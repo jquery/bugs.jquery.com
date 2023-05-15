@@ -1,0 +1,16 @@
+---
+pagination:
+  data: tickets
+  size: 1
+  alias: ticket
+	addAllPagesToCollections: true
+layout: layouts/ticket.njk
+eleventyComputed:
+  title: #{{ ticket.id }} ({{ ticket.title }}) - jQuery - Bug Tracker
+permalink: /ticket/{{ ticket.id }}/
+---
+<h1>{{ ticket.summary }}</h1>
+
+{% set postslist = tickets %}
+{% include "postslist.njk" %}
+
