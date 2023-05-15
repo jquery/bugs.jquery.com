@@ -6,6 +6,7 @@ const pluginSyntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
 const pluginBundle = require('@11ty/eleventy-plugin-bundle')
 const pluginNavigation = require('@11ty/eleventy-navigation')
 const { EleventyHtmlBasePlugin } = require('@11ty/eleventy')
+const CleanCSS = require('clean-css')
 
 const pluginDrafts = require('./eleventy.config.drafts.js')
 const pluginImages = require('./eleventy.config.images.js')
@@ -35,7 +36,17 @@ module.exports = function (eleventyConfig) {
   })
   eleventyConfig.addPlugin(pluginNavigation)
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin)
-  eleventyConfig.addPlugin(pluginBundle)
+  eleventyConfig.addPlugin(pluginBundle, {
+    transforms: [
+      function minifyCss(content) {
+        if (this.type === 'css') {
+          return new CleanCSS({}).minify(content).styles
+        }
+
+        return content
+      }
+    ]
+  })
 
   // Filters
   eleventyConfig.addFilter('readableDate', (dateObj, format, zone) => {

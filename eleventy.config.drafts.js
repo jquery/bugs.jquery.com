@@ -49,7 +49,7 @@ module.exports = (eleventyConfig) => {
 
     // Only log once.
     if (!logged) {
-      console.log(`[11ty/eleventy-base-blog] ${text} drafts.`)
+      console.log(`[elevent.config.drafts] ${text} drafts.`)
     }
 
     logged = true
