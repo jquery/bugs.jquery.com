@@ -6,6 +6,7 @@ tags:
   - second tag
   - posts with two tags
 ---
+
 Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.
 
 ## Code
@@ -17,12 +18,12 @@ Bring to the table win-win survival strategies to ensure proactive domination. A
 ```js
 // this is a command
 function myCommand() {
-	let counter = 0;
-	counter++;
+  let counter = 0
+  counter++
 }
 
 // Test with a line break above this line.
-console.log('Test');
+console.log('Test')
 ```
 
 ### Unstyled
