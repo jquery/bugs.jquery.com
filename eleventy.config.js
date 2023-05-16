@@ -6,6 +6,7 @@ const pluginSyntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
 const pluginBundle = require('@11ty/eleventy-plugin-bundle')
 const pluginNavigation = require('@11ty/eleventy-navigation')
 const { EleventyHtmlBasePlugin } = require('@11ty/eleventy')
+const pluginFavicon = require('eleventy-favicon')
 const CleanCSS = require('clean-css')
 
 const pluginDrafts = require('./eleventy.config.drafts.js')
@@ -47,6 +48,7 @@ module.exports = function (eleventyConfig) {
       }
     ]
   })
+  eleventyConfig.addPlugin(pluginFavicon)
 
   // Filters
   eleventyConfig.addFilter('readableDate', (dateObj, format, zone) => {

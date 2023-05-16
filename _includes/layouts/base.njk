@@ -1,61 +1,124 @@
 <!doctype html>
 <html lang="{{ metadata.language }}">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>{{ title or metadata.title }}</title>
-		<meta name="description" content="{{ description or metadata.description }}">
-
-		{#- Atom and JSON feeds included by default #}
-		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
-		<link rel="alternate" href="/feed/feed.json" type="application/json" title="{{ metadata.title }}">
-
-		{#-
-		CSS bundles are provided via the `eleventy-plugin-bundle` plugin:
-		1. You can add to them using `{% css %}`
-		2. You can get from them using `{% getBundle "css" %}` or `{% getBundleFileUrl "css" %}`
-		3. You can do the same for JS: {% js %}{% endjs %} and <script>{% getBundle "js" %}</script>
-		4. Learn more: https://github.com/11ty/eleventy-plugin-bundle
-		#}
-
-		{#
-			Hot reload isn't working with the bundle plugin on windows
-			See https://github.com/11ty/eleventy/issues/2807
-		#}
-		{# <link rel="stylesheet" href="/css/index.css" /> #}
-		{#- Add the contents of a file to the bundle #}
-		{%- css %}{% include "public/css/index.css" %}{% endcss %}
-
-		{#- Add an arbitrary string to the bundle #}
-		{# {%- css %}* { box-sizing: border-box; }{% endcss %} #}
-		{#- Render the CSS bundle using Inlined CSS (for the fastest site performance in production) #}
-		<style>{% getBundle "css" %}</style>
-		{#- Renders the CSS bundle using a separate file, if you can't set CSP directive style-src: 'unsafe-inline' #}
-		{# <link rel="stylesheet" href="{% getBundleFileUrl "css" %}"> #}
-	</head>
-	<body>
-		<a href="#skip" class="visually-hidden">Skip to main content</a>
-
-		<header>
-			<a href="/" class="home-link">{{ metadata.title }}</a>
-
-			{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
-			<nav>
-				<h2 class="visually-hidden">Top level navigation menu</h2>
-				<ul class="nav">
-				{%- for entry in collections.all | eleventyNavigation %}
-					<li class="nav-item"><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a></li>
-				{%- endfor %}
-				</ul>
-			</nav>
-		</header>
-
-		<main id="skip">
-			{{ content | safe }}
-		</main>
-
-		<footer></footer>
-
-		<!-- Current page: {{ page.url | htmlBaseUrl }} -->
-	</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title or metadata.title }}</title>
+    <meta name="description" content="{{ description or metadata.description }}">
+    {% favicon './favicon.svg' %}
+    {# Atom and JSON feeds included by default #}
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}"/>
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="{{ metadata.title }}"/>
+    {#
+      CSS bundles are provided via the `eleventy-plugin-bundle` plugin:
+      1. You can add to them using `{% css %}`
+      2. You can get from them using `{% getBundle "css" %}` or `{% getBundleFileUrl "css" %}`
+      3. You can do the same for JS: {% js %}{% endjs %} and
+        <script>{% getBundle "js" %}</script>
+      4. Learn more: https://github.com/11ty/eleventy-plugin-bundle
+    #}
+    {#
+      Hot reload isn't working with the bundle plugin on windows
+      See https://github.com/11ty/eleventy/issues/2807
+    #}
+    <link rel="stylesheet" href="/css/index.css"/>
+    {# Add the contents of a file to the bundle #}
+    {%- css %}{% include "public/css/ticket.css" %}{% endcss %}
+    {# Add an arbitrary string to the bundle #}
+    {# {%- css %}* { box-sizing: border-box; }{% endcss %} #}
+    {# Render the CSS bundle using Inlined CSS (for the fastest site performance in production) #}
+    <style>
+      {% getBundle "css" %}
+    </style>
+    {#- Renders the CSS bundle using a separate file, if you can't set CSP directive style-src: 'unsafe-inline' #}
+    {# <link rel="stylesheet" href="{% getBundleFileUrl "css" %}"> #}
+  </head>
+  <body>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="https://jquery.com/" title="jQuery Home">
+            <img src="/img/logo.png" width="215" height="53" alt="jQuery: Write Less, Do More."/>
+          </a>
+          <div>
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-row flex-between-center">
+          <h1>Bug Tracker</h1>
+          <form class="flex-row flex-start-center" action="/search" method="get">
+            <label for="jq-primarySearch">Search Tickets</label>
+            <input type="text" value="" title="Search jQuery" name="q" id="jq-primarySearch">
+            <button type="submit" name="go" id="jq-searchButton">
+              <span class="visually-hidden">Search</span>
+            </button>
+          </form>
+        </div>
+      </header>
+      <main id="skip">
+        {{ content | safe }}
+      </main>
+      <footer></footer>
+    </div>
+    <!-- Current page: {{ page.url | htmlBaseUrl }} -->
+  </body>
 </html>
