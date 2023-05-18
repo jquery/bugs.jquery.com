@@ -5,23 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title or metadata.title }}</title>
     <meta name="description" content="{{ description or metadata.description }}">
-    {% favicon './favicon.svg' %}
+    {% favicon './public/favicon.svg' %}
     {# Atom and JSON feeds included by default #}
-    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}"/>
-    <link rel="alternate" href="/feed/feed.json" type="application/json" title="{{ metadata.title }}"/>
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}" />
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="{{ metadata.title }}" />
     {#
       CSS bundles are provided via the `eleventy-plugin-bundle` plugin:
       1. You can add to them using `{% css %}`
       2. You can get from them using `{% getBundle "css" %}` or `{% getBundleFileUrl "css" %}`
-      3. You can do the same for JS: {% js %}{% endjs %} and
-        <script>{% getBundle "js" %}</script>
+      3. You can do the same for JS: {% js %}{% endjs %} and <script>{% getBundle "js" %}</script>
       4. Learn more: https://github.com/11ty/eleventy-plugin-bundle
     #}
     {#
       Hot reload isn't working with the bundle plugin on windows
       See https://github.com/11ty/eleventy/issues/2807
     #}
-    <link rel="stylesheet" href="/css/index.css"/>
+    <link rel="stylesheet" href="/css/index.css" />
     {# Add the contents of a file to the bundle #}
     {%- css %}{% include "public/css/ticket.css" %}{% endcss %}
     {# Add an arbitrary string to the bundle #}
@@ -39,9 +38,15 @@
       <header class="flex-column">
         <div class="flex-row flex-between-start">
           <a id="jq-siteLogo" href="https://jquery.com/" title="jQuery Home">
-            <img src="/img/logo.png" width="215" height="53" alt="jQuery: Write Less, Do More."/>
+            <img src="/img/logo.png" width="215" height="53" alt="jQuery: Write Less, Do More." />
           </a>
-          <div>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox" />
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
             <nav id="jq-primaryNavigation">
               <h2 class="visually-hidden">jQuery sites navigation menu</h2>
               <ul class="nav">
@@ -103,7 +108,7 @@
             </nav>
           </div>
         </div>
-        <div id="bug-tracker-form" class="flex-row flex-between-center">
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
           <h1>Bug Tracker</h1>
           <form class="flex-row flex-start-center" action="/search" method="get">
             <label for="jq-primarySearch">Search Tickets</label>
@@ -117,7 +122,10 @@
       <main id="skip">
         {{ content | safe }}
       </main>
-      <footer></footer>
+      <footer>
+        Copyright &copy; {% currentYear %}
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
     </div>
     <!-- Current page: {{ page.url | htmlBaseUrl }} -->
   </body>

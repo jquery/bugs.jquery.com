@@ -14,6 +14,7 @@
   --background-color: #39414a;
   --nav-background-color: #192839;
   --secondary-nav-background-color: var(--secondary-color);
+  --content-background-color: #181c21;
 
   --text-color: white;
   --text-color-link: #5DB0E6;
@@ -106,17 +107,6 @@ main :first-child {
   margin-top: 0;
 }
 
-header {
-  position: relative;
-  height: 186px;
-  padding: 0 40px;
-}
-header:after {
-  content: '';
-  display: table;
-  clear: both;
-}
-
 table {
   margin: 1em 0;
 }
@@ -150,8 +140,11 @@ code {
 
 /* Header */
 header {
+	position: relative;
+  height: 186px;
   display: flex;
   flex-wrap: wrap;
+  padding: 0 40px;
 }
 header h1 {
   font-size: 1.25rem;
@@ -161,7 +154,7 @@ header h1 {
 /* Nav */
 .nav {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 0;
   margin: 0;
   list-style: none;
@@ -169,12 +162,13 @@ header h1 {
 .nav a {
   display: flex;
   align-items: center;
-  height: 27px;
+  height: 35px;
   font-size: 0.75rem;
   padding: 0 1em;
   text-decoration: none;
   border-bottom: 1px dotted var(--nav-text-color);
   white-space: nowrap;
+  width: 100%;
 }
 .nav li:not(.active) a:hover,
 .nav li:not(.active) a:active {
@@ -189,9 +183,8 @@ header h1 {
 .nav .active a {
   border-bottom: 2px solid var(--nav-active-color);
 }
-
 #jq-siteLogo {
-  margin-top: 59px;
+  margin-top: 1em;
 }
 #jq-primaryNavigation {
   padding: 0 0.75em;
@@ -200,26 +193,55 @@ header h1 {
 #jq-secondaryNavigation {
   padding: 0 0.75em;
   background-color: var(--secondary-nav-background-color);
-  border-radius: var(--border-radius);
-  margin-top: 2em;
 }
 #jq-secondaryNavigation a {
-  height: 35px;
   font-size: 0.8125rem;
 }
 #bug-tracker-form {
-  position: absolute;
-  bottom: 15px;
-  left: 0;
-  right: 0;
+	position: relative;
+  width: 100%;
+  gap: 16px;
+  margin-top: 25px;
+}
+#bug-tracker-form form {
+	position: relative;
+  padding-right: 22px;
 }
 #jq-searchButton {
   position: absolute;
-  right: -20px;
-  top: -1px;
+  right: 0;
+  top: -4px;
   width: 35px;
   height: 35px;
   background: url(/img/icon-search.png) 0 0 no-repeat;
+}
+
+/* Hamburger Icon */
+.hamburger-lines {
+  position: relative;
+  width: 18px;
+  height: 14px;
+  align-self: center;
+}
+.hamburger-line {
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+.hamburger-toggle:checked + .hamburger-lines span:first-of-type {
+  transform: rotateZ(45deg) translate(4px, 4.5px) scaleX(1.2);
+}
+.hamburger-toggle:checked + .hamburger-lines span:nth-of-type(2) {
+  transform: rotateZ(135deg) scaleX(1.2);
+}
+.hamburger-toggle:checked + .hamburger-lines span:last-of-type {
+  transform: translateY(-8px) scale(0);
+  opacity: 0;
+}
+.hamburger-toggle:checked ~ #jq-menus {
+  transform: none;
+  opacity: 1;
 }
 
 /* Forms */
@@ -239,6 +261,17 @@ input {
 button {
   border: 0;
   cursor: pointer;
+}
+main {
+  background-color: var(--content-background-color);
+  padding: 20px;
+}
+
+/* Footer */
+footer {
+  background-color: var(--nav-background-color);
+  padding: 2.5em 40px;
+  margin-bottom: 30px;
 }
 
 /* Flex classes */
@@ -263,8 +296,57 @@ button {
   align-items: center;
 }
 
+@media(max-width: 919px) {
+  #jq-menus {
+    position: absolute;
+    top: 80px;
+    height: calc(100vh - 80px);
+    left: 0;
+    right: 0;
+    background-color: var(--nav-background-color);
+    z-index: 1;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    transform: translateX(100%);
+    opacity: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  }
+}
+
 @media(min-width: 920px) {
+  .nav {
+    flex-direction: row;
+  }
+  .nav a {
+    width: auto;
+  }
+  #jq-primaryNavigation a {
+    height: 27px;
+  }
+  #jq-secondaryNavigation {
+    border-radius: var(--border-radius);
+    margin-top: 2em;
+  }
+	#jq-siteLogo {
+		margin-top: 59px;
+	}
+	#bug-tracker-form {
+		flex-direction: row;
+		gap: 0;
+		position: absolute;
+		bottom: 15px;
+		left: 0;
+		right: 0;
+    padding: 0 40px 0 60px;
+	}
   #jq-primarySearch {
     width: 286px;
+  }
+  .hamburger-lines {
+    display: none;
+  }
+  main {
+    padding: 40px;
   }
 }

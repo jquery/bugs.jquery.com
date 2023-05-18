@@ -31,6 +31,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginImages)
 
   // Official plugins
+  eleventyConfig.addPlugin(pluginFavicon)
   eleventyConfig.addPlugin(pluginRss)
   eleventyConfig.addPlugin(pluginSyntaxHighlight, {
     preAttributes: { tabindex: 0 }
@@ -48,7 +49,6 @@ module.exports = function (eleventyConfig) {
       }
     ]
   })
-  eleventyConfig.addPlugin(pluginFavicon)
 
   // Filters
   eleventyConfig.addFilter('readableDate', (dateObj, format, zone) => {
@@ -107,6 +107,11 @@ module.exports = function (eleventyConfig) {
       level: [1, 2, 3, 4],
       slugify: eleventyConfig.getFilter('slugify')
     })
+  })
+
+  // Shortcodes
+  eleventyConfig.addShortcode('currentYear', () => {
+    return DateTime.local().toFormat('yyyy')
   })
 
   // Features to make your build faster (when you need them)
