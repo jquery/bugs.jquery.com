@@ -1,0 +1,24 @@
+---
+layout: layouts/base.njk
+---
+
+{%- css %}{% include "public/css/wiki.css" %}{% endcss %}
+
+<div class="wiki flex-column">
+  <div class="breadcrumbs-nav flex-row">
+    <a href="/" class="breadcrumbs-nav-first">wiki:</a>
+  </div>
+  <nav class="wiki-nav">
+    <ul class="flex-row">
+      <li>
+        <a href="/">Start Page</a>
+      </li>
+      <li>
+        <a href="/wiki/TitleIndex">Index</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="wiki-content">
+    {{ content | safe }}
+  </div>
+</div>

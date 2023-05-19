@@ -37,7 +37,7 @@
       <a href="#skip" class="visually-hidden">Skip to main content</a>
       <header class="flex-column">
         <div class="flex-row flex-between-start">
-          <a id="jq-siteLogo" href="https://jquery.com/" title="jQuery Home">
+          <a id="jq-siteLogo" href="/" title="jQuery Home">
             <img src="/img/logo.png" width="215" height="53" alt="jQuery: Write Less, Do More." />
           </a>
           <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox" />
@@ -119,8 +119,19 @@
           </form>
         </div>
       </header>
-      <main id="skip">
-        {{ content | safe }}
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="https://github.com/jquery/jquery/issues/new/choose">New Ticket</a>
+          <a href="/report">View Tickets</a>
+          <a href="/ticketgraph">Ticket Graph</a>
+          <a href="/roadmap">Roadmap</a>
+          <a href="/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          {{ content | safe }}
+        </div>
       </main>
       <footer>
         Copyright &copy; {% currentYear %}
