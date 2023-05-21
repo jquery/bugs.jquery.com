@@ -1,12 +1,114 @@
 ---
 pagination:
-  data: tickets
+  data: sampletickets
   size: 1
   alias: ticket
 layout: layouts/ticket.njk
 eleventyComputed:
   title: "#{{ ticket.id }} ({{ ticket.summary }}) - jQuery - Bug Tracker"
 permalink: /ticket/{{ ticket.id }}/
+tags: tickets
 ---
 
-{{ content | safe }}
+{% if pagination.href.previous or pagination.href.next %}
+  <nav class="content-nav">
+    <ul class="flex-row">
+      {% if pagination.href.previous %}
+        <li>
+          <a href="{{ pagination.href.previous }}">← Previous Ticket</a>
+        </Li>
+      {% else %}
+        <li>
+          <a aria-disabled="true">← Previous Ticket</a>
+        </li>
+      {% endif %}
+      {% if pagination.href.next %}
+        <li>
+          <a href="{{ pagination.href.next }}">Next Ticket →</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}
+
+<div class="ticket-details">
+  <h3>
+    <a href="{{ pagination.url }}">#{{ ticket.id }}</a>
+    <span class="ticket-status">{{ ticket.status }}</span>
+    <span class="ticket-type">{{ ticket.type }}</span>
+    <span class="ticket-resolution">({{ ticket.resolution }})</span>
+  </h3>
+
+  <div class="ticket-dates">
+    <p>Opened {{ ticket.time | yearsAgo }}</p>
+    {% if ticket.status == 'closed' and ticket.closedtime %}
+      <p>Closed {{ ticket.closedtime | yearsAgo }}</p>
+    {% endif %}
+    <p>Last modified {{ ticket.changetime | yearsAgo }}</p>
+  </div>
+
+  <h3 class="ticket-title">{{ ticket.summary }}</h3>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        {{ ticket.reporter }}
+      </td>
+      <th>Owned by:</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        {{ ticket.priority }}
+      </td>
+      <th>
+        Milestone:
+      </th>
+      <td>
+        <a href="/milestone/{{ ticket.milestone }}">{{ ticket.milestone }}</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>{{ ticket.component }}</td>
+      {% if ticket.version %}
+        <th>Version:</th>
+      {% else %}
+        <th class="missing">Version:</th>
+      {% endif %}
+      <td>{{ ticket.version }}</td>
+    </tr>
+    <tr>
+      {% if ticket.keywords %}
+        <th>Keywords:</th>
+      {% else %}
+        <th class="missing">Keywords:</th>
+      {% endif %}
+      <td>{{ ticket.keywords }}</td>
+      {% if ticket.cc %}
+        <th>Cc:</th>
+      {% else %}
+        <th class="missing">Cc:</th>
+      {% endif %}
+      <td>{{ ticket.cc }}</td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-details-bottom">
+    <h5>Description</h5>
+    <div class="ticket-description">{{ ticket.description }}</div>
+  </div>
+</div>

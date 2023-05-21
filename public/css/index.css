@@ -18,6 +18,7 @@
   --text-color-link-hover: #176092;
   --text-color-link-active: var(--secondary-color);
   --text-color-link-visited: var(--secondary-color);
+  --text-color-link-disabled: #998;
   --main-link-hover-bg-color: #eee;
 
   --footer-text-color-link: #5DB0E6;
@@ -116,6 +117,9 @@ footer a[href]:hover {
 a[href]:active,
 footer a[href]:hover {
   color: var(--text-color-link-active);
+}
+a[aria-disabled='true'] {
+  color: var(--text-color-link-disabled);
 }
 
 main {
@@ -233,6 +237,22 @@ header h1 {
   width: 35px;
   height: 35px;
   background: url(/img/icon-search.png) 0 0 no-repeat;
+}
+
+/* Upper content nav */
+.content-nav {
+  font-size: 0.8125rem;
+  margin: 1.2em 0;
+  align-self: flex-end;
+}
+.content-nav ul {
+  list-style: none;
+}
+.content-nav li {
+  padding: 0 1em;
+}
+.content-nav li:not(:last-of-type) {
+  border-right: 1px solid var(--border-color);
 }
 
 /* Hamburger Icon */
@@ -437,6 +457,9 @@ a.ext-link .icon {
   #jq-sidenav {
     width: 196px;
     flex-shrink: 0;
+  }
+  .content-nav {
+    margin-top: 0.4em;
   }
   #jq-content {
     flex-grow: 1;

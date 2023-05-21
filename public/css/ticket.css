@@ -1,0 +1,73 @@
+:root {
+  --ticket-details-background-color: #ffd;
+  --ticket-details-border-color: #dd9;
+  --ticket-table-border-color: #eed;
+  --ticket-date-text-color: #996;
+}
+
+.ticket-details {
+  position: relative;
+  background-color: var(--ticket-details-background-color);
+  border: 1px solid var(--ticket-details-border-color);
+  border-radius: var(--border-radius);
+  padding: 0.5em 1em;
+}
+.ticket-details span {
+  font-size: 0.75em;
+}
+
+.ticket-status,
+.ticket-type,
+.ticket-resolution {
+  text-transform: uppercase;
+}
+
+.missing {
+  color: var(--text-color-link-disabled);
+}
+
+.ticket-title {
+  border-bottom: 1px solid #bbb;
+  margin-top: 3em;
+  padding-bottom: 0.5em;
+}
+.ticket-dates {
+  color: var(--ticket-date-text-color);
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  font-size: 0.8125rem;
+}
+.ticket-dates p {
+  margin: 0 0 0.5em;
+}
+.ticket-properties {
+  width: 100%;
+  text-align: left;
+  font-size: 0.65rem;
+  border-top: 1px solid var(--ticket-table-border-color);
+  margin: 0;
+}
+.ticket-properties th {
+  font-weight: normal;
+  width: 20%;
+}
+.ticket-properties th,
+.ticket-properties td {
+  padding: 0.25em 0.5em;
+  border-bottom: 1px dashed var(--ticket-table-border-color);
+}
+.ticket-details-bottom {
+  padding: 0.5em;
+}
+.ticket-description {
+  font-size: 0.85rem;
+  margin-top: 0.5em;
+}
+.ticket-description pre {
+  background: #fff;
+  color: #333;
+  border: 1px solid #000;
+  text-align: left;
+  font-size: 0.6875rem;
+}

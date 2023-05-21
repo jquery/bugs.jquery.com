@@ -51,6 +51,16 @@ module.exports = function (eleventyConfig) {
   })
 
   // Filters
+  eleventyConfig.addFilter('yearsAgo', (datetime) => {
+    const date = new Date(datetime / 1000)
+    const now = new Date()
+    const years = now.getFullYear() - date.getFullYear()
+    if (years > 0) {
+      return `${years} year${years === 1 ? '' : 's'} ago`
+    }
+    return DateTime.fromJSDate(date, { zone: 'utc' }).toFormat('dd LLLL yyyy')
+  })
+
   eleventyConfig.addFilter('readableDate', (dateObj, format, zone) => {
     // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
     return DateTime.fromJSDate(dateObj, { zone: zone || 'utc' }).toFormat(
@@ -96,18 +106,20 @@ module.exports = function (eleventyConfig) {
   })
 
   // Customize Markdown library settings:
-  eleventyConfig.amendLibrary('md', (mdLib) => {
-    mdLib.use(markdownItAnchor, {
-      permalink: markdownItAnchor.permalink.ariaHidden({
-        placement: 'after',
-        class: 'header-anchor',
-        symbol: '#',
-        ariaHidden: false
-      }),
-      level: [1, 2, 3, 4],
-      slugify: eleventyConfig.getFilter('slugify')
-    })
-  })
+  // eleventyConfig.amendLibrary('md', (mdLib) => {
+  //   mdLib.use(markdownItAnchor, {
+  //     permalink: markdownItAnchor.permalink.ariaHidden({
+  //       placement: 'after',
+  //       class: 'header-anchor',
+  //       symbol: '#',
+  //       ariaHidden: false
+  //     }),
+  //     level: [1, 2, 3, 4],
+  //     slugify: eleventyConfig.getFilter('slugify')
+  //   })
+  // })
+
+  eleventyConfig.addFilter('tracToHTML', (text) => {})
 
   // Shortcodes
   eleventyConfig.addShortcode('currentYear', () => {
