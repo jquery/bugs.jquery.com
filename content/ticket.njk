@@ -1,13 +1,24 @@
----
-pagination:
-  data: sampletickets
-  size: 1
-  alias: ticket
-layout: layouts/ticket.njk
-eleventyComputed:
-  title: "#{{ ticket.id }} ({{ ticket.summary }}) - jQuery - Bug Tracker"
-permalink: /ticket/{{ ticket.id }}/
-tags: tickets
+---js
+{
+  pagination: {
+    data: 'tickets',
+    size: 1,
+    alias: 'ticket',
+    // Sliced in development or the server gets bogged down
+    before: (paginationData) => {
+      if (process.env.NODE_ENV === 'development') {
+        return paginationData.slice(-5)
+      }
+      return paginationData
+    }
+  },
+  layout: 'layouts/ticket.njk',
+  eleventyComputed: {
+    title: "#{{ ticket.id }} ({{ ticket.summary }}) - jQuery - Bug Tracker"
+  },
+  permalink: '/ticket/{{ ticket.id }}/',
+  tags: ['tickets']
+}
 ---
 
 {% if pagination.href.previous or pagination.href.next %}
@@ -25,6 +36,10 @@ tags: tickets
       {% if pagination.href.next %}
         <li>
           <a href="{{ pagination.href.next }}">Next Ticket →</a>
+        </li>
+      {% else %}
+        <li>
+          <a aria-disabled="true">Next Ticket →</a>
         </li>
       {% endif %}
     </ul>
@@ -58,7 +73,7 @@ tags: tickets
         {{ ticket.reporter }}
       </td>
       <th>Owned by:</th>
-      <td></td>
+      <td>{{ ticket.owner }}</td>
     </tr>
     <tr>
       <th>
@@ -67,9 +82,11 @@ tags: tickets
       <td>
         {{ ticket.priority }}
       </td>
-      <th>
-        Milestone:
-      </th>
+      {% if ticket.mileston %}
+        <th>Milestone:</th>
+      {% else %}
+        <th class="missing">Milestone:</th>
+      {% endif %}
       <td>
         <a href="/milestone/{{ ticket.milestone }}">{{ ticket.milestone }}</a>
       </td>
@@ -111,36 +128,48 @@ tags: tickets
   </table>
   <div class="ticket-info-bottom">
     <h5 class="ticket-description-title">Description</h5>
-    <div class="ticket-description">{{ ticket.description }}</div>
+    <div class="ticket-description">{{ ticket.description | tracToHTML | safe }}</div>
   </div>
 </div>
 
 <details open>
   <summary class="ticket-details-summary">Change History ({{ ticket.changes | length }})</summary>
   {% for change in ticket.changes %}
-    <div class="ticket-comment flex-column" id="comment:{{ loop.index }}">
-      <h3 class="flex-row flex-between-start ticket-comment-header">
+    <div class="ticket-change flex-column" id="comment:{{ loop.index }}">
+      <h3 class="flex-row flex-between-start ticket-change-header">
         <span>Changed {{ change.time | yearsAgo }} by <span class="author">{{ change.author }}</span></span>
-        <a class="ticket-comment-link" href="#comment:{{ loop.index }}">comment:{{ loop.index }}</a>
+        <a class="ticket-change-link" href="#comment:{{ loop.index }}">comment:{{ loop.index }}</a>
       </h3>
-      <table class="ticket-changes">
-        <tbody>
-          {% for field in change.fields %}
-            <tr>
-              <th>{{ field.field }}:</th>
-              <td>
-                {% if field.oldvalue and field.newvalue %}
-                  <span class="change-field-old">{{ field.oldvalue }}</span> → <span class="change-field-new">{{ field.newvalue }}</span>
-                {% elif field.oldvalue %}
-                  <span class="change-field-old strikethrough">{{ field.oldvalue }}</span>
-                {% elif field.newvalue %}
-                  <span class="change-field-new">{{ field.newvalue }}</span>
-                {% endif %}
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            {% for field in change.fields %}
+              {% if field.field != 'comment' %}
+                <tr>
+                  <th>{{ field.field }}:</th>
+                  <td>
+                    {% if field.oldvalue and field.newvalue %}
+                      <span class="change-field-old">{{ field.oldvalue }}</span> → <span class="change-field-new">{{ field.newvalue }}</span>
+                    {% elif field.oldvalue %}
+                      <span class="change-field-old strikethrough">{{ field.oldvalue }}</span>
+                    {% elif field.newvalue %}
+                      <span class="change-field-new">→ {{ field.newvalue }}</span>
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+        {% for field in change.fields %}
+          {% if field.field == 'comment' %}
+            <div class="ticket-comment-body">
+              {{ field.newvalue | tracToHTML | safe }}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
   {% endfor %}
 </details>

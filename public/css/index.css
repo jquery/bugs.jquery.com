@@ -1,6 +1,7 @@
 /* Defaults */
 :root {
-  --font-family: "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif ;
+  --font-family: Verdana, Arial, "Bitstream Vera Sans", Helvetica, sans-serif;
+  --font-family-header: "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
   --font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono,
     Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
@@ -39,9 +40,15 @@
   --nav-hover-link-color: rgba(0, 0, 0, 0.2);
   --nav-active-link-color: #176092;
 
-  --input-border-color: white;
   --border-color: #e4e4e4;
   --border-radius: 4px;
+
+  --input-border-color: white;
+  --blockquote-border-color: #b44;
+  --pre-color: #333;
+  --pre-background-color: #fff;
+  --code-color: #600;
+  --code-background-color: var(--content-background-color);
   --syntax-tab-size: 2;
 }
 
@@ -75,6 +82,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-header);
   font-weight: normal;
   margin: 0;
   padding: 0;
@@ -92,17 +100,25 @@ h1, h2, h3, h4, h5, h6 {
   width: 1px;
 }
 
-p:last-child {
-  margin-bottom: 0;
-}
 p {
   line-height: 1.5;
+  margin: 0.5em 0 1em;
+}
+p:last-child {
+  margin-bottom: 0;
 }
 ul {
   margin: 0;
 }
 li {
   line-height: 1.5;
+}
+blockquote {
+  margin: -0.3em 0 0 0;
+  border-style: solid;
+  border-width: 0 0 0 2px;
+  padding-left: 0.4em;
+  border-color: var(--blockquote-border-color);
 }
 
 a[href] {
@@ -126,9 +142,6 @@ a[aria-disabled='true'] {
 main {
   padding: 1rem;
 }
-main :first-child {
-  margin-top: 0;
-}
 
 table {
   margin: 1em 0;
@@ -144,7 +157,6 @@ code {
 }
 pre:not([class*='language-']) {
   margin: 0.5em 0;
-  line-height: 1.375; /* 22px /16 */
   -moz-tab-size: var(--syntax-tab-size);
   -o-tab-size: var(--syntax-tab-size);
   tab-size: var(--syntax-tab-size);
@@ -157,7 +169,23 @@ pre:not([class*='language-']) {
   word-spacing: normal;
   word-break: normal;
 }
+pre.wiki {
+  width: 100%;
+  padding: 0.25em;
+  font-size: 0.6875rem;
+  border-radius: var(--border-radius);
+  overflow-x: auto;
+  background: var(--pre-background-color);
+  color: var(--pre-color);
+  border: 1px solid #000;
+  text-align: left;
+}
 code {
+  color: var(--code-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.25em;
+  padding: 0 0.3em;
+  background: var(--code-background-color);
   word-break: break-all;
 }
 .strikethrough {
@@ -467,5 +495,6 @@ a.ext-link .icon {
   }
   #jq-content {
     flex-grow: 1;
+    max-width: 622px;
   }
 }

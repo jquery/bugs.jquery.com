@@ -119,7 +119,71 @@ module.exports = function (eleventyConfig) {
   //   })
   // })
 
-  eleventyConfig.addFilter('tracToHTML', (text) => {})
+  const rheaders = /^\s*(\=+)\s*([^=]+)\s*\1\s*$/
+  eleventyConfig.addFilter('tracToHTML', (text) => {
+    const codes = []
+    const pres = []
+    return (
+      // TODO: sanitize HTML content
+      text
+        // Newlines have extra escapes in the strings
+        .replace(/\\\n/g, '\n')
+        // Replace `` with <code> tags
+        .replace(/`([^`]+?)`/g, (_match, code) => {
+          codes.push(code) // Save the code for later
+          return `<code></code>`
+        })
+        // Replace {{{ }}} with <pre> tags
+        .replace(/{{{([^]+?)}}}/g, (_match, code) => {
+          // Save the code for later
+          pres.push(
+            // Remove language hints
+            code.replace(/^#!\w+\r?\n/, '')
+          )
+          return `<pre class="wiki"></pre>`
+        })
+        // Linkify links
+        .replace(
+          /\[?(https?:\/\/[^\s,\]]+)\]?/g,
+          `<a href="$1" class="ext-link"><span class="icon"></span>$1</a>`
+        )
+        // Linkify ticket references
+        .replace(/#(\d+)/g, `<a href="/ticket/$1">$&</a>`)
+        // Replace double newlines with paragraphs
+        .split(/(?:\r\n){2}/g)
+        .map((line) => {
+          if (!line.trim()) {
+            return ''
+          }
+          if (line.startsWith('<pre')) {
+            return line
+          }
+          // Blockquotes
+          if (line.startsWith('> ')) {
+            return `<blockquote>${line.slice(2)}</blockquote>`
+          }
+          // Headers
+          if (rheaders.test(line)) {
+            return line.replace(rheaders, (_all, equals, content) => {
+              const level = equals.length
+              return `<h${level}>${content}</h${level}>`
+            })
+          }
+          return `<p>${line}</p>`
+        })
+        .join('')
+        // Reinsert code
+        .replace(/<code><\/code>/g, () => {
+          const code = codes.shift()
+          return `<code>${code}</code>`
+        })
+        // Reinsert pres
+        .replace(/<pre class="wiki"><\/pre>/g, () => {
+          const code = pres.shift()
+          return `<pre class="wiki">${code}</pre>`
+        })
+    )
+  })
 
   // Shortcodes
   eleventyConfig.addShortcode('currentYear', () => {
