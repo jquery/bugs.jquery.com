@@ -31,20 +31,22 @@ tags: tickets
   </nav>
 {% endif %}
 
-<div class="ticket-details">
-  <h3>
-    <a href="{{ pagination.url }}">#{{ ticket.id }}</a>
-    <span class="ticket-status">{{ ticket.status }}</span>
-    <span class="ticket-type">{{ ticket.type }}</span>
-    <span class="ticket-resolution">({{ ticket.resolution }})</span>
-  </h3>
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="{{ pagination.url }}">#{{ ticket.id }}</a>
+      <span class="ticket-status">{{ ticket.status }}</span>
+      <span class="ticket-type">{{ ticket.type }}</span>
+      <span class="ticket-resolution">({{ ticket.resolution }})</span>
+    </h3>
 
-  <div class="ticket-dates">
-    <p>Opened {{ ticket.time | yearsAgo }}</p>
-    {% if ticket.status == 'closed' and ticket.closedtime %}
-      <p>Closed {{ ticket.closedtime | yearsAgo }}</p>
-    {% endif %}
-    <p>Last modified {{ ticket.changetime | yearsAgo }}</p>
+    <div class="ticket-dates">
+      <p>Opened {{ ticket.time | yearsAgo }}</p>
+      {% if ticket.status == 'closed' and ticket.closedtime %}
+        <p>Closed {{ ticket.closedtime | yearsAgo }}</p>
+      {% endif %}
+      <p>Last modified {{ ticket.changetime | yearsAgo }}</p>
+    </div>
   </div>
 
   <h3 class="ticket-title">{{ ticket.summary }}</h3>
@@ -107,8 +109,38 @@ tags: tickets
       <td></td>
     </tr>
   </table>
-  <div class="ticket-details-bottom">
-    <h5>Description</h5>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
     <div class="ticket-description">{{ ticket.description }}</div>
   </div>
 </div>
+
+<details open>
+  <summary class="ticket-details-summary">Change History ({{ ticket.changes | length }})</summary>
+  {% for change in ticket.changes %}
+    <div class="ticket-comment flex-column" id="comment:{{ loop.index }}">
+      <h3 class="flex-row flex-between-start ticket-comment-header">
+        <span>Changed {{ change.time | yearsAgo }} by <span class="author">{{ change.author }}</span></span>
+        <a class="ticket-comment-link" href="#comment:{{ loop.index }}">comment:{{ loop.index }}</a>
+      </h3>
+      <table class="ticket-changes">
+        <tbody>
+          {% for field in change.fields %}
+            <tr>
+              <th>{{ field.field }}:</th>
+              <td>
+                {% if field.oldvalue and field.newvalue %}
+                  <span class="change-field-old">{{ field.oldvalue }}</span> → <span class="change-field-new">{{ field.newvalue }}</span>
+                {% elif field.oldvalue %}
+                  <span class="change-field-old strikethrough">{{ field.oldvalue }}</span>
+                {% elif field.newvalue %}
+                  <span class="change-field-new">{{ field.newvalue }}</span>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endfor %}
+</details>
