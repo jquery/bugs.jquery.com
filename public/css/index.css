@@ -1,8 +1,9 @@
 /* Defaults */
 :root {
-  --font-family: Verdana, Arial, "Bitstream Vera Sans", Helvetica, sans-serif;
-  --font-family-header: "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
-  --font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono,
+  --font-family: "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
+  --font-family-header: var(--font-family);
+  --font-family-alternate: Verdana, Arial, "Bitstream Vera Sans", Helvetica, sans-serif;
+  --font-family-monospace: Monaco, Andale Mono WT, Andale Mono,
     Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
     Courier, monospace;
@@ -79,6 +80,8 @@ body {
   width: 100%;
   max-width: 910px;
   margin: 0 auto;
+  /* Avoid scroll with mobile nav */
+  overflow: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -87,6 +90,11 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
   letter-spacing: 0;
+}
+
+h1 {
+  font-size: 1.15rem;
+  font-weight: bold;
 }
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
@@ -210,7 +218,6 @@ header h1 {
   display: flex;
   flex-direction: column;
   padding: 0;
-  margin: 0;
   list-style: none;
 }
 .nav a {
@@ -322,6 +329,7 @@ form {
 label {
   font-style: italic;
   font-size: 0.8125rem;
+  font-weight: 700;
 }
 input {
   border: 1px solid var(--input-border-color);
@@ -382,7 +390,7 @@ footer {
     var(--footer-background-start-color),
     var(--footer-background-end-color)
   );
-  padding: 2.5em 2.5em;
+  padding: 2.5em;
   margin-bottom: 2em;
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
@@ -496,5 +504,6 @@ a.ext-link .icon {
   #jq-content {
     flex-grow: 1;
     max-width: 622px;
+    font-size: 0.875rem;
   }
 }

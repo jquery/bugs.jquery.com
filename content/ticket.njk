@@ -7,7 +7,7 @@
     // Sliced in development or the server gets bogged down
     before: (paginationData) => {
       if (process.env.NODE_ENV === 'development') {
-        return paginationData.slice(-5)
+        return paginationData.slice(0, 5)
       }
       return paginationData
     }
@@ -49,7 +49,7 @@
 <div class="ticket-info">
   <div class="flex-row flex-between-start">
     <h3>
-      <a href="{{ pagination.url }}">#{{ ticket.id }}</a>
+      <a href="{{ pagination.url }}" class="ticket-number">#{{ ticket.id }}</a>
       <span class="ticket-status">{{ ticket.status }}</span>
       <span class="ticket-type">{{ ticket.type }}</span>
       <span class="ticket-resolution">({{ ticket.resolution }})</span>
@@ -60,11 +60,13 @@
       {% if ticket.status == 'closed' and ticket.closedtime %}
         <p>Closed {{ ticket.closedtime | yearsAgo }}</p>
       {% endif %}
-      <p>Last modified {{ ticket.changetime | yearsAgo }}</p>
+      {% if not ticket.closedtime or ticket.closedtime != ticket.changetime %}
+        <p>Last modified {{ ticket.changetime | yearsAgo }}</p>
+      {% endif %}
     </div>
   </div>
 
-  <h3 class="ticket-title">{{ ticket.summary }}</h3>
+  <h1 class="ticket-title">{{ ticket.summary }}</h1>
 
   <table class="ticket-properties">
     <tr>

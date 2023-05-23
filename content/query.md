@@ -2,11 +2,11 @@
 layout: layouts/base.njk
 ---
 
-# Available Reports
+# Custom Query
 
 ---
 
-jQuery issues have moved to [GitHub](https://github.com/jquery/jquery/issues). This site is now a static version of the old trac bugs site. Reports using SQL queries are no longer available.
+jQuery issues have moved to [GitHub](https://github.com/jquery/jquery/issues). This site is now a static version of the old trac bugs site. SQL queries are no longer available.
 
 If you know the ticket number you are looking for, use the following URL format to go directly to the ticket:
 

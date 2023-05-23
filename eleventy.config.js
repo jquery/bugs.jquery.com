@@ -150,7 +150,7 @@ module.exports = function (eleventyConfig) {
         // Linkify ticket references
         .replace(/#(\d+)/g, `<a href="/ticket/$1">$&</a>`)
         // Replace double newlines with paragraphs
-        .split(/(?:\r\n){2}/g)
+        .split(/(?:\r?\n){2}/g)
         .map((line) => {
           if (!line.trim()) {
             return ''
