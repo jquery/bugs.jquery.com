@@ -119,7 +119,8 @@ module.exports = function (eleventyConfig) {
   //   })
   // })
 
-  const rheaders = /^\s*(\=+)\s*([^=]+)\s*\1\s*$/
+  const rheaders = /^ *(\=+) *([^\n\r]+) *\1? *$/
+  let listStarted = false
   eleventyConfig.addFilter('tracToHTML', (text) => {
     const codes = []
     const pres = []
@@ -149,10 +150,38 @@ module.exports = function (eleventyConfig) {
           /\[?(https?:\/\/[^\s,\]]+)\]?/g,
           `<a href="$1" class="ext-link"><span class="icon"></span>$1</a>`
         )
-        // Linkify ticket references
-        .replace(/#(\d+)/g, `<a href="/ticket/$1">$&</a>`)
+        // Linkify trac links
+        .replace(
+          /(?:\[trac:([^ ]+) "([^"]+)"\])|(?:\[trac:([^ ]+) ([^\]]+)\])/g,
+          function (_match, quotepage, quotedtext, page, text) {
+            return `<a href="https://trac.edgewall.org/intertrac/${encodeURIComponent(
+              quotepage || page
+            )}" class="ext-link"><span class="icon"></span>${
+              quotedtext || text
+            }</a>`
+          }
+        )
+        // Linkify bracket links
+        .replace(
+          /\[([^ ]+) (?:(?:"([^"]+)")|([^\]]+))\]/g,
+          `<a href="/wiki/$1">$2$3</a>`
+        )
+        // Linkify ticket references (avoid trac ticket links)
+        .replace(/#(\d+)(?<=y)</g, `<a href="/ticket/$1">$&</a>`)
+        // Linkify CamelCase to wiki
+        .replace(
+          /(^|\s)(!)?([A-Z][a-z]+[A-Z]\w+)(?!\w)/g,
+          function (_match, space, excl, page) {
+            if (excl) {
+              return `${space}${page}`
+            }
+            return `${space}<a href="/wiki/${page}">${page}</a>`
+          }
+        )
+        // Convert ---- to <hr>
+        .replace(/^--+$/gm, '<hr />')
         // Replace double newlines with paragraphs
-        .split(/(?:\r?\n){2}/g)
+        .split(/(?:\r?\n)/g)
         .map((line) => {
           if (!line.trim()) {
             return ''
@@ -171,7 +200,20 @@ module.exports = function (eleventyConfig) {
               return `<h${level}>${content}</h${level}>`
             })
           }
-          return `<p>${line}</p>`
+          if (/^\s*\* /.test(line)) {
+            line = line.replace(
+              /(^|\s+)\* ([^\n]+)/g,
+              `$1${listStarted ? '' : '<ul>'}<li>$2</li>`
+            )
+            listStarted = true
+            return line
+          }
+          if (listStarted) {
+            listStarted = false
+            return `</ul><p>${line}</p>`
+          } else {
+            return `<p>${line}</p>`
+          }
         })
         .join('')
         // Reinsert code

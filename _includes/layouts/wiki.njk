@@ -2,11 +2,14 @@
 layout: layouts/base.njk
 ---
 
-{%- css %}{% include "public/css/wiki.css" %}{% endcss %}
+<link rel="stylesheet" href="/css/wiki.css" />
 
 <div class="wiki flex-column">
   <div class="breadcrumbs-nav flex-row">
     <a href="/" class="breadcrumbs-nav-first">wiki:</a>
+    {% if breadcrumb %}
+      <a href="{{ page.url }}">{{ breadcrumb }}</a>
+    {% endif %}
   </div>
   <nav class="content-nav">
     <ul class="flex-row">
