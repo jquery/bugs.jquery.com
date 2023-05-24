@@ -124,12 +124,14 @@ module.exports = function (eleventyConfig) {
     const codes = []
     const pres = []
     return (
-      // TODO: sanitize HTML content
       text
         // Newlines have extra escapes in the strings
         .replace(/\\\n/g, '\n')
+        // Escape HTML
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
         // Replace `` with <code> tags
-        .replace(/`([^`]+?)`/g, (_match, code) => {
+        .replace(/`([^\r\n`]+?)`/g, (_match, code) => {
           codes.push(code) // Save the code for later
           return `<code></code>`
         })
