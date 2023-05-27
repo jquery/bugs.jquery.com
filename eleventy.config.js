@@ -50,6 +50,15 @@ module.exports = function (eleventyConfig) {
     ]
   })
 
+  eleventyConfig.addFilter('debug', (value, stringify) => {
+    if (stringify) {
+      console.log(JSON.stringify(value, null, 2))
+    } else {
+      console.log(value)
+    }
+    return ''
+  })
+
   // Filters
   eleventyConfig.addFilter('yearsAgo', (datetime) => {
     const date = new Date(datetime / 1000)

@@ -1,6 +1,8 @@
 :root {
   --milestone-date-color: #888;
   --milestone-progress-color: #bae0ba;
+  --milestone-name-color: #b00;
+  --milestone-name-box-shadow-color: #ccc;
 }
 
 .milestone-summary {
@@ -35,9 +37,28 @@
 }
 
 .milestone-description {
-  margin: 2em 0;
+  margin: 2em 0 0;
   border-radius: var(--border-radius);
   background-color: white;
   border: 1px solid var(--border-color);
   padding: 0.5em;
+}
+
+.milestone-name-link {
+  font-size: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.2em 0.375em;
+  box-shadow: 1px 1px 0.5em 0 var(--milestone-name-box-shadow-color);
+}
+.milestone-name-link:hover {
+  text-decoration: underline;
+}
+.milestone-name {
+  color: var(--milestone-name-color);
+}
+
+.roadmap {
+  margin-top: 2em;
 }

@@ -11,8 +11,6 @@ permalink: '/milestone/{{ milestone.name }}/index.html'
 tags: ['milestone']
 ---
 
-<link rel="stylesheet" href="/css/milestone.css" />
-
 <div class="flex-column">
   <nav class="content-nav">
     <ul class="flex-row">
@@ -43,35 +41,7 @@ tags: ['milestone']
   <h1>Milestone {{ milestone.name }}</h3>
   <hr>
 
-  <div class="milestone-summary">
-    {% if milestone.completed != 0 %}
-      <p class="date">Completed {{ milestone.completed | yearsAgo }}</p>
-    {% elif milestone.due != 0 %}
-      <p class="date">Due {{ milestone.due | yearsAgo }}</p>
-    {% else %}
-      <p class="date">No date set</p>
-    {% endif %}
-
-    <div class="flex-row progress">
-      <div class="progress-bar">
-        <div class="progress-bar-fill" style="width: {{ milestone.percent }}%"></div>
-      </div>
-      {{ milestone.percent }}%
-    </div>
-
-    <div class="flex-row ticket-numbers">
-      <div class="ticket-number">Total number of tickets: {{ milestone.total }}</div>
-      <div class="ticket-number">- closed: {{ milestone.closed }}</div>
-      {% set active = milestone.total - milestone.closed %}
-      <div class="ticket-number">- active: {{ active }}</div>
-    </div>
-
-    {% if milestone.description %}
-      <div class="milestone-description">
-        {{ milestone.description | tracToHTML | safe }}
-      </div>
-    {% endif %}
-  </div>
+  {% include "milestone-summary.njk" %}
 
   <p>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static version of the old Trac bugs site. Milestones can no longer be edited.</p>
 </div>
