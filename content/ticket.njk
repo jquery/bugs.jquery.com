@@ -142,21 +142,19 @@
   </div>
 </div>
 
-{% if ticketAttachments | length %}
-  <details open>
-    <summary class="ticket-details-summary">Attachments ({{ ticketAttachments | length }})</summary>
+<details>
+  <summary class="ticket-details-summary">Attachments ({{ ticketAttachments | length }})</summary>
 
-    <ul class="ticket-attachments">
-      {% for attachment in ticketAttachments %}
-        <li>
-          <a href="/attachment/ticket/{{ attachment.id }}/{{ attachment.filename }}">{{ attachment.filename }}</a> ({{ attachment.size | bytesToKilos }}) - added by {{ attachment.author }}
-          <strong>{{ attachment.time | yearsAgo }}</strong>.<br />
-          {{ attachment.description | tracToHTML | safe }}
-        </li>
-      {% endfor %}
-    </ul>
-  </details>
-{% endif %}
+  <ul class="ticket-attachments">
+    {% for attachment in ticketAttachments %}
+      <li>
+        <a href="/attachment/ticket/{{ attachment.id }}/{{ attachment.filename }}">{{ attachment.filename }}</a> ({{ attachment.size | bytesToKilos }}) - added by {{ attachment.author }}
+        <strong>{{ attachment.time | yearsAgo }}</strong>.<br />
+        {{ attachment.description | tracToHTML | safe }}
+      </li>
+    {% endfor %}
+  </ul>
+</details>
 
 <details open>
   <summary class="ticket-details-summary">Change History ({{ ticket.changes | length }})</summary>
