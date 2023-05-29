@@ -39,10 +39,17 @@ module.exports = function (eleventyConfig) {
       [`./zip-attachment/ticket/${attachTicket}`]: `/zip-attachment/ticket/${attachTicket}`
     })
   } else {
-    eleventyConfig.addPassthroughCopy({
-      './raw-attachment/': '/raw-attachment/',
-      './zip-attachment/': '/zip-attachment/'
-    })
+    eleventyConfig.addPassthroughCopy(
+      {
+        './raw-attachment/': '/raw-attachment/',
+        './zip-attachment/': '/zip-attachment/'
+      },
+      {
+        // Lower default concurrency to avoid EMFILE errors
+        // See https://github.com/11ty/eleventy/issues/2604
+        concurrency: 100
+      }
+    )
   }
 
   // Run Eleventy when these files change:
