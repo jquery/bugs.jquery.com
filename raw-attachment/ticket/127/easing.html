@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Untitled</title>
+<script type="text/javascript" src="jquery-fx-easing.js"></script>
+
+
+<script type="text/javascript">
+// start here
+$(init);
+
+function init() {
+  $('#mine')
+    .animate( { left: 600, top: 100 }, 2000, { easing: easeInOutSine, step: logPos } )
+    .animate( { left: 300, top: 300, width: 300, height: 50 }, 2000, { easing: easeInCubic, step: logPos } )
+    .animate({ top: 100, left: 200, height: 300, width: 50 }, 2000,  {easing: easeInOutQuad, step: logPos } )
+    .animate( { left: 0, top: 0 }, 2000, { easing: easeInOutSine, step: logPos, complete: completed } );
+}
+
+function completed() {
+  document.title = 'Complete!';
+}
+
+function logPos() {
+  document.title = [ this.style.top, this.style.left ].join(', ');
+}
+
+
+// next three functions are taken from
+// http://www.robertpenner.com/easing/
+function easeInOutSine(t, b, c, d) {
+	return -c/2 * (Math.cos(Math.PI*t/d) - 1) + b;
+};
+
+function easeInCubic(t, b, c, d) {
+  return c * Math.pow(t/d, 3) + b;
+}
+
+function easeInOutQuad(t, b, c, d) {
+	if ((t/=d/2) < 1) return c/2*t*t + b;
+	return -c/2 * ((--t)*(t-2) - 1) + b;
+}
+
+
+</script>
+<style type="text/css">
+body {
+margin: 0;
+padding: 0;
+}
+
+#mine {
+  background: blue;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 0;
+  left: 0;
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+<div id="mine" style="left: 0">dfd</div>
+
+</body>
+</html>

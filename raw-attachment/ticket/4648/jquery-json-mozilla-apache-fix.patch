@@ -1,0 +1,31 @@
+--- /var/www/foswiki-svn/JQueryPlugin/pub/System/JQueryPlugin/jquery.uncompressed.js	2009-05-11 22:05:25.000000000 +0200
++++ /var/www/foswiki/JQueryPlugin/pub/System/JQueryPlugin/jquery.uncompressed.js	2009-03-30 08:50:49.000000000 +0200
+@@ -2879,7 +2879,6 @@
+ 		var ct = xhr.getResponseHeader("content-type"),
+ 			xml = type == "xml" || !type && ct && ct.indexOf("xml") >= 0,
+ 			data = xml ? xhr.responseXML : xhr.responseText;
+-
+ 		if ( xml && data.documentElement.tagName == "parsererror" )
+ 			throw "parsererror";
+ 			
+@@ -2892,8 +2891,19 @@
+ 			jQuery.globalEval( data );
+ 
+ 		// Get the JavaScript object, if JSON is used.
+-		if ( type == "json" )
++		if ( type == "json" ) {
++                        // Mozilla has a problem with Apache sometimes which breaks JSON responses
++                        if (jQuery.browser.mozilla) {
++                                var depth = 1;
++                                var pos = data.indexOf("[");
++                                while (depth > 0) {
++                                  pos = Math.min(data.indexOf("[", pos + 1), data.indexOf("]", pos + 1));
++                                  depth = data.charAt(pos) == "[" ? depth + 1 : depth - 1;
++                                }
++                                data = pos == -1 ? data.slice(0) : data.slice(0, pos + 1);
++                        }
+ 			data = eval("(" + data + ")");
++                }
+ 
+ 		return data;
+ 	},

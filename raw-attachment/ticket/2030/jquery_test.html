@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      font { cursor:pointer; font-weight:bold; color:blue; }
+      div { background:yellow; width:300px; margin:5px; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script language='javascript'>
+    $(document).ready(function(){        
+          $('div.ajax').hide();
+          $('font.ajax').click(function() {
+              var nextDiv = $(this).next('div.ajax');
+              var visibleSiblings = nextDiv.siblings('div:visible');
+              var href = $(this).attr('href');            
+              if (visibleSiblings.length) { 
+                visibleSiblings.slideUp('500'); 
+              }
+              $.get('data.php', { family: href },function(data) {
+                  $(nextDiv).slideToggle('500').html(data);
+              });
+          });
+      })
+    </script>
+  </head>
+  <body>
+    <font class="ajax" href="href.uri">Click here (odd use of font html tag)</font>
+    <div class="ajax">
+      Target
+    </div>
+    <div>
+      This one is visible 
+    </div>
+    <div>
+      So is this one
+    </div>
+  </body>
+</html>

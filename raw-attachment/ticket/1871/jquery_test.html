@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:400px; height:400px; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      function doIt() {
+        $("#adiv").text("click!");
+        $("#adiv").trigger("acustom.atype");
+      }
+
+      function showMouse(e) {
+        $("#adiv").text("( " + e.pageX + ", " + e.pageY + " )");
+      }
+
+      $(function () {
+        $("#doit").bind('click.mine', doIt);
+        $("#container").mousemove(showMouse);
+        $("#adiv").bind("acustom.atype", function () {
+          console.log("custom");
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <button id="doit">Do It</button>
+    <div id="container">
+      Hi
+    </div>
+    <div id="adiv"></div>
+  </body>
+</html>

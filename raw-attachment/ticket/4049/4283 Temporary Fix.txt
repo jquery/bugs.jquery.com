@@ -1,0 +1,30 @@
+/*
+ *  $().attr proxy. http://dev.jquery.com/ticket/4283. We need to handle some things special until this gets taken care of.
+ */
+(function($){
+	var attr = $.prototype.attr;
+	$.prototype.attr = function(name, value, type){
+		if(typeof name == 'string' && name.toLowerCase() == 'checked'){
+			var val;
+			if((typeof value == 'string' && value.length && value == 'checked'))
+				val = true;
+			else
+				val = false;
+				
+			return this.each(function(){
+				this.checked = val;
+			});		
+		}
+		return attr.call(this, name, value, type);
+	};
+
+	var removeAttr = $.prototype.removeAttr;
+	$.prototype.removeAttr = function(name){
+		if(name.toLowerCase() == 'checked'){
+			return this.each(function(){
+				this.checked = false;
+			});		
+		}
+		return removeAttr.call(this, name);
+	};
+})(jQuery);

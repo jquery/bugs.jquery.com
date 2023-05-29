@@ -1,0 +1,15 @@
+Index: event.js
+===================================================================
+--- event.js	(revision 4750)
++++ event.js	(working copy)
+@@ -321,8 +321,8 @@
+ 		}
+ 			
+ 		// Add which for key events
+-		if ( !event.which && ((event.charCode || event.charCode === 0) ? event.charCode : event.keyCode) )
+-			event.which = event.charCode || event.keyCode;
++		if ( typeof event.which == "undefined" && (typeof event.charCode != "undefined" || typeof event.keyCode != "undefined") )
++			event.which = typeof event.charCode != "undefined" ? event.charCode : event.keyCode;
+ 		
+ 		// Add metaKey to non-Mac browsers (use ctrl for PC's and Meta for Macs)
+ 		if ( !event.metaKey && event.ctrlKey )

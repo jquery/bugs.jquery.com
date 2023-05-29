@@ -1,0 +1,77 @@
+diff --git a/src/attributes.js b/src/attributes.js
+index cd17797..3ce6608 100644
+--- a/src/attributes.js
++++ b/src/attributes.js
+@@ -31,13 +31,12 @@ jQuery.fn.extend({
+ 	removeClass: function( value ) {
+ 		if ( (value && typeof value === "string") || value === undefined ) {
+ 			var classNames = (value || "").split(/\s+/);
+-
+ 			for ( var i = 0, l = this.length; i < l; i++ ) {
+ 				var elem = this[i];
+-
+ 				if ( elem.nodeType === 1 && elem.className ) {
+ 					if ( value ) {
+-					var className = " " + elem.className + " ";
++						var className = " " + elem.className + " ";
++						className = className.replace(/[\n\t]/g, " ");
+ 						for ( var c = 0, cl = classNames.length; c < cl; c++ ) {
+ 							className = className.replace(" " + classNames[c] + " ", " ");
+ 						}
+@@ -48,17 +47,22 @@ jQuery.fn.extend({
+ 				}
+ 			}
+ 		}
+-
+ 		return this;
+ 	},
+ 
+ 	hasClass: function( selector ) {
+-		var className = new RegExp("\\s" + selector + "\\s", "g");
++		var searchTerm = " " + selector + " ";
+ 		for ( var i = 0, l = this.length; i < l; i++ ) {
+-		if ( (" " + this[i].className + " ").search( className ) > -1 ) {
+-			return true;
++			var className = " " + this[i].className + " ";
++			// according to the HTML W3C documentation
++			// carriage return and tab should be replaced with a single space
++			// http://www.w3.org/TR/html401/types.html#type-cdata
++			className = className.replace(/[\n\t]/g, " ");
++			if ( className.indexOf( searchTerm ) > -1 ) {
++				return true;
+ 			}
+ 		}
++		return false;
+ 	},
+ 
+ 	val: function( value ) {
+diff --git a/test/unit/attributes.js b/test/unit/attributes.js
+index f2d9660..492cd07 100644
+--- a/test/unit/attributes.js
++++ b/test/unit/attributes.js
+@@ -400,7 +400,7 @@ test("removeAttr(String", function() {
+ });
+ 
+ test("addClass, removeClass, hasClass", function() {
+-	expect(6);
++	expect(12);
+ 
+ 	var jq = jQuery("<p>Hi</p>"), x = jq[0];
+ 
+@@ -419,4 +419,16 @@ test("addClass, removeClass, hasClass", function() {
+ 
+ 	ok( jq.hasClass("hi"), "Check has1" );
+ 	ok( jq.hasClass("bar"), "Check has2" );
++
++	var jq = jQuery("<p class='class1\nclass2\tcla.ss3\n'></p>");
++	ok( jq.hasClass("class1"), "Check hasClass with carriage return" );
++	ok( jq.hasClass("class2"), "Check hasClass with tab" );
++	ok( jq.hasClass("cla.ss3"), "Check hasClass with dot" );
++
++	jq.removeClass("class2");
++	ok( jq.hasClass("class2")==false, "Check the class has been properly removed" );
++	jq.removeClass("cla");
++	ok( jq.hasClass("cla.ss3"), "Check the dotted class has not been removed" );
++	jq.removeClass("cla.ss3");
++	ok( jq.hasClass("cla.ss3")==false, "Check the dotted class has been removed" );
+ });

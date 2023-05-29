@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+  <head>
+    <title>jquery bug report</title>
+     <script language="javascript" src="js/jQuery/jquery-1.4a2.js" type="text/javascript"></script> 
+     <style type="text/css">
+        tr.hide { display: none; }
+    </style>
+  </head>
+
+  <body>
+    <h1>jquery bug report</h1>
+
+
+
+<table>
+<thead>
+   <tr>
+	  <th>column1</th>
+	  <th>column2</th>
+	  <th>column3</th>
+	  <th>column4</th>
+   </tr>
+</thead>
+<tbody>
+   <tr>
+	  <td>row1_column1</td>
+	  <td>row1_column2</td>
+	  <td>row1_column3</td>
+	  <td>row1_column4</td>
+   </tr>
+   <tr>
+	  <td>row2_column1</td>
+	  <td>row2_column2</td>
+	  <td>row2_column3</td>
+	  <td>row2_column4</td>
+   </tr>
+   <tr class="hide">
+	  <td>hidden row3_column1</td>
+	  <td>hidden row3_column2</td>
+	  <td>hidden row3_column3</td>
+	  <td>hidden row3_column4</td>
+   </tr>
+
+</table>
+<script type="text/javascript">
+$(document).ready(function(){
+      $("table tr").each (function(){
+          alert("selecting row: " + this.innerHTML);  
+     })
+      $("table tr:nth-child:gt(0)").each (function(){
+          alert("selecting child:" + this.innerHTML);  
+     })
+
+      $("tr:visible").each (function(){
+          alert("selecting visible: " + this.innerHTML);  
+     })
+});
+</script>
+
+</body>
+
+</html>
+     

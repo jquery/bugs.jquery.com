@@ -1,0 +1,57 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 5143)
++++ core.js	(working copy)
+@@ -661,6 +661,12 @@
+ 	
+ 	cache: {},
+ 	
++	proxy: function( fn, proxy ){
++		// Set the guid of unique handler to the same of original handler, so it can be removed 
++		proxy.guid = fn.guid = fn.guid || jQuery.event.guid++;
++		return proxy;//so proxy can be declared as an argument
++	},
++	
+ 	data: function( elem, name, data ) {
+ 		elem = elem == window ?
+ 			windowData :
+Index: event.js
+===================================================================
+--- event.js	(revision 5143)
++++ event.js	(working copy)
+@@ -26,16 +26,13 @@
+ 			var fn = handler; 
+ 
+ 			// Create unique handler function, wrapped around original handler 
+-			handler = function() { 
++			handler = jQuery.proxy( fn, function() { 
+ 				// Pass arguments and context to original handler 
+ 				return fn.apply(this, arguments); 
+-			};
++			});
+ 
+ 			// Store data in unique handler 
+ 			handler.data = data;
+-
+-			// Set the guid of unique handler to the same of original handler, so it can be removed 
+-			handler.guid = fn.guid;
+ 		}
+ 
+ 		// Init the element's event structure
+@@ -401,11 +398,12 @@
+ 	},
+ 	
+ 	one: function( type, data, fn ) {
++		var one = jQuery.proxy( fn || data, function(event) {
++			jQuery(this).unbind(event, one);
++			return (fn || data).apply( this, arguments);
++		});
+ 		return this.each(function(){
+-			jQuery.event.add( this, type, function(event) {
+-				jQuery(this).unbind(event);
+-				return (fn || data).apply( this, arguments);
+-			}, fn && data);
++			jQuery.event.add( this, type, one, fn && data);
+ 		});
+ 	},
+ 

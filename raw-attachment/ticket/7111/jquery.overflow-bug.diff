@@ -1,0 +1,26 @@
+--- jquery-1.4.2.js	2010-06-30 10:58:48.000000000 +0200
++++ jquery-1.4.2.patched.js	2010-10-03 23:54:49.000000000 +0200
+@@ -5576,7 +5576,8 @@
+ 					opt.display = jQuery.css(this, "display");
+ 
+ 					// Make sure that nothing sneaks out
+-					opt.overflow = this.style.overflow;
++					opt.overflowX = this.style.overflowX;
++					opt.overflowY = this.style.overflowY;
+ 				}
+ 
+ 				if ( jQuery.isArray( prop[p] ) ) {
+@@ -5586,8 +5587,11 @@
+ 				}
+ 			}
+ 
+-			if ( opt.overflow != null ) {
+-				this.style.overflow = "hidden";
++			if ( opt.overflowX != null ) {
++				this.style.overflowX = "hidden";
++			}
++			if ( opt.overflowY != null ) {
++				this.style.overflowY = "hidden";
+ 			}
+ 
+ 			opt.curAnim = jQuery.extend({}, prop);

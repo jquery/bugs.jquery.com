@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<script type="text/javascript" src="jquery-1.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $("#text1").live("blur change", function() {
+            alert("text1 handler");
+          });
+        });
+    </script>
+  </head>
+  <body>
+    <form>
+      <input type="text" id="text1" value="1234" size="10"/>
+      <input type="button" name="Blur" value="Blur" onClick="$('#text1').trigger('blur');"/>
+      <input type="button" name="Change" value="Change" onClick="$('#text1').trigger('change');"/>
+    </form>
+  </body>
+</html>
+

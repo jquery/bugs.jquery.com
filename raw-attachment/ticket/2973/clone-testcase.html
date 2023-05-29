@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Internet Explorer jQuery 1.2.6 clone bug</title>
+		<script src='http://jqueryjs.googlecode.com/files/jquery-1.2.6.js'></script>
+		<script type='text/javascript'>
+var c;
+
+$(function ( ) {
+	var f = $('.a')[0];
+	
+	$('.b', f).bind('click', function( ) {
+		alert('remove');
+	});
+
+	$('.c', f).bind('click', function( ) {
+		alert('blah');
+	});
+	
+	$('.cloner').bind('click', function( ) {
+		var a = $('.a:first').clone(true);
+		
+		var b = $(a).clone(true);
+		
+		$('body').append(b);
+	});
+	
+	$('.cloner2').bind('click', function( ) {
+		if (!c)
+			c = $('.a:first').clone(true);
+		
+		var b = $(c).clone(true);
+		
+		$('body').append(b);
+	});
+});
+		</script>
+	</head>
+	<body>
+		<button class='cloner'>clone(true)</button> <button class='cloner2'>clone(true) same</button>
+		<div class='a'>
+			<span>
+				<span class='b'>abc</span>
+			</span>
+			<span>
+				<span class='c'>abc</span>
+			</span>
+		</div>
+	</body>
+</html>

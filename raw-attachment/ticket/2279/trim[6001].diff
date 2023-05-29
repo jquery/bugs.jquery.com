@@ -1,0 +1,71 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 6000)
++++ src/core.js	(working copy)
+@@ -1117,8 +1117,17 @@
+ 		return elem[ name ];
+ 	},
+ 
++	// Trim function by Ariel Flesler
++	// http://flesler.blogspot.com/2008/11/fast-trim-function-for-javascript.html
+ 	trim: function( text ) {
+-		return (text || "").replace( /^\s+|\s+$/g, "" );
++		if( !text )
++			return "";
++
++		var start = -1,
++			end = text.length;
++		while( text.charCodeAt(--end) < 33 );
++		while( text.charCodeAt(++start) < 33 );
++		return text.slice( start, end + 1 );
+ 	},
+ 
+ 	makeArray: function( array ) {
+@@ -1126,7 +1135,7 @@
+ 
+ 		if( array != null ){
+ 			var i = array.length;
+-			// The window, strings (and functions) also have 'length'
++			// The window, strings and functions also have 'length'
+ 			if( i == null || typeof array === "string" || jQuery.isFunction(array) || array.setInterval )
+ 				ret[0] = array;
+ 			else
+Index: test/unit/core.js
+===================================================================
+--- test/unit/core.js	(revision 6000)
++++ test/unit/core.js	(working copy)
+@@ -1795,7 +1795,7 @@
+ 	equals( c[0].nodeValue, "hi", "Check node,textnode,comment contents is just the one from span" );
+ });
+ 
+-test("jQuery.makeArray", function(){
++test("makeArray()", function(){
+ 	expect(15);
+ 
+ 	equals( jQuery.makeArray(jQuery('html>*'))[0].nodeName, "HEAD", "Pass makeArray a jQuery object" );
+@@ -1830,3 +1830,24 @@
+ 
+ 	ok( jQuery.makeArray(document.getElementById('form')).length >= 13, "Pass makeArray a form (treat as elements)" );
+ });
++
++test("trim()", function(){
++	expect( 10 );
++	
++	var parse = jQuery.trim;
++	
++	equals( parse(""), "", "Empty String" );
++	equals( parse("  "), "", "Empty, with spaces" );
++	equals( parse(" \n\t\r  "), "", "Empty, with new lines, tabs, etc" );
++	
++	equals( parse("abc"), "abc", "No spaces" );
++	
++	equals( parse("abc  "), "abc", "Trailing spaces" );
++	equals( parse("abc \n\t\r  "), "abc", "Trailing new lines, tabs, etc" );
++	
++	equals( parse("  abc"), "abc", "Leading spaces" );
++	equals( parse(" \n\t\r abc"), "abc", "Leading new lines, tabs, etc" );
++	
++	equals( parse("  abc  "), "abc", "Both leading and trailing spaces" );
++	equals( parse(" \n\t\r abc \n\t\r "), "abc", "Both leading and trailing new lines, tabs, etc" );
++});
+\ No newline at end of file

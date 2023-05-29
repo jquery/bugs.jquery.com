@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en-us" lang="en-us" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Offset Zoom Test Case</title>
+    <style type="text/css">
+        body
+        {
+            cursor: pointer;
+        }
+        #ClickHere
+        {
+            margin-left: 105px;
+            border: solid 2px Navy;
+            color:Navy;
+        }
+        div.block
+        {
+            background-color: Red;
+            border: solid 1px Black;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            font-size: .65em;
+        }
+    </style>
+
+    <script type="text/javascript" src="jquery-1.3.2.js"> </script>
+
+    <script type="text/javascript" language="javascript">
+        var clickCounter = 0;
+        $(document).ready(function() {
+            $("body").click(function(e) {
+                var oldElement = $("#block" + clickCounter);
+                clickCounter++;
+                var id = "block" + clickCounter;
+                var newElement = $("<div class='block' id='" + id + "'></div>");
+                $("body").append(newElement);
+                var offset = oldElement.offset();
+                var left = offset.left + oldElement.width();
+                var top = offset.top + oldElement.height();
+                newElement.css("top", top + "px");
+                newElement.css("left", left + "px");
+                newElement.html(clickCounter + "<br />(" + left + ", " + top + ")");
+            });
+        });
+        
+    </script>
+
+</head>
+<body>
+    <div id="ClickHere">
+        Click Here to create another block. This will should create a box to appear under
+        and to the right of the last box created. Change the Zoom level to something other
+        than 100% in IE7 and observe the undesired behavior.</div>
+    <div id="block0" class="block">0</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+Index: ui.droppable.js
+===================================================================
+--- ui.droppable.js	(revision 4200)
++++ ui.droppable.js	(working copy)
+@@ -86,7 +86,7 @@
+ 				var el = e.srcElement; 
+ 				do { if(el.droppable) return el; el = el.parentNode; } while (el); //This is only used in IE! references in DOM are evil!
+ 			}
+-			if(c && o.accept(c.element)) c.currentTarget = findCurrentTarget(e);
++			if(c && o.accept.call(this,c.element)) c.currentTarget = findCurrentTarget(e);
+ 			
+ 			c.drag.apply(c, [e]);
+ 			e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+@@ -96,9 +96,9 @@
+ 
+ 			var c = $.ui.ddmanager.current;
+ 			if (!c || c.element == this.element) return; // Bail if draggable and droppable are same element
+-			
++			c.currentTarget = this;//added
+ 			var o = this.options;
+-			if (o.accept(c.element)) {
++			if (o.accept.call(this,c.element)) {
+ 				$.ui.plugin.call(this, 'over', [e, this.prepareCallbackObj(c)]);
+ 				$(this.element).triggerHandler("dropover", [e, this.prepareCallbackObj(c)], o.over);
+ 			}
+@@ -107,10 +107,9 @@
+ 		out: function(e) {
+ 
+ 			var c = $.ui.ddmanager.current;
+-			if (!c || c.element == this.element) return; // Bail if draggable and droppable are same element
+-
++			if (!c || c.element == this.element) return; // Bail if draggable and droppable are same element			
+ 			var o = this.options;
+-			if (o.accept(c.element)) {
++			if (o.accept.call(this,c.element)) {
+ 				$.ui.plugin.call(this, 'out', [e, this.prepareCallbackObj(c)]);
+ 				$(this.element).triggerHandler("dropout", [e, this.prepareCallbackObj(c)], o.out);
+ 			}
+@@ -119,10 +118,9 @@
+ 		drop: function(e) {
+ 
+ 			var c = $.ui.ddmanager.current;
+-			if (!c || c.element == this.element) return; // Bail if draggable and droppable are same element
+-			
++			if (!c || c.element == this.element) return; // Bail if draggable and droppable are same element			
+ 			var o = this.options;
+-			if(o.accept(c.element)) { // Fire callback
++			if(o.accept.call(this,c.element)) { // Fire callback
+ 				if(o.greedy && !c.slowMode) {
+ 					if(c.currentTarget == this.element) {
+ 						$.ui.plugin.call(this, 'drop', [e, {

@@ -1,0 +1,26 @@
+Index: ui.slider.js
+===================================================================
+--- ui.slider.js	(revision 3756)
++++ ui.slider.js	(working copy)
+@@ -62,9 +62,18 @@
+ 	//Macros for external methods that support chaining
+ 	var methods = "destroy,enable,disable,moveTo".split(",");
+ 	for(var i=0;i<methods.length;i++) {
+-		var cur = methods[i], f;
+-		eval('f = function() { var a = arguments; return this.each(function() { if(jQuery(this).is(".ui-slider")) jQuery.data(this, "ui-slider")["'+cur+'"](a); }); }');
+-		$.fn["slider"+cur.substr(0,1).toUpperCase()+cur.substr(1)] = f;
++		var cur = methods[i];
++		$.fn["slider"+cur.substr(0,1).toUpperCase()+cur.substr(1)] = (function(methodName) {
++			return function() {
++				var args = arguments;
++				return this.each(function() {
++					if($(this).is(".ui-slider")) {
++						var sliderData = $.data(this, "ui-slider");
++						sliderData[methodName].apply(sliderData, args);
++					}
++				});
++			};
++		})(cur);
+ 	};
+ 	
+ 	//get instance method

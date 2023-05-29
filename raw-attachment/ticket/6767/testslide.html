@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+  <head>
+    
+    <script type="text/javascript" src="jquery-1.4.2.min.js"></script>
+    
+    <script type="text/javascript">
+
+      $(document).ready(function() {
+
+        otherShowHide();
+        
+        $("#howhearsel").change(otherShowHide)
+        
+      });
+
+      function otherShowHide(event) {
+
+        var el = $("#howhearsel")
+
+        if (el.val().toLowerCase() == "other")
+        { // show the "other" text box.
+          if (!event) {
+            $("#howhearother").show(); // from document.ready, so just show it.
+          } else {
+            $("#howhearother").slideDown(function() { // slide it down.
+              $("#howhearother input").focus(); // this causes it to disappear in IE7.
+              //$("#howhearother input").get(0).focus(); // this is the fix, use this instead!
+            });
+          }
+        } 
+        else 
+        { // hide the "other" test box.
+          if (!event) {
+            $("#howhearother").hide(); // from document.ready, so just hide it.
+          } else {
+            $("#howhearother").slideUp(); // slide it up.
+          }
+        }
+
+      };
+
+    </script>
+    
+    <style type="text/css">
+      .lblcol { float:left; width:190px }
+      .fldcol { float:left }
+      .clear { clear:both }
+      #howhearother { margin-left: 190px }
+      #howhearother .lblcol { float:left; width: 60px }
+    </style>
+    
+  </head>
+
+  <body>
+
+    <div class="lblcol">How did you hear about us?</div>
+    <div class="fldcol">
+      <select name="howhear" size="1" id="howhearsel">
+        <option>Web Site</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="clear"></div>
+    <div id="howhearother">
+      <div class="lblcol">Other:</div>
+      <div class="fldcol"><input type="text" name="howhearother" size="50"/></div>
+    </div>
+
+  </body>
+
+</html>

@@ -1,0 +1,40 @@
+Index: test/unit/core.js
+===================================================================
+--- test/unit/core.js	(revision 5759)
++++ test/unit/core.js	(working copy)
+@@ -53,11 +53,12 @@
+ });
+ 
+ test("browser", function() {
+-	expect(13);
++	expect(14);
+ 	var browsers = {
+ 		//Internet Explorer
+ 		"Mozilla/5.0 (Windows; U; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727)": "6.0",
+ 		"Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 5.1; .NET CLR 1.1.4322; InfoPath.1; .NET CLR 2.0.50727)": "7.0",
++		"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506; .NET CLR 1.1.4322)": "7.0",
+ 		/** Failing #1876
+ 		 * "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ; .NET CLR 2.0.50727; .NET CLR 1.1.4322; .NET CLR 3.0.04506.30)": "7.0",
+ 		 */
+@@ -82,7 +83,7 @@
+ 		"Other browser's user agent 1.0":null
+ 	};
+ 	for (var i in browsers) {
+-		var v = i.toLowerCase().match( /.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/ ); // RegEx from Core jQuery.browser.version check
++		var v = i.toLowerCase().match( /.+?(?:rv|it|ra|ie)[\/: ]([\d.]+)(?!.+opera)/ ); // RegEx from Core jQuery.browser.version check
+ 		version = v ? v[1] : null;
+ 		equals( version, browsers[i], "Checking UA string" );
+ 	}
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 5759)
++++ src/core.js	(working copy)
+@@ -1221,7 +1221,7 @@
+ 
+ // Figure out what browser is being used
+ jQuery.browser = {
+-	version: (userAgent.match( /.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/ ) || [])[1],
++	version: (userAgent.match( /.+?(?:rv|it|ra|ie)[\/: ]([\d.]+)(?!.+opera)/ ) || [])[1],
+ 	safari: /webkit/.test( userAgent ),
+ 	opera: /opera/.test( userAgent ),
+ 	msie: /msie/.test( userAgent ) && !/opera/.test( userAgent ),

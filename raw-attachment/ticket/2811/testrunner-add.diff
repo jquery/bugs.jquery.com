@@ -1,0 +1,25 @@
+Index: unit/core.js
+===================================================================
+--- unit/core.js	(revision 5482)
++++ unit/core.js	(working copy)
+@@ -261,7 +261,7 @@
+ });
+ 
+ test("add(String|Element|Array|undefined)", function() {
+-	expect(8);
++	expect(12);
+ 	isSet( $("#sndp").add("#en").add("#sap").get(), q("sndp", "en", "sap"), "Check elements from document" );
+ 	isSet( $("#sndp").add( $("#en")[0] ).add( $("#sap") ).get(), q("sndp", "en", "sap"), "Check elements from document" );
+ 	equals( $([]).add($("#form")[0].elements).length, 15, "Check elements from array" );
+@@ -280,6 +280,11 @@
+ 	
+ 	var notDefined;
+ 	equals( $([]).add(notDefined).length, 0, "Check that undefined adds nothing" );
++	
++	equals( $([]).add([window,document,document.body,document]).length, 3, "Pass an array" );
++	equals( $(document).add(document).length, 1, "Check duplicated elements" );
++	equals( $(window).add(window).length, 1, "Check duplicated elements using the window" );
++	equals( $([]).add( document.getElementById('form') ).length, 15, "Add a form (adds the elements)" );
+ });
+ 
+ test("each(Function)", function() {

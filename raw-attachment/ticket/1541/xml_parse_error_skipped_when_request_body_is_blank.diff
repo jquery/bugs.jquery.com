@@ -1,0 +1,13 @@
+Index: jquery/src/ajax/ajax.js
+===================================================================
+--- jquery/src/ajax/ajax.js	(revision 2919)
++++ jquery/src/ajax/ajax.js	(working copy)
+@@ -795,7 +795,7 @@
+ 		var xml = type == "xml" || !type && ct && ct.indexOf("xml") >= 0;
+ 		data = xml ? r.responseXML : r.responseText;
+ 
+-		if ( xml && data.documentElement.tagName == "parsererror" )
++		if ( xml && r.responseText.match(/\S/) && data.documentElement.tagName == "parsererror" )
+ 			throw "parsererror";
+ 
+ 		// If the type is "script", eval it in global context

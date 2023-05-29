@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resource Loading event/property test</title>
+    <script>
+        "use strict";
+
+        //Set up the (expando) property
+        if (!("resourceLoading" in document.documentElement)) {
+            document.documentElement.resourceLoading = 0;
+        }
+
+        function modify(value) {
+            //modify the value
+            document.documentElement.resourceLoading = value;
+
+            //Notify listeners.
+            //No attachEvent branch since in IE modifying the expando triggers
+            //onpropertychange
+            if (document.addEventListener) {
+                var evt = document.createEvent("UIEvents");
+                evt.initEvent("documentElementResourceLoading", false, false);
+                document.dispatchEvent(evt);
+            }
+        }
+
+        function listen(callback) {
+            if (document.addEventListener) {
+                document.addEventListener("documentElementResourceLoading", function (evt) {
+                    callback(document.documentElement.resourceLoading);
+                }, false);
+            } else if (document.attachEvent) {
+                document.documentElement.attachEvent("onpropertychange", function (evt) {
+                    if (evt.propertyName === "resourceLoading") {
+                        callback(document.documentElement.resourceLoading);
+                    }
+                });
+            }
+        }
+
+        function increment() {
+            modify(document.documentElement.resourceLoading + 1);
+        }
+        function decrement() {
+            modify(document.documentElement.resourceLoading - 1);
+        }
+
+        function msg(message) {
+            document.getElementById("output").innerHTML += '<br>' + message;
+        }
+
+        increment();
+        increment();
+
+        listen(function (value) {
+            msg('resourceLoading is now: ' + value);
+        });
+
+    </script>
+</head>
+<body>
+    <h1>Resource Loading event/property test</h1>
+    <button onclick="increment()">Increment</button>
+    <button onclick="decrement()">Decrement</button>
+    <button onclick="msg('resourceLoading current value: ' + document.documentElement.resourceLoading)">Current Value</button>
+    <button onclick="msg('Is resourceLoading in documentElement: ' + ('resourceLoading' in document.documentElement))">resourceLoading in document.documentElement</button>
+    <div id="output"></div>
+</body>
+</html>

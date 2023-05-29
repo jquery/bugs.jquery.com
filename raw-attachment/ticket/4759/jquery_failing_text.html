@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="cssDspJobHead">Tracking Code</div>
+    <div class="cssDspJobBody"> 1975 </div>
+    <div class="cssDspJobHead">Blarg</div>
+    <div class="cssDspJobBody">Blah blah blah</div>
+    <script>
+      jQuery(function() {
+        if (jQuery(".cssDspJobBody~ .cssDspJobBody").length == 0) {
+          alert("Cannot find '.cssDspJobBody~ .cssDspJobBody', but I should be able to!");
+        } else {
+          alert("Looks good!");
+        }
+      });
+    </script>
+  </body>
+</html>

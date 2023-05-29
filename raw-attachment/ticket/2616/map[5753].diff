@@ -1,0 +1,40 @@
+Index: jquery/src/core.js
+===================================================================
+--- jquery/src/core.js	(revision 5753)
++++ jquery/src/core.js	(working copy)
+@@ -1201,19 +1201,25 @@
+ 		return ret;
+ 	},
+ 
+-	map: function( elems, callback ) {
+-		var ret = [];
+-
++	map: function( source, callback, target ) { 
++		if( !target ) 
++			target = 'length' in source ? [ ] : { }; 
++		
++		if( 'length' in target ){ // Is it an array(-like) ? else a hash 
++			var arr = true; 
++			if( !target.concat )// Fix array-like objects, or they will fail the final concat 
++				target = jQuery.makeArray(target); 
++		} 
+ 		// Go through the items, translating each of the items to their
+ 		// new value (or values).
+-		for ( var i = 0, length = elems.length; i < length; i++ ) {
+-			var value = callback( elems[ i ], i );
++		jQuery.each( source , function( key, value ){ 
++			value = callback( value, key ); 
++		
++			if ( value != null ) 
++		 		target[ arr ? target.length : key ] = value; 
++		}); 
+ 
+-			if ( value != null )
+-				ret[ ret.length ] = value;
+-		}
+-
+-		return ret.concat.apply( [], ret );
++		return arr ? target.concat.apply( [], target ) : target;
+ 	}
+ });
+ 

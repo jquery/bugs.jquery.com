@@ -1,0 +1,51 @@
+Index: ui.droppable.js
+===================================================================
+--- ui.droppable.js	(revision 4356)
++++ ui.droppable.js	(working copy)
+@@ -68,7 +68,7 @@
+ 			var draggable = $.ui.ddmanager.current;
+ 			if (!draggable || draggable.element == this.element) return; // Bail if draggable and droppable are same element
+ 			
+-			if (this.options.accept(draggable.element)) {
++			if (this.options.accept(this.ui(draggable))) {
+ 				$.ui.plugin.call(this, 'over', [e, this.ui(draggable)]);
+ 				$(this.element).triggerHandler("dropover", [e, this.ui(draggable)], this.options.over);
+ 			}
+@@ -79,7 +79,7 @@
+ 			var draggable = $.ui.ddmanager.current;
+ 			if (!draggable || draggable.element == this.element) return; // Bail if draggable and droppable are same element
+ 
+-			if (this.options.accept(draggable.element)) {
++			if (this.options.accept(this.ui(draggable))) {
+ 				$.ui.plugin.call(this, 'out', [e, this.ui(draggable)]);
+ 				$(this.element).triggerHandler("dropout", [e, this.ui(draggable)], this.options.out);
+ 			}
+@@ -90,7 +90,7 @@
+ 			var draggable = $.ui.ddmanager.current;
+ 			if (!draggable || draggable.element == this.element) return; // Bail if draggable and droppable are same element
+ 			
+-			if(this.options.accept(draggable.element)) {
++			if(this.options.accept(this.ui(draggable))) {
+ 				$.ui.plugin.call(this, 'drop', [e, this.ui(draggable)]);
+ 				$(this.element).triggerHandler("drop", [e, this.ui(draggable)], this.options.drop);
+ 			}
+@@ -163,7 +163,7 @@
+ 				if(m[i].item.disabled) continue;
+ 				m[i].offset = $(m[i].item.element).offset();
+ 				
+-				if (t && m[i].item.options.accept(t.element)) //Activate the droppable if used directly from draggables
++				if (t && m[i].item.options.accept.call(m[i].item.options,m[i].item.ui(t))) //Activate the droppable if used directly from draggables
+ 					m[i].item.activate.call(m[i].item, e);
+ 					
+ 			}
+@@ -175,8 +175,8 @@
+ 				
+ 				if (!this.item.disabled && $.ui.intersect(draggable, this, this.item.options.tolerance))
+ 					this.item.drop.call(this.item, e);
+-					
+-				if (!this.item.disabled && this.item.options.accept(draggable.element)) {
++               		        					
++				if (!this.item.disabled && this.item.options.accept.call(this.item,this.item.ui(draggable))) {
+ 					this.out = 1; this.over = 0;
+ 					this.item.deactivate.call(this.item, e);
+ 				}

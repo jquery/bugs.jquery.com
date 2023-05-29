@@ -1,0 +1,203 @@
+--- /home/bertrand/jquery/jquery/plugins/interface/iutil.js	2006-11-30 08:02:48.000000000 +0100
++++ ./iutil.js	2006-12-02 17:43:58.000000000 +0100
+@@ -42,16 +42,16 @@
+ 		var x = 0;
+ 		var y = 0;
+ 		var restoreStyle = false;
+-		es = e.style;
++		var es = e.style;
+ 		if (jQuery(e).css('display') == 'none') {
+-			oldVisibility = es.visibility;
+-			oldPosition = es.position;
++			var oldVisibility = es.visibility;
++			var oldPosition = es.position;
+ 			es.visibility = 'hidden';
+ 			es.display = 'block';
+ 			es.position = 'absolute';
+ 			restoreStyle = true;
+ 		}
+-		el = e;
++		var el = e;
+ 		while (el){
+ 			x += el.offsetLeft + (el.currentStyle && !jQuery.browser.opera ?parseInt(el.currentStyle.borderLeftWidth)||0:0);
+ 			y += el.offsetTop + (el.currentStyle && !jQuery.browser.opera ?parseInt(el.currentStyle.borderTopWidth)||0:0);
+@@ -77,13 +77,13 @@
+ 		var h = jQuery.css(e,'height');
+ 		var wb = 0;
+ 		var hb = 0;
+-		es = e.style;
++		var es = e.style;
+ 		if (jQuery(e).css('display') != 'none') {
+ 			wb = e.offsetWidth;
+ 			hb = e.offsetHeight;
+ 		} else {
+-			oldVisibility = es.visibility;
+-			oldPosition = es.position;
++			var oldVisibility = es.visibility;
++			var oldPosition = es.position;
+ 			es.visibility = 'hidden';
+ 			es.display = 'block';
+ 			es.position = 'absolute';
+@@ -97,98 +97,104 @@
+ 	},
+ 	getClient : function(e)
+ 	{
++		var ret = { w: 0, h: 0 };
+ 		if (e) {
+-			w = e.clientWidth;
+-			h = e.clientHeight;
+-		} else {
+-			de = document.documentElement;
+-			w = window.innerWidth || self.innerWidth || (de&&de.clientWidth) || document.body.clientWidth;
+-			h = window.innerHeight || self.innerHeight || (de&&de.clientHeight) || document.body.clientHeight;
+-		}
+-		return {w:w,h:h};
++			ret.w = e.clientWidth;
++			ret.h = e.clientHeight;
++			return ret;
++		}
++		var de = document.documentElement;
++		ret.w = window.innerWidth || self.innerWidth || (de&&de.clientWidth) || document.body.clientWidth;
++		ret.h = window.innerHeight || self.innerHeight || (de&&de.clientHeight) || document.body.clientHeight;
++		return ret;
+ 	},
+ 	getScroll : function (e)
+ 	{
++		var ret = { t: 0, l: 0, w: 0, h: 0, iw: 0, ih: 0 };
+ 		if (e) {
+-			t = e.scrollTop;
+-			l = e.scrollLeft;
+-			w = e.scrollWidth;
+-			h = e.scrollHeight;
+-			iw = 0;
+-			ih = 0;
++			ret.t = e.scrollTop;
++			ret.l = e.scrollLeft;
++			ret.w = e.scrollWidth;
++			ret.h = e.scrollHeight;
+ 		} else  {
+ 			if (document.documentElement && document.documentElement.scrollTop) {
+-				t = document.documentElement.scrollTop;
+-				l = document.documentElement.scrollLeft;
+-				w = document.documentElement.scrollWidth;
+-				h = document.documentElement.scrollHeight;
++				ret.t = document.documentElement.scrollTop;
++				ret.l = document.documentElement.scrollLeft;
++				ret.w = document.documentElement.scrollWidth;
++				ret.h = document.documentElement.scrollHeight;
+ 			} else if (document.body) {
+-				t = document.body.scrollTop;
+-				l = document.body.scrollLeft;
+-				w = document.body.scrollWidth;
+-				h = document.body.scrollHeight;
++				ret.t = document.body.scrollTop;
++				ret.l = document.body.scrollLeft;
++				ret.w = document.body.scrollWidth;
++				ret.h = document.body.scrollHeight;
+ 			}
+-			iw = self.innerWidth||document.documentElement.clientWidth||document.body.clientWidth||0;
+-			ih = self.innerHeight||document.documentElement.clientHeight||document.body.clientHeight||0;
++			ret.iw = self.innerWidth||document.documentElement.clientWidth||document.body.clientWidth||0;
++			ret.ih = self.innerHeight||document.documentElement.clientHeight||document.body.clientHeight||0;
+ 		}
+-		return { t: t, l: l, w: w, h: h, iw: iw, ih: ih };
++		return ret;
+ 	},
+ 	getMargins : function(e, toInteger)
+ 	{
+-		el = jQuery(e);
+-		t = el.css('marginTop') || '';
+-		r = el.css('marginRight') || '';
+-		b = el.css('marginBottom') || '';
+-		l = el.css('marginLeft') || '';
++		var ret = {t: 0, r: 0,	b: 0, l: 0};
++		var el = jQuery(e);
++		ret.t = el.css('marginTop') || '';
++		ret.r = el.css('marginRight') || '';
++		ret.b = el.css('marginBottom') || '';
++		ret.l = el.css('marginLeft') || '';
+ 		if (toInteger)
+ 			return {
+-				t: parseInt(t)||0,
+-				r: parseInt(r)||0,
+-				b: parseInt(b)||0,
+-				l: parseInt(l)
++				t: parseInt(ret.t)||0,
++				r: parseInt(ret.r)||0,
++				b: parseInt(ret.b)||0,
++				l: parseInt(ret.l)
+ 			};
+ 		else
+-			return {t: t, r: r,	b: b, l: l};
++			return ret;
+ 	},
+ 	getPadding : function(e, toInteger)
+ 	{
+-		el = jQuery(e);
+-		t = el.css('paddingTop') || '';
+-		r = el.css('paddingRight') || '';
+-		b = el.css('paddingBottom') || '';
+-		l = el.css('paddingLeft') || '';
++		var el = jQuery(e);
++		var ret = {
++			t:el.css('paddingTop') || '',
++			r:el.css('paddingRight') || '',
++			b:el.css('paddingBottom') || '',
++			l:el.css('paddingLeft') || ''
++		};
+ 		if (toInteger)
+ 			return {
+-				t: parseInt(t)||0,
+-				r: parseInt(r)||0,
+-				b: parseInt(b)||0,
+-				l: parseInt(l)
++				t: parseInt(ret.t)||0,
++				r: parseInt(ret.r)||0,
++				b: parseInt(ret.b)||0,
++				l: parseInt(ret.l)
+ 			};
+ 		else
+-			return {t: t, r: r,	b: b, l: l};
++			return ret;
+ 	},
+ 	getBorder : function(e, toInteger)
+ 	{
+-		el = jQuery(e);
+-		t = el.css('borderTopWidth') || '';
+-		r = el.css('borderRightWidth') || '';
+-		b = el.css('borderBottomWidth') || '';
+-		l = el.css('borderLeftWidth') || '';
++		var el = jQuery(e);
++		var ret = {
++			t:el.css('borderTopWidth') || '',
++			r:el.css('borderRightWidth') || '',
++			b:el.css('borderBottomWidth') || '',
++			l:el.css('borderLeftWidth') || ''
++		};
+ 		if (toInteger)
+ 			return {
+-				t: parseInt(t)||0,
+-				r: parseInt(r)||0,
+-				b: parseInt(b)||0,
+-				l: parseInt(l)||0
++				t: parseInt(ret.t)||0,
++				r: parseInt(ret.r)||0,
++				b: parseInt(ret.b)||0,
++				l: parseInt(ret.l)||0
+ 			};
+ 		else
+-			return {t: t, r: r,	b: b, l: l};
++			return ret;
+ 	},
+ 	getPointer : function(event)
+ 	{
+-		x = event.pageX || (event.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft)) || 0;
+-		y = event.pageY || (event.clientY + (document.documentElement.scrollTop || document.body.scrollTop)) || 0;
+-		return {x:x, y:y};
++		return {
++			x:event.pageX || (event.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft)) || 0,
++			y:event.pageY || (event.clientY + (document.documentElement.scrollTop || document.body.scrollTop)) || 0
++		};
+ 	},
+ 	traverseDOM : function(nodeEl, func)
+ 	{

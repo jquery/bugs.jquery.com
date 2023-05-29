@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+          "http://www.w3.org/TR/html4/strict.dtd">
+<!-- $Id: template.html 5 2007-10-11 23:18:37Z stan $ -->
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="author" content="Ian Eure <ieure@blarg.net>">
+        <meta name="copyright" content="© 2008 Buster Marx, Inc">
+        <title></title>
+    </head>
+    <body>
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript">
+$(function()
+  {
+      var html = $('<a href="#" id="foo" class="foo">foo - you should never see this</a> <br> <a href="#" id="bar" class="bar">bar</a>');
+      var nodes = $(html);
+      // Doesn’t work with a simple array of elements.
+      $('#foo', nodes.get()).remove();
+      // Also doesn’t work with the jQuery object matching them.
+      $('#foo', nodes).remove();
+      $('#container').append(nodes);
+  });
+</script>
+        <div id="container"></div>
+    </body>
+</html>

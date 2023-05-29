@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; }
+    </style>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript">
+      function parseToXML(text) {
+        var doc;
+
+        if (window.ActiveXObject) {
+          doc = new ActiveXObject("Microsoft.XMLDOM");
+          doc.async = false;
+          doc.loadXML(text);
+        } else
+          doc = (new DOMParser()).parseFromString(text, "application/xml");
+
+        return doc;
+      }
+
+      if (typeof console == 'undefined') {
+        var console = {};
+        console.log = alert;
+      }
+      var xmlText = "<Test><Items><item/><Item/><Item/></Items></Test>";
+
+      function doHTML() {
+        var $n = $(xmlText);
+        console.log($("item", $n).length); // expected 1, found 1
+        console.log($("Item", $n).length); // expected 2, found 1
+        console.log($n.find("Items").children("Item").length); // expected 2, found 0
+        console.log($n.children("Items").children("Item").length); // expected 2, found 3
+      }
+
+      function doXML() {
+        var doc = parseToXML(xmlText);
+        console.log("expect 1 found " + $("item", doc).length);
+        console.log("expect 2 found " + $("Item", doc).length);
+        console.log("expect 1 found " + $("Test", doc).find("Item:first").length);
+        console.log("expect 2 found " + $("Test", doc).find("Items").find("Item").length);
+        console.log("expect 2 found " + $("Items Item", doc).length);
+        // fix this by removing toUpperCase from from jQuery.find()
+        console.log("expect 2 found " + $("Items > Item", doc).length);
+        // fix this by removing toUpperCase from from jQuery.filter()
+        console.log("expect 2 found " + $("Items", doc).children("Item").length);
+      }
+
+      $(function () {
+        $("button:first").click(doHTML);
+        $("button:last").click(doXML);
+      });
+    </script>
+  </head>
+  <body>
+    <button>As HTML (in ticket description)</button>
+    <button>As XML (parsed to an XML document)</button>
+    <div id="container">
+      Hi
+    </div>
+    <div id="adiv"></div>
+  </body>
+</html>

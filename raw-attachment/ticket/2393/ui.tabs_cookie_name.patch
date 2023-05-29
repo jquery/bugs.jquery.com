@@ -1,0 +1,27 @@
+﻿Index: D:/workspace/jQuery/ui/ui.tabs.js
+===================================================================
+--- D:/workspace/jQuery/ui/ui.tabs.js	(revision 4815)
++++ D:/workspace/jQuery/ui/ui.tabs.js	(working copy)
+@@ -169,7 +169,11 @@
+                             return false; // break
+                         }
+                     } else if (o.cookie) {
+-                        var index = parseInt($.cookie('ui-tabs' + $.data(self.element)),10);
++                        if(o.cookie.cookieName)
++                          var index = parseInt($.cookie('ui-tabs-' + o.cookie.cookieName),10);
++                        else
++                          var index = parseInt($.cookie('ui-tabs' + $.data(self.element)),10);
++                          
+                         if (index && self.$tabs[index]) {
+                             o.selected = index;
+                             return false; // break
+@@ -296,6 +300,9 @@
+                 }
+ 
+                 if (o.cookie)
++                  if(o.cookie.cookieName)
++                    $.cookie('ui-tabs-' + o.cookie.cookieName, self.options.selected, o.cookie);
++                  else
+                     $.cookie('ui-tabs' + $.data(self.element), self.options.selected, o.cookie);
+ 
+                 // stop possibly running animations

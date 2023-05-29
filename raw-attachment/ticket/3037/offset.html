@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+  $(document).ready(function(){
+    
+    var mybox = $('div.box.bubble');
+	var myoffset = mybox.offset();
+	$('#offset_left').html(''+myoffset.left);
+	$('#offset_top').html(''+myoffset.top);
+
+  });
+</script>
+<style>
+div.box.bubble {
+	left: 50px;
+	top: 100px;
+	width: 100px;
+	height: 80px;
+	background: green;
+	position: absolute;
+	display:none;
+	visibility:hidden;
+}
+</style>
+</head>
+<body>
+
+	<div class="box bubble">it is a popup window</div>
+
+	coordinates of the div element (absolute and display: none) <br>
+    left: <span id="offset_left"></span> (instead of 50)<br>
+    top: <span id="offset_top"></span> (instead of 100)<br>
+	<br>
+	display: none is the problem. replacing it by visibility: hidden gives the right results but is not the right way for doing effects on it (as it uses extensively the css display).
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<html>
+<head>
+<title>IE8 Stack Overflow</title>
+<link type="text/css" rel="stylesheet" href="http://craigsworks.com/projects/qtip/css/qtip.css"/>
+
+    <script  type="text/javascript" src="http://code.jquery.com/jquery-1.4a1.js"></script>
+    <script  type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("jqueryui", "1.7");
+    </script>
+    <script type="text/javascript" src="http://www.altosresearch.com/altos/scripts/jquery.qtip.min.js"></script>
+    <script type="text/javascript" src="http://www.altosresearch.com/altos/scripts/qtip-styles.js"></script>
+
+</head>
+<body>
+<script type="text/javascript">
+    $(document).ready(function()
+        {
+           // Notice the use of the each() method to acquire access to each elements attributes
+           $('.qtip-help').each(function()
+           {
+              $(this).qtip({
+                  content: {
+                    title: {
+                       text: $(this).attr('alt'),
+                       button: false
+                    },
+                    text: $(this).attr('longdesc')
+                  },
+                 position: {
+                    corner: {
+                       target: 'bottomMiddle', // Position the tooltip above the link
+                       tooltip: 'topMiddle'
+                    },
+                    adjust: {
+                       screen: true // Keep the tooltip on-screen at all times
+                    }
+                 },
+                 style: 'help'
+              });
+           });
+            $('.qtip-wide').each(function()
+            {
+                $(this).qtip({
+                    content: {
+                      title: {
+                         text: $(this).attr('alt'),
+                         button: false
+                      },
+                      text: $(this).attr('longdesc')
+                    },
+                    position: {
+                    corner: {
+                       target: 'bottomMiddle', // Position the tooltip above the link
+                       tooltip: 'topMiddle'
+                    },
+                    adjust: {
+                       screen: true // Keep the tooltip on-screen at all times
+                    }
+                 },
+                   style: 'wide'
+                });
+            });
+
+        $('.qtip-sticky-help').each(function()
+        {
+            $(this).qtip({
+                content: {
+                  title: {
+                     text: $(this).attr('alt'),
+                      button: '[x]' // Show a close link in the title
+                  },
+                  text: $(this).attr('longdesc')
+                },
+                position: {
+                    corner: {
+                       target: 'bottomMiddle', // Position the tooltip above the link
+                       tooltip: 'topMiddle'
+                    },
+                    adjust: {
+                       screen: true // Keep the tooltip on-screen at all times
+                    }
+                },
+                show: {
+                   when: 'click',
+                   solo: true // Only show one tooltip at a time
+                },
+                hide: 'unfocus',
+               style: 'help'
+            });
+        });
+        $('a[title]').qtip({ style: { name: 'replacement', tip: true } });
+     });
+
+</script>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+    <p>Here is an example <a href="#" title="This is the title that should apear in the qTip popup">of a stack overflow in jquery</a>.</p>
+</body>
+</html>
+

@@ -1,0 +1,37 @@
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 4191)
++++ src/event.js	(working copy)
+@@ -406,6 +406,32 @@
+ 				arguments[0].type = "mouseleave";
+ 				return jQuery.event.handle.apply(this, arguments);
+ 			}
++		},
++		
++		change: {
++			setup: function() {
++				if ( (jQuery.browser.msie && (this.type == "radio" || this.type == "checkbox")) ||
++				 		(jQuery.browser.safari && this.type == "radio") ) {
++					jQuery(this).bind( this.type == "radio" ? "focus" : "click", jQuery.event.special.change.handler);
++					return true;
++				} 
++				return false;
++			},
++			
++			teardown: function() {
++				if ( (jQuery.browser.msie && (this.type == "radio" || this.type == "checkbox")) ||
++				 		(jQuery.browser.safari && this.type == "radio") ) {
++					jQuery(this).unbind( this.type == "radio" ? "focus" : "click", jQuery.event.special.change.handler);
++					return true;
++				}
++				return false;
++			},
++			
++			handler: function() {
++				// Execute the correct heandlers by setting the event type to change
++				arguments[0].type = "change";
++				return jQuery.event.handle.apply(this, arguments); 
++			}
+ 		}
+ 	}
+ };

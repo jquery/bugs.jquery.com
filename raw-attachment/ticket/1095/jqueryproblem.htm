@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title></title>
+		<script src="jquery.js"></script>
+	</head>
+	<body>
+	<script type="text/javascript">
+//<![CDATA[
+		$(document).ready(function() { 
+			$('#hiddenpart').hide(); 
+			$('#showhidden').click(function() { 
+				$('#showhidden').hide();
+				$('#hiddenpart').show('slow'); 
+			});
+		});
+//]]>
+		</script>
+
+		<form>
+			<div id="hiddenpart">
+				<input type="radio" name="myradio" value="Y" checked />&lt;-- should be checked <br />
+				<input type="radio" name="myradio" value="N" />&lt;-- should be unchecked 
+			</div>
+		</form>
+		<div id="showhidden">click here to show the hidden part of the form</div>
+	</body>
+</html>

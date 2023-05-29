@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<title>JQuery: $.find() bug</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript" />
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				alert($("#table1 tr[style*='table-row']").length);
+				alert($("#table1").find("tr[style*='table-row']").length);
+			});
+		</script>
+	</head>
+	<body>
+		<table id="table1">
+			<tr><td>1</td></tr>
+			<tr style="display: table-row;"><td>2</td></tr>
+			<tr><td>3</td></tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,17 @@
+--- jquery-1.3.2-orig/test/qunit/testrunner.js	2009-02-19 14:34:01.000000000 -0800
++++ jquery-1.3.2-release/test/qunit/testrunner.js	2009-07-23 15:05:35.000000000 -0700
+@@ -197,7 +197,12 @@
+     return innerEquiv;
+ }(); // equiv
+ 
+-var GETParams = $.map( location.search.slice(1).split('&'), decodeURIComponent ),
++// decodeURIComponent only takes a single argument, but map() calls it with two.
++// this is a workaround (hence "wa")
++function decodeURIComponent_wa(uri, junk) { return decodeURIComponent(uri); };
++
++//var GETParams = $.map( location.search.slice(1).split('&'), decodeURIComponent ),
++var GETParams = $.map( location.search.slice(1).split('&'), decodeURIComponent_wa ),
+ 	ngindex = $.inArray("noglobals", GETParams),
+ 	noglobals = ngindex !== -1;
+ 
+

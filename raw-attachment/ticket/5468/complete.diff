@@ -1,0 +1,13 @@
+diff --git a/src/ajax.js b/src/ajax.js
+index 858ac4b..2257a9b 100644
+--- a/src/ajax.js
++++ b/src/ajax.js
+@@ -457,6 +457,8 @@ jQuery.extend({
+ 			xhr.send( type === "POST" || type === "PUT" ? s.data : null );
+ 		} catch(e) {
+ 			jQuery.handleError(s, xhr, null, e);
++			// Fire the complete handlers
++			complete();
+ 		}
+ 
+ 		// firefox 1.5 doesn't fire statechange for sync requests

@@ -1,0 +1,14 @@
+Index: src/ajax.js
+===================================================================
+--- src/ajax.js	(revision 6268)
++++ src/ajax.js	(working copy)
+@@ -176,6 +176,9 @@
+ 		// checked again later (in the test suite, specifically)
+ 		s = jQuery.extend(true, s, jQuery.extend(true, {}, jQuery.ajaxSettings, s));
+ 
++        // strip any existing fragment (#) segment from the request URL
++        s.url = s.url.replace(/#(.*)$/, '');
++
+ 		var jsonp, jsre = /=\?(&|$)/g, status, data,
+ 			type = s.type.toUpperCase();
+ 

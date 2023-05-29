@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>test_1.3</title>
+	<script type="text/javascript" charset="utf-8" src="jquery.1.3.2.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		var snippet = "<div><span id='a'>JS did not run<\/span><script type='text/javascript'>" +
+		"$('#a').html('Hooray! JS ran!');" +
+		"<\/script><\/div>";
+		$(function(){
+			$('#replaceable').replaceWith($(snippet)[0]);
+		});
+	</script>
+</head>
+<body>
+	<div id="replaceable">I'm going away.</div>
+</body>
+</html>

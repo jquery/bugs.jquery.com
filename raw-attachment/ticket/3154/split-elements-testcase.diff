@@ -1,0 +1,37 @@
+Index: test/unit/core.js
+===================================================================
+--- test/unit/core.js	(revision 5788)
++++ test/unit/core.js	(working copy)
+@@ -258,7 +258,7 @@
+ });
+ 
+ test("add(String|Element|Array|undefined)", function() {
+-	expect(12);
++	expect(13);
+ 	isSet( jQuery("#sndp").add("#en").add("#sap").get(), q("sndp", "en", "sap"), "Check elements from document" );
+ 	isSet( jQuery("#sndp").add( jQuery("#en")[0] ).add( jQuery("#sap") ).get(), q("sndp", "en", "sap"), "Check elements from document" );
+ 	ok( jQuery([]).add(jQuery("#form")[0].elements).length >= 13, "Check elements from array" );
+@@ -266,6 +266,8 @@
+ 	// For the time being, we're discontinuing support for jQuery(form.elements) since it's ambiguous in IE
+ 	// use jQuery([]).add(form.elements) instead.
+ 	//equals( jQuery([]).add(jQuery("#form")[0].elements).length, jQuery(jQuery("#form")[0].elements).length, "Array in constructor must equals array in add()" );
++	
++	equals( jQuery([]).add(jQuery("#splitform")[0].elements).length, 2, "should be jQuery object with two elements, but is jQuery object with array with two elements" );
+ 
+ 	var x = jQuery([]).add(jQuery("<p id='x1'>xxx</p>")).add(jQuery("<p id='x2'>xxx</p>"));
+ 	equals( x[0].id, "x1", "Check on-the-fly element1" );
+Index: test/index.html
+===================================================================
+--- test/index.html	(revision 5788)
++++ test/index.html	(working copy)
+@@ -51,6 +51,10 @@
+ 		<p id="first">Try them out:</p>
+ 		<ul id="firstUL"></ul>
+ 		<ol id="empty"></ol>
++		<form id="splitform">
++			<input name="split" id="split1" />
++			<input name="xxx" id="split1" />
++		</form>
+ 		<form id="form" action="formaction">
+ 			<input type="text" name="action" value="Test" id="text1" maxlength="30"/>
+ 			<input type="text" name="text2" value="Test" id="text2" disabled="disabled"/>

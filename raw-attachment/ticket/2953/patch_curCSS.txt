@@ -1,0 +1,13 @@
+Index: /home/lrbabe/workspace/jQuery/jquery/src/core.js
+===================================================================
+--- /home/lrbabe/workspace/jQuery/jquery/src/core.js	(revision 5704)
++++ /home/lrbabe/workspace/jQuery/jquery/src/core.js	(working copy)
+@@ -859,7 +859,7 @@
+ 		if ( !force && style && style[ name ] )
+ 			ret = style[ name ];
+ 
+-		else if ( defaultView.getComputedStyle ) {
++		else if ( defaultView.getComputedStyle && !(jQuery.browser.opera && (name == 'width' || name == 'height') && jQuery.curCSS(elem, 'display') == 'none')) {
+ 
+ 			// Only "float" is needed here
+ 			if ( name.match( /float/i ) )

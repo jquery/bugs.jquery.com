@@ -1,0 +1,31 @@
+<html>
+<head>
+	<script type='text/javascript' src='jquery-1.3.2.js'></script>
+<script type='text/javascript'>
+$(document).ready(function(){
+	$(document)
+		.bind('namespace.a.b', function(){
+			console.log('Called a.b');
+		})
+		.bind('namespace.b.a', function(){
+			console.log('Called b.a');
+		});
+
+	// Shows 2 events, both with type a.b
+	console.log($(document).data('events'));
+
+	console.group('a.b');
+	$(document).trigger('namespace.a.b'); // Should only trigger a.b
+	console.groupEnd();
+
+	console.group('b.a');
+	$(document).trigger('namespace.b.a'); // Should only trigger b.a
+	console.groupEnd();
+});
+</script>
+</head>
+<body>
+
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+  <head>
+    <title>jquery crashing safari 2.0.4</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id=fail>
+      <a href="http://www.apple.com/">iphone</a>
+    </div>
+    <script type="text/javascript">
+      $(function() {
+        $('#fail').find('a').html('FAIL!');
+      });
+    </script>
+  </body>
+</html>
+<!--
+--- jquery.js.orig	2008-09-23 12:49:15.000000000 +0100
++++ jquery.js	2008-09-23 12:50:48.000000000 +0100
+@@ -1132,7 +1132,7 @@
+ 		if( array != null ){
+ 			var i = array.length;
+ 			//the window, strings and functions also have 'length'
+-			if( i == null || array.split || array.setInterval || array.call )
++			if( i == null || "split" in array || "setInterval" in array || "call" in array )
+ 				ret[0] = array;
+ 			else
+ 				while( i )
+-->

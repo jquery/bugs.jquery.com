@@ -1,0 +1,114 @@
+Index: test/unit/event.js
+===================================================================
+--- test/unit/event.js	(revision 5742)
++++ test/unit/event.js	(working copy)
+@@ -11,6 +11,36 @@
+ 	ok( !jQuery.data(jQuery("#firstp")[0], "events"), "Event handler unbound when using data." );
+ });
+ 
++test("bind()/unbind(), with same handler but different data", function() {
++	expect(3);
++	var data1 = 0, data2 = 0;
++	var handler = function(event) {
++		if (event.data.foo)
++			data1++;
++		if (event.data.bar)
++			data2++;
++	};
++	jQuery("#firstp").bind("click", {foo: "bar"}, handler);//.click().unbind("click", handler);
++	jQuery("#simon1").bind("click", {foo: "bar"}, handler);//.click().unbind("click", handler);
++	jQuery("#simon1").bind("click", {foo: "bar"}, handler);//.click().unbind("click", handler);
++	jQuery("#simon1").bind("click", {bar: "foo"}, handler);//.click().unbind("click", handler);
++	jQuery("#simon1").bind("click", {bar: "foo"}, handler);//.click().unbind("click", handler);
++	jQuery("#firstp").bind("click", {bar: "foo"}, handler);//.click().unbind("click", handler);
++	jQuery("#firstp").bind("click", {foo: "bar"}, handler);//.click().unbind("click", handler);
++	jQuery("#firstp").bind("click", {bar: "foo"}, handler);//.click().unbind("click", handler);
++
++	jQuery("#firstp").click();
++	jQuery("#simon1").click();
++	jQuery("#foo").click();
++
++	ok( data1==4 && data2==4, "Event handler was bound two times with different data");
++
++	jQuery("#firstp").unbind("click", handler);
++	jQuery("#simon1").unbind("click", handler);
++	ok( !jQuery.data(jQuery("#firstp")[0], "events"), "Event handler unbound when using different data but same handler. (1)" );
++	ok( !jQuery.data(jQuery("#simon1")[0], "events"), "Event handler unbound when using different data but same handler. (2)" );
++});
++
+ test("bind(), with data, trigger with data", function() {
+ 	expect(4);
+ 	var handler = function(event, data) {
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 5742)
++++ src/event.js	(working copy)
+@@ -48,6 +48,8 @@
+ 		// event in IE.
+ 		handle.elem = elem;
+ 
++		var guid = this.guid;
++
+ 		// Handle multiple events separated by a space
+ 		// jQuery(...).bind("mouseover mouseout", fn);
+ 		jQuery.each(types.split(/\s+/), function(index, type) {
+@@ -75,13 +77,36 @@
+ 				}
+ 			}
+ 
+-			// Add the function to the element's handler list
+-			handlers[handler.guid] = handler;
++			// handler with same guid is already bound. If this
++			// bind contains data, add the handler again with
++			// another guid.
++			if (handlers[handler.guid] && data) {
++				// add reference to other handlers for
++                                // unbinding
++				if (handlers[handler.guid].prev)
++					// handler has already a reference, put
++					// the new one in between
++					handler.prev = handlers[fn.guid].prev;
++				else
++					handler.prev = handler.guid;
+ 
++				handler.guid = guid++;
++				handlers[handler.guid] = handler;
++
++				// making a cycling reference from one event to
++				// eachother to be able to start at any event
++				// when unbinding
++				handlers[fn.guid].prev = handler.guid;
++			}
++			else 
++				handlers[handler.guid] = handler;
++
+ 			// Keep track of which events have been used, for global triggering
+ 			jQuery.event.global[type] = true;
+ 		});
+ 
++		this.guid = guid;
++
+ 		// Nullify elem to prevent memory leaks in IE
+ 		elem = null;
+ 	},
+@@ -118,9 +143,19 @@
+ 
+ 					if ( events[type] ) {
+ 						// remove the given handler for the given type
+-						if ( handler )
++						if ( handler ) {
++							//same handler was bound several times
++							//with different data
++							//var prev = events[type][handler.prev];
++							var prev = events[type][events[type][handler.guid].prev];
+ 							delete events[type][handler.guid];
+ 
++							while (prev) {
++								handler = prev;
++								prev = events[type][handler.prev];
++								delete events[type][handler.guid];
++							}
++						}
+ 						// remove all handlers for the given type
+ 						else
+ 							for ( handler in events[type] )

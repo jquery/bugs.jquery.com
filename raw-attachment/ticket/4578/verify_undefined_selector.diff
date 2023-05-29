@@ -1,0 +1,22 @@
+Index: jquery/test/unit/core.js
+===================================================================
+--- jquery/test/unit/core.js	(revision 6320)
++++ jquery/test/unit/core.js	(working copy)
+@@ -12,7 +12,7 @@
+ });
+ 
+ test("jQuery()", function() {
+-	expect(8);
++	expect(9);
+ 
+ 	var main = jQuery("#main");
+ 	isSet( jQuery("div p", main).get(), q("sndp", "en", "sap"), "Basic selector with jQuery object as context" );
+@@ -50,6 +50,8 @@
+ 	equals( jQuery([1,2,3]).get(1), 2, "Test passing an array to the factory" );
+ 
+ 	equals( jQuery(document.body).get(0), jQuery('body').get(0), "Test passing an html node to the factory" );
++
++	equals( jQuery(undefined).get(0), jQuery('shouldnotexist').get(0), "Test passing undefined node to the factory" );
+ });
+ 
+ test("selector state", function() {

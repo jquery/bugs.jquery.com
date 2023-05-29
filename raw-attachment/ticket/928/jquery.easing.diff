@@ -1,0 +1,39 @@
+Index: src/fx/fx.js
+===================================================================
+--- src/fx/fx.js	(revision 1295)
++++ src/fx/fx.js	(working copy)
+@@ -301,7 +301,7 @@
+ 	 * @example $("p").animate({
+ 	 *   opacity: 'show'
+ 	 * }, "slow", "easein");
+-	 * @desc An example of using an 'easing' function to provide a different style of animation. This will only work if you have a plugin that provides this easing function (Only 'linear' is provided by default, with jQuery).
++	 * @desc An example of using an 'easing' function to provide a different style of animation. This will only work if you have a plugin that provides this easing function (Only 'swing' and 'linear' are provided by default, with jQuery).
+ 	 *
+ 	 * @name animate
+ 	 * @type jQuery
+@@ -379,7 +379,14 @@
+ 		return opt;
+ 	},
+ 	
+-	easing: {},
++	easing: {
++		linear: function(percentage_elapsed, time_elapsed, value_start, value_difference, time_duration) {
++			return value_start + value_difference * percentage_elapsed;
++		}
++		swing: function(percentage_elapsed, time_elapsed, value_start, value_difference, time_duration) {
++			return value_start + value_difference * ((- Math.cos(percentage_elapsed * Math.PI) / 2) + 0.5);
++		}
++	},
+ 	
+ 	queue: {},
+ 	
+@@ -558,8 +565,7 @@
+ 				// If the easing function exists, then use it 
+ 				z.now = options.easing && jQuery.easing[options.easing] ?
+ 					jQuery.easing[options.easing](p, n,  firstNum, (lastNum-firstNum), options.duration) :
+-					// else use default linear easing
+-					((-Math.cos(p*Math.PI)/2) + 0.5) * (lastNum-firstNum) + firstNum;
++					jQuery.easing["swing"](p, n,  firstNum, (lastNum-firstNum), options.duration);
+ 
+ 				// Perform the next step of the animation
+ 				z.a();

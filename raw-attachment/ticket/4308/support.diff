@@ -1,0 +1,37 @@
+Index: support.js
+===================================================================
+--- support.js	(revision 6272)
++++ support.js	(working copy)
+@@ -8,15 +8,19 @@
+ 		id = "script" + (new Date).getTime();
+ 
+ 	div.style.display = "none";
+-	div.innerHTML = '   <link/><table></table><a href="/a" style="color:red;float:left;opacity:.5;">a</a><select><option>text</option></select>';
++	div.innerHTML = '   <link/><table></table><span></span><a href="/a" style="color:red;float:left;opacity:.5;">a</a><select><option>text</option></select>';
+ 
+ 	var all = div.getElementsByTagName("*"),
+-		a = div.getElementsByTagName("a")[0];
+-
++		a = div.getElementsByTagName("a")[0],
++		span = div.getElementsByTagName("span")[0];
++	
++	
+ 	// Can't get basic test support
+-	if ( !all || !all.length || !a ) {
++	if ( !all || !all.length || !a || !span ) {
+ 		return;
+ 	}
++	
++	span.setAttrbiute("style", "color: red;");
+ 
+ 	jQuery.support = {
+ 		// IE strips leading whitespace when .innerHTML is used
+@@ -32,7 +36,7 @@
+ 		
+ 		// Get the style information from getAttribute
+ 		// (IE uses .cssText insted)
+-		style: /red/.test( a.getAttribute("style") ),
++		style: /red/.test( a.getAttribute("style") ) && /red/.test( span.getAttribute("style") ),
+ 		
+ 		// Make sure that URLs aren't manipulated
+ 		// (IE normalizes it by default)

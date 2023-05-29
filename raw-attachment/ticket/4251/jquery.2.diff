@@ -1,0 +1,58 @@
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 6262)
++++ src/event.js	(working copy)
+@@ -34,11 +34,11 @@
+ 
+ 		// Init the element's event structure
+ 		var events = jQuery.data(elem, "events") || jQuery.data(elem, "events", {}),
+-			handle = jQuery.data(elem, "handle") || jQuery.data(elem, "handle", function(){
++			handle = jQuery.data(elem, "handle") || jQuery.data(elem, "handle", function anon(){
+ 				// Handle the second event of a trigger and when
+ 				// an event is called after a page has unloaded
+ 				return typeof jQuery !== "undefined" && !jQuery.event.triggered ?
+-					jQuery.event.handle.apply(arguments.callee.elem, arguments) :
++					jQuery.event.handle.apply(anon.elem, arguments) :
+ 					undefined;
+ 			});
+ 		// Add elem as a property of the handle function
+@@ -625,8 +625,8 @@
+ 	// Mozilla, Opera and webkit nightlies currently support this event
+ 	if ( document.addEventListener ) {
+ 		// Use the handy event callback
+-		document.addEventListener( "DOMContentLoaded", function(){
+-			document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
++		document.addEventListener( "DOMContentLoaded", function anon(){
++			document.removeEventListener( "DOMContentLoaded", anon, false );
+ 			jQuery.ready();
+ 		}, false );
+ 
+@@ -634,16 +634,16 @@
+ 	} else if ( document.attachEvent ) {
+ 		// ensure firing before onload,
+ 		// maybe late but safe also for iframes
+-		document.attachEvent("onreadystatechange", function(){
++		document.attachEvent("onreadystatechange", function anon(){
+ 			if ( document.readyState === "complete" ) {
+-				document.detachEvent( "onreadystatechange", arguments.callee );
++				document.detachEvent( "onreadystatechange", anon );
+ 				jQuery.ready();
+ 			}
+ 		});
+ 
+ 		// If IE and not an iframe
+ 		// continually check to see if the document is ready
+-		if ( document.documentElement.doScroll && window == window.top ) (function(){
++		if ( document.documentElement.doScroll && window == window.top ) (function anon(){
+ 			if ( jQuery.isReady ) return;
+ 
+ 			try {
+@@ -651,7 +651,7 @@
+ 				// http://javascript.nwbox.com/IEContentLoaded/
+ 				document.documentElement.doScroll("left");
+ 			} catch( error ) {
+-				setTimeout( arguments.callee, 0 );
++				setTimeout( anon, 0 );
+ 				return;
+ 			}
+ 

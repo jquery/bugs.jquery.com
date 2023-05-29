@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test Case</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <form action="#" method="get">
+      <input type="text" name="test" value="Testing...">
+      <input type="submit" value="Submit">
+    </form>
+    <script>
+      $('form').live('submit', function(event) {
+        console.log('canceling form');
+        event.preventDefault();
+      });
+      // Remove the following line to click the submit button, form action is cancelled.
+      $('form').submit();
+    </script>
+  </body>
+</html>

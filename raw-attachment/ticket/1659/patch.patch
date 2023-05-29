@@ -1,0 +1,21 @@
+Index: jquery.autocomplete.js
+===================================================================
+--- jquery.autocomplete.js	(revision 3386)
++++ jquery.autocomplete.js	(working copy)
+@@ -739,7 +739,15 @@
+ 			}).show();
+ 		},
+ 		selected: function() {
+-			return data && data[ listItems.filter("." + CLASSES.ACTIVE)[0].index ];
++            var filteredItems = listItems.filter("." + CLASSES.ACTIVE);
++            if(filteredItems.length > 0)
++            {
++                return data && data[ filteredItems[0].index ];                
++            }
++			else
++            {
++                return false;
++            }
+ 		}
+ 	};
+ };

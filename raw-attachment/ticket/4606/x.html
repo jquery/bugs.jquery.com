@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <!-- <script src="jquery-1.3.2.js"></script> -->
+  <script src="jquery-1.3.1.js"></script>
+  
+  <script>
+    function Tab(index, name, id)
+    {
+        var obj = $("#" + name + index);
+        $("#" + name + "s ~ div").hide();
+        $("#" + name + "s > ul > li").removeClass("selected");
+        $("#" + id + index).addClass("selected");    
+        obj.show();    
+    }
+    function AdminTab(tab) {
+        Tab(tab, 'AdminTab', 'adli'); 
+    }
+    $(document).ready(function() {
+        AdminTab(0);
+    });
+    </script>
+</head>
+<body>
+<div id="AdminTabs" class="ddoverlap" style="padding-top: 10px;">
+        <ul>
+            
+            <li id="adli0"><a href="javascript:AdminTab(0);">Settings</a></li>
+            <li id="adli1"><a href="javascript:AdminTab(1);">Articles</a></li>
+            <li id="adli2"><a href="javascript:AdminTab(2);">Sites</a></li>
+
+            <li id="adli3"><a href="javascript:AdminTab(3);">Parents</a></li>
+            <li id="adli4"><a href="javascript:AdminTab(4);">Statements/Batches</a></li>
+            <li id="adli5"><a href="javascript:AdminTab(5);">Counselors</a></li>
+            <li id="adli7"><a href="javascript:AdminTab(7);">Withdrawal</a></li>
+            <li id="adli9"><a href="javascript:AdminTab(9);">Maintenance</a></li>
+            
+            <li id="adli8"><a href="javascript:AdminTab(8);">Messages</a></li>
+
+        </ul>
+    </div>
+    <div id="AdminTab0" style="display: none" onSelect="InitSettings();">
+        <h4>Terms</h4>
+    </div>
+    <div id="AdminTab1" style="display: none" onSelect="InitArticles();">
+        <h4>Articles</h4>
+    </div>
+    <div id="AdminTab2" style="display: none" onSelect="InitSites();">
+        <h4>Sites</h4>
+    </div>
+</body>
+</html>

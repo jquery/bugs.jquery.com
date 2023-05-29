@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="en-US" dir="ltr">
+<head>
+	<title>FadeIn Bug</title>
+	<meta name="language" content="en-US" />
+	<meta charset="UTF-8">
+
+	<style>
+	.foobar, .foobar2 { position:relative; }
+	.sub { position:absolute;left:50px;top:50px;width:50px;height:50px;display:none; }
+	.foo1 .sub { background:blue; }
+	.foo2 .sub { background:red; }
+	.foo3 .sub { background:green; }
+	</style>
+	
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('.foobar').hover(function()
+		{
+			$(this).find('.sub').dequeue().stop();
+			$(this).find('.sub').delay(600).fadeIn('400');
+		}, function() {
+			$(this).find('.sub').dequeue().stop();
+			$(this).find('.sub').delay(600).fadeOut('400');
+		});
+
+		$('.foobar2').hover(function()
+		{
+			$(this).find('.sub').dequeue().stop();
+			$(this).find('.sub').delay(600).fadeTo('400',1);
+		}, function() {
+			$(this).find('.sub').dequeue().stop();
+			$(this).find('.sub').delay(600).fadeOut('400');
+		});
+	});
+	</script>
+</head>
+
+<body>
+	<p>This example uses <strong>fadeIn</strong> and fadeOut. Mouseover all three rapidly and soon the boxes will no longer appear! FireBug shows opacities are remaining set.</p>
+	
+	<ul>
+		<li class="foobar foo1"><a href="/">Mouseover me to show a blue box!</a>
+			<span class="sub">What?</span>
+		</li>
+		<li class="foobar foo2"><a href="/">Mouseover me to show a red box!</a>
+			<span class="sub">What?</span>
+		</li>
+		<li class="foobar foo3"><a href="/">Mouseover me to show a green box!</a>
+			<span class="sub">What?</span>
+		</li>
+	</ul>
+	
+	<p>This example uses <strong>fadeTo</strong> and fadeOut</p>
+	<ul>
+		<li class="foobar2 foo1"><a href="/">Mouseover me to show a blue box!</a>
+			<span class="sub">What?</span>
+		</li>
+		<li class="foobar2 foo2"><a href="/">Mouseover me to show a red box!</a>
+			<span class="sub">What?</span>
+		</li>
+		<li class="foobar2 foo3"><a href="/">Mouseover me to show a green box!</a>
+			<span class="sub">What?</span>
+		</li>
+	</ul>
+	
+</body>
+</html>

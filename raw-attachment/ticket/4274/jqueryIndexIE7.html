@@ -1,0 +1,29 @@
+<!-- Inconsistent behaviour between Mozilla and I/E, I/E is wacky -->
+<html id="html">
+  <head id="head"/>
+  <body id="body">
+  		<div id="div">A div</div>
+		<button type="button">Find Indices</button>
+		<span id="me"></span>
+  </body>
+</html>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+  $(function() {
+  	  $("*").each(function (i) {
+  	  	if(this.id !='me') {
+  	  		$("span").append(" " + i + ") " + this.tagName);
+  	  	}
+      });
+
+	 $("button").click(function () {
+	 	var ids = [ 'html','head','body','div'];
+	 	for(i =0; i < ids.length; i+= 1) {
+		 	var index = $("*").index( $('#' + ids[i] )[0] );
+		 	$("<p>" + ids[i] + " found at " + index +"</p>").appendTo("body");
+		}
+
+	 });
+
+  });
+</script>

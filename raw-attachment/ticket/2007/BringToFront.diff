@@ -1,0 +1,43 @@
+Index: ui.dialog.js
+===================================================================
+--- ui.dialog.js	(revision 4030)
++++ ui.dialog.js	(working copy)
+@@ -63,7 +63,8 @@
+ 		var uiDialogContainer = uiDialogContent.parent().addClass('ui-dialog-container').css({position: 'relative'});
+ 		var uiDialog = uiDialogContainer.parent()
+ 			.addClass('ui-dialog')
+-			.css({position: 'absolute', width: options.width, height: options.height, overflow: 'hidden'});
++			.css({position: 'absolute', width: options.width, height: options.height, overflow: 'hidden'})
++			.css("z-index", $('.ui-dialog:visible').size());
+ 		
+ 		if (options.resizable) {
+ 			uiDialog.append("<div class='ui-resizable-n ui-resizable-handle'></div>")
+@@ -106,6 +107,20 @@
+ 		if (options.draggable) {
+ 			uiDialog.draggable({ handle: '.ui-dialog-titlebar' });
+ 		}
++
++		this.bringToFront = function() {
++			var curZindex = uiDialog.css("z-index");
++			// It'd be really nice if we could sort visible siblings on z-index so they'd maintain relative order.
++			uiDialog.siblings('.ui-dialog:visible').each(function() {
++				var elem = $(this);
++				if (elem.css("z-index") >= curZindex) {
++					elem.css("z-index",curZindex);
++					curZindex++;
++				};
++			});
++			uiDialog.css("z-index", curZindex);
++		};
++		uiDialog.click(function() {self.bringToFront();});
+ 	
+ 		this.open = function() {
+ 			uiDialog.appendTo('body');
+@@ -135,6 +150,7 @@
+ 			top = top < doc.scrollTop() ? doc.scrollTop() : top;
+ 			uiDialog.css({top: top, left: left});
+ 			uiDialog.show();
++			self.bringToFront();
+ 		};
+ 
+ 		this.close = function() {

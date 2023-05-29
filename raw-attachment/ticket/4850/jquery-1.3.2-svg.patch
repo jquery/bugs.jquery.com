@@ -1,0 +1,137 @@
+617a618,622
+> // Does this element belong to SVG?
+> function isSVGElem(node) {
+> 	return (node.nodeType == 1 && node.namespaceURI == 'http://www.w3.org/2000/svg');
+> }
+> 
+713,714c718,721
+< 				if ( elem.nodeType == 1 && !jQuery.className.has( elem.className, className ) )
+< 					elem.className += (elem.className ? " " : "") + className;
+---
+> 				if ( elem.nodeType == 1 && !jQuery.className.has( elem, className ) ) {
+> 					var classes = jQuery.className.get(elem);
+> 					jQuery.className.set(elem, classes + (classes ? " " : "") + className);
+> 				}
+720,722c727,730
+< 			if (elem.nodeType == 1)
+< 				elem.className = classNames !== undefined ?
+< 					jQuery.grep(elem.className.split(/\s+/), function(className){
+---
+> 			if (elem.nodeType == 1) {
+> 				classNames = classNames || "";
+> 				var classes = jQuery.grep((jQuery.className.get(elem) || "").split(/\s+/),
+> 					function(className){
+724,725c732,734
+< 					}).join(" ") :
+< 					"";
+---
+> 					}).join(" ");
+> 				jQuery.className.set(elem, classes);
+> 			}
+730c739,758
+< 			return elem && jQuery.inArray( className, (elem.className || elem).toString().split(/\s+/) ) > -1;
+---
+> 			return elem && jQuery.inArray( className,
+> 				(typeof elem === "string" ? elem : jQuery.className.get(elem)).split(/\s+/) ) > -1;
+> 		},
+> 
+> 		// internal use only
+> 		get: function( elem ) {
+> 			return (!isSVGElem(elem) ? elem.className :
+> 				(elem.className ? elem.className.baseVal : "") || elem.getAttribute("class")); // SVG
+> 		},
+> 
+> 		// internal use only
+> 		set: function( elem, classNames ) {
+> 			if (isSVGElem(elem)) { // SVG
+> 				if (elem.className)
+> 					elem.className.baseVal = classNames;
+> 				else
+> 					elem.setAttribute("class", classNames);
+> 			}
+> 			else
+> 				elem.className = classNames;
+1510c1538
+< 					results.push( set[i] );
+---
+> 					results.push( set[i] || set.item(i) ); // SVG
+1516c1544
+< 					results.push( set[i] );
+---
+> 					results.push( set[i] || set.item(i) ); // SVG
+1780c1808,1817
+< 			for ( var i = 0, elem; (elem = curLoop[i]) != null; i++ ) {
+---
+> 			for ( var i = 0, elem = {}; elem != null; i++ ) {
+> 				elem = curLoop[i];
+> 				if ( !elem ) {
+> 					try {
+> 						elem = curLoop.item(i); // SVG
+> 					}
+> 					catch (e) {
+> 						// Ignore
+> 					}
+> 				}
+1782c1819,1820
+< 					if ( not ^ (elem.className && (" " + elem.className + " ").indexOf(match) >= 0) ) {
+---
+> 					var classes = jQuery.className.get(elem);
+> 					if ( not ^ (classes && (" " + classes + " ").indexOf(match) > -1) ) {
+2008,2009c2046
+< 			return (" " + (elem.className || elem.getAttribute("class")) + " ")
+< 				.indexOf( match ) > -1;
+---
+> 			return (" " + jQuery.className.get(elem) + " ").indexOf( match ) > -1;
+2017,2018c2054,2056
+< 						elem.getAttribute( name ),
+< 				value = result + "",
+---
+> 						elem.getAttribute( name );
+> 			result = result && result.baseVal || result; // SVG
+> 			var value = result + "",
+2084c2122
+< 					ret.push( array[i] );
+---
+> 					ret.push( array[i] || array.item(i) ); // SVG
+2146c2184,2186
+< 			if ( typeof context.getElementById !== "undefined" && !isXML ) {
+---
+> 			if (isSVGElem(context)) // SVG
+> 				return [context.ownerDocument.getElementById(match[1])];
+> 			else if ( typeof context.getElementById !== "undefined" && !isXML ) {
+2178,2180c2218,2220
+< 				for ( var i = 0; results[i]; i++ ) {
+< 					if ( results[i].nodeType === 1 ) {
+< 						tmp.push( results[i] );
+---
+> 				for ( var i = 0, result; (result = results[i] || results.item(i)); i++ ) { // SVG
+> 					if ( result.nodeType === 1 ) {
+> 						tmp.push( result );
+2339a2380
+> 		elem.namespaceURI === "http://www.w3.org/2000/svg" ||
+2499c2540
+< 					if (elem.addEventListener)
+---
+> 					try { // SVG
+2501,2502c2542,2546
+< 					else if (elem.attachEvent)
+< 						elem.attachEvent("on" + type, handle);
+---
+> 					}
+> 					catch(e) {
+> 						if (elem.attachEvent)
+> 							elem.attachEvent("on" + type, handle);
+> 					}
+2567c2611
+< 								if (elem.removeEventListener)
+---
+> 								try { // SVG
+2569,2570c2613,2617
+< 								else if (elem.detachEvent)
+< 									elem.detachEvent("on" + type, jQuery.data(elem, "handle"));
+---
+> 								}
+> 								catch (e) {
+> 									if (elem.detachEvent)
+> 										elem.detachEvent("on" + type, jQuery.data(elem, "handle"));
+> 								}

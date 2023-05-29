@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Untitled Document</title>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$('input.trigger').focus(function(){
+					$('#log').append('<li>'+this.tagName+'</li>');
+				});
+				setTimeout(function(){
+					/* this will trigger the focus event twice in ie7 */
+					$('input.trigger').trigger('focus');
+				}, 100);
+				
+			});
+		</script>
+	</head>
+	<body>
+		<input type="text" id="test1" class="trigger" />
+		
+		<ul id="log">
+			
+			
+		</ul>
+	</body>
+</html>

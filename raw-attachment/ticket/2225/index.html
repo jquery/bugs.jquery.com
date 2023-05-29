@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.jcache.js"></script>
+<script type="text/javascript">
+function tog(divID)
+{
+	theDiv = document.getElementById(divID);
+	theDiv.style.display = theDiv.style.display == 'block' ? 'none' : 'block';
+}
+
+$.jCache.maxSize = 10;
+
+blubb = function(theType, theURL, theData, divContent, divLoading){  
+	if (theType == "") theType = "GET";
+	divContent = "#" + divContent;
+	divLoading = "#" + divLoading;
+	
+	var cache_key = theURL;
+			
+	
+	if (theType.toUpperCase() == "GET" && $.jCache.hasItem(cache_key))
+	{
+		$(divContent).fadeOut("slow", function(){
+				$(divContent).html($.jCache.getItem(cache_key));
+				$(divContent).fadeIn("slow");
+			}
+		);
+		
+   		return;
+	}
+		
+	$(divContent).hide("slow", function(){
+		$(divLoading).show("slow", function(){		
+			$.ajax({
+				type: theType,
+   				url: theURL,
+   				data: theData,
+   				success: function(msg){
+   					
+   					if (theType.toUpperCase() == "GET")
+   					{
+   						$.jCache.setItem(cache_key, msg);
+					}
+					
+   					$(divLoading).hide("slow", function(){
+   						$(divContent).html(msg);
+						$(divContent).show("slow");
+   					});
+				},
+				error: function(){
+					$(divLoading).hide("slow", function(){
+   						$(divContent).html("<p>error!</p>");
+						$(divContent).show("slow");
+   					});
+				}
+			});
+		});
+	});
+}
+
+function loadFakeData(zahl)
+{
+   blubb("", 'content/content'+zahl+'.html', '', "demoContent", "demoLoading");
+}
+</script>
+
+
+<link rel="stylesheet" type="text/css" href="test/toggleElements.css" />
+<script type="text/javascript" src="test/jquery.toggleElements.pack.js"></script>
+    <script type="text/javascript">
+	$(document).ready(function(){
+		$('div.toggler-1').toggleElements( );
+	});
+    </script>
+    
+</head>
+<body>
+
+			<div id="divDemo">
+				<div id="demoContent">
+
+				</div>
+				
+				<div id="demoLoading" style="display: none">
+					<img src="images/icons/loading.gif" />
+				</div>
+			</div>     
+
+</body>
+</html>

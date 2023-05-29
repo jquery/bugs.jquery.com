@@ -1,0 +1,56 @@
+<html xmlns:c="http://www.cegid.fr/xhtml/control">
+<head>
+	<script language="javascript" src="js/jquery-1.2.1.js"></script>
+	<style>
+		body { margin:0px; padding:0px; font-family:MS Shell Dlg; font-size: 9pt; }
+		table { table-layout:fixed; border-collapse:collapse;}
+		td { border:1px solid black; padding:3px; }
+		#overcell { display:block; position:absolute; background-color:orange; }
+	</style>
+	<script>
+		$(function() {
+			$('#overcell').css({opacity:0.5});
+			$('body').mousemove(function(evt) {
+				if(evt.target.tagName.toLowerCase() == 'td') { // move over a cell
+					var $cell = $(evt.target), pos = $cell.offset();
+					window.status = $('#overcell').css({display:'block', width:$cell.width(), height:$cell.height(), top:pos.top, left:pos.left }).attr('style');
+					
+				}
+				else if(evt.target != $('#overcell')[0])
+					$('#overcell').css({display:'none'})
+			});
+		});
+	</script>
+</head>
+<body>
+<DIV id='overcell'></DIV>
+<TABLE cellSpacing="0" cellPadding="0" border="0">
+	<TBODY>
+		<TR style='height:50px'>
+			<TD>dsf lsdf lsdjfsd;nf, sd;fn, dlf sfnsd f:sd f,s:nsdnf s:f sd:ns:fnsd:;s f;s</TD>
+			<TD>d fhskfshkfhdf hsksdhlhlsdhsd</TD>
+			<TD>f sdf sdf sdlfjsdlkf jsdlkjlj lkj lj lj lskjf lj lksj flkjsd fs</TD>
+			<TD> sdff sdfsdf sdf sdf sdf sdf sdf s</TD>
+		</TR>
+		<TR>
+			<TD style='background-color:gray'>this one will bug ! uy uyu yuy uy uy uy uy uy yu uy uy uy uy uy u yuy u yu y uy uy uy uy uy uy u u</TD>
+			<TD>fds dfs</TD>
+			<TD> fsd fsdf </TD>
+			<TD>d fsdf sd</TD>
+		</TR>
+		<TR>
+			<TD>f sdf sd </TD>
+			<TD>f sdf sd</TD>
+			<TD>f sdf </TD>
+			<TD>f dsfds fsd </TD>
+		</TR>
+		<TR>
+			<TD> fsdf sdf sd</TD>
+			<TD> fsdf ds</TD>
+			<TD>f f sdf dsfsd </TD>
+			<TD>f sdf sdf sdf </TD>
+		</TR>
+	</TBODY>
+</TABLE>
+</BODY>
+</HTML>

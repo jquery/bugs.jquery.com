@@ -1,0 +1,58 @@
+<html>
+ <head>
+  <title> new document </title>
+  <meta name="generator" content="Chui-Wen Chiu" />
+  <meta name="author" content="" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+<script type="text/javascript" language="JavaScript" src="./js/jquery/jquery-1.3.2.js"></script>
+  <script type="text/javascript">
+  <!--//
+$(function(){
+ var a = ['a'];
+    // ok
+    //$.each(a, function(i, val) {
+    //    alert('Test#1 >> ' + i + ':' + val);
+    //});
+
+    a[a.length] = 'b';
+    // ok
+    //$.each(a, function(i, val) {
+    //    alert('Test#2 >> ' + i + ':' + val);
+    //});
+
+    a[2] = 'c';
+    // ok
+    //$.each(a, function(i, val) {
+    //    alert('Test#3 >> ' + i + ':' + val);
+    //});
+
+    a['3'] = 'd';
+    // ok
+    //$.each(a, function(i, val) {
+    //    alert('Test#4 >> ' + i + ':' + val);
+    //});
+
+    a['four'] = 'e';
+    // fail: skip a['four']
+    $.each(a, function(i, val) {
+        alert('Test#5 >> ' + i + ':' + val);
+    });
+
+    var b = [];
+    b["one"] = 1;
+    b["two"] = 2;
+
+    $.each(b, function(i, val) {
+        // fail: no run here
+        alert('Test#6 >> ' + i + ':' + val);
+    });
+})
+  //-->
+  </script>
+ </head>
+
+ <body>
+  
+ </body>
+</html>

@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.js"></script>
+		<!-- <script type="text/javascript" src="jquery-nightly.min.js"></script> -->
+		<script type="text/javascript">
+
+			$( document ).ready( function() {
+			
+				// NOTE: All results are 1 under jQuery 1.3
+	
+				alert( 'A: ' + $( '#one ~ #two span' ).length );                  // A: result is 1
+
+				alert( 'B: ' + $( '#two span:contains(word)' ).length );          // B: result is 1
+
+				alert( 'C: ' + $( 'span:visible' ).length );                      // C: result is 1
+
+				alert( 'D: ' + $( 'span:last' ).length );                         // D: result is 1
+
+				alert( 'E: ' + $( '#one ~ #two:contains(word)' ).length );        // E: result is 1
+
+				alert( 'F: ' + $( '#one + #two:contains(word)' ).length );        // F: result is 1
+
+				alert( 'G: ' + $( '#one ~ #two span:contains(word)' ).length );   // G: result is 0 ***
+
+				alert( 'H: ' + $( '#one + #two span:contains(word)' ).length );   // H: result is 0 ***
+
+				alert( 'I: ' + $( '#one ~ #two span:visible' ).length );          // I: result is 0 ***
+
+				alert( 'J: ' + $( '#one + #two span:visible' ).length );          // J: result is 0 ***
+
+				alert( 'K: ' + $( '#one ~ #two span:last' ).length );             // K: result is 1
+
+				alert( 'L: ' + $( '#two > p span:contains(word)' ).length );      // L: result is 1
+
+				alert( 'M: ' + $( 'body > #two p span:contains(word)' ).length ); // M: result is 1
+
+				alert( 'N: ' + $( '#one ~ #two span' ).filter( function() {
+					return $( this ).text() == 'word';
+				}).length );                                                      // N: result is 1
+
+				alert( 'O: ' + $( '#one + #two span' ).filter( function() {
+					return $( this ).text() == 'word';
+				}).length );                                                      // O: result is 1
+
+			})
+
+		</script>
+	</head>
+	<body>
+		<div id="one"></div>
+		<div id="two">
+			<p>
+				<span>word</span>
+			</p>
+		</div>
+	</body>
+</html>

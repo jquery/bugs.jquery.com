@@ -1,0 +1,17 @@
+Index: src/jquery/jquery.js
+===================================================================
+--- src/jquery/jquery.js	(revision 1620)
++++ src/jquery/jquery.js	(working copy)
+@@ -840,8 +840,10 @@
+ 	 */
+ 	clone: function(deep) {
+ 		return this.pushStack( jQuery.map( this, function(a){
+-			var a = a.cloneNode( deep != undefined ? deep : true );
+-			a.$events = null; // drop $events expando to avoid firing incorrect events
++			a = a.cloneNode( deep != undefined ? deep : true );
++			// drop $events expando to avoid firing incorrect events in IE
++			a.$events = null; 
++			jQuery(a).children().each(function(){ this.$events = null; });
+ 			return a;
+ 		}) );
+ 	},

@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br">
+    <head>
+        <title>jQuery UI Dialog - Exemplos/Examples</title>
+        <meta name="content-type" content="text/html; charset=iso-8859-1"/>
+        <link href="css/ui.dialog.css" rel="stylesheet" type="text/css"/>
+        <link href="css/ui.resizable.css" rel="stylesheet" type="text/css"/>
+        <link href="chili/javascript.css" rel="stylesheet" type="text/css"/>
+        
+		<script src="js/jquery.js" type="text/javascript"></script>
+		<script src="js/ui.core.js" type="text/javascript"></script>
+        <script src="js/ui.dialog.js" type="text/javascript"></script>
+        <script src="js/ui.resizable.js" type="text/javascript"></script>
+        <script src="js/ui.draggable.js" type="text/javascript"></script>
+
+		<!-- Chili the jQuery code highlighter plugin -->
+        <script type="text/javascript" src="chili/chili.pack.js"></script>
+        <script id="setup" type="text/javascript">
+            ChiliBook.recipeFolder = "chili/";
+            ChiliBook.stylesheetFolder = "chili/";
+        </script>
+        <style>
+            * {
+                margin: 0; padding: 0;
+            }            
+            body {
+                font-family: Tahoma; margin-bottom:20px; font-size: 11px; line-height:18px;
+            }
+			.demo {
+				width: 90%; margin:auto;
+			}
+			.ui-dialog p {
+				text-align:justify;
+			} 
+			.explain {
+				text-align:center; font-weight:bold;
+			}      
+            h2 {
+                font-size: 14px;
+            }            
+            p {
+                padding: 5px 20px;
+            }            
+            pre {
+                font-size: 11px;
+                border: solid 1px #ccc;
+                background: #f1f1f1;
+                margin: auto;
+            }
+        </style>
+        <script>
+            var Demo = {
+                one: function(){
+                    $('<div id="demo1">').load('pag1.html?country= united kingdom').dialog({
+                        maximize: false, 
+						modal:true,
+						overlay:{background:'#000000', opacity:0.4}
+                    });
+                },
+                two: function(){
+                    $('<div id="demo2">').load('pag1.html?country= united kingdom').dialog({
+                        title: 'I\'m the demo 2!',
+                        closable: false,
+                        width: 350,
+                        height: 200,
+                        maximize: false,
+                        buttons: {
+                            'Close': function(){
+                                $(this).dialog('close')
+                            }
+                        }
+                    });
+                },
+                three: function(){
+                    $('#demo3').dialog('destroy').remove();
+                    $('<div id="demo3">').load('pag1.html?country= united kingdom').dialog({
+                        title: 'I\'m the demo 3!',
+                        width: 450,
+                        height: 220
+                    });
+                }
+            }
+        </script>
+    </head>
+    <body>
+    	<p class="explain">See the details of changes <a href="http://www.profissionaisti.com.br/2008/11/jquery-dialog-melhorias-interessantes/">here</a>. 
+		To download the files, <a href="http://www.profissionaisti.com.br/wp-content/plugins/download-monitor/download.php?id=2">click here</a>.</p>
+        <div class="demo">
+		<h2>Default dialog without maximize button and modal with overlay</h2>
+        <span>
+            <a href="#" onclick="Demo.one();">Demo 1</a>
+        </span>
+    <pre><code class="javascript">
+	$('&lt;div id="demo1"&gt;').load('pag1.html').dialog({
+    	maximize: false, // not maximizable
+		modal:true,
+		overlay:{background:'#000000', opacity:0.4}
+    });
+	</code></pre>
+	</div>
+	<div class="demo">
+        <h2>Diaglo with Title, without close button (Not close with ESC too) and not maximizable.</h2>
+        <span>
+            <a href="#" onclick="Demo.two();">Demo 2</a>
+        </span>
+	<pre><code class="javascript">
+	$('&lt;div id="demo2"&gt;').load('pag1.html').dialog({
+    	title: 'I\'m the demo 2!', closable: false, width: 350, height: 200, maximize: false,
+    	buttons: {
+    		'Close': function(){
+        		$(this).dialog('close')
+        	}
+        }
+    });
+	</code></pre>
+	</div>
+	<div class="demo">
+        <h2>Close, maximize and restore original dialog (DoubleClick title bar maximize and restore the dialog).</h2>
+        <span>
+            <a href="#" onclick="Demo.three();">Demo 3</a>
+        </span>
+	<pre><code class="javascript">
+	$('#demo3').dialog('destroy').remove();
+    	$('&lt;div id="demo3"&gt;').load('pag1.html').dialog({
+        	title: 'I\'m the demo 3!', width: 450, height: 220
+    });
+	</code></pre>
+	</div>
+    </body>
+</html>

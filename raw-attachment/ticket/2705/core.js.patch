@@ -1,0 +1,20 @@
+=== core.js
+==================================================================
+--- core.js	(revision 31515)
++++ core.js	(local)
+@@ -651,7 +651,14 @@
+ 				script.appendChild( document.createTextNode( data ) );
+ 
+ 			head.appendChild( script );
+-			head.removeChild( script );
++            try {
++                head.removeChild( script );
++            } catch ( error ) {
++                setTimeout( function() {
++                    var head = document.getElementsByTagName("head")[0] || document.documentElement;
++                    head.removeChild( script );
++                }, 0);
++            }
+ 		}
+ 	},
+ 

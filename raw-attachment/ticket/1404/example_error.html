@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+		<script type='text/javascript' src='jquery-1.1.3.1.js'></script>
+	</head>
+	<body>
+		<script type='text/javascript'>
+		</script>
+		<div>
+			<p>
+			In IE6, any radio buttons are unchecked when toggling, losing their original value.<br />
+			In FF2, radio button status is not changed and works as expected.<br />
+			</p>
+			<p>
+			Removing line 404 from jquery-1.1.3.1.js causes just the opposite behavior (IE6 retains checked state, FF2 does not).<br />
+			</p>
+			<p>
+			NOTE: this only occurs if animation is used.   passing no arguments to jQuery's toggle() method does not cause the checked state to change in either browser.  Passing either 'fast' or 'slow' does.  Note this is only on the show() method -- hide() with animation does not cause this error.<br />
+			</p>
+		</div>
+		<div>
+			Successful case (checked radio button remains checked in IE 6):
+			<ol>
+				<li><a href='#' onclick='$("#test").hide("slow"); return false;'>Hide Slow</a></li>
+				<li><a href='#' onclick='$("#test").show(); return false;'>Show w/o animation</a></li>
+			</ol>
+			Failure Case (checked radio button becomes unchecked in IE 6):
+			<ol>
+				<li><a href='#' onclick='$("#test").hide(); return false;'>Hide w/o animation</a></li>
+				<li><a href='#' onclick='$("#test").show("slow"); return false;'>Show Slow</a></li>
+			</ol>
+		</div>
+		<div id='test'>
+			<fieldset>
+				<legend>Processor </legend>
+				<div class='row'>
+					<input type='radio' name='rdo0' id='rdo_id_27' checked='checked'  value='27' /><label for='rdo_id_27'>Dual Core Intel Xeon 3.0 GHz</label>
+				</div>
+				<div class='altrow'>
+					<input type='radio' name='rdo0' id='rdo_id_28' value='28' /><label for='rdo_id_28'>Quad Core Intel Xeon 2.66 GHz</label>
+				</div>
+			</fieldset>
+		</div>
+	</body>
+</html>
+
+

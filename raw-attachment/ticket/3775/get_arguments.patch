@@ -1,0 +1,12 @@
+Index: src/ajax.js
+===================================================================
+--- src/ajax.js	(revision 6026)
++++ src/ajax.js	(working copy)
+@@ -100,6 +100,7 @@
+ 	get: function( url, data, callback, type ) {
+ 		// shift arguments if data argument was ommited
+ 		if ( jQuery.isFunction( data ) ) {
++			type = callback;
+ 			callback = data;
+ 			data = null;
+ 		}

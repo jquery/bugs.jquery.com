@@ -1,0 +1,13 @@
+--- ..\eLearning\eLearning\Scripts\jquery.validate.old.js	2008-04-06 17:45:06.415668800 +0300
++++ ..\eLearning\eLearning\Scripts\jquery.validate.js	2008-04-06 17:33:58.105276000 +0300
+@@ -714,6 +714,10 @@
+ 		});
+ 		jQuery.each(['rangelength', 'range'], function() {
+ 			if (rules[this]) {
++			    if(typeof(rules[this]) === "string")
++				{
++					rules[this] = eval(rules[this]);
++				}
+ 				rules[this] = [Number(rules[this][0]), Number(rules[this][1])];
+ 			}
+ 		});

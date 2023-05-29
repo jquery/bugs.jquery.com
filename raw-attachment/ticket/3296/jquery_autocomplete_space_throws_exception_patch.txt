@@ -1,0 +1,32 @@
+Index: //wafile02/UserHome/skoon/Aptana/Workspace/JQuery Trunk/plugins/autocomplete/jquery.autocomplete.js
+===================================================================
+--- //wafile02/UserHome/skoon/Aptana/Workspace/JQuery Trunk/plugins/autocomplete/jquery.autocomplete.js	(revision 5838)
++++ //wafile02/UserHome/skoon/Aptana/Workspace/JQuery Trunk/plugins/autocomplete/jquery.autocomplete.js	(working copy)
+@@ -234,15 +234,18 @@
+ 		previousValue = currentValue;
+ 		
+ 		currentValue = lastWord(currentValue);
+-		if ( currentValue.length >= options.minChars) {
+-			$input.addClass(options.loadingClass);
+-			if (!options.matchCase)
+-				currentValue = currentValue.toLowerCase();
+-			request(currentValue, receiveData, hideResultsNow);
+-		} else {
+-			stopLoading();
+-			select.hide();
+-		}
++		if (currentValue) {
++			if (currentValue.length >= options.minChars) {
++				$input.addClass(options.loadingClass);
++				if (!options.matchCase) 
++					currentValue = currentValue.toLowerCase();
++				request(currentValue, receiveData, hideResultsNow);
++			}
++			else {
++				stopLoading();
++				select.hide();
++			}
++		};
+ 	};
+ 	
+ 	function trimWords(value) {

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>curCSS test case</title>
+	<script type="text/javascript" src="jquery-1.3.2.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			var box = $('#box');
+
+			$('#toggle').click(function () {
+				// keep things simple
+				if (box.is(':animated')) {
+					return;
+				}
+
+				if (box.is(':hidden')) {
+					box.animate({ marginTop: '-8em', height: 'show' }, 'slow');
+				} else {
+					box.animate({ marginTop: '0', height: 'hide' }, 'slow');
+				}
+			});
+		});
+	</script>
+	<style type="text/css">
+	#wrapper {
+		background-color: green;
+		height: 1em;
+		margin-top: 10em;
+		position: relative;
+		width: 5em;
+	}
+	#box {
+		background-color: red;
+		display: none;
+		height: 8em;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 5em;
+	}
+	#toggle {
+		margin-top: 1em;
+	}
+	</style>
+</head>
+<body>
+<div id="wrapper"><div id="box">content</div></div>
+<input type="button" id="toggle" value="toggle" />
+</body>
+</html>

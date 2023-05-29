@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>onbeforeunload bug</title>
+            
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    jQuery(document).ready(function() {
+        var messages = [];
+
+        function log( message ) {
+            messages.push(message);
+            $('#log').html(messages.join('\n'));
+        }
+        
+        $('#clickme').click(function() {
+            log('clickme clicked');
+        });
+        
+        window.onbeforeunload = function() {
+            return 'really?';
+        }
+    });
+    </script>
+    
+</head>
+<body>
+    <h1>Chrome <code>onbeforeunload</code> bug</h1>
+    <h2>Steps to reproduce</h2>
+    <ol>
+        <li>Click the button a couple of times, notice the log being filled.</li>
+        <li>Reload the page or try to close the window or tab.</li>
+        <li>Choose to "Stay on this page".</li>
+        <li>Click the button again, <strong>notice the log is no longer being filled.</strong></li>
+    </ol>
+    
+
+    <p>
+        <button id="clickme">Click me</button>
+    </p>
+    
+    <pre id="log"></pre>
+    
+    <p>The bug is fixed (as far as I can tell) if the internal jQuery function <code>now()</code> is modified like so:</p>
+    <pre>
+// original: 
+function now() {
+    return (new Date).getTime();
+}
+    
+// modified: 
+function now() {
+    return (new Date).valueOf();
+}
+</pre>
+
+</body>
+</html>

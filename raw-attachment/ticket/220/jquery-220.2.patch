@@ -1,0 +1,35 @@
+Index: src/jquery/jquery.js
+===================================================================
+--- src/jquery/jquery.js	(revision 361)
++++ src/jquery/jquery.js	(working copy)
+@@ -392,6 +392,14 @@
+ 	 * @test ok( $('#name').attr('name') == "name", 'Check for name attribute' );
+ 	 * @test ok( $('#text1').attr('name') == "action", 'Check for name attribute' );
+ 	 * @test ok( $('#form').attr('action') == "formaction", 'Check for action attribute' );
++	 * @test var xmltext = '<test><child myattr="hello"/></test>';
++	 * var xmldoc;
++	 * try {
++	 * 	xmldoc = new DOMParser().parseFromString(xmltext, 'text/xml');
++	 * } catch(ex) {
++	 *	xmldoc = new ActiveXObject('Microsoft.XMLDOM'); xmldoc.loadXML(xmltext);
++	 * }
++	 * ok( $('child', xmldoc).attr('myattr') == "hello", 'Check for read attribute from XML doc' );
+ 	 * 
+ 	 * @name attr
+ 	 * @type Object
+@@ -1824,9 +1832,13 @@
+ 		if ( fix[name] ) {
+ 			if ( value != undefined ) elem[fix[name]] = value;
+ 			return elem[fix[name]];
+-		} else if ( elem.getAttribute != undefined ) {
++		} else if ( typeof elem.getAttribute != "undefined" ) {
+ 			if ( value != undefined ) elem.setAttribute( name, value );
+-			return elem.getAttribute( name, 2 );
++			try {
++				return elem.getAttribute( name, 2 );
++			} catch(ex) {
++				return elem.getAttribute(name);
++			}
+ 		} else {
+ 			name = name.replace(/-([a-z])/ig,function(z,b){return b.toUpperCase();});
+ 			if ( value != undefined ) elem[name] = value;

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>jQuery Test</title>
+</head>
+<script src="jquery-1.2.6.min.js" type="text/javascript"></script>
+
+<script>
+
+var output = [];
+function testSelector(selector) {
+    try {
+        if ($(selector).size() > 0)
+            output.push("link found using selector \"" + selector + "\"");
+        else
+            output.push("link NOT found using selector \"" + selector + "\"");
+    }
+    catch (e) {
+        output.push("exception caught using selector \"" + selector + "\" - " + e);
+    }
+}
+
+$(document).ready(function(){
+
+    testSelector("a");
+    testSelector("a[name]");
+    testSelector("a[name=foo]");
+    testSelector("a[name='foo']");
+    testSelector("a[name*=foo]");
+    testSelector("a[name*='foo']");
+
+    testSelector("a");
+    testSelector("a[madeupattr]");
+    testSelector("a[madeupattr=wally()]");
+    testSelector("a[madeupattr='wally()']");
+    testSelector("a[madeupattr*=wally()]");
+    testSelector("a[madeupattr*='wally()']");
+    
+    testSelector("a[onclick]");
+    testSelector("a[onclick=bar()]");
+    testSelector("a[onclick='bar()']");
+    testSelector("a[onclick^=bar]");
+    testSelector("a[onclick*=bar]");
+    testSelector("a[onclick*='bar']");
+
+    $("#output").html(output.join("\n<br\>"));
+    
+});
+  
+</script>
+
+<body>
+
+<a name="foo" onclick="bar()" madeupattr="wally()" href="no.html">foobar link</a>
+
+<div id="output"></div>
+
+</body>
+</html>
+

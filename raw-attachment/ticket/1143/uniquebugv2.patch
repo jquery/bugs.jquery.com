@@ -1,0 +1,46 @@
+--- jquery-1.1.3a.js	2007-05-25 02:25:02.000000000 +0200
++++ jquery-1.1.3a_fix1143v2.js	2007-05-25 12:49:41.000000000 +0200
+@@ -7,8 +7,8 @@ if(typeof window.jQuery == "undefined") 
+  * Dual licensed under the MIT (MIT-LICENSE.txt)
+  * and GPL (GPL-LICENSE.txt) licenses.
+  *
+- * $Date: 2007-05-21 00:49:26 +0000 (Mon, 21 May 2007) $
+- * $Rev: 1938 $
++ * $Date: 2007-05-16 18:21:50 +0200 (Mi, 16 Mai 2007) $
++ * $Rev: 1910 $
+  */
+ 
+ // Global undefined variable
+@@ -1669,25 +1669,22 @@ jQuery.extend({
+ 	merge: function(first, second) {
+ 		// We have to loop this way because IE & Opera overwrite the length
+ 		// expando of getElementsByTagName
+-		for ( var i = 0; second[i]; i++ )
++		for ( var i = 0; second[i]; i++ ) {
++			second[i].$merge = true;
+ 			first.push(second[i]);
++		}
+ 		return first;
+ 	},
+-
+ 	unique: function(first) {
+-		var r = [], num = jQuery.mergeNum++;
+-
++		var r = [];
+ 		for ( var i = 0, fl = first.length; i < fl; i++ )
+-			if ( num != first[i].mergeNum ) {
+-				first[i].mergeNum = num;
++			if ( first[i].$merge ) {
++				first[i].$merge = false;
++				first[i].removeAttribute('$merge');
+ 				r.push(first[i]);
+ 			}
+-
+ 		return r;
+ 	},
+-
+-	mergeNum: 0,
+-
+ 	/**
+ 	 * Filter items out of an array, by using a filter function.
+ 	 *

@@ -1,0 +1,26 @@
+*** support.js	2010-04-28 10:50:21.000000000 -0400
+--- support2.js	2010-04-28 10:50:52.000000000 -0400
+***************
+*** 96,103 ****
+  	var fragment = document.createDocumentFragment();
+  	fragment.appendChild( div.firstChild );
+  
+! 	// WebKit doesn't clone checked state correctly in fragments
+! 	jQuery.support.checkClone = fragment.cloneNode(true).cloneNode(true).lastChild.checked;
+  
+  	// Figure out if the W3C box model works as expected
+  	// document.body must exist before we can do this
+--- 96,108 ----
+  	var fragment = document.createDocumentFragment();
+  	fragment.appendChild( div.firstChild );
+  
+! 	try {
+! 		// WebKit doesn't clone checked state correctly in fragments
+! 		jQuery.support.checkClone = fragment.cloneNode(true).cloneNode(true).lastChild.checked;
+! 	} catch(e) {
+! 		// PS3 fails to clone children in fragments
+! 		jQuery.support.checkClone = false;
+! 	}
+  
+  	// Figure out if the W3C box model works as expected
+  	// document.body must exist before we can do this

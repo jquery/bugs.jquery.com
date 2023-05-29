@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+<script type="text/javascript"
+        src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+<form  id="form-textarea" method="post" action="">
+<textarea id="area" name="area" rows="3" cols="80">linea 1
+linea 2</textarea>
+<input type="button" onclick="enviar()" value="Enviar" />
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    function enviar() {
+       // document.getElementById("area").value="hola\r\nadios" ;
+        alert("escape(document.getElementById('area').value): "
+                + escape(document.getElementById('area').value));
+        alert('escape($("#area")[0].value): ' + escape($("#area")[0].value));
+        alert('escape($("#area").val()): ' + escape($("#area").val()));
+    }
+//]]>
+</script>
+</body>
+</html>

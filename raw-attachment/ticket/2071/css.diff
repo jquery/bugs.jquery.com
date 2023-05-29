@@ -1,0 +1,50 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 4210)
++++ src/core.js	(working copy)
+@@ -766,9 +766,10 @@
+ 
+ 	// A method for quickly swapping in/out CSS properties to get correct calculations
+ 	swap: function( elem, options, callback ) {
++		var old = {};
+ 		// Remember the old values, and insert the new ones
+ 		for ( var name in options ) {
+-			elem.style[ "old" + name ] = elem.style[ name ];
++			old[ name ] = elem.style[ name ];
+ 			elem.style[ name ] = options[ name ];
+ 		}
+ 
+@@ -776,24 +777,27 @@
+ 
+ 		// Revert the old values
+ 		for ( var name in options )
+-			elem.style[ name ] = elem.style[ "old" + name ];
++			elem.style[ name ] = old[ name ];
+ 	},
+ 
+ 	css: function( elem, name, force ) {
+ 		if ( name == "width" || name == "height" ) {
+-			var width, height, props = { position: "absolute", visibility: "hidden", display:"block" };
++			var val, props = { position: "absolute", visibility: "hidden", display:"block" }, which = name == "width" ? [ "Left", "Right" ] : [ "Top", "Bottom" ];
+ 		
+ 			function getWH() {
+-				width = elem.clientWidth;
+-				height = elem.clientHeight;
++				val = name == "width" ? elem.offsetWidth : elem.offsetHeight;
++				jQuery.each( which, function() {
++					val = val - parseInt(jQuery.curCSS( elem, "padding" + this, true )) || 0;
++					val = val - parseInt(jQuery.curCSS( elem, "border" + this + "Width", true )) || 0;
++				});
+ 			}
+ 		
+ 			if ( jQuery(elem).is(":visible") )
+ 				getWH();
+ 			else
+ 				jQuery.swap( elem, props, getWH );
+-
+-			return name == "width" ? width : height;
++			
++			return val;
+ 		}
+ 		
+ 		return jQuery.curCSS( elem, name, force );

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xml+xhtml,text/html; charset=UTF-8" />
+<title>jQuery Slider Basic</title>
+<script type="text/javascript" src="../script/common/jquery-1.2.6.js"></script>
+<script type="text/javascript" src="../script/common/jquery-ui-1.5.2.js"></script>
+<link rel="stylesheet" href="http://dev.jquery.com/view/tags/ui/latest/themes/flora/flora.all.css" type="text/css" media="screen" title="Flora (Default)"></link>
+<style type="text/css" media="screen" lang="en">
+/* <!-- */
+* { padding: 0; border-width: 0; margin: 0; font-size: 100%; font-family: monospace; }
+label {width: 12em; margin-right: 0; display: inline; float: left; }
+input { border-width: 1px; display: block; }
+#main { width: 1000px; margin: 0 auto; }
+h1 { text-align: center; margin: 0 auto; }
+#platform { border: 1px solid black; margin-top: 50px; }
+.slider { border: 1px solid blue; }
+/* --> */
+</style>
+<script type="text/javascript">
+//<!--
+var widthSliderOptions =
+{
+  "handles":
+  [
+    { id: "width-slider", min: 20, max: 100, start: 20 }
+  ],
+  "slide": function(e, ui)
+  {
+    $("#width-value").each
+    (
+      function(index, element)
+      {
+        element.value = ui.value;
+      }
+    )
+  },
+  "min": 0,
+  "max": 200,
+  "startValue": 60
+};
+
+function initWidthSlider()
+{
+  $("#width-slider").slider(widthSliderOptions);
+}
+
+function onWidthValueChanged(e)
+{
+  var value = parseInt(this.value);
+  value = value<widthSliderOptions.handles[0].min?widthSliderOptions.handles[0].min:value;
+  value = value>widthSliderOptions.handles[0].max?widthSliderOptions.handles[0].max:value;
+  $("#width-slider").slider("moveTo", value.toString(), 0);
+}
+
+function initWidthValue()
+{
+  $("#width-value").blur(onWidthValueChanged);
+}
+
+function init()
+{
+  initWidthSlider();
+  initWidthValue();
+}
+
+jQuery(init);
+
+//-->
+</script>
+</head>
+<body>
+<div id="main">
+  <h1>jQuery Slider Basic</h1>
+  <div id="platform">
+    <div id="width-slider" class="slider"></div>
+    <div id="height-slider" class="slider"></div>
+  </div>
+  <div id="control-bar">
+    <label accesskey="e" for="enable">Enable the slider</label>
+    <input id="enable" type="checkbox" checked="checked" onchange="javascript: $('#width-slider').slider(this.checked?'enable':'disable');"></input>
+    <br />
+    <label accesskey="v" for="value">The value is</label>
+    <input id="width-value" type="text" value="60"></input>
+    <br />
+    <label accesskey="c" for="create">Create/Destroy</label>
+    <input id="create" type="checkbox" checked="checked" onclick="javascript: $('#width-slider').slider(this.checked?widthSliderOptions:'destroy');"></input>
+  </div>
+</div>
+</body>
+</html>

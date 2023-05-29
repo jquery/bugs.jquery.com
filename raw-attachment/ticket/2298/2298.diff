@@ -1,0 +1,71 @@
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 4664)
++++ src/event.js	(working copy)
+@@ -175,10 +175,10 @@
+ 		}
+ 
+ 		// Handle a global trigger
+-		if ( !elem ) {
++		if ( typeof elem != "object" ) {
+ 			// Only trigger if we've ever bound an event for it
+ 			if ( this.global[type] )
+-				jQuery("*").add([window, document]).trigger(type, data);
++				jQuery(typeof elem == "string" ? elem : "*").add([window, document]).trigger(type, data);
+ 
+ 		// Handle triggering a single element
+ 		} else {
+Index: src/ajax.js
+===================================================================
+--- src/ajax.js	(revision 4664)
++++ src/ajax.js	(working copy)
+@@ -228,7 +228,7 @@
+ 
+ 		// Watch for a new set of requests
+ 		if ( s.global && ! jQuery.active++ )
+-			jQuery.event.trigger( "ajaxStart" );
++			jQuery.event.trigger( "ajaxStart", null, s.global );
+ 
+ 		// If we're requesting a remote document
+ 		// and trying to load JSON or Script with a GET
+@@ -295,7 +295,7 @@
+ 			s.beforeSend(xml);
+ 			
+ 		if ( s.global )
+-			jQuery.event.trigger("ajaxSend", [xml, s]);
++			jQuery.event.trigger("ajaxSend", [xml, s], s.global);
+ 
+ 		// Wait for a response to come back
+ 		var onreadystatechange = function(isTimeout){
+@@ -386,7 +386,7 @@
+ 
+ 			// Fire the global callback
+ 			if ( s.global )
+-				jQuery.event.trigger( "ajaxSuccess", [xml, s] );
++				jQuery.event.trigger( "ajaxSuccess", [xml, s], s.global );
+ 		}
+ 
+ 		function complete(){
+@@ -396,11 +396,11 @@
+ 
+ 			// The request was completed
+ 			if ( s.global )
+-				jQuery.event.trigger( "ajaxComplete", [xml, s] );
++				jQuery.event.trigger( "ajaxComplete", [xml, s], s.global );
+ 
+ 			// Handle the global AJAX counter
+ 			if ( s.global && ! --jQuery.active )
+-				jQuery.event.trigger( "ajaxStop" );
++				jQuery.event.trigger( "ajaxStop", null, s.global );
+ 		}
+ 		
+ 		// return XMLHttpRequest to allow aborting the request etc.
+@@ -413,7 +413,7 @@
+ 
+ 		// Fire the global callback
+ 		if ( s.global )
+-			jQuery.event.trigger( "ajaxError", [xml, s, e] );
++			jQuery.event.trigger( "ajaxError", [xml, s, e], s.global );
+ 	},
+ 
+ 	// Counter for holding the number of active queries

@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script type="text/javascript" src="jquery-1.3.2.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+	  function PostContent(title,content)
+		{this.title=title;this.content=content;}
+   $("a").click(function(event){
+      $.ajax({type: "GET",
+  url: "test.js",
+  dataType: "script"});event.preventDefault();
+	 
+   });
+   $("a").click(function(event){
+   
+   
+    $("#result").load("http://localhost:8080/show.jsp",{$("#content").val( ).length, $("#content").val()},function(){
+	//$("#result").load("http://localhost:8080/show.jsp",new PostContent("en","yes"),function(){
+	alert("xoxo");
+	});
+ });
+ });
+  
+
+ 
+    </script>
+  </head>
+  <body>
+    <a href="http://jquery.com/">jQuery</a><input id="title" type="text" />
+	<textarea id="content"></textarea>
+</p><div id="result">
+</div><p>
+</p>
+  </body>
+</html>

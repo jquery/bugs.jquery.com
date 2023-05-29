@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>3245 Correlating Info</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var testform = document.getElementById('testform');
+	document.getElementById('current_get').innerHTML = testform.getAttribute('action');
+	document.getElementById('current_action').innerHTML = testform.action;
+
+	$('#jquery_action').append( $('#testform').attr('action') );
+	$('#jquery_selector').append( $('form[action=123]').length ? "Match" : "No Match (happens when browser returns http://.../123 for Element.action )" );
+});
+</script>
+
+<style type="text/css">
+body > dl > dt { font-weight: bold; }
+</style>
+</head>
+
+<body>
+	<dl>
+		<dt>FF3, IE8b1:</dt>
+			<dd>
+				<dl>
+					<dt>Element.getAttribute('action'):</dt>
+						<dd>123</dd>
+					<dt>Element.action:</dt>
+						<dd>http://localhost/123</dd>
+				</dl>
+			</dd>
+		<dt>IE6, IE7, Opera, Safari Win:</dt>
+			<dd>
+				<dl>
+					<dt>Element.getAttribute('action'):</dt>
+						<dd>123</dd>
+					<dt>Element.action:</dt>
+						<dd>123</dd>
+				</dl>
+			</dd>
+		<dt>Current Browser:</dt>
+			<dd>
+				<dl>
+					<dt>Element.getAttribute('action')</dt>
+						<dd id="current_get"></dd>
+					<dt>Element.action:</dt>
+						<dd id="current_action"></dd>
+				</dl>
+			</dd>
+		<dt>jQuery:</dt>
+			<dd>
+				<dl>
+					<dt>$('#testform').attr('action')</dt>
+						<dd id="jquery_action"></dd>
+					<dt>Selector</dt>
+						<dd id="jquery_selector"></dd>
+				</dl>
+			</dd>
+	</dl>
+	<form id="testform" action="123" method="get"><div>
+		<input type="text" />
+		<input type="submit" />
+	</div></form>
+
+</body>
+
+</html>

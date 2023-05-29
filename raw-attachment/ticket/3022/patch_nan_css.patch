@@ -1,0 +1,13 @@
+Index: jquery.js.960.tme.js
+===================================================================
+--- jquery.js.960.tme.js	(revision 9049)
++++ jquery.js.960.tme.js	(working copy)
+@@ -1042,7 +1042,7 @@
+ 
+ 		var notxml = !jQuery.isXMLDoc( elem ),
+ 			// Whether we are setting (or getting)
+-			set = value !== undefined,
++			set = value !== undefined && !isNaN(value),
+ 			msie = jQuery.browser.msie;
+ 
+ 		// Try to normalize/fix the name

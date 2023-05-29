@@ -1,0 +1,34 @@
+<html>
+<!-- note: doctype/namespace changes do not matter -->
+<head>
+  <title>crash firefox</title>
+  <script type="text/javascript" src="javascripts/jquery.js"></script>
+  <script type="text/javascript">
+$(function() {
+  // does not crash from "live"-bound clicks...
+  // $('label').live('click', function() {
+
+  $('label').click(function() {
+    // crashing selections:   $(this), $(this).children('input, span')... any inline element
+    // crashing values:       block, inherit, list-item, inline-block, inline-table, table-*
+
+    // order is important...
+    $(this).css('display', 'block');
+    $('div#container').hide();
+  });
+
+  // does not crash from programmatic click; click it yourself...
+  // $('label').click();
+});
+  </script>
+</head>
+
+<body>
+  <div id="container">
+    <label id="label">
+      click me to crash
+      <input type="checkbox" />
+    </label>
+  </div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+--- 1.2.6.js	2008-09-10 14:12:55.524889500 +0100
++++ 1.2.6-new.js	2008-09-10 14:12:32.509889500 +0100
+@@ -984,7 +985,7 @@
+ 					[ 2, "<table><tbody></tbody><colgroup>", "</colgroup></table>" ] ||
+ 
+ 					// IE can't serialize <link> and <script> tags normally
+-					jQuery.browser.msie &&
++					( jQuery.browser.msie && tags.match(/^<(link|script)/) ) &&
+ 					[ 1, "div<div>", "</div>" ] ||
+ 
+ 					[ 0, "", "" ];

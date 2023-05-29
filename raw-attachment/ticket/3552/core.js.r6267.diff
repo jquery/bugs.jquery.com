@@ -1,0 +1,16 @@
+--- /home/marc/www/lib/jQuery/diffs/core.js
++++ /home/marc/www/lib/jQuery/diffs/core.boo.js
+@@ -252,7 +252,12 @@
+
+ 	wrapInner: function( html ) {
+ 		return this.each(function(){
+-			jQuery( this ).contents().wrapAll( html );
++			var $this = jQuery( this );
++			if ( $this.contents().length ) {
++				$this.contents().wrapAll( html );
++			} else {
++				$this.html( html );
++			}
+ 		});
+ 	},
+

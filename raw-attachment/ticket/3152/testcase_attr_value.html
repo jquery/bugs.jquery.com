@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+       "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Test case for setting attr values</title>
+<script src="jquery-1.2.6.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#testsinglequote').attr('title', "A 'quoted' title.");
+    $('#testdoublequote').attr('title', 'A "quoted" title.');
+    $('#testopenbracket').attr('title', 'Is 2 < 4 ?');
+    $('#testclosebracket').attr('title', 'Is 2 > 4 ?');
+    $('#testamp').attr('title', 'Scrooge & company');
+});
+</script>
+</head>
+<body>
+
+<p><a href="#" id="testsinglequote" title='dummy'>Title should be <code>A &#039;quoted&#039; title.</code></a>
+<p><a href="#" id="testdoublequote">Title should be <code>A &quot;quoted&quot; title.</code></a>
+<p><a href="#" id="testopenbracket">Title should be <code>Is 2 &lt; 4?</code></a>
+<p><a href="#" id="testclosebracket">Title should be <code>Is 2 &gt; 4?</code></a>
+<p><a href="#" id="testamp">Title should be <code>Scrooge &amp; company</code></a>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<title>Testcase</title>
+
+<script type="text/javascript" charset="utf-8" src="jquery-1.1.4.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#mybutt').click(function(){
+		$('#mytab').append('<li><label for="new">First Name</label><input name="new" type="text" size="30" value="toto \\"tata\\""/></li>');
+	});
+});
+</script>
+</head>
+
+<body>
+<h1>Testcase</h1>
+
+<form id="addrform" method="POST" action="">
+<ul id="mytab">
+<li><label for="cname">Company Name</label><input name="cname" type="text"/></li>
+<li><label for="fname">First Name</label><input name="fname" type="text"/></li>
+</ul>
+</form>
+
+<input type="button" id="mybutt" value="Add input"/>
+
+</body>
+</html>

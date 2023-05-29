@@ -1,0 +1,12 @@
+--- ui.slider.js        (revision 3598)
++++ ui.slider.js        (working copy)
+@@ -240,7 +240,7 @@
+                                m = ((this.curValue)/o.realValue) * p;
+                        }
+                        
+-                       if(that.interactions) {
++                        if(that.interactions && this.options.dontOverLap) {
+                                nonvalidRange = that.nonvalidRange(this);
+                                if(nonvalidRange) {
+                                        this.curValue = nonvalidRange;
+

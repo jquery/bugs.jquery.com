@@ -1,0 +1,72 @@
+Index: ui.dialog.js
+===================================================================
+--- ui.dialog.js	(revision 4721)
++++ ui.dialog.js	(working copy)
+@@ -59,14 +59,14 @@
+ 		});
+ 		
+ 		if (options.resizable && $.fn.resizable) {
+-			uiDialog.append("<div class='ui-resizable-n ui-resizable-handle'></div>")
+-				.append("<div class='ui-resizable-s ui-resizable-handle'></div>")
+-				.append("<div class='ui-resizable-e ui-resizable-handle'></div>")
+-				.append("<div class='ui-resizable-w ui-resizable-handle'></div>")
+-				.append("<div class='ui-resizable-ne ui-resizable-handle'></div>")
+-				.append("<div class='ui-resizable-se ui-resizable-handle'></div>")
+-				.append("<div class='ui-resizable-sw ui-resizable-handle'></div>")
+-				.append("<div class='ui-resizable-nw ui-resizable-handle'></div>");
++			uiDialog.append('<div class="ui-resizable-n ui-resizable-handle"></div>')
++				.append('<div class="ui-resizable-s ui-resizable-handle"></div>')
++				.append('<div class="ui-resizable-e ui-resizable-handle"></div>')
++				.append('<div class="ui-resizable-w ui-resizable-handle"></div>')
++				.append('<div class="ui-resizable-ne ui-resizable-handle"></div>')
++				.append('<div class="ui-resizable-se ui-resizable-handle"></div>')
++				.append('<div class="ui-resizable-sw ui-resizable-handle"></div>')
++				.append('<div class="ui-resizable-nw ui-resizable-handle"></div>');
+ 			uiDialog.resizable({ maxWidth: options.maxWidth, maxHeight: options.maxHeight, minWidth: options.minWidth, minHeight: options.minHeight });
+ 		}
+ 
+Index: ui.draggable.ext.js
+===================================================================
+--- ui.draggable.ext.js	(revision 4721)
++++ ui.draggable.ext.js	(working copy)
+@@ -60,12 +60,12 @@
+ 			if(o.iframeFix.constructor == Array) {
+ 				for(var i=0;i<o.iframeFix.length;i++) {
+ 					var co = $(o.iframeFix[i]).offset({ border: false });
+-					$("<div class='DragDropIframeFix' style='background: #fff;'></div>").css("width", $(o.iframeFix[i])[0].offsetWidth+"px").css("height", $(o.iframeFix[i])[0].offsetHeight+"px").css("position", "absolute").css("opacity", "0.001").css("z-index", "1000").css("top", co.top+"px").css("left", co.left+"px").appendTo("body");
++					$('<div class="DragDropIframeFix" style="background: #fff;"></div>').css("width", $(o.iframeFix[i])[0].offsetWidth+"px").css("height", $(o.iframeFix[i])[0].offsetHeight+"px").css("position", "absolute").css("opacity", "0.001").css("z-index", "1000").css("top", co.top+"px").css("left", co.left+"px").appendTo("body");
+ 				}		
+ 			} else {
+ 				$("iframe").each(function() {					
+ 					var co = $(this).offset({ border: false });
+-					$("<div class='DragDropIframeFix' style='background: #fff;'></div>").css("width", this.offsetWidth+"px").css("height", this.offsetHeight+"px").css("position", "absolute").css("opacity", "0.001").css("z-index", "1000").css("top", co.top+"px").css("left", co.left+"px").appendTo("body");
++					$('<div class="DragDropIframeFix" style="background: #fff;"></div>').css("width", this.offsetWidth+"px").css("height", this.offsetHeight+"px").css("position", "absolute").css("opacity", "0.001").css("z-index", "1000").css("top", co.top+"px").css("left", co.left+"px").appendTo("body");
+ 				});							
+ 			}
+ 
+Index: ui.mouse.js
+===================================================================
+--- ui.mouse.js	(revision 4721)
++++ ui.mouse.js	(working copy)
+@@ -24,7 +24,7 @@
+ 		css: function(name) {
+ 			if ($.ui.cssCache[name]) return $.ui.cssCache[name];
+ 			
+-			var tmp = $("<div class='ui-resizable-gen'>").addClass(name).css(
++			var tmp = $('<div class="ui-resizable-gen"></div>').addClass(name).css(
+ 				{position:'absolute', top:'-5000px', left:'-5000px', display:'block'}
+ 			).appendTo('body');
+ 			
+Index: ui.resizable.js
+===================================================================
+--- ui.resizable.js	(revision 4721)
++++ ui.resizable.js	(working copy)
+@@ -118,7 +118,7 @@
+         var d = jQuery.trim(n[i]), t = o.defaultTheme, hname = 'ui-resizable-'+d;
+         
+         var rcss = $.extend(t[hname], t['ui-resizable-handle']), 
+-            axis = $(["<div class='",hname," ui-resizable-handle' style='",insertions[d],"'></div>"].join("")).css(/sw|se|ne|nw/.test(d) ? { zIndex: ++o.zIndex } : {});
++            axis = $(['<div class="',hname,' ui-resizable-handle" style="',insertions[d],'"></div>'].join("")).css(/sw|se|ne|nw/.test(d) ? { zIndex: ++o.zIndex } : {});
+         
+         o.handles[d] = '.ui-resizable-'+d;
+           

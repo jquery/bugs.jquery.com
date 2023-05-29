@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head> 
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+
+<style type="text/css">
+
+.monitor {
+	margin-left: 20em;
+}
+
+#helpBtn {
+	display: inline-block;
+	width: 76px;
+	height: 19px;
+	background-color: red;
+}
+
+#helpBtn.helpHideBtn {
+	background-color: blue;
+}
+
+#helpContainer {
+	position:absolute;
+	background-color: green;
+}
+
+</style>
+</head> 
+<body> 
+<a href="#" id="helpBtn" title="Help"></a> 
+<div id="helpContainer" style="display: none"> 
+	<p>Blah blah blah</p>
+	<p>Blah blah blah</p>
+	<p>Blah blah blah</p>
+	<p>Blah blah blah</p>
+</div> 
+<p>Trigger:</p>
+<div id=monitorTrigger class=monitor></div>
+<p>Container:</p>
+<div id=monitorContainer class=monitor></div>
+<p><a id=fix1 href="#">Fix 1 - change link to display: block</a>,
+<a id=fix2 href="#">Fix 2 - add text to link</a>,
+<a id=fix3 href="#">Fix 3 - wrap in an empty span</a>,
+<a id=fix4 href="#">Fix 4 - add comment before</a>
+</p>
+<script type="text/javascript" language="Javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" language="Javascript">
+
+$(function() {
+	$('#helpBtn').click(function() {
+		var b = $('#helpBtn');
+
+		if (b.hasClass('helpHideBtn')) {
+			$('#helpContainer').slideUp('slow');
+		} else {
+			$('#helpContainer').slideDown('slow');
+		}
+
+		b.toggleClass('helpHideBtn');
+
+		return false;
+	});
+	var updateMonitors = function() {
+		var updateMonitor = function (inquire, monitor) {
+			var inq = $(inquire);
+			var mon = $(monitor);
+			var out = 'width/height ' + inq.width() + " x " + inq.height();
+			out += " (offset " + inq[0].offsetWidth + " x " + inq[0].offsetHeight + ")<br>";
+			out += "css(display): " + inq.css('display') + " (style.display: " + inq[0].style.display + ")<br>";
+			out += "attributes:";
+			if (inq.is(':hidden')) {
+				out += " hidden";
+			} else {
+				out += " visible";
+			}
+			if (inq.prev().length) {
+				out += " prev=";
+				out += inq.prev()[0].nodeName;
+			}
+			if (inq.next().length) {
+				out += " next=";
+				out += inq.next()[0].nodeName;
+			}
+			if (inq[0].previousSibling) {
+				out += " previousSibling=" + inq[0].previousSibling.nodeName;
+			}
+			if (inq[0].nextSibling) {
+				out += " nextSibling=" + inq[0].nextSibling.nodeName;
+			}
+			out += "<br>";
+			mon.html(out);
+		}
+		updateMonitor('#helpBtn', '#monitorTrigger');
+		updateMonitor('#helpContainer', '#monitorContainer');
+	}
+
+	window.setInterval(updateMonitors, 1);
+
+	$('#fix1').click(function () {
+		$('#helpBtn').css('display', 'block');
+	});
+	$('#fix2').click(function () {
+		var button = $('#helpBtn');
+		// button.html('asdf');  // Unfortunately, this does not work
+		var copy = button.clone(true);
+		copy.html('x').insertAfter(button);
+		button.remove();
+	});
+	$('#fix3').click(function () {
+		var container = $('#helpContainer');
+		$('<span />').insertAfter(container).append(container.detach());
+	});
+	$('#fix4').click(function () {
+		$('#helpContainer').before('<!-- -->');
+	});
+});
+
+</script>
+</body> 
+</html>

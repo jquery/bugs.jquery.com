@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Interface Imagebox demo - Interface plugin for jQuery</title>
+		<script type="text/javascript" src="http://interface.eyecon.ro/jquery/jquery.js"></script>
+		<script type="text/javascript" src="http://interface.eyecon.ro/interface/interface.js"></script>
+<style type="text/css" media="screen">
+body
+{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #666666;
+	margin: 0;
+	padding: 0;
+}
+a
+{
+	text-decoration: none;
+}
+img
+{
+	border: none;
+}
+#ImageBoxOverlay
+{
+	background-color: #000;
+}
+#ImageBoxCaption
+{
+	background-color: #F4F4EC;
+}
+#ImageBoxContainer
+{
+	width: 250px;
+	height: 250px;
+	background-color: #F4F4EC;
+}
+#ImageBoxCaptionText
+{
+	font-weight: bold;
+	padding-bottom: 5px;
+	font-size: 13px;
+	color: #000;
+}
+#ImageBoxCaptionImages
+{
+	margin: 0;
+}
+#ImageBoxNextImage
+{
+	background-image: url(images/imagebox/spacer.gif);
+	background-color: transparent;
+}
+#ImageBoxPrevImage
+{
+	background-image: url(images/imagebox/spacer.gif);
+	background-color: transparent;
+}
+#ImageBoxNextImage:hover
+{
+	background-image: url(images/imagebox/next_image.jpg);
+	background-repeat:	no-repeat;
+	background-position: right top;
+}
+#ImageBoxPrevImage:hover
+{
+	background-image: url(images/imagebox/prev_image.jpg);
+	background-repeat:	no-repeat;
+	background-position: left bottom;
+}
+h2,
+h4,
+p
+{
+	padding-left: 20px;
+}
+</style>
+</head>
+
+<body>
+<div id="scontainer"></div>
+<h2>Interface Imagebox demo - Interface plugin for jQuery</h2>
+<h4>Black &amp; white</h4>
+<p>
+	<a href="http://interface.eyecon.ro/demos/images/imagebox/bw1.jpg" title="Moon eclipse" rel="imagebox-bw"><img src="http://interface.eyecon.ro/demos/images/imagebox/th_bw1.jpg" /></a>
+	<a href="http://interface.eyecon.ro/demos/images/imagebox/bw2.jpg" title="Rain drops" rel="imagebox-bw"><img src="http://interface.eyecon.ro/demos/images/imagebox/th_bw2.jpg" /></a>
+	<a href="http://interface.eyecon.ro/demos/images/imagebox/bw3.jpg" title="Church" rel="imagebox-bw"><img src="http://interface.eyecon.ro/demos/images/imagebox/th_bw3.jpg" /></a>
+</p>
+<h4>Lights</h4>
+<p>
+
+	<a href="http://interface.eyecon.ro/demos/images/imagebox/lights1.jpg" title="City lights" rel="imagebox-lights"><img src="http://interface.eyecon.ro/demos/images/imagebox/th_lights1.jpg" /></a>
+	<a href="http://interface.eyecon.ro/demos/images/imagebox/lights2.jpg" title="Flash lights" rel="imagebox-lights"><img src="http://interface.eyecon.ro/demos/images/imagebox/th_lights2.jpg" /></a>
+	<a href="http://interface.eyecon.ro/demos/images/imagebox/lights3.jpg" title="Laser lights" rel="imagebox-lights"><img src="http://interface.eyecon.ro/demos/images/imagebox/th_lights3.jpg" /></a>
+</p>
+<select>
+	<option>Blah</option>	
+</select>
+<script type="text/javascript">
+$(document).ready(
+	function()
+	{
+		$.ImageBox.init(
+			{
+				loaderSRC: 'images/imagebox/loading.gif',
+				closeHTML: '<img src="images/imagebox/close.jpg" />'
+			}
+		);
+	}
+);
+</script>
+</body>
+</html>

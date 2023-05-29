@@ -1,0 +1,11 @@
+--- iautocompleter.js	2006-10-11 21:42:38.000000000 -0800
++++ iautocompleter-fixed.js	2006-10-13 10:42:00.000000000 -0800
+@@ -81,7 +81,7 @@
+ 					data: $.param(data),
+ 					success: function(xml)
+ 					{
+-						subject.autoCFG.lastSuggestion = $('item',xml);
++						subject.autoCFG.lastSuggestion = $('item',xml.responseXML);
+ 						size = subject.autoCFG.lastSuggestion.size();
+ 						if (size > 0) {
+ 							var toWrite = '';

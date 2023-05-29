@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+  <title>Test align</title>
+  
+  <link rel="Stylesheet" media="screen" href="data/testsuite.css"/>
+  <script type="text/javascript" src="../dist/jquery.js"></script>
+  <script type="text/javascript" src="data/testrunner.js"></script>
+  <script>
+  test("Selection by align attribute", function() {
+    expect(11);
+  	ok($('table[align]').length == 2, "table[align]" );
+  	ok($('table[align=left]').length == 0, "table[align=left]");
+  	ok($('th[align]').length == 1, "th[align]");
+  	ok($('th[align=left]').length == 1, "th[align=left]");
+  	ok($('tr[align=left]').length == 1, "tr[align=left]");
+  	ok($('table[align=center]').length == 1, "table[align=center]");
+  	ok($('#aligned [align]').length == 1, "#aligned [align]");
+  	ok($('#aligned [align=center]').length == 1, "#aligned [align=center]");
+  	ok($('#aligned [align=left]').length == 0, "#aligned [align=left]");
+  	ok($('#not-aligned [align]').length == 0, "#not-aligned [align]");
+  	ok($('#multi-align [align]').length == 3, "#multi-align [align]");
+  });
+  </script>
+  
+  
+</head>
+
+<body>
+	<h1 id="header">jQuery - Test selection by align attribute</h1>
+	<h2 id="banner"></h2>
+	<h2 id="userAgent"></h2>
+
+
+<div id="main">
+
+<div id="aligned">
+<table align="center"><tbody>
+  <tr><th>Header</th></tr>
+  <tr><td>Data</td></tr>
+</tbody></table>
+</div>
+
+<div id="not-aligned">
+<table>
+<tbody>  <tr><th>Header</th></tr>
+  <tr><td>Data</td></tr>
+</tbody></table>
+</div>
+
+<div id="multi-align">
+<table align="right">
+<tbody>  <tr><th align="left">Header</th></tr>
+  <tr align="left"><td>Data</td></tr>
+</tbody></table>
+</div>
+
+</div>
+
+<ol id="tests"></ol>
+
+
+</body>
+</html>

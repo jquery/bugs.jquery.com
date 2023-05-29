@@ -1,0 +1,130 @@
+
+
+<html>
+
+<head>
+<script type="text/javascript" src="jquery-1.2.6.js"></script>
+<script type="text/javascript" src="jquery.ui.all.js"></script>
+</head>
+
+<body>
+<ul id="list1">
+  <li>
+    <div>
+      Item 1
+    </div>
+  </li>
+  
+  <li>
+    <span> Test graph </span>
+  
+    <div id='chart21Div'><!-- START Code Block for Chart chart21 -->
+    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="300" height="200" name="chart21" id=="chart21" >
+    <param name="allowScriptAccess" value="always" />
+    <param name="movie" value="Pie3d.swf"/>
+    <param name="FlashVars" value="&chartWidth=300&chartHeight=200&debugMode=0&registerWithJS=0&DOMId=chart21&dataXML=<chart caption='Test chart' xAxisName='apples' yAxisName='bananas' showValues='0' formatNumberScale='0' showBorder='1'>
+    <set label='0' value='37' />
+    <set label='1' value='23' />
+    <set label='2' value='38' />
+    <set label='3' value='31' />
+    <set label='4' value='29' />
+    <set label='5' value='40' />
+    <set label='6' value='45' />
+    <set label='7' value='48' />
+    <set label='8' value='0' />
+    </chart>" />
+    <param name="quality" value="high" />
+    <embed src="Pie3d.swf" FlashVars="&chartWidth=300&chartHeight=200&debugMode=0&registerWithJS=0&DOMId=chart21&dataXML=<chart caption='Test chart' xAxisName='apples' yAxisName='bananas' showValues='0' formatNumberScale='0' showBorder='1'>
+    <set label='0' value='37' />
+    <set label='1' value='23' />
+    <set label='2' value='38' />
+    <set label='3' value='31' />
+    <set label='4' value='29' />
+    <set label='5' value='40' />
+    <set label='6' value='45' />
+    <set label='7' value='48' />
+    <set label='8' value='0' />
+    </chart>" quality="high" width="300" height="200" name="chart21" id="chart21" allowScriptAccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"  />
+    </object>
+    <!-- END Code Block for Chart chart21 -->
+    </div>
+  
+  </li>
+</ul>
+
+<ul id="list2">
+  <li>
+    Item 3
+  </li>
+  
+  <li>
+    <div id='chart21Div'><!-- START Code Block for Chart chart21 -->
+    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="300" height="200" name="chart21" id=="chart21" >
+    <param name="allowScriptAccess" value="always" />
+    <param name="movie" value="Pie3d.swf"/>
+    <param name="FlashVars" value="&chartWidth=300&chartHeight=200&debugMode=0&registerWithJS=0&DOMId=chart21&dataXML=<chart caption='Test chart' xAxisName='apples' yAxisName='bananas' showValues='0' formatNumberScale='0' showBorder='1'>
+    <set label='0' value='37' />
+    <set label='1' value='23' />
+    <set label='2' value='38' />
+    <set label='3' value='31' />
+    <set label='4' value='29' />
+    <set label='5' value='40' />
+    <set label='6' value='45' />
+    <set label='7' value='48' />
+    <set label='8' value='0' />
+    </chart>" />
+    <param name="quality" value="high" />
+    <embed src="Pie3d.swf" FlashVars="&chartWidth=300&chartHeight=200&debugMode=0&registerWithJS=0&DOMId=chart21&dataXML=<chart caption='Test chart' xAxisName='apples' yAxisName='bananas' showValues='0' formatNumberScale='0' showBorder='1'>
+    <set label='0' value='37' />
+    <set label='1' value='23' />
+    <set label='2' value='38' />
+    <set label='3' value='31' />
+    <set label='4' value='29' />
+    <set label='5' value='40' />
+    <set label='6' value='45' />
+    <set label='7' value='48' />
+    <set label='8' value='0' />
+    </chart>" quality="high" width="300" height="200" name="chart21" id="chart21" allowScriptAccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"  />
+    </object>
+    <!-- END Code Block for Chart chart21 -->
+    </div>
+  </li>
+  
+</ul>
+
+
+
+
+<a id="clickme" >Click me</a>
+
+<p><a id="status">Ajax Call</a></p>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#list1').sortable({ connectWith: ['#list2'], update: updated })
+    $('#list2').sortable({ connectWith: ['#list1'], update: updated })
+    
+        $("#status").hide()
+    .ajaxStart(function() {
+        $(this).show();
+    })
+    .ajaxStop(function() {
+        $(this).fadeOut("slow");
+    });
+    
+    $('#clickme').click(function() {
+        $.ajax();
+    });
+});
+
+function updated(e,ui) {
+    $.ajax({});
+}
+
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+Index: jquery/src/core.js
+===================================================================
+--- jquery/src/core.js	(revision 5945)
++++ jquery/src/core.js	(working copy)
+@@ -407,9 +407,13 @@
+ 			if ( this.nodeType != 1 )
+ 				return;
+ 
+-			if ( jQuery.isArray(value) && /radio|checkbox/.test( this.type ) )
+-				this.checked = (jQuery.inArray(this.value, value) >= 0 ||
+-					jQuery.inArray(this.name, value) >= 0);
++			if ( /radio|checkbox/.test( this.type ) ) {
++				if ( jQuery.isArray(value) )
++					this.checked = (jQuery.inArray(this.value, value) >= 0 ||
++						jQuery.inArray(this.name, value) >= 0);
++				else
++					this.checked = (this.value == value || this.name == value);
++			}
+ 
+ 			else if ( jQuery.nodeName( this, "select" ) ) {
+ 				var values = jQuery.makeArray(value);

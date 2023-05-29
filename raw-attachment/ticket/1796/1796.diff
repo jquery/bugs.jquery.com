@@ -1,0 +1,13 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 3977)
++++ src/core.js	(working copy)
+@@ -764,7 +764,7 @@
+ 
+ 			// Revert the padding and border widths to get the
+ 			// correct height/width values
+-			jQuery.each([ "Top", "Bottom", "Right", "Left" ], function(){
++			jQuery.each(name == "width" ? [ "Right", "Left" ] : [ "Top", "Bottom" ], function(){
+ 				old[ "padding" + this ] = 0;
+ 				old[ "border" + this + "Width" ] = 0;
+ 			});

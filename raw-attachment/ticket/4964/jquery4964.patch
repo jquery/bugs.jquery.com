@@ -1,0 +1,42 @@
+Index: src/ajax.js
+===================================================================
+--- src/ajax.js	(revision 6522)
++++ src/ajax.js	(working copy)
+@@ -400,6 +400,11 @@
+ 							"notmodified" :
+ 							"success";
+ 
++				// allow request interception before success/error/status callback
++				if ( s.ready ) {
++					s.ready( xhr, status );
++				}
++
+ 				if ( status === "success" ) {
+ 					// Watch for, and catch, XML document parse errors
+ 					try {
+@@ -462,9 +467,10 @@
+ 		}
+ 
+ 		function success(){
++			var handler = s[xhr.status] || s.success;
+ 			// If a local callback was specified, fire it and pass it the data
+-			if ( s.success ) {
+-				s.success( data, status );
++			if ( handler ) {
++				handler( data, status );
+ 			}
+ 
+ 			// Fire the global callback
+@@ -495,9 +501,10 @@
+ 	},
+ 
+ 	handleError: function( s, xhr, status, e ) {
++		var handler = s[xhr.status] || s.error;
+ 		// If a local callback was specified, fire it
+-		if ( s.error ) {
+-			s.error( xhr, status, e );
++		if ( handler ) {
++			handler( xhr, status, e );
+ 		}
+ 
+ 		// Fire the global callback

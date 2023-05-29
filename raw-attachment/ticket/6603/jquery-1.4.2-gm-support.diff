@@ -1,0 +1,31 @@
+--- jquery-1.4.2.js	2010-02-14 03:35:05.000000000 +0000
++++ jquery-1.4.2-gm.js	2010-05-26 22:20:50.000000000 +0100
+@@ -950,18 +950,21 @@
+ 
+ 	// Technique from Juriy Zaytsev
+ 	// http://thinkweb2.com/projects/prototype/detecting-event-support-without-browser-sniffing/
++	// Test doesn't work in Greasemonkey due to security sandbox
+ 	var eventSupported = function( eventName ) { 
+ 		var el = document.createElement("div"); 
+ 		eventName = "on" + eventName; 
+ 
+-		var isSupported = (eventName in el); 
+-		if ( !isSupported ) { 
+-			el.setAttribute(eventName, "return;"); 
+-			isSupported = typeof el[eventName] === "function"; 
+-		} 
+-		el = null; 
++    try{
++  		var isSupported = (eventName in el); 
++  		if ( !isSupported ) { 
++  			el.setAttribute(eventName, "return;"); 
++  			isSupported = typeof el[eventName] === "function"; 
++  		} 
++  		el = null; 
+ 
+-		return isSupported; 
++  		return isSupported; 
++	  } catch(Exception) {}
+ 	};
+ 	
+ 	jQuery.support.submitBubbles = eventSupported("submit");

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+     
+<script type="text/javascript">
+$(function(){
+	var offset = $('#div1').offset(); //works
+	offset['top'] += $('#div1').outerHeight();
+	offset['left'] += $('#div1').outerWidth();
+	$('#div2').offset(offset); //fails
+	var x = 1;
+});
+</script>
+</head>
+<body>
+
+<div id="div2">I am div 2 moo moo</div>
+<div id="div1">I am div 1 quack quack</div>
+
+
+
+</body>
+</html>

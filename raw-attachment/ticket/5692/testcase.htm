@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+ 
+<head>
+<script src="http://code.jquery.com/jquery-1.4a2.min.js"></script>
+
+<title>Case</title>
+
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+
+<style type="text/css" media="screen"> 
+#foo, #bar {
+  border: 1px solid black;
+  margin-bottom: 40px;
+}
+a {
+  display: block;
+}
+li {
+  list-style: none;
+}
+</style>
+
+<script type="text/javascript"> 
+$(document).ready(function(){
+  $('.click').toggle( 
+    function() {
+      $(this).next().show("slow");
+    },
+    function() {
+      $(this).next().hide("slow");
+    } )
+});
+</script>
+
+</head>
+<body>
+<div id="foo">
+   <a class="click" href="">Click here</a> 
+   
+  <ol> 
+    <li>List item</li> 
+  </ol> 
+  
+  <a class="click" href="">Or click here</a>
+  
+  <ol>
+    <li>Also list item</li>
+  </ol>
+  
+</div>
+  
+<div id="bar">Bar</div>
+
+</body>
+</html>

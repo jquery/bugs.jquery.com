@@ -1,0 +1,23 @@
+<!DOCTYPE html> 
+<html>
+	<head> 
+		<title>IE onlcick</title> 
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.js"></script> 
+		<script type="text/javascript"> 
+			$(function(){
+				$('.clickme').live('click', function() {
+					// Live handler called.
+					alert('test');
+				});
+			});
+		
+			function testfunct(){
+				return false;
+			}
+		</script> 
+	</head> 
+	<body> 
+		<a onclick="return testfunct();" href="/test">link</a>
+		<div class="clickme">test2</div>
+	</body> 
+</html>

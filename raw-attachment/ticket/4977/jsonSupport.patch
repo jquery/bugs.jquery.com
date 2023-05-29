@@ -1,0 +1,14 @@
+diff --git a/src/support.js b/src/support.js
+index 332839d..1aa5318 100644
+--- a/src/support.js
++++ b/src/support.js
+@@ -46,6 +46,9 @@
+ 		// (IE uses styleFloat instead of cssFloat)
+ 		cssFloat: !!a.style.cssFloat,
+ 
++		// Check to see if we have a native JSON parser
++		json: typeof JSON === "object" && JSON.parse,
++
+ 		// Will be defined later
+ 		scriptEval: false,
+ 		noCloneEvent: true,

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd" xml:lang="en">
+	<head>
+		<title>jQuery.event.fix() &mdash; "which" bug</title>
+		<script type="text/javascript" src="jquery-1.2.3.js"></script>
+
+		<script type="text/javascript">
+			function OnKeypress(event, elm) {
+				$(elm).text("keyCode: " + event.keyCode + ", which: " + event.which);
+			}
+
+			$(document).ready(function() {
+				$("#jquery-input").keypress(function(event) {
+					OnKeypress(event, "#jquery-output");
+				});
+
+				document.getElementById("dom-input").addEventListener("keypress", function(event) {
+					OnKeypress(event, "#dom-output");
+				}, false);
+			});
+		</script>
+
+		<style type="text/css">
+		</style>
+	</head>
+
+	<body>
+		<p>Load this page in Opera.  In each text box, press the single quote key, then the right arrow key and observe the results.</p>
+
+		<form action="" onsubmit="return false">
+			<div>
+				<p>jQuery:</p>
+				<input id="jquery-input"></input>
+				<span id="jquery-output"></span>
+			</div>
+
+			<div>
+				<p>DOM:</p>
+				<input id="dom-input"></input>
+				<span id="dom-output"></span>
+			</div>
+		</form>
+	</body>
+</html>

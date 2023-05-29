@@ -1,0 +1,17 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 5588)
++++ src/core.js	(working copy)
+@@ -458,6 +458,13 @@
+ 	},
+ 
+ 	data: function( key, value ){
++		if(typeof key == "object")
++		{
++		  for(k in key)
++			$(this).data(k,key[k]);
++		  return this;
++		}
++
+ 		var parts = key.split(".");
+ 		parts[1] = parts[1] ? "." + parts[1] : "";

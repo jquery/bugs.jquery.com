@@ -1,0 +1,22 @@
+<html>
+<head>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript">
+		jQuery(function($) {
+			$('div.a').attr('tabindex',0);
+			$('div.b').each(function() { this.tabIndex = 0; });
+		});
+	</script>
+	<style>
+		:focus { background-color: yellow; }
+	</style>
+</head>
+<body>
+	<div class="a">One</div>
+	<div class="a">Two</div>
+	<div tabindex="-1">Three</div>
+	<div class="b">Four</div>
+	<div class="b">Five</div>
+</body>
+</html>
+

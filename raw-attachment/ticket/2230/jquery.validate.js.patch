@@ -1,0 +1,21 @@
+--- jquery.validate.js	2008-01-20 15:34:28.000000000 +0300
++++ jquery.validate.1.js	2008-01-24 19:07:05.000000000 +0300
+@@ -703,18 +703,6 @@
+ 			}
+ 		});
+ 		
+-		// auto-create ranges
+-		if (rules.min && rules.max) {
+-			rules.range = [rules.min, rules.max];
+-			delete rules.min;
+-			delete rules.max;
+-		}
+-		if (rules.minlength && rules.maxlength) {
+-			rules.rangelength = [rules.minlength, rules.maxlength];
+-			delete rules.minlength;
+-			delete rules.maxlength;
+-		}
+-		
+ 		return rules;
+ 	},
+ 	

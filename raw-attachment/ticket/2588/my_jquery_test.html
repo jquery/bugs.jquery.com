@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; }
+    </style>
+    <script type="text/javascript" src="jquery-1.2.3.pack.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+	    $('#toggle').click(function() {
+          $("rex-metainfo-cat").fadeIn();
+        });
+      });
+    </script>
+  </head>
+  <body>
+<form method="post" action="index.php">
+    <fieldset>
+      <legend><span class="rex-hide">Kategorie hinzufügen</span></legend>
+      <input type="hidden" value="structure" name="page"/>
+      <input type="hidden" value="0" name="category_id"/>
+      <input type="hidden" value="0" name="clang"/>
+      <table summary='Auflistung aller Unterkategorien der Kategorie "Homepage"' class="rex-table rex-table-mrgn">
+        <caption class="rex-hide">Liste der Unterkategorien der Kategorie "Homepage"</caption>
+        <colgroup>
+          <col width="40"/>
+          
+          <col width="1*"/>
+          <col width="40"/>
+          <col width="315"/>
+          <col width="153"/>
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="rex-icon"><a title="Kategorie hinzufügen" href="index.php?page=structure&amp;category_id=0&amp;function=add_cat&amp;clang=0"><img alt="Kategorie hinzufügen" src="media/folder_plus.gif"/></a></th>
+            
+            <th>Kategorie</th>
+            <th>Prio</th>
+            <th>Kategorie editieren</th>
+            <th>Status/Funktion</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr class="rex-trow-actv">
+          <td class="rex-icon"><img alt="Kategorie hinzufügen" title="Kategorie hinzufügen" src="media/folder.gif"/></td>
+          
+          <td><input type="text" name="category_name" id="category_name"/></td>
+          <td><input type="text" value="100" name="Position_New_Category" id="Position_New_Category"/></td>
+          <td><div class="rex-meta-button"><a href="#" id="toggle">toggle</a></div><input type="submit" title="Kategorie hinzufügen" value="Kategorie hinzufügen" name="catadd_function" class="rex-fsubmit"/></td>
+          <td class="rex-offline">offline</td>
+        </tr>
+  <tr style="display: none;" class="rex-trow-actv rex-metainfo-cat-hdr rex-metainfo-cat">
+  	<td> </td>
+  	<td colspan="4"><label for="cat_test">cat_test</label></td>
+	</tr>
+  <tr style="display: none;" class="rex-trow-actv rex-metainfo-cat">
+    <td> </td>
+  	<td colspan="4" class="rex-mt-fld"><input type="text" tabindex="17" maxlength="255" id="cat_test " value="" name="cat_test"/></td>
+  </tr>
+      </tbody>
+    </table>
+    <script type="text/javascript">
+       <!--
+//       var needle = new getObj("category_name");
+  //     needle.obj.focus();
+       //-->
+    </script>
+  </fieldset>
+</form>
+	</body>
+</html>

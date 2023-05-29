@@ -1,0 +1,43 @@
+Index: jquery/src/core.js
+===================================================================
+--- jquery/src/core.js	(revision 5824)
++++ jquery/src/core.js	(working copy)
+@@ -1125,13 +1125,14 @@
+ 		return (text || "").replace( /^\s+|\s+$/g, "" );
+ 	},
+ 
++	// Supports ANYTHING but functions
+ 	makeArray: function( array ) {
+ 		var ret = [];
+ 
+ 		if( array != null ){
+ 			var i = array.length;
+-			//the window, strings and functions also have 'length'
+-			if( i == null || array.split || array.setInterval || array.call )
++			// The window, strings (and functions) also have 'length'
++			if( i == null || array.split || array.setInterval )
+ 				ret[0] = array;
+ 			else
+ 				while( i )
+Index: jquery/test/unit/core.js
+===================================================================
+--- jquery/test/unit/core.js	(revision 5824)
++++ jquery/test/unit/core.js	(working copy)
+@@ -1684,7 +1684,7 @@
+ });
+ 
+ test("jQuery.makeArray", function(){
+-	expect(15);
++	expect(14);
+ 
+ 	equals( jQuery.makeArray(jQuery('html>*'))[0].nodeName, "HEAD", "Pass makeArray a jQuery object" );
+ 
+@@ -1709,7 +1709,7 @@
+ 	ok( !!jQuery.makeArray( document.documentElement.childNodes ).slice(0,1)[0].nodeName, "Pass makeArray a childNodes array" );
+ 
+ 	//function, is tricky as it has length
+-	equals( jQuery.makeArray( function(){ return 1;} )[0](), 1, "Pass makeArray a function" );
++	//equals( jQuery.makeArray( function(){ return 1;} )[0](), 1, "Pass makeArray a function" );
+ 	//window, also has length
+ 	equals( jQuery.makeArray(window)[0], window, "Pass makeArray the window" );
+ 

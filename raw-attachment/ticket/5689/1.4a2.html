@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="zh-tw">
+<head>
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<!--<script type="text/javascript" src="jquery-1.4a1.js"></script>-->
+<script type="text/javascript" src="jquery-1.4a2.js"></script>
+<title>Title</title>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+	$(function(){
+		//1.4a2 not work
+		$('.myTxt').live('focus', function(){
+			$(this).css('background-color', '#ff6');
+		}).live('blur', function(){
+			$(this).css('background-color', '');
+		});
+
+		$('<input type="text" class="myTxt" />').appendTo('body');
+	});
+</script>
+</head>
+
+<body>
+	
+</body>
+</html>

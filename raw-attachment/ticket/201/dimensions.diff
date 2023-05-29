@@ -1,0 +1,30 @@
+@@ -76,10 +76,10 @@
+  * @cat Dimensions
+  */
+ $.fn.innerHeight = function() {
+-	return this.get(0) == window || this.get(0) == document ?
+-		this.height() :
+-		this.get(0).offsetHeight - parseInt(this.css("borderTop")) - parseInt(this.css("borderBottom"));
+-};
++	return this.get(0) == window || this.get(0) == document ?
++		this.height() :
++		this.get(0).offsetHeight - parseInt(this.css("borderTop") || 0) - parseInt(this.css("borderBottom") || 0);
++};
+ 
+ /**
+  * Returns the inner width value (without border) for the first matched element.
+@@ -94,10 +94,10 @@
+  * @cat Dimensions
+  */
+ $.fn.innerWidth = function() {
+-	return this.get(0) == window || this.get(0) == document ?
+-		this.width() :
+-		this.get(0).offsetWidth - parseInt(this.css("borderLeft")) - parseInt(this.css("borderRight"));
+-};
++	return this.get(0) == window || this.get(0) == document ?
++		this.width() :
++		this.get(0).offsetWidth - parseInt(this.css("borderLeft") || 0) - parseInt(this.css("borderRight") || 0);
++};
+ 
+ /**
+  * Returns the outer height value (including border) for the first matched element.

@@ -1,0 +1,33 @@
+Index: src/ajax.js
+===================================================================
+--- src/ajax.js	(revision 4175)
++++ src/ajax.js	(working copy)
+@@ -151,7 +151,7 @@
+ 	lastModified: {},
+ 
+ 	ajax: function( s ) {
+-		var jsonp, jsre = /=(\?|%3F)/g, status, data;
++		var jsonp, jsre = /=(\?|%3F)(&|$)/g, status, data;
+ 
+ 		// Extend the settings, but re-extend 's' so that it can be
+ 		// checked again later (in the test suite, specifically)
+@@ -177,8 +177,8 @@
+ 
+ 			// Replace the =? sequence both in the query string and the data
+ 			if ( s.data )
+-				s.data = (s.data + "").replace(jsre, "=" + jsonp);
+-			s.url = s.url.replace(jsre, "=" + jsonp);
++				s.data = (s.data + "").replace(jsre, "=" + jsonp + "$2");
++			s.url = s.url.replace(jsre, "=" + jsonp + "$2");
+ 
+ 			// We need to make sure
+ 			// that a JSONP style response is executed properly
+@@ -192,6 +192,8 @@
+ 				// Garbage collect
+ 				window[ jsonp ] = undefined;
+ 				try{ delete window[ jsonp ]; } catch(e){}
++				if (head)
++					head.removeChild( script );
+ 			};
+ 		}
+ 

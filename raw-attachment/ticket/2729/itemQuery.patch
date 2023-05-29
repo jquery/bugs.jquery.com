@@ -1,0 +1,72 @@
+Index: ui/ui.sortable.js
+===================================================================
+--- ui/ui.sortable.js	(revision 5268)
++++ ui/ui.sortable.js	(working copy)
+@@ -220,7 +220,10 @@
+ 			this.items = [];
+ 			this.containers = [this];
+ 			var items = this.items;
+-			var queries = [$(this.options.items, this.element)];
++
++      // itemQuery allows us to refine the selection of items used in the sortable.
++      var queries = typeof this.options.itemQuery == 'function' ? 
++        this.options.itemQuery.apply(this) : [$(this.options.items, this.element)];
+ 			
+ 			if(this.options.connectWith) {
+ 				for (var i = this.options.connectWith.length - 1; i >= 0; i--){
+Index: ui/demos/ui.sortable.html
+===================================================================
+--- ui/demos/ui.sortable.html	(revision 5268)
++++ ui/demos/ui.sortable.html	(working copy)
+@@ -91,6 +91,27 @@
+ 	</ul>
+ </div>
+ 
++<h2>5. Nested lists limited to 1 level deep</h2>
++<div class="playground">
++	<ul id="example5" style="cursor: hand; cursor: pointer;">
++		<li>Drag us</li>
++		<li>around</li>
++		<li>and change
++			<ul>
++			    <li>Lorem</li>
++			    <li>Ipsum</li>
++			</ul>
++		</li>
++		<li>our</li>
++		<li>positions
++			<ul>
++			    <li>Something else</li>
++			    <li>Foo bar</li>
++			</ul>
++		</li>
++	</ul>
++</div>
++
+ <script type="text/javascript">
+ if(!window.console) {
+  window.console = {
+@@ -110,6 +131,23 @@
+ 	$("#example3").sortable({ items: "li", revert: true, tree: true });
+ 	$("#example4").sortable({ placeholder: "hover", revert: true });
+ 
++	$("#example5").sortable({ 
++    items: "li", revert: true, tree: true,
++    itemQuery: function() {
++      if (this.currentItem) {
++
++        // if list item has a list
++        if ($('ul', this.currentItem).size()) {
++
++          // return only list items from the root list
++          return [$('> li', this.element)];
++        }
++      }
++      return [$(this.options.items, this.element)];
++    }
++  });
++
++
+ });
+ </script>
+ </body>

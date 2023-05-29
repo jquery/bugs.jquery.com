@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Battlefield</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+body {
+	margin-left: 25px;
+	margin-top: 25px;
+}
+</style>
+<script type="text/javascript" src="../../exploitos/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../exploitos/jquery/jquery.plugins/debug.js" ></script>
+<script type="text/javascript" src="../../exploitos/jquery/plugins/jquery.dimensions.js"></script>
+<script type="text/javascript" src="../../exploitos/jquery/jquery.ui/ui.mouse.js"></script>
+<script type="text/javascript" src="../../exploitos/jquery/jquery.ui/ui.draggable.js"></script>
+<script type="text/javascript" src="../../exploitos/jquery/jquery.ui/ui.droppable.js"></script>
+<script src="battleship.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var program = new Battleship();
+
+	$(document).ready(
+		function()
+		{
+			program.Init( '', '' );
+		}
+	);
+</script>
+</head>
+<body>
+<div id="player" class="battlefield">
+	<h3>Your Fleet</h3>
+	<table>
+		<tr>
+			<th>&nbsp;</th>
+			<th>1</th>
+			<th>2</th>
+			<th>3</th>
+			<th>4</th>
+			<th>5</th>
+			<th>6</th>
+			<th>7</th>
+			<th>8</th>
+			<th>9</th>
+			<th>10</th>
+		</tr>
+		<tr>
+			<td class="non-field">A</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">B</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">C</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">D</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">E</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">F</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">G</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">H</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">I</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">J</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</div>
+<div id="computer" class="battlefield">
+	<h3>Enemy's Fleet</h3>
+	<table>
+		<tr>
+			<th>&nbsp;</th>
+			<th>1</th>
+			<th>2</th>
+			<th>3</th>
+			<th>4</th>
+			<th>5</th>
+			<th>6</th>
+			<th>7</th>
+			<th>8</th>
+			<th>9</th>
+			<th>10</th>
+		</tr>
+		<tr>
+			<td class="non-field">A</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">B</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">C</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">D</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">E</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">F</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">G</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">H</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">I</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+			<td class="non-field">J</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</div>
+<div id="shipselect">
+	<h3>Place your ships</h3>
+	<ul>
+		<li onclick="$('#horizontal').attr('checked', 'checked');"><input type="radio" value="horizontal" name="direction" checked="checked"/>Horizontal</li>
+		<li onclick="$('#vertical').attr('checked', 'checked');"><input type="radio" value="vertical" name="direction"/>Vertical</li>
+	</ul>
+	<br/>
+	<div>
+		<img id="cv" class="ships" src="images/carrier.png" title="Aircraft Carrier" alt="Aircraft Carrier" style="width:125px; height:25px;"/>
+		<img id="bb" class="ships" src="images/battleship.png" title="Battleship" alt="Battleship"style="width:100px; height:25px;"/>
+		<img id="ss" class="ships" src="images/sub.png" title="Submarine" alt="Submarine" style="width:75px; height:25px;"/>
+		<img id="dd" class="ships" src="images/destroyer.png" title="Destroyer" alt="Destroyer" style="width:75px; height:25px;"/>
+		<img id="pt" class="ships" src="images/patrol.png" title="Patrol Boat" alt="Patrol Boat" style="width:50px; height:25px;"/>
+	</div>
+</div>
+</body>
+</html>

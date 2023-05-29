@@ -1,0 +1,38 @@
+From 7dbc01ae248b1abd8751fdff1ec0891b6ba1d5c6 Mon Sep 17 00:00:00 2001
+From: C. Scott Ananian <cscott@cscott.net>
+Date: Fri, 9 Jul 2010 00:18:57 -0400
+Subject: [PATCH] Avoid problems when adding text which happens to match an Object method name.
+
+Fixes #6779.
+---
+ src/manipulation.js |    6 ++++--
+ 1 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/src/manipulation.js b/src/manipulation.js
+index cb898cc..b3639cf 100644
+--- a/src/manipulation.js
++++ b/src/manipulation.js
+@@ -399,10 +399,12 @@ function buildFragment( args, nodes, scripts ) {
+ 	// IE 6 doesn't like it when you put <object> or <embed> elements in a fragment
+ 	// Also, WebKit does not clone 'checked' attributes on cloneNode, so don't cache
+ 	if ( args.length === 1 && typeof args[0] === "string" && args[0].length < 512 && doc === document &&
++		args[0] != 'hasOwnProperty' &&
+ 		!rnocache.test( args[0] ) && (jQuery.support.checkClone || !rchecked.test( args[0] )) ) {
+ 
+ 		cacheable = true;
+-		cacheresults = jQuery.fragments[ args[0] ];
++		cacheresults = jQuery.fragments.hasOwnProperty(args[0]) ?
++                               jQuery.fragments[ args[0] ] : null;
+ 		if ( cacheresults ) {
+ 			if ( cacheresults !== 1 ) {
+ 				fragment = cacheresults;
+@@ -599,4 +601,4 @@ function evalScript( i, elem ) {
+ 	if ( elem.parentNode ) {
+ 		elem.parentNode.removeChild( elem );
+ 	}
+-}
+\ No newline at end of file
++}
+-- 
+1.7.1
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="windows-1252"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="de" xml:lang="de">
+<head>
+  <title>jquery bug testcase</title>
+</head>
+<body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script type="text/javascript">
+<!--
+  $(function() {
+      $('.bug').css('color', '#0a0');
+      $('body').append("$('.bug') = " + $('.bug').length).append('<br />')
+               .append('first div class attribute: '  + $('div:eq(0)').attr('class')).append('<br />')
+               .append('second div class attribute: ' + $('div:eq(1)').attr('class'));
+  })
+//-->
+</script>
+
+<p>Two classes where one is the beginning of the other one cause problems in opera when selecting the shorter one (e.g. <b>.bug</b> in this case.)</p>
+
+<div class="bug bugTest">This one works (class="bug bugTest")</div>
+<div class="bugTest bug">This one doesn't work in Opera (class="bugTest bug")</div>
+
+</body>
+</html>
+

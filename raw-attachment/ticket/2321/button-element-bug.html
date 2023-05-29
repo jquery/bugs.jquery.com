@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>Testing button element value</title>
+<script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.2.3.js"></script>
+<script type="text/javascript">
+jQuery(function () {
+    jQuery("#testButton").click(function () {
+        alert(jQuery(this).val());         // Firefox alerts "buttonValue", IE alerts "Content <em>inside</em> button"
+        alert(jQuery(this).attr('value'));  // Firefox alerts "buttonValue", IE alerts "Content <em>inside</em> button"
+    });
+    });
+</script>
+</head>
+<body>
+<button id="testButton" value="buttonValue">
+Content <em>inside</em> button
+</button>
+</body>
+</html>

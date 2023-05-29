@@ -1,0 +1,149 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Faster jQuery</title>
+<style type="text/css">
+
+body
+{
+    font-family: arial, verdana, san-serif;
+    font-size: 14px;
+}
+
+div#Docs
+{
+    margin: 5px;
+}
+
+div#Container,
+div#Container2,
+div#Container3
+{
+    font-size: 10px;
+    margin: 2px;
+    float: left;
+}
+
+div#Container table,
+div#Container2 table,
+div#Container3 table
+{
+    color: #000;
+    background: #ddd;
+    border 1px solid #333;
+    margin: 0;
+}
+
+div#Container table tr td,
+div#Container2 table tr td,
+div#Container3 table tr td
+{
+    text-align: center;
+    font-weight: bold;
+    padding: 2px;
+}
+
+
+div#Container table tr td span.ClickBox,
+div#Container2 table tr td span.ClickBox,
+div#Container3 table tr td span.ClickBox
+{
+    color: red;
+    cursor: pointer;
+}
+
+div#Container2 table tr td span.ClickBox
+{
+    color: blue;
+}
+
+div#Container3 table tr td span.ClickBox
+{
+    color: green;
+}
+
+</style>
+<script type="text/javascript" src="script.js">
+</script>
+<script type="text/javascript" src="jquery-1.1.3.1.adjusted.js">
+</script>
+<script type="text/javascript">
+var cm = new ContentManager('Container');
+var cm2 = new ContentManager('Container2');
+var cm3 = new ContentManager('Container3');
+function run()
+{
+    //this.blur();
+    
+    var count = $('input#count').val();
+    cm.setCount(count);
+    cm2.setCount(count);
+    cm3.setCount(count);
+    
+    cm.reset();
+    cm2.reset();
+    cm3.reset();
+    
+    setTimeout(rebuild, 200);
+}
+
+function updateResult()
+{
+    var result = 
+        "Red: " + cm.getDuration() + "ms<br />\n" +
+        "Blue: " + cm2.getDuration() + "ms<br />\n" +
+        "Green: " + cm3.getDuration() + "ms<br />\n";
+    $('div#Result').empty().append(result);
+}
+
+function rebuild()
+{
+    cm.createTable();
+    cm.attachBehavior(updateResult);
+    
+    cm2.createTable();
+    cm2.attachBehavior2(updateResult);
+    
+    cm3.createTable();
+    cm3.attachBehavior3(updateResult);
+}
+
+function init()
+{
+    $('input#count').val(cm.getCount());
+}
+
+$(document).ready(init);
+</script>
+</head>
+<body id="Body">
+<form action="#">
+
+<div id="Docs">
+
+<div id="Script">
+<b>Page:</b> <a href="index.html">index.html</a><br />
+<b>Script:</b> <a href="script.js">script.js</a><br />
+<b>Count:</b> <input id="count" type="text" style="width: 50px;" />
+<a href="javascript: run();">Run</a>
+</div>
+
+<div id="Result">
+</div>
+
+</div>
+
+<div id="Container">
+</div>
+
+<div id="Container2">
+</div>
+
+<div id="Container3">
+</div>
+
+</form>
+</body>
+
+</html>

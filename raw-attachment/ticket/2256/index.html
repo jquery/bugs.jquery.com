@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>MySite 6.x</title>
+  <script type="text/javascript" src="scripts/jquery-1.2.2.min.js"></script>
+  <script type="text/javascript" src="scripts/jquery.dimensions.js"></script>
+  <script type="text/javascript" src="scripts/ui.mouse.js"></script>  
+  <script type="text/javascript" src="scripts/ui.draggable.js"></script>
+  <script type="text/javascript" src="scripts/ui.draggable.ext.js"></script>  
+  <script type="text/javascript" src="scripts/ui.droppable.js"></script>
+  <script type="text/javascript" src="scripts/ui.droppable.ext.js"></script>  
+  <script type="text/javascript" src="scripts/ui.sortable.js"></script>  
+
+  <script>
+  /*
+  $(document).ready(function(){
+  //  $(".mysite").sortable({items: 'div.sortable-item'});  
+    $("a.top").click(function () {
+      $(this).next('div.content').toggle();
+    });  
+    $(".sortable-item").draggable({helper: 'clone'});
+    $(".droppable").droppable({
+      accept: ".sortable-item",
+      activeClass: 'droppable-active',
+      hoverClass: 'droppable-hover',
+      tolerance: 'pointer',
+      drop: function(ev, ui) {
+        var output = '';
+        $.each(ui.element, function(i, info){
+          output += i + ' : ' + info + '<br />';
+        });
+        var theData = ui.element.innerHTML;
+        var thisName = ui.element.className;
+        var objStr = thisName.replace('sortable-item ', '');
+        var objId = objStr.replace(' ui-draggable', '');
+        var blockStr = "." + objId;
+        $(".debug").append(blockStr);        
+        $(blockStr).remove();
+        $(this).append('<div class="sortable-item ' + objId + ' ui-draggable">' + theData + '<div>');
+        //$(".debug").append("<br />" + thisName + ' : -' + blockStr + '-<hr />' + output);
+      }
+    });
+    $(".mysite").sortable({
+      items: 'div.sortable-item',
+      start: function(e, ui) {
+        $(".debug").append('hi');
+      },      
+      update: function(e, ui) {
+        $(".debug").append('ho');
+      },
+      change: function(e, ui) {
+        $(".debug").append('he');
+      }      
+    });    
+  });  */
+  $(document).ready(function(){
+    $(".mysite").sortable({
+      items: 'div.sortable-item',
+      start: function(e, ui) {
+        $(".debug").append('hi');
+      },      
+      change: function(e, ui) {
+        $(".debug").append('ho');
+      },
+      stop: function(e, ui) {
+        $(".debug").append('ha');
+      },      
+      sort: function(e, ui) {
+        $(".debug").append('he');
+      }      
+    });
+    $("a.top").click(function () {
+      $(this).next('div.content').toggle();
+    });
+  });    
+  </script>  
+  
+  <style>
+  #boundary {
+    width: 500px;
+  }
+  .block { 
+    
+    border: 2px solid #0090DF;
+    background-color: #68BFEF;
+    width: 75px; 
+    height: 75px;
+    margin: 10px;
+    z-index: 100;
+  }
+  .drop { 
+    background-color: #e9b96e;
+    border: 3px double #c17d11;
+    width: 150px; 
+    height: 70px;
+    margin: 0 0 0 100px; 
+    float: left;
+    top: 5px;
+    right: 5px;
+    opacity: 0.7;
+  }
+  .droppable-active {
+    opacity: 1.0;
+  }
+  .droppable-hover {
+    outline: 1px dotted black;
+  }
+  </style>  
+  <style>@import url(style.css);</style>
+  
+<body>
+  <div id="region1" class="mysite droppable sortable">
+    <div class="sortable-item m1"><a href="#" href="#" class="top">Head</a><div class="content">Content 1</div></div>
+    <div class="sortable-item m2"><a href="#" class="top">Head</a><div class="content">Content 2</div></div>
+    <div class="sortable-item m3"><a href="#" class="top">Head</a><div class="content">Content 3</div></div>
+    <div class="sortable-item m4"><a href="#" class="top">Head</a><div class="content">Content 4</div></div>
+  </div>
+  <div id="region2" class="mysite droppable sortable">
+    <div class="sortable-item m5"><a href="#" class="top">Head</a><div class="content">Content 5</div></div>
+    <div class="sortable-item m6"><a href="#" class="top">Head</a><div class="content">Content 6</div></div>
+    <div class="sortable-item m7"><a href="#" class="top">Head</a><div class="content">Content 7</div></div>
+    <div class="sortable-item m8"><a href="#" class="top">Head</a><div class="content">Content 8</div></div>
+  </div>  
+  <div id="region3" class="mysite droppable sortable">
+    <div class="sortable-item m9"><a href="#" class="top">Head</a><div class="content">Content 9</div></div>
+    <div class="sortable-item m10"><a href="#" class="top">Head</a><div class="content">Content 10</div></div>
+    <div class="sortable-item m11"><a href="#" class="top">Head</a><div class="content">Content 11</div></div>
+    <div class="sortable-item m12"><a href="#" class="top">Head</a><div class="content">Content 12</div></div>
+  </div>    
+
+
+<div class="debug"></div>
+
+<!--
+<h4>Drag</h4>
+<div id="boundary">
+  <div class="block m20">drag me!</div>
+  <div class="block m21">no, drag me!</div>  
+  <div class="drop">drop on me!</div>
+  <div class="drop">drop on me!</div>  
+
+  <div class="block m21">drag me!</div>
+
+</div>
+<br clear="all" /><br /><br />
+<hr />
+
+<div class="debug"></div>
+
+<h4>Sort</h4>
+-->
+</body>
+</html>

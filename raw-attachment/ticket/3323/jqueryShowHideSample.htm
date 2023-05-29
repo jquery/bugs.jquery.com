@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	
+	<script>
+	$(document).ready(function(){
+		
+		$("#btnHide").click(function () {
+			$("span:last-child").hide("fast", function () {
+				// use callee so don't have to name the function
+				$(this).prev().hide("slow", arguments.callee); 
+			});
+		});
+		$("#btnShow").click(function () {
+			//$("span").show(2000);
+			$("span").show("slow");
+		});
+	});
+	</script>
+	<style>
+	span {
+		background:#def3ca; 
+		padding:3px; 
+		float:left;
+		font-family: Arial, sans-serif;
+		font-weight:bold;
+		/*font-size:8pt;*/
+		font-size:10px;
+	}
+	</style>
+</head>
+<body>
+  <button id="btnHide">Hide</button>
+  <button id="btnShow">Show</button>
+  <div>
+    <span>Tis</span> 
+    <span>is</span> 
+    <span>a</span> 
+    <span>test</span> 
+    <span>of</span> 
+    <span>the</span> 
+    <span>jquery</span> 
+    <span>.hide/.show</span> 
+    <span>functionality</span> 
+    <span>...</span> 
+  </div>
+</body>
+</html>

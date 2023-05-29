@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+    <title>Defer or not defer, that is the question</title>
+	
+	<script type="text/javascript" src="http://jquery.com/src/jquery-latest.pack.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			$('#one')[0].style.color = 'red';
+		});
+	</script>
+
+</head>
+<body>
+	
+	<div id="bad">
+	</div>
+	
+	<script type="text/javascript">
+		document.getElementById('bad').innerHTML = 'Bad!';
+	</script>
+	
+	<span>1 </span>
+	<span>2 </span>
+	<span>3 </span>
+	<span>4 </span>
+	<span>5 </span>
+	<span>6 </span>
+	<span>7 </span>
+	<span>8 </span>
+	<span>9 </span>
+	
+	<div id="one">
+		One!
+	</div>
+
+</body>
+</html>

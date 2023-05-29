@@ -1,0 +1,50 @@
+From 7ff74dd81ccfa76d65001d4120b32ba9f2d2446f Mon Sep 17 00:00:00 2001
+From: Nic Bellamy <REDACTED>
+Date: Wed, 9 Jun 2010 13:06:38 +1200
+Subject: [PATCH] Fix jQuery.ajax() success function being called when HTTP connection refused.
+
+Fix a bug introduced in commit c3c94823f27ee1e935586d46fd86f055f3a3d97d whereby
+an AJAX request that was refused by the server at the TCP level (ie. connection
+refused) would call the success function with null data.
+
+Opera returns 0 when HTTP status is 304 _or_ when the connection to the server
+is refused. Other browsers return 0 when the connection to the server is
+refused, and return 304 status correctly.
+---
+ jquery-1.4.2.js |   13 +++++++++++--
+ 1 files changed, 11 insertions(+), 2 deletions(-)
+
+diff --git a/jquery-1.4.2.js b/jquery-1.4.2.js
+index fff6776..3cf7f59 100644
+--- a/jquery-1.4.2.js
++++ b/jquery-1.4.2.js
+@@ -5320,7 +5320,13 @@ jQuery.extend({
+ 			return !xhr.status && location.protocol === "file:" ||
+ 				// Opera returns 0 when status is 304
+ 				( xhr.status >= 200 && xhr.status < 300 ) ||
+-				xhr.status === 304 || xhr.status === 1223 || xhr.status === 0;
++				xhr.status === 304 || xhr.status === 1223 ||
++				// Opera returns 0 when HTTP status is 304 _or_
++				// when the connection to the server is
++				// refused. Other browsers return 0 when the
++				// connection to the server is refused, and
++				// return 304 status correctly.
++				(jQuery.browser.opera && xhr.status === 0);
+ 		} catch(e) {}
+ 
+ 		return false;
+@@ -5340,7 +5346,10 @@ jQuery.extend({
+ 		}
+ 
+ 		// Opera returns 0 when status is 304
+-		return xhr.status === 304 || xhr.status === 0;
++		return xhr.status === 304 ||
++			// Opera returns 0 when HTTP status is 304 _or_ when
++			// the connection to the server is refused.
++			(jQuery.browser.opera && xhr.status === 0);
+ 	},
+ 
+ 	httpData: function( xhr, type, s ) {
+-- 
+1.7.1
+

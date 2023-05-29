@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>3178 Test Case</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var numchars = 800000;
+	var teststring = '';
+
+	for (var i = 0; i < numchars; i++) {
+		teststring += '2';
+	}
+
+	var htmlcode = '<div><div id="one">1</div><div id="two">' + teststring + '</div></div>';
+	var currentsection = $('#one', htmlcode).html();
+	alert('#one contents: ' + currentsection); // Expected "#one contents: 1"
+});
+</script>
+</head>
+
+<body>
+</body>
+
+</html>

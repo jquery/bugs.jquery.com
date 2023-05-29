@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<script src="http://code.jquery.com/jquery-1.4.2.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			var test = {};
+			
+			
+			function testOne()
+			{
+				$(test).trigger('onetest');
+			}
+			
+			function testBind()
+			{
+				$(test).trigger('bindtest');
+			}
+			
+			
+			$(
+				function() {
+					$(test).one("onetest", one_Handler);
+					$(test).bind("bindtest", bind_Handler);
+				}
+			);
+			
+			
+			function one_Handler()
+			{
+				alert("one call");
+			}
+			
+			function bind_Handler()
+			{
+				alert("bind call");
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick="javascript:testOne();">TEST with One</button>
+		<button onclick="javascript:testBind();">TEST with Bind</button>
+	</body>
+</html>

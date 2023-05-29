@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Test Case: action, src, href</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	document.getElementById('test2').innerHTML = '<form id="testform2" action="special.html" method="get"><div><input type="text" /><input type="submit" /></div></form><img id="testimg2" src="exhibit.gif" /><a id="testanchor2" href="special.html"></a>';
+
+	// TEST 1
+	var testform = document.getElementById('testform');
+	document.getElementById('action_current_get').innerHTML = testform.getAttribute('action');
+	document.getElementById('action_current_get2').innerHTML = testform.getAttribute('action', 2);
+	document.getElementById('action_current_dom0').innerHTML = testform.action;
+
+	var testimg = document.getElementById('testimg');
+	document.getElementById('src_current_get').innerHTML = testimg.getAttribute('src');
+	document.getElementById('src_current_get2').innerHTML = testimg.getAttribute('src', 2);
+	document.getElementById('src_current_dom0').innerHTML = testimg.src;
+
+	var testanchor = document.getElementById('testanchor');
+	document.getElementById('href_current_get').innerHTML = testanchor.getAttribute('href');
+	document.getElementById('href_current_get2').innerHTML = testanchor.getAttribute('href', 2);
+	document.getElementById('href_current_dom0').innerHTML = testanchor.href;
+
+	// TEST 2
+	var testform2 = document.getElementById('testform2');
+	document.getElementById('action_current_get_2').innerHTML = testform2.getAttribute('action');
+	document.getElementById('action_current_get2_2').innerHTML = testform2.getAttribute('action', 2);
+	document.getElementById('action_current_dom0_2').innerHTML = testform2.action;
+
+	var testimg2 = document.getElementById('testimg2');
+	document.getElementById('src_current_get_2').innerHTML = testimg2.getAttribute('src');
+	document.getElementById('src_current_get2_2').innerHTML = testimg2.getAttribute('src', 2);
+	document.getElementById('src_current_dom0_2').innerHTML = testimg2.src;
+
+	var testanchor2 = document.getElementById('testanchor2');
+	document.getElementById('href_current_get_2').innerHTML = testanchor2.getAttribute('href');
+	document.getElementById('href_current_get2_2').innerHTML = testanchor2.getAttribute('href', 2);
+	document.getElementById('href_current_dom0_2').innerHTML = testanchor2.href;
+
+	// jQuery TEST 1
+	$('#jquery_action').append( $('#testform').attr('action') );
+	$('#jquery_src').append( $('#testimg').attr('src') );
+	$('#jquery_href').append( $('#testanchor').attr('href') );
+
+	// jQuery TEST 2
+	$('#jquery_action_2').append( $('#testform2').attr('action') );
+	$('#jquery_src_2').append( $('#testimg2').attr('src') );
+	$('#jquery_href_2').append( $('#testanchor2').attr('href') );
+
+
+});
+</script>
+
+<style type="text/css">
+body > dl > dt { font-weight: bold; }
+</style>
+</head>
+
+<body>
+	<dl>
+		<dt>Current Browser Native:</dt>
+			<dd style="float: left; width: 400px;">
+				<dl>
+					<dt>ACTION</dt>
+						<dd>
+							<dl>
+								<dt>Element.getAttribute('action')</dt>
+									<dd id="action_current_get"></dd>
+								<dt>Element.getAttribute('action', 2)</dt>
+									<dd id="action_current_get2"></dd>
+								<dt>Element.action:</dt>
+									<dd id="action_current_dom0"></dd>
+							</dl>
+						</dd>
+				</dl>
+				<dl>
+					<dt>SRC</dt>
+						<dd>
+							<dl>
+								<dt>Element.getAttribute('src')</dt>
+									<dd id="src_current_get"></dd>
+								<dt>Element.getAttribute('src', 2)</dt>
+									<dd id="src_current_get2"></dd>
+								<dt>Element.src</dt>
+									<dd id="src_current_dom0"></dd>
+							</dl>
+						</dd>
+				</dl>
+				<dl>
+					<dt>HREF</dt>
+						<dd>
+							<dl>
+								<dt>Element.getAttribute('href')</dt>
+									<dd id="href_current_get"></dd>
+								<dt>Element.getAttribute('href', 2)</dt>
+									<dd id="href_current_get2"></dd>
+								<dt>Element.href</dt>
+									<dd id="href_current_dom0"></dd>
+							</dl>
+						</dd>
+				</dl>
+			</dd>
+			<dd style="float: left; width: 400px;">
+				<dl>
+					<dt>ACTION: innerHTML</dt>
+						<dd>
+							<dl>
+								<dt>Element.getAttribute('action')</dt>
+									<dd id="action_current_get_2"></dd>
+								<dt>Element.getAttribute('action', 2)</dt>
+									<dd id="action_current_get2_2"></dd>
+								<dt>Element.action:</dt>
+									<dd id="action_current_dom0_2"></dd>
+							</dl>
+						</dd>
+				</dl>
+				<dl>
+					<dt>SRC: innerHTML</dt>
+						<dd>
+							<dl>
+								<dt>Element.getAttribute('src')</dt>
+									<dd id="src_current_get_2"></dd>
+								<dt>Element.getAttribute('src', 2)</dt>
+									<dd id="src_current_get2_2"></dd>
+								<dt>Element.src</dt>
+									<dd id="src_current_dom0_2"></dd>
+							</dl>
+						</dd>
+				</dl>
+				<dl>
+					<dt>HREF: innerHTML</dt>
+						<dd>
+							<dl>
+								<dt>Element.getAttribute('href')</dt>
+									<dd id="href_current_get_2"></dd>
+								<dt>Element.getAttribute('href', 2)</dt>
+									<dd id="href_current_get2_2"></dd>
+								<dt>Element.href</dt>
+									<dd id="href_current_dom0_2"></dd>
+							</dl>
+						</dd>
+				</dl>
+			</dd>
+	</dl>
+	<dl style="clear: left;">
+		<dt>jQuery:</dt>
+			<dd style="float: left; width: 400px;">
+				<dl>
+					<dt>$('form').attr('action')</dt>
+						<dd id="jquery_action"></dd>
+					<dt>$('img').attr('src')</dt>
+						<dd id="jquery_src"></dd>
+					<dt>$('a').attr('href')</dt>
+						<dd id="jquery_href"></dd>
+				</dl>
+			</dd>
+			<dd style="float: left; width: 400px;">
+				<dl>
+					<dt>$('form2').attr('action')</dt>
+						<dd id="jquery_action_2"></dd>
+					<dt>$('img2').attr('src')</dt>
+						<dd id="jquery_src_2"></dd>
+					<dt>$('a2').attr('href')</dt>
+						<dd id="jquery_href_2"></dd>
+				</dl>
+			</dd>
+	</dl>
+
+	<!-- Test Area -->
+	<div id="test1" style="display: none;">
+		<form id="testform" action="special.html" method="get"><div>
+			<input type="text" />
+			<input type="submit" />
+		</div></form>
+
+		<img id="testimg" src="exhibit.gif" />
+
+		<a id="testanchor" href="special.html"></a>
+	</div>
+
+	<div id="test2" style="display: none;">
+
+	</div>
+
+</body>
+
+</html>

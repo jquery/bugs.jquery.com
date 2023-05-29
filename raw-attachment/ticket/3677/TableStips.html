@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+<script type="text/javascript" src="jquery-1.2.6.min.js"></script>
+<script type="text/javascript">
+$(function(){
+$("tr:not('.header') + tr:not('.footer')").hover(function(){$(this).addClass("highlighted");},function(){$(this).removeClass("highlighted");});
+});
+</script>
+<style type="text/css">
+.header
+{background-color:#000099;
+color:#FFFFFF;
+}
+
+.footer
+{
+background-color:#333333;
+color:#FFFF00;
+}
+
+.highlighted
+{
+background-color:#FFFF00;
+color:black;
+}
+</style>
+</head>
+
+<body>
+
+<table>
+<tr class="header"><td>First Culumn</td><td>Second Column</td><td>Third Column</td></tr>
+<tr><td>First Value1</td><td>Second Value</td><td>Third Value</td></tr>
+<tr><td>First Value</td><td>Second Value</td><td>Third Value</td></tr>
+<tr><td>First Value</td><td>Second Value</td><td>Third Value</td></tr>
+<tr><td>First Value</td><td>Second Value</td><td>Third Value</td></tr>
+<tr><td>First Value</td><td>Second Value</td><td>Third Value</td></tr>
+<tr><td>First Value</td><td>Second Value</td><td>Third Value</td></tr>
+<tr class="footer"><td>First Footer</td><td>Second Footer</td><td>Third Footer</td></tr>
+
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  
+  <script>
+  $(document).ready(function(){
+    
+    $("#right").click(function(){
+      $(".block").animate({"left": "+=5em"}, "slow", null, function(){
+	  
+	  $("#text").html($(".block").css("left"));
+	  });
+    });
+
+    $("#left").click(function(){
+      $(".block").animate({"left": "-=5em"}, "slow", null, function(){
+	  
+	  $("#text").html($(".block").css("left"));
+	  });
+    });
+
+  });
+  </script>
+  <style>
+  div.block { 
+    position:absolute; 
+    background-color:#abc; 
+    left:10em;
+    width:600px; 
+    height:90px;
+    margin:5px; 
+  }
+  </style>
+</head>
+<body>
+<div id="text">&nbsp</div>
+  <button id="left">«</button> <button id="right">»</button>
+<div style="position:absolute; left: 30em;">
+<div class="block"></div>
+</div>
+
+</body>
+</html>

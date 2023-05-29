@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>test</title>
+
+	<script src="src/core.js"></script>
+	<script src="src/support.js"></script>
+	<script src="src/data.js"></script>
+	<script src="src/queue.js"></script>
+	<script src="src/attributes.js"></script>
+	<script src="src/event.js"></script>
+	<script src="src/sizzle/sizzle.js"></script>
+	<script src="src/sizzle-jquery.js"></script>
+	<script src="src/traversing.js"></script>
+	<script src="src/manipulation.js"></script>
+	<script src="src/css.js"></script>
+	<script src="src/ajax.js"></script>
+	<script src="src/effects.js"></script>
+	<script src="src/offset.js"></script>
+	<script src="src/dimensions.js"></script>
+</head>
+
+<body>
+	<h1>.delay() bugfix and extension</h1>
+	<p>Needs more testing...</p>
+	<h2>Updated description .delay()</h2>
+	<p>.delay( [ delayId ], duration, [ queueName ] )<br/>
+	delayId = An optional string containing the name of the delay id. The delay can be interrupted by using .removeDelay( delayId ).<br/>
+	duration = An integer indicating the number of milliseconds to delay execution of the next item in the queue.<br/>
+	queueName = A string containing the name of the queue. Defaults to fx, the standard effects queue.<br/>
+</p>
+	<h2>Updated description .clearQueue()</h2>
+	<p>.clearQueue( [ queueName ] )<br/>
+queueNameA = string containing the name of the queue. Defaults to fx, the standard effects queue.<br /><br />
+Also clears all delays of the element.<br/>
+</p>
+	<h2>New description .removeDelay( [ delayId ], [ queueName ] )</h2>
+	<p>.delay( [ delayId ], duration, [ queueName ] )<br/>
+	delayId = An optional string containing the name of the delay id. If no delayId is given, the last delay of the element will be canceled.<br/>
+	queueName = A string containing the name of the queue. Defaults to fx, the standard effects queue.<br/><br />
+Currently you need to clear all delays of an element, before you can append new operations the the element or you call .clearQueue() first.
+</p>
+	
+	<h2>Tests</h2>
+	<p><button>Run delay tests</button></p>
+	<div class="first">first</div>
+	<div class="second">second</div>
+	<div class="third">third</div>
+	<div class="fourth">fourth</div>
+	<div class="fifth">fifth</div>
+<script type="text/javascript">
+$("button").click(function() {
+ 	$("div.first").delay("timeout1",800).fadeTo(400,0).delay(800).fadeTo(400,1);
+	$("div.first").removeDelay("timeout1");
+	
+ 	$("div.second").delay(800).fadeTo(400,0).delay("timeout1",800).fadeTo(400,1);
+	$("div.second").removeDelay("timeout1");
+	
+ 	$("div.third").delay(800).fadeTo(400,0).delay(800).fadeTo(400,1);
+	$("div.third").removeDelay();
+	
+	$("div.fourth").delay(800).fadeTo(400,0).delay(800).fadeTo(400,1);
+	$("div.fourth").clearQueue();
+	$("div.fourth").clearQueue();
+	$("div.fourth").delay(2800).fadeTo(0,1).fadeTo(400,0.5);
+	
+	$("div.fifth").delay(800).fadeTo(400,0).delay(800).fadeTo(400,1);
+	$("div.fifth").removeDelay();
+	$("div.fifth").removeDelay();
+	$("div.fifth").delay(2800).fadeTo(0,1).fadeTo(400,0.5);
+	
+});
+</script>
+</body>
+</html>

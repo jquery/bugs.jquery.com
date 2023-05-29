@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Test jQuery selector/live-event bug</title>
+<script type="text/javascript" src="jquery-1.3.2.js"></script>
+</head>
+<body>
+<p>Form with name=form1</p>
+<form action="" method="post" name="form1">
+	<p><label for="name">Name:</label><input type="text" name="name" id="name" value="This one does not work" /></p>
+	<p><input type="submit" name="submit" value="Submit" id="submit" /></p>
+</form>
+<p>&nbsp;</p>
+<p>Form with name=form2</p>
+<form action="" method="post" name="form2">
+	<p><label for="names">Names:</label><input type="text" name="names" id="names" value="This one works" /></p>
+	<p><input type="submit" name="submit2" value="Submit2" id="submit2" /></p>
+</form>
+<script type="text/javascript">
+$(document).ready(function(){	
+alert('should say "submit" :'+ $('form[name=form1] :submit').attr('name') +
+	'\n'+
+	'should say "submit2":'+ $('form[name=form2] :submit').attr('name'));
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+Index: fx.js
+===================================================================
+--- fx.js	(版本 6489)
++++ fx.js	(工作副本)
+@@ -127,6 +127,7 @@
+ 			opt.curAnim = jQuery.extend({}, prop);
+ 
+ 			jQuery.each( prop, function(name, val){
++				name = name.replace(rdashAlpha, fcamelCase);
+ 				var e = new jQuery.fx( self, opt, name );
+ 
+ 				if ( /toggle|show|hide/.test(val) )

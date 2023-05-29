@@ -1,0 +1,21 @@
+Index: ajax.js
+===================================================================
+--- ajax.js	(revision 6125)
++++ ajax.js	(working copy)
+@@ -394,13 +394,10 @@
+ 			if ( s.timeout > 0 )
+ 				setTimeout(function(){
+ 					// Check to see if the request is still happening
+-					if ( xhr ) {
+-						if( !requestDone )
+-							onreadystatechange( "timeout" );
+-
++					if ( xhr && !requestDone ){
+ 						// Cancel the request
+-						if ( xhr )
+-							xhr.abort();
++						xhr.abort();
++						onreadystatechange( "timeout" );
+ 					}
+ 				}, s.timeout);
+ 		}

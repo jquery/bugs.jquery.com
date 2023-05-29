@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Next Adjacent Selector and/or Child Selector in IE6</title>
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+	<script language="javascript" type="text/javascript">
+	
+		$(function(){
+			
+			// v1.3.2: Success
+			// v1.4.1: Success
+			// v1.4.2: Success
+			alert($.makeArray(
+				$("#btnAPI").next("ul").find("li a") // onSuccess: Will return list of urls
+			));
+			
+			// v1.3.2: Success
+			// v1.4.1: Fail IE6 IE7
+			// v1.4.2: Fail IE6 IE7
+			alert($.makeArray(
+				$("#btnAPI + ul li a") // onSuccess: Will return list of urls
+			));
+			
+		});
+	
+	</script>
+</head>
+<body>
+
+	<div class="controls nav">
+		<ul>
+			<li class="first">
+				<a id="btnAPI" href="#">Insert API</a>
+				<ul>
+					<li><a href="#">Template</a></li>
+					<li><a href="#">Include</a></li>
+				</ul>
+			</li>
+			<li><a id="btnCompress" href="#">Compression</a></li>
+			<li><a id="btnClose" href="#">Close</a></li>
+			<li><a id="btnReset" href="#">Reset</a></li>
+			<li class="last"><a id="btnProcess" href="#"><strong>Process</strong></a></li>
+		</ul>
+	</div>	
+
+</body>
+</html>

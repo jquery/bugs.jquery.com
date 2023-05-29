@@ -1,0 +1,42 @@
+=== src/core.js
+==================================================================
+--- src/core.js	(revision 523)
++++ src/core.js	(local)
+@@ -27,7 +27,7 @@
+ 
+ // A simple way to check for HTML strings or ID strings
+ // (both of which we optimize for)
+-var quickExpr = /^[^<]*(<(.|\s)+>)[^>]*$|^#(\w+)$/;
++var quickExpr = /^([^<]*<(.|\s)+>[^>]*)$|^#(\w+)$/;
+ 
+ // Is it a simple selector
+ var isSimple = /^.[^:#\[\.]*$/;
+=== test/unit/core.js
+==================================================================
+--- test/unit/core.js	(revision 523)
++++ test/unit/core.js	(local)
+@@ -188,7 +188,7 @@
+ var foo = false;
+ 
+ test("$('html')", function() {
+-	expect(6);
++	expect(12);
+ 
+ 	reset();
+ 	foo = false;
+@@ -207,6 +207,15 @@
+ 	ok( j.length >= 2, "Check node,textnode,comment creation (some browsers delete comments)" );
+ 
+ 	ok( !$("<option>test</option>")[0].selected, "Make sure that options are auto-selected #2050" );
++
++	reset();
++	var $nodes = $("I <b>Like</b> Pie");
++	equals($nodes.length, 3, "Verify text nodes at start and end get created #2466");
++	equals($nodes[0].nodeType, 3, "First node is a text node #2466");
++	equals($nodes[0].nodeValue, "I ", "First node has correct value #2466");
++	equals($nodes[1].nodeType, 1, "Middle node is a html node #2466");
++	equals($nodes[2].nodeType, 3, "Last node is a text node #2466");
++	equals($nodes[2].nodeValue, " Pie", "Last node has correct value #2466");
+ });
+ 
+ test("$('html', context)", function() {

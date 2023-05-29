@@ -1,0 +1,49 @@
+<html>
+<head>
+<style type= "text/css">
+<!--
+BODY {margin-left:0; margin-right:0; margin-top:0; margin-bottom:0;
+width:100%;height:100%;overflow:hidden;background-color:threedface;}
+-->
+</style>
+<script language="JavaScript" src="http://www.conduit.com/Api/ToolbarApi.aspx"></script>
+<script language="JavaScript" src="http://www.conduit.com/API/BrowserCompApi.aspx"></script>
+<script language="JavaScript" src="http://accounts-test.famos.com/root/bte/jquery-1.3.2.js"></script>
+<script language="JavaScript" src="http://accounts-test.famos.com/root/bte/jquery.json-1.3.min.js"></script>
+<script language="JavaScript">
+
+/* FAMOS Explore javascript code
+
+Revision History:
+Date        Who     What
+----        ---     ----
+27-May-09   BTE     Original creation.
+
+*/
+
+function explore()
+{
+    seltext = GetSearchTerm();
+    if(seltext)
+    {
+        qtext = $.quoteString(seltext);
+        OpenFloatingWindow('http://accounts-test.famos.com/root/bte/content-iframe.html?u=' + seltext, 790, 500);
+           //OpenFloatingWindow('http://www.earptech.com/test.html', 790, 500);
+    }
+}
+</script>
+</head>
+<body>
+
+<!-- ENTER YOUR HTML HERE -->
+<table border="0" cellspacing="0" cellpadding="0"><tr><td>
+<a name="fh" id="fh" href="javascript:;" onclick="explore();">
+<img src="famos.bmp" height="20" width="20"></a>
+</td><td>
+<a name="fh2" id="fh2" href="javascript:;" onclick="explore();">
+Explore</a>
+</td></tr></table>
+</a>
+
+</body>
+</html>

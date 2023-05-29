@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <title>Frequence - Arrange your friends in sequence</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="Frequence is a Facebook game developed by Diffen LLC. The objective of the puzzle is to arrange the photos of your Facebook friends in the shortest possible time.">
+    <meta name="keywords" content="Facebook game,Mind game,Brain game,Puzzle,social game,casual game">
+    <LINK href="freq.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    <h3>Frequence Game - Arrange your friends in sequence!</h3>
+    <div id="gamediv">
+        <div id="levels">
+            <h4 id="whichlevel" style="display:inline;">Level 4</h4>
+            <button class="fb_button" id="prevgame" onclick="prevGame();">Replay Previous Level</button>
+
+            <button class="fb_button_selected" id="nextgame" onclick="nextGame();">Next Level</button>
+            <button class="fb_button">World Rankings</button>
+            <button class="fb_button" onclick="showFriendRankings();">Friend Rankings</button>
+        </div>
+        <div id="gameoverdiv" style='display:none;'>
+            <div id='score'></div>
+        </div>
+
+        <div id="waitdiv" style="display:none;">
+            <img src="photos/wait.gif" alt="Wait"><br>
+            Loading. Please wait...
+        </div>
+        <div id="friendrankingsdiv" style="display:none;">
+        </div>
+        <div id="playpen">
+            <div id="canvasdiv">
+                <div class="caption">Arrange these pictures..<br><img src="photos/downarrow.png"></div>
+
+                <table id="canvas"></table>
+            </div>
+            <div id="middiv">
+                <table border="0">
+                  <tr>
+                    <td valign="middle" width="75">..to match<br><img src="photos/rightarrow.png"><br>this sequence
+                    </td>
+                  </tr>
+                </table>
+
+            </div>
+            <div id="targetdiv" title="This is the target. Arrange the grid on the right to match the order on the left.">
+                <div class="caption">&nbsp;</div>
+                <table id="target"></table>
+            </div>
+            <div style="clear:both;height:25px;"></div>
+            <div id="clock"></div>
+            <div id="instructions">
+                <h3>How to Play</h3>
+
+                <p><b>Objective of the game:</b> In the grid on your right (your play area), arrange the pictures of your friends in the sequence that matches the grid on the left.<br>
+                </p>
+                <p>
+                    <b>Moving the pictures</b>
+                    <ol>
+                        <li>Only cells adjacent to the empty cell (vertically or horizontally, but not diagonally) can be moved into the empty cell.</li>
+
+                        <li>Click on a picture adjacent to the empty cell to move that picture into the empty cell.</li>
+                        <li>Move several pictures at once by clicking on a picture farther away but in the same row or column as the empty cell. This will move all pictures by 1 cell in the direction of the empty cell.</li>
+                    </ol>
+
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var frimages = ['http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs624.snc3/27405_592925756_1062_q.jpg','http://profile.ak.fbcdn.net/v22939/615/110/q1730627562_584.jpg','http://profile.ak.fbcdn.net/v22939/1461/44/q522185772_4785.jpg','http://profile.ak.fbcdn.net/v228/9/116/q651228597_8643.jpg','http://profile.ak.fbcdn.net/profile6/1370/58/q541814720_7541.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs351.snc4/41632_716294201_7212_q.jpg','http://profile.ak.fbcdn.net/v227/1524/96/q561079166_5411.jpg','http://profile.ak.fbcdn.net/v225/1274/10/q665904754_8656.jpg','http://profile.ak.fbcdn.net/profile6/1308/119/q646432230_3139.jpg','http://profile.ak.fbcdn.net/v22939/108/34/q1016870382_7000.jpg','http://profile.ak.fbcdn.net/v229/640/31/q1742550768_336.jpg','http://profile.ak.fbcdn.net/v22944/1517/42/q643664993_7918.jpg','http://profile.ak.fbcdn.net/profile5/514/76/q744932194_5447.jpg','http://profile.ak.fbcdn.net/v229/1377/113/q1247684028_4156.jpg','http://profile.ak.fbcdn.net/profile5/823/19/q525520374_8281.jpg','http://profile.ak.fbcdn.net/profile5/660/97/q747456092_6085.jpg','http://profile.ak.fbcdn.net/v22941/943/70/q700295786_8322.jpg','http://profile.ak.fbcdn.net/v22940/660/38/q595814893_5507.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs168.ash2/41512_727456591_9834_q.jpg','http://profile.ak.fbcdn.net/v22943/1005/16/q100000567675960_859.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs254.snc3/23137_662411252_1099_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-sf2p/hs306.ash1/23177_750736112_3879_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs301.ash1/23083_1010661550_677_q.jpg','http://profile.ak.fbcdn.net/v227/1777/76/q1398886126_7377.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs270.snc3/23152_551663447_1295_q.jpg','http://profile.ak.fbcdn.net/v22942/987/35/q500086521_9651.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs254.snc3/23132_100000863204247_4331_q.jpg','http://profile.ak.fbcdn.net/v223/1420/51/q641653382_7354.jpg','http://profile.ak.fbcdn.net/v223/1280/81/q100000064975542_5086.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs308.ash1/23220_511527735_9517_q.jpg','http://profile.ak.fbcdn.net/v22942/1075/36/q812824617_7973.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs649.snc3/27488_724820931_1540_q.jpg','http://profile.ak.fbcdn.net/v226/1638/111/q1359465105_2821.jpg','http://profile.ak.fbcdn.net/v230/1318/15/q1460824699_440.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs624.snc3/27410_700684713_1619_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs270.snc3/23164_638410092_891_q.jpg','http://profile.ak.fbcdn.net/v222/1749/59/q624272741_394.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs255.snc3/23148_100000802582943_9708_q.jpg','http://profile.ak.fbcdn.net/v228/730/86/q684050147_3056.jpg','http://profile.ak.fbcdn.net/profile5/801/36/q677342826_1961.jpg','http://profile.ak.fbcdn.net/v223/1550/73/q723139772_3639.jpg','http://profile.ak.fbcdn.net/hprofile-ak-sf2p/hs253.snc3/23112_671988047_4321_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs269.snc3/23127_833188642_6896_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs625.ash1/27423_906410485_1724_q.jpg','http://profile.ak.fbcdn.net/v229/1533/14/q636206348_4472.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs275.snc3/23245_637315571_5870_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-sf2p/hs641.snc3/27345_553955248_2466_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs255.snc3/23162_718102677_8956_q.jpg'];        var frnaams = ['Priyanka Sehgal','Anand Dani','Advit Sahdev','SuryaPrashant Rao','Shivani Patel','Vivek Jain','Shraddha Sanghi','Prakash Nanani','Parag Ingle','Nirupama Bhandaru','Rohit Nanani','Anuva Pardesi','Ravindra Ramavath','So Scazafavo','Nathan Kaiser','Ramasubramanian Sundararajan','Ajay Dudani','Ridhi Haldia','Vivek Iyer','Anurag Bhargava','Tapan Shah','Ashni Raghuvanshi','Parth Sachdev','Steve Rubin','Pradeep Kumar Gond','Anurag Jain','D.n. Nainani Nainani','Shweta Kumar','Natarajan Viswanathan','Chhatra Karki','Gajapathy Pillai','Barkha Jasuja','Sanghamitra Lama','Sudha Iyer Dsouza','Suhas Misra','Rajat Gupta','Ishita Agrawal','Rajesh Kotak','Vinod Subramanian','Akshay Pundle','Bhushan Giri','Sameer Talreja','Anirudh Ralli','Srivatsa Subbanna','Vivek Belgavi','Mayuri Duggirala','Sandeep Sonpatki','Vidya Murthy Lahiri'];        var frurls = ['http://www.facebook.com/profile.php?id=592925756','http://www.facebook.com/profile.php?id=1730627562','http://www.facebook.com/advit.sahdev','http://www.facebook.com/surya.prashant','http://www.facebook.com/profile.php?id=541814720','http://www.facebook.com/profile.php?id=716294201','http://www.facebook.com/profile.php?id=561079166','http://www.facebook.com/profile.php?id=665904754','http://www.facebook.com/parag.ingle','http://www.facebook.com/profile.php?id=1016870382','http://www.facebook.com/profile.php?id=1742550768','http://www.facebook.com/profile.php?id=643664993','http://www.facebook.com/ravindrar1','http://www.facebook.com/sosowhat','http://www.facebook.com/nckaiser','http://www.facebook.com/gs.ramsu','http://www.facebook.com/profile.php?id=700295786','http://www.facebook.com/ridhi.haldia','http://www.facebook.com/vivekiyer68','http://www.facebook.com/profile.php?id=100000567675960','http://www.facebook.com/profile.php?id=662411252','http://www.facebook.com/profile.php?id=750736112','http://www.facebook.com/parth.sachdev','http://www.facebook.com/profile.php?id=1398886126','http://www.facebook.com/pradeep.gond','http://www.facebook.com/anuragmjain','http://www.facebook.com/profile.php?id=100000863204247','http://www.facebook.com/profile.php?id=641653382','http://www.facebook.com/profile.php?id=100000064975542','http://www.facebook.com/ckarki','http://www.facebook.com/profile.php?id=812824617','http://www.facebook.com/profile.php?id=724820931','http://www.facebook.com/profile.php?id=1359465105','http://www.facebook.com/profile.php?id=1460824699','http://www.facebook.com/suhas.misra','http://www.facebook.com/anthmoksh','http://www.facebook.com/profile.php?id=624272741','http://www.facebook.com/profile.php?id=100000802582943','http://www.facebook.com/profile.php?id=684050147','http://www.facebook.com/akshay.pundle','http://www.facebook.com/profile.php?id=723139772','http://www.facebook.com/sameer.talreja','http://www.facebook.com/anirudh.ralli','http://www.facebook.com/srivatsas','http://www.facebook.com/vivek.belgavi','http://www.facebook.com/mayuri.duggirala','http://www.facebook.com/profile.php?id=553955248','http://www.facebook.com/profile.php?id=718102677'];        var gridSize;
+        var canimages = [[],[],[],[0,3,5,2,1001,4,6,1,7],[9,14,3,13,11,6,5,10,12,0,1001,1,7,8,4,2],[15,8,21,9,20,0,1001,7,23,17,22,11,13,19,16,4,14,5,3,2,1,6,18,10,12]]; /* shuffled canvas images */ 
+        var gridStatus = [];
+        var started = false;
+        var timesAllowed = ['','','','150','250','400'];
+         var hasfriends = true;         var playa = 1279922677;
+        var playerlevel = 4;
+        var glevel  = playerlevel;
+        var baseurl = 'http://pikadoo.com/facebook/Frequence/';
+        var pecking = ['Rookie','Amateur','Professional','Champion','Hall of Famer','Frequen God'];
+        var ggt,gst,gbt,timeallowed,timeoutvar;
+    </script>
+    <script type="text/javascript" src="freq.js"></script>
+  </body>
+</html>
+
+

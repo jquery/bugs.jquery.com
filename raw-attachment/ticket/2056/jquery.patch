@@ -1,0 +1,468 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 4145)
++++ src/core.js	(working copy)
+@@ -157,15 +157,7 @@
+ 	// Determine the position of an element within 
+ 	// the matched set of elements
+ 	index: function( elem ) {
+-		var ret = -1;
+-
+-		// Locate the position of the desired element
+-		this.each(function(i){
+-			if ( this == elem )
+-				ret = i;
+-		});
+-
+-		return ret;
++		return jQuery.inArray( elem, this )
+ 	},
+ 
+ 	attr: function( name, value, type ) {
+@@ -201,22 +193,20 @@
+ 		return this.attr( key, value, "curCSS" );
+ 	},
+ 
++	getText: function( elem ) {
++		return jQuery.map( elem.childNodes, function(child){
++			var nt = child.nodeType;
++			return nt == 8 ? null
++						   : nt == 1 ? jQuery.fn.getText( child )
++						   : child.nodeValue;
++		}).join("");
++	},
++
+ 	text: function( text ) {
+-		if ( typeof text != "object" && text != null )
+-			return this.empty().append( (this[0] && this[0].ownerDocument || document).createTextNode( text ) );
+-
+-		var ret = "";
+-
+-		jQuery.each( text || this, function(){
+-			jQuery.each( this.childNodes, function(){
+-				if ( this.nodeType != 8 )
+-					ret += this.nodeType != 1 ?
+-						this.nodeValue :
+-						jQuery.fn.text( [ this ] );
+-			});
+-		});
+-
+-		return ret;
++		if ( typeof text != "object" && text !== null && text !== undefined )
++			return this.empty().append( document.createTextNode( text ) );
++		else
++		  return jQuery.map( text || this, jQuery.fn.getText ).join("");
+ 	},
+ 
+ 	wrapAll: function( html ) {
+@@ -476,16 +466,15 @@
+ 	},
+ 	
+ 	domManip: function( args, table, reverse, callback ) {
+-		var clone = this.length > 1, elems; 
++		var len = this.length, clone, elems;
++		if( len === 0 ) return this;
++		else {
++		  clone = len > 1
++		  elems = jQuery.clean( args, this[0].ownerDocument );
++		  if ( reverse ) elems.reverse();
++		}
+ 
+ 		return this.each(function(){
+-			if ( !elems ) {
+-				elems = jQuery.clean( args, this.ownerDocument );
+-
+-				if ( reverse )
+-					elems.reverse();
+-			}
+-
+ 			var obj = this;
+ 
+ 			if ( table && jQuery.nodeName( this, "table" ) && jQuery.nodeName( elems[0], "tr" ) )
+@@ -1077,15 +1066,12 @@
+ 	},
+ 
+ 	makeArray: function( array ) {
+-		var ret = [];
+-
+ 		// Need to use typeof to fight Safari childNodes crashes
+-		if ( typeof array != "array" )
+-			for ( var i = 0, length = array.length; i < length; i++ )
+-				ret.push( array[ i ] );
+-		else
+-			ret = array.slice( 0 );
++		if ( typeof array == "array" ) return array.slice( 0 );
+ 
++		var ret = [];
++		for ( var i = 0, length = array.length; i < length; i++ )
++			ret.push( array[ i ] );
+ 		return ret;
+ 	},
+ 
+@@ -1100,18 +1086,24 @@
+ 	merge: function( first, second ) {
+ 		// We have to loop this way because IE & Opera overwrite the length
+ 		// expando of getElementsByTagName
+-
+ 		// Also, we need to make sure that the correct elements are being returned
+-		// (IE returns comment nodes in a '*' query)
+-		if ( jQuery.browser.msie ) {
+-			for ( var i = 0; second[ i ]; i++ )
+-				if ( second[ i ].nodeType != 8 )
+-					first.push( second[ i ] );
++		for ( var i = 0, next=second[1]; ; ){
++			if( !next ){
++				if( second[i] ) first.push( second[i] );
++				break;
++			}
++			first.push( second[i], next );
++			i+=2
++			next = second[ i+1 ];
++		}
++		return first;
++	},
+ 
+-		} else
+-			for ( var i = 0; second[ i ]; i++ )
++	msie_merge: function(first, second){
++		for ( var i = 0; second[ i ]; i++ )
++			// (IE returns comment nodes in a '*' query)
++			if ( second[ i ].nodeType != 8 )
+ 				first.push( second[ i ] );
+-
+ 		return first;
+ 	},
+ 
+@@ -1130,45 +1122,63 @@
+ 			}
+ 
+ 		} catch( e ) {
+-			ret = array;
++			return array;
+ 		}
+ 
+ 		return ret;
+ 	},
+ 
++	reject: function(elems, callback) {
++		var ret = [];
++		for( var i = 0, el = elems.length; i < el; i++ ) {
++			if ( !callback( elems[i], i ) ) ret.push( elems[i] );
++		}
++		return ret;
++	},
++
+ 	grep: function( elems, callback, inv ) {
+ 		// If a string is passed in for the function, make a function
+ 		// for it (a handy shortcut)
+ 		if ( typeof callback == "string" )
+ 			callback = eval("false||function(a,i){return " + callback + "}");
+ 
++		if( inv ) return jQuery.reject(elems, callback);
++
+ 		var ret = [];
+-
+-		// Go through the array, only saving the items
+-		// that pass the validator function
+-		for ( var i = 0, length = elems.length; i < length; i++ )
+-			if ( !inv && callback( elems[ i ], i ) || inv && !callback( elems[ i ], i ) )
+-				ret.push( elems[ i ] );
+-
++		for ( var i = 0, length = elems.length; i < length; i++ ) {
++			if ( callback( elems[i], i ) ) ret.push( elems[i] );
++		}
+ 		return ret;
+ 	},
+ 
++	// automatically flattens returned arrays
++	// map(xs, function(x) {return [x]}) == xs
+ 	map: function( elems, callback ) {
+-		var ret = [];
++		var arrays = []; // array of arrays to be concated together
+ 
+-		// Go through the array, translating each of the items to their
+-		// new value (or values).
+-		for ( var i = 0, length = elems.length; i < length; i++ ) {
++		for (var i = 0, length = elems.length; i < length; i++ ) {
+ 			var value = callback( elems[ i ], i );
+ 
+-			if ( value !== null && value != undefined ) {
+-				if ( value.constructor != Array )
+-					value = [ value ];
++			if ( value !== null && value !== undefined ) {
++				if ( value.constructor != Array ) arrays.push( [value] );
++				else arrays.push( value );
++			} 
++		}
++		// if arrays has no members, Array.concat will return undefined
++		if( arrays.length === 0 ) return arrays;
++		return Array.concat.apply(Array, arrays);
++	},
+ 
+-				ret = ret.concat( value );
+-			}
++
++	// map without flattening, error on undefined, filter null
++	collect: function( elems, callback ) {
++		ret = []
++		for (var i = 0, length = elems.length; i < length; i++ ) {
++			var value = callback( elems[ i ], i );
++			if( value === undefined )
++			  throw("collect: callback return undefined value ");
++			if( value !== null ) ret.push( value );
+ 		}
+-
+ 		return ret;
+ 	}
+ });
+@@ -1330,3 +1340,5 @@
+ 					this.css( type, size.constructor == String ? size : size + "px" );
+ 	};
+ });
++
++if ( jQuery.browser.msie ) jQuery.extend({merge: jQuery.msie_merge})
+Index: src/selector.js
+===================================================================
+--- src/selector.js	(revision 4145)
++++ src/selector.js	(working copy)
+@@ -8,8 +8,8 @@
+ 
+ jQuery.extend({
+ 	expr: {
+-		"": "m[2]=='*'||jQuery.nodeName(a,m[2])",
+-		"#": "a.getAttribute('id')==m[2]",
++		"" : function(a){return m[2]=='*'||jQuery.nodeName(a,m[2])},
++		"#": function(a){return a.getAttribute('id')==m[2]},
+ 		":": {
+ 			// Position Checks
+ 			lt: "i<m[3]-0",
+@@ -67,16 +67,19 @@
+ 	},
+ 	
+ 	// The regular expressions that power the parsing engine
+-	parse: [
++	parse: {
++		attributes:
+ 		// Match: [@value='test'], [@foo]
+ 		/^(\[) *@?([\w-]+) *([!*$^~=]*) *('?"?)(.*?)\4 *\]/,
+ 
++		argument:
+ 		// Match: :contains('foo')
+-		/^(:)([\w-]+)\("?'?(.*?(\(.*?\))?[^(]*?)"?'?\)/,
++		/^(:)([\w-]+)\(["']?(.*?(\(.*?\))?[^(]*?)["']?\)/,
+ 
+-		// Match: :even, :last-chlid, #id, .class
+-		new RegExp("^([:.#]*)(" + chars + "+)")
+-	],
++		other:
++		// Match: :even, :last-child, #id, .class
++		new RegExp("^([:.#]?)(" + chars + "+)")
++	},
+ 
+ 	multiFilter: function( expr, elems, not ) {
+ 		var old, cur = [];
+@@ -293,112 +296,126 @@
+ 		return tmp;
+ 	},
+ 
+-	filter: function(t,r,not) {
+-		var last;
++	//variables used only in the filter function
++    //placed here so they can be bound to the expr functions
++	m: null, r: null,
++	filter: function(t,r_passed,not) {
++		var last, p = jQuery.parse;
++		m = null, r = r_passed;
++		function match(key) {
++			m = p[key].exec(t)
++			if(m){
++				// Remove what we just matched
++				t = t.substring( m[0].length );
+ 
++				m[2] = m[2].replace(/\\/g, "");
++			}
++			return m;
++		}
++
+ 		// Look for common filter expressions
+ 		while ( t && t != last ) {
+ 			last = t;
+ 
+-			var p = jQuery.parse, m;
+-
+-			for ( var i = 0; p[i]; i++ ) {
+-				m = p[i].exec( t );
+-
+-				if ( m ) {
+-					// Remove what we just matched
+-					t = t.substring( m[0].length );
+-
+-					m[2] = m[2].replace(/\\/g, "");
+-					break;
+-				}
+-			}
+-
+-			if ( !m )
+-				break;
+-
+-			// :not() is a special case that can be optimized by
+-			// keeping it out of the expression list
+-			if ( m[1] == ":" && m[2] == "not" )
+-				// optimize if only one selector found (most common case)
+-				r = isSimple.test( m[3] ) ?
+-					jQuery.filter(m[3], r, true).r :
+-					jQuery( r ).not( m[3] );
+-
+-			// We can get a big speed boost by filtering by class here
+-			else if ( m[1] == "." )
+-				r = jQuery.classFilter(r, m[2], not);
+-
+-			else if ( m[1] == "[" ) {
+-				var tmp = [], type = m[3];
++			if ( match("attributes") ){
++				var tmp = [], type = m[3], m2 = m[2], m5 = m[5];
+ 				
+ 				for ( var i = 0, rl = r.length; i < rl; i++ ) {
+-					var a = r[i], z = a[ jQuery.props[m[2]] || m[2] ];
++					var a = r[i], z = a[ jQuery.props[m2] || m2 ];
+ 					
+-					if ( z == null || /href|src|selected/.test(m[2]) )
+-						z = jQuery.attr(a,m[2]) || '';
++					if ( z == null || /href|src|selected/.test(m2) )
++						z = jQuery.attr(a,m2) || '';
+ 
+ 					if ( (type == "" && !!z ||
+-						 type == "=" && z == m[5] ||
+-						 type == "!=" && z != m[5] ||
+-						 type == "^=" && z && !z.indexOf(m[5]) ||
+-						 type == "$=" && z.substr(z.length - m[5].length) == m[5] ||
+-						 (type == "*=" || type == "~=") && z.indexOf(m[5]) >= 0) ^ not )
++						 type == "=" && z == m5 ||
++						 type == "!=" && z != m5 ||
++						 type == "^=" && z && !z.indexOf(m5) ||
++						 type == "$=" && z.substr(z.length - m5.length) == m5 ||
++						 (type == "*=" || type == "~=") && z.indexOf(m5) >= 0) ^ not )
+ 							tmp.push( a );
+ 				}
+ 				
+ 				r = tmp;
++				continue;
++			}
+ 
+-			// We can get a speed boost by handling nth-child here
+-			} else if ( m[1] == ":" && m[2] == "nth-child" ) {
+-				var merge = {}, tmp = [],
+-					// parse equations like 'even', 'odd', '5', '2n', '3n+2', '4n-1', '-n+6'
+-					test = /(-?)(\d*)n((?:\+|-)?\d*)/.exec(
+-						m[3] == "even" && "2n" || m[3] == "odd" && "2n+1" ||
+-						!/\D/.test(m[3]) && "0n+" + m[3] || m[3]),
+-					// calculate the numbers (first)n+(last) including if they are negative
+-					first = (test[1] + (test[2] || 1)) - 0, last = test[3] - 0;
+- 
+-				// loop through all the elements left in the jQuery object
+-				for ( var i = 0, rl = r.length; i < rl; i++ ) {
+-					var node = r[i], parentNode = node.parentNode, id = jQuery.data(parentNode);
++			if ( match("argument") ){
++				var m2 = m[2], m3 = m[3]
++				// :not() is a special case that can be optimized by
++				// keeping it out of the expression list
++				if ( m2 == "not" ){
++					// optimize if only one selector found (most common case)
++					r = isSimple.test( m3 ) ?
++						jQuery.filter(m3, r, true).r :
++						jQuery( r ).not( m3 );
++					continue;
++				}
++				// We can get a speed boost by handling nth-child here
++				else if ( m2 == "nth-child" ) {
++					var merge = {}, tmp = [],
++						// parse equations like 'even', 'odd', '5', '2n', '3n+2', '4n-1', '-n+6'
++						test = /(-?)(\d*)n((?:\+|-)?\d*)/.exec(
++							m3 == "even" && "2n" || m3 == "odd" && "2n+1" ||
++							!/\D/.test(m3) && "0n+" + m3 || m3),
++						// calculate the numbers (first)n+(last) including if they are negative
++						first = (test[1] + (test[2] || 1)) - 0, last = test[3] - 0;
++	 
++					// loop through all the elements left in the jQuery object
++					for ( var i = 0, rl = r.length; i < rl; i++ ) {
++						var node = r[i], parentNode = node.parentNode, id = jQuery.data(parentNode);
+ 
+-					if ( !merge[id] ) {
+-						var c = 1;
++						if ( !merge[id] ) {
++							var c = 1;
+ 
+-						for ( var n = parentNode.firstChild; n; n = n.nextSibling )
+-							if ( n.nodeType == 1 )
+-								n.nodeIndex = c++;
++							for ( var n = parentNode.firstChild; n; n = n.nextSibling )
++								if ( n.nodeType == 1 )
++									n.nodeIndex = c++;
+ 
+-						merge[id] = true;
+-					}
++							merge[id] = true;
++						}
+ 
+-					var add = false;
++						var add = false;
+ 
+-					if ( first == 0 ) {
+-						if ( node.nodeIndex == last )
++						if ( first == 0 ) {
++							if ( node.nodeIndex == last )
++								add = true;
++						} else if ( (node.nodeIndex - last) % first == 0 && (node.nodeIndex - last) / first >= 0 )
+ 							add = true;
+-					} else if ( (node.nodeIndex - last) % first == 0 && (node.nodeIndex - last) / first >= 0 )
+-						add = true;
+ 
+-					if ( add ^ not )
+-						tmp.push( node );
++						if ( add ^ not )
++							tmp.push( node );
++					}
++
++					r = tmp;
++					continue;
+ 				}
++			} else {
++				if ( !match("other") ) break;
+ 
+-				r = tmp;
++				// We can get a big speed boost by filtering by class here
++				if ( m[0].charAt(0) == "." ){
++					r = jQuery.classFilter(r, m[2], not);
++					continue;
++				}
+ 
++			}
++			
+ 			// Otherwise, find the expression to execute
+-			} else {
+-				var f = jQuery.expr[m[1]];
+-				if ( typeof f != "string" )
+-					f = jQuery.expr[m[1]][m[2]];
++			var k = m[1]
+ 
+-				// Build a custom macro to enclose it
+-				f = eval("false||function(a,i){return " + f + "}");
++			if( k == ':' ){
++				var exprs = jQuery.expr[':'];
++				k = m[2]; f = exprs[k];
+ 
+-				// Execute it against the current filter
+-				r = jQuery.grep( r, f, not );
+-			}
++				if( typeof f == "string" ){
++				  eval("f=function(a,i){return " + f + "}");
++				  exprs[k] = f;
++				}
++				// Build a custom function to enclose it
++			} else f = jQuery.expr[k];
++
++			// Execute it against the current filter
++			r = jQuery.grep( r, f, not );
+ 		}
+ 
+ 		// Return an array of filtered elements (r)

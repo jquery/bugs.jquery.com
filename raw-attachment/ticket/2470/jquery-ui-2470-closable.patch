@@ -1,0 +1,130 @@
+diff --git a/jquery.ui-1.5b4/ui.tabs.js b/jquery.ui-1.5b4/ui.tabs.js
+index 25c6b65..02a6d8e 100644
+--- a/jquery.ui-1.5b4/ui.tabs.js
++++ b/jquery.ui-1.5b4/ui.tabs.js
+@@ -89,6 +89,17 @@
+ 					$this.hasClass(o.panelClass) || $this.addClass(o.panelClass);
+ 				});
+ 
++				if (o.closable) {
++				    function closeTab(el) { self.remove(self.$lis.index(el.parentNode)); };
++				    this.$lis.each(function(){
++					$(o.closeTemplate.replace(/#\{text\}/g, o.closeText)).appendTo(this)
++						.addClass(o.closeAnchorClass)
++						.click(function() {closeTab(this);})
++				    });
++				}
++
++			    this.$tabs.addClass(o.tabAnchorClass);
++
+ 				// Try to retrieve selected tab:
+ 				// 1. from fragment identifier in url if present
+ 				// 2. from cookie
+@@ -126,9 +137,11 @@
+ 				// highlight selected tab
+ 				this.$panels.addClass(o.hideClass);
+ 				this.$lis.removeClass(o.selectedClass);
++				if (o.closable == 'selected') {this.$lis.find("." + o.closeAnchorClass).hide();}
+ 				if (o.selected !== null) {
+ 					this.$panels.eq(o.selected).show().removeClass(o.hideClass); // use show and remove class to show in any case no matter how it has been hidden before
+ 					this.$lis.eq(o.selected).addClass(o.selectedClass);
++					if (o.closable == 'selected') {this.$lis.eq(o.selected).find("." + o.closeAnchorClass).show();}
+ 					
+ 					// seems to be expected behavior that the show callback is fired
+ 					var onShow = function() {
+@@ -217,6 +230,10 @@
+ 				}*/
+ 				$li.addClass(o.selectedClass)
+ 					.siblings().removeClass(o.selectedClass);
++				if (o.closable == 'selected') {
++				    $li.find("." + o.closeAnchorClass).show();
++				    $li.siblings().find("." + o.closeAnchorClass).hide();
++				}
+ 				hideTab(clicked, $hide, $show);
+ 			}
+ 
+@@ -248,6 +265,7 @@
+ 					if ($li.hasClass(o.selectedClass)) {
+ 						self.options.selected = null;
+ 						$li.removeClass(o.selectedClass);
++						if (o.closable == 'selected') {$li.find("." + o.closeAnchorClass).hide();}
+ 						self.$panels.stop();
+ 						hideTab(this, $hide);
+ 						this.blur();
+@@ -257,6 +275,7 @@
+ 						var a = this;
+ 						self.load(self.$tabs.index(this), function() {
+ 							$li.addClass(o.selectedClass).addClass(o.unselectClass);
++							if (o.closable == 'selected') {$li.find("." + o.closeAnchorClass).show();}
+ 							showTab(a, $show);
+ 						});
+ 						this.blur();
+@@ -289,6 +308,7 @@
+ 						} :
+ 						function() {
+ 							$li.addClass(o.selectedClass);
++							if (o.closable == 'selected') {$li.find("." + o.closeAnchorClass).show();}
+ 							showTab(a, $show);
+ 						}
+ 					);
+@@ -321,6 +341,7 @@
+ 
+ 		},
+ 		add: function(url, label, index) {
++			var self = this ; // for scoping in closure
+ 			if (index == undefined) 
+ 				index = this.$tabs.length; // append by default
+ 
+@@ -344,6 +365,16 @@
+ 				$li.insertBefore(this.$lis[index]);
+ 				$panel.insertBefore(this.$panels[index]);
+ 			}
++			$li.find('a:first').addClass(o.tabAnchorClass);
++
++			if (o.closable) {
++				function closeTab(el) { self.remove(self.$lis.index(el.parentNode)); };
++				var aclose = $(o.closeTemplate.replace(/#\{text\}/g, o.closeText));
++				$(o.closeTemplate.replace(/#\{text\}/g, o.closeText)).appendTo($li)
++					.addClass(o.closeAnchorClass)
++					.click(function() {closeTab(this);})
++				if (o.closable == 'selected') {$li.find("." + o.closeAnchorClass).hide();}
++			}
+ 			
+ 			o.disabled = $.map(o.disabled,
+ 				function(n, i) { return n >= index ? ++n : n });
+@@ -352,6 +383,7 @@
+ 
+ 			if (this.$tabs.length == 1) {
+ 				$li.addClass(o.selectedClass);
++				if (o.closable == 'selected') {$li.find("." + o.closeAnchorClass).show();}
+ 				$panel.removeClass(o.hideClass);
+ 				var href = $.data(this.$tabs[0], 'load.tabs');
+ 				if (href)
+@@ -515,6 +547,8 @@
+ 		event: 'click',
+ 		disabled: [],
+ 		cookie: null, // e.g. { expires: 7, path: '/', domain: 'jquery.com', secure: true }
++		closable: false, /* valid values are false, "all" or "selected" */
++		closeText: '(x)',
+ 		// TODO history: false,
+ 
+ 		// Ajax
+@@ -529,6 +563,7 @@
+ 		// templates
+ 		tabTemplate: '<li><a href="#{href}"><span>#{label}</span></a></li>',
+ 		panelTemplate: '<div></div>',
++		closeTemplate: '<a onclick="return false;"><span>#{text}</span></a>',
+ 
+ 		// CSS classes
+ 		navClass: 'ui-tabs-nav',
+@@ -537,7 +572,9 @@
+ 		disabledClass: 'ui-tabs-disabled',
+ 		panelClass: 'ui-tabs-panel',
+ 		hideClass: 'ui-tabs-hide',
+-		loadingClass: 'ui-tabs-loading'
++		loadingClass: 'ui-tabs-loading',
++	    tabAnchorClass: 'ui-tabs-tab',
++		closeAnchorClass: 'ui-tabs-close'
+ 	};
+ 	
+ 	$.ui.tabs.getter = "length";

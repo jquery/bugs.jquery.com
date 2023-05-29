@@ -1,0 +1,4 @@
+2405c2405
+< 	while ( parent && parent != elem ) try { parent = parent.parentNode; } catch(error) { parent = elem; }
+---
+> 	while ( parent && parent != elem ) try { parent = parent.parentNode; } catch(error) { return false; }

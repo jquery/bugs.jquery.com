@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>offset test</title>
+	<style type="text/css">
+		body{
+			width: 200px;
+			margin: 0 auto;
+			background: #eee;
+			position: relative;
+		}
+		#foo{
+			height: 400px;
+			background: #bbb;
+		}
+	</style>
+</head>
+<body>
+	<div id="foo">
+		<div id="bar">
+		</div>
+	</div>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		jQuery(function($){
+			alert($('#foo').offset().left);
+		});
+	</script>
+</body>
+</html>

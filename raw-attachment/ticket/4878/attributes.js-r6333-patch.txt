@@ -1,0 +1,13 @@
+101c101,103
+< 				var values = jQuery.makeArray(value);
+---
+> 				var values = jQuery.makeArray(value),
+> 					one = this.type == "select-one",
+> 					canSelect = true;
+104c106
+< 					this.selected = (jQuery.inArray( this.value, values ) >= 0 ||
+---
+> 					this.selected = canSelect && (jQuery.inArray( this.value, values ) >= 0 ||
+105a108,109
+> 					if (this.selected && one)
+> 						canSelect = false;

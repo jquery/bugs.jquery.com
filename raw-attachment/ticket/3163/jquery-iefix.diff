@@ -1,0 +1,65 @@
+--- C:\src\lex\xp\jquery-1.2.6.js	Tue Jul 15 17:14:17 2008
++++ C:\src\lex\xp\jquery.js	Tue Jul 15 17:28:24 2008
+@@ -935,7 +935,23 @@
+ 
+ 		return ret;
+ 	},
++	
++	discardElement: function( element ) {
++        var garbageBin = document.getElementById('IELeakGarbageBin');
++        if (!garbageBin) {
++            garbageBin = document.createElement('DIV');
++            garbageBin.id = 'IELeakGarbageBin';
++            garbageBin.style.display = 'none';
++            document.body.appendChild(garbageBin);
++        }
+ 
++        // move the element to the garbage bin
++        garbageBin.appendChild(element);
++        garbageBin.innerHTML = '';
++        if (element.__listener)
++            element.__listener = null;
++    },
++    
+ 	clean: function( elems, context ) {
+ 		var ret = [];
+ 		context = context || document;
+@@ -993,9 +1009,14 @@
+ 				div.innerHTML = wrap[1] + elem + wrap[2];
+ 
+ 				// Move to the right depth
+-				while ( wrap[0]-- )
++				while ( wrap[0]-- ) {
++			        var oldDiv = div;
+ 					div = div.lastChild;
+-
++					oldDiv.removeChild(div);
++					jQuery.discardElement(oldDiv);
++					oldDiv = null;
++				}
++				
+ 				// Remove IE's autoinserted <tbody> from table fragments
+ 				if ( jQuery.browser.msie ) {
+ 
+@@ -1019,6 +1040,13 @@
+ 				}
+ 
+ 				elem = jQuery.makeArray( div.childNodes );
++				
++				while (div.firstChild) {
++				    var child = div.firstChild;
++				    div.removeChild( child );
++			    }
++				
++			    jQuery.discardElement(div);
+ 			}
+ 
+ 			if ( elem.length === 0 && (!jQuery.nodeName( elem, "form" ) && !jQuery.nodeName( elem, "select" )) )
+@@ -1315,6 +1343,7 @@
+ 			});
+ 			if (this.parentNode)
+ 				this.parentNode.removeChild( this );
++			jQuery.discardElement(this);
+ 		}
+ 	},
+ 

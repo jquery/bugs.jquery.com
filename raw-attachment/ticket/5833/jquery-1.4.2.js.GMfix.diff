@@ -1,0 +1,29 @@
+954a955
+> 		var oel = el;
+957,959c958,975
+< 		var isSupported = (eventName in el); 
+< 		if ( !isSupported ) { 
+< 			el.setAttribute(eventName, "return;"); 
+---
+> 		var isSupported = true;
+> 		var isSafe = true;
+> 		if ( typeof el.wrappedJSObject == 'object' ) {
+> 			// Detected Firefox with Greasemonkey (or other protected addon)
+> 			if ( typeof el.wrappedJSObject.__lookupGetter__(eventName) !== 'undefined' || 
+> 			     typeof el.wrappedJSObject.__lookupSetter__(eventName) !== 'undefined' ) {
+> 				// A custom getter was detected. It can be:
+> 				// 1) Attemt to inject unsafe code into previleged scope with __define[GS]etter__
+> 				// 2) Page script authors knows what they do. So we only SUPPOSE that isSupported = true (most probably)
+> 				// It is unsafe to access a property with the custom getter
+> 				isSafe = false;
+> 			} else {
+> 				el = el.wrappedJSObject;
+> 			}
+> 		}
+> 
+> 		if ( isSafe && !(eventName in el) ) {
+> 			oel.setAttribute(eventName, "return;");
+962c978
+< 		el = null; 
+---
+> 		oel = el = null;

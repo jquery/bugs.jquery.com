@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Untitled Document</title>
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<script src="lib/jquery-1.2.6.pack.js" type="text/javascript"></script>
+		<script type="text/javascript" charset="utf-8">
+			var render = function(data)
+			{
+				var tree = $('#tree');
+				var treetpl = $('<div>').html(tree.html()).children().eq(0);
+				
+				tree.empty();
+				
+				for(var i=0; i<data.length; i++)
+				{
+					var tpl = treetpl.clone();
+					tpl.html(tpl.html()); // this is the source of the bug
+					
+					tpl.appendTo(tree);
+					tpl.find('.name').html(data[i].name);
+				}
+			}
+			
+			var getLength = function()
+			{
+				var length = $('li .name').length;
+				alert('$("li .name")length ='+length);
+			};
+			
+			var getHTML = function()
+			{
+				alert($('#tree').html());
+			}
+			
+			$(document).ready(function(){
+				render([{name:'item1'}, {name:'item2'}, {name:'item3'}, {name:'item4'}])
+			});
+		</script>
+	</head>
+	<body>
+		<ul id="tree">
+			<li><span class="name">name</span></li>
+		</ul>
+		<input type="button" value="get length" onclick="getLength();" />
+		<input type="button" value="get HTML" onclick="getHTML();" />
+	</body>
+</html>

@@ -1,0 +1,15 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 3541)
++++ src/core.js	(working copy)
+@@ -10,8 +10,8 @@
+  */
+ 
+ // Map over jQuery in case of overwrite
+-if ( typeof jQuery != "undefined" )
+-	var _jQuery = jQuery;
++if ( typeof window.jQuery != "undefined" )
++	var _jQuery = window.jQuery;
+ 
+ var jQuery = window.jQuery = function( selector, context ) {
+ 	// If the context is a namespace object, return a new object

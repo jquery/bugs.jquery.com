@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>test</title>
+<script type="text/javascript" src="jquery-1.3.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+// this works in 1.2.6, but in 1.3.1, the mouseover event only gets applied to the first div created
+
+$("p").hide();
+$('<div class="mousey">mouse over me</div>').mouseover(function() {
+	$(this).hide().parent("div").find("p").show();
+}).appendTo($(".tester"));
+
+});
+
+ 
+</script>
+<style type="text/css">
+.tester { border: 1px solid #ccc }
+.mousey { border: 1px solid #f88 }
+</style>
+</head>
+
+<body>
+
+<div class="tester"><p>this is a test</p></div>
+<div class="tester"><p>of events</p></div>
+<div class="tester"><p>and cloning</p></div>
+<div class="tester"><p>plus other stuff</p></div>
+
+	
+</body>
+</html>
+

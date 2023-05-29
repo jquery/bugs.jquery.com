@@ -1,0 +1,13 @@
+--- jquery.js.orig	2008-06-02 18:03:20.555701400 +0200
++++ jquery.js	2008-06-02 18:31:43.868097100 +0200
+@@ -2283,6 +2283,10 @@ jQuery.fn.extend({
+ 		// Attach the listeners
+ 		bindReady();
+ 
++		// Check whether given function is callable.
++		if ( typeof fn != 'function' ) {
++			return false;
++		}
+ 		// If the DOM is already ready
+ 		if ( jQuery.isReady )
+ 			// Execute the function immediately

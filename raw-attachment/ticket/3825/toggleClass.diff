@@ -1,0 +1,72 @@
+Index: test/unit/core.js
+===================================================================
+--- test/unit/core.js	(revision 6090)
++++ test/unit/core.js	(working copy)
+@@ -1574,7 +1574,7 @@
+ });
+ 
+ test("toggleClass(String)", function() {
+-	expect(6);
++	expect(16);
+ 	var e = jQuery("#firstp");
+ 	ok( !e.is(".test"), "Assert class not present" );
+ 	e.toggleClass("test");
+@@ -1588,6 +1588,33 @@
+ 	ok( e.is(".test"), "Assert class present" );
+ 	e.toggleClass("test", false);
+ 	ok( !e.is(".test"), "Assert class not present" );
++	
++	e.addClass("testA testB");
++	ok( (e.is(".testA") && e.is(".testB")), "Assert 2 different classes present" );
++	e.toggleClass("testB testC");
++	ok( (e.is(".testA") && !e.is(".testB") && e.is(".testC")), "Assert 1 class added, 1 class removed and 1 class keeped" );
++	e.toggleClass("testA testC");
++	ok( (!e.is(".testA") && !e.is(".testB") && !e.is(".testC")), "Assert no class present" );
++	
++	// toggleClass storage
++	e.toggleClass(true);
++	ok( e.get(0).className === '', "Assert class is empty (data was empty)" );
++	e.addClass("testD");
++	ok( e.is(".testD"), "Assert class present" );
++	e.toggleClass();
++	ok( !e.is(".testD"), "Assert class not present" );
++	ok( e.data('originalClassName') == 'testD', "Assert data was stored" );
++	e.toggleClass();
++	ok( e.is(".testD"), "Assert class present (restored from data)" );
++	e.toggleClass(false);
++	ok( !e.is(".testD"), "Assert class not present" );
++	e.toggleClass(true);
++	ok( e.is(".testD"), "Assert class present (restored from data)" );
++	
++	// Cleanup
++	e.removeClass("testD");
++	e.removeData('originalClassName')
++	
+ });
+ 
+ test("removeAttr(String", function() {
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 6090)
++++ src/core.js	(working copy)
+@@ -1202,9 +1202,17 @@
+ 	},
+ 
+ 	toggleClass: function( classNames, state ) {
+-		if( typeof state !== "boolean" )
+-			state = !jQuery.className.has( this, classNames );
+-		jQuery.className[ state ? "add" : "remove" ]( this, classNames );
++		if(!classNames || typeof classNames === "boolean") {
++			if( !(classNames = jQuery.data(this, 'originalClassName')) && !this.className ) return;
++			state = this.className ? !(jQuery.data(this, 'originalClassName', classNames = this.className)) : true;
++		}
++		var elem = this;
++		jQuery.each((classNames || "").split(/\s+/), function(i, className){
++			var force = ( typeof state !== "boolean" ) ?
++					!jQuery.className.has( elem, className ) :
++					state;
++			jQuery.className[ force ? "add" : "remove" ]( elem, className );
++		});
+ 	},
+ 
+ 	remove: function( selector ) {

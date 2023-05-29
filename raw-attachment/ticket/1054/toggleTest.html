@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+	<head>
+		<title>One/toggle test page</title>
+		<meta name="description" content="test page">
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="http://users.tpg.com.au/j_birch/plugins/assets/css/demo.css" media="screen,print">
+		<script type="text/javascript" src="http://users.tpg.com.au/j_birch/plugins/superfish/jquery-1.1.2.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("button").one("click",function() {
+					//change button behaviour to toggle pause/resume
+					$(this).text("Run toggle 1").toggle(
+						function() { $(this).text('Run toggle 2') },
+						function() { $(this).text('Run toggle 1') }
+					);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<h1>One/toggle <small>test page</small></h1>
+		<h3>Inconsistant cross-browser behaviour</h3>
+			<p>After one click the behaviour of this button is changed to toggle between two functions. IE toggles between them in the wrong order. Firefox will display the button label as &#8220;Run toggle 1&#8221; first, whereas IE displays the label as &#8220;Run toggle 2&#8221; and makes good on its threat to do so.&#160;<button>Run the &#8220;one&#8221; function</button></p>
+		</div>
+	</body>
+</html>

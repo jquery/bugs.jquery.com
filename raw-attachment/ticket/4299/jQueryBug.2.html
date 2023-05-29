@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<title>jQuery bug</title>
+	
+<script type="text/javascript">
+$(function(){ 
+  doChanges("form1");
+  doChanges("form2");
+});
+
+function log(msg){
+  $("#logger").append(msg + "<br/>"); 
+}
+
+function doChanges(formid){
+  log("+++++++++++++++++");
+  log("Working with formid = "+formid);
+  var $form = $("#"+formid);
+  
+  testFieldChanging($form, "action", "#newAction");
+  log(" ");
+  testFieldChanging($form, "method", "post");
+}
+
+function testFieldChanging($form, fieldName, newAttr){
+  log("Start "+fieldName+" attr = " + $form.attr(fieldName));
+  log("Changing "+fieldName+" attr to "+newAttr);
+  
+  $form.attr(fieldName, newAttr);
+  
+  log("Now "+fieldName+" attr = "+ $form.attr(fieldName));
+  var actionResult = ($form.attr(fieldName).toLowerCase() === newAttr.toLowerCase() )?"<span style='color:green;'>CHANGED</span>":"<span style='color:red;'>NOT CHANGED</span>";
+  log("Result: "+fieldName+" attr is "+actionResult);
+  
+  log("Try with classic DOM");
+  changeAction($form.attr("id"), fieldName, newAttr);
+  log("Now "+fieldName+" attr = "+ $form.attr(fieldName));
+  var actionResult = ($form.attr(fieldName).toLowerCase() === newAttr.toLowerCase() )?"<span style='color:green;'>CHANGED</span>":"<span style='color:red;'>NOT CHANGED</span>";
+  log("Result: "+fieldName+" attr is "+actionResult);
+}
+
+function changeAction(formId, attribute, newValue){
+	$("#"+formId)[0].attributes[attribute].value = newValue; 
+}
+
+</script>
+
+</head>
+<body>
+
+<form id="form1" action="#action1" method="get">
+  <!-- Nothing here -->
+</form>
+
+<form id="form2" action="#action2" method="get">
+  <!-- Nothing here -->
+  <input type="text" name="action" value="Action Start Value" />
+  <input type="text" name="method" value="Method start Value" />
+</form>
+
+
+<div id="logger">
+
+</div>
+</body>
+</html>

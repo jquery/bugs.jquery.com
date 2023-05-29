@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jQuery replaceAll closing tag bug</title>
+  <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+    $(function() {
+      $('#one').click(function() {
+        $('<div id="replacement" class="divtest">Replacement</div>').replaceAll('#div-with-end-tag');
+        if ($("div.divtest").length == 2)
+			$(this).after("&nbsp;&nbsp;Pass");
+		else
+			$(this).after("&nbsp;&nbsp;Fail");
+        return false;
+      });
+      
+      $('#two').click(function() {
+        $('<div id="replacement" class="divtest">Replacement</div>').replaceAll('#self-closing-div');
+        if ($("div.divtest").length == 2)
+			$(this).after("&nbsp;&nbsp;Pass");
+		else
+			$(this).after("&nbsp;&nbsp;Fail");
+        return false;
+      });
+      
+    });
+  </script>
+</head>
+<body>
+	<div id="explanation">
+		<p>jQuery's <a href="http://docs.jquery.com/Manipulation/replaceAll">replaceAll</a> does not recognize an element that closes itself, e.g. "&lt;div /&gt;".</p>
+		<p>This page must be reloaded between tests.</p>
+		<p>Test 1 should replace the second "Static Text" with the text "Replacement".  Should pass.</p>
+		<p>Test 2 should place the text "Replacement" before the first "Static Text".  Should fail.</p>
+	</div>
+  
+	<button id="one" style="width: 300px">1. Replace Div with Separate End Tag</button><br />
+	<button id="two" style="width: 300px">2. Replace Self-Closing Div</button>
+	
+	<br/><br/>
+	<div id="self-closing-div" class="divtest" />Static Text
+	<div id="div-with-end-tag"  class="divtest">Static Text</div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.4.2.min.js" type="text/javascript"></script>
+<title>x</title>
+<style type="text/css">
+	body { margin: 0; padding: 0; border: 0; }
+	.x {
+		background: #eee;
+		margin: 10px;
+		padding: 5px;
+	}
+	
+	.x1 {
+		position: relative;
+		/* left value not specified */
+	}
+	
+	.x2 {
+		position: absolute;
+		left: 200px;
+		/* left value specified */
+	}
+	
+	.x3 {
+		position: absolute;
+		left: 400px;
+	}
+</style>
+</head>
+
+<body>
+<div class="x x1">
+	<strong>position: static; (default)</strong>
+</div>
+
+<div class="x x2">
+	<strong>position: relative;</strong>
+</div>
+
+<div class="x x3">
+	<strong>position: absolute;</strong>
+</div>
+
+<script type="text/javascript">
+	$(".x").each(function(){
+		$(this).append('<br />$(this).css("top") > '+$(this).css("top"));
+		$(this).append('<br />$(this).position().top > '+$(this).position().top);
+		$(this).append('<br />$(this).css("left") > '+$(this).css("left"));
+	});
+</script>
+</body>
+</html>

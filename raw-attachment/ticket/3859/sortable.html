@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+    <title>sortable test</title>
+    <script type="text/javascript" src="jquery.ui-1.5.3/jquery-1.2.6.js"></script>
+    <!--<script type="text/javascript" src="../PlanningTool/jquery-1.3.min.js"></script>-->
+    <!--<script type="text/javascript" src="jquery.ui-1.5.3/ui/ui.core.js"></script>-->
+    <!--<script type="text/javascript" src="jquery.ui-1.5.3/ui/ui.sortable.js"></script>-->
+    <script type="text/javascript" src="../PlanningTool/jquery.ui-1.6rc4/ui/ui.core.js"></script>
+    <script type="text/javascript" src="../PlanningTool/jquery.ui-1.6rc4/ui/ui.sortable.js"></script>
+
+    <script>
+    $(document).ready(function() {
+        $('#l1,#l2').sortable({
+            connectWith:['#l1,#l2'],
+            update:function(e,ui) {alert('update!');},
+            receive:function(e,ui) {alert('receive!');},
+            remove:function(e,ui) {alert('remove!');},
+        });
+    });
+    </script>
+    <style>
+    li {
+        background-color:yellow;
+    }
+    ul {
+        padding:10px;
+        background-color:grey;
+    }
+    </style>
+</head>
+<body>
+    <ul id='l1'>
+        <li>Aap</li>
+        <li>Noot</li>
+        <li>Mies</li>
+    </ul>
+    <ul id='l2'>
+        <li>Aap</li>
+        <li>Noot</li>
+        <li>Mies</li>
+    </ul>
+</body>
+</html>

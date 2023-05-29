@@ -1,0 +1,53 @@
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 6344)
++++ src/event.js	(working copy)
+@@ -41,7 +41,7 @@
+ 				// Handle the second event of a trigger and when
+ 				// an event is called after a page has unloaded
+ 				return typeof jQuery !== "undefined" && !jQuery.event.triggered ?
+-					jQuery.event.handle.apply( arguments.callee.elem, arguments ) :
++					jQuery.event.handle.apply( handle.elem, arguments ) :
+ 					undefined;
+ 			});
+ 		// Add elem as a property of the handle function
+@@ -699,8 +699,8 @@
+ 	// Mozilla, Opera and webkit nightlies currently support this event
+ 	if ( document.addEventListener ) {
+ 		// Use the handy event callback
+-		document.addEventListener( "DOMContentLoaded", function() {
+-			document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
++		document.addEventListener( "DOMContentLoaded", function handle() {
++			document.removeEventListener( "DOMContentLoaded", handle, false );
+ 			jQuery.ready();
+ 		}, false );
+ 
+@@ -708,16 +708,16 @@
+ 	} else if ( document.attachEvent ) {
+ 		// ensure firing before onload,
+ 		// maybe late but safe also for iframes
+-		document.attachEvent("onreadystatechange", function() {
++		document.attachEvent("onreadystatechange", function handle() {
+ 			if ( document.readyState === "complete" ) {
+-				document.detachEvent( "onreadystatechange", arguments.callee );
++				document.detachEvent( "onreadystatechange", handle );
+ 				jQuery.ready();
+ 			}
+ 		});
+ 
+ 		// If IE and not an iframe
+ 		// continually check to see if the document is ready
+-		if ( document.documentElement.doScroll && window === window.top ) (function() {
++		if ( document.documentElement.doScroll && window === window.top ) (function anon() {
+ 			if ( jQuery.isReady ) {
+ 				return;
+ 			}
+@@ -727,7 +727,7 @@
+ 				// http://javascript.nwbox.com/IEContentLoaded/
+ 				document.documentElement.doScroll("left");
+ 			} catch( error ) {
+-				setTimeout( arguments.callee, 0 );
++				setTimeout( anon, 0 );
+ 				return;
+ 			}
+ 

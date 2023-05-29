@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>IE onclick + live</title>
+</head>
+<body>
+	
+	<script type="text/javascript" src="../../dist/jquery.js"></script>
+	<script type="text/javascript">
+		liveIEinlinecount = 0;
+		$('<a id="liveIElink" href="javascript:void(liveIEinlinecount++);" onclick="return false;"><span>link</span></a>').prependTo('body');
+		$(".whatever").live("click", function(event) {
+			event.preventDefault();
+		});
+		// the interval in to avoid using alerts and provide feedback for debug
+		setInterval(function(){
+			$('#testarea').html(liveIEinlinecount);
+			jQuery('#liveIElink').click(); // this doesn't trigger the bug
+			jQuery('#liveIElink span').get(0).fireEvent('onclick'); // this also doesn't trigger the bug
+		},1000);
+		
+		/* draft for Unit Tests
+		
+		// Verify that livehandler don't return true firing inline events in IE
+		liveIEinlinecount = 0; // global on purpuse
+		jQuery('<a id="liveIElink" href="javascript:void(liveIEinlinecount++);" onclick="return false;">link</a>').appendTo('body');
+		jQuery('#liveIElink').click();
+		equals( liveIEinlinecount, 0, "inline click" );
+		liveIEinlinecount = undefined;
+		jQuery('#liveIElink').remove();
+		
+		*/
+	</script>
+	<div id="testarea"></div>
+	<div>The above number should always be 0, regardless of how many times you click on the link</div>
+</body>
+</html>

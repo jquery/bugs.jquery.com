@@ -1,0 +1,27 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 5084)
++++ src/core.js	(working copy)
+@@ -692,12 +692,13 @@
+ 			windowData :
+ 			elem;
+ 
+-		var id = elem[ expando ];
++		var id = elem[ expando ], ret;
+ 
+ 		// If we want to remove a specific section of the element's data
+ 		if ( name ) {
+ 			if ( jQuery.cache[ id ] ) {
+ 				// Remove the section of cache data
++				ret = jQuery.cache[ id ][ name ];
+ 				delete jQuery.cache[ id ][ name ];
+ 
+ 				// If we've removed all the data, remove the element's cache
+@@ -725,6 +726,7 @@
+ 			// Completely remove the data cache
+ 			delete jQuery.cache[ id ];
+ 		}
++		return ret;
+ 	},
+ 
+ 	// args is for internal usage only

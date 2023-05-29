@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      function doIt() {
+        var $container = $("#container");
+        $container.show();
+        $container.hide(3000);
+        var q = $container.queue();
+        var qlen = q.length;
+        $("#adiv").text("Length should be 1.  It is " + qlen);
+      }
+
+      function doIt2() {
+        $("#adiv").text("Should hide it then stop (not crash or do the other 2).");
+        var $container = $("#container");
+        $container.show();
+        $container.hide(1000);
+        $container.show(1000);
+        $container.hide(1000);
+        $("#container").queue([]);
+      }
+
+      $(function () {
+        $("#doit").click(doIt);
+        $("#doit2").click(doIt2);
+      });
+    </script>
+  </head>
+  <body>
+    <button id="doit">Check queue()</button>
+    <button id="doit2">Check queue(array)</button>
+    <div id="container">
+      Hi
+    </div>
+    <div id="adiv"></div>
+  </body>
+</html>

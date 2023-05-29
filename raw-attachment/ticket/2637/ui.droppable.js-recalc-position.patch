@@ -1,0 +1,54 @@
+--- ui.droppable.js.orig	2008-04-02 14:48:31.000000000 +0100
++++ ui.droppable.js	2008-04-02 14:48:07.000000000 +0100
+@@ -40,7 +40,7 @@
+ 		});
+ 		
+ 		//Store the droppable's proportions
+-		this.proportions = { width: this.element.outerWidth(), height: this.element.outerHeight() };
++		this.recalcProportions();
+ 		
+ 		// Add the reference and positions to the manager
+ 		$.ui.ddmanager.droppables.push({ item: this, over: 0, out: 1 });
+@@ -114,6 +114,9 @@
+ 		activate: function(e) {
+ 
+ 			var draggable = $.ui.ddmanager.current;
++			// recalculate proportions incase they've changed:
++			this.recalcProportions();
++
+ 			$.ui.plugin.call(this, 'activate', [e, this.ui(draggable)]);
+ 			if(draggable) this.element.triggerHandler("dropactivate", [e, this.ui(draggable)], this.options.activate);
+ 				
+@@ -124,7 +127,10 @@
+ 			$.ui.plugin.call(this, 'deactivate', [e, this.ui(draggable)]);
+ 			if(draggable) this.element.triggerHandler("dropdeactivate", [e, this.ui(draggable)], this.options.deactivate);
+ 			
+-		}
++		},
++		recalcProportions: function() {
++			this.proportions = { width: this.element.outerWidth(), height: this.element.outerHeight() };
++		},
+ 	});
+ 	
+ 	$.ui.intersect = function(draggable, droppable, toleranceMode) {
+@@ -148,8 +154,10 @@
+ 					&&     y2 - (draggable.helperProportions.height / 2) < b ); // Top Half
+ 				break;
+ 			case 'pointer':
+-				return (   l < (draggable.positionAbs.left + draggable.clickOffset.left) && (draggable.positionAbs.left + draggable.clickOffset.left) < r
+-					&& t < (draggable.positionAbs.top + draggable.clickOffset.top) && (draggable.positionAbs.top + draggable.clickOffset.top) < b);
++				var pX = draggable.positionAbs.left + draggable.clickOffset.left,
++				    pY = draggable.positionAbs.top + draggable.clickOffset.top;
++				return (   l < pX && pX < r
++					&& t < pY && pY < b);
+ 				break;
+ 			case 'touch':
+ 				return (   (l < x1 && x1 < r && t < y1 && y1 < b)    // Top-Left Corner
+@@ -205,7 +213,6 @@
+ 		
+ 			//Run through all draggables and check their positions based on specific tolerance options
+ 			$.each($.ui.ddmanager.droppables, function() {
+-
+ 				if(this.item.disabled) return false; 
+ 				var intersects = $.ui.intersect(draggable, this, this.item.options.tolerance);
+ 

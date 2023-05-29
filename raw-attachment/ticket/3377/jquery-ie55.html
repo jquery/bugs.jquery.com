@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>IE 5.5 selector test</title>
+<script type="text/javascript" src="jquery.js"></script>
+<style text="text/css">
+  li.drop { color: red; font-weight: bold; }
+</style>
+<script type="text/javascript">
+  if( ! window.jQuery ) alert("jquery.js is missing!");
+
+  $(document).ready( function() {
+    
+    $("#filterSelectionbar > li.drop").css("color", "green");
+
+    alert( "$('#filterSelectionbar > li.drop') = "       + ( $("#filterSelectionbar > li.drop").length )       + " items\n"
+         + "$('#filterSelectionbar').find('li.drop') = " + ( $("#filterSelectionbar").find("li.drop").length ) + " items\n" );
+
+  } );
+
+</script>
+</head>
+
+<body>
+
+  <ul id="filterSelectionbar">
+    <li>li normal</li>
+    <li class="drop">li drop</li>
+    <li>li normal</li>
+  </ul>
+  
+</body>
+</html>

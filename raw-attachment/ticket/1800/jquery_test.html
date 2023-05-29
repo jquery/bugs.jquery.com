@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        $("button:first").click(function () {
+              var cd_id = 5;
+              var pro_id = 7;
+              var data = [{name:"id", value:cd_id}, {name:"pro_id", value:pro_id}];
+
+              var s = jQuery.param(data);
+              alert(s);
+            });
+      });
+    </script>
+  </head>
+  <body>
+    <button>Do It</button>
+    <div id="container">
+      Hi
+    </div>
+    <div id="adiv"></div>
+  </body>
+</html>

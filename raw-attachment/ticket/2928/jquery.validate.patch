@@ -1,0 +1,11 @@
+465c465,466
+< 				var rule = { method: method, parameters: rules[method] };
+---
+> 				var parameters = jQuery.isFunction(rules[method]) ? rules[method](element) : rules[method];
+> 				var rule = { method: method, parameters: parameters };
+801,805d801
+< 		});
+< 		
+< 		// evaluate parameters
+< 		jQuery.each(rules, function(rule, parameter) {
+< 			rules[rule] = jQuery.isFunction(parameter) ? parameter(element) : parameter;

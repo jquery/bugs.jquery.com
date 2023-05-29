@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>jQuery Test Case: Internet Explorer Alpha Filter side effects</title>
+	
+	<!--
+		Author: Frode Danielsen (prefect)
+		Date: January 17th, 2009
+		
+		Functionality: A simple grid of images where each image can be zoomed to a larger size by
+		clicking on it. Clicking on a zoomed image scales it back down again.
+		While zoomed, the image is overlayed the other images in the grid. Images which are not
+		zoomed are also set to a lower opacity, which in a full implementation would indicate their
+		disabled state.
+		
+		Bug: In Internet Explorer the Alpha filter is automatically used by jQuery to set the opacity.
+		When the Alpha filter is active the images get clipped inside their DIVs, as if we'd used the
+		CSS overflow property on the DIVs. Consequentially, this wrecks the zoom & overlay functionality.
+		
+		How to test: Open the page in Internet Explorer (6 or 7) and zoom in and back out again on one image.
+		This will activate the Alpha filter on all the other images. Next, try to zoom in on a different
+		image and you'll see the active Alpha filter clip the image at the DIVs dimensions.
+		
+		How to fix: At the end of the Javascript a few lines have been deactivated. If these are reactivated,
+		the Alpha filter will be disabled after resetting the opacity to 1.0. This test case proposes
+		that disabling the Alpha filter automatically should be handled by jQuery, similar to how jQuery
+		enables it automatically when setting the opacity CSS property.
+	-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function () {
+			// Images sizes
+			var baseWidth = 180, baseHeight = 135,
+				zoomWidth = 380, zoomHeight = 285;
+			
+			var images = $('img');
+			images.click(function (e) {
+				var img = $(this), container = img.parent(),
+					width = parseInt(img.css('width')),
+					newWidth = 0, newHeight = 0, xPos = 0, yPos = 0;
+				
+				var isZoomed = (width == zoomWidth);
+				
+				if (isZoomed) {
+					newWidth = baseWidth;
+					newHeight = baseHeight;
+				}
+				else {
+					newWidth = zoomWidth;
+					newHeight = zoomHeight;
+					
+					// Tweak left/top position of the image according to it's position in the grid
+					var index = images.index(img);
+					if (index % 2 != 0) {
+						xPos -= 200;
+					}
+					if (index >= (images.length - 2)) {
+						yPos -= (zoomHeight - baseHeight);
+					}
+					
+					// Adjust z-index to place current image above all other images
+					container.css('z-index', '1');
+				}
+				
+				var animProps = {
+					width: newWidth,
+					height: newHeight,
+					left: xPos,
+					top: yPos
+				};
+				img.animate(animProps, 200, 'swing', function () {
+					// Reset z-index after scaling image back to base size
+					if (isZoomed) container.css('z-index', '0');
+				});
+				
+				/**
+				 * Dim all other images than the zoomed image, or reset when scaling down again.
+				 * This enables the Alpha filter in Internet Explorer, which causes clipping of
+				 * content in the div, similar to how the CSS overflow property works.
+				 */
+				container.siblings().css('opacity', (isZoomed ? '1.0' : '0.5'));
+				
+				/**
+				 * Uncomment the following code to disable the Alpha filter manually when
+				 * the opacity should be 1.0 anyway.
+				 */
+				// if (isZoomed && !$.support.opacity) {
+				// 	container.siblings().css('filter', "alpha(enabled='false')");
+				// }
+			});
+		})
+	</script>
+	
+	<style type="text/css" media="screen">
+		html, body {
+			background-color: #fff;
+		}
+		
+		body {
+			margin: 20px;
+			width: 400px;
+		}
+		
+		div {
+			position: relative;
+			float: left;
+			width: 200px;
+			height: 155px;
+		}
+		
+			div img {
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				width: 180px;
+				height: 135px;
+				cursor: pointer;
+			}
+	</style>
+</head>
+<body>
+	<div>
+		<img src="http://farm1.static.flickr.com/25/46247551_7753bef0fd.jpg?v=0" alt="" />
+	</div>
+	<div>
+		<img src="http://farm1.static.flickr.com/33/46247511_cae75f536a.jpg?v=0" alt="" />
+	</div>
+	<div>
+		<img src="http://farm1.static.flickr.com/30/46247525_a8f00cd47c.jpg?v=0" alt="" />
+	</div>
+	<div>
+		<img src="http://farm1.static.flickr.com/26/46241461_5427bdd5c4.jpg?v=0" alt="" />
+	</div>
+	<div>
+		<img src="http://farm1.static.flickr.com/24/46247599_a2b54355e7.jpg?v=0" alt="" />
+	</div>
+	<div>
+		<img src="http://farm1.static.flickr.com/33/46247614_114e894140.jpg?v=0" alt="" />
+	</div>
+</body>
+</html>

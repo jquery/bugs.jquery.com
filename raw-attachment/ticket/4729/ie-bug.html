@@ -1,0 +1,42 @@
+<html>
+<head>
+<script src="/code/js/jquery.js"></script>
+<script language="javascript">
+$(function(){
+	var list = $('div.conditional:has(*:nth-child(2) input), div.conditional:has(*:nth-child(2) select)').get();
+	alert('list(' + list + ')');
+	});
+</script>
+</head>
+<body>
+<div id="frame" style="width: 100% !important;">
+
+
+<a name="error_radioname"></a>
+
+<div class="generic_element">
+
+<div class="conditional">
+	<a name="error_radioname"></a>
+	<div style="" class="generic_element radio_element radioname_container ">
+		<label class="radio">Question label?</label>
+		<div style="float: left; margin-bottom: 5px;">
+			<label>
+			<input type="radio" name="radioname" value="No" id="radioname" class=" typeradio" />No</label>
+
+			<label>
+			<input type="radio" name="radioname" value="Yes" id="radioname" class=" typeradio" />Yes</label>
+			<input type="hidden" name="v:radioname" value="--validation-hash--" id="v:radioname" class="validation" />
+		</div>
+	</div>
+	<a name="error_showhidefield"></a>
+	<div class="generic_element showhidefield_container ">
+		<label for="showhidefield">Label for showhidefield question.</label>
+
+		<textarea name="showhidefield"  rows="10" cols="60" id="showhidefield" class=" typetextarea"></textarea>
+		<input type="hidden" name="v:showhidefield" value="--validation-hash--" id="v:showhidefield" class="validation" />
+	</div>
+</div>
+</div>
+</body>
+</html>

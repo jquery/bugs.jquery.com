@@ -1,0 +1,32 @@
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<script src="http://code.jquery.com/jquery-1.4.2.js" type="text/javascript"></script>
+	<style type="text/css">
+		div { width: 100%; }
+		#grandparent { background-color: grey; }
+		#parent { background-color: red; }
+		#child { background-color: green; }
+	</style>
+	<script type="text/javascript">
+	$(function(){
+		alert('Test One, parent is display: none');
+		$('#parent').hide();
+		alert("child\n\t" + "is(:visible): " + $('#child').is(':visible') + "\n\tis(:hidden): " + $('#child').is(':hidden') + "\n\twidth: " + $('#child').width() + "\n\theight: " + $('#child').height() + "\n parent" + "\n\tis(:visible):" + $('#parent').is(':visible') + "\n\tis(:hidden): " + $('#parent').is(':hidden') + "\n\twidth: " + $('#parent').width() + "\n\theight: " + $('#parent').height());
+		$('#parent').show();
+		alert('passed!');
+		$('#parent').css('visibility','hidden');
+		alert('Test Two, parent is visibility: hidden');
+		alert("child\n\t" + "is(:visible): " + $('#child').is(':visible') + "\n\tis(:hidden): " + $('#child').is(':hidden') + "\n\twidth: " + $('#child').width() + "\n\theight: " + $('#child').height() + "\n parent" + "\n\tis(:visible):" + $('#parent').is(':visible') + "\n\tis(:hidden): " + $('#parent').is(':hidden') + "\n\twidth: " + $('#parent').width() + "\n\theight: " + $('#parent').height());
+		
+		alert("failed\n" + "The :visible and :hidden filters do not work with the css attribute visibility\n\nThese tests were conducted from Mozilla Firefox 3.6.8 as well as Google Chrome 5.0.375.125 on Ubuntu Linux");
+		});
+	</script>
+</head><body>
+    <div id="parent">
+        parent
+        <div id="child">
+            child
+        </div>
+    </div>
+
+</body></html>

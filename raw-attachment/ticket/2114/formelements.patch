@@ -1,0 +1,23 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 4454)
++++ core.js	(working copy)
+@@ -38,7 +38,8 @@
+ 		selector = selector || document;
+ 
+ 		// Handle $(DOMElement)
+-		if ( selector.nodeType ) {
++		// in IE form.elements looks like form
++		if ( selector.nodeType  && ( selector.nodeName.toUpperCase() != "FORM" ) ) {
+ 			this[0] = selector;
+ 			this.length = 1;
+ 			return this;
+@@ -93,7 +94,7 @@
+ 
+ 			// HANDLE: $(arraylike)
+ 			// Watch for when an array-like object, contains DOM nodes, is passed in as the selector
+-			(selector.jquery || selector.length && selector != window && !selector.nodeType && selector[0] != undefined && selector[0].nodeType) && jQuery.makeArray( selector ) ||
++			(selector.jquery || selector.length && selector != window && selector[0] != undefined && selector[0].nodeType) && jQuery.makeArray( selector ) ||
+ 
+ 			// HANDLE: $(*)
+ 			[ selector ] );

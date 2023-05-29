@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<title>Test case for ticket #2404</title>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<script type="text/javascript" src="jquery.js"></script>
+<script type='text/javascript' src='jquery.bgiframe.min.js'></script>
+<script type='text/javascript' src='jquery.dimensions.js'></script>
+<script type='text/javascript' src='jquery.autocomplete.js'></script>
+
+<link rel="stylesheet" type="text/css" href="jquery.autocomplete.css" />
+  
+<script type="text/javascript">
+$().ready(function() {
+  $('#text').autocomplete(
+    ['java', 'c++', 'python', 'php'],
+    {'multiple': true, 'multipleSeparator': ' '}
+  )
+});
+</script>
+
+</head>
+
+<body>
+  <div><input type="text" name="text" id="text" value="" /></div>
+</body>
+
+</html>

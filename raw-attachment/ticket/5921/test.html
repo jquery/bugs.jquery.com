@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+  <head>
+    <title>jQuery 1.4 speed test</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="jquery-1.4.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+     $(function() {
+	   var w1=[0,0,0,0,0,0];
+	   var slice, startTime,endTime;
+	   var rep = 10000;
+       $('h1').each( function() {
+	    var ver = 0;
+	    // Version 1
+	    slice = [];
+		startTime = new Date().getTime();
+		for ( var i = 0; i < rep; ++i )
+		{
+			var obj = $(this).parent().children();
+			var start = obj.index(this) + 1;
+			var end   = obj.index($(this).nextAll('h1:first'));
+			if ( end == -1 ) {
+				slice = obj.slice(start);
+			} else {
+				slice = obj.slice(start,end);
+			}		
+		}
+		endTime = new Date().getTime();
+		w1[ver++] += endTime-startTime;
+
+	    // Version 2 -- 1.4 only
+	    slice = [];
+		startTime = new Date().getTime();
+		if (jQuery.fn.jquery == "1.4") {
+			for ( var i = 0; i < rep; ++i )
+			{
+				var start = $(this).index() + 1;
+				var end   = $(this).nextAll('h1:first').index();
+				if ( end == -1 ) {
+					slice = $(this).parent().children().slice(start);
+				} else {
+					slice = $(this).parent().children().slice(start,end);
+				}
+			}
+		}
+		endTime = new Date().getTime();
+		w1[ver++] += endTime-startTime;
+
+	    // Version 3
+	    slice = [];
+		startTime = new Date().getTime();
+		for ( var i = 0; i < rep; ++i )
+		{
+			slice = $(this).nextAll().not($(this).nextAll('h1:eq(0)').nextAll().andSelf());
+		}
+		endTime = new Date().getTime();
+		w1[ver++] += endTime-startTime;
+
+	    // Version 4, only simple selectors, possibly non cross-browser
+	    slice = [];
+		startTime = new Date().getTime();
+		for ( var i = 0; i < rep; ++i )
+		{
+			var elm = this;
+			while (elm = elm.nextSibling) {
+				if ( elm.nodeType == 1 ) {
+					if ( elm.tagName == 'H1' ) break;
+					slice.push(elm);
+				}
+			}
+		}
+		endTime = new Date().getTime();
+		w1[ver++] += endTime-startTime;
+
+	    // Version 5, jQuery selector, possibly non cross-browser
+	    slice = [];
+		startTime = new Date().getTime();
+		for ( var i = 0; i < rep; ++i )
+		{
+			var elm = this;
+			slice = [];
+			while (elm = elm.nextSibling) {
+				if ( elm.nodeType == 1 ) {
+					if ( $(elm).is('h1') ) break;
+					slice.push(elm);
+				}
+			}
+		}
+		endTime = new Date().getTime();
+		w1[ver++] += endTime-startTime;
+
+	    // Version 6, new jQuery 1.4 method
+	    slice = [];
+		startTime = new Date().getTime();
+		if (jQuery.fn.jquery == "1.4") {
+			for ( var i = 0; i < rep; ++i )
+			{
+				slice = $(this).nextUntil('h1');
+			}
+		}
+		endTime = new Date().getTime();
+		w1[ver++] += endTime-startTime;		
+	   });
+	   alert(w1);
+     });
+	 /*
+	 All on Win2008R2 x64
+	 jQuery 1.4.min
+	 Method #          :   1    2    3   4     5    6
+	 Firefox 3.6       : 4675,6692,6282,168, 6260,13187 | 4<1<5<3<2<6
+	 Opera 10.10       : 6518,9260,8385,231,10205,21853 | 4<1<3<2<5<6
+	 Chrome 3.0.195.38 : 2870,4225,3487,126, 3979,8429  | 4<1<3<5<2<6
+	 
+	 jQuery 1.3.2.min
+	 Method #          :   1    2    3   4     5    6
+	 Firefox 3.6       : 4957,   x,6490,294, 5908,    x | 4<1<5<3
+	 Opera 10.10       : 6400,   x,8096,197, 8313,    x | 4<1<3<5
+	 Chrome 3.0.195.38 : 2399,   x,2987,162, 3317,    x | 4<1<3<5
+	 */
+    </script>
+  </head>
+<body>
+  <h1>Section 1</h1>
+  <p>Content</p>
+  <h2>Subsection 1.1</h2>
+  <p>Content</p>
+  <h2>Subsection 1.2</h2>
+  <p>Content</p>
+  <h2>Subsection 1.3</h2>
+  <p>Content</p>
+  <h1>Section 2</h1>
+  <p>Content</p>
+  <h2>Subsection 2.1</h2>
+  <p>Content</p>
+  <h2>Subsection 2.2</h2>
+  <p>Content</p>
+  <h1>Section 3</h1>
+  <p>Content</p>
+  <h2>Subsection 3.1</h2>
+  <p>Content</p>
+  <h2>Subsection 3.2</h2>
+  <p>Content</p>
+  <h2>Subsection 3.3</h2>
+  <p>Content</p>
+  <h2>Subsection 3.4</h2>
+  <p>Content</p>
+</body>
+</html>

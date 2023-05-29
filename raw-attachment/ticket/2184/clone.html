@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Thead clone won't work in MSIE</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<td>lorem ipsum</td>
+
+</tr>
+
+</thead>
+
+<tbody><td>dolor color</td></tbody>
+
+<tfoot>
+
+<tr>
+
+<td>and a footer</td>
+
+</tr>
+
+</tfoot>
+
+</table>
+
+</div>
+
+<script type="text/javascript">
+
+var tableElement='td'
+
+//table = ok
+//thead = buggy
+//tfoot = buggy
+//tbody	= buggy
+//tr = buggy
+//td = buggy
+
+
+var jQueryclonedTable=$('#container '+tableElement).clone().get(0);
+alert(jQueryclonedTable.innerHTML);
+var DOMclonedTable=document.getElementById('container').getElementsByTagName(tableElement).item(0).cloneNode(true);
+alert(DOMclonedTable.innerHTML);
+
+</script>
+
+</body>
+</html>

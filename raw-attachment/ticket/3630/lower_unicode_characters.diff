@@ -1,0 +1,32 @@
+Index: test/unit/selector.js
+===================================================================
+--- test/unit/selector.js	(revision 5949)
++++ test/unit/selector.js	(working copy)
+@@ -41,13 +41,14 @@
+ });
+ 
+ test("id", function() {
+-	expect(25);
++	expect(26);
+ 	t( "ID Selector", "#body", ["body"] );
+ 	t( "ID Selector w/ Element", "body#body", ["body"] );
+ 	t( "ID Selector w/ Element", "ul#first", [] );
+ 	t( "ID selector with existing ID descendant", "#firstp #simon1", ["simon1"] );
+ 	t( "ID selector with non-existant descendant", "#firstp #foobar", [] );
+ 	t( "ID selector using UTF8", "#台北Táiběi", ["台北Táiběi"] );
++  t( "ID selector using lower UTF8 characters", "#aviación", ["aviación"] );
+ 	t( "Multiple ID selectors using UTF8", "#台北Táiběi, #台北", ["台北Táiběi","台北"] );
+ 	t( "Descendant ID selector using UTF8", "div #台北", ["台北"] );
+ 	t( "Child ID selector using UTF8", "form > #台北", ["台北"] );
+Index: src/selector.js
+===================================================================
+--- src/selector.js	(revision 5949)
++++ src/selector.js	(working copy)
+@@ -1,6 +1,6 @@
+ var chars = jQuery.browser.safari && parseInt(jQuery.browser.version) < 417 ?
+ 		"(?:[\\w*_-]|\\\\.)" :
+-		"(?:[\\w\u0128-\uFFFF*_-]|\\\\.)",
++		"(?:[\\w\u00c0-\uFFFF*_-]|\\\\.)",
+ 	quickChild = new RegExp("^>\\s*(" + chars + "+)"),
+ 	quickID = new RegExp("^(" + chars + "+)(#)(" + chars + "+)"),
+ 	quickClass = new RegExp("^([#.]?)(" + chars + "*)");

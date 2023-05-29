@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
+	<script src="http://davehauenstein.com/code/jquery-edit-in-place/example/js/jquery.editinplace.packed.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(function(){
+			$('.editable').editInPlace({
+					bg_over: 'none', 
+					default_text: ' ',
+					callback: function(unusedElementID, newContent, oldContent){
+						return oldContent;
+					}
+			});
+			$('.editable').hover(
+				function(){ $(this).click(); }, 
+				function(){ $(this).find(':input').submit(); }
+			);
+		});
+	</script>
+</head>
+<body>
+	<div class="editable">
+		foo
+	</div>
+	<div class="editable">
+		foo
+	</div>
+	<div class="editable">
+		foo
+	</div>
+	<div class="editable">
+		foo
+	</div>
+	<div class="editable">
+		foo
+	</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+Index: jquery.js
+===================================================================
+--- jquery.js	(revisione 2146)
++++ jquery.js	(copia locale)
+@@ -1721,7 +1721,7 @@
+ 		// Go through the array, only saving the items
+ 		// that pass the validator function
+ 		for ( var i = 0, el = elems.length; i < el; i++ )
+-			if ( !inv && fn(elems[i],i) || inv && !fn(elems[i],i) )
++			if ( !inv != !fn(elems[i],i) )
+ 				result.push( elems[i] );
+ 
+ 		return result;

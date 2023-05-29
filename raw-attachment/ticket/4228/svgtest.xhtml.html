@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" >
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script type="text/javascript" src="jquery-1.3.2.js"></script>
+  <script type="text/javascript">
+<![CDATA[
+
+
+$(document).ready(function(){
+    var pos = -50;
+    $(".brushcursor").attr("cx", pos  );
+    $(".brushcursor").attr("cy", pos );
+    $(".brushcursor").attr("x", pos );
+    $(".brushcursor").attr("y", pos );
+});
+
+]]>
+  </script>
+ </head>
+ <body >
+  <svg:svg id="svgcanvas" style='border:solid #eee 1px;background:#ffa' width="300" height="300">
+    <svg:circle class="brushcursor" id="c0" cx="150" cy="150" r="20" stroke-width="1" stroke-dasharray="6,3"  stroke="grey" fill="none" style="stroke-opacity:0.5"/>
+    <svg:rect class="brushcursor" id="c1" width="40" height="40" x="150" y="150" stroke-width="1" stroke-dasharray="6,3"  stroke="grey" fill="none" style="stroke-opacity:0.5"/>
+    <svg:circle class="brushcursor" id="c2" cx="150" cy="150" r="20" stroke-width="1" stroke-dasharray="6,3"  stroke="red" fill="none" style="stroke-opacity:0.5"/>
+    <svg:rect class="brushcursor" id="c3" width="40" height="40" x="150" y="150" stroke-width="1" stroke-dasharray="6,3"  stroke="red" fill="none" style="stroke-opacity:0.5"/>
+    <svg:circle class="brushcursor" id="c4" cx="150" cy="150" r="10" stroke-width="1" stroke-dasharray="6,3"  stroke="grey" fill="none" style="stroke-opacity:0.5"/>
+  </svg:svg>
+<!--
+   <canvas id="canvas" width="300" height="300" style="position:absolute;left:20px;top:20px;z-index:1;" ></canvas>
+-->
+
+  <div id="errors">
+In jquery 1.3.1 the drawn objects are hidden (the position of them is set to -50,-50. <br />
+In jquery 1.3.2 they don't get hidden.    <br /><br />
+  </div>
+<br/>
+ </body>
+</html>
+

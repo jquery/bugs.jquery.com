@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Test</title>
+<script src="http://code.jquery.com/jquery-1.4.2.js"></script>
+</head>
+
+<body>
+<H1>Test</H1>
+
+
+The script below demonstrates an xml parse error that occurs in IE but
+not FF.  Assuming the xml is parsed correctly, you should see an alert
+with the title of the one book in the xml document.  If the parse
+fails, you will get a parseerror alert.  This file and accompanying
+xml work fine in firefox, whather the files are remote (served by
+http) or local.  They also work fine in IE if the files are remote.
+However, if the files are stored locally, IE will generate a
+parseerror.
+
+<script>
+function testXML(xml) {
+$("Title",xml).each(function() {
+  alert($(this).text());
+});
+}
+
+function reportError(xmlhttp, status, error) {
+alert("error: " + status);
+}
+
+function test(url) {
+var xmlhttp=$.ajax(
+{
+url: url,
+data: "",
+success: testXML,
+error: reportError,
+dataType: "xml"}
+);
+}
+
+test("test.xml")
+</script>
+
+</body>
+
+</html>
+

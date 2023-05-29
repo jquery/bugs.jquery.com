@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <script src="http://code.jquery.com/jquery-1.4.2.js"></script>
+        <style type="text/css">
+            div {
+                margin: 10px;
+                float: left;
+                width: 100px;
+                height: 100px;
+                background: red;
+            }
+            
+            p {
+                margin: 10px;
+                clear: both;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="one">One</div>
+        <div id="two">Two</div>
+        <p>Click one div, then while it's fading, click the other. The second div's animation will stop as soon as the first one's animation completes.</p>
+        <script type="text/javascript">
+			$(function() {
+			    $('#one, #two').click(function() {
+			        $(this).fadeTo( 2000, 0.0, function() {
+			            $(this).stop();
+			        } );
+			    } );
+			});
+        </script>
+    </body>
+</html>

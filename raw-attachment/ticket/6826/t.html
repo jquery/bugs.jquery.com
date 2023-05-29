@@ -1,0 +1,28 @@
+<head>
+<script src="http://code.jquery.com/jquery-1.4.2.js"></script>
+</head>
+<body>
+<span>Original</span> --- <span>One</span> --- <span>Two Words</span><br>
+<input value="Original"><br>
+<button id="bt1">Check</button>
+<div></div>
+<script>
+$('span').click( function () {
+	$('input').val($(this).text());
+});
+$('#bt1').click( function () {
+	$('div').html(
+		$('[value="Original"]').length + ' ' + $('[value="One"]').length + ' ' + $('[value="Two Words"]').length + '<br>' +
+		$('[value=Original]').length + ' ' + $('[value=One]').length + ' ' + $('[value=Two Words]').length
+	);
+});
+</script>
+<button id="bt2">Workaround?</button>
+<script>
+$('#bt2').click( function () {
+	$('div').html(
+		$('[][value="Original"]').length + ' ' + $('[][value="One"]').length + ' ' + $('[][value="Two Words"]').length + '<br>' +
+		$('[][value=Original]').length + ' ' + $('[][value=One]').length + ' ' + $('[][value=Two Words]').length
+	);
+});
+</script>

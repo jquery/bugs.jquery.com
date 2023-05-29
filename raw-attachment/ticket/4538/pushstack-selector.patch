@@ -1,0 +1,67 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 6308)
++++ core.js	(working copy)
+@@ -141,25 +141,45 @@
+ 
+ 	// Take an array of elements and push it onto the stack
+ 	// (returning the new matched element set)
+-	pushStack: function( elems, name, selector ) {
+-		// Build a new jQuery matched element set
+-		var ret = jQuery( elems || null );
+-
+-		// Add the old object onto the stack (as a reference)
+-		ret.prevObject = this;
+-
+-		ret.context = this.context;
+-
+-		if ( name === "find" ) {
+-			ret.selector = this.selector + (this.selector ? " " : "") + selector;
+-		} else if ( name ) {
+-			ret.selector = this.selector + "." + name + "(" + selector + ")";
++	pushStack: (function(){
++		var concatChar = {
++			find: "",
++			children: "> ",
++			next: "+ ",
++			siblings: '~ '
++		};
++		function concatSelector(first, last, concatName){
++			return (concatChar[concatName] !== undefined) ? first + (first ? " " : "")+ concatChar[concatName] + last : first + "." + concatName + "(" + last + ")";
+ 		}
++		
++		function concatMultiSelector( contextSelector, appendSelector, concatName ){
++			contextSelector = contextSelector.split(',');
++			appendSelector = appendSelector.split(',');
++			var ret = [];
++			for(var i = 0; i < contextSelector.length; i++){
++				for(var j = 0; j < appendSelector.length; j++){
++					ret.push( concatSelector( jQuery.trim( contextSelector[i] ), jQuery.trim( appendSelector[j] ), concatName ) );
++				}
++			}	
++			return ret.join(', ');
++		}
++		
++		return function( elems, name, selector ) {
++			// Build a new jQuery matched element set
++			var ret = jQuery( elems || null );
++	
++			// Add the old object onto the stack (as a reference)
++			ret.prevObject = this;
++	
++			ret.context = this.context;
++			
++			ret.selector = (this.selector.indexOf(',') !== -1 || selector.indexOf(',') !== -1) ? concatMultiSelector( this.selector, selector, name ) : concatSelector( this.selector, selector, name );
++			
++			// Return the newly-formed element set
++			return ret;
++		}
++	})(),
+ 
+-		// Return the newly-formed element set
+-		return ret;
+-	},
+-
+ 	// Force the current matched set of elements to become
+ 	// the specified array of elements (destroying the stack in the process)
+ 	// You should use pushStack() in order to do this, but maintain the stack

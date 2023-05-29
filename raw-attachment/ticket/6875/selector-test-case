@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>selectory-test-case</title>
+<meta http-equiv="X-UA-Compatible" content="IE=IE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript">
+var $j = jQuery.noConflict();
+var template = 'path/to/template/';
+$j(document).ready(function(){
+ $j('input[name*=\\[txtProductQuantity\\]]').each(function() {
+  $j('input[name*=\\[txtProductQuantity\\]]').bind('blur', function() {
+   if ($j(this).val()) {
+    var x = $j(this).attr('name').replace('[txtProductQuantity]','\\\\[txtProductPrice\\\\]');
+    var x = x.replace('[','\\\\[');
+    var x = x.replace(']','\\\\]');
+    $j('#msg').html(x+' => '+$j('input[name*='+x+']').attr('name'));
+   }
+  });
+  $j('input[name*=\\[txtProductPrice\\]]').bind('blur', function() {
+   if ($j(this).val()) {
+    var y = $j(this).attr('id').replace('[txtProductPrice]','\\\\[txtProductQuantity\\\\]');
+    var y = y.replace('[','\\\\[');
+    var y = y.replace(']','\\\\]');
+    $j('#msg').html(y+' => '+$j('input[name^='+y+']').val());
+   }
+  });
+ });
+});
+</script>
+</head>
+<body>
+<form action="selector-test-case.html" method="post" class="auth-form" name="puchase" id="purchase">
+ <div>
+		<div id="msg"></div>
+  <table border="0" width="100%" class="auth-form txt" cellspacing="5">
+   <tr>
+    <td colspan="7">
+     <table border="0" width="100%" class="auth-form txt" id="products" style="products">
+      <tr>
+       <td><input name="txtProduct[0][txtProductQuantity]" id="txtProduct[0][txtProductQuantity]" /></td>
+       <td><input name="txtProduct[0][txtProductDescription]" id="txtProduct[0][txtProductDescription]" /></td>
+       <td><input name="txtProduct[0][txtProductPrice]" id="txtProduct[0][txtProductPrice]" /></td>
+       <td><input name="txtProduct[0][txtProductNumber]" id="txtProduct[0][txtProductNumber]" /></td>
+       <td><input name="txtProduct[0][txtProductSource]" id="txtProduct[0][txtProductSource]" /></td>
+      </tr>
+      <tr>
+       <td><input name="txtProduct[1][txtProductQuantity]" id="txtProduct[1][txtProductQuantity]" /></td>
+       <td><input name="txtProduct[1][txtProductDescription]" id="txtProduct[1][txtProductDescription]" /></td>
+       <td><input name="txtProduct[1][txtProductPrice]" id="txtProduct[1][txtProductPrice]" /></td>
+       <td><input name="txtProduct[1][txtProductNumber]" id="txtProduct[1][txtProductNumber]" /></td>
+       <td><input name="txtProduct[1][txtProductSource]" id="txtProduct[1][txtProductSource]" /></td>
+      </tr>
+     </table>
+    </td>
+   </tr>
+   <tr>
+    <td colspan="4"></td>
+    <td title="Total of parts list" width="2%" class="txt" align="right"><strong>Total:</strong></td>
+    <td title="Total of parts list" class="txt">$<input type="text" id="txtProductTotal" name="txtProductTotal" value="" /></td>
+    <td class="copyright" id="txtProductTotalErr" width="25" nowrap></td>
+   </tr>
+  </table>
+ </div>
+</form>
+</body>
+</html>

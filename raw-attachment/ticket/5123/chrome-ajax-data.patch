@@ -1,0 +1,63 @@
+From 27c4ea613648d9ca1759e8d3d8deb16c590ec1a2 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Mislav=20Marohni=C4=87?= <mislav.marohnic@gmail.com>
+Date: Tue, 30 Mar 2010 23:34:09 +0200
+Subject: [PATCH] ensure that `undefined` is never sent as Ajax data to xhr.send()
+
+This fixes Google Chrome making POST/PUT/DELETE requests with empty data.
+When `data` isn't specified by user, its value is (naturally) `undefined`
+which causes Chrome to actually send "undefined" in the HTTP request body.
+---
+ src/ajax.js            |    2 +-
+ test/data/echoData.php |    1 +
+ test/unit/ajax.js      |   13 +++++++++++++
+ 3 files changed, 15 insertions(+), 1 deletions(-)
+ create mode 100644 test/data/echoData.php
+
+diff --git a/src/ajax.js b/src/ajax.js
+index 7cf280a..f4301f1 100644
+--- a/src/ajax.js
++++ b/src/ajax.js
+@@ -474,7 +474,7 @@ jQuery.extend({
+ 
+ 		// Send the data
+ 		try {
+-			xhr.send( type === "POST" || type === "PUT" || type === "DELETE" ? s.data : null );
++			xhr.send( (type !== "GET" && s.data) || null );
+ 
+ 		} catch( sendError ) {
+ 			jQuery.ajax.handleError( s, xhr, null, e );
+diff --git a/test/data/echoData.php b/test/data/echoData.php
+new file mode 100644
+index 0000000..5da01dc
+--- /dev/null
++++ b/test/data/echoData.php
+@@ -0,0 +1 @@
++<?php echo file_get_contents('php://input'); ?>
+\ No newline at end of file
+diff --git a/test/unit/ajax.js b/test/unit/ajax.js
+index be4b3f0..58aa615 100644
+--- a/test/unit/ajax.js
++++ b/test/unit/ajax.js
+@@ -1163,6 +1163,19 @@ test("data option: evaluate function values (#2806)", function() {
+ 	})
+ });
+ 
++test("data option: empty bodies for non-GET requests", function() {
++	stop();
++	jQuery.ajax({
++		url: "data/echoData.php",
++		data: undefined,
++		type: "post",
++		success: function(result) {
++			equals( result, "" );
++			start();
++		}
++	})
++});
++
+ test("jQuery.ajax - If-Modified-Since support", function() {
+ 	expect( 3 );
+ 
+-- 
+1.6.4.1
+

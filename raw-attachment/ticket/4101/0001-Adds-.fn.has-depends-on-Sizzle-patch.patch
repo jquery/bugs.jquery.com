@@ -1,0 +1,81 @@
+From 6b860c88e1edb6833a57905d9dc38a0e378e6e06 Mon Sep 17 00:00:00 2001
+From: Yehuda Katz <wycats@gmail.com>
+Date: Tue, 21 Jul 2009 00:51:11 -0700
+Subject: [PATCH] Adds $.fn.has (depends on Sizzle patch)
+
+---
+ src/traversing.js       |    8 ++++++++
+ test/unit/traversing.js |   38 +++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 45 insertions(+), 1 deletions(-)
+
+diff --git a/src/traversing.js b/src/traversing.js
+index 669c70a..f6b7e62 100644
+--- a/src/traversing.js
++++ b/src/traversing.js
+@@ -43,6 +43,14 @@ jQuery.fn.extend({
+ 		return ret;
+ 	},
+ 
++	has: function( target ) {
++	  var targets = jQuery(target);
++	  return this.filter(function() {
++			for( var i=0, j=targets.length; i<j; i++ )
++				if(jQuery.contains( this, targets[i] )) return true;
++	  });
++	},
++
+ 	not: function( selector ) {
+ 		return this.pushStack( jQuery.winnow(this, selector, false), "not", selector);
+ 	},
+diff --git a/test/unit/traversing.js b/test/unit/traversing.js
+index f585d9c..8e0fc04 100644
+--- a/test/unit/traversing.js
++++ b/test/unit/traversing.js
+@@ -135,7 +135,43 @@ test("not(jQuery)", function() {
+ 	expect(1);
+ 
+ 	isSet( jQuery("p").not(jQuery("#ap, #sndp, .result")).get(), q("firstp", "en", "sap", "first"), "not(jQuery)" );
+-})
++});
++
++test("has(Element)", function() {
++	expect(2);
++
++	var obj = jQuery("#main").has(jQuery("#sndp")[0]);
++	isSet( obj, q("main"), "Keeps elements that have the element as a descendant" );
++
++	var multipleParent = jQuery("#main, #header").has(jQuery("#sndp")[0]);
++	isSet( obj, q("main"), "Does not include elements that do not have the element as a descendant" );
++});
++
++test("has(Selector)", function() {
++	expect(3);
++
++	var obj = jQuery("#main").has("#sndp");
++	isSet( obj, q("main"), "Keeps elements that have any element matching the selector as a descendant" );
++
++	var multipleParent = jQuery("#main, #header").has("#sndp");
++	isSet( obj, q("main"), "Does not include elements that do not have the element as a descendant" );
++
++	var multipleHas = jQuery("#main").has("#sndp, #first");
++	isSet( multipleHas, q("main"), "Only adds elements once" );
++});
++
++test("has(Arrayish)", function() {
++	expect(3);
++
++	var simple = jQuery("#main").has(jQuery("#sndp"));
++	isSet( simple, q("main"), "Keeps elements that have any element in the jQuery list as a descendant" );
++
++	var multipleParent = jQuery("#main, #header").has(jQuery("#sndp"));
++	isSet( multipleParent, q("main"), "Does not include elements that do not have an element in the jQuery list as a descendant" );
++
++	var multipleHas = jQuery("#main").has(jQuery("#sndp, #first"));
++	isSet( simple, q("main"), "Only adds elements once" );
++});
+ 
+ test("andSelf()", function() {
+ 	expect(4);
+-- 
+1.6.3.3
+

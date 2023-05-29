@@ -1,0 +1,18 @@
+Index: /home/lrbabe/workspace/jQuery/jquery/test/unit/core.js
+===================================================================
+--- /home/lrbabe/workspace/jQuery/jquery/test/unit/core.js	(revision 5704)
++++ /home/lrbabe/workspace/jQuery/jquery/test/unit/core.js	(working copy)
+@@ -507,10 +507,12 @@
+ });
+ 
+ test("css(String, Object)", function() {
+-	expect(21);
++	expect(23);
+ 	ok( $('#foo').is(':visible'), 'Modifying CSS display: Assert element is visible');
+ 	$('#foo').css('display', 'none');
+ 	ok( !$('#foo').is(':visible'), 'Modified CSS display: Assert element is hidden');
++	ok( $('#foo').css('width') != '0px', 'Assert element width is not 0px' );
++	ok( $('#foo').css('height') != '0px', 'Assert element eight is not 0px' );
+ 	$('#foo').css('display', 'block');
+ 	ok( $('#foo').is(':visible'), 'Modified CSS display: Assert element is visible');
+ 

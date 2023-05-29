@@ -1,0 +1,31 @@
+// Helper function to support older browsers!
+[].indexOf || (Array.prototype.indexOf = function(v, n){
+	n = (n == null) ? 0 : n;
+	var m = this.length;
+	for (var i=n; i<m; i++)
+		if (this[i] == v)
+			return i;
+	return -1;
+});
+
+
+
+change to this:
+
+
+
+// Helper function to support older browsers! if (![].indexOf) {
+
+    Array.prototype.indexOf = function(v, n){
+
+        n = (n == null) ? 0 : n; var m = this.length; for (var i=n; i<m; i++)
+
+            if (this[i] == v)
+
+                return i;
+
+        return -1;
+
+    });
+
+} 

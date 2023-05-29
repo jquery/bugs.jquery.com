@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <title>jQuery width() Bug</title>
+    <style type="text/css">
+        #div1 {
+            position: absolute;
+            border: 1px dashed black;
+            padding: 10px;
+        }
+        #div2 {
+            position: absolute;
+            border: 1px dashed black;
+            padding: 10px;
+        }
+        #div3 {
+            width: 200px;
+            position: absolute;
+            border: 1px dashed black;
+            padding: 10px;
+        }
+        #div4 {
+            width: 200px;
+            position: absolute;
+            border: 1px dashed black;
+            padding: 10px;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-nightly.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("#div2").hide();
+            $("#div1w").text( $("#div1").width() );
+            $("#div2w").text( $("#div2").width() );
+
+            $("#showBtn").click(function(evt) {
+                $("#div1").toggle(); // get div1 out of the way
+                $("#div2").toggle();
+                $("#div2w").text( $("#div2").width() );
+            });
+
+            $("#div4").hide();
+            $("#div3w").text( $("#div3").width() );
+            $("#div4w").text( $("#div4").width() );
+
+            $("#showBtn2").click(function(evt) {
+                $("#div3").toggle(); // get div3 out of the way
+                $("#div4").toggle();
+                $("#div4w").text( $("#div4").width() );
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>width() Bug</h1>
+    <p>jQuery's width() method returns an incorrect value when used on an invisible element with 
+    absolute or fixed positioning. However, this is only the case when the invisible element does 
+    not have an explicitly assigned width. This can be traced to the css() method: in its "width" 
+    case for invisible elements, it clones the node and sets the padding/border widths to zero to 
+    measure the element. The problem is that it also explicitly sets the "left" and "right" edge 
+    positions, which will implicitly change the element's width when it has no explicit width. That 
+    code appears to be intended to position the element at the origin point of the page, but due to 
+    a simple oversight actually ends up changing the element size. This behaviour is consistently 
+    incorrect on Firefox 2, IE 7, and Opera 9 (all on Windows; I don't have access to a Mac).</p>
+
+    <p>The work-around, is of course, to display the element before trying to get its size. However, 
+    you shouldn't have to do this, and usually you want to position the element before displaying 
+    it. Changing the positioning to something else is no good, since that completely changes how
+    the browser sizes the element.</p>
+
+    <p>This demonstrates the bug. Watch the #div2/#div4 width values as you click the buttons.</p>
+
+
+    <h2>Div's without explicit widths</h2>
+    <table>
+        <tr><th>Div id</th><th>Result of width()</th></tr>
+        <tr><td>div1</td><td id="div1w"></td></tr>
+        <tr><td>div2</td><td id="div2w"></td></tr>
+    </table>
+
+    <input type="button" id="showBtn" value="Toggle #div2">
+
+    <div id="div1">
+        This is div #div1
+    </div>
+    <div id="div2">
+        Div #div2 lies here
+    </div>
+
+
+    <h2 style="margin-top: 3em">Div's with explicit widths</h2>
+    <table>
+        <tr><th>Div id</th><th>Result of width()</th></tr>
+        <tr><td>div3</td><td id="div3w"></td></tr>
+        <tr><td>div4</td><td id="div4w"></td></tr>
+    </table>
+
+    <input type="button" id="showBtn2" value="Toggle #div4">
+
+    <div id="div3">
+        This is div #div3
+    </div>
+    <div id="div4">
+        Div #div4 lies here
+    </div>
+
+
+    <h2 style="margin-top: 3em">The Fix</h2>
+    <p>The bug has an easy, one-line fix:</p>
+
+    <strong>From: <a href="http://dev.jquery.com/browser/trunk/jquery/src/core.js?rev=3669#L773">src/core.js@3669, line 773</a></strong>
+    <pre>right: "0",</pre>
+
+    <strong>To:</strong>
+    <pre>top: "0",</pre>
+</body>
+</html>

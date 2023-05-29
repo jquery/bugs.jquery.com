@@ -1,0 +1,21 @@
+Index: offset.js
+===================================================================
+--- offset.js	(revision 5917)
++++ offset.js	(working copy)
+@@ -17,9 +17,13 @@
+ 		if ( !(mozilla && elem == document.body) && elem.getBoundingClientRect ) {
+ 			var box = elem.getBoundingClientRect();
+ 
+-			// Add the document scroll offsets
+-			add(box.left + Math.max(doc.documentElement.scrollLeft, doc.body.scrollLeft),
+-				box.top  + Math.max(doc.documentElement.scrollTop,  doc.body.scrollTop));
++			// MSIE getBoundingClientRect on the HTML element already has the document scroll offsets added.
++			if (!jQuery.browser.msie || !elem.nodeName || elem.nodeName.toLowerCase()!='html')
++			{
++				// Add the document scroll offsets
++				add(box.left + Math.max(doc.documentElement.scrollLeft, doc.body.scrollLeft),
++					box.top  + Math.max(doc.documentElement.scrollTop,  doc.body.scrollTop));
++			}
+ 
+ 			// IE adds the HTML element's border, by default it is medium which is 2px
+ 			// IE 6 and 7 quirks mode the border width is overwritable by the following css html { border: 0; }

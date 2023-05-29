@@ -1,0 +1,37 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 4527)
++++ src/core.js	(working copy)
+@@ -494,19 +494,26 @@
+ 			if ( table && jQuery.nodeName( this, "table" ) && jQuery.nodeName( elems[0], "tr" ) )
+ 				obj = this.getElementsByTagName("tbody")[0] || this.appendChild( this.ownerDocument.createElement("tbody") );
+ 
+-			var scripts = jQuery( [] );
++			function inDom(elem) {
++				while (elem.parentNode && elem.parentNode != document)
++					elem = elem.parentNode;
++				return elem.parentNode;
++			}
+ 
++			var scripts = jQuery( [] ),
++				targetInDom = inDom( obj );
++
+ 			jQuery.each(elems, function(){
+-				var elem = clone ?
+-					jQuery( this ).clone( true )[0] :
+-					this;
++				var elem = clone ? jQuery( this ).clone( true )[0] : this, 
++					// eval scripts only if they are outside the dom being placed in it
++					addScripts = targetInDom && !inDom( elem );
+ 
+ 				// execute all scripts after the elements have been injected
+-				if ( jQuery.nodeName( elem, "script" ) ) {
++				if ( addScripts && jQuery.nodeName( elem, "script" ) ) {
+ 					scripts = scripts.add( elem );
+ 				} else {
+ 					// Remove any inner scripts for later evaluation
+-					if ( elem.nodeType == 1 )
++					if ( addScripts && elem.nodeType == 1 )
+ 						scripts = scripts.add( jQuery( "script", elem ).remove() );
+ 
+ 					// Inject the elements into the document

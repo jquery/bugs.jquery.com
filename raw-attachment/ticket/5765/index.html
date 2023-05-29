@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Runner</title>
+		<link rel="stylesheet" href="http://github.com/jquery/qunit/raw/master/qunit/qunit.css" type="text/css" media="screen" />
+		<script src="http://code.jquery.com/jquery-nightly.min.js"></script>
+		<script type="text/javascript" src="http://github.com/jquery/qunit/raw/master/qunit/qunit.js"></script>
+		<script type="text/javascript">
+			var checkboxState;
+			
+			$(document).ready(function () {
+			
+				module(".click() timing bug");
+				test("Inconsistent state reporting between .click() and manual user click of checkbox", function () {
+					$('body').append('<input type="checkbox">');
+					$('input:checkbox').click(function () {
+						checkboxState = $(this).attr('checked');
+					});
+					
+					$('input:checkbox').click();
+					
+					ok($('input:checkbox').is(':checked'),"Checkbox is checked");
+					ok(checkboxState === true,"Checkbox reported that it is checked in the .click() handler");
+					
+					$('input:checkbox').remove();
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<h1 id="qunit-header">.click() timing bug</h1>
+ 		<h2 id="qunit-banner"></h2>
+ 		<h2 id="qunit-userAgent"></h2>
+ 		<ol id="qunit-tests"></ol>
+	
+	</body>
+</html>

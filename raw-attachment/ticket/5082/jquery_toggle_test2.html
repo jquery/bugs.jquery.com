@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>jQuery IE8 toggle test</title>
+<style type="text/css">
+a.toggle2 {
+    display: none;
+}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="top">
+This page works as expected in FF3, Chrome, Opera 9, Safari and IE8 <strong>compatibility mode</strong>, but not in IE8 (normal) mode.
+<br />
+<br />
+
+Behaves as expected (foo will be shown with Toggle 1):<br />
+<a href="#" class="toggle1">Toggle 1</a> 
+<a href="#" class="toggle2">Toggle 2</a> 
+<a href="#">foo</a>
+</div>
+
+<br /><br /><br /><br />
+
+<div id="bottom">
+foo link is between Toggle 1 and Toggle 2. Now foo is shown with Toggle 2 (after a few clicks):<br />
+<a href="#" class="toggle1">Toggle 1</a> 
+<a href="#">foo</a>
+<a href="#" class="toggle2">Toggle 2</a> 
+</div>
+
+<script type="text/javascript">
+$(function () {
+    $("#top a").click(function () {
+        $("#top a").toggle();
+        return false;
+    });
+    
+    $("#bottom a").click(function () {
+        $("#bottom a").toggle();
+        return false;
+    });
+});
+</script>
+</body>
+</html>

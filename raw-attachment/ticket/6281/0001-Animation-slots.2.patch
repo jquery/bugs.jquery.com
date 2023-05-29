@@ -1,0 +1,228 @@
+From 2e830e107fc1f4e836fcdff5a56c061fde4a2bbc Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Carl=20F=C3=BCrstenberg?= <carl@excito.com>
+Date: Mon, 15 Mar 2010 01:09:54 +0100
+Subject: [PATCH] Animation slots
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+When multiple animations are meant to be executed in "parallel",
+currently they will be unsynchronus and thus experience an delayed
+animation for later elements. To overcome this issue, we add an slot
+mechanism which specifies that we can use one single slot for a bounch
+of animations, and they all will use the same start time and current
+time.
+
+Signed-off-by: Carl Fürstenberg <carl@excito.com>
+---
+ src/effects.js |   99 +++++++++++++++++++++++++++++++++++++++++++++----------
+ 1 files changed, 81 insertions(+), 18 deletions(-)
+
+diff --git a/src/effects.js b/src/effects.js
+index 97456cc..b2d61c6 100644
+--- a/src/effects.js
++++ b/src/effects.js
+@@ -105,7 +105,7 @@ jQuery.fn.extend({
+ 					.animate({opacity: to}, speed, callback);
+ 	},
+ 
+-	animate: function( prop, speed, easing, callback ) {
++	animate: function( prop, speed, easing, callback, slot ) {
+ 		var optall = jQuery.speed(speed, easing, callback);
+ 
+ 		if ( jQuery.isEmptyObject( prop ) ) {
+@@ -152,6 +152,7 @@ jQuery.fn.extend({
+ 			opt.curAnim = jQuery.extend({}, prop);
+ 
+ 			jQuery.each( prop, function( name, val ) {
++					var cur_slot = slot || new jQuery.slot( now(), true);
+ 				var e = new jQuery.fx( self, opt, name );
+ 
+ 				if ( rfxtypes.test(val) ) {
+@@ -177,14 +178,15 @@ jQuery.fn.extend({
+ 							end = ((parts[1] === "-=" ? -1 : 1) * end) + start;
+ 						}
+ 
+-						e.custom( start, end, unit );
++						e.custom( start, end, unit, cur_slot );
+ 
+ 					} else {
+-						e.custom( start, val, "" );
++						e.custom( start, val, "", cur_slot );
+ 					}
+ 				}
+ 			});
+ 
++
+ 			// For JS strict compliance
+ 			return true;
+ 		});
+@@ -200,14 +202,21 @@ jQuery.fn.extend({
+ 		this.each(function() {
+ 			// go in reverse order so anything added to the queue during the loop is ignored
+ 			for ( var i = timers.length - 1; i >= 0; i-- ) {
+-				if ( timers[i].elem === this ) {
++				var slot = timers[i];
++				for ( var j = slot.members.length - 1; j >= 0; j-- ) {
++					if ( slot.members[j].elem === this ) {
+ 					if (gotoEnd) {
+ 						// force the next step to be the last
+-						timers[i](true);
++							slot.members[j](true);
++						}
++						slot.remove(j);
+ 					}
+-
+-					timers.splice(i, 1);
+ 				}
++				if( slot.empty() ) {
++					jQuery.timers.splice(i, 1 );
++					slot.inTimer = false;
++				}
++
+ 			}
+ 		});
+ 
+@@ -281,6 +290,16 @@ jQuery.extend({
+ 
+ 	timers: [],
+ 
++	slot: function(time, active) {
++		this.members = [];
++		if( time ) {
++			this.time = this.startTime = time;
++		}
++		if( typeof active === 'undefined' || active ) {
++			this.activate();
++		}
++	},
++
+ 	fx: function( elem, options, prop ) {
+ 		this.options = options;
+ 		this.elem = elem;
+@@ -293,6 +312,38 @@ jQuery.extend({
+ 
+ });
+ 
++jQuery.slot.prototype = {
++	time: null,
++	startTime: null,
++	activate: function() {
++		if( !this.active ) {
++			this.active = true;
++			if( !this.inTimer ) {
++				this.inTimer = true;
++				jQuery.timers.push( this );
++			}
++		}
++	},
++	add: function( obj ) {
++		if( ! this.startTime ) {
++			this.startTime = this.time = now();
++		}
++		if( this.active && !this.inTimer ) {
++			this.inTimer = true;
++			jQuery.timers.push( this );
++		}
++		this.members.push( obj );
++	},
++	remove: function( id ) {
++		if( this.members[id] ) {
++			this.members.splice( id, 1 );
++		}
++	},
++	empty: function() {
++		return this.members.length === 0;
++	}
++}
++
+ jQuery.fx.prototype = {
+ 	// Simple function for setting a style value
+ 	update: function() {
+@@ -319,8 +370,7 @@ jQuery.fx.prototype = {
+ 	},
+ 
+ 	// Start an animation from one number to another
+-	custom: function( from, to, unit ) {
+-		this.startTime = now();
++	custom: function( from, to, unit, slot ) {
+ 		this.start = from;
+ 		this.end = to;
+ 		this.unit = unit || this.unit || "px";
+@@ -329,14 +379,17 @@ jQuery.fx.prototype = {
+ 
+ 		var self = this;
+ 		function t( gotoEnd ) {
+-			return self.step(gotoEnd);
++			return self.step(gotoEnd, slot);
+ 		}
+ 
+ 		t.elem = this.elem;
+ 
+-		if ( t() && jQuery.timers.push(t) && !timerId ) {
++		if( !slot.startTime || t() ) {
++			slot.add( t );
++			if( ! timerId ) {
+ 			timerId = setInterval(jQuery.fx.tick, 13);
+ 		}
++		}
+ 	},
+ 
+ 	// Simple 'show' function
+@@ -365,10 +418,10 @@ jQuery.fx.prototype = {
+ 	},
+ 
+ 	// Each step of an animation
+-	step: function( gotoEnd ) {
+-		var t = now(), done = true;
++	step: function( gotoEnd, slot ) {
++		var done = true;
+ 
+-		if ( gotoEnd || t >= this.options.duration + this.startTime ) {
++		if ( gotoEnd || slot.time >= this.options.duration + slot.startTime ) {
+ 			this.now = this.end;
+ 			this.pos = this.state = 1;
+ 			this.update();
+@@ -414,7 +467,7 @@ jQuery.fx.prototype = {
+ 			return false;
+ 
+ 		} else {
+-			var n = t - this.startTime;
++			var n = slot.time - slot.startTime;
+ 			this.state = n / this.options.duration;
+ 
+ 			// Perform the easing function, defaults to swing
+@@ -436,8 +489,16 @@ jQuery.extend( jQuery.fx, {
+ 		var timers = jQuery.timers;
+ 
+ 		for ( var i = 0; i < timers.length; i++ ) {
+-			if ( !timers[i]() ) {
+-				timers.splice(i--, 1);
++			var slot = timers[i];
++			slot.time = now();
++			for ( var j = 0; j < slot.members.length; j++ ) {
++				if ( !slot.members[j]() ) {
++					slot.remove(j--);
++				}
++			}
++			if( slot.empty() ) {
++				jQuery.timers.splice(i, 1 );
++				slot.inTimer = false;
+ 			}
+ 		}
+ 
+@@ -475,8 +536,10 @@ jQuery.extend( jQuery.fx, {
+ 
+ if ( jQuery.expr && jQuery.expr.filters ) {
+ 	jQuery.expr.filters.animated = function( elem ) {
+-		return jQuery.grep(jQuery.timers, function( fn ) {
++		return jQuery.grep(jQuery.timers, function( slot ) {
++				return jQuery.grep(slot.members, function( fn ) {
+ 			return elem === fn.elem;
+ 		}).length;
++			}).length;
+ 	};
+ }
+-- 
+1.7.0
+

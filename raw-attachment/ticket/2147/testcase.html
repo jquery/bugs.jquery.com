@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script src="http://code.jquery.com/jquery-1.2.1.js" type="text/javascript">
+</script>
+<title></title>
+</head>
+<body>
+<pre id="output">
+Here's the XML:
+
+&lt;translation&gt;
+	&lt;sentence&gt;
+		&lt;key&gt;test&lt;/key&gt;
+		&lt;value&gt;Hi, I am a test sentence&lt;/value&gt;
+	&lt;/sentence&gt;
+	&lt;sentence&gt;
+		&lt;key&gt;test_explanation&lt;/key&gt;
+		&lt;value&gt;Hi, I am the test explanation&lt;/value&gt;
+	&lt;/sentence&gt;
+	&lt;sentence&gt;
+		&lt;key&gt;contestable&lt;/key&gt;
+		&lt;value&gt;Hi, I am a totally extraneus text&lt;/value&gt;
+	&lt;/sentence&gt;
+&lt;/translation&gt;
+</pre>
+<script type="text/javascript">
+//<![CDATA[
+	xml_test = '<translation>';
+	xml_test += '<sentence><key>test<\/key><value>Hi, I am a test sentence<\/value><\/sentence>';
+	xml_test += '<sentence><key>test_explanation<\/key><value>Hi, I am the test explanation<\/value><\/sentence>';
+	xml_test += '<sentence><key>contestable<\/key><value>Hi, I am a totally extraneus text<\/value><\/sentence>';
+	xml_test += '<\/translation>';
+	
+	
+	$('#output').append(
+		'<br />jQuery string <b>' +   'sentence key:contains(test)' + '<\/b> returns ' +
+		$('sentence key:contains(test)',xml_test).size()
+		+ ' nodes'
+	);
+
+	jQuery.extend(jQuery.expr[":"], {
+	  equals: "(a.textContent||a.innerText||jQuery(a).text()||'')==m[3]"
+	});	
+	$('#output').append('<br /><br />Added new exact-match selector:<br />equals: "(a.textContent||a.innerText||jQuery(a).text()||\'\')==m[3]"<br />');
+	
+	
+	$('#output').append(
+		'<br />jQuery string <b>' +   'sentence key:equals(test)' + '<\/b> returns ' +
+		$('sentence key:equals(test)',xml_test).size()
+		+ ' nodes<br />'
+	);
+
+	
+	$('#output').append(
+		'<br />jQuery string <b>' +   'sentence:has(key:equals(test))>value' + '<\/b> returns: ' +
+		$('sentence:has(key:equals(test))>value',xml_test).text()
+		
+	);
+            
+//]]>
+</script>
+</body>
+</html>

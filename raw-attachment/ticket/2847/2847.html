@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>2847 Test Case</title>
+<script type="text/javascript" src="jquery-1.2.6.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("ul.first1 > li:first").each(function(){
+		$(this).addClass('first');
+	});
+	$("ul.first2 > li:first").each(function(){
+		$(this).addClass('first');
+	});
+	$("ul.nth1 > li:nth(1)").each(function(){
+		$(this).addClass('nth');
+	});
+	$("ul.nth2 > li:nth(1)").each(function(){
+		$(this).addClass('nth');
+	});
+	$("ul.eq1 > li:eq(1)").each(function(){
+		$(this).addClass('eq');
+	});
+	$("ul.eq2 > li:eq(1)").each(function(){
+		$(this).addClass('eq');
+	});
+	$("ul.lt1 > li:lt(2)").each(function(){
+		$(this).addClass('lt');
+	});
+	$("ul.lt2 > li:lt(2)").each(function(){
+		$(this).addClass('lt');
+	});
+	$("ul.gt1 > li:gt(0)").each(function(){
+		$(this).addClass('gt');
+	});
+	$("ul.gt2 > li:gt(0)").each(function(){
+		$(this).addClass('gt');
+	});
+	$("ul.firstchild1 > li:first-child").each(function(){
+		$(this).addClass('firstchild');
+	});
+	$("ul.firstchild2 > li:first-child").each(function(){
+		$(this).addClass('firstchild');
+	});
+	$("ul.lastchild1 > li:last-child").each(function(){
+		$(this).addClass('lastchild');
+	});
+	$("ul.lastchild2 > li:last-child").each(function(){
+		$(this).addClass('lastchild');
+	});
+	$("ul.last1 > li:last").each(function(){
+		$(this).addClass('last');
+	});
+	$("ul.last2 > li:last").each(function(){
+		$(this).addClass('last');
+	});
+	$("ul.only1 > li:only-child").each(function(){
+		$(this).addClass('onlychild');
+	});
+	$("ul.only2 > li:only-child").each(function(){
+		$(this).addClass('onlychild');
+	});
+});
+</script>
+<style type="text/css">
+	h1 { clear: left; }
+	ul { float: left; display: inline; width: 200px; }
+	ul li.in-question { background-color: red; }
+	ul li.first,
+	ul li.last,
+	ul li.nth,
+	ul li.eq,
+	ul li.gt,
+	ul li.lt,
+	ul li.firstchild,
+	ul li.lastchild,
+	ul li.onlychild { background-color: lime; }
+</style>
+</head>
+
+<body>
+	<h1>Test :first jQuery selector.</h1>
+	<p>The first list item in each of the following lists should be green:</p>
+	<ul class="first1">
+		<li class="in-question">First LI with <strong>no</strong> preceding comment</li>
+		<li>Second LI</li>
+		<li>Third LI</li>
+	</ul>
+	<ul class="first2">
+		<!-- I am a comment -->
+		<li class="in-question">First LI <strong>with</strong> a preceding comment</li>
+		<li>Second LI</li>
+		<li>Third LI</li>
+	</ul>
+
+	<h1>Test :first-child jQuery selector.</h1>
+	<p>The first list item in each of the following lists should be green:</p>
+	<ul class="firstchild1">
+		<li class="in-question">First LI with <strong>no</strong> preceding comment</li>
+		<li>Second LI</li>
+		<li>Third LI</li>
+	</ul>
+	<ul class="firstchild2">
+		<!-- I am a comment -->
+		<li class="in-question">First LI <strong>with</strong> a preceding comment</li>
+		<li>Second LI</li>
+		<li>Third LI</li>
+	</ul>
+
+	<h1>Test :nth(1) jQuery selector.</h1>
+	<p>The second list item in each of the following lists should be green:</p>
+	<ul class="nth1">
+		<li>First LI</li>
+		<li class="in-question">Second LI with <strong>no</strong> preceding comment</li>
+		<li>Third LI</li>
+	</ul>
+	<ul class="nth2">
+		<!-- I am a comment -->
+		<li>First LI</li>
+		<li class="in-question">Second LI <strong>with</strong> a preceding comment</li>
+		<li>Third LI</li>
+	</ul>
+
+	<h1>Test :eq(1) jQuery selector.</h1>
+	<p>The second list item in each of the following lists should be green:</p>
+	<ul class="eq1">
+		<li>First LI</li>
+		<li class="in-question">Second LI with <strong>no</strong> preceding comment</li>
+		<li>Third LI</li>
+	</ul>
+	<ul class="eq2">
+		<!-- I am a comment -->
+		<li>First LI</li>
+		<li class="in-question">Second LI <strong>with</strong> a preceding comment</li>
+		<li>Third LI</li>
+	</ul>
+
+	<h1>Test :lt(2) jQuery selector.</h1>
+	<p>The first and second list item in each of the following lists should be green:</p>
+	<ul class="lt1">
+		<li class="in-question">First LI with <strong>no</strong> preceding comment</li>
+		<li class="in-question">Second LI with <strong>no</strong> preceding comment</li>
+		<li>Third LI</li>
+	</ul>
+	<ul class="lt2">
+		<!-- I am a comment -->
+		<li class="in-question">First LI <strong>with</strong> a preceding comment</li>
+		<li class="in-question">Second LI <strong>with</strong> a preceding comment</li>
+		<li>Third LI</li>
+	</ul>
+
+	<h1>Test :gt(0) jQuery selector.</h1>
+	<p>The second and third list item in each of the following lists should be green:</p>
+	<ul class="gt1">
+		<li>First LI</li>
+		<li class="in-question">Second LI with <strong>no</strong> preceding comment</li>
+		<li class="in-question">Third LI with <strong>no</strong> preceding comment</li>
+	</ul>
+	<ul class="gt2">
+		<!-- I am a comment -->
+		<li class="notgreen">First LI</li>
+		<li class="in-question">Second LI <strong>with</strong> a preceding comment</li>
+		<li class="in-question">Third LI <strong>with</strong> a preceding comment</li>
+	</ul>
+
+	<h1>Test :last jQuery selector.</h1>
+	<p>The last list item in each of the following lists should be green:</p>
+	<ul class="last1">
+		<li>First LI</li>
+		<li>Second LI</li>
+		<li class="in-question">Last LI with <strong>no</strong> following comment.</li>
+	</ul>
+	<ul class="last2">
+		<li>First LI</li>
+		<li>Second LI</li>
+		<li class="in-question">Last LI <strong>with</strong> a following comment.</li>
+		<!-- I am a comment -->
+	</ul>
+
+	<h1>Test :last-child jQuery selector.</h1>
+	<p>The last list item in each of the following lists should be green:</p>
+	<ul class="lastchild1">
+		<li>First LI</li>
+		<li>Second LI</li>
+		<li class="in-question">Last LI with <strong>no</strong> following comment.</li>
+	</ul>
+	<ul class="lastchild2">
+		<li>First LI</li>
+		<li>Second LI</li>
+		<li class="in-question">Last LI <strong>with</strong> a following comment.</li>
+		<!-- I am a comment -->
+	</ul>
+
+	<h1>Test :only-child jQuery selector.</h1>
+	<p>The only list item in each of the following lists should be green:</p>
+	<ul class="only1">
+		<li class="in-question">Only LI with <strong>no</strong> comments.</li>
+	</ul>
+	<ul class="only2">
+		<!-- I am a comment -->
+		<li class="in-question">Only LI <strong>with</strong> comments.</li>
+	</ul>
+
+</body>
+
+</html>

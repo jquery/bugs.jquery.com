@@ -1,0 +1,13 @@
+Index: src/selector/selector.js
+===================================================================
+--- src/selector/selector.js	(revision 2253)
++++ src/selector/selector.js	(working copy)
+@@ -63,7 +63,7 @@
+ 
+ 		// Match: :even, :last-chlid, #id, .class
+ 		new RegExp("^([:.#]*)(" + 
+-			( jQuery.chars = jQuery.browser.safari && jQuery.browser.version < 416.12 ? "(?:[\\w*_-]|\\\\.)" : "(?:[\\w\u0128-\uFFFF*_-]|\\\\.)" ) + "+)")
++			( jQuery.chars = jQuery.browser.safari && parseInt(jQuery.browser.version) < 417 ? "(?:[\\w*_-]|\\\\.)" : "(?:[\\w\u0128-\uFFFF*_-]|\\\\.)" ) + "+)")
+ 	],
+ 
+ 	multiFilter: function( expr, elems, not ) {

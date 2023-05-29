@@ -1,0 +1,91 @@
+--- jquery-1.1.3.1.js.orig	2007-07-12 22:19:16.000000000 +0200
++++ jquery-1.1.3.1.js	2007-07-12 23:09:50.000000000 +0200
+@@ -681,11 +681,12 @@
+ 
+ 	// Figure out what browser is being used
+ 	jQuery.browser = {
+-		version: (b.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1],
+-		safari: /webkit/.test(b),
++		version: (b.match(/.*(?:rv|webkit|khtml|opera|msie)[\/: ]([\d.]+)/i) || [])[1],
++		webkit: /webkit/.test(b),
++		khtml: /khtml[\/: ][\d.]+/.test(b), /* Version included to avoid WebKit */
+ 		opera: /opera/.test(b),
+-		msie: /msie/.test(b) && !/opera/.test(b),
+-		mozilla: /mozilla/.test(b) && !/(compatible|webkit)/.test(b)
++		msie: false /*@cc_on || /msie/.test(b)@*/, /* Conditional compilation to avoid Opera and others */
++		gecko: /gecko\/(19|20)[\d][\d](0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])/.test(b) /* Version included to avoid KHTML and WebKit */
+ 	};
+ 
+ 	// Check to see if the W3C box model is being used
+@@ -847,7 +848,7 @@
+ 
+ 		// Match: :even, :last-chlid, #id, .class
+ 		new RegExp("^([:.#]*)(" + 
+-			( jQuery.chars = jQuery.browser.safari && jQuery.browser.version < "3.0.0" ? "\\w" : "(?:[\\w\u0128-\uFFFF*_-]|\\\\.)" ) + "+)")
++			( jQuery.chars = jQuery.browser.webkit && jQuery.browser.version < "522.0" || jQuery.browser.khtml && jQuery.browser.version < "3.90" ? "\\w" : "(?:[\\w\u0128-\uFFFF*_-]|\\\\.)" ) + "+)")
+ 	],
+ 
+ 	multiFilter: function( expr, elems, not ) {
+@@ -1432,7 +1433,7 @@
+ 			event.target = event.srcElement;
+ 				
+ 		// check if target is a textnode (safari)
+-		if (jQuery.browser.safari && event.target.nodeType == 3)
++		if (jQuery.browser.webkit && event.target.nodeType == 3)
+ 			event.target = originalEvent.target.parentNode;
+ 
+ 		// Add relatedTarget, if necessary
+@@ -1562,7 +1563,7 @@
+ 				jQuery.readyList = null;
+ 			}
+ 			// Remove event listener to avoid memory leak
+-			if ( jQuery.browser.mozilla || jQuery.browser.opera )
++			if ( jQuery.browser.gecko || jQuery.browser.opera )
+ 				document.removeEventListener( "DOMContentLoaded", jQuery.ready, false );
+ 			
+ 			// Remove script element used by IE hack
+@@ -1586,7 +1587,7 @@
+ 	});
+ 	
+ 	// If Mozilla is used
+-	if ( jQuery.browser.mozilla || jQuery.browser.opera )
++	if ( jQuery.browser.gecko || jQuery.browser.opera )
+ 		// Use the handy event callback
+ 		document.addEventListener( "DOMContentLoaded", jQuery.ready, false );
+ 	
+@@ -1612,7 +1613,7 @@
+ 		script = null;
+ 	
+ 	// If Safari  is used
+-	} else if ( jQuery.browser.safari )
++	} else if ( jQuery.browser.webkit || jQuery.browser.khtml )
+ 		// Continually check to see if the document.readyState is valid
+ 		jQuery.safariTimer = setInterval(function(){
+ 			// loaded and complete are both valid states
+@@ -1935,7 +1936,7 @@
+ 		try {
+ 			return !r.status && location.protocol == "file:" ||
+ 				( r.status >= 200 && r.status < 300 ) || r.status == 304 ||
+-				jQuery.browser.safari && r.status == undefined;
++				(jQuery.browser.webkit || jQuery.browser.khtml) && r.status == undefined;
+ 		} catch(e){}
+ 		return false;
+ 	},
+@@ -1947,7 +1948,7 @@
+ 
+ 			// Firefox always returns 200. check Last-Modified date
+ 			return xml.status == 304 || xmlRes == jQuery.lastModified[url] ||
+-				jQuery.browser.safari && xml.status == undefined;
++				(jQuery.browser.webkit || jQuery.browser.khtml) && xml.status == undefined;
+ 		} catch(e){}
+ 		return false;
+ 	},
+@@ -2012,7 +2013,7 @@
+ 	globalEval: function( data ) {
+ 		if ( window.execScript )
+ 			window.execScript( data );
+-		else if ( jQuery.browser.safari )
++		else if ( jQuery.browser.webkit || jQuery.browser.khtml )
+ 			// safari doesn't provide a synchronous global eval
+ 			window.setTimeout( data, 0 );
+ 		else

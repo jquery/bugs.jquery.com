@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+		<title>Enter problem</title>
+		<script type="text/javascript" src="jquery-1.4.2.js"></script>
+	</head>
+	<body>
+		<p id="version"></p>
+		<input id="input" type="text"/>
+		<p>Instructions:
+			<ol>
+				<li>Click on the page background</li>
+				<li>Click in the input textbox</li>
+				<li>Type a couple of characters</li>
+				<li>Hit Enter</li>
+				<li>Hit Enter again</li>
+			</ol>
+		</p>
+		<p id="enter" style="display:none; padding:4px; color:white; background-color:green;">document received ENTER keydown event</p>
+		<p id="change" style="display:none; padding:4px; color:white; background-color:red;">input received change event</p>
+		
+		<script type="text/ecmascript">
+			$(function() {
+				$("#version").text("Using jQuery " + $(document).jquery);
+				$(document).keydown(function(evt) { 
+					if (evt.keyCode == 13) $("#enter").stop().fadeIn(0).fadeOut(1000);
+				});
+				$("#input").bind("change", function(evt) {
+					$("#change").stop().fadeIn(0).fadeOut(1000);
+					//if (evt.keyCode != 13) return; // this prevents the issue
+					evt.stopPropagation();
+				});
+			});
+		</script>
+	</body>
+</html>

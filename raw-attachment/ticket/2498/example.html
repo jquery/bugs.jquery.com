@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+    <style type="text/css">
+	.nextEl{
+		width:100%;
+		margin-top:5px;
+		margin-bottom:10px;
+	}
+	.errorAdvise{
+		/*background-color:Gainsboro;
+		padding-top:5px;
+		padding-bottom:10px;*/
+		padding-left:20px;
+		background:Gainsboro url(../../images/unchecked.gif) no-repeat left;
+	}
+	.error{
+		color:red;
+		font-weight:bold;
+	}
+	.checked{
+		padding-left:20px;
+		background:GreenYellow url(../../images/checked.gif) no-repeat left;
+	}
+    </style>
+<script src="/js/jquery.js" type="text/javascript"></script>
+<script src="/js/ui.datepicker.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+jQuery(document).ready(function(){
+	var validator = jQuery("#incidentReport").validate({
+		rules:{
+			title:"required",
+			genre:"required",
+			os:"required",
+			inet:"required",
+			browser:"required",
+			
+			ram:{
+				required:false
+			},
+			hdd:{
+				required:false
+			},
+			screenResolution:{
+				required:false
+			},
+			time:"required",
+			date:{
+				required:true,
+				dateISO: true
+			},
+			description:{
+				required:true,
+				minlength: 100
+			},
+			clasify:"required"
+
+		},
+		messages: {
+            title: "Enter a title for your incident", 
+            genre: "Enter your lastname", 
+			os: "Please Choose the operating system", 
+            inet: "What Connection did you had at the moment?",
+			browser: "in what Browser did you experience this anomaly",
+			time: "do you remember the time when this ocurred? if not try your best guess",
+			date: "we need the date... again just try your best guess",
+			description:{
+				required: "This is the Long Description of your incident try being as descriptive as possible, keep in mind we are not machines... (maybe monkeys, or chickens)",
+				minlength: jQuery.format("Enter at least {0} characters")
+			},
+			clasify: "try and clasify the incident"
+        },
+		errorPlacement: function(error, element) { 
+			console.log(element.parent());
+			element.parent().removeClass('checked');
+			element.parent().addClass("errorAdvise");
+            if (element.is(":radio")){
+				error.html('Error: '+error.html());
+                error.appendTo(element.parent().find('.nextEl')); 
+			}else if(element.is(":checkbox")){
+				error.html('Error: '+error.html());
+            	error.appendTo(element.parent().find('.nextEl')); 
+			}else{
+				error.html('Error: '+error.html());
+            	error.appendTo(element.parent().find('.nextEl')); 
+			}
+			
+			/*if ( element.is(":radio") ) 
+                error.appendTo( element.parent().next().next() ); 
+            else if ( element.is(":checkbox") ) 
+                error.appendTo ( element.next() ); 
+            else 
+                error.appendTo( element.parent().next() ); */
+        }, 
+        // set this class to error-labels to indicate valid fields 
+        success: function(label) { 
+            // set   as text for IE 
+			label.parent().parent().removeClass('errorAdvise');
+			label.parent().parent().addClass('checked');
+            label.html(" ");
+        }
+	});
+	jQuery("#date").attachDatepicker();
+});
+</script>
+
+</head>
+
+<body>
+    <div id="addNewForm">
+        <form id="incidentReport" action="/actions/reportIncident.php">
+        	
+            <div class="row">
+                <label>Title of Incident:</label>
+                <input type="text" name="title" />
+                <div class="nextEl"></div>
+            </div>
+            
+            <div class="row">
+                <label>Genre:</label>
+                <select name="genre" >
+	                <option>Please Choose One</option>
+                	<option>banner</option>
+                    <option>forms</option>
+                    <option>images</option>
+                    <option>flash</option>
+                    <option>audio</option>
+                    <option>copy</option>
+                </select>
+                <div class="nextEl"></div>
+            </div>
+            
+            <div class="row">
+                <label>Operating System:</label>
+                 <select name="os" >
+	                <option>Please Choose One</option>
+                    <option>Windows 98</option>
+                	<option>Windows XP</option>
+                    <option>Windows 2000</option>
+                    <option>Windows Vista</option>
+                    <option>Mac OSX 10.4.x</option>
+                    <option>Mac OSX 10.5.x</option>
+                    <option>Linux</option>
+                    <option>Nokia Nseries (N95,N92,N85 etc)</option>
+                    <option>Windows Mobile</option>
+                    <option>Iphone</option>
+                    <option>Other</option>
+                </select>
+                <div class="nextEl"></div>
+            </div>
+            
+            <div class="row">
+                <label>Internet Connection:</label>
+                <select name="inet" >
+	                <option>Please Choose One</option>
+                	<option>Dial Up</option>
+                    <option>Cable</option>
+                    <option>T1</option>
+                </select>
+                <div class="nextEl"></div>
+            </div>
+            
+            <div class="row">
+                <label>Browser:</label>
+                 <select name="browser" >
+	                <option>Please Choose One</option>
+                	<option>FireFox 2.x</option>
+                    <option>FireFox 3</option>
+                    <option>Microsoft Internet Explorer 6</option>
+                    <option>Microsoft Internet Explorer 7</option>
+                    <option>Microsoft Internet Explorer 8</option>
+                    <option>Safari 1.x</option>
+                    <option>Safari 2.x</option>
+                    <option>Safari 3.x</option>
+                    <option>Safari (Iphone)</option>
+                    <option>Opera</option>
+                    <option>Other</option>
+                </select>
+                <div class="nextEl"></div>
+            </div>
+            
+            <div class="row">
+                <label>Ram:</label>
+                <input type="text" name="ram" />
+                <div class="nextEl"></div>
+            </div>
+            
+            <div class="row">
+                <label>HDD free space:</label>
+                <input type="text" name="hdd" />
+                <div class="nextEl"></div>
+            </div>
+            
+            <div class="row">
+                <label>Screen Resolution:</label>
+                <input type="text" name="screenResolution" />
+                <div class="nextEl"></div>
+            </div>
+            
+            <div class="row">
+                <label>Time of Incident:</label>
+                <input type="text" name="time" />
+                <div class="nextEl"></div>
+            </div>
+            
+            <div class="row">
+                <label>Date of Incident:</label>
+                <input type="text" name="date" id="date" />
+                <div class="nextEl"></div>
+            </div>
+            
+            <div class="row">
+                <label>Brief Description:</label>
+                <!--<input type="text" name="title" />-->
+                <textarea name="description" cols="35" rows="5"></textarea>
+                <div class="nextEl"></div>
+            </div>
+            
+            <div class="row">
+                <label>Clasify the error:</label>
+                <input type="radio" name="clasify" style="width:25px;" />&lt;-medium<input type="radio" name="clasify" style="width:25px;" />&lt;-several<input type="radio" name="clasify" style="width:25px;" />&lt;-critical
+                <div class="nextEl"></div>
+            </div>
+            <input type="submit" value="Submit" style="width:50px;" />&nbsp;<input type="reset" value="Reset" style="width:50px;" />
+            
+        </form>
+    </div>
+
+</body>
+</html>

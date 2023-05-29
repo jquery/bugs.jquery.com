@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head> 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript"> 
+function countStuff(){
+		// Results for IE 7 only (tested in IE tester and IE8 compatibility mode)
+		alert($('a[name="thename"]').length); // shows 1, correct - 'a' element ok
+		alert($('div[class="theclass"]').length); // shows 1, correct - 'div' element by attribute:class ok
+		alert($('div[name="thename"]').length); // shows 0, should be 1 !!!:
+		
+		alert($('.theclass[name="thename"]').length); //shows 1, should be 2 !!! - div element excluded
+		alert($('.theclass').filter('[name="thename"]').length);// shows 2, correct - using filter selects both elements
+}
+</script>
+</head>
+ 
+<body>
+	<div name='thename' class='theclass'>Content in a div</div>
+	<a href='#' name='thename' class='theclass'>Content within a link</a>
+  <p><a href='#' onclick='countStuff()'>CLICK HERE - Count stuff</a></p>
+</body>
+</html>

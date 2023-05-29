@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+	<script type="text/javascript">
+<!--
+function checkFoo() {
+	var choice = $('input[name="foo[0]"]:checked').val();
+	alert("foo[0] choice is " + choice);
+}
+function checkBarBaz() {
+	var choice = $('input[name="bar.baz[0]"]:checked').val();
+	alert("bar.baz[0] choice is " + choice);
+}
+function checkFeeFoe() {
+	var choice = $('input[name="fee.foe"]:checked').val();
+	alert("fee.foe choice is " + choice);
+}
+-->
+</script>
+</head>
+<body>
+<h1>foo[0]</h1>
+<form>
+	<input type="radio" name="foo[0]" id="test_1_1" checked="checked" value="1" /><label for="test_1_1">Yes</label>
+	<input type="radio" name="foo[0]" id="test_1_2" value="2" /><label for="test_1_2">No</label>
+	<input type="button" value="Test" onClick="checkFoo();" />
+</form>
+<h1>bar.baz[0] - why does this not work?</h1>
+<form>
+	<input type="radio" name="bar.baz[0]" id="test_2_1" checked="checked" value="1" /><label for="test_2_1">Yes</label>
+	<input type="radio" name="bar.baz[0]" id="test_2_2" value="2" /><label for="test_2_2">No</label>
+	<input type="button" value="Test" onClick="checkBarBaz();" />
+</form>
+<h1>fee.foe</h1>
+<form>
+	<input type="radio" name="fee.foe" id="test_3_1" checked="checked" value="1" /><label for="test_3_1">Yes</label>
+	<input type="radio" name="fee.foe" id="test_3_2" value="2" /><label for="test_3_2">No</label>
+	<input type="button" value="Test" onClick="checkFeeFoe();" />
+</form>
+</body>
+</html>

@@ -1,0 +1,36 @@
+Index: src/fx.js
+===================================================================
+--- src/fx.js	(revision 6414)
++++ src/fx.js	(working copy)
+@@ -22,6 +22,7 @@
+ 		if ( speed ) {
+ 			return this.animate( genFx("show", 3), speed, callback);
+ 		} else {
++			var tmpDiv;
+ 			for ( var i = 0, l = this.length; i < l; i++ ){
+ 				var old = jQuery.data(this[i], "olddisplay");
+ 				
+@@ -33,8 +34,11 @@
+ 					if ( elemdisplay[ tagName ] ) {
+ 						display = elemdisplay[ tagName ];
+ 					} else {
+-						var elem = jQuery("<" + tagName + " />").appendTo("body");
+-						
++						if ( !tmpDiv ) {
++							tmpDiv = jQuery("<div/>").appendTo("body");
++						}
++						var elem = jQuery("<" + tagName + " />").appendTo(tmpDiv);
++
+ 						display = elem.css("display");
+ 						if ( display === "none" )
+ 							display = "block";
+@@ -47,6 +51,9 @@
+ 					jQuery.data(this[i], "olddisplay", display);
+ 				}
+ 			}
++			if ( tmpDiv ) {
++				tmpDiv.remove();
++			}
+ 
+ 			// Set the display of the elements in a second loop
+ 			// to avoid the constant reflow

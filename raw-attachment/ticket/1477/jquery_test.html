@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      function doIt() {
+        var s = "" + $("#emblem").val();
+        $("#adiv").text(s);
+      }
+
+      $(function () {
+        $("#emblem").mouseup(doIt);
+      });
+    </script>
+  </head>
+  <body>
+    <select id="emblem">
+      <option value="a">1</option>
+      <option value="b">2</option>
+      <option value="c">3</option>
+      <option value="d">4</option>
+    </select>
+    <div id="adiv"></div>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+... Line number 215
+		onkeyup: function(element) {
+			// Altered by Jeroen van de Pol, grouped variables will also be checked on keyup
+			if (element.name in this.submitted || element == this.lastElement ) {
+				var check = this;
+				if($(this.settings.groups).length > 0) {
+					$.each($(this.settings.groups), function(index, group){
+						$.each(group, function(group, elements){
+							// check if current element exist in this group
+							if(elements.indexOf(element.id) > -1) {
+								$.each(elements.split(' '), function(index, el){
+									if($('#'+el)) {
+										check.element($('#'+el));
+									}
+								});
+							}
+						});
+					});
+				} 
+				this.element(element);
+			}
+		},

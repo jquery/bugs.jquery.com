@@ -1,0 +1,93 @@
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 5202)
++++ src/event.js	(working copy)
+@@ -41,17 +41,10 @@
+ 		// Init the element's event structure
+ 		var events = jQuery.data(elem, "events") || jQuery.data(elem, "events", {}),
+ 			handle = jQuery.data(elem, "handle") || jQuery.data(elem, "handle", function(){
+-				// returned undefined or false
+-				var val;
+-
+ 				// Handle the second event of a trigger and when
+ 				// an event is called after a page has unloaded
+-				if ( typeof jQuery == "undefined" || jQuery.event.triggered )
+-					return val;
+-		
+-				val = jQuery.event.handle.apply(arguments.callee.elem, arguments);
+-		
+-				return val;
++				if ( typeof jQuery != "undefined" && !jQuery.event.triggered )
++					return jQuery.event.handle.apply(arguments.callee.elem, arguments);
+ 			});
+ 		// Add elem as a property of the handle function
+ 		// This is to prevent a memory leak with non-native
+@@ -240,36 +233,35 @@
+ 		var val;
+ 
+ 		// Empty object is for triggered events with no data
+-		event = jQuery.event.fix( event || window.event || {} ); 
++		event = arguments[0] = jQuery.event.fix( event || window.event ); 
+ 
+ 		// Namespaced event handlers
+-		var parts = event.type.split(".");
+-		event.type = parts[0];
++		var ns = event.type.split(".");
++		event.type = ns[0];
++		ns = ns[1];//namespace
+ 
+-		var handlers = jQuery.data(this, "events") && jQuery.data(this, "events")[event.type], args = Array.prototype.slice.call( arguments, 1 );
+-		args.unshift( event );
++		var handlers = jQuery.data(this, "events") && jQuery.data(this, "events")[event.type];
+ 
+ 		for ( var j in handlers ) {
+ 			var handler = handlers[j];
+-			// Pass in a reference to the handler function itself
+-			// So that we can later remove it
+-			args[0].handler = handler;
+-			args[0].data = handler.data;
+ 
+ 			// Filter the functions by class
+-			if ( !parts[1] && !event.exclusive || handler.type == parts[1] ) {
+-				var ret = handler.apply( this, args );
++			if ( !ns && !event.exclusive || handler.type == ns ) {
+ 
+-				if ( val !== false )
+-					val = ret;
+-
+-				if ( ret === false ) {
+-					event.preventDefault();
+-					event.stopPropagation();
+-				}
++				// Pass in a reference to the handler function itself
++				// So that we can later remove it
++				event.handler = handler;
++				event.data = handler.data;
++				
++				val = handler.apply( this, arguments ) !== false && val;
+ 			}
+ 		}
+ 
++		if ( val === false ) {//check after the loop
++			event.preventDefault();
++			event.stopPropagation();
++		}
++
+ 		// Clean up added properties in IE to prevent memory leak
+ 		if (jQuery.browser.msie)
+ 			event.target = event.preventDefault = event.stopPropagation =
+@@ -279,10 +271,13 @@
+ 	},
+ 
+ 	fix: function(event) {
++		if( event._fixed_ )//already fixed
++			return event;
++		
+ 		// store a copy of the original event object 
+ 		// and clone to set read-only properties
+ 		var originalEvent = event;
+-		event = jQuery.extend({}, originalEvent);
++		event = jQuery.extend({ _fixed_:true }, originalEvent);
+ 		
+ 		// add preventDefault and stopPropagation since 
+ 		// they will not work on the clone

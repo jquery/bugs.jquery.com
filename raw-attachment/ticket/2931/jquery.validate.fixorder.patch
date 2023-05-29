@@ -1,0 +1,13 @@
+--- jquery.validate.js	2008-05-24 08:24:28.877081400 -0400
++++ jquery.validate.new.js	2008-05-24 08:29:52.832907000 -0400
+@@ -409,8 +409,8 @@
+ 			// select all valid inputs inside the form (no submit or reset buttons)
+ 			// workaround with jQuery([]).add until http://dev.jquery.com/ticket/2114 is solved
+ 			return jQuery([]).add(this.currentForm.elements)
+-			.filter("input, select, textarea")
+-			.not(":submit, :reset, [disabled]")
++			.filter(":input")
++			.not(":submit, :reset, :image, [disabled]")
+ 			.not( this.settings.ignore )
+ 			.filter(function() {
+ 				!this.name && validator.settings.debug && window.console && console.error( "%o has no name assigned", this);

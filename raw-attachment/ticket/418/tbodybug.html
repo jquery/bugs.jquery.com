@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>TBody Duplication</title>
+		<script type="text/javascript" src="jquery-latest.js"></script>
+		<script type="text/javascript">
+		<!--
+		$(
+			function()
+			{
+				var mytable = $("<table>");
+				var mythead = $("<thead>").append("<tr><th>TH One</th><th>TH Two</th></tr>");
+				var mytbody = $("<tbody>").append("<tr><td>TD One</td><td>TD Two</td></tr>");
+				mytable.append(mythead).append(mytbody);
+				$("#placeholder").append(mytable);
+				alert(mytable.html());
+			}
+		)
+		//-->
+		</script>
+	</head>
+	<body>
+		<div id="placeholder"></div>
+	</body>
+</html>

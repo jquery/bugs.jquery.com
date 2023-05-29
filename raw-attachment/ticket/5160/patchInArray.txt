@@ -1,0 +1,18 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 6533)
++++ core.js	(working copy)
+@@ -409,12 +409,12 @@
+ 	},
+ 
+ 	inArray: function( elem, array ) {
++		if(array.indexOf) return array.indexOf(elem);
+ 		for ( var i = 0, length = array.length; i < length; i++ ) {
+ 			if ( array[ i ] === elem ) {
+ 				return i;
+ 			}
+ 		}
+-
+ 		return -1;
+ 	},
+ 

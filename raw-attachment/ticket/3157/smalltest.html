@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<script type="text/javascript" src="jquery-1.2.6.js"></script>
+<script type="text/javascript" src="jquery.create.js"></script>
+
+<script type="text/javascript">
+var JQTester = {
+	init: function(){
+		jQuery.noConflict();
+		jQuery('#events').bind('click', function(e){
+      jQuery('#events').html(jQuery('#events').html() + 'click<br>');
+    });
+		jQuery('#events').bind('submit', function(e){
+      jQuery('#events').html(jQuery('#events').html() + 'submit<br>');
+    });
+		jQuery('#events').bind('ajaxComplete', function(e){
+      jQuery('#events').html(jQuery('#events').html() + 'ajaxComplete<br>');
+    });
+		jQuery('#events').bind('ajaxStart', function(e){
+      jQuery('#events').html(jQuery('#events').html() + 'ajaxStart<br>');
+    });
+		jQuery('#events').bind('ajaxSuccess', function(e){
+      jQuery('#events').html(jQuery('#events').html() + 'ajaxSuccess<br>');
+    });
+		jQuery('#button').click(function(){
+			JQTester.doit();
+			return true;
+		});
+	},
+
+	doit: function(){
+		jQuery.getJSON('http://td-www.loan.com/jsonreturn.html?jsoncallback=?');
+	}
+}
+	function callbackfnc(data){
+		console.log(data);
+	}
+$(document).ready(function(){
+	JQTester.init();
+});
+</script>
+
+</head>
+<body>
+
+<div id="loading" style="display:none">BOX BOX BOX</div>
+<div id="events"></div>
+<input id="button" type="button">
+</body>
+</html>

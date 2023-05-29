@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+	<title>jQuery Bug</title>
+	<style type="text/css" media="screen">
+		body {
+			font: normal 12px/1.1em Arial, sans-serif;
+		}
+		pre {
+			font: normal 13px/1.1em Courier, monospace;
+			background: #151515;
+			color: #fff;
+			padding: 3px;
+			border: 2px solid #666;
+		}
+		pre .grey {color: #abaeae;}
+		pre .green {color: #62b040;}
+		pre .neon {color: #99cf4a;}
+		pre .orange {color: #e28964;}
+		pre .brown {color: #c56a4d;}
+		pre .blue {color: #3387a8;}
+		pre .purple {color: #9b859d;}
+		pre .yellow {color: #dad085;}
+	</style>
+
+</head>
+<body>
+
+	<a id="link" href="#">Test Link</a>
+	<p>Click anywhere, the click handler was bound to the window, when it should not have. It should only be on "Test Link".</p>
+	<script type="text/javascript" charset="utf-8">
+		var
+		link = document.getElementById('link'),
+		other = document.getElementById('noExist'); // other element, maybe it is null
+
+		// Okay now lets attach a click handler to both values
+		jQuery([link, null]).bind('click', function (e) {
+			alert('You just clicked on a <' + e.target.tagName + '> element');
+		});
+	</script>
+	<h2>Code:</h2>
+	<pre>
+<span class="neon">var</span>
+link <span class="orange">=</span> <span class="purple">document</span>.<span class="yellow">getElementById</span>(<span class="green">'link'</span>),
+other <span class="orange">=</span> <span class="purple">document</span>.<span class="yellow">getElementById</span>(<span class="green">'noExist'</span>); <span class="grey">// other element, maybe it is null</span>
+
+<span class="grey">// okay, now lets attach a click handler to both values</span>
+jQuery([link, <span class="blue">null</span>]).bind(<span class="green">'click'</span>, <span class="neon">function</span> (<span class="blue">e</span>) {
+  <span class="yellow">alert</span>(<span class="green">'You just clicked on a &lt;'</span> <span class="orange">+</span> e.<span class="brown">target</span>.<span class="brown">tagName</span> <span class="orange">+</span> <span class="green">'&gt; element'</span>);
+});
+</pre>
+
+</body>
+</html>

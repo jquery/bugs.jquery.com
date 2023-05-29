@@ -1,0 +1,18 @@
+<script src="jquery-1.2.4a.js"></script>
+<script src="jquery.ui-all-1.5b2.js"></script>
+<style>
+.test { width:200px; height:200px; margin:10px; background-color:#68BFEF; }
+</style>
+<script>
+$(document).ready(function(){
+    for (var div,i=1; i<=5; i++) {
+        div += '<div id="'+i+'" class="test">'+i+'</div>';
+    }
+    $(div).appendTo("body");
+
+    $('.test').draggable({
+        helper: 'clone'
+    });
+});
+</script>
+scroll to botton, drag the last div, you will see the bug.

@@ -1,0 +1,44 @@
+Index: ui.dialog.js
+===================================================================
+--- ui.dialog.js	(revision 4770)
++++ ui.dialog.js	(working copy)
+
+@@ -154,7 +166,12 @@
+ 			}
+ 			top = top < doc.scrollTop() ? doc.scrollTop() : top;
+ 			uiDialog.css({top: top, left: left});
+-			uiDialog.show();
++			if(options.show){
++				options.show(uiDialog);
++			}
++			else{
++				uiDialog.show();
++			}
+ 			self.moveToTop();
+ 			self.activate();
+ 			
+@@ -188,7 +205,12 @@
+ 		
+ 		this.close = function() {
+ 			this.overlay && this.overlay.destroy();
+-			uiDialog.hide();
++			if(options.hide){
++				options.hide(uiDialog);
++			}
++			else{
++				uiDialog.hide();
++			}
+ 
+ 			// CALLBACK: close
+ 			var closeEV = null;
+@@ -216,7 +238,9 @@
+ 			position: 'center',
+ 			resizable: true,
+ 			width: 300,
+-			zIndex: 1000
++			zIndex: 1000,
++			show:false,
++			hide:false
+ 		},
+ 		
+ 		overlay: function(dialog) {

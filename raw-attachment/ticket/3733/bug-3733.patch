@@ -1,0 +1,16 @@
+--- jquery.old.js	2008-12-24 12:34:08.000000000 -0800
++++ jquery.js	2008-12-24 14:12:31.000000000 -0800
+@@ -512,8 +512,11 @@
+ 					scripts = scripts.add( elem );
+ 				else {
+ 					// Remove any inner scripts for later evaluation
+-					if ( elem.nodeType == 1 )
+-						scripts = scripts.add( jQuery( "script", elem ).remove() );
++					if ( elem.nodeType == 1 ) {
++
++						if ( typeof jQuery( "script", elem ).type == undefined || jQuery( "script", elem ).type == 'text/javascript' )
++							scripts = scripts.add( jQuery( "script", elem ).remove() );
++					}
+ 
+ 					// Inject the elements into the document
+ 					callback.call( obj, elem );

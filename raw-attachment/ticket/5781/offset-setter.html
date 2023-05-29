@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+	<title>.offset() setter bug</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4a2.js"></script>
+	<style type="text/css">
+	#below {
+		position: absolute;
+	}
+	</style>
+	<script type="text/javascript">
+	$(function() {
+		var above = $('#above'),
+			aboveOffset = above.offset();
+		$('#below').offset({
+			top: aboveOffset.top + above.height(),
+			left: aboveOffset.left
+		});
+	});
+	</script>
+</head>
+<body>
+
+<p id="above">I should be above</p>
+<p id="below">I should be below</p>
+
+</body>
+</html>

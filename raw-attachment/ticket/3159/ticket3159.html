@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<script type="text/javascript" src="jquery-1.2.6.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+
+				$('#blah').data('foo','bar');
+
+				// this fails to uncache 
+				$('#container').empty();
+
+				// this works
+				//$('#container').children().removeData().end().empty();
+
+				console.dir($.cache);
+			});
+		</script>
+	</head>
+	<body>
+		<div id="container">
+			<form id="blah">
+				blah	
+			</form>
+		</div>
+	</body>
+

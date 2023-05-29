@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+</head>
+
+<body>
+  <div>a</div>
+  <div>b</div>
+  <div>c</div>
+  
+  <script type="text/javascript">
+    // $#each and $#map both take functions with (index, element)
+    // and they both reassign "this" to the current element
+    
+    var selector = "div:not('_firebugConsole')";
+    
+    console.log("--- $#each---");
+    
+    $(selector).each(function(index, element) {
+        console.log("letter " + element.innerHTML);
+        console.log("letter " + this.innerHTML);
+    });
+    
+    console.log("--- $#map---");
+    
+    $(selector).map(function(index, element) {
+        console.log("letter " + this.innerHTML);
+        console.log("letter " + element.innerHTML);
+    });
+    
+    // $.each also takes a function with (index, element)
+    // and reassignes "this" to the current element.
+    // However $.map instead takes (element, index)
+    // and "this" is not reassigned to the element
+    
+    var array = ["a", "b", "c"];
+    
+    console.log("--- $.each---");
+    
+    $.each(array, function(index, element) {
+      console.log("letter " + element);
+      console.log("letter " + this);
+    });
+    
+    console.log("--- $.map---");
+    
+    $.map(array, function(index, element) {
+                     // ^ ERROR: $.map takes (element, index)
+      console.log("letter " + element); // < will print the index instead of the letter
+      console.log("letter " + this); // < will print [object Window] instead of the letter
+    });
+  </script>
+</body>
+</html>

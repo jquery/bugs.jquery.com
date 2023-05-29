@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+	<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			alert("target = " + $("#main_form").attr('target'));
+
+			$("#main_form").attr('target', 'bar');
+			
+			alert("target = " + $("#main_form").attr('target'));
+			
+			//console.log($("#main_form").attr('target'));
+			
+		});
+	</script>
+</head>
+
+<body>
+	<form id="main_form" target="foo">
+		<input id="target" value="" />
+	</form>
+</body>
+</html>

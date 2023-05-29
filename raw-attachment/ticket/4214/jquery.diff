@@ -1,0 +1,64 @@
+--- jquery.js	2009-02-22 18:27:27.000000000 -0600
++++ jquery.patched.js	2009-02-22 18:53:24.000000000 -0600
+@@ -6,7 +6,7 @@
+  * Dual licensed under the MIT and GPL licenses.
+  * http://docs.jquery.com/License
+  *
+- * Date: 2009-02-19 16:34:21 -0600 (Thu, 19 Feb 2009)
++ * Date: 2009-02-19 17:34:21 -0500 (Thu, 19 Feb 2009)
+  * Revision: 6246
+  */
+ (function(){
+@@ -192,6 +192,12 @@
+ 	},
+ 
+ 	css: function( key, value ) {
++		if (key == 'transform') {
++			if (typeof jQuery.props[key] == 'undefined' || !jQuery.props[key]) {
++				jQuery.props[key] = getTransformProperty(this.get(0));
++			}
++		}
++		
+ 		// ignore negative width and height values
+ 		if ( (key == 'width' || key == 'height') && parseFloat(value) < 0 )
+ 			value = undefined;
+@@ -794,6 +800,9 @@
+ 		if ( name.match( /float/i ) )
+ 			name = styleFloat;
+ 
++		// Will map transform to browser specific transform properties
++		name = jQuery.props[ name ] || name;
++
+ 		if ( !force && style && style[ name ] )
+ 			ret = style[ name ];
+ 
+@@ -3209,6 +3218,19 @@
+ 
+ var styleFloat = jQuery.support.cssFloat ? "cssFloat" : "styleFloat";
+ 
++function getTransformProperty(element) {
++	// Try transform first for forward compatibility
++	var properties = ['transform', 'WebkitTransform', 'MozTransform'];
++	var p;
++	while (p = properties.shift()) {
++		if (typeof element.style[p] != 'undefined') {
++			return p;
++		}
++	}
++	// Default to transform also
++	return 'transform';
++}
++
+ jQuery.props = {
+ 	"for": "htmlFor",
+ 	"class": "className",
+@@ -3219,7 +3241,8 @@
+ 	maxlength: "maxLength",
+ 	cellspacing: "cellSpacing",
+ 	rowspan: "rowSpan",
+-	tabindex: "tabIndex"
++	tabindex: "tabIndex",
++	transform: undefined
+ };
+ jQuery.fn.extend({
+ 	// Keep a copy of the old load

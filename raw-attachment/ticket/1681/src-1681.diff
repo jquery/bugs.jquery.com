@@ -1,0 +1,16 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 5830)
++++ src/core.js	(working copy)
+@@ -1304,8 +1304,9 @@
+ 		jQuery.className.remove( this, classNames );
+ 	},
+ 
+-	toggleClass: function( classNames ) {
+-		jQuery.className[ jQuery.className.has( this, classNames ) ? "remove" : "add" ]( this, classNames );
++	toggleClass: function( classNames, b ) {
++		if( typeof b === 'undefined' ) b = !jQuery.className.has( this, classNames );
++		jQuery.className[ b ? "add" : "remove" ]( this, classNames );
+ 	},
+ 
+ 	remove: function( selector ) {

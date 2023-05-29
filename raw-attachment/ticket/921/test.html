@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>jQ IE clone Test</title>
+<script type="text/javascript" src="inc/jquery.js"></script>
+
+</head>
+<body>
+
+<hr />
+<p>IE's scope is the cloned element, NOT the clone. IE also auto-fires events attached to "clones" -- hence the instant removal of cloned element (not clone).</p>
+
+<div id="ex1">
+	
+	<div>
+	<input type="text" name="v" value="test" class="pV" />
+	<input type="submit" value="+" class="addValue" />
+	</div>
+	
+</div>
+
+<script type="text/javascript">
+$().ready(function(){
+    $('#ex1 input.addValue').click(function() {
+    	$(this).parent().clone().appendTo('#ex1');
+    	
+    	$(':input:last',$('#ex1'))
+    	   .val('-')
+    	   .one('click', function() 
+                {
+                    $(this).parent().remove();
+                    return false;
+                }
+                );
+	});
+});
+</script>
+
+
+
+<hr />
+
+<p>Using a benign click event, the element is not removed. NOTICE that clones still have their donor events!</p>
+
+
+<div id="ex2">
+	
+	<div>
+	<input type="text" name="v" value="test" class="pV" />
+	<input type="submit" value="+" class="addValue" />
+	</div>
+	
+</div>
+
+<script type="text/javascript">
+$().ready(function(){
+    $('#ex2 input.addValue').click(function() {
+    	$(this).parent().clone().appendTo('#ex2');
+    	
+    	$(':input:last',$('#ex2'))
+    	   .val('-')
+    	   .one('click', function() { return false; });;
+	});
+});
+</script>
+
+</body>
+</html>

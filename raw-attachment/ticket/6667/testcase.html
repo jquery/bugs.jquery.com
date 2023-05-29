@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<script src="http://code.jquery.com/jquery-1.4.2.js"></script>
+		<script>
+		jQuery(function() {
+			var first = 'body';
+			var second = 'body';
+			jQuery(first).delegate('foobar','click', jQuery.noop);
+			jQuery(second).delegate('form','submit', function(){
+				alert('submit');
+				return false;
+			});
+		});
+		</script>
+	</head>
+	<body>
+		<form>
+			<input type="submit" name="submitted"/>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!--
+Validate bug showcase.
+Author: Vinícius Pitta Lima de Araújo (contato at viniciusaraujo dot net
+Description: This showcase demostrate how the validate plugin behave with custom rules when the maxlength property is defined.
+-->
+<html>
+	<head>
+		<title>validate custom method bug</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<script type="text/javascript" src="jquery-1.2.3.min.js"></script>
+		<script type="text/javascript" src="jquery.validate.js"></script>
+		<script type="text/javascript">
+			$().ready(function() {
+				$.validator.addMethod("customRule", function (value, element) {
+					alert(element.name + ' checked!');
+					return !this.optional(element);
+				}, "Invalid field!");
+				
+				$("#testForm").validate({
+					rules : {
+						tf1 : "customRule",
+						tf2 : "customRule"
+					},
+					submitHandler : function(f) {
+						alert('Form submitted');
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<form id="testForm">
+			<p>
+				This text has the <em>maxlength</em> property setted and will the custom rule will work only when the field is filled 
+				because if the field is empty the maxlength rule will return a <em>dependency-mismatch</em> and stop the execution of the check method.
+			</p>
+			<label for="tf1">Text Field 1</label><input type="text" id="tf1" name="tf1" maxlength="50"/><br/>
+			
+			<p>
+				This one will ever work because it have not the <em>maxlength</em> property.
+			</p>
+			<label for="tf2">Text Field 2</label><input type="text" id="tf2" name="tf2" />
+			<br/>
+			<button type="submit">Test it!</button>
+		</form>
+	</body>
+</html>

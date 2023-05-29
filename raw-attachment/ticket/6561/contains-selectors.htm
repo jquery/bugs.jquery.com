@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+ <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE6" />
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<style type="text/css">
+body {background: #fff; color: #000;}
+
+td.tar { text-align: right; }
+input { background: #eee; color: #000; width: 60px; }
+
+table, td, th { border: #333 1px solid; border-collapse: collapse; padding: 3px; }
+#demo td { height: 75px; width: 75px; vertical-align: top; }
+span.date { text-align: right; display: block; }
+</style>
+</head><body>
+
+<h2>jQuery Selectors</h2>
+<table id="setup">
+ <tr>
+  <th>Target</th>
+  <th>Selector</th>
+  <th>Case</th>
+  <th colspan=2>Style</th>
+ </tr>
+ <tr>
+  <td class="tar">
+   <select class="sc0">
+    <option value="td" selected>td</option>
+    <option value=".date">.date</option>
+    <option value=".event">.event</option>
+   </select>
+  </td>
+  <td>:contains( <input class="sc1" type="text" style="width:100px" value="2" title="case sensitive" /> )</td>
+  <td>Sensitive</td>
+  <td>Background</td>
+  <td><input class="sc2" type="text" value="#EB7"></td>
+ </tr>
+ <tr>
+  <td class="tar">
+   <select class="ex0">
+    <option value="td">td</option>
+    <option value=".date" selected>.date</option>
+    <option value=".event">.event</option>
+   </select>
+  </td>
+  <td>:containsExact( <input class="ex1" type="text" style="width:100px" value="3" /> )</td>
+  <td>Insensitive</td>
+  <td>Text Color</td>
+  <td><input class="ex2" type="text" value="#F00"></td>
+ </tr>
+ <tr>
+  <td class="tar">
+   <select class="ec0">
+    <option value="td">td</option>
+    <option value=".date">.date</option>
+    <option value=".event" selected>.event</option>
+   </select>
+  </td>
+  <td>:containsExactCase( <input class="ec1" type="text" style="width:100px" value="Vacation" title="case sensitive" /> )&nbsp;</td>
+  <td>Sensitive</td>
+  <td>Border</td>
+  <td><input class="ec2" type="text" value="#00F"></td>
+ </tr>
+</table>
+<br>
+Basic Table Cell: &lt;td&gt;&lt;span class="date"&gt;#&lt;/span&gt;&lt;span class="event"&gt;Event&lt;/span&gt;&lt;/td&gt;<br>
+<br>
+<button>Update</button>
+<br><br>
+
+ <table id="demo">
+  <tr>
+   <td><span class="date">1</span></td>
+   <td><span class="date">2</span></td>
+   <td><span class="date">3</span></td>
+   <td><span class="date">4</span></td>
+   <td><span class="date">5</span></td>
+   <td><span class="date">6</span></td>
+   <td><span class="date">7</span></td>
+  <tr>
+  <tr>
+   <td><span class="date">8</span></td>
+   <td><span class="date">9</span><span class="event">Event day #1</span></td>
+   <td><span class="date">10</span><span class="event">Event day #2</span></td>
+   <td><span class="date">11</span><span class="event">Event day #3</span></td>
+   <td><span class="date">12</span><span class="event">Event</span></td>
+   <td><span class="date">13</span></td>
+   <td><span class="date">14</span></td>
+  <tr>
+  <tr>
+   <td><span class="date">15</span></td>
+   <td><span class="date">16</span><span class="event">Vacation</span></td>
+   <td><span class="date">17</span><span class="event">vacation</span></td>
+   <td><span class="date">18</span></td>
+   <td><span class="date">19</span></td>
+   <td><span class="date">20</span></td>
+   <td><span class="date">21</span></td>
+  <tr>
+  <tr>
+   <td><span class="date">22</span></td>
+   <td><span class="date">23</span></td>
+   <td><span class="date">24</span></td>
+   <td><span class="date">25</span></td>
+   <td><span class="date">26</span></td>
+   <td><span class="date">27</span></td>
+   <td><span class="date">28</span></td>
+  <tr>
+  <tr>
+   <td><span class="date">29</span></td>
+   <td><span class="date">30</span></td>
+   <td><span class="date">31</span></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+  <tr>
+ </table>
+
+<script type="text/javascript">
+// Two new selectors: http://dev.jquery.com/ticket/6561
+$.extend($.expr[':'],{
+ containsExact: function(a,i,m){
+  return $.trim($(a).text().toLowerCase()) === m[3].toLowerCase();
+ },
+ containsExactCase: function(a,i,m){
+  return $.trim($(a).text()) === m[3];
+ }
+});
+
+// Set up page
+$(document).ready(function(){
+ process();
+ $(':button').click(function(){
+ 	reset();
+  process();
+ })
+})
+
+// process inputs
+function process(){
+ $('#demo')
+  .find( $('.sc0').val() + ':contains(' + $('.sc1').val() + ')').css('background', $('.sc2').val() ).end()
+  .find( $('.ec0').val() + ':containsExactCase(' + $('.ec1').val() + ')').css( 'border', $('.ec2').val() + ' 2px solid' ).end()
+  .find( $('.ex0').val() + ':containsExact(' + $('.ex1').val() + ')').css({ color : $('.ex2').val() , 'font-weight' : 'bold' });
+}
+// reset changes
+function reset(){
+ $('#demo')
+  .find('td, .event, .date').css({
+   background : 'transparent',
+   border     : 'transparent 0px solid',
+   color      : $('body').css('color') ,
+   fontWeight : 'normal'
+  }).end()
+  .find('td').css({
+   border : '#000 1px solid'
+  });
+}
+</script>
+
+</body></html>

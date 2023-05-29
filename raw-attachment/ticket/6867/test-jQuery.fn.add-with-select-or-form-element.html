@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<body>
+  <form id="f" action=".">
+    <div>
+      <select id="s">
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+      </select>
+    </div>
+  </form>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script>
+    var emptyCollection = jQuery();
+
+    var selectElement = document.getElementById("s");
+    var selectResults = [];
+
+    var formElement = document.getElementById("s");
+    var formResults = [];
+
+    // These should be equivalent:
+    selectResults[0] = emptyCollection.add(selectElement);
+    selectResults[1] = emptyCollection.add("#s");
+    selectResults[2] = emptyCollection.add(jQuery(selectElement));
+
+    // These should also be equivalent:
+    formResults[0] = emptyCollection.add(formElement);
+    formResults[1] = emptyCollection.add("#f");
+    formResults[2] = emptyCollection.add(jQuery(formElement));
+
+    if (testBug(selectResults, "select") && testBug(formResults, "form")) {
+      alert("Test passed.");
+    } else {
+      alert("Test failed.");
+    }
+
+    function testBug(results, tagName) {
+      for (var i = 0; i < results.length; i++) {
+        if (results[i].not(tagName).length > 0) {
+          return false;
+        }
+      }
+      return true;
+    }
+  </script>
+</body>

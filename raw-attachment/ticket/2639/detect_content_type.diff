@@ -1,0 +1,20 @@
+Index: jquery/src/ajax.js
+===================================================================
+@@ -449,13 +449,14 @@
+ 
+ 		if ( xml && data.documentElement.tagName == "parsererror" )
+ 			throw "parsererror";
+-
++		
++		// If no specific type is given, use Content-Type as a clue
+ 		// If the type is "script", eval it in global context
+-		if ( type == "script" )
++		if ( type == "script" || (!type && (ct == "application/javascript" || ct == "text/javascript" || ct == "text/ecmascript" || ct == "application/ecmascript")))
+ 			jQuery.globalEval( data );
+ 
+ 		// Get the JavaScript object, if JSON is used.
+-		if ( type == "json" )
++		if ( type == "json" || (!type && ct == "application/json"))
+ 			data = eval("(" + data + ")");
+ 
+ 		return data;

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Is it a BUG in jQuery 1.3?</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.js"></script>
+<script language="javascript">
+	$(function($){
+
+		//Insert
+		$('#insert-row').click(function(){
+			$('table').append($('<tr><td><input type="text" value="" /></td></tr>'));
+		});
+
+
+		//Input click
+		$('table td input').live('click', function(ev){
+			console.log('input "click" event');
+		});
+
+		//TD click
+		$('table td').live('click', function(ev){
+
+			//Ignores if is a bubbled event
+			if(ev.target != this){ return false; }
+
+			console.group('td "click" event');
+			if($('#triggerHandler').is(':checked')){
+				$(this).find('input').triggerHandler('click');
+				console.log('but where is the input "click" event?');
+			} else {
+				$(this).find('input').trigger('click');
+			}
+			console.groupEnd();
+
+		});
+
+	});
+</script>
+</head>
+<body>
+  <table width="200" border="1">
+    <tr>
+      <th id="insert-row">Insert Row</th>
+    </tr>
+  </table>
+<br/>
+<input type="checkbox" id="triggerHandler" value="yes" checked="checked" /><label for="triggerHandler">Use triggerHandler</label>
+</body>
+</html>

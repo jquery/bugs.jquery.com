@@ -1,0 +1,128 @@
+Index: /Users/sgonzale/Documents/workspace/jQuery/src/core.js
+===================================================================
+--- /Users/sgonzale/Documents/workspace/jQuery/src/core.js	(revision 6039)
++++ /Users/sgonzale/Documents/workspace/jQuery/src/core.js	(working copy)
+@@ -970,6 +970,11 @@
+ 				if( jQuery.nodeName( elem, "form" ) && elem.getAttributeNode(name) )
+ 					return elem.getAttributeNode( name ).nodeValue;
+ 
++				if ( name == jQuery.props.tabindex ) {
++					var attributeNode = elem.getAttributeNode(jQuery.props.tabindex);
++					return attributeNode && attributeNode.specified && attributeNode.value || undefined;
++				}
++
+ 				return elem[ name ];
+ 			}
+ 
+Index: /Users/sgonzale/Documents/workspace/jQuery/src/support.js
+===================================================================
+--- /Users/sgonzale/Documents/workspace/jQuery/src/support.js	(revision 6039)
++++ /Users/sgonzale/Documents/workspace/jQuery/src/support.js	(working copy)
+@@ -51,6 +51,8 @@
+ 		// (IE uses styleFloat instead of cssFloat)
+ 		cssFloat: !!a.style.cssFloat,
+ 
++		tabindex: !a.getAttributeNode('tabindex'),
++
+ 		// Will be defined later
+ 		scriptEval: false,
+ 		noCloneEvent: true
+@@ -96,5 +98,6 @@
+ 	readonly: "readOnly",
+ 	maxlength: "maxLength",
+ 	cellspacing: "cellSpacing",
+-	rowspan: "rowSpan"
++	rowspan: "rowSpan",
++	tabindex: jQuery.support.tabindex ? "tabindex" : "tabIndex"
+ };
+Index: /Users/sgonzale/Documents/workspace/jQuery/test/index.html
+===================================================================
+--- /Users/sgonzale/Documents/workspace/jQuery/test/index.html	(revision 6039)
++++ /Users/sgonzale/Documents/workspace/jQuery/test/index.html	(working copy)
+@@ -195,6 +195,19 @@
+ 				<div><div class="hidden">hidden</div></div>
+ 			</div>
+ 		</div>
++		
++		<h1>Food</h1>
++		<ol id="listWithTabIndex" tabindex="0">
++			<li id="foodWithNegativeTabIndex" tabindex="-1">Rice</li>
++			<li id="foodNoTabIndex">Beans</li>
++			<li>Blinis</li>
++			<li>Tofu</li>
++		</ol>
++	
++		<h2 id="headingWithNoTabIndex">I'm hungry. I should...</h2>
++		<a href="#" id="linkWithNoTabIndex">Eat lots of food</a> |
++		<a href="#" id="linkWithTabIndex" tabindex="2">Eat a little food</a> |
++		<a href="#" id="linkWithNegativeTabIndex" tabindex="-1">Eat no food</a>
+ 	</div>
+ 	</dl>
+ 	
+Index: /Users/sgonzale/Documents/workspace/jQuery/test/unit/core.js
+===================================================================
+--- /Users/sgonzale/Documents/workspace/jQuery/test/unit/core.js	(revision 6039)
++++ /Users/sgonzale/Documents/workspace/jQuery/test/unit/core.js	(working copy)
+@@ -545,6 +545,62 @@
+ 	});
+ }
+ 
++test("attr('tabindex')", function() {
++	expect(5);
++
++	// tabindex 0
++	equals(jQuery('#listWithTabIndex').attr('tabindex'), 0, 'tabindex of 0');
++
++	// positive tabindex
++	equals(jQuery('#linkWithTabIndex').attr('tabindex'), 2, 'tabindex of 2');
++
++	// negative tabindex
++	equals(jQuery('#linkWithNegativeTabIndex').attr('tabindex'), -1, 'negative tabindex');
++
++	// regular element without a tabindex
++	equals(jQuery('#headingWithNoTabIndex').attr('tabindex'), undefined, 'no tabindex, not tabbable by default');
++
++    // link without a tabindex
++	equals(jQuery('#linkWithNoTabIndex').attr('tabindex'), undefined, 'no tabindex, tabbable by default');
++});
++
++test("attr('tabindex', value)", function() {
++	expect(9);
++
++	var element = jQuery('#headingWithNoTabIndex');
++	equals(element.attr('tabindex'), undefined, 'start with no tabindex');
++
++	// set a positive string
++	element.attr('tabindex', '1');
++	equals(element.attr('tabindex'), 1, 'set tabindex to 1 (string)');
++
++	// set a zero string
++	element.attr('tabindex', '0');
++	equals(element.attr('tabindex'), 0, 'set tabindex to 0 (string)');
++
++	// set a negative string
++	element.attr('tabindex', '-1');
++	equals(element.attr('tabindex'), -1, 'set tabindex to -1 (string)');
++	
++	// set a positive number
++	element.attr('tabindex', 1);
++	equals(element.attr('tabindex'), 1, 'set tabindex to 1 (number)');
++
++	// set a zero number
++	element.attr('tabindex', 0);
++	equals(element.attr('tabindex'), 0, 'set tabindex to 0 (number)');
++
++	// set a negative number
++	element.attr('tabindex', -1);
++	equals(element.attr('tabindex'), -1, 'set tabindex to -1 (number)');
++	
++	element = jQuery('#linkWithTabIndex');
++	equals(element.attr('tabindex'), 2, 'start with tabindex 2');
++
++	element.attr('tabindex', -1);
++	equals(element.attr('tabindex'), -1, 'set negative tabindex');
++});
++
+ test("css(String|Hash)", function() {
+ 	expect(19);
+ 

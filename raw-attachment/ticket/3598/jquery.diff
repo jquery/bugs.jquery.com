@@ -1,0 +1,15 @@
+--- jquery.js.ORIG	2008-10-21 11:31:48.171875000 +0200
++++ jquery.js	2008-11-13 09:06:33.234375000 +0100
+@@ -2880,9 +2880,12 @@
+ 			xml = type == "xml" || !type && ct && ct.indexOf("xml") >= 0,
+ 			data = xml ? xhr.responseXML : xhr.responseText;
+
++		if ( xml && !data.documentElement && xhr.responseStream )
++			try { data.load( xhr.responseStream ); } catch(e){}
++
+ 		if ( xml && data.documentElement.tagName == "parsererror" )
+ 			throw "parsererror";
+
+ 		// Allow a pre-filtering function to sanitize the response
+ 		if( filter )
+ 			data = filter( data, type );

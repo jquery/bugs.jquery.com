@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>testcase</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.js"></script>
+	<script type="text/javascript">
+	// I GOT THE PIECE OF CODE BELOW AT ONE OF MY PROJECTS
+	function testcase() {
+		$('.btn,.btn-bullet')
+		.filter('.btn')
+		.before(function(){
+			return '<div class="btn-wrapper"'+($(this).is(':visible')?'':' style="display:none"')+'><img src="public/img/btn_esq.gif" alt="" /></div>';
+		})
+		.end()
+		.filter('.btn-bullet')
+		.before(function(){
+			return '<div class="btn-wrapper"'+($(this).is(':visible')?'':' style="display:none"')+'><img src="public/img/btn_esq_bullet.gif" alt="" /></div>';
+		})
+		.end()
+		.after(function(){
+			return '<div class="btn-wrapper"'+($(this).is(':visible')?'':' style="display:none"')+'><img src="public/img/btn_dir.gif" alt="" /></div>';
+		});
+	}
+	</script>
+</head>
+<body>
+<ul>
+	<li><button onclick="$(true).is('a');">$(true).is('a');</button></li>
+	<li><button onclick="testcase();">elem.ownerDocument is null</button></li>
+</ul>
+</body>
+</html>

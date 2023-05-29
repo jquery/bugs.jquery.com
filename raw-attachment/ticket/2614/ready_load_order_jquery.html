@@ -1,0 +1,28 @@
+<script type="text/javascript" src="jquery-1.2.6.js"></script>
+<script type="text/javascript">
+/*
+ * events still available to IE applications
+ */
+if (jQuery.browser.msie) {
+ document.onreadystatechange = function () {
+  if (this.readyState == 'complete') {
+   document.body.innerHTML += ' * ' + event.type + '<br />';
+   status += ' * ' + event.type;
+  }
+ };
+}
+window.onload = function (event) {
+ event = event || window.event;
+ document.body.innerHTML += ' * ' + event.type + '<br />';
+ status += ' * ' + event.type;
+};
+</script>
+<script type="text/javascript">
+/*
+ * jQuery own .ready() event
+ */
+$(document).ready(function () {
+ document.body.innerHTML += ' * ready<br />';
+ status += ' * ready';
+});
+</script>

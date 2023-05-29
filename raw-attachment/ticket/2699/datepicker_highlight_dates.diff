@@ -1,0 +1,43 @@
+Index: datepicker/core/ui.datepicker.js
+===================================================================
+--- datepicker/core/ui.datepicker.js	(revision 5254)
++++ datepicker/core/ui.datepicker.js	(working copy)
+@@ -93,7 +93,8 @@
+ 		numberOfMonths: 1, // Number of months to show at a time
+ 		stepMonths: 1, // Number of months to step back/forward
+ 		rangeSelect: false, // Allows for selecting a date range on one date picker
+-		rangeSeparator: ' - ' // Text between two dates in a range
++		rangeSeparator: ' - ', // Text between two dates in a range
++		hlDates: [] // Emphasize/highlight provided dates
+ 	};
+ 	$.extend(this._defaults, this.regional['']);
+ 	this._datepickerDiv = $('<div id="datepicker_div">');
+@@ -1106,6 +1107,13 @@
+ 	_generateDatepicker: function() {
+ 		var today = new Date();
+ 		today = new Date(today.getFullYear(), today.getMonth(), today.getDate()); // clear time
++		var hlDays = [];
++		var hlDates = this._get('hlDates');
++		for (var i=0; i < hlDates.length; i++) {
++			var d = new Date(hlDates[i]);
++			hlDays[i] = d.getTime();
++		}
++
+ 		var showStatus = this._get('showStatus');
+ 		var isRTL = this._get('isRTL');
+ 		// build the date picker HTML
+@@ -1216,6 +1224,7 @@
+ 							(otherMonth && !showOtherMonths ? '' : ' ' + daySettings[1] + // highlight custom dates
+ 							(printDate.getTime() >= currentDate.getTime() && printDate.getTime() <= endDate.getTime() ?  // in current range
+ 							' datepicker_currentDay' : '') + // highlight selected day
++							(hlDays.indexOf(printDate.getTime()) > -1 ? ' datepicker_today' : '') + // highlight user supplied dates
+ 							(printDate.getTime() == today.getTime() ? ' datepicker_today' : '')) + '"' + // highlight today (if different)
+ 							(unselectable ? '' : ' onmouseover="jQuery(this).addClass(\'datepicker_daysCellOver\');' +
+ 							(!showStatus || (otherMonth && !showOtherMonths) ? '' : 'jQuery(\'#datepicker_status_' +
+@@ -1436,4 +1445,4 @@
+ 
+ $.datepicker = new Datepicker(); // singleton instance
+ 
+-})(jQuery);
+\ No newline at end of file
++})(jQuery);

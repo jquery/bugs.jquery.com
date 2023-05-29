@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>JQuery slide and lists with custom bullets</title>
+<script src="jquery.js"></script>
+<script>
+$(document).ready(function(){
+	 $("h1").click(
+	     function(){
+	         $("li.foo").slideDown("fast");
+	     }
+ 	);
+
+	 $("h1").dblclick(
+	     function(){
+	         $("li.foo").slideUp("fast");
+	     }
+ 	);
+}); 
+</script>
+</head>
+<body>
+
+<h1>test</h1>
+<ul>
+  <li class="foo">one</li>
+  <li class="foo">two</li>
+  <li class="foo">three</li>
+</ul>
+</body>
+</html>

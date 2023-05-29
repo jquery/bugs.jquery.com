@@ -1,0 +1,12 @@
+--- jquery-1.4.1.js 
++++ jquery-1.4.1.js 
+@@ -355,7 +355,8 @@
+ 
+ jQuery.extend({
+ 	noConflict: function( deep ) {
+-		window.$ = _$;
++		if (window.$ === jQuery)
++			window.$ = _$;
+ 
+ 		if ( deep ) {
+ 			window.jQuery = _jQuery;

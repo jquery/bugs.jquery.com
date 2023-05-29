@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; }
+    </style>
+    <script type="text/javascript" src="../jquery.test.js"></script>
+    <script type="text/javascript">
+      function doIt() {
+        $("<b></b>").appendTo("form").append($("input"));
+      }
+
+      function doIt2() {
+        $("<b></b>").appendTo("form").get(0).appendChild($("input").get(0));
+      }
+
+      $(function () {
+        $("#doit").click(doIt);
+        $("#doit2").click(doIt2);
+      });
+    </script>
+  </head>
+  <body>
+    <button id="doit">jQuery append</button>
+    <button id="doit2">DOM appendChild</button>
+    <div id="container">
+      Hi
+    </div>
+    <form>
+      <input type="checkbox" name="a" />
+    </form>
+    <div id="adiv"></div>
+  </body>
+</html>

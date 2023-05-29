@@ -1,0 +1,20 @@
+--- jquery/jquery-1.2.3.js	Wed Feb  6 13:23:17 2008
++++ jquery/jquery-patched.js	Thu Feb 21 05:56:55 2008
+@@ -2838,9 +2838,16 @@
+ 	},
+ 
+ 	httpData: function( r, type ) {
++		var isIE = window.ActiveXObject ? true : false;
+ 		var ct = r.getResponseHeader("content-type");
+ 		var xml = type == "xml" || !type && ct && ct.indexOf("xml") >= 0;
+-		var data = xml ? r.responseXML : r.responseText;
++		var data = xml ? (isIE ? r.responseText : r.responseXML) : r.responseText;
++
++		if (isIE) {
++			var xmldom = new ActiveXObject('Microsoft.XMLDOM');
++			xmldom.loadXML(r.responseText);
++			data = xmldom;
++		}
+ 
+ 		if ( xml && data.documentElement.tagName == "parsererror" )
+ 			throw "parsererror";

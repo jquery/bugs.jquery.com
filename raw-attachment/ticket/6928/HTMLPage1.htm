@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+    <title>Untitled Page</title>
+    <script language="javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+    
+    <script language="javascript">
+    
+    function InputOnKeyDown(objEvent)
+    {
+        var objMyDiv = $(window.document.getElementById("MyDiv"));
+        if(objMyDiv)
+        {
+            $(objMyDiv).keydown();
+        }
+    }
+    
+    function DivOnKeyDown(objEvent)
+    {
+        alert(objEvent.keyCode);
+    }
+    
+    </script>
+    
+</head>
+<body>
+    <input type="text" value="Enter keys..." onkeydown="InputOnKeyDown(event);" />
+    
+    <div onkeydown="DivOnKeyDown(event);" tabindex="-1" id="MyDiv" style="position:absolute;width:100px;height:100px;left:100px;top:100px;background-color:Green;" ></div>
+</body>
+</html>

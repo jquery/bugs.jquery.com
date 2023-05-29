@@ -1,0 +1,114 @@
+--- jquery.tablesorter.js.svn	2007-02-20 04:34:25.000000000 +0000
++++ jquery.tablesorter.js	2007-02-20 04:48:39.000000000 +0000
+@@ -1,4 +1,4 @@
+-/*
++/* vim: sts=4:ts=4:sw=4:noet:fenc=utf-8
+  *
+  * TableSorter - Client-side table sorting with ease!
+  *
+@@ -33,8 +33,12 @@
+ 		bind: true,
+ 		addHeaderLink: false,
+ 		lockedSortDir: false,
++		minToScroll: false,
+ 		dateFormat: 'mm/dd/yyyy' /** us default, uk dd/mm/yyyy */
+ 	};
++
++	var ieDivID = 0;
++	var enableScrollHasRun = false;
+  
+ 	return this.each(function(){
+ 	/** add a class name for identifiying the table for companion plugins */
+@@ -58,6 +62,70 @@
+ 		/** table object holder.*/
+ 		var oTable = this;
+ 
++		function enableScroll() {
++			if ( defaults.minToScroll ) {
++				if ( jQuery.browser.mozilla ) { if (enableScrollHasRun) { return; }; mozScroll(); };
++				if ( jQuery.browser.msie ) { ieScroll() };
++			};
++			enableScrollHasRun = true;
++		};
++
++		function mozScroll() {
++			for (i=0; i < oTable.tBodies.length; i++) {
++				finalSetup = false;
++				var rows = oTable.tBodies[i].rows;
++                if (rows.length > defaults.minToScroll) {
++                    finalSetup = true;
++                    var lastChilds = jQuery(oTable.tBodies[i]).find('td:last-child');
++                    jQuery(lastChilds).css('padding-right', '16px');
++                    var rows_height = jQuery(rows).height();
++                    if ( rows_height == 0 ) { rows_height = 32; };
++                    var tbody_height = (rows_height * defaults.minToScroll) + 'px';
++                    jQuery(oTable.tBodies[i]).css({ overflow: 'auto', overflowX: 'hidden', height: tbody_height });
++                };
++                if (finalSetup) { jQuery(oTable).css('border-collapse', 'separate'); };
++            };
++        };
++
++		function ieScroll () {
++            var rows = 0;
++            for ( i=0; i < oTable.tBodies.length; i++) {
++                rows += oTable.tBodies[i].rows.length;
++            };
++            var tDivID = 'scrollWrapper-';
++            var scrollTop_ = 0;
++            if (rows > defaults.minToScroll) {
++                var createDiv = true;
++                var div_id = tDivID + ieDivID;
++                if ( jQuery(oTable).parent().is('div') && jQuery(oTable).parent().attr('id') == tDivID + (ieDivID-1) ) {
++                    createDiv = false;
++                    scrollTop_ = oTable.parentNode.scrollTop
++                };
++                if ( createDiv ) { jQuery(oTable).wrap('<div id="' + div_id + '"></div>'); };
++                jQuery(oTable).css({
++                    margin: '0px', marginRight: '22px', top: '0px', left: '0px'
++                });
++                jQuery(oTable.tHead).css('position', 'relative');
++                jQuery(oTable.tHead.rows).css({
++                    top: '0px', bottom: '0px', position: 'relative'
++                });
++                var rows_height = jQuery(oTable.tBodies[0].rows).height();
++                if ( rows_height == 0 ) { rows_height = 32; };
++                var div_height = (rows_height * defaults.minToScroll) + 'px';
++                jQuery('#'+div_id).css({
++                    width: '100%', overflow: 'auto', overflowX: 'hidden', height: div_height
++                });
++                oTable.parentNode.scrollTop = scrollTop_;
++                jQuery(oTable.tHead.rows).css('top', scrollTop_ + 'px');
++                if ( createDiv ) { ieDivID++; };
++                var div_width = jQuery('#'+div_id).width();
++                var table_width = (div_width-18)*100/div_width;
++                jQuery(oTable).css('width', table_width+'%');
++            };
++            return;
++        };
++
++
+ 		if(defaults.stripeRowsOnStartUp && defaults.stripingRowClass) {
+ 			jQuery.tableSorter.utils.stripeRows(oTable,defaults);
+ 		}
+@@ -132,11 +200,13 @@
+ 
+ 						jQuery(".sorter",oCell).click(function(e) {
+ 							sortOnColumn( jQuery(this).parent(), ((defaults.lockedSortDir) ? defaults.lockedSortDir : jQuery(this).parent()[0].count++) % 2, jQuery(this).parent()[0].index );
++							enableScroll()
+ 							return false;
+ 						});
+ 					} else {
+ 						jQuery(oCell).click(function(e) {
+ 							sortOnColumn( jQuery(this), ((defaults.lockedSortDir) ? defaults.lockedSortDir : jQuery(this)[0].count++) % 2, jQuery(this)[0].index );
++							enableScroll()
+ 							return false;
+ 						});
+ 					}
+@@ -254,6 +324,7 @@
+ 					jQuery.event.trigger("sortStop",[COLUMN_INDEX]);
+ 				}
+ 				COLUMN_LAST_INDEX = COLUMN_INDEX;
++				enableScroll();
+ 			}
+ 		}
+ 	});

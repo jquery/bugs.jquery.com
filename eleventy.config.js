@@ -1,5 +1,4 @@
 const { DateTime } = require('luxon')
-const markdownItAnchor = require('markdown-it-anchor')
 
 const pluginRss = require('@11ty/eleventy-plugin-rss')
 const pluginSyntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
@@ -8,17 +7,43 @@ const pluginNavigation = require('@11ty/eleventy-navigation')
 const { EleventyHtmlBasePlugin } = require('@11ty/eleventy')
 const pluginFavicon = require('eleventy-favicon')
 const CleanCSS = require('clean-css')
+const fs = require('node:fs')
+const path = require('node:path')
 
 const pluginDrafts = require('./eleventy.config.drafts.js')
 const pluginImages = require('./eleventy.config.images.js')
+
+function escapeHTML(string) {
+  return string.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
 
 module.exports = function (eleventyConfig) {
   // Copy the contents of the `public` folder to the output folder
   // For example, `./public/css/` ends up in `_site/css/`
   eleventyConfig.addPassthroughCopy({
     './public/': '/',
-    './node_modules/prismjs/themes/prism-okaidia.css': '/css/prism-okaidia.css'
+    './node_modules/prismjs/themes/prism.min.css': '/css/prism.min.css'
   })
+
+  const attachTicket =
+    process.env.ATTACHMENT_TICKET || (process.env.ATTACHMENT_TICKET = '25')
+
+  // Limit the number of copies during development builds
+  if (process.env.NODE_ENV === 'development') {
+    console.log(
+      '[Development] Added attachments for http://localhost:8080/ticket/' +
+        attachTicket
+    )
+    eleventyConfig.addPassthroughCopy({
+      [`./raw-attachment/ticket/${attachTicket}`]: `/raw-attachment/ticket/${attachTicket}`,
+      [`./zip-attachment/ticket/${attachTicket}`]: `/zip-attachment/ticket/${attachTicket}`
+    })
+  } else {
+    eleventyConfig.addPassthroughCopy({
+      './raw-attachment/': '/raw-attachment/',
+      './zip-attachment/': '/zip-attachment/'
+    })
+  }
 
   // Run Eleventy when these files change:
   // https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
@@ -68,6 +93,23 @@ module.exports = function (eleventyConfig) {
       return `${years} year${years === 1 ? '' : 's'} ago`
     }
     return DateTime.fromJSDate(date, { zone: 'utc' }).toFormat('dd LLLL yyyy')
+  })
+
+  eleventyConfig.addFilter('isImage', (filename) => {
+    return /\.(jpg|jpeg|png|webp|gif|tiff|avif|svg)$/i.test(filename)
+  })
+
+  eleventyConfig.addFilter('isPreviewable', (filename) => {
+    return /\.(js|html?|diff|patch|css|txt|php)$/i.test(filename)
+  })
+
+  eleventyConfig.addFilter('extension', (filename) => {
+    return path.extname(filename).replace(/^\./, '')
+  })
+
+  eleventyConfig.addFilter('bytesToKilos', (bytes) => {
+    const kilos = bytes / 1024
+    return `${kilos.toFixed(1)} KB`
   })
 
   eleventyConfig.addFilter('readableDate', (dateObj, format, zone) => {
@@ -135,12 +177,9 @@ module.exports = function (eleventyConfig) {
     const codes = []
     const pres = []
     return (
-      text
+      escapeHTML(text)
         // Newlines have extra escapes in the strings
         .replace(/\\\n/g, '\n')
-        // Escape HTML
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
         // Replace `` with <code> tags
         .replace(/`([^\r\n`]+?)`/g, (_match, code) => {
           codes.push(code) // Save the code for later
@@ -173,6 +212,13 @@ module.exports = function (eleventyConfig) {
             }</a>`
           }
         )
+        // Linkify CamelCase links in brackets
+        .replace(
+          /\[([A-Z][a-z]+[A-Z][\w#-]+)(?:\s+([^\]]+))?\]/g,
+          function (_match, page, text) {
+            return `<a href="/wiki/${page}">${text || page}</a>`
+          }
+        )
         // Linkify trac links
         .replace(
           /(?:\[trac:([^ ]+) "([^"]+)"\])|(?:\[trac:([^\s\]]+)(?: ([^\]]+))?\])/g,
@@ -185,10 +231,10 @@ module.exports = function (eleventyConfig) {
           }
         )
         // Linkify ticket references (avoid trac ticket links)
-        .replace(/#(\d+)(?<=y)</g, `<a href="/ticket/$1">$&</a>`)
+        .replace(/#(\d+)(?!<=>)/g, `<a href="/ticket/$1">$&</a>`)
         // Linkify CamelCase to wiki
         .replace(
-          /(^|\s)(!)?\[?([A-Z][a-z]+[A-Z]\w+)\]?(?!\w)/g,
+          /(^|\s)(!)?([A-Z][a-z]+[A-Z]\w+(?:#\w+)?)(?!\w)/g,
           function (_match, space, excl, page) {
             if (excl) {
               return `${space}${page}`
@@ -255,6 +301,13 @@ module.exports = function (eleventyConfig) {
   // Shortcodes
   eleventyConfig.addShortcode('currentYear', () => {
     return DateTime.local().toFormat('yyyy')
+  })
+
+  eleventyConfig.addAsyncShortcode('attachment', async (ticketId, filename) => {
+    const content = await fs.promises.readFile(
+      path.join(__dirname, 'raw-attachment/ticket/', ticketId, filename)
+    )
+    return content.toString()
   })
 
   // Features to make your build faster (when you need them)

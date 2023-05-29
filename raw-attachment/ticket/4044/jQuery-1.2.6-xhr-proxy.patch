@@ -1,0 +1,24 @@
+commit 534d1e33229aaf16c198bd4b5d11ab2b2c9cbfef
+Author: Garrett LeSage <garrett@novell.com>
+Date:   Mon Feb 2 20:43:35 2009 +0100
+
+    adding proxy workaround for Firefox not sending a Content-Length header for empty-bodied POSTs
+
+diff --git a/jquery/src/ajax.js b/jquery/src/ajax.js
+index a0c80af..07ed01b 100644
+--- a/jquery/src/ajax.js
++++ b/jquery/src/ajax.js
+@@ -388,6 +388,13 @@ jQuery.extend({
+ 
+ 		// Send the data
+ 		try {
++			if (jQuery.browser.mozilla && type == "POST" && s.data === null) {
++				// Firefox fails to send the Content-Length header on
++				// POST requests with null passed to send,
++				// causing an issue with Squid proxies.
++				// (Setting a "Content-Length: 0" header does not work.)
++				s.data = '';
++			}
+ 			xhr.send(s.data);
+ 		} catch(e) {
+ 			jQuery.handleError(s, xhr, null, e);

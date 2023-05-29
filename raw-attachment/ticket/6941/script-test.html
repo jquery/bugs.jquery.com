@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" language="javascript">
+			$(function(){
+				var str = '<div class="upload">' +
+						'<scr' + 'ipt class="after" type="text/template">' +
+						    '<div>hi</div>' +
+						'</scr' + 'ipt>' +
+					    '</div>';
+				
+				$('#container').html(str);
+
+				console.log($('#container').children().get());
+				// log shows that the script tag has jumped outside of its parent div
+				// Why is this?
+				});
+		</script>
+	</head>
+	<body>
+		<div id="container">
+		</div>
+	</body>
+</html>

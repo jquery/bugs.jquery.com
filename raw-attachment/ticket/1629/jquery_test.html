@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      div { background:yellow; width:400px; margin:5px; }
+      #hid div { display:none; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      function show(id, value) {
+        if (value) {
+          value = value + " = '" + eval(value) + "'";
+        }
+        $(id).text(value);
+      }
+
+      $(function () {
+        var saveHTML = $("#saver")[0].innerHTML;
+        $("button:eq(0)").click(function () {
+              show("#adiv", '$("#hid div").css("display")');
+              // reset the innerHTML to what it was (even if unchanged)
+              $("#saver")[0].innerHTML = saveHTML;
+              show("#bdiv", '$("#hid div").css("display")');
+              // set the element to "block" then reset it (should change nothing in the end)
+              var elem = $("#hid div")[0];
+              var save = elem.style.display;
+              elem.style.display = "block";
+              elem.style.display = save;
+              show("#cdiv", '$("#hid div").css("display")');
+            });
+        $("button:eq(1)").click(function () {
+              show("#adiv", '$("#hid div").css("display")');
+              $("#hid div").slideDown('fast').slideUp('fast', function () {
+                show("#bdiv", '$("#hid div").css("display")');
+              });
+              show("#cdiv", "");
+            });
+        $("button:eq(2)").click(function () {
+              show("#adiv", '$("#hid div").css("display")');
+              var elem = $("#hid div")[0];
+              var save = elem.style.display;
+              elem.style.display = "block";
+              elem.style.display = save;
+              show("#bdiv", '$("#hid div").css("display")');
+              show("#cdiv", "");
+            });
+        $("button:eq(3)").click(function () {
+              $("#saver")[0].innerHTML = saveHTML;
+              show("#adiv", "");
+              show("#bdiv", "");
+              show("#cdiv", "");
+            });
+      });
+    </script>
+  </head>
+  <body>
+    <button>Demo problem</button>
+    <button>slideDown, slideUp</button>
+    <button>display</button>
+    <button>reset</button>
+    <p>
+      Click 'Demo problem' and should get 'none' all 3 times
+    </p>
+    <div id="saver" style="display:none;">
+      <div>
+        <div id="hid">
+          slideDown<div>slideDown</div>
+        </div>
+      </div>
+    </div>
+    <div id="adiv"></div>
+    <div id="bdiv"></div>
+    <div id="cdiv"></div>
+  </body>
+</html>

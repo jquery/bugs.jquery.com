@@ -1,0 +1,72 @@
+diff --git a/speed/jquery-basis.js b/speed/jquery-basis.js
+index 9263574..0b8d9aa 100644
+--- a/speed/jquery-basis.js
++++ b/speed/jquery-basis.js
+@@ -2461,11 +2461,11 @@ jQuery.event = {
+ 
+ 		// Init the element's event structure
+ 		var events = jQuery.data(elem, "events") || jQuery.data(elem, "events", {}),
+-			handle = jQuery.data(elem, "handle") || jQuery.data(elem, "handle", function(){
++			handle = jQuery.data(elem, "handle") || jQuery.data(elem, "handle", function f(){
+ 				// Handle the second event of a trigger and when
+ 				// an event is called after a page has unloaded
+ 				return typeof jQuery !== "undefined" && !jQuery.event.triggered ?
+-					jQuery.event.handle.apply(arguments.callee.elem, arguments) :
++					jQuery.event.handle.apply(f.elem, arguments) :
+ 					undefined;
+ 			});
+ 		// Add elem as a property of the handle function
+@@ -3051,8 +3051,8 @@ function bindReady(){
+ 	// Mozilla, Opera and webkit nightlies currently support this event
+ 	if ( document.addEventListener ) {
+ 		// Use the handy event callback
+-		document.addEventListener( "DOMContentLoaded", function(){
+-			document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
++		document.addEventListener( "DOMContentLoaded", function f(){
++			document.removeEventListener( "DOMContentLoaded", f, false );
+ 			jQuery.ready();
+ 		}, false );
+ 
+@@ -3060,16 +3060,16 @@ function bindReady(){
+ 	} else if ( document.attachEvent ) {
+ 		// ensure firing before onload,
+ 		// maybe late but safe also for iframes
+-		document.attachEvent("onreadystatechange", function(){
++		document.attachEvent("onreadystatechange", function f(){
+ 			if ( document.readyState === "complete" ) {
+-				document.detachEvent( "onreadystatechange", arguments.callee );
++				document.detachEvent( "onreadystatechange", f );
+ 				jQuery.ready();
+ 			}
+ 		});
+ 
+ 		// If IE and not an iframe
+ 		// continually check to see if the document is ready
+-		if ( document.documentElement.doScroll && window == window.top ) (function(){
++		if ( document.documentElement.doScroll && window == window.top ) (function f(){
+ 			if ( jQuery.isReady ) return;
+ 
+ 			try {
+@@ -3077,7 +3077,7 @@ function bindReady(){
+ 				// http://javascript.nwbox.com/IEContentLoaded/
+ 				document.documentElement.doScroll("left");
+ 			} catch( error ) {
+-				setTimeout( arguments.callee, 0 );
++				setTimeout( f, 0 );
+ 				return;
+ 			}
+ 
+@@ -3186,11 +3186,11 @@ jQuery( window ).bind( 'unload', function(){
+ 	root.removeChild( script );
+ 
+ 	if ( div.attachEvent && div.fireEvent ) {
+-		div.attachEvent("onclick", function(){
++		div.attachEvent("onclick", function f(){
+ 			// Cloning a node shouldn't copy over any
+ 			// bound event handlers (IE does this)
+ 			jQuery.support.noCloneEvent = false;
+-			div.detachEvent("onclick", arguments.callee);
++			div.detachEvent("onclick", f);
+ 		});
+ 		div.cloneNode(true).fireEvent("onclick");
+ 	}

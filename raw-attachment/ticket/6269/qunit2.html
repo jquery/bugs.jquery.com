@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>jQuery 1.4 Event Unbind Unit Test</title>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.js">
+        </script>
+        <!--
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js">
+        </script>
+        <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js">
+        </script>
+        -->
+        <link rel="stylesheet" href="http://github.com/jquery/qunit/raw/master/qunit/qunit.css" type="text/css" media="screen" />
+        <script type="text/javascript" src="http://github.com/jquery/qunit/raw/master/qunit/qunit.js">
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+            
+                module("SuggestionBox", {
+                    setup: function(){
+                    },
+                    teardown: function(){
+                    }
+                });
+				
+				test("unbind", 2, function(){
+					var foo = {};
+					var callback = function() {
+						ok("true","1st call back fired.");
+					};
+					var callback2 = function() {
+						ok("true","2nd call back fired.");
+					};
+					$(foo).bind('myEvent', callback);
+					$(foo).bind('myEvent', callback2);
+					$(foo).trigger('myEvent', [this]);
+					$(foo).unbind('myEvent', callback);
+					console.log("unbound callback");
+					
+					//Fails here
+					$(foo).unbind('myEvent', callback2);
+					console.log("unbound callback2");
+				});
+            });
+        </script>
+    </head>
+    <body>
+        <form id="frm" onsubmit="return false;"></form>
+        <h1 id="qunit-header">Event Unbind</h1>
+        <h2 id="qunit-banner"></h2>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests">
+        </ol>
+    </body>
+</html>

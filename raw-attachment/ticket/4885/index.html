@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SelectList</title>
+<style type="text/css">
+	
+</style>
+</head>
+<body>
+<select id="dropdown1">
+	<option data-blogid="11" data-url="http://www.one.com/">one.com</option>
+	<option data-blogid="12" data-url="http://www.two.com/">two.com</option>
+	<option data-blogid="13" data-url="http://www.three.com/">three.com</option>
+	<option data-blogid="14" data-url="http://www.four.com/">four.com</option>
+	<option data-blogid="15" data-url="http://www.five.com/">five.com</option>
+	<option data-blogid="16" data-url="http://www.six.com/">six.com</option>
+	<option data-blogid="17" data-url="http://www.seven.com/">seven.com</option>
+	<option data-blogid="18" data-url="http://www.eight.com/">eight.com</option>
+	<option data-blogid="19" data-url="http://www.nine.com/">nine.com</option>
+	<option data-blogid="20" data-url="http://www.ten.com/">ten.com</option>
+</select>
+<a href="#" id="add">&gt;&gt;</a>
+<ul id="list1">
+	
+</ul>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+	(function($) {
+		
+		// Set attr labels, get dropdown, get list and get add link.
+		var blogid_attr = 'data-blogid',
+			url_attr = 'data-url',
+			dropdown = $('#dropdown1'),
+			list = $('#list1'),
+			add = $('#add');		
+		
+		// Delegate click on remove links.
+		$('#list1 .remove-link').live('click', function(e) {
+			e.preventDefault();
+				
+			// Get blogid, url; create option and set attr's.
+			var self = $(this),
+				parent = self.parent('li'),
+				blogid = parent.find('input[name=blogid]').attr('value'),
+				url = parent.find('input[name=url]').attr('value'),
+				
+				option = $('<option />')
+					.attr(blogid_attr, blogid)
+					.attr(url_attr, url)
+					.appendTo(dropdown);
+			
+			// Remove link before setting option text
+			self.remove();
+			option.text(parent.text());
+			
+			// Remove list item.
+			parent.remove();
+			
+			// Clone items, sort them alphabetically and append to the dropdown.
+			var items = dropdown.find('option').clone();
+			items.sort(function(a, b) {
+				var x = a.innerHTML.toLowerCase();
+				var y = b.innerHTML.toLowerCase();
+				return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+			}).appendTo(dropdown.empty());
+		});
+		
+		// Delegate click on add link.
+		$('#add').live('click', function(e) {
+			e.preventDefault();
+			
+			// Get blogid, url; create list item and set hidden values.
+			var selected = dropdown.children(':selected'),
+				blogid = selected.attr(blogid_attr),
+				url = selected.attr(url_attr),
+				
+				li = $('<li />')
+					.appendTo(list)
+					.text(selected.text()),
+					
+				blogid_hidden = $('<input />')
+					.attr('type', 'hidden')
+					.attr('name', 'blogid')
+					.appendTo(li)
+					.attr('value', blogid),
+					
+				url_hidden = $('<input />')
+					.attr('type', 'hidden')
+					.attr('name', 'url')
+					.appendTo(li)
+					.attr('value', url),
+					
+				remove_link = $('<a />')
+					.attr('href', '#')
+					.addClass('remove-link')
+					.appendTo(li)
+					.text('remove');
+			
+			// Remove dropdown option.
+			selected.remove();
+		});
+		
+	})(jQuery);
+</script>
+</body>
+</html>

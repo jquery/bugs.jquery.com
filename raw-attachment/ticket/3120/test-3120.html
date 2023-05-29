@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html> 
+<html> 
+<head> 
+<title></title> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js" type="text/javascript"></script>
+	<script type="text/javascript">
+ 
+		function addListItem(animate) {
+ 
+			var $li = $("<li></li>").text("Item " + ($("ol").children().length+1));
+ 
+			var $a = $("<a></a>").text("remove").attr("href", "#").click(function() {
+				$(this).parent("li").slideUp(1000, function() {
+					$(this).remove();
+				}); 
+			});
+ 
+			$li.append($a); 
+			$("#list").append($li.hide());
+			if(animate) $li.slideDown(1000); else $li.show();
+		}
+ 
+		$(document).ready(function() {
+ 
+			addListItem(false);
+			addListItem(false);
+			addListItem(false);
+ 
+		}); 
+ 
+	</script>
+</head>
+<body>
+	<h1>jQuery Slide Effect Anomaly with IE6/IE7</h1>
+	<h3>Internet Explorer 6 &amp; 7</h3>
+	<p>
+	When adding or removing an item, the slideUp and slideDown effects slide in one direction for 50% of the slide, and in the other direction for the rest.
+	Note the abruptness of the effect, especially when removing an item. The same effect can be observed with show() and hide(), but is easier to
+	demonstrate with the slide.
+	</p>
+ 
+	<h3>Firefox 3, Safari 3</h3>
+	<p>
+	The slide effects behave how you'd expect them to, completing a full slide up/down in a single direction. As far as I know, this is also how
+	it works in all browsers except for IE.
+	</p>
+ 
+ 
+	<p><a href="#" id="additem" onclick="addListItem(true)">add</a></p>	
+ 
+	<ol id="list"></ol>
+ 
+ 
+	<p><em>Animating speed has been set slow to demonstrate the effect.</em></p>
+ 
+	
+</body>
+</html>
+

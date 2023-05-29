@@ -1,0 +1,32 @@
+Index: jquery/src/core.js
+===================================================================
+--- jquery/src/core.js	(revision 5961)
++++ jquery/src/core.js	(working copy)
+@@ -1150,12 +1150,26 @@
+ 	inArray: function( elem, array ) {
+ 		for ( var i = 0, length = array.length; i < length; i++ )
+ 		// Use === because on IE, window == document
+-			if ( array[ i ] === elem )
++  	// added second condition because when comparing two arrays containing identical elements, false is returned
++  		if (( array[ i ] === elem ) || (( array[ i ] instanceof Array ) && jQuery.compareArrays(elem, array[ i ]) ))
+ 				return i;
+ 
+ 		return -1;
+ 	},
+ 
++	compareArrays: function( array1, array2 ) {
++    // adapted from code by Patrick Hunlock
++    // http://www.hunlock.com/blogs/Mastering_Javascript_Arrays
++	  if ( array1.length != array2.length ) return false;
++    for ( var i = 0; i < array2.length; i++ ) {
++        if ( array1[i] instanceof Array ) {
++          if ( !jQuery.compareArrays(array1[i], array2[i]) ) return false;
++        }
++        if ( array1[i] !== array2[i] ) return false;
++    }
++    return true;
++	},
++
+ 	merge: function( first, second ) {
+ 		// We have to loop this way because IE & Opera overwrite the length
+ 		// expando of getElementsByTagName

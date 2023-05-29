@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>jquery ajax test</title>
+    <script type="application/javascript" src="jquery.js"></script>
+    <script type="application/javascript">
+      $(document).ready(function() {
+        $.getJSON('http://tinderbox.mozilla.org/showbuilds.cgi?tree=Firefox&json=1',
+              function() {
+                $('#ok').text('PASS');
+              });
+        });
+    </script>
+	</head>
+	<body>
+    <p id="ok">FAIL</p>
+  </body>
+</html>
+

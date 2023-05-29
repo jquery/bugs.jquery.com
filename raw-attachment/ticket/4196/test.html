@@ -1,0 +1,30 @@
+<html>
+<body>
+    <a href="javascript:loadJQuery()">Load jQuery</a>
+
+<script type="text/javascript">
+function loadJQuery() {
+    var script = document.createElement('script');
+    script.src = 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js';
+    var head = document.getElementsByTagName('head')[0]||document.body;
+    var done = false;
+    // Attach handlers for all browsers (taken from jQuery).
+    script.onload = script.onreadystatechange = function() {
+        if (!done && (!this.readyState ||
+                    this.readyState === 'loaded' ||
+                    this.readyState === 'complete')) {
+            done = true;
+            script.onload = script.onreadystatechange = null;
+
+            alert('before ready: ' + $.isReady);
+            $(document).ready(function() {
+                alert('inside ready: ' + $.isReady);
+            });
+        }
+    };
+
+    head.appendChild(script);
+}
+</script>
+</body>
+</html>

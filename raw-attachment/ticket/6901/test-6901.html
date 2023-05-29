@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js" type="text/javascript"></script>
+</head>
+<body>
+	<div id="div1">
+		<div id="frame1"></div>
+	</div>
+	<div id="div2">
+		<div id="frame2"></div>
+	</div>
+	
+	<a href="javascript:change()">change</a>
+	
+<script type="text/javascript">
+$(function(){
+	var $frame = $('<iframe style="width:200px; height:100px;"></iframe>');
+	$('#frame1').html( $frame );
+	setTimeout( function() {
+		var doc = $frame[0].contentWindow.document;
+		var $body = $('body',doc);
+		$body.html('test1');
+	}, 100);
+	
+	var $frame2 = $('<iframe style="width:200px; height:100px;"></iframe>');
+	$('#frame2').html( $frame2 );
+	setTimeout( function() {
+		var doc2 = $frame2[0].contentWindow.document;
+		var $body2 = $('body',doc2);
+		$body2.html('test2');
+	}, 100); 
+});
+	function change() {
+		$("#div2").after($("#div1"));
+	}	
+</script>
+
+</body>
+</html>

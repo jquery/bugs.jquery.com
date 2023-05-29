@@ -1,0 +1,23 @@
+--- C:/Documents and Settings/bblank/Desktop/ajax.js	Thu Jun 18 16:16:24 2009
++++ C:/Documents and Settings/bblank/Desktop/ajax-typefix.js	Thu Jun 18 16:32:48 2009
+@@ -97,8 +97,9 @@
+ jQuery.extend({
+ 
+ 	get: function( url, data, callback, type ) {
+-		// shift arguments if data argument was ommited
++		// shift arguments if data argument was omitted
+ 		if ( jQuery.isFunction( data ) ) {
++			type = callback;
+ 			callback = data;
+ 			data = null;
+ 		}
+@@ -121,7 +122,9 @@
+ 	},
+ 
+ 	post: function( url, data, callback, type ) {
++		// shift arguments if data argument was omitted
+ 		if ( jQuery.isFunction( data ) ) {
++			type = callback;
+ 			callback = data;
+ 			data = {};
+ 		}

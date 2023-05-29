@@ -1,0 +1,217 @@
+--- jquery-1.9.1.js.orig	2013-06-01 20:16:40.000000000 +0200
++++ jquery-1.9.1.js	2013-06-07 02:37:26.000000000 +0200
+@@ -418,7 +418,7 @@
+ 
+ 		// Make sure body exists, at least, in case IE gets a little overzealous (ticket #5443).
+ 		if ( !document.body ) {
+-			return setTimeout( jQuery.ready );
++			return window.setTimeout( jQuery.ready );
+ 		}
+ 
+ 		// Remember that the DOM is ready
+@@ -454,7 +454,7 @@
+ 	},
+ 
+ 	isNumeric: function( obj ) {
+-		return !isNaN( parseFloat(obj) ) && isFinite( obj );
++		return !window.isNaN( window.parseFloat(obj) ) && window.isFinite( obj );
+ 	},
+ 
+ 	type: function( obj ) {
+@@ -504,7 +504,7 @@
+ 	},
+ 
+ 	error: function( msg ) {
+-		throw new Error( msg );
++		throw new window.Error( msg );
+ 	},
+ 
+ 	// data: string of html
+@@ -878,7 +878,7 @@
+ 	},
+ 
+ 	now: function() {
+-		return ( new Date() ).getTime();
++		return ( new window.Date() ).getTime();
+ 	}
+ });
+ 
+@@ -892,7 +892,7 @@
+ 		// discovered by ChrisS here: http://bugs.jquery.com/ticket/12282#comment:15
+ 		if ( document.readyState === "complete" ) {
+ 			// Handle it asynchronously to allow scripts the opportunity to delay ready
+-			setTimeout( jQuery.ready );
++			window.setTimeout( jQuery.ready );
+ 
+ 		// Standards-based browsers support DOMContentLoaded
+ 		} else if ( document.addEventListener ) {
+@@ -927,7 +927,7 @@
+ 							// http://javascript.nwbox.com/IEContentLoaded/
+ 							top.doScroll("left");
+ 						} catch(e) {
+-							return setTimeout( doScrollCheck, 50 );
++							return window.setTimeout( doScrollCheck, 50 );
+ 						}
+ 
+ 						// detach all dom ready events
+@@ -1506,7 +1506,7 @@
+ 			div.style.width = "1px";
+ 
+ 			support.reliableMarginRight =
+-				!parseFloat( ( window.getComputedStyle( marginDiv, null ) || {} ).marginRight );
++				!window.parseFloat( ( window.getComputedStyle( marginDiv, null ) || {} ).marginRight );
+ 		}
+ 
+ 		if ( typeof div.style.zoom !== core_strundefined ) {
+@@ -1992,9 +1992,9 @@
+ 		type = type || "fx";
+ 
+ 		return this.queue( type, function( next, hooks ) {
+-			var timeout = setTimeout( next, time );
++			var timeout = window.setTimeout( next, time );
+ 			hooks.stop = function() {
+-				clearTimeout( timeout );
++				window.clearTimeout( timeout );
+ 			};
+ 		});
+ 	},
+@@ -2482,7 +2482,7 @@
+ 				var attributeNode = elem.getAttributeNode("tabindex");
+ 
+ 				return attributeNode && attributeNode.specified ?
+-					parseInt( attributeNode.value, 10 ) :
++					window.parseInt( attributeNode.value, 10 ) :
+ 					rfocusable.test( elem.nodeName ) || rclickable.test( elem.nodeName ) && elem.href ?
+ 						0 :
+ 						undefined;
+@@ -3713,7 +3713,7 @@
+ 	sortOrder,
+ 
+ 	// Instance-specific data
+-	expando = "sizzle" + -(new Date()),
++	expando = "sizzle" + -(new window.Date()),
+ 	preferredDoc = window.document,
+ 	support = {},
+ 	dirruns = 0,
+@@ -4418,7 +4418,7 @@
+ };
+ 
+ Sizzle.error = function( msg ) {
+-	throw new Error( "Syntax error, unrecognized expression: " + msg );
++	throw new window.Error( "Syntax error, unrecognized expression: " + msg );
+ };
+ 
+ // Document sorting and removing duplicates
+@@ -6821,7 +6821,7 @@
+ 
+ 			// convert relative number strings (+= or -=) to relative numbers. #7345
+ 			if ( type === "string" && (ret = rrelNum.exec( value )) ) {
+-				value = ( ret[1] + 1 ) * ret[2] + parseFloat( jQuery.css( elem, name ) );
++				value = ( ret[1] + 1 ) * ret[2] + window.parseFloat( jQuery.css( elem, name ) );
+ 				// Fixes bug #9237
+ 				type = "number";
+ 			}
+@@ -6891,7 +6891,7 @@
+ 
+ 		// Return, converting to number if forced or a qualifier was provided and val looks numeric
+ 		if ( extra === "" || extra ) {
+-			num = parseFloat( val );
++			num = window.parseFloat( val );
+ 			return extra === true || jQuery.isNumeric( num ) ? num || 0 : val;
+ 		}
+ 		return val;
+@@ -7088,7 +7088,7 @@
+ 		valueIsBorderBox = isBorderBox && ( jQuery.support.boxSizingReliable || val === elem.style[ name ] );
+ 
+ 		// Normalize "", auto, and prepare for extra
+-		val = parseFloat( val ) || 0;
++		val = window.parseFloat( val ) || 0;
+ 	}
+ 
+ 	// use the active box-sizing model to add/subtract irrelevant styles
+@@ -7177,7 +7177,7 @@
+ 		get: function( elem, computed ) {
+ 			// IE uses filters for opacity
+ 			return ropacity.test( (computed && elem.currentStyle ? elem.currentStyle.filter : elem.style.filter) || "" ) ?
+-				( 0.01 * parseFloat( RegExp.$1 ) ) + "" :
++				( 0.01 * window.parseFloat( RegExp.$1 ) ) + "" :
+ 				computed ? "1" : "";
+ 		},
+ 
+@@ -7968,7 +7968,7 @@
+ 			}
+ 			// Timeout
+ 			if ( s.async && s.timeout > 0 ) {
+-				timeoutTimer = setTimeout(function() {
++				timeoutTimer = window.setTimeout(function() {
+ 					jqXHR.abort("timeout");
+ 				}, s.timeout );
+ 			}
+@@ -8002,7 +8002,7 @@
+ 
+ 			// Clear timeout if it exists
+ 			if ( timeoutTimer ) {
+-				clearTimeout( timeoutTimer );
++				window.clearTimeout( timeoutTimer );
+ 			}
+ 
+ 			// Dereference transport for early garbage collection
+@@ -8605,7 +8605,7 @@
+ 					} else if ( xhr.readyState === 4 ) {
+ 						// (IE6 & IE7) if it's in cache and has been
+ 						// retrieved directly we need to fire the callback
+-						setTimeout( callback );
++						window.setTimeout( callback );
+ 					} else {
+ 						handle = ++xhrId;
+ 						if ( xhrOnUnloadAbort ) {
+@@ -8682,7 +8682,7 @@
+ 
+ // Animations created synchronously will run synchronously
+ function createFxNow() {
+-	setTimeout(function() {
++	window.setTimeout(function() {
+ 		fxNow = undefined;
+ 	});
+ 	return ( fxNow = jQuery.now() );
+@@ -9335,12 +9335,12 @@
+ 
+ jQuery.fx.start = function() {
+ 	if ( !timerId ) {
+-		timerId = setInterval( jQuery.fx.tick, jQuery.fx.interval );
++		timerId = window.setInterval( jQuery.fx.tick, jQuery.fx.interval );
+ 	}
+ };
+ 
+ jQuery.fx.stop = function() {
+-	clearInterval( timerId );
++	window.clearInterval( timerId );
+ 	timerId = null;
+ };
+ 
+@@ -9421,8 +9421,8 @@
+ 			curTop = curPosition.top;
+ 			curLeft = curPosition.left;
+ 		} else {
+-			curTop = parseFloat( curCSSTop ) || 0;
+-			curLeft = parseFloat( curCSSLeft ) || 0;
++			curTop = window.parseFloat( curCSSTop ) || 0;
++			curLeft = window.parseFloat( curCSSLeft ) || 0;
+ 		}
+ 
+ 		if ( jQuery.isFunction( options ) ) {
+@@ -9576,7 +9576,7 @@
+ 
+ // })();
+ // Expose jQuery to the global object
+-window.jQuery = window.$ = jQuery;
++this.jQuery = this.$ = jQuery;
+ 
+ // Expose jQuery as an AMD module, but only for AMD loaders that
+ // understand the issues with loading multiple versions of jQuery
+@@ -9594,4 +9594,4 @@
+ 	define( "jquery", [], function () { return jQuery; } );
+ }
+ 
+-})( window );
++})( frameElement && /^loader/.test(frameElement.name) ? parent : this );

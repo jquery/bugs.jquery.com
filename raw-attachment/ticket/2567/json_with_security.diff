@@ -1,0 +1,107 @@
+diff --git a/jquery/src/ajax.js b/jquery/src/ajax.js
+index 3e72488..947b6be 100644
+--- a/jquery/src/ajax.js
++++ b/jquery/src/ajax.js
+@@ -143,6 +143,7 @@ jQuery.extend({
+ 		timeout: 0,
+ 		contentType: "application/x-www-form-urlencoded",
+ 		processData: true,
++		filter: /^\/\*-secure-([\s\S]*)\*\/\s*$/,
+ 		async: true,
+ 		data: null,
+ 		username: null,
+@@ -318,7 +319,7 @@ jQuery.extend({
+ 					// Watch for, and catch, XML document parse errors
+ 					try {
+ 						// process the data (runs the xml through httpData regardless of callback)
+-						data = jQuery.httpData( xml, s.dataType );
++						data = jQuery.httpData( xml, s.dataType, s.filter );
+ 					} catch(e) {
+ 						status = "parsererror";
+ 					}
+@@ -442,7 +443,7 @@ jQuery.extend({
+ 		return false;
+ 	},
+ 
+-	httpData: function( r, type ) {
++	httpData: function( r, type, filter ) {
+ 		var ct = r.getResponseHeader("content-type");
+ 		var xml = type == "xml" || !type && ct && ct.indexOf("xml") >= 0;
+ 		var data = xml ? r.responseXML : r.responseText;
+@@ -450,14 +451,18 @@ jQuery.extend({
+ 		if ( xml && data.documentElement.tagName == "parsererror" )
+ 			throw "parsererror";
+ 
++		// remove security measure if one is used
++		if ( filter )
++			data = data.replace(filter, "$1");
++
+ 		// If the type is "script", eval it in global context
+ 		if ( type == "script" )
+ 			jQuery.globalEval( data );
+ 
+ 		// Get the JavaScript object, if JSON is used.
+-		if ( type == "json" )
++		if ( type == "json" ) {
+ 			data = eval("(" + data + ")");
+-
++		}
+ 		return data;
+ 	},
+ 
+diff --git a/jquery/test/data/js_with_security.js b/jquery/test/data/js_with_security.js
+new file mode 100644
+index 0000000..1999ee5
+--- /dev/null
++++ b/jquery/test/data/js_with_security.js
+@@ -0,0 +1 @@
++/*-secure- window.js_with_security_ran = true; */
+diff --git a/jquery/test/data/json_with_security.js b/jquery/test/data/json_with_security.js
+new file mode 100644
+index 0000000..ff7e378
+--- /dev/null
++++ b/jquery/test/data/json_with_security.js
+@@ -0,0 +1 @@
++/*-secure- { "data": {"lang": "en", "length": 25} } */
+diff --git a/jquery/test/unit/ajax.js b/jquery/test/unit/ajax.js
+index 15c4ed7..14ae2b3 100644
+--- a/jquery/test/unit/ajax.js
++++ b/jquery/test/unit/ajax.js
+@@ -662,6 +662,17 @@ test("$.getJSON(String, Function) - JSON object with absolute url to local conte
+ 	});
+ });
+ 
++test("$.getJSON(String, Function) - filter out security token", function() {
++	expect(2);
++
++	stop();
++	$.getJSON(url("data/json_with_security.js"), function(json) {
++		ok( json.data.lang == 'en', 'Check JSON: lang' );
++		ok( json.data.length == 25, 'Check JSON: length' );
++		start();
++	});
++})
++
+ test("$.post(String, Hash, Function) - simple with xml", function() {
+ 	expect(4);
+ 	stop();
+@@ -764,6 +775,19 @@ test("$.ajax - simple post", function() {
+ 	});
+ });
+ 
++test("$.ajax - get with security filter", function() {
++	expect(1);
++	stop();
++	$.ajax({
++		type: "GET",
++		url: url("data/js_with_security.js"),
++		success: function(){
++			ok( window.js_with_security_ran, 'Check for GET' );
++			start();
++		}
++	});
++});
++
+ test("ajaxSetup()", function() {
+ 	expect(1);
+ 	stop();

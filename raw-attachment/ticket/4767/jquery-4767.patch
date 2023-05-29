@@ -1,0 +1,20 @@
+Index: ajax.js
+===================================================================
+--- ajax.js	(revision 6389)
++++ ajax.js	(working copy)
+@@ -99,6 +99,7 @@
+ 	get: function( url, data, callback, type ) {
+ 		// shift arguments if data argument was ommited
+ 		if ( jQuery.isFunction( data ) ) {
++			type = callback;
+ 			callback = data;
+ 			data = null;
+ 		}
+@@ -122,6 +123,7 @@
+ 
+ 	post: function( url, data, callback, type ) {
+ 		if ( jQuery.isFunction( data ) ) {
++			type = callback;
+ 			callback = data;
+ 			data = {};
+ 		}

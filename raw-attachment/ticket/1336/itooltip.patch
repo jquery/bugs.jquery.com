@@ -1,0 +1,39 @@
+--- interface 1.2/source/itooltip.js	2007-05-31 00:00:00.000000000 -0400
++++ ./itooltip.js	2007-05-31 00:00:00.000000000 -0400
+@@ -43,10 +43,19 @@ jQuery.iTooltip = {
+ 		jQuery.iTooltip.focused = false;
+ 		jQuery.iTooltip.hide(e, this);
+ 	},
++	hideclicked : function(e)
++	{
++		if (jQuery.iTooltip.current != this)
++			return ;
++		jQuery('#tooltipHelper').fadeOut(1);
++	},
+ 	show : function(e, el, focused)
+ 	{
+ 		if (jQuery.iTooltip.current != null)
+-			return ;
++		{
++			jQuery.iTooltip.focused = false;
++			jQuery.iTooltip.hide(e, jQuery.iTooltip.current);
++		}
+ 		if (!el) {
+ 			el = this;
+ 		}
+@@ -114,6 +123,7 @@ jQuery.iTooltip = {
+ 			if (el.tooltipCFG.onShow) 
+ 				el.tooltipCFG.onShow.apply(el);
+ 			jEl.bind('mouseout',jQuery.iTooltip.hide)
++			   .bind('click',jQuery.iTooltip.hideclicked)
+ 			   .bind('blur',jQuery.iTooltip.hidefocused);
+ 		}
+ 	},
+@@ -142,6 +152,7 @@ jQuery.iTooltip = {
+ 			jQuery(el)
+ 				.attr('title',jQuery.iTooltip.oldTitle)
+ 				.unbind('mouseout', jQuery.iTooltip.hide)
++				.unbind('click', jQuery.iTooltip.hideclicked)
+ 				.unbind('blur', jQuery.iTooltip.hidefocused);
+ 			if (el.tooltipCFG.onHide) 
+ 				el.tooltipCFG.onHide.apply(el);

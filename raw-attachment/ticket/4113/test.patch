@@ -1,0 +1,113 @@
+Index: ajax.js
+===================================================================
+--- ajax.js	(revision 6193)
++++ ajax.js	(working copy)
+@@ -186,15 +186,15 @@
+ 		// Handle JSONP Parameter Callbacks
+ 		if ( s.dataType == "jsonp" ) {
+ 			if ( type == "GET" ) {
+-				if ( !s.url.match(jsre) )
+-					s.url += (s.url.match(/\?/) ? "&" : "?") + (s.jsonp || "callback") + "=?";
+-			} else if ( !s.data || !s.data.match(jsre) )
++				if ( !jsre.test(s.url) )
++					s.url += (/\?/.test(s.url) ? "&" : "?") + (s.jsonp || "callback") + "=?";
++			} else if ( !s.data || !jsre.test(s.data) )
+ 				s.data = (s.data ? s.data + "&" : "") + (s.jsonp || "callback") + "=?";
+ 			s.dataType = "json";
+ 		}
+ 
+ 		// Build temporary JSONP function
+-		if ( s.dataType == "json" && (s.data && s.data.match(jsre) || s.url.match(jsre)) ) {
++		if ( s.dataType == "json" && (s.data && jsre.test(s.data) || jsre.test(s.url)) ) {
+ 			jsonp = "jsonp" + jsc++;
+ 
+ 			// Replace the =? sequence both in the query string and the data
+@@ -227,12 +227,12 @@
+ 			// try replacing _= if it is there
+ 			var ret = s.url.replace(/(\?|&)_=.*?(&|$)/, "$1_=" + ts + "$2");
+ 			// if nothing was replaced, add timestamp to the end
+-			s.url = ret + ((ret == s.url) ? (s.url.match(/\?/) ? "&" : "?") + "_=" + ts : "");
++			s.url = ret + ((ret == s.url) ? (/\?/.test(s.url) ? "&" : "?") + "_=" + ts : "");
+ 		}
+ 
+ 		// If data is available, append data to url for get requests
+ 		if ( s.data && type == "GET" ) {
+-			s.url += (s.url.match(/\?/) ? "&" : "?") + s.data;
++			s.url += (/\?/.test(s.url) ? "&" : "?") + s.data;
+ 
+ 			// IE likes to send both get and post data, prevent this
+ 			s.data = null;
+Index: core.js
+===================================================================
+--- core.js	(revision 6193)
++++ core.js	(working copy)
+@@ -772,7 +772,7 @@
+ 		}
+ 
+ 		// Make sure we're using the right name for getting the float value
+-		if ( name.match( /float/i ) )
++		if ( /float/i.test( name ) )
+ 			name = styleFloat;
+ 
+ 		if ( !force && style && style[ name ] )
+@@ -781,7 +781,7 @@
+ 		else if ( defaultView.getComputedStyle ) {
+ 
+ 			// Only "float" is needed here
+-			if ( name.match( /float/i ) )
++			if ( /float/i.test( name ) )
+ 				name = "float";
+ 
+ 			name = name.replace( /([A-Z])/g, "-$1" ).toLowerCase();
+@@ -853,7 +853,7 @@
+ 			if ( typeof elem === "string" ) {
+ 				// Fix "XHTML"-style tags in all browsers
+ 				elem = elem.replace(/(<(\w+)[^>]*?)\/>/g, function(all, front, tag){
+-					return tag.match(/^(abbr|br|col|img|input|link|meta|param|hr|area|embed)$/i) ?
++					return /^(abbr|br|col|img|input|link|meta|param|hr|area|embed)$/i.test(tag) ?
+ 						all :
+ 						front + "></" + tag + ">";
+ 				});
+@@ -869,7 +869,7 @@
+ 					!tags.indexOf("<leg") &&
+ 					[ 1, "<fieldset>", "</fieldset>" ] ||
+ 
+-					tags.match(/^<(thead|tbody|tfoot|colg|cap)/) &&
++					/^<(thead|tbody|tfoot|colg|cap)/.test(tags) &&
+ 					[ 1, "<table>", "</table>" ] ||
+ 
+ 					!tags.indexOf("<tr") &&
+@@ -989,9 +989,9 @@
+ 					var attributeNode = elem.getAttributeNode( "tabIndex" );
+ 					return attributeNode && attributeNode.specified
+ 						? attributeNode.value
+-						: elem.nodeName.match(/(button|input|object|select|textarea)/i)
++						: /(button|input|object|select|textarea)/i.test(elem.nodeName)
+ 							? 0
+-							: elem.nodeName.match(/^(a|area)$/i) && elem.href
++							: /^(a|area)$/i.test(elem.nodeName) && elem.href
+ 								? 0
+ 								: undefined;
+ 				}
+Index: selector.js
+===================================================================
+--- selector.js	(revision 6193)
++++ selector.js	(working copy)
+@@ -294,7 +294,7 @@
+ 		"": function(checkSet, part, isXML){
+ 			var doneName = done++, checkFn = dirCheck;
+ 
+-			if ( !part.match(/\W/) ) {
++			if ( !/\W/.test(part) ) {
+ 				var nodeCheck = part = isXML ? part : part.toUpperCase();
+ 				checkFn = dirNodeCheck;
+ 			}
+@@ -304,7 +304,7 @@
+ 		"~": function(checkSet, part, isXML){
+ 			var doneName = done++, checkFn = dirCheck;
+ 
+-			if ( typeof part === "string" && !part.match(/\W/) ) {
++			if ( typeof part === "string" && !/\W/.test(part) ) {
+ 				var nodeCheck = part = isXML ? part : part.toUpperCase();
+ 				checkFn = dirNodeCheck;
+ 			}

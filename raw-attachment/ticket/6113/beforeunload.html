@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>jQuery double beforeunload</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(window).bind('beforeunload', function(){
+				alert('Hit beforeunload');
+			});
+		});
+	</script>
+</head>
+
+<body>

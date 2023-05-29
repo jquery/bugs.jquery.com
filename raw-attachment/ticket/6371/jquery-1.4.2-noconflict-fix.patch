@@ -1,0 +1,19 @@
+--- jquery-1.4.2.js 
++++ jquery-1.4.2-noconflict-patched.js 
+@@ -360,9 +360,13 @@
+ 
+ jQuery.extend({
+ 	noConflict: function( deep ) {
+-		window.$ = _$;
+-
+-		if ( deep ) {
++		// Is window.$ this jQuery? Revert it to the previous $.
++		if (window.$ === jQuery) {
++			window.$ = _$;
++		}
++
++		// Is window.jQuery this jQuery? Revert it to the previous jQuery.
++		if ( deep && window.jQuery === jQuery) {
+ 			window.jQuery = _jQuery;
+ 		}
+ 

@@ -1,0 +1,34 @@
+--- /Users/keith/Sites/sonomagrapevine.org/misc/jquery-1.1.2-uncompressed.js	2007-06-20 10:00:16.000000000 -0700
++++ /Users/keith/Sites/sonomagrapevine.org/misc/jquery.js	2007-06-20 10:00:20.000000000 -0700
+@@ -330,10 +330,11 @@
+ 	className: {
+ 		// internal only, use addClass("class")
+ 		add: function( elem, c ){
+-			jQuery.each( c.split(/\s+/), function(i, cur){
+-				if ( !jQuery.className.has( elem.className, cur ) )
+-					elem.className += ( elem.className ? " " : "" ) + cur;
+-			});
++		    if ( c.split )
++    			jQuery.each( c.split(/\s+/), function(i, cur){
++    				if ( !jQuery.className.has( elem.className, cur ) )
++    					elem.className += ( elem.className ? " " : "" ) + cur;
++    			});
+ 		},
+ 
+ 		// internal only, use removeClass("class")
+@@ -348,8 +349,13 @@
+ 		has: function( t, c ) {
+ 			t = t.className || t;
+ 			// escape regex characters
+-			c = c.replace(/([\.\\\+\*\?\[\^\]\$\(\)\{\}\=\!\<\>\|\:])/g, "\\$1");
+-			return t && new RegExp("(^|\\s)" + c + "(\\s|$)").test( t );
++			if ( c.replace ) {
++			    c = c.replace(/([\.\\\+\*\?\[\^\]\$\(\)\{\}\=\!\<\>\|\:])/g, "\\$1");
++			    return t && new RegExp("(^|\\s)" + c + "(\\s|$)").test( t );
++		    }
++		    else {
++		        return false;
++		    }
+ 		}
+ 	},
+ 	swap: function(e,o,f) {

@@ -1,0 +1,104 @@
+Index: test/unit/event.js
+===================================================================
+--- test/unit/event.js	(revision 6162)
++++ test/unit/event.js	(working copy)
+@@ -474,7 +474,7 @@
+ });
+ 
+ test(".live()/.die()", function() {
+-	expect(42);
++	expect(46);
+ 
+ 	var submit = 0, div = 0, livea = 0, liveb = 0;
+ 
+@@ -611,6 +611,29 @@
+ 	
+ 	// Cleanup
+ 	jQuery("#nothiddendivchild").die("click");
++
++	// Verify that .live() ocurs and cancel buble in the same order as
++	// we would expect .bind() and .click() without delegation
++	var lived = 0, livee = 0;
++	
++	// bind one pair in one order
++	jQuery('span#liveSpan1 a').live('click', function(){ lived++; return false; });
++	jQuery('span#liveSpan1').live('click', function(){	livee++; });
++
++	jQuery('span#liveSpan1 a').click();
++	equals( lived, 1, "Verify that only one first handler occurred." );
++	equals( livee, 0, "Verify that second handler don't." );
++
++	// and one pair in inverse
++	jQuery('#liveHandlerOrder span#liveSpan2').live('click', function(){	livee++; });
++	jQuery('#liveHandlerOrder span#liveSpan2 a').live('click', function(){ lived++; return false; });
++
++	jQuery('span#liveSpan2 a').click();
++	equals( lived, 2, "Verify that only one first handler occurred." );
++	equals( livee, 0, "Verify that second handler don't." );
++	
++	// Cleanup
++	jQuery("span#liveSpan1 a, span#liveSpan1, span#liveSpan2 a, span#liveSpan2").die("click");
+ });
+ 
+ /*
+Index: test/index.html
+===================================================================
+--- test/index.html	(revision 6162)
++++ test/index.html	(working copy)
+@@ -213,6 +213,11 @@
+ 			<span>...</span><a id="linkWithNoHrefWithTabIndex" tabindex="1">Eat some funyuns</a><span>...</span>
+ 			<span>...</span><a id="linkWithNoHrefWithNegativeTabIndex" tabindex="-1">Eat some funyuns</a><span>...</span>
+ 		</div>
++		
++		<div id="liveHandlerOrder">
++			<span id="liveSpan1"><a href="#"></a></span>
++			<span id="liveSpan2"><a href="#"></a></span>
++		</div>
+ 	</div>
+ 	</dl>
+ 	
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 6162)
++++ src/core.js	(working copy)
+@@ -342,14 +342,17 @@
+ 	},
+ 
+ 	closest: function( selector ) {
+-		var pos = jQuery.expr.match.POS.test( selector ) ? jQuery(selector) : null;
++		var closer = 0, pos = jQuery.expr.match.POS.test( selector ) ? jQuery(selector) : null;
+ 
+ 		return this.map(function(){
+ 			var cur = this;
+ 			while ( cur && cur.ownerDocument ) {
+-				if ( pos ? pos.index(cur) > -1 : jQuery(cur).is(selector) )
++				if ( pos ? pos.index(cur) > -1 : jQuery(cur).is(selector) ) {
++					jQuery(cur).data('howClose',closer);
+ 					return cur;
++				}
+ 				cur = cur.parentNode;
++				closer++;
+ 			}
+ 		});
+ 	},
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 6162)
++++ src/event.js	(working copy)
+@@ -571,9 +571,14 @@
+ 		}
+ 	});
+ 
++	elems.sort(function(a,b) {
++		return jQuery(a.elem).data('howClose') - jQuery(b.elem).data('howClose');
++	});
++	
+ 	jQuery.each(elems, function(){
+-		if ( this.fn.call(this.elem, event, this.fn.data) === false )
+-			stop = false;
++		if ( this.fn.call(this.elem, event, this.fn.data) === false ) {
++			return stop = false;;
++		}
+ 	});
+ 
+ 	return stop;

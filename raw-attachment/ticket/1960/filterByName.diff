@@ -1,0 +1,16 @@
+Index: src/selector.js
+===================================================================
+--- src/selector.js	(revision 5084)
++++ src/selector.js	(working copy)
+@@ -330,6 +330,11 @@
+ 			else if ( m[1] == "." )
+ 				r = jQuery.classFilter(r, m[2], not);
+ 
++			else if ( !not && m[1] == '[' && m[2] == 'name' && m[3] == '=' )//special case, filter by exact name
++				r = jQuery.grep( document.getElementsByName(m[5]), function(elem){
++					return jQuery.inArray( elem, r ) != -1;	
++				});
++
+ 			else if ( m[1] == "[" ) {
+ 				var tmp = [], type = m[3];
+ 				

@@ -1,0 +1,24 @@
+Index: src/fx/fx.js
+===================================================================
+--- src/fx/fx.js	(revision 2029)
++++ src/fx/fx.js	(working copy)
+@@ -544,13 +544,13 @@
+ 					if ( options.hide || options.show )
+ 						for ( var p in elem.curAnim )
+ 							jQuery.attr(y, p, elem.orig[p]);
++					
++					// If a callback was provided, execute it
++					if ( jQuery.isFunction( options.complete ) )
++						// Execute the complete function
++						options.complete.apply( elem );
+ 				}
+-
+-				// If a callback was provided, execute it
+-				if ( done && jQuery.isFunction( options.complete ) )
+-					// Execute the complete function
+-					options.complete.apply( elem );
+-
++				
+ 				return false;
+ 			} else {
+ 				var n = t - this.startTime;

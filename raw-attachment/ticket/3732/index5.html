@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>test</title>
+		<style type="text/css">
+        </style>
+    <script src="jquery/jquery-1.2.6.pack.js" type="text/javascript"></script>
+<script>
+$(document).ready(function() {
+//hack css jquery for ie
+	$.fn.extend({ css2: function(key, value) { var key = key.replace(/\-(\w)/g, function(all, letter){ return letter.toUpperCase(); }); return this.css( key, value); } });
+		$('#id2').after('normal css": '+$('#id2').css('background-position')+'<br />camelcase: '+$('#id2').css('backgroundPosition')+"<br />fixed: "+$('#id2').css2('background-position'));
+						   });
+</script>
+
+</head>
+<body>
+background-position vs backgroundPosition<br />
+<div id="id2" style="background-position:50px 50px">my position is: <div>
+</body>
+</html>

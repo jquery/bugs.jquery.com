@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Uber-Uploader - Free File Upload Progress Bar</title>
+		<script language="javaScript" type="text/JavaScript" src="jquery-1.4a1.js"></script>
+		<script language="javaScript" type="text/JavaScript">
+			function startUpload(){
+				var iframe_name = "frame_123456";
+				
+				$("#upload_container").append("<iframe name='"+iframe_name+"' frameborder='0' width='780' height='200' scrolling='auto'></iframe>");
+				$("#ubr_upload_form").attr("target", iframe_name);
+				$("#ubr_upload_form").attr("action", "test.php");
+				$("#ubr_upload_form").submit();
+				
+				return false
+			}
+		</script>
+	</head>
+	<body>
+	<center>
+		<h1>jquery-1.4a1.js</h1>
+		<div id="upload_container"></div>
+		<form id="ubr_upload_form" name="ubr_upload_form" method="post" enctype="multipart/form-data" action="#" onSubmit="return startUpload();">
+			<input type="file" name="filename">
+			<input type="submit" id="upload_button" name="upload_button" value="Upload">
+		</form>
+	</center>
+	</body>
+</html>
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+        <title>Test</title>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+        var clone=$("#form1").clone(true);
+        clone.find('input[type=submit]').click(function(){
+        alert("click: textarea value:"+$(this).parent('form').find('textarea').text());
+        });
+        clone.submit(function(){
+        alert("submit: textarea value:"+$(this).find('textarea').text());
+        });
+        clone.insertAfter($("#form1"));
+        
+        });
+        </script>
+</head>
+<body>
+<form id="form1" method="post" action="">
+<textarea rows="5" cols="20" name="text">mytext</textarea>
+<input type="submit" value="ok"/>
+</form>
+</body>
+</html>

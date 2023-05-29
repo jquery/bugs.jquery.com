@@ -1,0 +1,72 @@
+<!--
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<html>
+<script type="text/JavaScript" src="jquery-112.js"></script>
+<script type="text/JavaScript" src="iUtil.js"></script>
+<script type="text/JavaScript">
+function qviewport() {
+	var l,t,iw,ih;
+	var dE = document.documentElement;
+	var dB = document.body;
+	if (self.pageYOffset) { // all except Explorer
+		l = self.pageXOffset;
+		t = self.pageYOffset;
+
+	} else if (dE && dE.scrollTop) {// Explorer 6 Strict
+		l = dE.scrollLeft;
+		t = dE.scrollTop;
+	} else if (dB) { // all other Explorers
+		l = dB.scrollLeft;
+		t = dB.scrollTop;
+	}
+
+	if (self.innerHeight) { // all except Explorer
+		iw = self.innerWidth;
+		ih = self.innerHeight;
+	} else if (dE && dE.clientHeight) {// Explorer 6 Strict Mode
+		iw = dE.clientWidth;
+		ih = dE.clientHeight;
+	} else if (dB) { // other Explorers
+		iw = dB.clientWidth;
+		ih = dB.clientHeight;
+	}
+	return {l:l, t:t, iw:iw, ih:ih};
+}
+
+
+function testViewport() {
+	
+	var s = jQuery.iUtil.getScroll();
+	var qv = qviewport();
+	//alert('qv '+qv.t+','+qv.l+' '+qv.iw+' '+qv.ih);
+	if (s.t != qv.t || s.iw != qv.iw){
+		alert('INCORRECT '+'t:'+s.t+', l:'+ s.l+', w:'+ s.w+', h:'+ s.h+', iw:'+ s.iw+', ih:'+ s.ih);
+	}
+}
+</script>
+<body>
+something in here.
+
+
+<p>
+alsdk a;lskd;lask dlkasd;l asld kla dka sldk al;sdkas
+dalskdl asdl asldk al;kdsla;ksd asdla sdl;ka sl;dk asl;kd asd
+asldkal;sd asl;kd als;k dla;skd l;askd aksd al;sd kal;sd k;laskd
+adkasl;dk alsdk akds;lak dl;aks d;lka d;lkas;ld a;sldk a;lsd asd ka;skd ;alskd
+asd
+kas;ldk a;lsdk a;lskd l;ask dl;ask dl;as d;lask d;lask d;lask dlka sd
+alskdlak daks d;lask dl;aksd ;lkas; daks;d a;k
+</p>
+<a href="javascript:testViewport();">viewport</a>
+<p style="width:400px;">
+alsdk a;lskd;lask dlkasd;l asld kla dka sldk al;sdkas
+dalskdl asdl asldk al;kdsla;ksd asdla sdl;ka sl;dk asl;kd asd
+asldkal;sd asl;kd als;k dla;skd l;askd aksd al;sd kal;sd k;laskd
+adkasl;dk alsdk akds;lak dl;aks d;lka d;lkas;ld a;sldk a;lsd asd ka;skd ;alskd
+asd
+kas;ldk a;lsdk a;lskd l;ask dl;ask dl;as d;lask d;lask d;lask dlka sd
+alskdlak daks d;lask dl;aksd ;lkas; daks;d a;k
+</p>
+</body>
+<html>

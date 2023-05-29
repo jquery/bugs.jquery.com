@@ -1,0 +1,11 @@
+--- jquery-1.4a2.js	2009-12-19 18:15:38.000000000 -0700
++++ jquery-1.4a2.new.js	2009-12-19 17:59:24.000000000 -0700
+@@ -1808,7 +1808,7 @@ jQuery.each(["bind", "one"], function(i,
+ 			jQuery( this ).unbind( event, handler );
+ 			return fn.apply( this, arguments );
+ 		}) : fn;
+-		return type === "unload" ? this.one(type, data, handler, thisObject) : this.each(function() {
++		return this.each(function() {
+ 			jQuery.event.add( this, type, handler, data );
+ 		});
+ 	};

@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>jQuery Solitaire</title>
+		<style type="text/css">
+			#pnlSolitaire { width:640px; height:480px; border:#000 2px solid; background:#00CC00; position:relative; }
+				#pnlSolHand, #pnlSolPile, #pnlSolColumns B, #pnlSolSuites B { position:absolute; top:10px; left:10px; width:65px; height:116px; border:#FFF 1px dotted; }
+				#pnlSolPile { left:88px; }
+					#pnlSolHand I, #pnlSolPile I, #pnlSolColumns B I, #pnlSolSuites B I { position:absolute; }
+				#pnlSolColumns { position:absolute; top:130px; right:10px; }
+					#pnlSolColumns B { position:relative; float:left; margin-right:10px; }
+				#pnlSolSuites { position:absolute; top:0px; right:10px; }
+					#pnlSolSuites B { position:relative; float:left; margin-right:10px; }
+			
+			.face_cards I { display:block; width:62px; height:112px; background:#999 url(images/playing_cards.jpg) 0px 0px no-repeat; border:#000 2px solid; }
+			.face_cards I.facedown { background-position:-123px 0px !important; } .face_cards I.facedown.x2 { background-position:-184px 0px !important; }
+			.face_cards I.c1X  { background-position:0px 0px; }			.face_cards I.c2X  { background-position:-61px 0px; }
+			.face_cards I.cAS  { background-position:-0px -113px; }		.face_cards I.c2S  { background-position:-61px -113px; }
+			.face_cards I.c3S  { background-position:-123px -113px; }	.face_cards I.c4S  { background-position:-184px -113px; }
+			.face_cards I.c5S  { background-position:-246px -113px; }	.face_cards I.c6S  { background-position:-307px -113px; }
+			.face_cards I.c7S  { background-position:-369px -113px; }	.face_cards I.c8S  { background-position:-431px -113px; }
+			.face_cards I.c9S  { background-position:-492px -113px; }	.face_cards I.c10S { background-position:-553px -113px; }
+			.face_cards I.cJS  { background-position:-615px -113px; }	.face_cards I.cQS  { background-position:-676px -113px; }
+			.face_cards I.cKS  { background-position:-738px -113px; }	.face_cards I.cAH  { background-position:-0px -226px; }
+			.face_cards I.c2H  { background-position:-61px -226px; }	.face_cards I.c3H  { background-position:-123px -226px; }
+			.face_cards I.c4H  { background-position:-184px -226px; }	.face_cards I.c5H  { background-position:-246px -226px; }
+			.face_cards I.c6H  { background-position:-307px -226px; }	.face_cards I.c7H  { background-position:-369px -226px; }
+			.face_cards I.c8H  { background-position:-430px -226px; }	.face_cards I.c9H  { background-position:-492px -226px; }
+			.face_cards I.c10H { background-position:-553px -226px; }	.face_cards I.cJH  { background-position:-615px -226px; }
+			.face_cards I.cQH  { background-position:-676px -226px; }	.face_cards I.cKH  { background-position:-738px -226px; }
+			.face_cards I.cAD  { background-position:-0px -339px; }		.face_cards I.c2D  { background-position:-61px -339px; }
+			.face_cards I.c3D  { background-position:-123px -339px; }	.face_cards I.c4D  { background-position:-184px -339px; }
+			.face_cards I.c5D  { background-position:-246px -339px; }	.face_cards I.c6D  { background-position:-307px -339px; }
+			.face_cards I.c7D  { background-position:-369px -339px; }	.face_cards I.c8D  { background-position:-430px -339px; }
+			.face_cards I.c9D  { background-position:-492px -339px; }	.face_cards I.c10D { background-position:-553px -339px; }
+			.face_cards I.cJD  { background-position:-615px -339px; }	.face_cards I.cQD  { background-position:-676px -339px; }
+			.face_cards I.cKD  { background-position:-738px -339px; }	.face_cards I.cAC  { background-position:-0px -452px; }
+			.face_cards I.c2C  { background-position:-61px -452px; }	.face_cards I.c3C  { background-position:-123px -452px; }
+			.face_cards I.c4C  { background-position:-184px -452px; }	.face_cards I.c5C  { background-position:-246px -452px; }
+			.face_cards I.c6C  { background-position:-307px -452px; }	.face_cards I.c7C  { background-position:-369px -452px; }
+			.face_cards I.c8C  { background-position:-430px -452px; }	.face_cards I.c9C  { background-position:-492px -452px; }
+			.face_cards I.c10C { background-position:-553px -452px; }	.face_cards I.cJC  { background-position:-615px -452px; }
+			.face_cards I.cQC  { background-position:-676px -452px; }	.face_cards I.cKC  { background-position:-738px -452px; }
+		</style>
+		<script type="text/javascript" language="Javascript" src="/js/jquery/jquery-1.3pre.js"></script>
+		<script type="text/javascript" language="Javascript" src="/js/jquery/jquery.shuffle.js"></script>
+		<script type="text/javascript" language="Javascript" src="/js/jquery/ui/ui.core.js"></script>
+		<script type="text/javascript" language="Javascript" src="/js/jquery/ui/ui.draggable.js"></script>
+		<script type="text/javascript" language="Javascript">		
+			Solitaire = {
+				Deck: [
+					'A.S','2.S','3.S','4.S','5.S','6.S','7.S','8.S','9.S','10.S','J.S','Q.S','K.S',
+					'A.C','2.C','3.C','4.C','5.C','6.C','7.C','8.C','9.C','10.C','J.C','Q.C','K.C',
+					'A.H','2.H','3.H','4.H','5.H','6.H','7.H','8.H','9.H','10.H','J.H','Q.H','K.H',
+					'A.D','2.D','3.D','4.D','5.D','6.D','7.D','8.D','9.D','10.D','J.D','Q.D','K.D'
+				],
+				
+				Board: {Pile:[], Columns:{1:[],2:[],3:[],4:[],5:[],6:[],7:[]}, Suites:{1:[],2:[],3:[],4:[]}, Hand:[]},
+				
+				setup: function() {
+					$('#gameCanvas').empty();
+					
+					strBoard = '';
+					$.each(this.Board, function(i, val) {
+						strBoard +=  '<b id="pnlSol'+ i +'">';
+						if (val.length == undefined && typeof(val) == 'object') { 
+							$.each(val, function(i2, val2) {
+								strBoard += '<b class="cell'+ i2 +'">'+ i2 +'</b>';
+							});
+						}
+						strBoard += '</b>';
+					});
+					
+					$('#gameCanvas').append('<div id="pnlSolitaire" class="face_cards">' + strBoard + '</div>');
+					
+					$('#pnlSolHand').click(function() {
+						Solitaire.draw();
+					});
+					
+					return this;
+				},
+				
+				deal: function() {
+					$('#pnlSolitaire I').draggable('destroy');
+					$('#pnlSolHand, #pnlSolPile, #pnlSolColumns B, #pnlSolSuites B').html('');
+					
+					$.shuffle(this.Deck);
+					
+					$.each(this.Deck, function(i, val) {
+						strClass = 'c' + val.replace('.','');
+						$('#pnlSolHand').append('<i class="'+ strClass +' facedown"></i>');
+					});
+					
+					$('#pnlSolHand I').draggable({revert:true, opacity:.5, stack:{group:'#pnlSolitaire B I', min:1}, containment:'#pnlSolitaire'});
+					
+					$.each(this.Board.Columns, function(i, val) {
+						for (i2=7; i2>=i; i2--) {
+							$('#pnlSolHand I:last').appendTo('#pnlSolColumns B:eq('+(i2-1)+')');
+						}
+						
+						for (i2=0; i2<=i; i2++) {
+							$('#pnlSolColumns B:eq('+i2+') I').each(function(i3) {
+								$(this).css({top:0}).addClass('facedown').animate({top:i3*6}, 'slow');
+							});
+							
+							$('#pnlSolColumns B:eq('+i2+') I:last').removeClass('facedown');
+						}
+					});
+					
+					$('#pnlSolHand I').each(function(i) {
+						$(this).css({top:0}).animate({top:i*3}, 'slow');
+					});
+					
+					$('#pnlSolitaire I').draggable('disable');
+					$('#pnlSolColumns B I:last').draggable('enable');
+				},
+				
+				draw: function() {
+					if ($('#pnlSolHand I').size() == 0) {
+						$('#pnlSolPile I').each(function(i) {
+							$(this).addClass('facedown').appendTo('#pnlSolHand').animate({top:i*3}, 'slow');
+						});
+						$('#pnlSolHand I:last').draggable('disable');
+					} else {
+						for (i=0; i<4; i++) {
+							$('#pnlSolHand I:last').removeClass('facedown').css({top:0}).appendTo('#pnlSolPile');
+						}
+					}
+					
+					$('#pnlSolPile I').draggable('disable');
+					$('#pnlSolPile I:last').draggable('enable');				
+				}
+			};
+		
+			$(document).ready( function() {
+				// TODO: Show Loading Animation;
+			
+				$.each(['images/playing_cards.jpg'], function(i) {
+			    	$("<img>").attr("src", arguments[i]);
+			  	});
+				
+				Solitaire.setup().deal();
+				
+				// TODO: Hide Loading Animation 
+			});
+		</script>
+	</head>
+	<body id="gameCanvas">
+		This page requires JavaScript to be enabled.
+	</body>
+</html>

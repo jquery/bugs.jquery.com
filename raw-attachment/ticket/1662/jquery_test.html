@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript">
+      function useVal() {
+        $("#textinput").val("Você já deu sua avaliação a esse livro.");
+        $("#textinput2").val("Jörn");
+      }
+
+      $(function () {
+        $("button:first").click(function () {
+              showUnicode();
+            });
+        $("button:last").click(function () {
+              useVal();
+            });
+      });
+    </script>
+  </head>
+  <body>
+    <button>Use .text()</button>
+    <button>Use .val()</button>
+    <div id="container">
+      Hi
+    </div>
+    <input type="text" id="textinput" />
+    <input type="text" id="textinput2" />
+    <div id="adiv"></div>
+  </body>
+</html>

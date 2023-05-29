@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>selectory-test-case</title>
+<meta http-equiv="X-UA-Compatible" content="IE=IE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript">
+var $j = jQuery.noConflict();
+var template = 'path/to/template/';
+$j(document).ready(function(){
+ $j('#addProduct').click(function() {
+  $j('input[name*=\\[txtProductQuantity\\]]').each(function() {
+   $j('input[name*=\\[txtProductQuantity\\]]').bind('blur', function() {
+    if ($j(this).val()) {
+     var x = $j(this).attr('name').replace('[txtProductQuantity]','\\\\[txtProductPrice\\\\]');
+     var x = x.replace('[','\\\\[');
+     var x = x.replace(']','\\\\]');
+     $j('#msg').html(x+' => '+$j('input[name*='+x+']').attr('name'));
+     //addTotal($j(this).val(), $j('input[name^='+x+']').val());
+    }
+   });
+   $j('input[name*=\\[txtProductPrice\\]]').bind('blur', function() {
+    if ($j(this).val()) {
+     var y = $j(this).attr('id').replace('[txtProductPrice]','\\\\[txtProductQuantity\\\\]');
+     var y = y.replace('[','\\\\[');
+     var y = y.replace(']','\\\\]');
+     $j('#msg').html(y+' => '+$j('input[name^='+y+']').val());
+     //addTotal($j(this).val(), $j('#'+y).val());
+    }
+   });
+  });
+ });
+});
+function addTotal(item, amt)
+{
+ if (amt) {
+  var total = ($j('#txtProductTotal').val()) ? parseFloat($j('#txtProductTotal').val()) + (parseFloat(item) * parseFloat(amt)) : parseFloat(item) * parseFloat(amt);
+ } else {
+  var total = ($j('#txtProductTotal').val()) ? parseFloat($j('#txtProductTotal').val()) + (parseFloat(item) * parseFloat(amt)) : parseFloat(item);
+ }
+ $j('#txtProductTotal').val(parseFloat(total).toFixed(2));
+}
+function subTotal(item, amt)
+{
+ if (amt) {
+  var total = ($j('#txtProductTotal').val()) ? parseFloat($j('#txtProductTotal').val()) - (parseFloat(item) * parseFloat(amt)) : parseFloat(item) * parseFloat(amt);
+ } else {
+  var total = ($j('#txtProductTotal').val()) ? parseFloat($j('#txtProductTotal').val()) - parseFloat(item) : parseFloat(item);
+ }
+ $j('#txtProductTotal').val(parseFloat(total).toFixed(2));
+}
+function addEmptyRow(id,count,template)
+{
+	var formRemove = '<a href="#" alt="Remove product?" title="Remove product?">Remove row?</a>';
+	var formQuantity = document.createElement('input');
+	formQuantity.setAttribute('type', 'text');
+ formQuantity.setAttribute('name', 'txtProduct['+count+'][txtProductQuantity]');
+ formQuantity.setAttribute('id', 'txtProduct['+count+'][txtProductQuantity]');
+ formQuantity.setAttribute('title', 'Product name for row #'+count);
+ formQuantity.setAttribute('size', '15');
+	var formDescription = document.createElement('input');
+	formDescription.setAttribute('type', 'text');
+ formDescription.setAttribute('name', 'txtProduct['+count+'][txtProductDescription]');
+ formDescription.setAttribute('id', 'txtProduct['+count+'][txtProductDescription]');
+ formDescription.setAttribute('title', 'Product description for row #'+count);
+ var formPrice = document.createElement('input');
+	formPrice.setAttribute('type', 'text');
+ formPrice.setAttribute('name', 'txtProduct['+count+'][txtProductPrice]');
+ formPrice.setAttribute('id', 'txtProduct['+count+'][txtProductPrice]');
+ formPrice.setAttribute('title', 'Product price for row #'+count);
+ formPrice.setAttribute('size', '15');
+	var formNumber = document.createElement('input');
+	formNumber.setAttribute('type', 'text');
+ formNumber.setAttribute('name', 'txtProduct['+count+'][txtProductNumber]');
+ formNumber.setAttribute('id', 'txtProduct['+count+'][txtProductNumber]');
+ formNumber.setAttribute('title', 'Product number for row #'+count);
+ formNumber.setAttribute('size', '15');
+	var formSource = document.createElement('input');
+	formSource.setAttribute('type', 'text');
+ formSource.setAttribute('name', 'txtProduct['+count+'][txtProductSource]');
+ formSource.setAttribute('id', 'txtProduct['+count+'][txtProductSource]');
+ formSource.setAttribute('title', 'Product source for row #'+count);
+ formSource.setAttribute('size', '15');
+
+ var formFiller = '*';
+
+ var table = document.getElementById(id);
+
+ if(count<0){count = table.rows.length;count++;}
+
+ var row = table.insertRow(count);
+
+ try {
+  var cellRemove = row.insertCell(0);
+  cellRemove.innerHTML = formRemove;
+  var cellQuantity = row.insertCell(1);
+  cellQuantity.appendChild(formQuantity);
+  var cellDescription = row.insertCell(2);
+  cellDescription.appendChild(formDescription);
+  var cellPrice = row.insertCell(3);
+  cellPrice.appendChild(formPrice);
+  var cellNumber = row.insertCell(4);
+  cellNumber.appendChild(formNumber);
+  var cellSource = row.insertCell(5);
+  cellSource.appendChild(formSource);
+  var cellFiller = row.insertCell(6);
+  cellFiller.innerHTML = formFiller;
+
+ } catch (ex) {
+  alert(ex);
+ }
+}
+</script>
+</head>
+<body>
+<form action="selector-test-case.html" method="post" class="auth-form" name="puchase" id="purchase">
+ <div>
+		<div id="msg"></div>
+  <table border="0" width="100%" class="auth-form txt" cellspacing="5">
+   <tr align="center">
+    <td title="Add new product element?" width="20" align="left"><a href="#" title="Add new product row?" onclick="javascript:addEmptyRow('products',document.getElementById('products').rows.length,template)" id="addProduct">Add row?</td>
+    <td title="Product quantity" width="200" nowrap><strong>Quantity</strong></td>
+    <td title="Item description" width="200" nowrap><strong>Item description</strong></td>
+    <td title="Item price" width="200" nowrap><strong>Price</strong></td>
+    <td title="Part number" width="200" nowrap><strong>Part number</strong></td>
+    <td title="Part source" width="200" nowrap><strong>Part source</strong></td>
+    <td class="copyright"></td>
+   </tr>
+   <tr>
+    <td colspan="7">
+     <table border="0" width="100%" class="auth-form txt" id="products" style="products"></table>
+    </td>
+   </tr>
+   <tr>
+    <td colspan="4"></td>
+    <td title="Total of parts list" width="2%" class="txt" align="right"><strong>Total:</strong></td>
+    <td title="Total of parts list" class="txt">$<input type="text" id="txtProductTotal" name="txtProductTotal" value="" /></td>
+    <td class="copyright" id="txtProductTotalErr" width="25" nowrap></td>
+   </tr>
+  </table>
+ </div>
+</form>
+</body>
+</html>

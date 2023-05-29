@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.js"></script>
+<title>Sandbox</title>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<style type="text/css" media="screen">
+body { background-color: #000; font: 16px Helvetica, Arial; color: #fff; }
+</style>
+<script>
+$(function() {
+  $("h3:first").wrapInner(function(i) {
+    console.log(this);
+    return "<strong style='display:block;border:1px solid #000'/>";
+  });
+  $("h3:eq(1)").wrapInner("<strong style='display:block;border:1px solid #000'/>");
+});
+</script>
+</head>
+<body>
+<h3>foo<span>bar</span><div>baz</div>bam</h3>
+<br/>
+<h3>foo<span>bar</span><div>baz</div>bam</h3>
+</body>
+</html>

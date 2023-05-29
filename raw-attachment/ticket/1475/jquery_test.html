@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      span { font-weight:bold; color:blue; }
+      div { background:yellow; width:400px; margin:5px; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        $("select").change(function () {
+              $("#adiv").text("Span event handler 1 triggered");
+              var copy = $(this).clone();
+            });
+        $("select").change(function () {
+              $("#bdiv").text("Span event handler 2 triggered");
+            });
+        $("body").change(function () {
+              $("#cdiv").text("Body event handler triggered");
+            });
+      });
+    </script>
+  </head>
+  <body>
+    <select>
+      <option>Op 1</option>
+      <option>Op 2</option>
+      <option>Op 3</option>
+    </select>
+    <div id="adiv"></div>
+    <div id="bdiv"></div>
+    <div id="cdiv"></div>
+  </body>
+</html>

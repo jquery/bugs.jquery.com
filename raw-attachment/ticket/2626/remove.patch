@@ -1,0 +1,13 @@
+Index: ui.base.js
+===================================================================
+--- ui.base.js	(revision 5158)
++++ ui.base.js	(working copy)
+@@ -107,7 +107,7 @@
+ 			});
+ 		},
+ 		remove: function() {
+-			this.trigger("remove");
++			jQuery("*", this).add(this).trigger("remove");
+ 			return _remove.apply(this, arguments );
+ 		}
+ 	});

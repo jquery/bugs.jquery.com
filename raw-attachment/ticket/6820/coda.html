@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+  <head>
+    <script type="text/javascript" src="jquery-1.4.2.js"></script>
+    <title>Collaborative Database Table Editor (CODA)</title>
+  </head>
+  <body>
+    <h1 id="title">Loading...</h1>
+    <div id="editor">
+    </div>
+    <script type="text/javascript">
+      // build the page on load
+      $.getJSON("setup.json",build);
+
+      /* also attempted, just to check
+      $.ajax({
+        url: "setup.json",
+        dataType: 'json',
+        success: build
+      });*/
+	      
+		      
+      function build(data,status){
+	// set the title and h1 text
+        $("title").html(data.title);
+	$("#title").html(data.title);
+	// add the form table
+        $("#editor").html(data.form);
+      }
+      
+    </script>
+  </body>
+</html>

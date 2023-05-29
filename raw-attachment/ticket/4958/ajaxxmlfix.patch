@@ -1,0 +1,20 @@
+Index: ajax.js
+===================================================================
+--- ajax.js	(revision 6484)
++++ ajax.js	(working copy)
+@@ -543,7 +543,14 @@
+ 		var ct = xhr.getResponseHeader("content-type"),
+ 			xml = type === "xml" || !type && ct && ct.indexOf("xml") >= 0,
+ 			data = xml ? xhr.responseXML : xhr.responseText;
+-
++		
++		// IE 6 & 7 fail to recognise Content-Types ending +xml (eg application/rss+xml)
++		// as XML, so we create an XML object from the text here
++		if (xml && jQuery.browser.ie && /\+xml$/.test(ct)) {
++			data = new ActiveXObject("Microsoft.XMLDOM");
++			data.loadXML( xhr.responseText );
++		}
++		
+ 		if ( xml && data.documentElement.nodeName === "parsererror" ) {
+ 			throw "parsererror";
+ 		}

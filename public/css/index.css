@@ -207,8 +207,7 @@ pre:not([class*='language-']) {
   white-space: pre;
   word-spacing: normal;
   word-break: normal;
-}
-pre.wiki {
+
   width: 100%;
   padding: 0.25em;
   font-size: 0.6875rem;
@@ -227,6 +226,15 @@ code {
   background: var(--code-background-color);
   word-break: break-all;
 }
+pre[class*='language-'] code {
+  color: unset;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  background: none;
+  word-break: normal;
+}
+
 .strikethrough {
   text-decoration: line-through;
 }

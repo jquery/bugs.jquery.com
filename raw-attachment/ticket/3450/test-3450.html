@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<title></title> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js" type="text/javascript"></script>
+<script type="text/javascript"> 
+$(function(){
+
+var itext = $('div')[0].innerText || $('div')[0].textContent;
+var ttext = $('div').text();
+var s = "";
+
+if ( itext != ttext ) {
+	s += "innerText doesn't match .text()\n";
+	s += ".innerText: ";
+	for ( var i=0; i < itext.length; i++ ) 
+		s += " "+itext.charCodeAt(i).toString(16);
+	s += "\n";
+	s += ".text():    ";
+	for ( var i=0; i < ttext.length; i++ ) 
+		s += " "+ttext.charCodeAt(i).toString(16);
+	s += "\n";
+}
+else {
+	s += "innerText matches .text()\n";
+}
+s += "match="+$('div:contains("\u00a0")').length;
+alert(s);
+
+
+});
+</script> 
+</head> 
+<body> 
+
+
+<div id="test">A&nbsp;A</div>
+
+
+</body> 
+</html> 

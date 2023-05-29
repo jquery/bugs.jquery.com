@@ -1,0 +1,66 @@
+<div id="collection">
+                <form id="formDownload" name="formDownload" action="">
+                <h1>
+                    <span>Asset Download</span></h1>
+                <hr />
+                <span>Filetype: </span>
+                <select id="FileType" name="FileType">
+                    <option value="Png">Png</option>
+                    <option value="Jpg">Jpg</option>
+                    <option value="Tiff">Tiff</option>
+                </select>
+                <span>Image output :</span>
+                <select id="ImageOutput" name="ImageOutput">
+                    <optgroup label="Brochure">
+                        <option value="1500x1500">1500 x 1500</option>
+                    </optgroup>
+                    <optgroup label="Web">
+                        <option value="500x500">500 x 500</option>
+                    </optgroup>
+                    <optgroup label="Other">
+                        <option value="Custom">Custom</option>
+                    </optgroup>
+                </select>
+                <hr />
+                <fieldset style="display: none; padding: 5px; margin: 0px;" id="customArea">
+                    <legend>Custom output settings</legend>
+                    <table>
+                        <tr>
+                            <td style="width: 150px">
+                                X
+                            </td>
+                            <td>
+                                <input type="text" value="500" id="Width" name="Width" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Y
+                            </td>
+                            <td>
+                                <input type="text" value="500" id="Height" name="Height" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Cropped
+                            </td>
+                            <td>
+                                <input type="checkbox" id="Cropped" name="Cropped" value="check" style="margin:0px;padding:0px;" />
+                            </td>
+                        </tr>
+                        <tr id="rowPadding" style="display: none;">
+                            <td>
+                                Crop padding
+                            </td>
+                            <td>
+                                <input type="text" value="5" name="Padding" id="Padding" />
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+                <div style="text-align: right; margin-top:10px;">
+                    <input type="button" value="Download" id="downloadItems" />
+                </div>
+                </form>
+            </div>

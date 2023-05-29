@@ -1,0 +1,17 @@
+<html>
+<head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+<script type="text/javascript">
+setTimeout("$('#test')[0].contentWindow.document.designMode = 'on';", 300);
+</script>
+</head>
+<body>
+
+<iframe id="test"></iframe>
+<p>
+<button onclick="$('#test').wrap('<center>');">wrap("&lt;center&gt;")</button>
+<button onclick="$('#test').unwrap();">unwrap()</button>
+</p>
+
+</body>
+</html>

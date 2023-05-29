@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Untitled Page</title>
+    <script type="text/javascript" src="Scripts/jquery-1.2.6.min.js"></script>
+</head>
+<body>
+<a href="javascript:test1(500, 'wikiResults');">Test</a>
+<div id="wikiResults" style="margin-top: 35px;"></div>
+
+<script type="text/javascript">
+    function test1(count, targetId)
+    {
+        var dataSourceUrl = "http://code.katzenbach.com/Default.aspx?callback=?";
+        $.getJSON(dataSourceUrl, {c: count, test: "true", nt: new Date().getTime()}, function(results) {
+                        var response = new String();
+                        response += "<div>";
+                        for(i in results)
+                        {
+                                response += results[i];
+                                response += " ";
+
+                        }
+                        response += "</div>";
+                        $("#" + targetId).html(response);
+        });
+    }
+
+
+</script>
+</body>
+</html>

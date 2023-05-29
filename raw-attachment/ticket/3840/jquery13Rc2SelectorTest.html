@@ -1,0 +1,33 @@
+
+<html>
+    <head>
+        <title>Selector Test</title>
+    </head>
+    <body>
+        <div id="ALLCAPS"></div>
+        <div class="ALLCAPS"></div>
+        <div class="ALLCAPS"></div>
+        
+        <!--
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+        -->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.3rc2.js"></script>
+        
+        <script type="text/javascript">
+            $(document).ready(function() {
+               var numIds = $("#ALLCAPS").length;
+               if (numIds !== 1)
+                   {
+                   alert ("expected 1 elements but found: "+numIds);
+                   }
+               
+               var numClasses = $(".ALLCAPS").length;
+
+               if (numClasses !== 2)
+                   {
+                   alert ("expected 2 elements but found: "+numClasses);
+                   }
+            });
+        </script>
+    </body>
+</html>

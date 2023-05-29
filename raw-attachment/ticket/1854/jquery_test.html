@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Junque</title>
+    <style type="text/css">
+      div { border: 2px blue solid; margin:3px; padding:3px; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      function clearEm() {
+        $("div").css("background", "");
+      }
+      function useNotFunc() {
+        clearEm();
+        $("div").not("div.asdf").css("background", "yellow");
+      }
+      function useNotSelector() {
+        clearEm();
+        $("div:not(div.asdf)").css("background", "yellow");
+      }
+      function useAltNotMethod() {
+        clearEm();
+        $("div").not($("div.asdf")).css("background", "yellow");
+      }
+      function useSingleSelector() {
+        clearEm();
+        $("div").not(".asdf").css("background", "yellow");
+      }
+
+      $(document).ready(function () {
+        $("button:eq(0)").click(useSingleSelector);
+        $("button:eq(1)").click(useNotFunc);
+        $("button:eq(2)").click(useNotSelector);
+        $("button:eq(3)").click(useAltNotMethod);
+      });
+    </script>
+  </head>
+  <body>
+    <button>$("div").not(".asdf")</button>
+    <button>$("div").not("div.asdf")</button>
+    <button>$("div:not(div.asdf)")</button>
+    <button>$("div").not($("div.asdf"))</button>
+    <div>&lt;div&gt;</div>
+    <div class="asdf">&lt;div class = "asdf"&gt;</div>
+    <div class="asdf">&lt;div class = "asdf"&gt;</div>
+    <div>&lt;div&gt;</div>
+  </body>
+</html>

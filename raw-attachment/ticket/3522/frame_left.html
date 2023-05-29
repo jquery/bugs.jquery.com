@@ -1,0 +1,34 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test</title>
+<script type="text/javascript" src="jquery-1.2.6.js"></script>
+<script type="text/javascript" src="ui.core.js"></script>
+<script type="text/javascript" src="ui.resizable.js"></script>
+<script type="text/javascript">
+$(parent.frames[1].document).ready(function()	{
+$("#resizebleTextarea",parent.frames[1].document.body).resizable({handles: "all"});
+
+
+
+
+$(parent.frames[1].document.body).select( function () { 
+      $("#sel",parent.frames[1].document).text("Something was selected").show().fadeOut(1000); 
+    });
+
+
+});
+
+
+
+
+</script>
+
+
+</head>
+<body>
+</body>
+</html>
+

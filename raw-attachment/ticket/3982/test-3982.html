@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<script src="jquery-1.3.js"></script>
+  
+<script type="text/javascript">
+$(document).ready(function(){
+
+$(window).error(function(msg, url, line){
+	alert("jQuery error: "+msg+" "+url+" "+line);
+});
+
+window.onerror = function(msg, url, line){
+	alert("Native error: "+msg+" "+url+" "+line);
+};
+
+
+setTimeout(function(){ barf() }, 2000);
+
+
+});
+</script>
+</head>
+<body>
+
+</body>
+</html>

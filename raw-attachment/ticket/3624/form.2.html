@@ -1,0 +1,63 @@
+***************
+Line: 1106
+***************
+elem.filter = (elem.filter || "").replace( /alpha\([^)]*\)/, "" ) +
+ (parseInt( value ) + '' == "NaN" ? "" : "alpha(opacity=" + value * 100 + ")");
+***************
+
+After process hide to show. The text "<LABEL>Text</LABEL>" have a little transparency on IE7. I comment this line(:1106) for cancel opacity then it's works.
+
+-------
+Fussia, Daniel.
+from brazil.
+
+
+
+<html>
+
+<script src="jquery-latest.js"></script>
+  
+<script>
+
+  $(document).ready(function(){   
+
+    function doShow() {
+      $("form").show("normal");
+    }
+    function doHide() {
+      $("form").hide("normal");
+    }
+
+    $('[id=show]').click(doShow);
+    $('[id=hide]').click(doHide);
+
+  });
+
+</script>
+
+<style type="text/css">
+<!--
+.font {
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #000000;
+}
+-->
+</style>
+
+
+<body>
+<input type="button" id="hide" value="hide">
+<input type="button" id="show" value="show">
+<form>
+   <label>A-B-C-D-E-F-G-H-I-J-K-L-M-N-O-P-Q-R-S-T-U-V-W-X-Y-Z</label>
+</form>
+   <BR>
+   <label>A-B-C-D-E-F-G-H-I-J-K-L-M-N-O-P-Q-R-S-T-U-V-W-X-Y-Z</label>
+</body>
+</html>

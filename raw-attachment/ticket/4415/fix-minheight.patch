@@ -1,0 +1,35 @@
+Index: src/fx.js
+===================================================================
+--- src/fx.js	(revision 6300)
++++ src/fx.js	(working copy)
+@@ -116,6 +116,9 @@
+ 					// Store display property
+ 					opt.display = jQuery.css(this, "display");
+ 
++					// Store min-height property
++					opt.minHeight = this.style.minHeight;
++
+ 					// Make sure that nothing sneaks out
+ 					opt.overflow = this.style.overflow;
+ 				}
+@@ -259,6 +262,10 @@
+ 		// Set display property to block for height/width animations
+ 		if ( ( this.prop == "height" || this.prop == "width" ) && this.elem.style )
+ 			this.elem.style.display = "block";
++		
++		// Disable the min-height property for height animations
++		if ( this.prop == "height" && this.elem.style )
++			this.elem.style.minHeight = "0";
+ 	},
+ 
+ 	// Get the current size
+@@ -352,6 +359,9 @@
+ 					this.elem.style.display = this.options.display;
+ 					if ( jQuery.css(this.elem, "display") == "none" )
+ 						this.elem.style.display = "block";
++
++					// Reset the min-height
++					this.elem.style.minHeight = this.options.minHeight;
+ 				}
+ 
+ 				// Hide the element if the "hide" operation was done

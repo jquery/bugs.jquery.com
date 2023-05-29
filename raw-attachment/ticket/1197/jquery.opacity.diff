@@ -1,0 +1,13 @@
+Index: src/jquery/jquery.js
+===================================================================
+--- src/jquery/jquery.js	(revision 1908)
++++ src/jquery/jquery.js	(working copy)
+@@ -1460,6 +1460,8 @@
+ 				ret = cur.getPropertyValue(prop);
+ 			else if ( prop == "display" )
+ 				ret = "none";
++			else if ( prop == "opacity")
++				ret = "1";
+ 			else
+ 				jQuery.swap(elem, { display: "block" }, function() {
+ 				    var c = document.defaultView.getComputedStyle(this, "");

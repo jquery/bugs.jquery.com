@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Collapsible List &mdash; Take 4</title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <script type="text/javascript"
+            src="../scripts/jquery-1.2.6.js"></script>
+    <script type="text/javascript">
+	$(function(){
+		//Initialize
+		$('li:has(ul)').click(function(event){
+			if (this == event.target) {
+              if ($(this).children().is(':hidden')) {
+              	$(this).css('list-style-image','url(minus.gif)').children().slideDown();
+              }else {
+                $(this).css('list-style-image','url(plus.gif)').children().slideUp();
+              }
+            }
+            return false;
+		}).css({cursor:'pointer','list-style-image':'url(plus.gif)'}).children().hide();
+        $('li:not(:has(ul))').css({
+        	cursor: 'default','list-style-image':'none'
+        });
+      });
+    </script>
+    <style>
+      fieldset { width: 320px }
+    </style>
+  </head>
+
+  <body>
+    <fieldset>
+      <legend>Collapsible List &mdash; Take 4</legend>
+      <div id="tree">
+      <ul>
+        <li><input type="checkbox" id="1" name="1" value="1" />Item 1</li>
+        <li><input type="checkbox" id="2" name="2" value="2" />Item 2</li>
+        <li>
+          <input type="checkbox" id="3" name="3" value="3" />Item 3
+          <ul>
+            <li><input type="checkbox" id="31" name="31" value="31" />Item 3.1</li>
+            <li>
+              <input type="checkbox" id="32" name="32" value="32" />Item 3.2
+              <ul>
+                <li><input type="checkbox" id="321" name="321" value="321" />Item 3.2.1</li>
+                <li><input type="checkbox" id="322" name="322" value="322" />Item 3.2.2</li>
+                <li><input type="checkbox" id="323" name="323" value="323" />Item 3.2.3</li>
+              </ul>
+            </li>
+            <li>Item <input type="checkbox" id="33" name="33" value="33">3.3</li>
+          </ul>
+        </li>
+        <li>
+          <input type="checkbox" id="4" name="4" value="4">Item 4
+          <ul>
+            <li><input type="checkbox" id="41" name="41" value="41">Item 4.1</li>
+            <li>
+              <input type="checkbox" id="42" name="42" value="42">Item 4.2
+              <ul>
+                <li><input type="checkbox" id="421" name="421" value="421">Item 4.2.1</li>
+                <li><input type="checkbox" id="422" name="422" value="422">Item 4.2.2</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><input type="checkbox" id="5" name="5" value="5">Item 5</li>
+      </ul>
+      </div>
+    </fieldset>
+  </body>
+</html>

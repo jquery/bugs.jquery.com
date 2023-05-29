@@ -1,0 +1,20 @@
+Index: jquery.autocomplete.js
+===================================================================
+--- jquery.autocomplete.js	(revision 5602)
++++ jquery.autocomplete.js	(working copy)
+@@ -284,6 +284,8 @@
+ 				function (result){
+ 					// if no value found, clear the input box
+ 					if( !result ) $input.val("");
++					// ash: if we have function for cases where there is no match - call it
++					if (options.whenNoMatch && jQuery.isFunction(options.whenNoMatch)) options.whenNoMatch($input);
+ 				}
+ 			);
+ 		}
+@@ -732,4 +734,4 @@
+ 	field.focus();
+ };
+ 
+-})(jQuery);
+\ No newline at end of file
++})(jQuery);

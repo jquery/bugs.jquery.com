@@ -1,0 +1,14 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 5949)
++++ core.js	(working copy)
+@@ -391,6 +391,9 @@
+ 
+ 					return values;				
+ 				}
++				
++				if ( jQuery.browser.msie && jQuery.nodeName( elem, 'button' ) )
++					return elem.getAttributeNode('value').value;
+ 
+ 				// Everything else, we just grab the value
+ 				return (elem.value || "").replace(/\r/g, "");

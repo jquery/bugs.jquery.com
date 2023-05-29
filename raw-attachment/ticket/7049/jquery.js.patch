@@ -1,0 +1,14 @@
+--- jquery-nightly.js.orig	2010-09-18 13:00:21.009602454 +0400
++++ jquery-nightly.js	2010-09-18 13:02:11.887574789 +0400
+@@ -360,9 +360,9 @@
+ 
+ jQuery.extend({
+ 	noConflict: function( deep ) {
+-		window.$ = _$;
++		if ( window.$ === jQuery ) window.$ = _$;
+ 
+-		if ( deep ) {
++		if ( deep && window.jQuery === jQuery ) {
+ 			window.jQuery = _jQuery;
+ 		}
+ 

@@ -1,0 +1,21 @@
+Index: jquery.autocomplete.js
+===================================================================
+--- jquery.autocomplete.js	(revision 5742)
++++ jquery.autocomplete.js	(working copy)
+@@ -418,6 +418,7 @@
+ 	var length = 0;
+ 	
+ 	function matchSubset(s, sub) {
++		if (s.constructor === Function)	return false;
+ 		if (!options.matchCase) 
+ 			s = s.toLowerCase();
+ 		var i = s.indexOf(sub);
+@@ -640,7 +641,7 @@
+ 		list.empty();
+ 		var max = limitNumberOfItems(data.length);
+ 		for (var i=0; i < max; i++) {
+-			if (!data[i])
++			if (!data[i] || (data[i].value.constructor === Function))
+ 				continue;
+ 			var formatted = options.formatItem(data[i].data, i+1, max, data[i].value, term);
+ 			if ( formatted === false )

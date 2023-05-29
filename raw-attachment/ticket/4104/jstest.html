@@ -1,0 +1,50 @@
+<html>
+
+<head>
+  <script src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript">google.load("jquery", "1.3.1");</script>
+  <script type="text/javascript">
+
+  function select_and_report( selector ) {
+    var r = $( selector );
+    $( '#results' ).append( selector + ': ' + r.length + '<br/>' );
+  }
+
+  $( document ).ready( function() {
+    select_and_report( ':input:not(:radio)' );
+    select_and_report( ':input:not(:radio,.foobar)' );
+    select_and_report( ':input:not(.foobar,:radio)' );
+    select_and_report( ':input:not(:radio,:checkbox)' );
+    select_and_report( ':input:not(:radio,:text)' );
+    select_and_report( ':input:not(:radio,.foobar,:checkbox)' );
+    select_and_report( ':input:not(:radio,:checkbox,.foobar)' );
+    select_and_report( ':input:not(.foobar,:radio,:checkbox)' );
+    select_and_report( ':input:not(:checkbox,:radio,:text)' );
+    select_and_report( ':input:not(:checkbox,.foobar,.barfoo)' );
+    select_and_report( ':input:not(:checkbox,:radio,.foobar,.barfoo)' );
+    select_and_report( ':input:not(:checkbox,:radio,:text,:password)' );
+  } );
+
+  </script>
+</head>
+
+<body>
+
+<form>
+
+r1: <input type="radio" name="r1"/><br/>
+r2: <input type="radio" name="r2"/><br/>
+r3: <input type="radio" name="r3"/><br/>
+r4: <input type="radio" name="r4"/><br/>
+
+<div id="results">
+<p>
+Every count should be zero, since every selector has :not(:radio).
+</p>
+</div>
+
+</form>
+
+</body>
+
+</html>

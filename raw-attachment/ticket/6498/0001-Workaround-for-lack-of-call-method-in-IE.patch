@@ -1,0 +1,29 @@
+From 915e3233d1ac0c6b3069ca279b09b4428d24dc3a Mon Sep 17 00:00:00 2001
+From: Jesse Hallett <jesse.hallett@jivesoftware.com>
+Date: Mon, 13 Sep 2010 16:36:04 -0700
+Subject: [PATCH] Workaround for lack of call() method in IE
+
+---
+ src/ajax.js |    6 +++++-
+ 1 files changed, 5 insertions(+), 1 deletions(-)
+
+diff --git a/src/ajax.js b/src/ajax.js
+index 78d9b24..a662f65 100644
+--- a/src/ajax.js
++++ b/src/ajax.js
+@@ -467,7 +467,11 @@ jQuery.extend({
+ 			var oldAbort = xhr.abort;
+ 			xhr.abort = function() {
+ 				if ( xhr ) {
+-					oldAbort.call( xhr );
++					if (oldAbort.call) {
++						oldAbort.call( xhr );
++					} else {
++						Function.prototype.call.call(oldAbort, xhr);
++					}
+ 				}
+ 
+ 				onreadystatechange( "abort" );
+-- 
+1.7.1
+

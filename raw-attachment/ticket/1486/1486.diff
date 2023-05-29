@@ -1,0 +1,46 @@
+Index: test/unit/event.js
+===================================================================
+--- test/unit/event.js	(revision 3484)
++++ test/unit/event.js	(working copy)
+@@ -116,7 +116,7 @@
+ });
+ 
+ test("trigger(event, [data], [fn])", function() {
+-	expect(40);
++	expect(41);
+ 
+ 	var handler = function(event, a, b, c) {
+ 		equals( event.type, "click", "check passed data" );
+@@ -169,6 +169,16 @@
+ 	// Trigger only the handlers (no native) and extra fn, with external event obj
+ 	// Triggers 9
+ 	equals( $("#firstp").triggerHandler("click", [eventObj, 1, "2", "abc"], handler), "test", "Verify handler response" );
++	
++	var pass = true;
++	try {
++		$('input:first')
++			.hide()
++			.trigger('focus');
++	} catch(e) {
++		pass = false;
++	}
++	ok( pass, "Trigger focus on hidden element" );
+ });
+ 
+ test("toggle(Function, Function)", function() {
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 3484)
++++ src/event.js	(working copy)
+@@ -177,7 +177,10 @@
+ 			// Trigger the native events (except for clicks on links)
+ 			if ( fn && donative !== false && val !== false && !(jQuery.nodeName(element, 'a') && type == "click") ) {
+ 				this.triggered = true;
+-				element[ type ]();
++				try {
++					element[ type ]();
++				// prevent IE from throwing an error for some hidden elements
++				} catch (e) {}
+ 			}
+ 
+ 			this.triggered = false;

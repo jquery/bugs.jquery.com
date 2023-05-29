@@ -1,0 +1,156 @@
+63,66c63,66
+< 	jQuery.extend(this._defaults, this.regional['']);
+< 	this._calendarDiv = jQuery('<div id="calendar_div"></div>');
+< 	jQuery(document.body).append(this._calendarDiv);
+< 	jQuery(document.body).mousedown(this._checkExternalClick);
+---
+> 	$.extend(this._defaults, this.regional['']);
+> 	this._calendarDiv = $('<div id="calendar_div"></div>');
+> 	$(document.body).append(this._calendarDiv);
+> 	$(document.body).mousedown(this._checkExternalClick);
+69c69
+< jQuery.extend(PopUpCal.prototype, {
+---
+> $.extend(PopUpCal.prototype, {
+136c136
+< 		var input = jQuery(target);
+---
+> 		var input = $(target);
+152c152
+< 			var trigger = jQuery(buttonImageOnly ? '<img class="calendar_trigger" src="' +
+---
+> 			var trigger = $(buttonImageOnly ? '<img class="calendar_trigger" src="' +
+166c166
+< 		var input = jQuery(target);
+---
+> 		var input = $(target);
+191c191
+< 			this._dialogInput = jQuery('<input type="text" size="1" style="position: absolute; top: -100px;"/>');
+---
+> 			this._dialogInput = $('<input type="text" size="1" style="position: absolute; top: -100px;"/>');
+193c193
+< 			jQuery('body').append(this._dialogInput);
+---
+> 			$('body').append(this._dialogInput);
+219,220c219,220
+< 		if (jQuery.blockUI) {
+< 			jQuery.blockUI(this._calendarDiv);
+---
+> 		if ($.blockUI) {
+> 			$.blockUI(this._calendarDiv);
+228c228
+< 		inputs = (inputs.jquery ? inputs : jQuery(inputs));
+---
+> 		inputs = (inputs.jquery ? inputs : $(inputs));
+231,232c231,232
+< 			jQuery('../button.calendar_trigger', this).each(function() { this.disabled = false; });
+< 			jQuery('../img.calendar_trigger', this).css({opacity:'1.0',cursor:''});
+---
+> 			$('../button.calendar_trigger', this).each(function() { this.disabled = false; });
+> 			$('../img.calendar_trigger', this).css({opacity:'1.0',cursor:''});
+234c234
+< 			popUpCal._disabledInputs = jQuery.map(popUpCal._disabledInputs,
+---
+> 			popUpCal._disabledInputs = $.map(popUpCal._disabledInputs,
+243c243
+< 		inputs = (inputs.jquery ? inputs : jQuery(inputs));
+---
+> 		inputs = (inputs.jquery ? inputs : $(inputs));
+246,247c246,247
+< 			jQuery('../button.calendar_trigger', this).each(function() { this.disabled = true; });
+< 			jQuery('../img.calendar_trigger', this).css({opacity:'0.5',cursor:'default'});
+---
+> 			$('../button.calendar_trigger', this).each(function() { this.disabled = true; });
+> 			$('../img.calendar_trigger', this).css({opacity:'0.5',cursor:'default'});
+249c249
+< 			popUpCal._disabledInputs = jQuery.map(popUpCal._disabledInputs,
+---
+> 			popUpCal._disabledInputs = $.map(popUpCal._disabledInputs,
+261c261
+< 		control = (typeof control == 'string' ? jQuery(control)[0] : control);
+---
+> 		control = (typeof control == 'string' ? $(control)[0] : control);
+294c294
+< 			input = jQuery('input', input.parentNode)[0];
+---
+> 			input = $('input', input.parentNode)[0];
+317c317
+< 		inst._calendarDiv.css('position', (popUpCal._inDialog && jQuery.blockUI ? 'static' : 'absolute')).
+---
+> 		inst._calendarDiv.css('position', (popUpCal._inDialog && $.blockUI ? 'static' : 'absolute')).
+354,355c354,355
+< 		if (jQuery.browser.msie) { // fix IE < 7 select problems
+< 			jQuery('#calendar_cover').css({width: inst._calendarDiv[0].offsetWidth + 4,
+---
+> 		if ($.browser.msie) { // fix IE < 7 select problems
+> 			$('#calendar_cover').css({width: inst._calendarDiv[0].offsetWidth + 4,
+416,418c416,418
+< 				if (jQuery.blockUI) {
+< 					jQuery.unblockUI();
+< 					jQuery('body').append(this._calendarDiv);
+---
+> 				if ($.blockUI) {
+> 					$.unblockUI();
+> 					$('body').append(this._calendarDiv);
+429c429
+< 		jQuery('.calendar_prompt', inst._calendarDiv).remove();
+---
+> 		$('.calendar_prompt', inst._calendarDiv).remove();
+437c437
+< 		var target = jQuery(event.target);
+---
+> 		var target = $(event.target);
+441c441
+< 			&& !(popUpCal._inDialog && jQuery.blockUI) )
+---
+> 			&& !(popUpCal._inDialog && $.blockUI) )
+476c476
+< 		if (inst._input && inst._selectingMonthYear && !jQuery.browser.msie) {
+---
+> 		if (inst._input && inst._selectingMonthYear && !$.browser.msie) {
+499c499
+< 		inst._selectedDay = jQuery("a", td).html();
+---
+> 		inst._selectedDay = $("a", td).html();
+570c570
+< 		jQuery('<div id="calendar_div_' + this._id + '" class="calendar_inline"></div>'));
+---
+> 		$('<div id="calendar_div_' + this._id + '" class="calendar_inline"></div>'));
+578c578
+< jQuery.extend(PopUpCalInstance.prototype, {
+---
+> $.extend(PopUpCalInstance.prototype, {
+586c586
+< 		this._input = jQuery(input);
+---
+> 		this._input = $(input);
+747,748c747,748
+< 					(unselectable ? '' : ' onmouseover="jQuery(this).addClass(\'calendar_daysCellOver\');"' +
+< 					' onmouseout="jQuery(this).removeClass(\'calendar_daysCellOver\');"' +
+---
+> 					(unselectable ? '' : ' onmouseover="$(this).addClass(\'calendar_daysCellOver\');"' +
+> 					' onmouseout="$(this).removeClass(\'calendar_daysCellOver\');"' +
+757c757
+< 			'<div style="clear: both;"></div>' + (!jQuery.browser.msie ? '' :
+---
+> 			'<div style="clear: both;"></div>' + (!$.browser.msie ? '' :
+823c823
+< 	jQuery.extend(target, props);
+---
+> 	$.extend(target, props);
+835c835
+< jQuery.fn.calendar = function(settings) {
+---
+> $.fn.calendar = function(settings) {
+853c853
+< 			var instSettings = (inlineSettings ? jQuery.extend(jQuery.extend({}, settings || {}),
+---
+> 			var instSettings = (inlineSettings ? $.extend($.extend({}, settings || {}),
+860c860
+< 			var instSettings = jQuery.extend(jQuery.extend({}, settings || {}),
+---
+> 			var instSettings = $.extend($.extend({}, settings || {}),
+869c869
+< jQuery(document).ready(function() {
+---
+> $(document).ready(function() {

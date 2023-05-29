@@ -1,0 +1,41 @@
+*** C:/Users/Charlie/Desktop/jquery-jquery-efe51cd/test/unit/manipulation - original.js	Sat Jul 10 21:53:21 2010
+--- C:/Users/Charlie/Desktop/jquery-jquery-efe51cd/test/unit/manipulation.js	Sat Jul 10 23:17:56 2010
+***************
+*** 866,872 ****
+  }
+  
+  var testHtml = function(valueObj) {
+! 	expect(31);
+  
+  	jQuery.scriptorder = 0;
+  
+--- 866,872 ----
+  }
+  
+  var testHtml = function(valueObj) {
+! 	expect(35);
+  
+  	jQuery.scriptorder = 0;
+  
+***************
+*** 893,898 ****
+--- 893,911 ----
+  	equals( jQuery("#main").children()[0].nodeName.toUpperCase(), "STYLE", "And that a style element was inserted." );
+  
+  	reset();
++ 	
++    jQuery("#main").html(valueObj("<embed src='data/cow.jpg'></embed>"));
++    ok((jQuery("#main").children().length > 0), "Make sure there is a child EMBED element." );
++    equals( jQuery("#main").children()[0].nodeName.toUpperCase(), "EMBED", "And that an embed element was inserted." );
++    
++    reset();
++ 
++    jQuery("#main").html(valueObj("<object data='data/cow.jpg'></object>"));
++    equals( jQuery("#main").children().length, 1, "Make sure there is a child OBJECT element." );
++    equals( jQuery("#main").children()[0].nodeName.toUpperCase(), "OBJECT", "And that an object element was inserted." );
++    
++    reset();	
++ 	
+  	// using contents will get comments regular, text, and comment nodes
+  	var j = jQuery("#nonnodes").contents();
+  	j.html(valueObj("<b>bold</b>"));

@@ -1,0 +1,131 @@
+<style>
+
+
+
+
+
+
+.groupWrapper
+{
+	width: 32%;
+	float: left;
+	margin-right: 1%;
+	//height: 200px;	
+}
+.serializer
+{
+	clear: both;
+}
+.groupItem
+{
+	margin-bottom: 20px;
+}
+.groupItem .itemHeader
+{
+	line-height: 28px;
+	background-color: #DAFF9F;
+	border-top: 2px solid #B5EF59;
+	color: #000;
+	padding: 0 10px;
+	cursor: move;
+	font-weight: bold;
+	font-size: 16px;
+	height: 28px;
+	position: relative;
+}
+
+.groupItem .itemHeader a
+{
+	position: absolute;
+	right: 10px;
+	top: 0px;
+	font-weight: normal;
+	font-size: 11px;
+	text-decoration: none;
+}
+.sortHelper
+{
+	border: 3px dashed #666;
+	width: auto !important;
+}
+.groupWrapper p
+{
+	height: 1px;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+
+#sort2{
+	border:1px solid #eeeeee
+}
+
+</style>
+<script type="text/javascript" src="jquery-1.2.1.js"></script>
+<script type="text/javascript" src="interface.js"></script>
+<DIV class=groupWrapper id=sort1>
+<DIV class=groupItem id="s3">
+<DIV class=itemHeader style="moz-user-select: none">SAT 25th 
+Percentile</DIV></DIV>
+<DIV class=groupItem id="s4">
+<DIV class=itemHeader style="moz-user-select: none">SAT 75th 
+Percentile</DIV></DIV>
+<DIV class=groupItem id="s5">
+<DIV class=itemHeader style="moz-user-select: none">Students in Top 10% of their 
+High School Class</DIV></DIV>
+<DIV class=groupItem id="s6">
+<DIV class=itemHeader style="moz-user-select: none">Acceptance Rate</DIV></DIV>
+
+</DIV>
+<DIV class=groupWrapper id="sort2">
+<DIV class=groupItem id="0">
+<!--DIV class=itemHeader style="moz-user-select: none">Drag &amp; Drop 
+here</DIV></DIV-->
+<P>&nbsp;</P></DIV>
+
+</STYLE>
+
+<SCRIPT>
+save_criteria = function() 
+{
+
+}
+
+$(document).ready(
+    function () {
+
+		$('div.groupWrapper').Sortable(
+			{
+				accept: 'groupItem',
+				helperclass: 'sortHelper',
+				activeclass : 	'sortableactive',
+				hoverclass : 	'sortablehover',
+				handle: 'div.itemHeader',
+				tolerance: 'pointer',
+				onChange : function(ser)
+				{
+					if(document.getElementById('0'))document.getElementById('s0').style.display='none';
+					save_criteria();
+					},
+					onStart : function()
+					{
+						$.iAutoscroller.start(this, document.getElementsByTagName('body'));
+					},
+					onStop : function()
+					{
+						$.iAutoscroller.stop();
+					}
+			}
+		);
+    }
+);
+
+
+
+function serialize(s)
+{
+	serial = $.SortSerialize(s);
+	alert(serial.hash);
+};
+</SCRIPT>
+

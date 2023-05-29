@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>:eq(n) test case</title>
+	<script type="text/javascript" src="jquery-1.3.2.js"></script>
+	<script type="text/javascript">
+		function print(q) {
+			var buf = $.map(q.get(), function (el) { return [el.nodeName.toLowerCase(), '#', el.id, ', ']; });
+			buf.pop();
+			buf.unshift('[ ');
+			buf.push(' ]');
+			return buf.join('');
+		}
+		$(function () {
+			var results = ['Results:', ''], q, i;
+
+			q = $('div div');
+			results.push('$("div div"): ' + print(q));
+
+			results.push('');
+
+			// .eq(n)
+			q.each(function (i) {
+				results.push('$("div div").eq(' + i + '): ' + print(q.eq(i)));
+			});
+
+			results.push('');
+
+			// :eq(n)
+			i = 0;
+			while (true) {
+				q = $('div div:eq(' + i + ')');
+				if (q.length == 0) {
+					break;
+				}
+				results.push('$("div div:eq(' + i + ')"): ' + print(q));
+				i++;
+			}
+
+			$('#results').html(results.join('<br />'));
+		});
+	</script>
+	<style type="text/css">
+	div {
+		margin-bottom: 1em;
+		padding: 0 1em;
+		border: 1px solid black;
+	}
+	#first {
+		background-color: pink;
+	}
+	#second {
+		background-color: yellow;
+	}
+	#third {
+		background-color: lime;
+	}
+	#results {
+		margin: 0;
+		padding: 0;
+		border: none;
+	}
+	</style>
+</head>
+<body>
+<div>
+	wrapper
+	<div id="first">
+		first
+		<div id="second">
+			second
+		</div>
+	</div>
+</div>
+<div>
+	wrapper
+	<div id="third">
+		third
+	</div>
+</div>
+<div id="results"></div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      div { background:yellow; width:400px; margin:5px; }
+      #hid { display:none; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      function show(id, value) {
+        if (value) {
+          value = value + " = '" + eval(value) + "'";
+        }
+        $(id).text(value);
+      }
+
+      $(function () {
+        $("button:eq(0)").click(function () {
+              show("#adiv", '$("#hid").css("display")');
+              // set the innerHTML to itself
+              $("#container")[0].innerHTML = $("#container")[0].innerHTML;
+              show("#bdiv", '$("#hid").css("display")');
+              // set the element to "block" then reset it (should change nothing in the end)
+              var elem = $("#hid")[0];
+              var save = elem.style.display;
+              elem.style.display = "block";
+              elem.style.display = save;
+              show("#cdiv", '$("#hid").css("display")');
+            });
+      });
+    </script>
+  </head>
+  <body>
+    <button>Demo problem</button>
+    <p>
+      Click 'Demo problem' and should get 'none' all 3 times
+    </p>
+    <div id="container" style="display:none;">
+      <div>
+        <div id="hid">hidden</div>
+      </div>
+    </div>
+    <div id="adiv"></div>
+    <div id="bdiv"></div>
+    <div id="cdiv"></div>
+  </body>
+</html>

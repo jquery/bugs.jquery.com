@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<title></title> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js" type="text/javascript"></script>
+<script type="text/javascript"> 
+$(document).ready(function(){
+
+var s = '';
+s += '$(".Item:not(:first)").length '      + $(".Item:not(:first)").length + '\n';
+s += '$(".Item:not(.Item:first)").length ' + $(".Item:not(.Item:first)").length + '\n';
+var first = $(":first");
+s += '$(":first") nodeName ' + first[0].nodeName + ', nodeType=' + first[0].nodeType;
+alert(s);
+
+});
+</script> 
+</head> 
+<body> 
+
+<h1>Header</h1>
+<div class="Item">Item 1</div>
+<div class="Item">Item 2</div>
+
+
+</body> 
+</html> 

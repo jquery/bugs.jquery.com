@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <title>Client validator test page</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+   </head>
+   <body>
+   <div id="notworking" style="border: 1px solid red;">
+   This one is not working.
+   </div>
+   <br>
+   <div id="working" style="border: 1px solid black;">
+   This one is working.
+   </div>
+   
+   <input type="button" id="buttonNotWorking" value="try not working example (watch firebug console!!)">
+   <input type="button" id="buttonWorking" value="try working example">
+      <script type="text/javascript">
+      $(document).ready(function(){
+        $("#notworking").data("animationproperties", { opacity: 0.25, left: '+=50', height: 'toggle' });
+        $("#notworking").data("animationoptions", {'duration':150});
+        $("#working").data("animationproperties", { opacity: 0.25, left: '+=50', height: 'toggle' });
+        $("#working").data("animationoptions", {'duration':150});
+        
+        $("#buttonNotWorking").bind('click', function(){
+            var divNotWorking = $("#notworking");
+            
+            var anprop = divNotWorking.data("animationproperties");
+            var anopt = divNotWorking.data("animationoptions");
+            
+            divNotWorking.animate(anprop, anopt);
+        });
+        $("#buttonWorking").click(function(){
+            var divWorking = $("#working");
+            
+            var anprop = divWorking.data("animationproperties");
+            var anopt = divWorking.data("animationoptions");
+            // clone the objects
+            var anpropClone = jQuery.extend(true, {}, anprop);
+            var anoptClone = jQuery.extend(true, {}, anopt);
+        
+            divWorking.animate(anpropClone, anoptClone);
+        });
+        
+      });
+      
+      
+      </script>
+      
+   </body>
+</html>

@@ -1,0 +1,32 @@
+_findPos: function(obj) {
+var temp = obj;
+while (obj && (obj.type == 'hidden' || obj.nodeType != 1)) {
+obj = obj.nextSibling;
+}
+var curleft = curtop = 0;
+var origcurleft = 0;
+if (obj && obj.offsetParent) {
+curleft = obj.offsetLeft;
+curtop = obj.offsetTop;
+while (obj = obj.offsetParent) {
+origcurleft = curleft;
+curleft += obj.offsetLeft;
+if (curleft < 0) {
+curleft = origcurleft;
+}
+curtop += obj.offsetTop;
+}
+}
+var parentNodes = $(temp).parents().get();
+var parentCounter = 0;
+
+while (parentNodes[parentCounter].tagName.toLowerCase() !="body")
+{
+curleft -= parentNodes[parentCounter].scrollLeft;
+curtop -= parentNodes[parentCounter].scrollTop;
+parentCounter++;
+}
+
+if (curleft<0){curleft = origcurleft;}
+return [curleft,curtop];
+},

@@ -1,0 +1,39 @@
+--- a/ui/ui.draggable.js
++++ b/ui/ui.draggable.js
+@@ -213,24 +213,27 @@
+                        if ($.ui.ddmanager && !this.options.dropBehaviour)
+                                $.ui.ddmanager.drop(this, e);
+                                
+-                       if(this.options.revert) {
+-                               var self = this;
+-                               $(this.helper).animate(this.originalPosition, parseInt(this.options.revert, 10) || 500, fu
+-                                       self.propagate("stop", e);
+-                                       self.clear();
+-                               });
+-                       } else {
++                       if(this.options.revert) this.revert();
++                       else {
+                                this.propagate("stop", e);
+                                this.clear();
+                        }
+-
+                        return false;
+                        
+                },
++               revert: function(e){
++                   var self = this;
++                       $(this.helper).animate(this.originalPosition, parseInt(this.options.revert, 10) || 500, function()
++                               self.propagate("stop", e);
++                               self.clear();
++                       });
++               },
+                clear: function() {
+-                       if(this.options.helper != 'original' && !this.cancelHelperRemoval) this.helper.remove();
++                       if(this.options.helper != 'original' && !this.cancelHelperRemoval){
++                           this.helper.remove();
++                           this.helper = null;
++                       }
+                        if($.ui.ddmanager) $.ui.ddmanager.current = null;
+-                       this.helper = null;
+                        this.cancelHelperRemoval = false;
+                },

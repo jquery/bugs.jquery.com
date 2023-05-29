@@ -1,0 +1,25 @@
+--- selector.js	2009-09-28 14:02:12.000000000 -0700
++++ selector-ie.js	2009-09-28 14:00:13.000000000 -0700
+@@ -860,8 +860,8 @@
+ 	div = null; // release memory in IE
+ })();
+
+-if ( document.getElementsByClassName && document.documentElement.getElementsByClassName ) (function(){
+-	var div = document.createElement("div");
++var div = document.createElement("div");
++if ( div.getElementsByClassName ) (function(){
+ 	div.innerHTML = "<div class='test e'></div><div class='test'></div>";
+
+ 	// Opera can't find a second classname (in 9.6)
+@@ -880,9 +880,9 @@
+ 			return context.getElementsByClassName(match[1]);
+ 		}
+ 	};
+-
+-	div = null; // release memory in IE
+ })();
++div = null; // release memory in IE
++
+
+ function dirNodeCheck( dir, cur, doneName, checkSet, nodeCheck, isXML ) {
+ 	var sibDir = dir == "previousSibling" && !isXML;

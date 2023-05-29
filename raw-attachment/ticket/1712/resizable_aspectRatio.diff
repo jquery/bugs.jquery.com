@@ -1,0 +1,80 @@
+--- ui.resizable.js	(Revision 370)
++++ ui.resizable.js	(Arbeitskopie)
+@@ -124,6 +124,9 @@
+ 		if(o.autohide)
+ 			$(this.element).addClass("ui-resizable-autohide").hover(function() { $(this).removeClass("ui-resizable-autohide"); }, function() { if(self.interaction.options.autohide && !self.interaction.init) $(this).addClass("ui-resizable-autohide"); });
+ 	
++		// We want to conserve the aspect ratio so we store the original aspect ratio in the configuration
++		if (o.aspectRatio && o.aspectRatio == 'preserve')
++			options.aspectRatio = $(this.element).width()/$(this.element).height();
+ 
+ 		$.extend(options, {
+ 			helper: helper,
+@@ -131,6 +134,7 @@
+ 			dragPrevention: 'input,button,select',
+ 			minHeight: options.minHeight || 50,
+ 			minWidth: options.minWidth || 100,
++			aspectRatio: options.aspectRatio || false,
+ 			startCondition: function(e) {
+ 				if(self.disabled) return false;
+ 				for(var i in options.handles) {
+@@ -223,6 +227,10 @@
+ 			var nw = p[0] + (this.pos[0] - co.left);
+ 			var nh = p[1] + (this.pos[1] - co.top);
+ 		
++			// Conserve aspect ratio
++			if(e.shiftKey && !o.aspectRatio)
++				o.aspectRatio = p[0]/p[1];
++		
+ 			if(o.axis) {
+ 				switch(o.axis) {
+ 					case 'e':
+@@ -230,6 +238,9 @@
+ 						break;
+ 					case 's':
+ 						nw = p[0];
++						
++						if(o.aspectRatio) nw = nh * (o.aspectRatio)
++						
+ 						break;
+ 					case 'n':
+ 					case 'ne':
+@@ -241,6 +252,9 @@
+ 						if(o.axis == 'n') nw = p[0];
+ 						var mod = (this.pos[1] - co.top); nh = nh - (mod*2);
+ 						mod = nh <= o.minHeight ? p[1] - o.minHeight : (nh >= o.maxHeight ? 0-(o.maxHeight-p[1]) : mod);
++						
++						if(o.aspectRatio) nw = nh * (o.aspectRatio)
++						
+ 						$(this.helper).css('top', co.top + mod);
+ 						break;
+ 						
+@@ -266,7 +280,9 @@
+ 						
+ 						var mody = (this.pos[1] - co.top); nh = nh - (mody*2);
+ 						mody = nh <= o.minHeight ? p[1] - o.minHeight : (nh >= o.maxHeight ? 0-(o.maxHeight-p[1]) : mody);
+-
++						
++						if(o.aspectRatio) mody = modx * (1/o.aspectRatio);
++						
+ 						$(this.helper).css({
+ 							left: co.left + modx,
+ 							top: co.top + mody
+@@ -276,7 +292,7 @@
+ 				}	
+ 			}
+ 
+-			if(e.shiftKey) nh = nw * (p[1]/p[0]);
++			if(o.aspectRatio) nh = nw * (1/o.aspectRatio);
+ 			
+ 			if(o.minWidth) nw = nw <= o.minWidth ? o.minWidth : nw;
+ 			if(o.minHeight) nh = nh <= o.minHeight ? o.minHeight : nh;
+@@ -284,7 +300,7 @@
+ 			if(o.maxWidth) nw = nw >= o.maxWidth ? o.maxWidth : nw;
+ 			if(o.maxHeight) nh = nh >= o.maxHeight ? o.maxHeight : nh;
+ 			
+-			if(e.shiftKey) nh = nw * (p[1]/p[0]);
++			if(o.aspectRatio) nh = nw * (1/o.aspectRatio);
+ 
+ 			var modifier = $(that.element).triggerHandler("resize", [e, that.prepareCallbackObj(this)], o.resize);
+ 			if(!modifier) modifier = {};

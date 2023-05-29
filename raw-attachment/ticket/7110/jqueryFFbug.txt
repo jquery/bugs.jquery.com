@@ -1,0 +1,14 @@
+
+        function onAddItem() {
+            itemCount = itemCount + 1;
+            var rowString = "<tr id=row-" + itemCount + ">";
+            rowString = rowString + "<td>" + document.getElementById("Order_productcode").value + "</td>";
+            rowString = rowString + "<td>" + document.getElementById("Order_productsku").value + "</td>";
+            rowString = rowString + "<td>" + document.getElementById("Order_productdesc").value + "</td>";
+            rowString = rowString + "<td align=\"right\">" + document.getElementById("ItemQuantity").value + "</td>";
+            rowString = rowString + "<td>" + document.getElementById("Order_productweight").value + "</td>";
+            rowString = rowString + "<td>" + document.getElementById("Order_productcost").value + "</td>";
+            rowString = rowString + "</tr>";
+            $row = $(rowString);
+            $row.hide().fadeIn("slow").appendTo("#orderedItems table tbody");
+        }

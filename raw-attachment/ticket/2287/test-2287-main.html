@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html> 
+<html>
+<head> 
+<title>Test for #2287</title>
+<script type="text/javascript" src="jquery.js"></script> 
+<script type="text/javascript"> 
+
+$(function() {
+	$("#myframe").contents().find("h1").click(function(){
+		alert(this.nodeName+","+this.id);
+	});
+});
+
+</script> 
+<style>
+iframe { width: 500px; height: 300px; }
+</style>
+</head> 
+<body> 
+<form> 
+
+  <iframe id="myframe" src="test-2287-iframe.html"></iframe>
+
+
+</form> 
+
+<div id="frameContainer"></div> 
+
+</body> 
+</html> 

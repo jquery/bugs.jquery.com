@@ -1,0 +1,25 @@
+Index: src/css.js
+===================================================================
+--- src/css.js	(revision 6300)
++++ src/css.js	(working copy)
+@@ -24,6 +24,13 @@
+ 			options = {};
+ 			options[ name ] = value;
+ 		}
++	} else if ( jQuery.isArray( name ) ) {
++		if( !this.length ) return null;
++		var node = this[0], o = {};
++		jQuery.each( name, function(){
++			o[this] = jQuery.css( node, this );
++		});
++		return o;
+ 	}
+ 
+ 	// For each element...
+@@ -202,4 +209,4 @@
+ 		for ( var name in options )
+ 			elem.style[ name ] = old[ name ];
+ 	}
+-});
+\ No newline at end of file
++});

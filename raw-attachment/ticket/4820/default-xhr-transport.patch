@@ -1,0 +1,16 @@
+--- /home/steiner/ncvs/jqueryui-svn/jquery-1.3.2.js	2009-06-22 21:06:02.000000000 -0400
++++ jquery-1.3.2.js	2009-06-24 15:09:33.000000000 -0400
+@@ -3507,7 +3507,12 @@
+ 		var requestDone = false;
+ 
+ 		// Create the request object
+-		var xhr = s.xhr();
++		if (s.xhr) {
++            	    var xhr = s.xhr();
++        	} else {
++            	    // fallback on default xhr transport
++            	    var xhr = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
++        	}
+ 
+ 		// Open the socket
+ 		// Passing null username, generates a login popup on Opera (#2865)

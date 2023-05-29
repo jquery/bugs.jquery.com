@@ -1,0 +1,24 @@
+Index: jquery/src/ajax.js
+===================================================================
+--- jquery/src/ajax.js	(revision 3966)
++++ jquery/src/ajax.js	(working copy)
+@@ -113,7 +113,7 @@
+ 	},
+ 
+ 	getScript: function( url, callback ) {
+-		return jQuery.get(url, null, callback, "script");
++		return jQuery.get(url, null, callback, "xdscript");
+ 	},
+ 
+ 	getJSON: function( url, data, callback ) {
+@@ -216,8 +216,8 @@
+ 			jQuery.event.trigger( "ajaxStart" );
+ 
+ 		// If we're requesting a remote document
+-		// and trying to load JSON or Script
+-		if ( !s.url.indexOf("http") && s.dataType == "script" ) {
++		// and trying to load JSON or xdScript(cross domain)
++		if ( !s.url.indexOf("http") && s.dataType == "xdscript" && s.type.toLowerCase() == "get" ) {
+ 			var head = document.getElementsByTagName("head")[0];
+ 			var script = document.createElement("script");
+ 			script.src = s.url;

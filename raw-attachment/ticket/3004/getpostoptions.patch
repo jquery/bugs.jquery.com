@@ -1,0 +1,77 @@
+Index: jquery/src/ajax.js
+===================================================================
+--- jquery/src/ajax.js	(revision 6274)
++++ jquery/src/ajax.js	(working copy)
+@@ -96,7 +96,7 @@
+ 
+ jQuery.extend({
+   
+-	get: function( url, data, callback, type ) {
++	get: function( url, data, callback, type, options ) {
+ 		// shift arguments if data argument was ommited
+ 		if ( jQuery.isFunction( data ) ) {
+ 			callback = data;
+@@ -103,24 +103,27 @@
+ 			data = null;
+ 		}
+ 
+-		return jQuery.ajax({
+-			type: "GET",
+-			url: url,
+-			data: data,
+-			success: callback,
+-			dataType: type
+-		});
++		// merge in the default options
++		options = jQuery.extend({
++			type: "GET",
++			url: url,
++			data: data,
++			success: callback,
++			dataType: type
++		}, options);
++
++		return jQuery.ajax(options);
+ 	},
+ 
+-	getScript: function( url, callback ) {
+-		return jQuery.get(url, null, callback, "script");
++	getScript: function( url, callback, options ) {
++		return jQuery.get(url, null, callback, "script", options);
+ 	},
+ 
+-	getJSON: function( url, data, callback ) {
+-		return jQuery.get(url, data, callback, "json");
++	getJSON: function( url, data, callback, options ) {
++		return jQuery.get(url, data, callback, "json", options);
+ 	},
+ 
+-	post: function( url, data, callback, type ) {
++	post: function( url, data, callback, type, options ) {
+ 		if ( jQuery.isFunction( data ) ) {
+ 			callback = data;
+ 			data = {};
+@@ -126,13 +129,16 @@
+ 			data = {};
+ 		}
+ 
+-		return jQuery.ajax({
+-			type: "POST",
+-			url: url,
+-			data: data,
+-			success: callback,
+-			dataType: type
+-		});
++		// merge in the default options
++		options = jQuery.extend({
++			type: "POST",
++			url: url,
++			data: data,
++			success: callback,
++			dataType: type
++		}, options);
++
++		return jQuery.ajax(options);
+ 	},
+ 
+ 	ajaxSetup: function( settings ) {

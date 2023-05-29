@@ -1,0 +1,31 @@
+<form method="post" action="#">
+	<select id="select1">
+		<option value="1">First option</option>
+		<option value="2">Second option</option>
+		<option value="3">Third option</option>
+		<option value="4">Fourth option</option>
+	</select>
+
+	<select id="select2">
+		<option value="1" selected>First option</option>
+		<option value="2">Second option</option>
+		<option value="3">Third option</option>
+		<option value="4">Fourth option</option>
+	</select>
+	<button id="testVal" type="button">Get values</button>
+	<button type="reset">Reset form</button>
+</form>
+
+<script src="jquery-1.3.2.js"></script>
+<script type="text/javascript">
+$(document).ready(function()
+{
+	$('#testVal').click(function()
+	{
+		alert(
+				'Select1:\n selectedIndex = ' + document.getElementById('select1').selectedIndex + ', val() = ' + $('#select1').val() + '\n' +
+				'Select2:\n selectedIndex = ' + document.getElementById('select2').selectedIndex + ', val() = ' + $('#select2').val()
+			);
+	});
+});
+</script>

@@ -1,0 +1,14 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 5831)
++++ src/core.js	(working copy)
+@@ -1031,6 +1031,9 @@
+ 
+ 		});
+ 
++		// Remove the elements from the temporary div (#3255)
++		jQuery(ret).remove();
++
+ 		return ret;
+ 	},
+ 

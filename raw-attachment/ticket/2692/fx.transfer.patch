@@ -1,0 +1,34 @@
+Index: fx/fx.transfer.js
+===================================================================
+--- fx/fx.transfer.js	(revision 5134)
++++ fx/fx.transfer.js	(working copy)
+@@ -9,10 +9,9 @@
+       
+       // Set options
+       var mode = $.ec.setMode(el, o.options.mode || 'effect'); // Set Mode
+-      var target = $(document.getElementById(o.options.to)); // Find Target
++      var target = $(o.options.to); // Find Target
+       var position = el.position();
+-      $('body', document).append('<div id="fxTransfer"></div>');
+-      var transfer = $('#fxTransfer');
++	  var transfer = $('<div id="fxTransfer"></div>').appendTo(document.body)
+       
+       // Set target css
+       transfer.addClass(o.options.className);
+Index: fx/tests/transfer.html
+===================================================================
+--- fx/tests/transfer.html	(revision 5134)
++++ fx/tests/transfer.html	(working copy)
+@@ -53,9 +53,9 @@
+ 
+ <div class="controls">
+   <div>
+-    <a href="#" onClick="$(this).effect('transfer', {to: 'fx', className:'transfer1' }, 500);return false;">Transfer</a>
+-    <a href="#" onClick="$(this).effect('transfer', {to: 'fx', className:'transfer2' }, 500);return false;">Transfer</a>
+-    <a href="#" onClick="$(this).effect('transfer', {to: 'fx', className:'transfer3' }, 800);return false;">Transfer</a>
++    <a href="#" onClick="$(this).effect('transfer', {to: '#fx', className:'transfer1' }, 500);return false;">Transfer</a>
++    <a href="#" onClick="$(this).effect('transfer', {to: '#fx', className:'transfer2' }, 500);return false;">Transfer</a>
++    <a href="#" onClick="$(this).effect('transfer', {to: '#fx', className:'transfer3' }, 800);return false;">Transfer</a>
+   </div>
+   <div style="clear:both;padding-bottom:5px;"></div>
+ </div>

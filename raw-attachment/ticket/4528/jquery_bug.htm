@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Bug in Jquery 1.3.2</title>
+	<script type="text/javascript" src="jquery-1.3.2.js"></script>
+</head>
+<body>
+This is an issue with selecting a child of a parent.
+<p>Find <a href="javascript:alert($('#_lcs>#test1').length);void(0)">$('#_lcs>#test1').length</a></p>
+<p>Find <a href="javascript:alert($('#_lcs>#test2').length);void(0)">$('#_lcs>#test2').length</a></p>
+<p>Find <a href="javascript:alert($('#_lcs>#_test3').length);void(0)">$('#_lcs>#_test3').length</a></p>
+<p>Find <a href="javascript:alert($('#_lcs>#test4').length);void(0)">$('#_lcs>#test4').length</a></p>
+
+<div id="test2">Some test 2</div>
+<div id="_test3">Some test 3 with an _ character in the id</div>
+
+<div id="_lcs" style="display:hidden;">
+<div id="test1">Some test 1</div>
+<div id="test2">Some test 2</div>
+<div id="_test3">Some test 3 with an _ character in the id</div>
+<div id="test4">Some test 4</div>
+</div>
+</body>
+</html>

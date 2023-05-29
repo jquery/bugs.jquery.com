@@ -1,0 +1,32 @@
+Index: src/event/event.js
+===================================================================
+--- src/event/event.js	(revision 2012)
++++ src/event/event.js	(working copy)
+@@ -8,6 +8,13 @@
+ 	// Bind an event to an element
+ 	// Original by Dean Edwards
+ 	add: function(element, type, handler, data) {
++		// support multiple comma seperated types
++		if ( type.indexOf(',') >= 0 ) {
++			jQuery.each(type.split(','), function(i,t) {
++				jQuery.event.add(element, jQuery.trim(t), handler, data);
++			});
++		}
++		
+ 		// For whatever reason, IE has trouble passing the window object
+ 		// around, causing it to be cloned in the process
+ 		if ( jQuery.browser.msie && element.setInterval != undefined )
+@@ -84,6 +91,13 @@
+ 
+ 	// Detach an event or set of events from an element
+ 	remove: function(element, type, handler) {
++		// support multiple comma seperated types
++		if ( type && type.indexOf(',') >= 0 ) {
++			jQuery.each(type.split(','), function(i,t) {
++				jQuery.event.remove(element, jQuery.trim(t), handler);
++			});
++		}
++		
+ 		var events = element.$events, ret, index;
+ 
+ 		if ( events ) {

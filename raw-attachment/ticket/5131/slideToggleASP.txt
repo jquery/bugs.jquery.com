@@ -1,0 +1,27 @@
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+    $('#<%=lnkTest.ClientID %>').click(function() {
+
+        $('#<%=pnlTest.ClientID %>').slideToggle('slow');
+            return false;
+
+        });
+    });
+    </script>
+    
+    <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server">
+        <Scripts>
+            <asp:ScriptReference Path="~/js/jquery-1.3.2.js" />          
+        </Scripts>
+    </asp:ScriptManagerProxy>
+    
+  
+   <asp:LinkButton ID="lnkTest" runat="server" Text="View Map"/><br /> 
+        <asp:Panel ID="pnlTest" runat="server" style="display:none;">
+          <asp:TextBox ID="txtBox" runat="server" ReadOnly="True" Rows="20" TextMode="MultiLine"
+            Width="95%" Height="523px" Wrap="false" style = "display:block;
+	float:left;
+	margin-bottom:10px;" />            
+        </asp:Panel>   

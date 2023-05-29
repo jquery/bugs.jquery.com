@@ -1,0 +1,39 @@
+Index: data/testrunner.js
+===================================================================
+--- data/testrunner.js	(revision 5282)
++++ data/testrunner.js	(working copy)
+@@ -13,6 +13,9 @@
+ 	asyncTimeout: 2 // seconds for async timeout
+ };
+ 
++_config.restrictions = 	location.search.length < 2 ? [ ] : //restrict modules/tests by get parameters
++		$.map( location.search.slice(1).split('&'), decodeURIComponent );
++
+ var isLocal = !!(window.location.protocol == 'file:');
+ 
+ $(function() {
+@@ -72,9 +75,22 @@
+ function test(name, callback, nowait) {
+ 	if(_config.currentModule)
+ 		name = _config.currentModule + " module: " + name;
++	
++	var i = _config.restrictions.length, pass = !i;
++	while( i-- ){
++		var r = _config.restrictions[i],
++			not = r.charAt(0) == '!';
++			
++		if( not ) 
++			r = r.slice(1);
+ 		
+-	var filter = location.search.slice(1);
+-	if ( filter && encodeURIComponent(name).indexOf(filter) == -1 )
++		if( name.indexOf(r) != -1 ){
++			pass = !not;
++			break;
++		}else if( not )
++			pass = true;
++	}
++	if( !pass ) 
+ 		return;
+ 		
+ 	synchronize(function() {

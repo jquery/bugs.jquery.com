@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-tw">
+<head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript">
+		$(function()
+		{
+			$('#btnClone').live('click', function()
+			{
+				var selElm = $('#div1 select[name=sel]')[0];
+				
+				$(selElm).clone().insertAfter(selElm);
+			});
+			
+			$('select[name="sel"]').live('change', function()
+			{
+				alert(
+					$(this).val()
+				);
+			});
+		});
+    </script>
+</head>
+<body>
+
+<form>
+	<div>
+		<input type="button" id="btnClone" value="Clone SELECT" />
+	</div>
+
+	<hr />
+	
+	<div id="div1">
+		<select name="sel">
+			<option value="">Choose One</option>
+			<option value="1">Option 1</option>
+			<option value="2">Option 2</option>
+			<option value="3">Option 3</option>
+			<option value="4">Option 4</option>
+		</select>
+	</div>
+</form>
+
+</body>
+</html>

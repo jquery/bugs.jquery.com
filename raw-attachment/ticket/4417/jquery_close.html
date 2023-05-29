@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(function(){
+				$("#test").attr('name',$("#test").attr('name')+"[]");
+				var obj_tr_clone=$("#line").clone(true);
+				alert(obj_tr_clone.html());
+			});
+			
+			
+		</script>
+	</head>
+	<body>
+		<table>
+			<tr id="line">
+				<td><input id="test" name="a"></td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>setInterval leak in fx</title>
+		<style type="text/css">
+#div1 {position:absolute;left:300px;top:0;background-color:red;width:100px;height:100px}			
+		</style>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.js"></script>
+		<script type="text/javascript">
+$(function(){
+	for(var i = 6; i > 0; i--) {
+		$('p').clone().appendTo(document.body);
+	}
+	$(window).bind('scroll resize', function() {
+		$('#div1').stop()
+		.animate({
+			'top': $(window).scrollTop()+ 100
+		});
+	});
+});
+		</script>
+	</head>
+	<body>
+		<p>Scroll the document up and down crazily and observe CPU usage</p>
+		<p>Profiling using Firebug shows setInterval leak</p>
+		<div id="div1"></div>
+	</body>
+</html>

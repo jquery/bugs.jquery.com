@@ -1,0 +1,23 @@
+Index: jquery.js
+===================================================================
+--- jquery.js	(revision 15330)
++++ jquery.js	(working copy)
+@@ -3959,15 +3959,15 @@
+ });
+ var rinlinejQuery = / jQuery\d+="(?:\d+|null)"/g,
+ 	rleadingWhitespace = /^\s+/,
+-	rxhtmlTag = /(<([\w:]+)[^>]*?)\/>/g,
++	rxhtmlTag = /(<([\w:]+)([^>]*?))\/>/g,
+ 	rselfClosing = /^(?:area|br|col|embed|hr|img|input|link|meta|param)$/i,
+ 	rtagName = /<([\w:]+)/,
+ 	rtbody = /<tbody/i,
+ 	rhtml = /<|&#?\w+;/,
+ 	rnocache = /<script|<object|<embed|<option|<style/i,
+ 	rchecked = /checked\s*(?:[^=]|=\s*.checked.)/i,  // checked="checked" or checked (html5)
+-	fcloseTag = function( all, front, tag ) {
+-		return rselfClosing.test( tag ) ?
++	fcloseTag = function( all, front, tag, attrs ) {
++		return rselfClosing.test( tag ) || attrs.match(/[^\s"']$/) ?
+ 			all :
+ 			front + "></" + tag + ">";
+ 	},

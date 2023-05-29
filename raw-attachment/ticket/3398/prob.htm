@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>Window bug</title>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <script type="text/javascript">
+        $(window).load(function() {
+            $(document.body).append("<iframe name='otherWindow' scroll='yes' src='about:blank'>");
+            var otherWindow = window.frames["otherWindow"].window;
+
+            $(otherWindow).blur(function() {
+                alert(this.name);
+            });
+        });
+    </script>
+
+</head>
+<body>
+</body>
+</html>

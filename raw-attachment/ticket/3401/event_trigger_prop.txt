@@ -1,0 +1,23 @@
+Index: Y:/.workspace/jquery/src/event.js
+===================================================================
+--- Y:/.workspace/jquery/src/event.js	(revision 5853)
++++ Y:/.workspace/jquery/src/event.js	(working copy)
+@@ -186,6 +186,7 @@
+ 			// Pass along a fake event
+ 			if ( event ) {
+ 				data.unshift({
++					triggered: true, // flags that event was triggered manually
+ 					type: type,
+ 					target: elem,
+ 					preventDefault: function(){},
+@@ -315,7 +316,10 @@
+ 
+ 		// Fix timeStamp
+ 		event.timeStamp = event.timeStamp || now();
++		// add flag that this has been triggered via an actual event
++		event.triggered: false;
+ 
++
+ 		// Fix target property, if necessary
+ 		if ( !event.target )
+ 			event.target = event.srcElement || document; // Fixes #1925 where srcElement might not be defined either

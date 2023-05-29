@@ -1,0 +1,18 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	$('td').each(function() {
+		$(this).width(); //when this line is commented - everything seems to be okay on google chrome
+		$(this).css('width','100px');
+	});
+});
+</script>
+<style>
+th,td {width: 100px; background: yellow;}
+.hidden {display: none;}
+</style>
+<table>
+<thead><tr><th>1</th><th class="hidden">2</th><th>3</th></thead>
+<tbody><tr><td>4</td><td class="hidden">5</td><td>6</td></tbody>
+<tfoot><tr><td>7</td><td class="hidden">8</td><td>9</td></tfoot>
+</table>

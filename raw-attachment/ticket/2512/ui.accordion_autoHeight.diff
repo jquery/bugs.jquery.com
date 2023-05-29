@@ -1,0 +1,58 @@
+Index: ui.accordion.js
+===================================================================
+--- ui.accordion.js	(revision 4906)
++++ ui.accordion.js	(working copy)
+@@ -70,7 +70,7 @@
+ 		options.headers.next().each(function() {
+ 			maxPadding = Math.max(maxPadding, $(this).innerHeight() - $(this).height());
+ 		}).height(maxHeight - maxPadding);
+-	} else if ( options.autoheight ) {
++	} else if ( options.autoHeight ) {
+ 		var maxHeight = 0;
+ 		options.headers.next().each(function() {
+ 			maxHeight = Math.max(maxHeight, $(this).outerHeight());
+@@ -103,7 +103,7 @@
+ 	},
+ 	destroy: function() {
+ 		this.options.headers.next().css("display", "");
+-		if ( this.options.fillSpace || this.options.autoheight ) {
++		if ( this.options.fillSpace || this.options.autoHeight ) {
+ 			this.options.headers.next().css("height", "");
+ 		}
+ 		$.removeData(this.element, "ui-accordion");
+@@ -152,7 +152,7 @@
+ 				toHide: toHide,
+ 				complete: complete,
+ 				down: down,
+-				autoheight: options.autoheight
++				autoHeight: options.autoHeight
+ 			});
+ 		} else {
+ 			$.ui.accordion.animations[options.animated]({
+@@ -160,7 +160,7 @@
+ 				toHide: toHide,
+ 				complete: complete,
+ 				down: down,
+-				autoheight: options.autoheight
++				autoHeight: options.autoHeight
+ 			});
+ 		}
+ 	} else {
+@@ -255,7 +255,7 @@
+ 		animated: 'slide',
+ 		event: "click",
+ 		header: "a",
+-		autoheight: true,
++		autoHeight: true,
+ 		running: 0,
+ 		navigationFilter: function() {
+ 			return this.href.toLowerCase() == location.href.toLowerCase();
+@@ -286,7 +286,7 @@
+ 				duration: options.duration,
+ 				easing: options.easing,
+ 				complete: function() {
+-					if ( !options.autoheight ) {
++					if ( !options.autoHeight ) {
+ 						options.toShow.css("height", "auto");
+ 					}
+ 					options.complete();

@@ -1,0 +1,40 @@
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+<script type="text/javascript">
+function applyPatch() {
+    var Expr = jQuery.expr;
+
+    Expr.match = {
+        ID:     /#((?:[\w\u00c0-\uFFFF_-]|\\.)+)/,
+		CLASS:  /^[^[]*\.((?:[\w\u00c0-\uFFFF_-]|\\.)+)/,
+		NAME:   /\[name=['"]*((?:[\w\u00c0-\uFFFF_-]|\\.)+)['"]*\]/,
+		ATTR:   /\[\s*((?:[\w\u00c0-\uFFFF_-]|\\.)+)\s*(?:(\S?=)\s*(['"]*)(.*?)\3|)\s*\]/,
+		TAG:    /^((?:[\w\u00c0-\uFFFF\*_-]|\\.)+)/,
+		CHILD:  /:(only|nth|last|first)-child(?:\((even|odd|[\dn+-]*)\))?/,
+		POS:    /:(nth|eq|gt|lt|first|last|even|odd)(?:\((\d*)\))?(?=[^-]|$)/,
+		PSEUDO: /:((?:[\w\u00c0-\uFFFF_-]|\\.)+)(?:\((['"]*)((?:\([^\)]+\)|[^\2\(\)]*)+)\2\))?/
+    };
+
+    for ( var type in Expr.match ) {
+        Expr.match[ type ] = new RegExp( Expr.match[ type ].source + /(?![^\[]*\])(?![^\(]*\))/.source );
+        Expr.leftMatch[ type ] = new RegExp( /(^(?:.|\r|\n)*?)/.source + Expr.match[ type ].source.replace(/\\(\d+)/g, function(all, num){
+            return "\\" + (num - 0 + 1);
+        }));
+    }
+};
+
+$(function(){
+  var selector = '[name="person.names[0]"]:visible';
+  alert('w\\o patch\n'+selector+': '+$(selector).length);
+  applyPatch();
+  alert('\\w patch\n'+selector+': '+$(selector).length);
+});
+
+
+</script>
+</head>
+<body>
+<input name="person.names[0]" type="text"/>
+</body>
+</html>

@@ -1,0 +1,22 @@
+Index: src/fx.js
+===================================================================
+--- src/fx.js	(revision 3685)
++++ src/fx.js	(working copy)
+@@ -126,7 +126,7 @@
+ 	},
+ 	
+ 	queue: function(type, fn){
+-		if ( jQuery.isFunction(type) ) {
++		if ( jQuery.isFunction(type) || type instanceof Array ) {
+ 			fn = type;
+ 			type = "fx";
+ 		}
+@@ -162,6 +162,8 @@
+ 	if ( !elem )
+ 		return;
+ 
++	type = type || "fx";
++
+ 	var q = jQuery.data( elem, type + "queue" );
+ 
+ 	if ( !q || array )

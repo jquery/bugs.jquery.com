@@ -1,0 +1,19 @@
+Index: jquery/src/selector.js
+===================================================================
+--- jquery/src/selector.js	(revision 5829)
++++ jquery/src/selector.js	(working copy)
+@@ -21,7 +21,13 @@
+ 			odd: function(a,i){return i%2;},
+ 
+ 			// Child Checks
+-			"first-child": function(a){return a.parentNode.getElementsByTagName("*")[0]==a;},
++			"first-child": function(a){
++				var children = a.parentNode.getElementsByTagName("*");
++				for ( var i = 0 ; i < children.length; i++ ) {
++					if ( children[i].nodeType != 8 ) return children[i] == a;
++				}
++				return children[0] == a;
++			},
+ 			"last-child": function(a){return jQuery.nth(a.parentNode.lastChild,1,"previousSibling")==a;},
+ 			"only-child": function(a){return !jQuery.nth(a.parentNode.lastChild,2,"previousSibling");},
+ 

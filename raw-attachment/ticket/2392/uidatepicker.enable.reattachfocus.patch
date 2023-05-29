@@ -1,0 +1,12 @@
+Index: ui.datepicker.js
+===================================================================
+--- ui.datepicker.js	(revision 4813)
++++ ui.datepicker.js	(working copy)
+@@ -201,6 +201,7 @@
+ 		var $target = target;
+ 		this._disabledInputs = $.map(this._disabledInputs,
+ 			function(value) { return (value == $target ? null : value); }); // delete entry
++        $target.focus(this._showDatepicker);			
+ 	},
+ 
+ 	/* Disable the date picker to a jQuery selection.

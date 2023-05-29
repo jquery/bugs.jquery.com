@@ -1,0 +1,13 @@
+Index: jquery-1.3.2.js
+===================================================================
+--- jquery-1.3.2.js	(revision 1116)
++++ jquery-1.3.2.js	(working copy)
+@@ -2336,7 +2336,7 @@
+ };
+ 
+ var isXML = function(elem){
+-	return elem.nodeType === 9 && elem.documentElement.nodeName !== "HTML" ||
++	return elem.nodeType === 9 && elem.documentElement && elem.documentElement.nodeName !== "HTML" ||
+ 		!!elem.ownerDocument && isXML( elem.ownerDocument );
+ };
+ 

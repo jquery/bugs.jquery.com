@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>3254 Test Case</title>
+<link rel="stylesheet" href="testsuite.css" />
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="testrunner.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	test("Check the number of child tables of the div where the table is reassigned to the same variable.", function () {
+		expect(3);
+		var div = $("#container1");
+		var table = div.find("table");
+
+		for (var i = 0; i < 3; i++) {
+			table = table.clone();
+			div.append(table);
+		}
+
+		equals(div.find('table').length, '4', 'Check the number of children using .find("table") as reference');
+
+		// Bookend the points of failure by passing messages
+		var pre = div.html();
+		equals(div.children().length, '4', 'Check the number of children using .children().length');
+		var post = div.html();
+
+		equals(post, pre, 'Compare pre and post values for the HTML');
+
+	});
+
+	reset();
+
+	test("Check the number of child tables of the div where the table is not assigned to the same variable.", function () {
+		expect(3);
+		var div = $("#container2");
+		var table = div.find("table");
+
+		for (var i = 0; i < 3; i++) {
+			notsame = table.clone();
+			div.append(notsame);
+		}
+
+		equals(div.find('table').length, '4', 'Check the number of children using .find("table") as reference');
+
+		// Bookend the points of failure by passing messages
+		var pre = div.html();
+		equals(div.children().length, '4', 'Check the number of children using .children().length');
+		var post = div.html();
+
+		equals(post, pre, 'Compare pre and post values for the HTML');
+
+	});
+
+});
+</script>
+
+</head>
+
+<body>
+<body id="body">
+	<h1 id="header">Ticket 3254</h1>
+	<h2 id="banner"></h2>
+	<h2 id="userAgent"></h2>
+
+
+
+	<!-- TEST HTML -->
+	<div id="main">
+		<div id="container1"><table></table></div>
+		<div id="container2"><table></table></div>
+	</div>
+	<ol id="tests"></ol>
+</body>
+
+</html>

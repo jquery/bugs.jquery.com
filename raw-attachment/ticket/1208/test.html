@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<script type="text/javascript" src="jquery.js" ></script>
+	<script type="text/javascript">
+	function oc(){
+		$('.hide').toggle();
+	}
+	</script>
+	<style type="text/css">
+	.me{ display: none; }
+	</style>
+<body>
+
+<input type='button' onclick="oc();" value="Toggle" />
+ 
+<table>
+	<tr><td>Not Broken</td></tr>
+	<tr class="hide" style="display:none"><td>Toggle Shown</td></tr>
+	<tr class="hide" style="display:none"><td>Toggle Shown</td></tr>
+	<tr class="hide" style="display:none"><td>Toggle Shown</td></tr>
+</table>
+
+<hr/>
+
+<table>
+	<tr><td>Not Broken</td></tr>
+	<tr class="hide"><td>Toggle Shown</td></tr>
+	<tr class="hide"><td>Toggle Shown</td></tr>
+	<tr class="hide"><td>Toggle Shown</td></tr>
+</table>
+
+<hr/>
+
+<table>
+	<tr><td>Broken</td></tr>
+	<tr class="hide me"><td>Toggle Shown</td></tr>
+	<tr class="hide me "><td>Toggle Shown</td></tr>
+	<tr class="hide me"><td>Toggle Shown</td></tr>
+</table>
+
+<hr/>
+
+</body>
+</html>

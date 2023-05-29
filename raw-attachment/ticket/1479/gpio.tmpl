@@ -1,0 +1,52 @@
+
+<html>
+<head>
+  <script type="text/javascript" src="/jquery/prototype.js"></script>
+  <script type="text/javascript" src="/jquery/jquery.js"></script>
+  <link rel="stylesheet" href="/style.css" type="text/css">
+  <script type="text/javascript">
+    jQuery.noConflict();
+    var watch_handle;
+    var watch_req;
+    function change_led_misc() {
+       jQuery.get("/cgi-bin/set",{ led_misc: (jQuery("#led_misc").attr('checked') ? '1' : '0') });
+       //new Ajax.Request("/cgi-bin/set?led_misc="+(jQuery("#led_misc").attr('checked') ? '1' : '0'));
+    }
+
+    function watch_callback(data) {
+      if(data!='') {
+        var changed=data.split('\n');
+        if(changed[0]=="led_misc") {
+          var current = Boolean(jQuery("#led_misc").attr('checked'));
+  	  var newval = Boolean(Number(changed[1]));
+	  if(current != newval) {
+	    jQuery("#led_misc").attr('checked', newval);
+          }
+        }
+      }
+      //watch_req=jQuery.get("/cgi-bin/watch_callback?handle="+watch_handle, watch_callback)
+      watch_req=new Ajax.Request("/cgi-bin/watch_callback?handle="+watch_handle, {method:'get', onSuccess: function(transport) {watch_callback(transport.responseText);}});
+    }
+
+    jQuery(document).ready(function(){
+      jQuery("#led_misc").attr('checked', <%$ led_misc %>);
+      watch_handle=<%
+		int handle, r;
+		const char *watch_names[]={ "led_misc" };
+		r=BERR_CALL(callback_create_queue)(BCB_Q_MAX, 1, 0, &handle);
+		if(r) return bt_err(r);
+		r=BERR_CALL(watch)(handle, 1, watch_names);
+		if(r) return bt_err(r);
+		bt_printf("%i", handle);
+		   %>
+      watch_req=jQuery.get("/cgi-bin/watch_callback?handle="+watch_handle, watch_callback)
+      //watch_req=new Ajax.Request("/cgi-bin/watch_callback?handle="+watch_handle, {method:'get', onSuccess: function(transport) {alert(transport.responseText); watch_callback(transport.responseText);}});
+    });
+  </script>
+</head>
+<body>
+
+<input id="led_misc" name=led_misc type=checkbox onclick="change_led_misc();" >
+</body>
+</html>
+

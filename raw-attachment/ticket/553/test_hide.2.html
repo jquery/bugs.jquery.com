@@ -1,0 +1,35 @@
+<html>
+<head>
+<script src="jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+	$("#hide").click(
+		function(){
+			$("#op").hide();
+		}
+	)
+	$("#show").click(
+		function(){
+			$("#op").show();
+		}
+	)
+	$("#change").click(
+		function(){
+			$("#out").html($("#in").val());
+		}
+	)
+}
+)
+</script>
+</head>
+<body>
+<input type="button" id="hide" name="send" value="hide" /> 
+<input type="button" id="show" name="send" value="show" /> 
+<input type="button" id="change" name="change" value="change"> 
+<div id="op">
+<textarea id="in" rows="10" cols="100"></textarea>
+<textarea id="out" rows="10" cols="100"></textarea>
+</div>
+</body>
+</html>

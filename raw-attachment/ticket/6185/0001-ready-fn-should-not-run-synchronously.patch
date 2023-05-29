@@ -1,0 +1,53 @@
+From 002065ff5cfd58b82a00af614eff3d02222c74bb Mon Sep 17 00:00:00 2001
+From: Jesse Hallett <jesse.hallett@jivesoftware.com>
+Date: Fri, 26 Feb 2010 13:26:16 -0800
+Subject: [PATCH] ready( fn ) should not run synchronously.
+
+---
+ src/core.js       |    6 ++++--
+ test/unit/core.js |   15 +++++++++++++++
+ 2 files changed, 19 insertions(+), 2 deletions(-)
+
+diff --git a/src/core.js b/src/core.js
+index ba5d7f5..6baadb0 100644
+--- a/src/core.js
++++ b/src/core.js
+@@ -234,8 +234,10 @@ jQuery.fn = jQuery.prototype = {
+ 
+ 		// If the DOM is already ready
+ 		if ( jQuery.isReady ) {
+-			// Execute the function immediately
+-			fn.call( document, jQuery );
++			// Execute the function on the next tick
++			setTimeout(function() {
++				fn.call( document, jQuery );
++			}, 1);
+ 
+ 		// Otherwise, remember the function for later
+ 		} else if ( readyList ) {
+diff --git a/test/unit/core.js b/test/unit/core.js
+index d8aba16..c33361b 100644
+--- a/test/unit/core.js
++++ b/test/unit/core.js
+@@ -832,3 +832,18 @@ test("jQuery.parseJSON", function(){
+ 		ok( true, "Test malformed JSON string." );
+ 	}
+ });
++
++asyncTest("ready(), after DOM is ready", function(){
++	expect(3);
++
++	equals( jQuery.isReady, true, "DOM is ready" );
++
++	var callbackCalled = false;
++	jQuery(document).ready(function(){
++		callbackCalled = true;
++		ok( true, "ready() callback is called" );
++		start();
++	});
++
++	equals( callbackCalled, false, "ready() callback is called asynchronously" );
++});
+-- 
+1.7.0
+

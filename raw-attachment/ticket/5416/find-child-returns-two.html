@@ -1,0 +1,19 @@
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
+	<script>
+		$(function(){
+			console.log("$('dt:first').text()", $('dt:first').text())
+			console.log("should only be foo", $('dt:first').text() === "foo");
+			var dls = $('dl');
+			console.log("dls.find('dt:first').text()", dls.find('dt:first').text())
+			console.log("should only be foo", dls.find('dt:first').text() === "foo");
+			console.log("should find only one match", dls.find('dt:first').length === 1);
+		});
+	</script>
+</head>
+<body>
+	<dl><dt>foo</dt><dd></dd></dl>
+	<dl><dt>bar</dt><dd></dd></dl>
+</body>
+</html>

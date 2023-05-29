@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>Untitled Document</title>
+	<style>
+		div {
+			height: 300px;
+			width: 200px;
+			background-color: aqua;
+			right: 300px;
+			bottom: 100px;
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	<a href="#">click me to toggle the right div's "right"</a>
+	<div></div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<script>
+		$('a').click(function() {
+			$('div').animate({right: 'toggle'}, 3000);
+		});
+	</script>
+</body>
+</html>

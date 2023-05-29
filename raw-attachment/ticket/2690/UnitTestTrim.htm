@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />  
+    <title>UNIT TEST: trim</title>
+    
+	<script language="JavaScript" type="text/javascript" src="/jsunit/app/jsUnitCore.js"></script>
+
+	<script language="JavaScript" type="text/javascript">
+	<!--
+
+// from jQuery 1.2.6
+function jQuery_trim( text ) {
+	return (text || "").replace( /^\s+|\s+$/g, "" );
+}
+		
+	var Ektron = {};
+    Ektron.RegExp = {};
+    
+	Ektron.RegExp.CharacterClass = {};
+		
+	// IE (as of IE 7) omits non-breaking space and other Unicode space separators in "\s".
+	Ektron.RegExp.CharacterClass.s = "[\t\x0b\f \xa0\u1680\u180e\u2000-\u200a\u202f\u205f\u3000\n\r\u2028\u2029]";
+	Ektron.RegExp.ltrim = new RegExp("^" + Ektron.RegExp.CharacterClass.s + "+");
+	Ektron.RegExp.rtrim = new RegExp(Ektron.RegExp.CharacterClass.s + "+$");
+	
+    var $ektron = {};
+    $ektron.trim = function( text )
+    {
+        return (text+"").replace(Ektron.RegExp.ltrim,"").replace(Ektron.RegExp.rtrim,"");
+    };
+
+var strHelloWorld = " \t\n  \xa0hello world \t\n  \xa0";
+
+function test_jQuery_trim_whitespace()
+{
+	assertEquals("hello world", jQuery_trim(strHelloWorld));
+}
+
+function test_ektron_trim_whitespace()
+{
+	assertEquals("hello world", $ektron.trim(strHelloWorld));
+}
+
+function test_jQuery_trim_null()
+{
+	assertEquals("", jQuery_trim(null));
+}
+
+function test_ektron_trim_null()
+{
+	assertEquals("null", $ektron.trim(null));
+}
+
+function test_jQuery_trim_number()
+{
+	assertEquals("trim zero", "", jQuery_trim(0));
+	assertEquals("trim ten", "10", jQuery_trim(10));
+	assertEquals("trim negative one", "-1", jQuery_trim(-1));
+}
+
+function test_ektron_trim_number()
+{
+	assertEquals("trim zero", "0", $ektron.trim(0));
+	assertEquals("trim ten", "10", $ektron.trim(10));
+	assertEquals("trim negative one", "-1", $ektron.trim(-1));
+}
+
+function test_jQuery_trim_digits()
+{
+	assertEquals("0.20", jQuery_trim("0.20"));
+}
+
+function test_ektron_trim_digits()
+{
+	assertEquals("0.20", $ektron.trim("0.20"));
+}
+
+	// -->
+	</script>
+</head>
+<body onload="alert('[' + jQuery_trim(strHelloWorld) + '] should be [hello world]')">
+    <h1>trim Tests</h1>
+
+    <p>This page contains tests for the JsUnit.</p>
+</body>
+</html>

@@ -1,0 +1,31 @@
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+	<title>Test</title>
+    <script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		var select = $('#select')[0];
+		for (var i = 0; i < select.options.length; ++i) {
+			select.selectedIndex = i;
+			$(select).val($(select).val());
+			$('body').append('<div>Testing selectedIndex === '+i+': '+(select.selectedIndex === i ? 'ok' : 'FAIL ['+select.selectedIndex+']')+'<'+'/div>');
+		}
+	});
+	</script>
+</head>
+<body>
+	<div>
+		First iteration through the loop sets selected=true for every option, since they all match val('').
+		Firefox responds by selecting the first element only; IE selects the last.
+		Subsequent iterations work fine since val(x) uses a unique value each time.
+	</div>
+	<div>
+		<select id="select">
+			<option></option>
+			<option>alpha</option>
+			<option>beta</option>
+			<option>gamma</option>
+		</select>
+	</div>
+</body>
+</html>

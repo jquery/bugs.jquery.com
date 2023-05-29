@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC  "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>A JQuery Glitch</title>
+</head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+<script id="script" type="text/javascript" >
+   $(function() {
+          var waw = $('#waw');
+          var wane;
+          var wax = function() {
+              waw.fadeIn(7000, wane);
+          }
+          wane = function() {
+              waw.fadeOut(7000, wax);
+          }
+          wane();
+      }
+   );
+</script>
+<script type="text/javascript">$(function() {$('#copyCodeHere').html($('#script').html())});</script>
+<body id="root">
+
+<h1>A JQuery bug</h1>
+
+<p>The following code is intended to slowly, continuosly fade in and out the
+&ldquo;Wax and wane&rdquo; writing below.</p>
+
+<pre id="copyCodeHere" style="color:darkblue"></pre>
+
+<p>It mostly works as intended, but it also produces occasional errors on
+the Firefox 3.5.8 error console. Also verified with Firefox 3.0.11.</p>
+
+<p>The problem does not seem to occure
+if the duration value is set to something much shorter.</p>
+
+<p>The error seen (translated from German):
+&ldquo;Error processing the value for 'opacity'. Declaration ignored.&rdquo;</p>
+
+<h1 id="waw">Wax and wane</h2>
+
+</body>
+</html>

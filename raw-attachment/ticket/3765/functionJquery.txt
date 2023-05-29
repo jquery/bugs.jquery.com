@@ -1,0 +1,23 @@
+     $("#btnSbmtOrden").click(clickBtnOrden);
+
+      function clickBtnOrden(){
+              $("#customer").hide("slow");
+       alert($("#nota").text()) //-----------------------------------------------this value is empty in ForeFox but show the contect in IE
+              $.post("orderManager.asp", {clienteId:$("#clienteId").val(),
+                                             mode:"add",
+                                             tab : "orden",
+                                             addressId:$("#direccionId").val(),
+                                             fecha:$("#fecha").val(),
+                                             note:$("#nota").text()
+                                             },addingOrders,"html");
+                                             
+              $("#fecha").val("");
+              $("#dspCliente").text("");
+              $("#disDireccion").text("");
+              $("#nota").text("");
+              $("#dspClient").text(""); 
+              $(this).attr("disabled","disabled");
+              $("#clientName").val("").focus();
+              $("#customer").show("slow");
+              return false;
+      }   // click al boton de enviar orden

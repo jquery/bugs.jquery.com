@@ -1,0 +1,13 @@
+Index: env.js
+===================================================================
+--- env.js	(revision 5709)
++++ env.js	(working copy)
+@@ -76,7 +76,7 @@
+ 		return num;
+ 	};
+ 	
+-	window.clearInterval = function(num){
++	window.clearTimeout = window.clearInterval = function(num){
+ 		if ( timers[num] ) {
+ 			timers[num].stop();
+ 			delete timers[num];

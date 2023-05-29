@@ -1,0 +1,14 @@
+Index: selector.js
+===================================================================
+--- selector.js	(revision 5994)
++++ selector.js	(working copy)
+@@ -807,6 +807,9 @@
+ 		jQuery.css(elem, "display") !== "none" &&
+ 		jQuery.css(elem, "visibility") !== "hidden";
+ };
++Sizzle.selectors.filters.animated = function(elem){
++  return jQuery.grep(jQuery.timers,function(fn){return elem==fn.elem;}).length;
++};
+ 
+ jQuery.multiFilter = function( expr, elems, not ) {
+ 	if ( not ) {

@@ -1,0 +1,59 @@
+Index: ui.slider.html
+===================================================================
+--- ui.slider.html	(revision 3835)
++++ ui.slider.html	(working copy)
+@@ -37,6 +37,7 @@
+ 	<div id='example2' class='ui-slider-2' style="margin: 40px;">
+ 	<div class='ui-slider-handle'></div>	
+ 	</div>
++	<div>Current value: <span id = "example2val">0</span></div>
+ </div>
+ 
+ <h2>3. Multiple handles</h2>
+@@ -47,6 +48,27 @@
+ 	</div>
+ </div>
+ 
++<h2>4. Move to, single handle</h2>
++<div class="playground">
++	<div id='example4' class='ui-slider-2' style="margin: 40px;">
++	<div class='ui-slider-handle'></div>	
++	</div>
++	<div><input id = "example4Val" size = "3">
++	<a href = "" onclick = "$('#example4').sliderMoveTo(parseInt($('#example4Val').val())); return false;">Jump</a></div>
++</div>
++
++<h2>5. Move to, multiple handles</h2>
++<div class="playground">
++	<div id='example5' class='ui-slider-2' style="margin: 40px;">
++	<div class='ui-slider-handle'></div>	
++	<div class='ui-slider-handle' style="left: 188px;"></div>	
++	</div>
++	<div><input id = "example5Val1" size = "3">
++	<a href = "" onclick = "$('#example5').sliderMoveTo(parseInt($('#example5Val1').val()), null, null, null, 0); return false;">Jump 1</a></div>
++	<div><input id = "example5Val2" size = "3">
++	<a href = "" onclick = "$('#example5').sliderMoveTo(parseInt($('#example5Val2').val()), null, null, null, 1); return false;">Jump 2</a></div>
++</div>
++
+ <script type="text/javascript">
+ if(!window.console) {
+  window.console = {
+@@ -59,10 +81,15 @@
+ $(window).bind("load",function(){
+ 
+ 	$('#example1').slider();
+-	$('#example2').slider({ steps: 10 });
++	$('#example2').slider({ 
++		minValue: 50,
++		maxValue: 150,
++		steps: 10,
++		slide: function(e, ui) { $('#example2val').text(ui.value); }
++	});
+ 	$('#example3').slider({ steps: 10 });
+-	
+-
++	$('#example4').slider();
++	$('#example5').slider();
+ });
+ </script>
+ </body>

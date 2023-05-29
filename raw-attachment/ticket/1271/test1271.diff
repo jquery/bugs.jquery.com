@@ -1,0 +1,32 @@
+Index: test/unit/selector.js
+===================================================================
+--- test/unit/selector.js	(revision 4040)
++++ test/unit/selector.js	(working copy)
+@@ -29,6 +29,10 @@
+ 	});
+ }
+ 
++test("#1271", function() {
++	t( "xxx", "#testFor1271 [foo]", ["foobar" ]);
++});
++
+ test("broken", function() {
+ 	expect(7);
+ 	t( "Broken Selector", "[", [] );
+Index: test/index.html
+===================================================================
+--- test/index.html	(revision 4040)
++++ test/index.html	(working copy)
+@@ -33,6 +33,12 @@
+ 			<a href="http://diveintomark.org/" class="blog" hreflang="en" id="mark">diveintomark</a>
+ 
+ 		</p>
++		<div id="testFor1271">
++			<div id="foobar" foo="bar"></div>
++			<form>
++				<input name='foo'>
++			</form>
++		</div>
+ 		<div id="foo">
+ 			<p id="sndp">Everything inside the red border is inside a div with <code>id="foo"</code>.</p>
+ 			<p lang="en" id="en">This is a normal link: <a id="yahoo" href="http://www.yahoo.com/" class="blogTest">Yahoo</a></p>

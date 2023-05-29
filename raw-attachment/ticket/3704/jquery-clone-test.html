@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Cloning inputs : value vs defaultValue.</title>
+    <script src="jquery-1.2.5.js"></script>
+  </head>
+  <body>
+    <form><input value="initial"></form>
+    <script>(function () {
+      var original = document.forms[0].elements[0];
+
+      original.value = 'changed';
+
+      var clone = $(original).clone(true)[0];
+
+      document.writeln('<pre>');
+      document.writeln('original.       value=' + original.       value);
+      document.writeln('original.defaultValue=' + original.defaultValue);
+      document.writeln('   clone.       value=' +    clone.       value);
+      document.writeln('   clone.defaultValue=' +    clone.defaultValue);
+      document.writeln('<\/pre>');
+    })()</script>
+    </pre>
+  </body>
+</html>

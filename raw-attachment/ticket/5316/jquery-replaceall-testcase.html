@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jQuery replaceAll multiple elements</title>
+  <meta charset=utf-8 />
+  <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+    $(function() {
+      $('#one').click(function() {
+        $('<div><p>1</p><p>2</p></div>').replaceAll('#replaceme');
+        showResults();
+        return false;
+      });
+      
+      $('#two').click(function() {
+        $('<p>1</p><p>2</p>').replaceAll('#replaceme');
+        showResults();
+        return false;
+      });
+      
+    });
+    
+    function showResults() {
+      if ($('#content p').length == 2) {
+        $('#result').text('PASS');
+      } else {
+        $('#result').text('FAIL').css('color', 'red');
+      }      
+    }
+  </script>
+</head>
+<body>
+  <div id="explanation">
+    <p>jQuery's <a href="http://docs.jquery.com/Manipulation/replaceAll">replaceAll</a> does not insert any element after the first if called on a block of HTML that contains multiple sibling elements.</p>
+    
+    <p>This page must be reloaded between tests.</p>
+  </div>
+  
+  <form>
+    <button id="one">Replace element with: &lt;div&gt;&lt;p&gt;1&lt;/p&gt;&lt;p&gt;2&lt;/p&gt;&lt;/div&gt;</button><br />
+    <button id="two">Replace element with: &lt;p&gt;1&lt;/p&gt;&lt;p&gt;2&lt;/p&gt;</button>
+  </form>
+  
+  <div id="content" style="display: none;">
+    <div id="replaceme">
+      This will be replaced.
+    </div>
+  </div>
+  
+  <div id="result" style="margin-top: 12px; font-size: 24px; color: green;"></div>
+</body>
+</html>

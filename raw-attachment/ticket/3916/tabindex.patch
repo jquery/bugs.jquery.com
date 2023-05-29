@@ -1,0 +1,81 @@
+Index: /Users/sgonzale/Documents/workspace/jQuery/src/core.js
+===================================================================
+--- /Users/sgonzale/Documents/workspace/jQuery/src/core.js	(revision 6118)
++++ /Users/sgonzale/Documents/workspace/jQuery/src/core.js	(working copy)
+@@ -986,9 +986,11 @@
+ 					var attributeNode = elem.getAttributeNode( "tabIndex" );
+ 					return attributeNode && attributeNode.specified
+ 						? attributeNode.value
+-						: elem.nodeName.match(/^(a|area|button|input|object|select|textarea)$/i)
++						: elem.nodeName.match(/(button|input|object|select|textarea)/i)
+ 							? 0
+-							: undefined;
++							: elem.nodeName.match(/^(a|area)$/i) && elem.href
++								? 0
++								: undefined;
+ 				}
+ 
+ 				return elem[ name ];
+Index: /Users/sgonzale/Documents/workspace/jQuery/test/index.html
+===================================================================
+--- /Users/sgonzale/Documents/workspace/jQuery/test/index.html	(revision 6118)
++++ /Users/sgonzale/Documents/workspace/jQuery/test/index.html	(working copy)
+@@ -198,7 +198,7 @@
+ 		</div>
+ 		
+ 		<div id="tabindex-tests">
+-			<ol id="listWithTabIndex" tabindex="0">
++			<ol id="listWithTabIndex" tabindex="5">
+ 				<li id="foodWithNegativeTabIndex" tabindex="-1">Rice</li>
+ 				<li id="foodNoTabIndex">Beans</li>
+ 				<li>Blinis</li>
+@@ -209,6 +209,9 @@
+ 			<span>...</span><a href="#" id="linkWithNoTabIndex">Eat lots of food</a><span>...</span> |
+ 			<span>...</span><a href="#" id="linkWithTabIndex" tabindex="2">Eat a little food</a><span>...</span> |
+ 			<span>...</span><a href="#" id="linkWithNegativeTabIndex" tabindex="-1">Eat no food</a><span>...</span>
++			<span>...</span><a id="linkWithNoHrefWithNoTabIndex">Eat a burger</a><span>...</span>
++			<span>...</span><a id="linkWithNoHrefWithTabIndex" tabindex="1">Eat some funyuns</a><span>...</span>
++			<span>...</span><a id="linkWithNoHrefWithNegativeTabIndex" tabindex="-1">Eat some funyuns</a><span>...</span>
+ 		</div>
+ 	</div>
+ 	</dl>
+Index: /Users/sgonzale/Documents/workspace/jQuery/test/unit/core.js
+===================================================================
+--- /Users/sgonzale/Documents/workspace/jQuery/test/unit/core.js	(revision 6118)
++++ /Users/sgonzale/Documents/workspace/jQuery/test/unit/core.js	(working copy)
+@@ -552,22 +552,21 @@
+ }
+ 
+ test("attr('tabindex')", function() {
+-	expect(5);
++	expect(8);
+ 
+-	// tabindex 0
+-	equals(jQuery('#listWithTabIndex').attr('tabindex'), 0, 'tabindex of 0');
+-
+-	// positive tabindex
+-	equals(jQuery('#linkWithTabIndex').attr('tabindex'), 2, 'tabindex of 2');
++	// elements not natively tabbable
++	equals(jQuery('#listWithTabIndex').attr('tabindex'), 5, 'not natively tabbable, with tabindex set to 0');
++	equals(jQuery('#divWithNoTabIndex').attr('tabindex'), undefined, 'not natively tabbable, no tabindex set');
++	
++	// anchor with href
++	equals(jQuery('#linkWithNoTabIndex').attr('tabindex'), 0, 'anchor with href, no tabindex set');
++	equals(jQuery('#linkWithTabIndex').attr('tabindex'), 2, 'anchor with href, tabindex set to 2');
++	equals(jQuery('#linkWithNegativeTabIndex').attr('tabindex'), -1, 'anchor with href, tabindex set to -1');
+ 
+-	// negative tabindex
+-	equals(jQuery('#linkWithNegativeTabIndex').attr('tabindex'), -1, 'negative tabindex');
+-
+-	// regular element without a tabindex
+-	equals(jQuery('#divWithNoTabIndex').attr('tabindex'), undefined, 'no tabindex, not tabbable by default');
+-
+-    // link without a tabindex
+-	equals(jQuery('#linkWithNoTabIndex').attr('tabindex'), 0, 'no tabindex, tabbable by default');
++	// anchor without href
++	equals(jQuery('#linkWithNoHrefWithNoTabIndex').attr('tabindex'), undefined, 'anchor without href, no tabindex set');
++	equals(jQuery('#linkWithNoHrefWithTabIndex').attr('tabindex'), 1, 'anchor without href, tabindex set to 2');
++	equals(jQuery('#linkWithNoHrefWithNegativeTabIndex').attr('tabindex'), -1, 'anchor without href, no tabindex set');
+ });
+ 
+ test("attr('tabindex', value)", function() {

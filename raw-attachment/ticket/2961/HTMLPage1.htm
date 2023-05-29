@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Untitled Page</title>
+    <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function empty() {
+            var lg_sel_elem = $("select[name='league']");
+            lg_sel_elem.empty();
+                        
+            
+        }
+        
+        function populate() {
+            var lg_sel_elem = $("select[name='league']");
+            lg_sel_elem.wrapInner("<option value='41'>Colorado</value>");
+        }
+    </script>
+</head>
+<body>
+<p> Select one </p>
+<select name='league'>
+    <option value=""> Please Select </option>
+</select>
+<input type='button' value="Test" onclick='empty();' />
+<input type='button' value="Test2" onclick='populate();' />
+</body>
+</html>

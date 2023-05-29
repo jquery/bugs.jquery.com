@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<script type="text/javascript" language="javascript" src="jquery.js"></script>
+
+<script language="javascript">
+$(document).ready(function(){
+
+	$.get('test.xml', function(d) {
+		output='';
+		//find each 'item' in the file and parse it
+		$(d).find('item').each(function() {
+			//current item this for this iteration
+			var $item = $(this);
+			//get Title
+			var title = $item.find('title').text();
+			output+=title+'\n';
+			//get pubDate
+			var pubDate = $item.find('pubDate').text();
+			output+=pubDate+'\n';
+			//get geo coordinates
+			var geo = $item.find('georss\\:point').text(); //WebKit can't do this - issue with escaping char?
+			output+=geo+'\n';
+
+		});
+		alert(output);
+	});
+
+});
+
+</script>
+
+</head>
+
+<body>
+
+</body>
+</html>

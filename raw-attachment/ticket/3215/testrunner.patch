@@ -1,0 +1,103 @@
+Index: testrunner.js
+===================================================================
+--- testrunner.js	(revision 5800)
++++ testrunner.js	(working copy)
+@@ -15,6 +15,7 @@
+ 	Test: [],
+ 	stats: {
+ 		all: 0,
++		good: 0,
+ 		bad: 0
+ 	},
+ 	queue: [],
+@@ -22,7 +23,11 @@
+ 	timeout: null,
+ 	expected: null,
+ 	currentModule: null,
++	startTime : new Date().getTime(),
++	beforeEach : null,
++	afterEach : null,
+ 	asyncTimeout: 2 // seconds for async timeout
++	
+ };
+ 
+ _config.filters = location.search.length > 1 && //restrict modules/tests by get parameters
+@@ -35,6 +40,13 @@
+ 	runTest();	
+ });
+ 
++function qUnitTesting( testsCallback ){
++    $(document).ready(function(){
++        testsCallback(_config);
++        allTestsDone();        
++    });
++}
++
+ function synchronize(callback) {
+ 	_config.queue[_config.queue.length] = callback;
+ 	if(!_config.blocking) {
+@@ -90,17 +102,26 @@
+ }
+ 
+ function runTest() {
+-	_config.blocking = false;
+-	var time = new Date();
++	_config.blocking = false;	
+ 	_config.fixture = document.getElementById('main').innerHTML;
+ 	_config.ajaxSettings = $.ajaxSettings;
++}
++
++function allTestsDone(){
++    synchronize(function(){
++        updateStats();
++        $("<div>").attr("id", "TESTRESULTS").html(""+_config.stats.bad).hide().appendTo("body");        
++    });
++}
++
++function updateStats(){
+ 	synchronize(function() {
+-		time = new Date() - time;
+-		$("<div>").html(['<p class="result">Tests completed in ',
+-			time, ' milliseconds.<br/>',
++		_config.endTime = new Date().getTime();
++		$("#results").html(['<p class="result">Tests completed in ',
++			(_config.endTime - _config.startTime), ' milliseconds.<br/>',
++			_config.stats.good, ' tests of ', _config.stats.all, ' passed.<br/>',
+ 			_config.stats.bad, ' tests of ', _config.stats.all, ' failed.</p>']
+-			.join(''))
+-			.appendTo("body");
++			.join(''));
+ 		$("#banner").addClass(_config.stats.bad ? "fail" : "pass");
+ 	});
+ }
+@@ -115,7 +136,9 @@
+ 	synchronize(function() {
+ 		_config.Test = [];
+ 		try {
++			if( _config.beforeEach ){ _config.beforeEach(name); }
+ 			callback();
++			if( _config.afterEach ){ _config.afterEach(name); }
+ 		} catch(e) {
+ 			if( typeof console != "undefined" && console.error && console.warn ) {
+ 				console.error("Test " + name + " died, exception and test follows");
+@@ -159,7 +182,10 @@
+ 				state = "fail";
+ 				bad++;
+ 				_config.stats.bad++;
+-			} else good++;
++			} else {
++			    good++;
++			    _config.stats.good++;
++			}
+ 		}
+ 	
+ 		var li = document.createElement("li");
+@@ -185,7 +211,7 @@
+ 		li.appendChild( ol );
+ 	
+ 		document.getElementById("tests").appendChild( li );		
+-	});
++	});	
+ }
+ 
+ // call on start of module test to prepend name to all tests

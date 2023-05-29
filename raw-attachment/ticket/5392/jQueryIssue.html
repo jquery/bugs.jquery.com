@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>eg. Issue</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
+<script type="text/javascript">
+(function($){
+
+	function PopupWindow(url,name,w,h){
+			LeftPosition = (screen.availWidth) ? (screen.availWidth-w)/2 : 0;
+			TopPosition = (screen.availHeight) ? (screen.availHeight-h)/2 : 0;
+			settings = 'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',toolbar=yes,menubar=yes,scrollbars=yes,status=yes'
+			if(toolwin != undefined) {toolwin.close(); delete toolwin;}
+			var toolwin = window.open(url,name,settings);
+			toolwin.focus();
+			return toolwin;
+	}
+
+	var getRootWindow = function(){
+		return (window['opener'] || window);
+	}
+
+	var MyObj = function(){
+		this.init();
+	};
+	MyObj.prototype = {
+		init:function(){
+			this.debug = $("#debug");
+			this.jLinks = $(".link");
+			this.jLinksPopup = $([]);
+			this.assignEvents(this.jLinks);
+		}
+		,popupLoad:function(jQueryFromPopup){
+			this.jLinksPopup = jQueryFromPopup(".link");
+			this.assignEvents(this.jLinksPopup);
+		}
+		,assignEvents:function(jObj){
+			var self = this;
+			/*  line 2694 : handler is not a function, it is an object */
+			jObj.click(function(){
+				PopupWindow(this.href, 'blaa', 400, 200)
+				self.debug.html(self.debug.html() + " Booya!");
+				return false;
+			});
+
+			/* I found Native Event handler for all IE's sorts the issue out
+			if(window['addEvent']) {
+				window.addEvent(this,"click",fn);
+			} else {
+				$(this).click(fn);
+			}
+			*/
+
+		}
+	}
+
+	//Dom ready
+	$(function(){
+		/* Get the root window so that the popup remove actions will occur in the opener window (if it exists) */
+		var dataBlock = window.dataBlock = getRootWindow()['dataBlock'] || {};
+
+		if(dataBlock.myInstanceObj == undefined) {
+			dataBlock.myInstanceObj = new MyObj();
+		}
+		if(getRootWindow() != window) {
+			dataBlock.myInstanceObj.popupLoad($);
+		}
+	});
+
+})(jQuery);
+</script>
+</head>
+<body>
+	<div class="links">
+		<ul>
+			<li><a class="link" href="#nota" title="Click Me">Click Me</a></li>
+		</ul>
+	</div>
+	<p id="debug"></p>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="matt.wilson">
+        <meta name="description" content="">
+        
+        <title>Title</title>
+        
+        <link rel="icon" href="">
+        <script src="http://code.jquery.com/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            $(function() {
+            	// works
+                console.log($("input[style*=blue]"));
+                
+                // doesn't work
+                console.log($("div").find("input[style*=blue]"));
+                
+                // works
+                console.log($("div").find("input[name*=foo]"));
+                
+            })
+        </script>
+    </head>
+
+    <body>
+        <header>
+            
+        </header>
+        <div>
+            <input style="color: blue;" name="foo">
+                WOOT WOOT
+            </input>
+        </div>
+        <footer>
+            
+        </footer>        
+    </body>
+
+</html>

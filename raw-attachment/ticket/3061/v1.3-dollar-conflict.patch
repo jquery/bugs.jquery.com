@@ -1,0 +1,29 @@
+--- jquery.validate.js.ORIG	2008-05-12 13:15:36.000000000 -0700
++++ jquery.validate.js	2008-06-18 11:21:56.245989000 -0700
+@@ -416,7 +416,7 @@
+ 				!this.name && validator.settings.debug && window.console && console.error( "%o has no name assigned", this);
+ 			
+ 				// select only the first element for each name, and only those with rules specified
+-				if ( this.name in rulesCache || !validator.objectLength($(this).rules()) )
++				if ( this.name in rulesCache || !validator.objectLength(jQuery(this).rules()) )
+ 					return false;
+ 				
+ 				rulesCache[this.name] = true;
+@@ -459,7 +459,7 @@
+ 				element = this.findByName( element.name )[0];
+ 			}
+ 			
+-			var rules = $(element).rules();
++			var rules = jQuery(element).rules();
+ 			var dependencyMismatch = false;
+ 			for( method in rules ) {
+ 				var rule = { method: method, parameters: rules[method] };
+@@ -776,7 +776,7 @@
+ 		});
+ 		
+ 		// handle dependency check
+-		$.each(rules, function(prop, val) {
++		jQuery.each(rules, function(prop, val) {
+ 			// ignore rule when param is explicitly false, eg. required:false
+ 			if (val === false) {
+ 				delete rules[prop];

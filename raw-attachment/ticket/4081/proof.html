@@ -1,0 +1,29 @@
+<html>
+ <head>
+  <title>Test</title>
+  <script language="javascript" src="jquery-1.3.1.js"></script>
+  <script language="javascript">
+   function testload() {
+     alert($("tr[name='pv']").text());
+     
+     return true;
+   }
+   
+  </script>
+ </head>
+ <body>
+  <table width="500" cellpadding="1" cellspacing="1" border="1">
+   <tr name="head">
+    <td>Header</td>
+   </tr>
+   <tr name="pv">
+    <td>content before</td>
+   </tr>
+   <tr>
+    <td>
+     <a href="#" onclick="return testload()">Test</a>
+    </td>
+   </tr>
+  </table>
+ </body>
+</html>

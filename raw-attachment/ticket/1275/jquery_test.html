@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      function doIt() {
+        $.ajax({
+                  url:"load.html",
+                  ifModified:true,
+                  success:function (html) {
+                        $("#container").html(html).slideDown(2000).slideUp(2000);
+                      }
+              });
+      }
+
+      $(function () {
+        $("#doit").click(doIt);
+      });
+    </script>
+  </head>
+  <body>
+    <button id="doit">Only load and show if modified</button>
+    <div id="container" style="display:none;">
+      Hi
+    </div>
+    <div id="adiv"></div>
+  </body>
+</html>

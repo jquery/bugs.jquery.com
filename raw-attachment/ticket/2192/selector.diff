@@ -1,0 +1,14 @@
+Index: selector.js
+===================================================================
+--- selector.js	(revision 4482)
++++ selector.js	(working copy)
+@@ -344,7 +344,8 @@
+ 						 type == "!=" && z != m[5] ||
+ 						 type == "^=" && z && !z.indexOf(m[5]) ||
+ 						 type == "$=" && z.substr(z.length - m[5].length) == m[5] ||
+-						 (type == "*=" || type == "~=") && z.indexOf(m[5]) >= 0) ^ not )
++						 type == "*=" && z.indexOf(m[5]) >= 0 ||
++						 type == "~=" && (' '+z+' ').indexOf(' '+m[5]+' ') >= 0) ^ not )
+ 							tmp.push( a );
+ 				}
+ 				

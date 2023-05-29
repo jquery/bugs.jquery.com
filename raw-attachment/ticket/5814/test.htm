@@ -1,0 +1,45 @@
+<html>
+<head>
+  <script type="text/javascript" src="JScripts/jquery-1.4.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var t = new TestClass();
+      t.GetData();
+    });
+    
+    
+    function server(url) { return new serverObject(url); }
+    function serverObject(url) { this.url = url; }
+    serverObject.prototype.exec = function(args, context, callback) {
+      var ajaxOptions = {};
+      ajaxOptions.url = this.url;
+      ajaxOptions.data = args;
+      ajaxOptions.context = context;
+      ajaxOptions.callback = callback;
+      ajaxOptions.success = function(data) {
+        try {
+          this.callback.call(this.context, data);
+        } catch(e) {
+          alert("Exception\n\n" + e.message);
+        }
+      }
+      $.ajax(ajaxOptions);
+    }
+    
+    
+    function TestClass() {
+      this.CriticalValue = 1;
+    }
+    
+    TestClass.prototype.GetData = function() {
+      server("test.htm").exec({}, this, this.Complete);
+    }
+    
+    TestClass.prototype.Complete = function() {
+      alert("The value is: "+this.CriticalValue);
+    }
+</script>
+</head>
+<body>
+</body>
+</html>

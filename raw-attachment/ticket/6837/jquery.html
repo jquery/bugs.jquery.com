@@ -1,0 +1,32 @@
+<html>
+   <head>
+      <title></title>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
+   </head>
+   <body>
+      <form id="form" action="" method="POST">
+         <select id="bug" name="bug">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+         </select>
+         <input type="reset">
+      </form>
+      <script type="text/javascript">
+         (function($)
+         {
+            $(document).ready(function()
+            {
+               $('#form').bind('reset', function()
+               {
+                  alert($('#bug').val());
+               });
+
+               $('#form').trigger('reset');
+            });
+         })(jQuery);
+      </script>
+   </body>
+</html>

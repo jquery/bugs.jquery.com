@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Test Number</title>
+    <script type="text/javascript" src="validate_number.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript">
+    function validate_number()
+    {
+        var phone_number = $("#phone_number").val();
+        var success = validate_phone_number(phone_number)?"valid":"invalid";
+        //$("#error_msg").empty();
+        //$("#error_msg").append("The number " + phone_number + " is " + success + "<br />");
+        $("#error_msg").replaceWith("The number " + phone_number + " is " + success + "<br />");
+    }
+    </script>
+</head>
+<body>
+    <h1>Test phone number validation</h1>
+    <div id="error_msg" name="error_msg">number validation message goes here</div><br /><br />
+    <input type="text" id="phone_number" name="phone_number" /><br /><br />
+    <input type="submit" onclick="validate_number(); return 0;" /><br />
+</body>
+</html>

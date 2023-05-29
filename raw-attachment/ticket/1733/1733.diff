@@ -1,0 +1,71 @@
+Index: test/unit/core.js
+===================================================================
+--- test/unit/core.js	(revision 3483)
++++ test/unit/core.js	(working copy)
+@@ -926,7 +926,7 @@
+ });
+ 
+ test("addClass(String)", function() {
+-	expect(1);
++	expect(2);
+ 	var div = $("div");
+ 	div.addClass("test");
+ 	var pass = true;
+@@ -934,10 +934,11 @@
+ 	 if ( div.get(i).className.indexOf("test") == -1 ) pass = false;
+ 	}
+ 	ok( pass, "Add Class" );
++	ok( !$('<span>test</span>\n<span>test</span>').addClass('test').eq(1).hasClass('test'), 'Test addClass with text nodes' );
+ });
+ 
+ test("removeClass(String) - simple", function() {
+-	expect(3);
++	expect(4);
+ 	var div = $("div").addClass("test").removeClass("test"),
+ 		pass = true;
+ 	for ( var i = 0; i < div.size(); i++ ) {
+@@ -957,7 +958,7 @@
+ 	reset();
+ 	var div = $("div:eq(0)").addClass("test").removeClass("");
+ 	ok( div.is('.test'), "Empty string passed to removeClass" );
+-	
++	ok( !$('<span>test</span>\n<span>test</span>').addClass('test').removeClass('test').eq(1).hasClass('test'), 'Test removeClass with text nodes' );
+ });
+ 
+ test("toggleClass(String)", function() {
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 3483)
++++ src/core.js	(working copy)
+@@ -687,23 +687,24 @@
+ 		// internal only, use addClass("class")
+ 		add: function( elem, classNames ) {
+ 			jQuery.each((classNames || "").split(/\s+/), function(i, className){
+-				if ( !jQuery.className.has( elem.className, className ) )
++				if ( elem && elem.nodeType == 1 && !jQuery.className.has( elem.className, className ) )
+ 					elem.className += (elem.className ? " " : "") + className;
+ 			});
+ 		},
+ 
+ 		// internal only, use removeClass("class")
+ 		remove: function( elem, classNames ) {
+-			elem.className = classNames != undefined ?
+-				jQuery.grep(elem.className.split(/\s+/), function(className){
+-					return !jQuery.className.has( classNames, className );	
+-				}).join(" ") :
+-				"";
++			if ( elem && elem.nodeType == 1 )
++				elem.className = classNames != undefined ?
++					jQuery.grep(elem.className.split(/\s+/), function(className){
++						return !jQuery.className.has( classNames, className );	
++					}).join(" ") :
++					"";
+ 		},
+ 
+ 		// internal only, use is(".class")
+ 		has: function( elem, className ) {
+-			return jQuery.inArray( className, (elem.className || elem).toString().split(/\s+/) ) > -1;
++			return elem && jQuery.inArray( className, (elem.className || elem).toString().split(/\s+/) ) > -1;
+ 		}
+ 	},
+ 

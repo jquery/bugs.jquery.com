@@ -1,0 +1,55 @@
+<script type="text/javascript" src="jquery-1.2.6.js"></script> 
+<script type="text/javascript" src="jquery.form.js"></script> 
+
+<script type="text/javascript">
+$(document).ready( function(){
+});
+
+function submit_new_avatar(form) {
+$("#cont").html('prepare');
+ var options = { 
+         beforeSubmit:  validate_form,
+         success:       success_new_avatar,
+         error:         submitError,
+         dataType: 'json'
+ };
+
+$(form).ajaxSubmit(options);
+return false;
+}
+
+function validate_form (){
+$("#cont").append("<br>started");
+}
+
+function submitError (){
+$("#cont").append('<br>error');	
+}
+
+function success_new_avatar (data) {
+$("#cont").append("<br>ended");	
+}
+
+</script>
+
+<body>
+    <form onsubmit="return submit_new_avatar(this);" id="new_avatar_form" method="post" enctype="multipart/form-data" action="/main.fcgi">
+        <input type='hidden' name='action' value='save_new_avatar' />
+    
+
+    <table class="form">
+    <tr>
+        <td class="left"></td>
+        <td class="right">Choose picture:<br /><input type="file" name="file1" /></td>
+    </tr>
+    </table>
+    
+
+     <input type="submit" value="  Upload  " /><input type="reset" value="Cancel" />
+
+    </form>
+
+
+<div id="cont"></div>
+
+</body>

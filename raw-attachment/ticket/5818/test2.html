@@ -1,0 +1,22 @@
+<!DOCTYPE html> 
+<html>
+	<head> 
+		<title>AJAX</title> 
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.js"></script> 
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script> 
+		<script type="text/javascript">
+			function testfunct(){
+				$.ajax({
+				  url: 'ajax.txt',
+				  success: function(data) {
+					$("body").append(data);
+				  }
+				});
+				return false;
+			}
+		</script> 
+	</head> 
+	<body> 
+		<a onclick="return testfunct();" href="/test">link</a>
+	</body> 
+</html>

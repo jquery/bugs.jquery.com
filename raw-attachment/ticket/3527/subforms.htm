@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>Sub-forms</title>
+    <style type="text/css">
+    </style>
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/validate/jquery.validate.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var $list = $("#List"),
+                $detail = $("#Detail"),
+                $detailName = $detail.find("#Name"),
+                $detailDescription = $detail.find("#Description");
+
+            $detail.hide();
+            $list.find("li").click(function() {
+                var $this = $(this),
+                    $title = $this.find("span");
+
+                $detail.hide("fast",
+                    $detail.css("display") == "none" || $this.find("form").length == 0
+                    ? function() {
+                        $detailName
+                            .unbind("change")
+                            .change(function() { $title.text(this.value) })
+                            .val($title.text());
+                        $detailDescription
+                            .unbind("change")
+                            .change(function() { $this.data("description", this.value) })
+                            .val($this.data("description") || "");
+
+                        $this.append($detail);
+                        $detail.show("slow");
+                    }
+                    : "");
+            });
+            $("form")
+                .click(function(e) { e.stopPropagation() })
+                .submit(function() {
+                    var $this = $(this);
+                    $this.validate().form();
+                    
+                    alert(this.id.concat("\n", $this.serialize()));
+
+                    if (this.id == "Detail") { $this.hide("fast"); }
+                    return false;
+                });
+        });
+    </script>
+</head>
+<body>
+    <form id="List">
+        <ul>
+            <li><input name="active_1" type="checkbox" checked="checked" /><span>Item 1</span></li>
+            <li><input name="active_2" type="checkbox" checked="checked" /><span>Item 2</span></li>
+            <li><input name="active_3" type="checkbox" checked="checked" /><span>Item 3</span></li>
+        </ul>
+        <p><input type="submit" /></p>
+    </form>
+    
+    <form id="Detail">
+        <p>
+            <label for="Name">Name</label>
+            <input id="Name" name="Name" class="required" />
+        </p>
+        <p>
+            <label for="Description">Description</label>
+            <textarea id="Description" name="Description" class="required"></textarea>
+        </p>
+        <p><input type="submit" /></p>
+    </form>
+</body>
+</html>

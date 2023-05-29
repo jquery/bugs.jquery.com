@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>Test</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function () {
+          $('#test a').hover(function () {
+              $(this).closest('dt').next('dd').animate({ opacity: 1 });
+          }, function () {
+              $(this).closest('dt').next('dd').animate({ opacity: 0.5 });
+          });
+      });
+    </script>
+    <style>
+      #test dt {
+          width: 100px;
+          text-align: right;
+          float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test">
+      <dl>
+        <dt><a href="#">ABC</a></dt>
+        <dd>Description for ABC</dd>
+        <dt><a href="#">DEF</a></dt>
+        <dd>Description for DEF</dd>
+      </dl>
+    </div>
+  </body>
+</html>

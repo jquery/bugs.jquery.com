@@ -1,0 +1,32 @@
+--- ui.selectable.js.old	2008-03-07 20:35:01.000000000 +0100
++++ ui.selectable.js	2008-03-07 20:03:31.000000000 +0100
+@@ -5,6 +5,8 @@
+ 
+ 	$.fn.extend({
+ 		selectable: function(options) {
++			var args = Array.prototype.slice.call(arguments, 1);
++
+ 			return this.each(function() {
+ 				if (typeof options == "string") {
+ 					var select = $.data(this, "ui-selectable");
+@@ -20,8 +22,7 @@
+ 		var instance = this;
+ 
+ 		this.element = $(element);
+-
+-		$.data(this.element, "ui-selectable", this);
++		$.data(element, "ui-selectable", this);
+ 		this.element.addClass("ui-selectable");
+ 
+ 		this.options = $.extend({
+@@ -91,8 +92,8 @@
+ 			this.element
+ 				.removeClass("ui-selectable ui-selectable-disabled")
+ 				.removeData("ui-selectable")
+-				.unbind(".selectable");
+-			this.removeMouseInteraction();
++				.unbind(".selectable")
++				.removeMouseInteraction();
+ 		},
+ 		enable: function() {
+ 			this.element.removeClass("ui-selectable-disabled");

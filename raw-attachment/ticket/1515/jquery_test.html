@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; display:none; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      function doSlideDown() {
+        $("div").slideDown();
+      }
+
+      function doSlideUp() {
+        $("div").slideUp();
+      }
+
+      $(function () {
+        $("#slidedown").click(doSlideDown);
+        $("#slideup").click(doSlideUp);
+      });
+    </script>
+  </head>
+  <body>
+    <button id="slidedown">slideDown()</button>
+    <button id="slideup">slideUp()</button>
+    <div id="container">
+      This is an attempt to create the test case that is described in Ticket #1515 since one was not provided.
+    </div>
+  </body>
+</html>

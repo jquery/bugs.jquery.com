@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery :contains selector error test case</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+  <script type="text/javascript">
+    function data_in_contains(){
+      $('ul li:contains("One")').fadeOut();
+    }
+    
+    function data_in_variable_passed_to_contains(){
+      value_in_variable = "Two";
+      $('ul li:contains(value_in_variable)').fadeOut();
+    }
+
+    $(document).ready(function(){
+      data_in_variable_passed_to_contains();
+      data_in_contains()
+    });
+  </script>
+</head>
+<body>
+  <ul>
+    <li>One</li>
+    <li>Two</li>
+  </ul>
+</body>
+</html>

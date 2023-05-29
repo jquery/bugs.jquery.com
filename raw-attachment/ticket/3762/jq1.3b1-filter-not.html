@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>jQuery 1.3b1</title>
+    <script src="jquery-1.3b1.js" type="text/javascript"></script>
+  </head>
+
+  <body>
+    <ul>
+      <li class="test-1">test-1</li>
+      <li class="test-2">test-2</li>
+      <li class="test-3">test-3</li>
+      <li class="test-4">test-4</li>
+      <li class="test-5">test-5</li>
+    </ul>
+  </body>
+
+  <script type="text/javascript">
+    $(function(){
+        // This is fine
+        $('li:not(.test-3,.test-4)').css({backgroundColor: 'red'});
+
+        // This triggers a bug in jQuery 1.3b1
+        $('ul>li').filter('li:not(.test-2,.test-4)').css({fontWeight: 'bold'});
+    });
+  </script>
+</html>

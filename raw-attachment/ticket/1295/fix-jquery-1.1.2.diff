@@ -1,0 +1,37 @@
+*** jquery-latest.js	Thu Jun 14 16:26:44 2007
+--- jquery.js	Thu Jun 14 18:31:51 2007
+***************
+*** 1288,1294 ****
+  		// returned undefined or false
+  		var returnValue;
+  
+! 		var c = this.$events[event.type];
+  
+  		var args = [].slice.call( arguments, 1 );
+  		args.unshift( event );
+--- 1288,1295 ----
+  		// returned undefined or false
+  		var returnValue;
+  
+!                 var local_this = event.currentTarget;
+!                 var c = local_this.$events[event.type];
+  
+  		var args = [].slice.call( arguments, 1 );
+  		args.unshift( event );
+***************
+*** 1299,1305 ****
+  			args[0].handler = c[j];
+  			args[0].data = c[j].data;
+  
+! 			if ( c[j].apply( this, args ) === false ) {
+  				event.preventDefault();
+  				event.stopPropagation();
+  				returnValue = false;
+--- 1300,1306 ----
+  			args[0].handler = c[j];
+  			args[0].data = c[j].data;
+  
+! 			if ( c[j].apply( local_this, args ) === false ) {
+  				event.preventDefault();
+  				event.stopPropagation();
+  				returnValue = false;

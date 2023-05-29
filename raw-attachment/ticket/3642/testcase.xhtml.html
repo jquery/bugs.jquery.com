@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>innerHTML xhtml test</title>
+<style type="text/css">
+.bold { font-weight: bold; font-size: 2em; }
+</style>
+<script type="text/javascript" src="jquery-1.2.6.js"></script>
+<script type="text/javascript">
+<![CDATA[
+$(document).ready(function() {
+	$("#test_span").addClass("bold");
+
+	// note: the extra quote (") character after <div was inserted
+	//       on purpose. Removing it makes the markup valid,
+	//       which causes no issues.
+	$("#test_span").wrap('<div "></div>');
+	alert('oh no!');
+});
+]]>
+</script>
+</head>
+<body>
+<p>This is a <span id="test_span">test</span>. In Firefox, expect an exception.</p>
+
+</body>
+</html>

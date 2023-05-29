@@ -1,0 +1,44 @@
+Index: src/ajax.js
+===================================================================
+--- src/ajax.js	(revision 5495)
++++ src/ajax.js	(working copy)
+@@ -1,7 +1,10 @@
+ jQuery.fn.extend({
++	// Keep a copy of the old load
++	_load: jQuery.fn.load,
++	
+ 	load: function( url, params, callback ) {
+-		if ( jQuery.isFunction( url ) )
+-			return this.bind("load", url);
++		if ( typeof url != 'string' )
++			return this._load( url );
+ 
+ 		var off = url.indexOf(" ");
+ 		if ( off >= 0 ) {
+Index: test/unit/event.js
+===================================================================
+--- test/unit/event.js	(revision 5495)
++++ test/unit/event.js	(working copy)
+@@ -112,8 +112,8 @@
+ 	ok( $("a.test:first").triggerHandler("click") === false, "Handler is bound to appendTo'd elements" );
+ });
+ 
+-test("click()", function() {
+-	expect(5);
++test("trigger() shortcuts", function() {
++	expect(6);
+ 	$('<li><a href="#">Change location</a></li>').prependTo('#firstUL').find('a').bind('click', function() {
+ 		var close = $('spanx', this); // same with $(this).find('span');
+ 		equals( close.length, 0, "Context element does not exist, length must be zero" );
+@@ -138,6 +138,11 @@
+ 	};
+ 	$('#simon1').click();
+ 	equals( clickCounter, 1, "Check that click, triggers onclick event handler on an a tag also" );
++	
++	//try triggering load with $().load() used to fail
++	$('<img />').load(function(){
++		ok( true, "Trigger the load event, using the shortcut .load(), used to fail.");
++	}).load();
+ });
+ 
+ test("unbind(event)", function() {

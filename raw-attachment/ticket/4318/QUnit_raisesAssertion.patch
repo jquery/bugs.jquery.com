@@ -1,0 +1,36 @@
+Index: testrunner.js
+===================================================================
+--- testrunner.js	(revision 6272)
++++ testrunner.js	(working copy)
+@@ -224,6 +224,7 @@
+ 	expect: expect,
+ 	ok: ok,
+ 	equals: equals,
++	raises: raises,
+ 	start: start,
+ 	stop: stop,
+ 	reset: reset,
+@@ -590,6 +591,24 @@
+ 	push(expected == actual, actual, expected, message);
+ }
+ 
++/**
++ * Checks that the given expression throws an exception of the expected type, with an optional message.
++ *
++ * @example raises( function() { return foo.bar; }, "TypeError", "invalid property access raises TypeError exception" );
++ *
++ * @param Function expression
++ * @param String expected exception type
++ * @param String message (optional)
++ */
++function raises(expression, expected, message) {
++	try {
++		push(false, expression(), expected, message);
++	} catch(ex) {
++		push(ex.name == expected, ex.name, expected, message);
++	}
++}
++
+ function push(result, actual, expected, message) {
+ 	message = message || (result ? "okay" : "failed");
+ 	QUnit.ok( result, result ? message + ": " + expected : message + ", expected: " + jsDump.parse(expected) + " result: " + jsDump.parse(actual) );

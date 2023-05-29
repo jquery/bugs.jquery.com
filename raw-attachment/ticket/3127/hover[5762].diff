@@ -1,0 +1,88 @@
+Index: jquery/src/event.js
+===================================================================
+--- jquery/src/event.js	(revision 5762)
++++ jquery/src/event.js	(working copy)
+@@ -363,58 +363,40 @@
+ 			setup: function() {
+ 				// Make sure the ready event is setup
+ 				bindReady();
+-				return;
+ 			},
+ 
+-			teardown: function() { return; }
+-		},
++			teardown: function() { }
++		}
++	}
++};
+ 
+-		mouseenter: {
+-			setup: function() {
+-				if ( jQuery.browser.msie ) return false;
+-				jQuery(this).bind("mouseover", jQuery.event.special.mouseenter.handler);
+-				return true;
+-			},
+-
+-			teardown: function() {
+-				if ( jQuery.browser.msie ) return false;
+-				jQuery(this).unbind("mouseover", jQuery.event.special.mouseenter.handler);
+-				return true;
+-			},
+-
+-			handler: function(event) {
+-				// If we actually just moused on to a sub-element, ignore it
+-				if ( withinElement(event, this) ) return true;
+-				// Execute the right handlers by setting the event type to mouseenter
+-				event.type = "mouseenter";
+-				return jQuery.event.handle.apply(this, arguments);
++if( !jQuery.browser.msie )
++	jQuery.each({
++		mouseover : 'mouseenter',
++		mouseout  : 'mouseleave' 
++	}, function( orig, fix ){		
++		var event = jQuery.event;
++		
++		function handler( e ) {
++			// If we didn't actually moused on to a sub-element
++			if ( !withinElement(e, this) ){
++				// Fix the event type and execute the right handlers
++				e.type = "mouseenter";
++				return event.handle.apply( this, arguments );
+ 			}
+-		},
+-
+-		mouseleave: {
++		}
++		
++		event.special[ fix ] = {
+ 			setup: function() {
+-				if ( jQuery.browser.msie ) return false;
+-				jQuery(this).bind("mouseout", jQuery.event.special.mouseleave.handler);
+-				return true;
++				event.add( this, orig, handler );
+ 			},
+ 
+ 			teardown: function() {
+-				if ( jQuery.browser.msie ) return false;
+-				jQuery(this).unbind("mouseout", jQuery.event.special.mouseleave.handler);
+-				return true;
+-			},
++				event.remove( this, orig, handler );
++			}			
++		};
++	});
+ 
+-			handler: function(event) {
+-				// If we actually just moused on to a sub-element, ignore it
+-				if ( withinElement(event, this) ) return true;
+-				// Execute the right handlers by setting the event type to mouseleave
+-				event.type = "mouseleave";
+-				return jQuery.event.handle.apply(this, arguments);
+-			}
+-		}
+-	}
+-};
+-
+ jQuery.fn.extend({
+ 	bind: function( type, data, fn ) {
+ 		return type == "unload" ? this.one(type, data, fn) : this.each(function(){

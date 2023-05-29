@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery 1.3.2 bug</title>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(window).bind("test.aa.b", function() {
+				alert("ERROR");
+			});
+			$(window).trigger("test.a.b");
+			/*
+				the order of namespaces doesn't matter - only the first namespace seems to be affected, and only if it's not alone
+				
+				.a.b       triggers        .aa.b
+				.a.b.c.d   triggers        .aa.b.c.d
+				.begin.two triggers        .beginning.two
+				
+				
+				.a         doesn't trigger .aa
+			*/
+		</script>
+	</head>
+	<body>
+		<h1>jQuery 1.3.2 event bug</h1>
+	</body>
+</html>

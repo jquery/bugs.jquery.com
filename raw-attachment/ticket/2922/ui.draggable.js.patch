@@ -1,0 +1,16 @@
+--- a/ui/ui.draggable.js
++++ b/ui/ui.draggable.js
+@@ -210,10 +210,11 @@
+                stop: function(e) {
+                
+                        //If we are using droppables, inform the manager about the drop
++
+                        if ($.ui.ddmanager && !this.options.dropBehaviour)
+-                               $.ui.ddmanager.drop(this, e);
++                               var dropped = $.ui.ddmanager.drop(this, e);
+                                
+-                       if(this.options.revert) this.revert();
++                       if(this.options.revert || (this.options.revertInvalid && !dropped)) this.revert();
+                        else {
+                                this.propagate("stop", e);
+                                this.clear();

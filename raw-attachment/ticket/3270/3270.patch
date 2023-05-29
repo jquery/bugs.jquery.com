@@ -1,0 +1,23 @@
+--- C:\Documents and Settings\Administrator\Desktop\jquery\jquery-1.3.js	Fri Jan 16 22:45:25 2009
++++ C:\Documents and Settings\Administrator\Desktop\jquery\jquery-1.3-test.js	Sun Jan 18 20:32:18 2009
+@@ -227,12 +227,17 @@
+ 				wrap.insertBefore( this[0] );
+ 
+ 			wrap.map(function(){
++
+ 				var elem = this;
++				for ( var sib; elem.firstChild; elem = sib ) {
++					sib = elem.firstChild;
++					while ( sib && sib.nodeType != 1 )
++						sib = sib.nextSibling;
++					if ( !sib )
++						break;
++				}
++				return elem;
+ 
+-				while ( elem.firstChild )
+-					elem = elem.firstChild;
+-
+-				return elem;
+ 			}).append(this);
+ 		}
