@@ -33,6 +33,7 @@
   --main-background-end-color: #181c21;
   --content-background-color: #fafafa;
   --sidenav-header-background-color: #ddd;
+  --banner-background-color: var(--primary-color);
 
   --footer-background-start-color: var(--primary-color);
   --footer-background-end-color: #0f1923;
@@ -74,8 +75,32 @@ html {
 body {
   background-image: url(/img/bg-interior-tile-drk.jpg);
   background-repeat: repeat-x;
-  background-position: 50% 0;
+  background-position: 50% 80px;
 }
+
+/* Banner */
+.banner {
+  width: 100%;
+  height: 80px;
+  background-color: var(--banner-background-color);
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: 0.875rem;
+  padding: 0 0.25em;
+}
+
+.banner a[href],
+.banner a[href]:visited {
+  color: #5cb5f0;
+}
+.banner a[href]:hover {
+  color: var(--text-color-link-hover);
+}
+.banner a[href]:active {
+  color: var(--text-color-link-active);
+}
+
 th, tr {
   font-family: var(--font-family-alternate);
 }
@@ -429,6 +454,11 @@ footer a[href]:visited {
   justify-content: flex-start;
   align-items: center;
 }
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* Utility classes */
 .white-box {
@@ -460,6 +490,13 @@ a.ext-link .icon {
 }
 
 @media(min-width: 920px) {
+  body {
+    background-position-y: 60px;
+  }
+  .banner {
+    height: 60px;
+    font-size: 1rem;
+  }
   header {
     padding: 0 40px;
   }
