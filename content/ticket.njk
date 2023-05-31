@@ -20,7 +20,7 @@
   layout: 'layouts/ticket.njk',
   eleventyComputed: {
     ticketAttachments: (data) => {
-      return data.attachments.filter((attachment) => attachment.id === data.ticket.id + '')
+      return data.attachments.filter((attachment) => attachment.id === data.ticket.id)
     },
     title: "#{{ ticket.id }} ({{ ticket.summary }}) - jQuery - Bug Tracker"
   },
@@ -148,7 +148,7 @@
   <ul class="ticket-attachments">
     {% for attachment in ticketAttachments %}
       <li>
-        <a href="/attachment/ticket/{{ attachment.id }}/{{ attachment.filename }}">{{ attachment.filename }}</a> ({{ attachment.size | bytesToKilos }}) - added by {{ attachment.author }}
+        <a href="/attachment/ticket/{{ attachment.id }}/{{ attachment.filename }}/index.html">{{ attachment.filename }}</a> ({{ attachment.size | bytesToKilos }}) - added by {{ attachment.author }}
         <strong>{{ attachment.time | yearsAgo }}</strong>.<br />
         {{ attachment.description | tracToHTML | safe }}
       </li>

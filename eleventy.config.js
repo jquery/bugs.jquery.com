@@ -305,7 +305,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addAsyncShortcode('attachment', async (ticketId, filename) => {
     const content = await fs.promises.readFile(
-      path.join(__dirname, 'raw-attachment/ticket/', ticketId, filename)
+      path.join(__dirname, `raw-attachment/ticket/${ticketId}`, filename)
     )
     return content.toString()
   })
