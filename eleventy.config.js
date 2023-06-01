@@ -1,6 +1,5 @@
 const { DateTime } = require('luxon')
 
-const pluginRss = require('@11ty/eleventy-plugin-rss')
 const pluginSyntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
 const pluginBundle = require('@11ty/eleventy-plugin-bundle')
 const pluginNavigation = require('@11ty/eleventy-navigation')
@@ -10,7 +9,6 @@ const CleanCSS = require('clean-css')
 const fs = require('node:fs')
 const path = require('node:path')
 
-const pluginDrafts = require('./eleventy.config.drafts.js')
 const pluginImages = require('./eleventy.config.images.js')
 
 function escapeHTML(string) {
@@ -59,12 +57,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget('content/**/*.{svg,webp,png,jpeg}')
 
   // App plugins
-  eleventyConfig.addPlugin(pluginDrafts)
   eleventyConfig.addPlugin(pluginImages)
 
   // Official plugins
   eleventyConfig.addPlugin(pluginFavicon)
-  eleventyConfig.addPlugin(pluginRss)
   eleventyConfig.addPlugin(pluginSyntaxHighlight, {
     preAttributes: { tabindex: 0 }
   })
