@@ -42,6 +42,7 @@ jobs:
       - name: Build with Eleventy
         env:
           NODE_ENV: production
+          NODE_OPTIONS: '--max_old_space_size=4096'
         # run: npm run build -- --pathprefix="${{ steps.pages.outputs.base_url }}/"
         run: npm run build -- --pathprefix="/bugs.jquery.com/"
       # - name: Upload artifact
