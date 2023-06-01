@@ -1,13 +1,12 @@
 {
   "name": "bugs.jquery.com",
   "version": "0.0.1",
-  "description": "Static archive of the old bugs.jquery.com trac site.",
+  "description": "Static archive of the old bugs.jquery.com trac site, built with eleventy.",
   "scripts": {
     "clean": "rimraf _site/",
     "build": "npm run clean && npx @11ty/eleventy",
     "postbuild": "npm run searchindex",
     "start": "npm run clean && cross-env NODE_ENV=development npx @11ty/eleventy --serve --quiet",
-    "poststart": "npm run searchindex",
     "debug": "npm run clean && DEBUG=Eleventy* npx @11ty/eleventy",
     "debugstart": "npm run clean && DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
     "benchmark": "npm run clean && DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
