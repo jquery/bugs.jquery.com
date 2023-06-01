@@ -8,6 +8,7 @@ const pluginFavicon = require('eleventy-favicon')
 const CleanCSS = require('clean-css')
 const fs = require('node:fs')
 const path = require('node:path')
+const { exec } = require('node:child_process')
 
 const pluginImages = require('./eleventy.config.images.js')
 const tracToHTML = require('./eleventy.config.tracToHTML.js')
@@ -168,6 +169,22 @@ module.exports = function (eleventyConfig) {
       path.join(__dirname, `raw-attachment/ticket/${ticketId}`, filename)
     )
     return content.toString()
+  })
+
+  eleventyConfig.on('eleventy.after', async ({ runMode, outputMode }) => {
+    if (
+      process.env.NODE_ENV === 'development' &&
+      runMode === 'serve' &&
+      outputMode === 'fs'
+    ) {
+      return exec('npm run searchindex', (err, stdout) => {
+        if (err) {
+          console.error(err)
+          return
+        }
+        console.log(stdout)
+      })
+    }
   })
 
   // Features to make your build faster (when you need them)
