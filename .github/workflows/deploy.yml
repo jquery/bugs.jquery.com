@@ -29,8 +29,6 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
-    env:
-      NODE_ENV: production
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -42,6 +40,8 @@ jobs:
       - name: Install Node.js dependencies
         run: npm ci
       - name: Build with Eleventy
+        env:
+          NODE_ENV: production
         # run: npm run build -- --pathprefix="${{ steps.pages.outputs.base_url }}/"
         run: npm run build -- --pathprefix="/bugs.jquery.com/"
       # - name: Upload artifact
