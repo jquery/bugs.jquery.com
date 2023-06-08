@@ -1,5 +1,5 @@
 const rasterisks = /^\s*\* /
-const rheaders = /^ *(\=+) *([^\n\r]+) *\1? *$/
+const rheaders = /^ *(\=+) *([^\n\r]+?)[=\s]*$/
 let listStarted = false
 
 function escapeHTML(string) {
@@ -35,7 +35,7 @@ module.exports = function tracToHTML(text) {
       })
       // Linkify http links in brackets
       .replace(
-        /(^|\s)\[(https?:\/\/[^\s\]]+)(?:\s+([^\]]+))?\]/g,
+        /(^|\s)(?:\[https?:\/\/([^ ]+) "([^"]+)"\])|(?:\[https?:\/\/([^\s\]]+)(?: ([^\]]+))?\])/g,
         function (_match, space, url, text) {
           return `${
             space || ''
@@ -46,7 +46,7 @@ module.exports = function tracToHTML(text) {
       )
       // Linkify hash links in brackets
       .replace(
-        /(^|\s)\[(#[^\s\]]+)(?:\s+([^\]]+))?\]/g,
+        /(^|\s)(?:\[(#[^ ]+) "([^"]+)"\])|(?:\[(#[^\s\]]+)(?: ([^\]]+))?\])/g,
         function (_match, space, url, text) {
           return `${
             space || ''
@@ -57,7 +57,7 @@ module.exports = function tracToHTML(text) {
       )
       // Linkify CamelCase links in brackets
       .replace(
-        /(^|\s)\[([A-Z][a-z]+[A-Z][\w#-]+)(?:\s+([^\]]+))?\]/g,
+        /(^|\s)(?:\[([A-Z][a-z]+[A-Z][^ ]+) "([^"]+)"\])|(?:\[([A-Z][a-z]+[A-Z][^\s\]]+)(?: ([^\]]+))?\])/g,
         function (_match, space, page, text) {
           return `${space || ''}<a href="/wiki/${page}">${text || page}</a>`
         }
@@ -77,7 +77,7 @@ module.exports = function tracToHTML(text) {
       .replace(/#(\d+)(?!<=>)/g, `<a href="/ticket/$1">$&</a>`)
       // Linkify CamelCase to wiki
       .replace(
-        /(^|\s)(!)?([A-Z][a-z]+[A-Z]\w+(?:#\w+)?)(?!\w)/g,
+        /(^|\s)(!)?([A-Z][a-z]+[A-Z][\w:]+(?:#\w+)?)(?!\w)/g,
         function (_match, space, excl, page) {
           if (excl) {
             return `${space || ''}${page}`
