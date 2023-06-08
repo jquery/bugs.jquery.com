@@ -1,12 +1,12 @@
 /* Defaults */
 :root {
-  --font-family: "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
+  --font-family: 'Trebuchet MS', Verdana, Helvetica, Arial, sans-serif;
   --font-family-header: var(--font-family);
-  --font-family-alternate: Verdana, Arial, "Bitstream Vera Sans", Helvetica, sans-serif;
-  --font-family-monospace: Monaco, Andale Mono WT, Andale Mono,
-    Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
-    Courier, monospace;
+  --font-family-alternate: Verdana, Arial, 'Bitstream Vera Sans', Helvetica,
+    sans-serif;
+  --font-family-monospace: Monaco, Andale Mono WT, Andale Mono, Lucida Console,
+    Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+    Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
 }
 
 /* Theme colors */
@@ -28,7 +28,7 @@
   --button-hover-color: var(--text-color-link-hover);
   --button-text-color: #fff;
 
-  --footer-text-color-link: #5DB0E6;
+  --footer-text-color-link: #5db0e6;
 
   --background-color: #39414a;
   --nav-background-color: var(--primary-color);
@@ -105,7 +105,8 @@ body {
   color: var(--text-color-link-active);
 }
 
-th, tr {
+th,
+tr {
   font-family: var(--font-family-alternate);
 }
 .container {
@@ -116,7 +117,12 @@ th, tr {
   overflow: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-family-header);
   font-weight: normal;
   margin: 0;
@@ -245,7 +251,7 @@ pre[class*='language-'] code {
 
 /* Header */
 header {
-	position: relative;
+  position: relative;
   height: 186px;
   display: flex;
   flex-wrap: wrap;
@@ -301,7 +307,7 @@ header h1 {
   font-size: 0.8125rem;
 }
 #bug-tracker-form {
-	position: relative;
+  position: relative;
   width: 100%;
   gap: 16px;
   margin-top: 25px;
@@ -429,11 +435,12 @@ main a[href]:active {
 /* Footer */
 footer {
   background-color: var(--nav-background-color);
-  background: var(--nav-background-color) linear-gradient(
-    to bottom,
-    var(--footer-background-start-color),
-    var(--footer-background-end-color)
-  );
+  background: var(--nav-background-color)
+    linear-gradient(
+      to bottom,
+      var(--footer-background-start-color),
+      var(--footer-background-end-color)
+    );
   padding: 2.5em;
   margin-bottom: 2em;
   border-top: 2px solid #000;
@@ -472,6 +479,9 @@ footer a[href]:visited {
   justify-content: center;
   align-items: center;
 }
+.items-start {
+  align-items: start;
+}
 
 /* Utility classes */
 .white-box {
@@ -484,7 +494,7 @@ a.ext-link .icon {
   background: url(/img/extlink.png) 0 50% no-repeat;
 }
 
-@media(max-width: 919px) {
+@media (max-width: 919px) {
   #jq-menus {
     position: absolute;
     top: 80px;
@@ -502,7 +512,7 @@ a.ext-link .icon {
   }
 }
 
-@media(min-width: 920px) {
+@media (min-width: 920px) {
   body {
     background-position-y: 60px;
   }
@@ -526,18 +536,18 @@ a.ext-link .icon {
     border-radius: var(--border-radius);
     margin-top: 2em;
   }
-	#jq-siteLogo {
-		margin-top: 59px;
-	}
+  #jq-siteLogo {
+    margin-top: 59px;
+  }
   #bug-tracker-form {
-		flex-direction: row;
-		gap: 0;
-		position: absolute;
-		bottom: 15px;
-		left: 0;
-		right: 0;
+    flex-direction: row;
+    gap: 0;
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
     padding: 0 40px 0 60px;
-	}
+  }
   .hamburger-lines {
     display: none;
   }
