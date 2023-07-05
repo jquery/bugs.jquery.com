@@ -3,8 +3,11 @@
 }
 
 #search {
-  width: 100%;
   position: relative;
+  /* Leave space for the :before label, search icon, and gap */
+  width: calc(100% - 85px - 22px - 1rem);
+  margin-right: 22px;
+  align-self: flex-end;
 }
 #search:before {
   content: 'Search Tickets';
@@ -115,7 +118,6 @@
 @media(min-width: 920px) {
   #search {
     width: auto;
-    margin-right: 22px;
   }
   .pagefind-ui__search-input {
     width: 300px;
