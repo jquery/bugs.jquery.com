@@ -1,0 +1,19 @@
+<html>
+<head>
+    <title>Demo of jQuery Memory Leak in IE</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    function resetContent() {
+        $("#content div").remove();
+        for(var i=0; i<1000; i++) {
+            $("#content").append("<div>Hello World!</div>");
+        }
+        setTimeout(resetContent, 2000);
+    }
+    $(resetContent);
+</script>
+<div id="content"></div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+﻿<html><head><title>whatever</title>
+    <script type="text/javascript" src="/JS/jquery-1.3.2.js"></script>
+</head>
+<body>
+    <a id="id1" />
+    <a id="id2" />
+    
+    <script type="text/javascript">
+        var list = jQuery("#id1");
+        list.add(jQuery("#id2"));
+
+        list.each(function()
+        {
+            alert(this.id);
+        });
+
+        alert(jQuery("#id2").get());
+    </script>
+</body>
+</html>

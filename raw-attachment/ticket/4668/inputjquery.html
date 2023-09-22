@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery input test case</title>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<script>
+		$(function(){
+			$('input').each(function() {
+				lbl = $(this).closest('label');
+				jqType = $(this).attr('type');
+				jsType = this.getAttribute('type');
+				lbl.
+					prepend('<span class="jq">'+jqType+'</span>').
+					prepend('<span class="js">'+jsType+'</span>');
+			});
+		})
+	</script>
+
+	<style>
+		fieldset {
+			width: 200px;
+		}
+		label {
+			width: 200px;
+			padding: 0 0 20px;
+			display: block;
+		}
+		.jq {
+			background: red;
+		}
+		.js {
+			background: green;
+		}
+	</style>
+</head>
+<body>
+
+<p>Green values in label are grabbed by <code>getAttribute</code>, red by jQuerys <code>attr</code>.</p>
+<fieldset>
+	<legend>jQuery Input Types</legend>
+	<label id=text>
+		<input type=text>
+	</label>
+	<label id=url>
+		<input type=url>
+	</label>
+	<label id=email>
+		<input type=email>
+	</label>
+	<label id=search>
+		<input type=search>
+	</label>
+</fieldset>
+<p>Only confirmed browser where jQuery gets the right types is Opera.</p>
+</body>
+</html>

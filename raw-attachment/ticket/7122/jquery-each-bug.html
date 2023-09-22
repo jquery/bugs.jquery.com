@@ -1,0 +1,45 @@
+<html>
+<head>
+  <script type="text/javascript" src="jquery-1.4.2.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      var data = {"collections":[{"collectionId":"1651961","title":"Yahoo","classification":"Census","region":"OTHER","uri":"http://www.yahoo.com","containsImages":true,"count":null},{"collectionId":"1783956","title":"Ebay","classification":"Vital","region":"OTHER","uri":"http://www.ebay.com","containsImages":false,"count":"609793"},{"collectionId":"1809046","title":"Google","classification":"Vital","region":"OTHER","uri":"http://www.google.com","containsImages":false,"count":"6183"},{"collectionId":"1809045","title":"CNN","classification":"Vital","region":"OTHER","uri":"http://www.cnn.com","containsImages":false,"count":"31078"}]};
+      var dataTable = $('#browse-table');
+      var thRow = $($(dataTable).find('tr')[0]).clone();
+      $('#browse-table tbody').empty();
+      drawCollections(data, dataTable, thRow);      
+    });
+
+    function drawCollections(newSet, dataTable, thRow) {
+      var table = dataTable;
+
+      $('#browse-table tbody').empty();
+      $('#browse-table').append(thRow);
+      $.each(newSet.collections, function(index, value) {
+        var dataRow = $('<tr><td class="collection" scope="row"><a href="#"><span /></a></td><td class="records">0</td></tr>');
+        dataRow.find('td.collection a span').text(value.title);
+        if (value.containsImages) {
+          dataRow.find('td.collection a img').show();
+        }
+        else {
+          dataRow.find('td.collection a img').hide();
+        }
+        dataRow.find('td.collection a').attr("href", value.uri);
+        dataRow.find('td.records').text(value.count);
+
+        table.append(dataRow);
+//        dataRow = dataRow.clone();
+      });
+      $('#number_of_results').text(newSet.length);
+    }
+  </script>
+</head>
+<body>
+<table id="browse-table">
+  <tr>
+    <th class="th-collection">Title</th>
+    <th class="th-records">Records</th>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,21 @@
+--- /home/he54189/tmp/jquery-validate/jquery.validate.js	2008-08-07 15:17:42.000000000 +0800
++++ jquery.validate.js	2008-09-23 09:31:57.000000000 +0800
+@@ -197,6 +197,7 @@
+ 		errorContainer: $( [] ),
+ 		errorLabelContainer: $( [] ),
+ 		onsubmit: true,
++        validateHidden: true,
+ 		ignore: [],
+ 		onfocusin: function(element) {
+ 			this.lastActive = element;
+@@ -305,7 +306,9 @@
+ 		checkForm: function() {
+ 			this.prepareForm();
+ 			for ( var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++ ) {
+-				this.check( elements[i] );
++                if (this.settings.validateHidden || $(elements[i]).parents().filter(':hidden').length == 0) {
++    				this.check( elements[i] );
++                }
+ 			}
+ 			return this.valid(); 
+ 		},

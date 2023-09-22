@@ -1,0 +1,21 @@
+Index: ajax.js
+===================================================================
+--- ajax.js	(revision 541)
++++ ajax.js	(working copy)
+@@ -701,6 +701,7 @@
+ 			success: fvoid,
+ 			error: fvoid,
+ 			dataType: null,
++			contentType: "application/x-www-form-urlencoded",
+ 			data: null,
+ 			url: null
+ 		}, s);
+@@ -736,7 +737,7 @@
+ 
+ 		// Set the correct header, if data is being sent
+ 		if ( s.data )
+-			xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
++			xml.setRequestHeader("Content-Type", contentType);
+ 
+ 		// Set the If-Modified-Since header, if ifModified mode.
+ 		if ( s.ifModified )

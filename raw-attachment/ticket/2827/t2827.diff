@@ -1,0 +1,20 @@
+--- core.js	2009-06-17 15:39:15.000000000 -0700
++++ core.js	2009-06-17 15:38:14.000000000 -0700
+@@ -659,7 +659,7 @@
+ 		var name, i = 0, length = object.length;
+ 
+ 		if ( args ) {
+-			if ( length === undefined ) {
++			if ( length === undefined || object.constructor == Function ) {
+ 				for ( name in object )
+ 					if ( callback.apply( object[ name ], args ) === false )
+ 						break;
+@@ -670,7 +670,7 @@
+ 
+ 		// A special, fast, case for the most common use of each
+ 		} else {
+-			if ( length === undefined ) {
++			if ( length === undefined || object.constructor == Function ) {
+ 				for ( name in object )
+ 					if ( callback.call( object[ name ], name, object[ name ] ) === false )
+ 						break;

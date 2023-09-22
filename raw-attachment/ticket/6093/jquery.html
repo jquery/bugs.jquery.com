@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>foo</title>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+	<div>
+
+    <input type="radio" name="newsletter" value="Hot F(uzz" />
+    <span>name?</span>
+
+  </div>
+  <div>
+    <input type="radio" name="newsletters" value="Cold Fusion" />
+
+    <span>name?</span>
+  </div>
+  <div>
+    <input type="radio" name="accept" value="Evil Plans" />
+
+    <span>name?</span>
+  </div>
+<script>
+sel="Hot F\\(uzz";
+alert(sel);
+$("body").find('input[value="' + sel + '"]').next().text(" is newsletter");</script>
+</body>
+</html>

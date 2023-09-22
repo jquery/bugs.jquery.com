@@ -1,0 +1,97 @@
+Index: src/ajax.js
+===================================================================
+--- src/ajax.js	(revision 6522)
++++ src/ajax.js	(working copy)
+@@ -46,6 +46,7 @@
+ 		// Request the remote document
+ 		jQuery.ajax({
+ 			url: url,
++			target: self,
+ 			type: type,
+ 			dataType: "html",
+ 			data: params,
+@@ -264,7 +265,7 @@
+ 
+ 		// Watch for a new set of requests
+ 		if ( s.global && ! jQuery.active++ ) {
+-			jQuery.event.trigger( "ajaxStart" );
++			trigger( "ajaxStart" );
+ 		}
+ 
+ 		// Matches an absolute URL, and saves the domain
+@@ -355,7 +356,7 @@
+ 		if ( s.beforeSend && s.beforeSend(xhr, s) === false ) {
+ 			// Handle the global AJAX counter
+ 			if ( s.global && ! --jQuery.active ) {
+-				jQuery.event.trigger( "ajaxStop" );
++				trigger( "ajaxStop" );
+ 			}
+ 
+ 			// close opended socket
+@@ -364,7 +365,7 @@
+ 		}
+ 
+ 		if ( s.global ) {
+-			jQuery.event.trigger("ajaxSend", [xhr, s]);
++			trigger("ajaxSend", [xhr, s]);
+ 		}
+ 
+ 		// Wait for a response to come back
+@@ -378,7 +379,7 @@
+ 
+ 					// Handle the global AJAX counter
+ 					if ( s.global && ! --jQuery.active ) {
+-						jQuery.event.trigger( "ajaxStop" );
++						trigger( "ajaxStop" );
+ 					}
+ 				}
+ 
+@@ -461,6 +462,15 @@
+ 			onreadystatechange();
+ 		}
+ 
++		function trigger(event, data) {
++			// if a target element was specified, trigger on that
++			if ( s.target ) {
++				$(s.target).trigger(event, data);
++			} else {
++				jQuery.event.trigger(event, data);
++			}
++		}
++
+ 		function success(){
+ 			// If a local callback was specified, fire it and pass it the data
+ 			if ( s.success ) {
+@@ -469,7 +479,7 @@
+ 
+ 			// Fire the global callback
+ 			if ( s.global ) {
+-				jQuery.event.trigger( "ajaxSuccess", [xhr, s] );
++				trigger( "ajaxSuccess", [xhr, s] );
+ 			}
+ 		}
+ 
+@@ -481,12 +491,12 @@
+ 
+ 			// The request was completed
+ 			if ( s.global ) {
+-				jQuery.event.trigger( "ajaxComplete", [xhr, s] );
++				trigger( "ajaxComplete", [xhr, s] );
+ 			}
+ 
+ 			// Handle the global AJAX counter
+ 			if ( s.global && ! --jQuery.active ) {
+-				jQuery.event.trigger( "ajaxStop" );
++				trigger( "ajaxStop" );
+ 			}
+ 		}
+ 
+@@ -502,7 +512,7 @@
+ 
+ 		// Fire the global callback
+ 		if ( s.global ) {
+-			jQuery.event.trigger( "ajaxError", [xhr, s, e] );
++			trigger( "ajaxError", [xhr, s, e] );
+ 		}
+ 	},
+ 

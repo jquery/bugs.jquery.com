@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>Test Page</title>
+<style type='text/css'>
+body {
+    font-family: sans-serif;
+}
+#log p {
+    margin:     0;
+    padding:    0;
+}
+</style>
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+<script type='text/javascript'>
+(function() {
+    $(document).ready(pageInit);
+
+    function pageInit() {
+        $('#btnGo').click(go);
+    }
+
+    function go() {
+        $.ajax({
+            url:        'showparams.jsp',
+            type:       'post',
+            data:       {a: 1, b: 'testing one two three', c: ['x', 'y', 'z']},
+            dataType:   'html',
+            success:    function(data) {
+                $('#target').append(data);
+            }
+        });
+    }
+
+    var write = log;
+    function log(msg) {
+        $('#log').append("<p>" + msg + "</p>");
+    }
+})();
+</script>
+</head>
+<body><div>
+<input type='button' id='btnGo' value='Go'>
+<div id='target'></div>
+<div id='log'></div>
+</div></body>
+</html>

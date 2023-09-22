@@ -1,0 +1,14 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 6435)
++++ core.js	(working copy)
+@@ -12,6 +12,9 @@
+ 	// Map over the $ in case of overwrite
+ 	_$ = window.$,
+ 
++    // Use the correct document accordingly with window argument (sandbox)
++    document = window.document,
++
+ 	// A central reference to the root jQuery(document)
+ 	rootjQuery,
+ 

@@ -1,0 +1,37 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 5831)
++++ src/core.js	(working copy)
+@@ -936,12 +936,13 @@
+ 	},
+ 
+ 	clean: function( elems, context ) {
+-		var ret = [];
+ 		context = context || document;
+ 		// !context.createElement fails in IE with an error but returns typeof 'object'
+ 		if (typeof context.createElement == 'undefined')
+ 			context = context.ownerDocument || context[0] && context[0].ownerDocument || document;
+ 
++		var ret = [], div = context.createElement("div");
++
+ 		jQuery.each(elems, function(i, elem){
+ 			if ( typeof elem == 'number' )
+ 				elem += '';
+@@ -959,7 +960,7 @@
+ 				});
+ 
+ 				// Trim whitespace, otherwise indexOf won't work as expected
+-				var tags = jQuery.trim( elem ).toLowerCase(), div = context.createElement("div");
++				var tags = jQuery.trim( elem ).toLowerCase();
+ 
+ 				var wrap =
+ 					// option or optgroup
+@@ -1031,6 +1032,8 @@
+ 
+ 		});
+ 
++		// Remove the elements from the temporary div (#3255) 
++		div.innerHTML = '';
+ 		return ret;
+ 	},
+ 

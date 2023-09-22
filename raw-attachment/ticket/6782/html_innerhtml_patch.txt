@@ -1,0 +1,29 @@
+*** C:/Users/Charlie/Desktop/jquery-jquery-efe51cd/src/manipulation-src.js	Sat Jul 10 22:54:53 2010
+--- C:/Users/Charlie/Desktop/jquery-jquery-efe51cd/src/manipulation.js	Sat Jul 10 22:55:15 2010
+***************
+*** 6,11 ****
+--- 6,12 ----
+  	rtbody = /<tbody/i,
+  	rhtml = /<|&#?\w+;/,
+  	rnocache = /<script|<object|<embed|<option|<style/i,
++ 	rnoInnerhtml = /<script|<style/i,
+  	rchecked = /checked\s*(?:[^=]|=\s*.checked.)/i,  // checked="checked" or checked (html5)
+  	fcloseTag = function( all, front, tag ) {
+  		return rselfClosing.test( tag ) ?
+***************
+*** 229,235 ****
+  				null;
+  
+  		// See if we can take a shortcut and just use innerHTML
+! 		} else if ( typeof value === "string" && !rnocache.test( value ) &&
+  			(jQuery.support.leadingWhitespace || !rleadingWhitespace.test( value )) &&
+  			!wrapMap[ (rtagName.exec( value ) || ["", ""])[1].toLowerCase() ] ) {
+  
+--- 230,236 ----
+  				null;
+  
+  		// See if we can take a shortcut and just use innerHTML
+! 		} else if ( typeof value === "string" && !rnoInnerhtml.test( value ) &&
+  			(jQuery.support.leadingWhitespace || !rleadingWhitespace.test( value )) &&
+  			!wrapMap[ (rtagName.exec( value ) || ["", ""])[1].toLowerCase() ] ) {
+  

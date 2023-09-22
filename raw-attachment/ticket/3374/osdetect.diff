@@ -1,0 +1,19 @@
+Index: trunk/jquery/src/core.js
+===================================================================
+--- trunk/jquery/src/core.js	(revision 5845)
++++ trunk/jquery/src/core.js	(working copy)
+@@ -1230,6 +1230,14 @@
+ 	mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
+ };
+ 
++// Figure out what OS is being used
++jQuery.browser = {
++	mac: /mac/.test(userAgent),
++	win: /win/.test(userAgent),
++	linux: /linux/.test(userAgent),
++	iphone: /iphone/.test(userAgent)
++};
++
+ var styleFloat = jQuery.browser.msie ?
+ 	"styleFloat" :
+ 	"cssFloat";

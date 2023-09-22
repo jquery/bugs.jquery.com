@@ -1,0 +1,89 @@
+<html>
+<head>
+<style type="text/css">
+table tbody {
+  height: 100px;
+  overflow-y: auto;
+}
+td {
+ border: solid 1px black;
+}
+.here {
+  background-color: yellow;
+}
+#msg {
+  display: none;
+}
+</style>
+<script type="text/javascript"
+		  Src="http://code.jquery.com/nightlies/jquery-nightly.js"></script>
+<script  type="text/javascript">
+$(function() {
+  $("#go").click(function(e) {
+    var offset = $("#here").offset();
+    $("#mydiv").css({left:offset.left, top:offset.top, position:"absolute"});
+    $("#msg").show();
+    return false;
+  });
+});
+</script>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" class="" id="myScrollTable" width="400">
+    <tbody>
+        <tr class="r1">
+            <td class="c1">John</td>
+            <td class="c2">Smith</td>
+            <td class="c3">30</td>
+        </tr>
+        <tr class="r2">
+            <td class="c1">John</td>
+            <td class="c2">Smith</td>
+            <td class="c3">31</td>
+        </tr>
+        <tr class="r1">
+            <td class="c1">John</td>
+            <td class="c2">Smith</td>
+            <td class="c3">32</td>
+        </tr>
+        <tr class="r2">
+            <td class="c1">John</td>
+            <td class="c2">Smith</td>
+            <td class="c3">33</td>
+        </tr>
+        <tr class="r1">
+            <td class="c1">John</td>
+            <td class="c2">Smith</td>
+            <td class="c3">34</td>
+        </tr>
+        <tr class="r2">
+            <td class="c1">John</td>
+            <td class="c2">Smith</td>
+            <td class="c3">35</td>
+        </tr>
+        <tr class="r1">
+            <td class="c1">John</td>
+            <td id="here" class="here" class="c2">HERE!</td>
+            <td class="c3">36</td>
+        </tr>
+        <tr class="r2">
+            <td class="c1">John</td>
+            <td id="" class="c2">Smith</td>
+            <td class="c3">37</td>
+        </tr>
+    </tbody>
+</table>
+<br/>
+<br/>
+<br/>
+<br/>
+<p>Scroll to <span class="here">HERE!</span> and click <a href="#"
+																		 id="go">GO</a> 
+to place <span id="mydiv" style="background-color:red;">this div</span>
+																		 over <span class="here">HERE!</span> 
+</p>
+<p id="msg">
+Offset is off by the amount you've scrolled the tbody!!!
+</p>
+</body>
+</html>

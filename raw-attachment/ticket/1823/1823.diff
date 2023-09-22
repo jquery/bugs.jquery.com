@@ -1,0 +1,14 @@
+Index: src/fx.js
+===================================================================
+--- src/fx.js	(revision 3685)
++++ src/fx.js	(working copy)
+@@ -201,7 +201,8 @@
+ 		// Queueing
+ 		opt.old = opt.complete;
+ 		opt.complete = function(){
+-			jQuery(this).dequeue();
++			if ( opt.queue !== false )
++				jQuery(this).dequeue();
+ 			if ( jQuery.isFunction( opt.old ) )
+ 				opt.old.apply( this );
+ 		};

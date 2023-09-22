@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<title>jQuery input[type=text] bug</title>
+<style type="text/css">
+#a, #b { margin: 10px; padding: 10px; border: 1px solid #000; }
+p { font-weight: bold; font-size: large; margin: 0 0 10px 0;}
+small { font-weight: normal; }
+</style>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.3.2.min.js"></script>
+<script type="text/javascript">
+jQuery(function($){
+	$("#a input[type=text]").css("backgroundColor", "green");
+	
+	$("#b input[type=text]:eq(1)").css("backgroundColor", "red");
+});
+</script>
+</head>
+<body>
+
+<div id="a">
+	<p>input[type=text] - backgroundColor: green<br><small>correctly selects elements with type attribute defined</small></p>
+	<input> &lt;input&gt;<br>
+	<input> &lt;input&gt;<br>
+	<br>
+	<input type="text"> &lt;input type="text"&gt;<br>
+	<input type="text"> &lt;input type="text"&gt;<br>
+</div>
+<div id="b">
+	<p>input[type=text]:eq(1) - backgroundColor: red<br><small>incorrectly selects elements without type attribute defined</small></p>
+	<input> &lt;input&gt;<br>
+	<input> &lt;input&gt;<br>
+	<br>
+	<input type="text"> &lt;input type="text"&gt;<br>
+	<input type="text"> &lt;input type="text"&gt;<br>
+</div>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!doctype html>
+<html>
+    <head>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <title>Frequence - Arrange your friends in sequence</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="description" content="Frequence is a Facebook game developed by Brain IQ Games. The objective of the puzzle is to arrange the photos of your Facebook friends in the shortest possible time.">
+        <meta name="keywords" content="Facebook game,Mind game,Brain game,Puzzle,social game,casual game">
+        <style type="text/css">
+            td.targetCell {
+                width:55px;
+                height:55px;
+            }
+            td.targetCell img {
+                border:none;
+            }
+            td.canvasCell {
+                width:52px;
+                height:52px;
+                cursor:pointer;
+            }
+            td.hole {
+                width:50px;
+                height:50px;
+                border:2px dashed maroon;
+            }
+            td.canvasCell img{
+                border:2px solid #FFFFFF;
+            }
+            td.canvasCell img:hover{
+                border:1px solid #0000FF;
+            }
+            #targetdiv {
+                float:left;
+            }
+            .caption {
+                font-weight:bold;
+                text-align:center;
+                font-size:0.9em;
+                height:50px;
+            }
+            #middiv{
+                float:left;
+                text-align:center;
+                height:200px;
+                font-weight:bold;
+                font-size:0.9em;
+                margin:0 10px;
+                padding-top:50px; /*height of the caption div */
+            }
+            #canvasdiv{
+                float:left;
+                text-align:center;
+            }
+            h3 {
+                text-align:center;
+                font-size:1.3em;
+                margin:8px 0;
+            }
+            #instructions{
+                width:500px;
+                font-size:0.7em;
+            }
+            #clock{
+                font-size:1.5em;
+                text-align:center;
+                color:#004000;
+                font-weight:bold;
+            }
+            #gamediv {
+                width:700px;
+            }
+            #addiv {
+                width:730px;
+                height:92px;
+                border:1px solid black;
+                margin:5px 0;
+            }
+            /* Simulating Facebook-style tabs */
+            .fbtab {
+                padding: 8px;
+                background-color: #d8dfea;
+                color: #3b5998;
+                font-weight: bold;
+                margin-right: 4px;
+                text-decoration: none;
+                border:1px solid #999999;
+                border-bottom:none;
+            }
+            .fbtab_selected {
+                padding: 8px;
+                background-color: #fff;
+                color: #000;
+                font-weight: bold;
+                margin-right: 4px;
+                text-decoration: none;
+                border:1px solid #999999;
+                border-bottom:none;
+            }
+            .fbtab:hover {
+                background-color: #3b5998;
+                color: #ffffff;
+                cursor: pointer;
+            }
+            #gridsizes {
+                width:750px;
+                padding:8px;
+                border-bottom:1px solid #999999;
+                margin-bottom:5px;
+            }
+            button {
+                border-style: solid;
+                border-width: 1px;
+                font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+                font-size: 13px;
+                margin: 0 2px;
+                padding: 2px 6px;
+                text-align:center;
+                font-weight:bold;
+            }
+            .fb_button {
+                background-color: #3b5998;
+                border-color: #d8dfea rgb(14, 31, 91) rgb(14, 31, 91) rgb(216, 223, 234);
+                color: #fff;
+            }
+            .fb_button_selected {
+                background:#DDDDDD none repeat scroll 0 0;
+                color:#000;
+                border-color: #999999;
+            }
+            #symbols {
+                width:700px;
+                margin-bottom:15px;
+            }
+            body {
+                font-family: 'Lucida Grande', Verdana, Arial, sans-serif;
+            }
+            h1 a {
+                text-decoration: none;
+                color: #3b5998;
+            }
+            h1 a:hover {
+                text-decoration: underline;
+            }
+            h3 {
+                margin:0 0 15px 0;
+            }
+            #levels {
+                margin-bottom:10px;
+                border-top:1px solid #DDDDDD;
+                border-bottom:1px solid #DDDDDD;
+                padding:3px 0;
+                width:700px;
+            }
+            #levels button {
+                margin:0 0 0 20px;
+            }
+            #gameoverdiv{
+                margin-left:30px;
+                font-size:1.1em;
+                color:green;
+                font-weight:bold;
+                font-family:Verdana;
+            }
+            #waitdiv{
+                text-align:center;
+            }
+            .rank {
+                width:150px;
+                float:left;
+                margin:0 10px 0 0;
+                text-align:center;
+                background-color:#DDDDDD;
+            }
+
+            .selfrank{
+                background-color:#8ED79B;
+            }
+
+            .rank .naam {
+                font-weight:bold;
+                font-size:0.9em;
+                height:40px;
+            }
+
+            .laybl{
+                font-size:0.8em;
+                text-align:left;
+            }
+            .valoo {
+                font-weight:bold;
+                font-size:0.8em;
+            }
+        </style>
+
+    </head>
+    <body>
+        <!--
+      We use the JS SDK to provide a richer user experience. For more info,
+      look here: http://github.com/facebook/connect-js
+    -->
+        <div id="fb-root"></div>
+        <h3>Frequence Game - Arrange your friends in sequence!</h3>
+        <!--
+    <div id="addiv">Ads will go here</div>
+    -->
+        <div id="gamediv">
+            <!--
+        <div id="symbols">
+            <button class="fb_button_selected">Play With Friends' Photos</button>
+            <button class="fb_button">Play With Numbers</button>
+        </div>
+        <div id="gridsizes">
+            <a href="#" id="3x3" class="fbtab_selected">3 x 3 grid</a>
+            <a href="#" id="4x4" class="fbtab">4 x 4 grid</a>
+            <a href="#" id="5x5" class="fbtab">5 x 5 grid</a>
+        </div>
+        -->
+
+            <div id="levels">
+                <h4 id="whichlevel" style="display:inline;">Level 4</h4>
+                <button class="fb_button" id="prevgame" onclick="prevGame();">Replay Previous Level</button>
+                <button class="fb_button_selected" id="nextgame" onclick="nextGame();">Next Level</button>
+                <button class="fb_button">World Rankings</button>
+                <button class="fb_button" onclick="showFriendRankings();">Friend Rankings</button>
+
+            </div>
+            <div id="gameoverdiv" style='display:none;'>
+                <div id='score'></div>
+            </div>
+            <div id="waitdiv" style="display:none;">
+                <img src="photos/wait.gif" alt="Wait"><br>
+                Loading. Please wait...
+            </div>
+            <div id="friendrankingsdiv" style="display:none;">
+
+            </div>
+            <div id="playpen">
+                <div id="canvasdiv">
+                    <div class="caption">Arrange these pictures..<br><img src="photos/downarrow.png"></div>
+                    <table id="canvas"></table>
+                </div>
+                <div id="middiv">
+                    <table border="0">
+
+                        <tr>
+                            <td valign="middle" width="75">..to match<br><img src="photos/rightarrow.png"><br>this sequence
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="targetdiv" title="This is the target. Arrange the grid on the right to match the order on the left.">
+                    <div class="caption">&nbsp;</div>
+                    <table id="target"></table>
+
+                </div>
+                <div style="clear:both;height:25px;"></div>
+                <div id="clock"></div>
+                <div id="instructions">
+                    <h3>How to Play</h3>
+                    <p><b>Objective of the game:</b> In the grid on your right (your play area), arrange the pictures of your friends in the sequence that matches the grid on the left.<br>
+                    </p>
+
+                    <p>
+                        <b>Moving the pictures</b>
+                        <ol>
+                            <li>Only cells adjacent to the empty cell (vertically or horizontally, but not diagonally) can be moved into the empty cell.</li>
+                            <li>Click on a picture adjacent to the empty cell to move that picture into the empty cell.</li>
+                            <li>Move several pictures at once by clicking on a picture farther away but in the same row or column as the empty cell. This will move all pictures by 1 cell in the direction of the empty cell.</li>
+
+                        </ol>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var frimages = ['http://profile.ak.fbcdn.net/v222/1749/59/q624272741_394.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs625.snc3/27425_1296423728_9592_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs309.ash1/23234_658444044_7223_q.jpg','http://profile.ak.fbcdn.net/v22939/1461/44/q522185772_4785.jpg','http://profile.ak.fbcdn.net/v224/699/57/q510483433_6214.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs621.snc3/27347_695596134_2302_q.jpg','http://profile.ak.fbcdn.net/v227/1423/25/q525300656_8100.jpg','http://profile.ak.fbcdn.net/v22942/415/68/q798677655_7717.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs173.ash2/41668_663040473_1030_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs275.snc3/23255_660477990_3546_q.jpg','http://profile.ak.fbcdn.net/v230/1066/65/q10712889_5460.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs323.snc4/41404_9307528_9795_q.jpg','http://profile.ak.fbcdn.net/profile5/1336/88/q535958855_2785.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs625.ash1/27421_1089715664_134_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs308.ash1/23217_557990032_4928_q.jpg','http://profile.ak.fbcdn.net/v226/1548/69/q734272405_7744.jpg','http://profile.ak.fbcdn.net/v225/1853/65/q514723521_9158.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs645.snc3/27434_612302_6597_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs621.snc3/27339_1445875075_1343_q.jpg','http://profile.ak.fbcdn.net/v230/32/73/q686597939_4794.jpg','http://profile.ak.fbcdn.net/v22941/683/27/q588605336_9698.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs646.snc3/27446_735799609_1371_q.jpg','http://profile.ak.fbcdn.net/v22941/240/79/q1155877622_5088.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs649.snc3/27488_724820931_1540_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs321.snc4/41378_713650103_3578_q.jpg','http://profile.ak.fbcdn.net/profile6/211/123/q1661033840_8144.jpg','http://profile.ak.fbcdn.net/v227/1058/53/q591170716_9652.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs306.ash1/23183_100000569619118_9208_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs273.snc3/23215_635553448_3417_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs321.snc4/41368_571233129_2939_q.jpg','http://profile.ak.fbcdn.net/profile5/2003/100/q569540664_9438.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs255.snc3/23163_803306678_8071_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs624.snc3/27405_100000483439508_5543_q.jpg','http://profile.ak.fbcdn.net/profile6/27/101/q1035780910_8201.jpg','http://profile.ak.fbcdn.net/profile5/856/71/q690196606_9829.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs347.snc4/41503_634059781_6256_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-sf2p/hs624.ash1/27415_100000435726378_7036_q.jpg','http://profile.ak.fbcdn.net/v230/169/119/q1188010049_9651.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs302.ash1/23092_1354744967_9633_q.jpg','http://profile.ak.fbcdn.net/v230/1704/28/q662114849_4391.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs255.snc3/23161_692796956_2043_q.jpg','http://profile.ak.fbcdn.net/v22944/38/69/q1280077889_2668.jpg','http://profile.ak.fbcdn.net/v228/556/56/q513809607_8529.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs266.snc3/23078_1089152133_6794_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs321.snc4/41369_603266680_472_q.jpg','http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs344.snc4/41438_621821288_5640_q.jpg','http://profile.ak.fbcdn.net/v228/916/80/q689878367_2162.jpg','http://profile.ak.fbcdn.net/v226/929/26/q754537355_7556.jpg'];        var frnaams = ['Ishita Agrawal','Anu Rai','Ryan Thiessen','Advit Sahdev','Gurleen Chawla','Narisa Spaulding','Amit Goldie','Jasuja Ghanshyam','Jon Tatman','Hitomi Wedell','Jenny Park','Ben Dame','Gina Lopez','Tanya Sachdev','Tyson Masaki Chihaya','Ruchi Jasuja','Pankaj Nainani','David Schwartz','Sean-Toes Gallagher','Manish Vyas','Chris Back','Andy Kurniawan','Ann Truong','Barkha Jasuja','Latosha Hanson','Priyanka Dawani','Prashanth Reddy','Sean Hummel','Bhavna Kaura','Nathaniel Gray','Aneesh Nainani','Aparna Trisal','Pooja Dwivedi','Anoop Dawani','Katie Leggett','Virendra Sahdev','Simmi Sachdev','Frank Pellett','Jeremy Lewis','William Moffett','Bryan Newman','Aaron Hachez','Chris Schmechel','Krishna Nainani','Bill Eberle','Kiranmai Durvasula','Amrita Pati','James Gurney'];        var frurls = ['http://www.facebook.com/profile.php?id=624272741','http://www.facebook.com/a.rai.lost','http://www.facebook.com/rt','http://www.facebook.com/advit.sahdev','http://www.facebook.com/profile.php?id=510483433','http://www.facebook.com/narisas','http://www.facebook.com/amit.goldie','http://www.facebook.com/profile.php?id=798677655','http://www.facebook.com/brickfan','http://www.facebook.com/profile.php?id=660477990','http://www.facebook.com/profile.php?id=10712889','http://www.facebook.com/bendame','http://www.facebook.com/profile.php?id=535958855','http://www.facebook.com/profile.php?id=1089715664','http://www.facebook.com/tyson.chihaya','http://www.facebook.com/ruchi.jasuja','http://www.facebook.com/profile.php?id=514723521','http://www.facebook.com/Schwartz.David','http://www.facebook.com/shinebox','http://www.facebook.com/vyasmanish','http://www.facebook.com/chris.back','http://www.facebook.com/cyberblue','http://www.facebook.com/profile.php?id=1155877622','http://www.facebook.com/profile.php?id=724820931','http://www.facebook.com/latosha.hanson','http://www.facebook.com/priyanka.dawani','http://www.facebook.com/profile.php?id=591170716','http://www.facebook.com/profile.php?id=100000569619118','http://www.facebook.com/profile.php?id=635553448','http://www.facebook.com/profile.php?id=571233129','http://www.facebook.com/profile.php?id=569540664','http://www.facebook.com/aparna.trisal','http://www.facebook.com/profile.php?id=100000483439508','http://www.facebook.com/anoop.dawani','http://www.facebook.com/katlegg3','http://www.facebook.com/profile.php?id=634059781','http://www.facebook.com/profile.php?id=100000435726378','http://www.facebook.com/profile.php?id=1188010049','http://www.facebook.com/profile.php?id=1354744967','http://www.facebook.com/william.moffett','http://www.facebook.com/bryan.j.newman','http://www.facebook.com/mrhollow','http://www.facebook.com/chris.schmechel','http://www.facebook.com/profile.php?id=1089152133','http://www.facebook.com/bill.eberle','http://www.facebook.com/kiran.durvasula','http://www.facebook.com/amrita.pati','http://www.facebook.com/JamesGurney'];        var gridSize;
+            var canimages = [[],[],[],[5,6,4,2,1001,1,0,7,3],[10,0,1001,5,8,7,4,11,9,6,12,2,3,13,14,1],[13,14,2,10,9,8,4,16,12,15,1,17,22,3,0,5,11,21,19,7,23,18,1001,20,6]]; /* shuffled canvas images */
+            var gridStatus = [];
+            var started = false;
+            var timesAllowed = ['','','','150','250','400'];
+            var hasfriends = true;         var playa = 641435652;
+            var playerlevel = 4;
+            var glevel  = playerlevel;
+            var baseurl = 'http://pikadoo.com/facebook/Frequence/';
+            var pecking = ['Rookie','Amateur','Professional','Champion','Hall of Famer','Frequen God'];
+            var ggt,gst,gbt,timeallowed;
+        </script>
+        <script type="text/javascript" src="freq.js"></script>
+
+    </body>
+</html>
+
+

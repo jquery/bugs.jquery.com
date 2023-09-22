@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>jQuery animation bug test case</title>
+</head>
+<body>
+<h1>click on the blue div</h1>
+<p>for this test case to work <b>jquery-1.2.6.js must be in the same directory</b></p>
+
+<script type="text/javascript">
+    var html = [
+    '<html xmlns="http://www.w3.org/1999/xhtml">',
+    '<head>',
+        '<title></title>',
+        '<script src="jquery-1.2.6.js" type="text/javascript"><\/script>',
+    '</head>',
+    '<body>',
+        '<div id="testdiv" style="width: 100px; height: 100px; color: white; background-color: blue;">click on me</div>',
+    '</body>',
+    '</html>'].join("\n");
+
+    var iframe = document.createElement("iframe")
+    iframe.setAttribute("id", "dynamiciframe");
+    iframe.setAttribute("name", "dynamiciframe");
+    document.body.appendChild(iframe);
+
+    document.body.onload = function() {
+        var iframe = window.frames["dynamiciframe"];
+        iframe.document.open();
+        iframe.document.write(html);
+        
+        iframe.document.body.onload = function() {
+            var jQuery = iframe.window.jQuery;
+            jQuery("#testdiv").click(function() {
+                jQuery(this).fadeOut("slow", function() {
+                    alert("done!");
+                });
+            });
+        };
+        
+        iframe.document.close();
+    };
+</script>
+
+</body>
+</html>

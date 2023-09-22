@@ -1,0 +1,116 @@
+<div class="uiImageSelector">
+			<input name="LibraryImageIDX" type="hidden" value="" />
+		</div>
+	
+		<script type="text/javascript">
+			
+		$(document).ready(function(){ 
+			$('input[name="LibraryImageIDX"]').parents(".uiImageSelector").uiImageSelector(
+				{
+					"Index"  : "",
+					"Source" : "",
+					"Name"   : ""
+				},
+				{
+					"Index"  : Array('85','86','87','88','21','89','46','91','92','62','44','23'),
+					"Source" : Array('http://www.varsityclub.biz/images/uploaded/85.jpg','http://www.varsityclub.biz/images/uploaded/86.jpg','http://www.varsityclub.biz/images/uploaded/87.jpg','http://www.varsityclub.biz/images/uploaded/88.jpg','http://www.varsityclub.biz/images/uploaded/21.jpg','http://www.varsityclub.biz/images/uploaded/89.jpg','http://www.varsityclub.biz/images/uploaded/46.jpg','http://www.varsityclub.biz/images/uploaded/91.jpg','http://www.varsityclub.biz/images/uploaded/92.jpg','http://www.varsityclub.biz/images/uploaded/62.jpg','http://www.varsityclub.biz/images/uploaded/44.jpg','http://www.varsityclub.biz/images/uploaded/23.png'),
+					"Name"   : Array('animal','band','gonzo','honey-dew','Jack N Coke','kermit','Old Men','rowlf','swedishchef','Team','Ted','Vodka Tonic')
+				});
+		});
+		
+		</script>
+
+
+
+
+(function($){
+	
+	$.fn.uiImageSelector = function(Current,List) {
+			
+		return this.each(function() {
+
+			// Initial HTML
+			$(this).append('<div class="current"></div><a href="" class="icon" /></a><div class="browser padding hide"><div class="browser border"><div class="browser controls"><a href="" class="page first"></a><a href="" class="page previous"></a><a href="" class="page last"></a><a href="" class="page next"></a></div><div class="browser toprow"></div><div style="clear:both;"></div><div class="browser bottomrow"></div><div style="clear:both;"></div></div></div><div style="clear:both;"></div>');
+			$(this).find('a[href=""]').click(function(event){ event.preventDefault(); });
+			var uiImageSelector = $(this);
+
+			// Current Image
+			var ImageCurrent = new Image();
+			ImageCurrent.onload = function(){ $(uiImageSelector).find('.current').html('<img src="'+Current.Source+'" />'); }
+			ImageCurrent.onerror = function(){ $(uiImageSelector).find('.current').html('<img src="http://www.webmecompany.com/images/ui/ImageSelectorNoImage.png" />'); }
+			ImageCurrent.src = Current.Source;
+			
+			// Column and Row Settings
+			Column = new Object();
+			Row = new Object({
+				Top    : { Index : Array(), Source : Array(), Name : Array() },
+				Bottom : { Index : Array(), Source : Array(), Name : Array() }
+			});
+			
+			Column.Total = Math.ceil((List.Index.length - 8) / 2);
+			if(Column.Total < 0) { Column.Total = 0; }
+			Column.Current = 0;
+			for(i in List.Index) {
+				if(List.Index[i] == Current.Index) {
+					Column.Current = Math.ceil(i / 2) - 1;
+					if(Column.Current > Column.Total) { Column.Current = Column.Total; }
+				}
+				if(i % 2 == 0) {
+					Row.Top.Index.push(List.Index[i]);
+					Row.Top.Source.push(List.Source[i]);
+					Row.Top.Name.push(List.Name[i]);
+				} else {
+					Row.Bottom.Index.push(List.Index[i]);
+					Row.Bottom.Source.push(List.Source[i]);
+					Row.Bottom.Name.push(List.Name[i]);
+				}
+			}
+			$('.uiImageSelector input').data({ Column : Column, Row : Row });
+
+			// Browser Images
+			for(i=Column.Current;i<=Column.Current+3;i++) {
+				if(Row.Top.Index[i] != '') {
+					$('<div class="image"><img src="'+Row.Top.Source[i]+'" /></div>')
+						.data({ Index : Row.Top.Index[i], Source : Row.Top.Source[i], Name : Row.Top.Name[i] })
+						.appendTo($(uiImageSelector).find('.browser.toprow'))
+						.click(BrowserImage);
+					if(Row.Top.Index[i] == Current.Index) { $(uiImageSelector).find('.browser.toprow div:last').addClass('selected'); }
+				}
+				if(Row.Bottom.Index[i] != '') {
+					$('<div class="image"><img src="'+Row.Bottom.Source[i]+'" /></div>')
+						.data({ Index : Row.Bottom.Index[i], Source : Row.Bottom.Source[i], Name : Row.Bottom.Name[i] })
+						.appendTo($(uiImageSelector).find('.browser.bottomrow'))
+						.click(BrowserImage);
+					if(Row.Bottom.Index[i] == Current.Index) { $(uiImageSelector).find('.browser.bottomrow div:last').addClass('selected'); }
+				}
+			}
+			
+			// Events
+			$(document).click(function(){ $(uiImageSelector).find('.browser.padding').addClass('hide'); });
+			$(uiImageSelector).find('.browser.padding').click(function(event){ event.stopPropagation(); });
+			$(uiImageSelector).find('.icon').click(function(event){
+				event.stopPropagation();
+				$(uiImageSelector).find('.browser.padding').removeClass('hide');
+			});
+			
+
+			if(Column.Current == 0) { $(uiImageSelector).find('.page.first,.page.previous').addClass('disabled'); }
+			if(Column.Current == Column.Total) { $(uiImageSelector).find('.page.last,.page.next').addClass('disabled'); }
+			
+			
+			
+		});
+		
+		function BrowserImage(){
+			var uiImageSelector = $(this).parents('.uiImageSelector');
+			$(uiImageSelector).find('.image').removeClass('selected');
+			$(this).addClass('selected');
+			$(uiImageSelector).find('input').val($(this).data().Index);
+			$(uiImageSelector).find('.current').html('<img src="'+$(this).data().Source+'" />');
+			$(uiImageSelector).find('.browser.padding').addClass('hide');
+		}
+		
+		
+	}
+
+})(jQuery);

@@ -1,0 +1,21 @@
+Index: jquery/src/core.js
+===================================================================
+--- jquery/src/core.js	(revision 6270)
++++ jquery/src/core.js	(working copy)
+@@ -250,10 +250,12 @@
+ 		return this;
+ 	},
+ 
+-	wrapInner: function( html ) {
+-		return this.each(function(){
+-			jQuery( this ).contents().wrapAll( html );
+-		});
++	wrapInner: function( html ) { 
++		return this.each(function(){ 
++			this.firstChild
++				? jQuery( this ).contents().wrapAll( html )
++				: jQuery( this ).append(html);         
++		}); 
+ 	},
+ 
+ 	wrap: function( html ) {

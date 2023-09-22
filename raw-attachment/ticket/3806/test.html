@@ -1,0 +1,24 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+	$('.lala').click(function(){
+		console.log($('#test_broken').attr('action'));
+		$('#test_broken').attr('action', 'bar');
+		console.log($('#test_broken').attr('action'));
+		
+		console.log($('#test_working').attr('action'));
+		$('#test_working').attr('action', 'bar');
+		console.log($('#test_working').attr('action'));
+	});
+})
+</script>
+
+<form action="foo" method="post" id="test_broken">
+	<input id="action" type="hidden">
+</form>
+
+<form action="foo" method="post" id="test_working">
+</form>
+
+<input type="button" class="lala" value=" Test 1 ">

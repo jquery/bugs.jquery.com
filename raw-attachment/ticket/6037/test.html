@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Ajax IE7 error</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <style type="text/css" media="screen">
+            
+        </style>
+		<script type="text/javascript">
+			$(function(){
+				$("#ajaxclick").click(function(){
+					$.ajax({
+						type:"POST",
+						url:"/test.php",
+						timeout:500,
+						data:"",
+						success:function(msg){
+							alert("Data Saved");
+						},
+						error:function(){
+							alert("error");
+						}
+					});
+					return false;
+				});
+			});
+		</script>
+    </head>
+    <body>
+		<a id="ajaxclick" href="#ajax">start ajax</a>
+        <div id="holder"></div>
+    </body>
+</html>

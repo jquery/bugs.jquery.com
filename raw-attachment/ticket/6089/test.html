@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script>
+    $(function () {
+        var text = '';
+        var selector1 = '#divID1 ~ #divID2 button';
+        var selector2 = "#divID1 ~ #divID2 button:contains('Second')";
+        
+        text += selector1 + ': ' + $(selector1).length + '<br/>';
+        text += selector2 + ': ' + $(selector2).length;
+        
+        $('#divOutput').html(text);
+    });
+  </script>
+</head>
+<body>
+	
+<div>
+    <div id="divID1">Some text</div>
+    <div id="divID2">
+        <button type="button">First</button>
+        <button type="button">Second</button>
+    </div>
+    <br/>
+    <div>Output:</div>
+    <div id="divOutput"></div>
+</div>
+
+</body>
+</html>

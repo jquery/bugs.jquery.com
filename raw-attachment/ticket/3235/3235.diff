@@ -1,0 +1,25 @@
+Index: jquery/src/ajax.js
+===================================================================
+--- jquery/src/ajax.js	(revision 5830)
++++ jquery/src/ajax.js	(working copy)
+@@ -283,11 +283,16 @@
+ 
+ 		// Open the socket
+ 		// Passing null username, generates a login popup on Opera (#2865)
+-		if( s.username )
+-			xhr.open(type, s.url, s.async, s.username, s.password);
+-		else
+-			xhr.open(type, s.url, s.async);
+ 
++		try {
++			if( s.username )
++				xhr.open(type, s.url, s.async, s.username, s.password);
++			else
++				xhr.open(type, s.url, s.async);
++		} catch (e) {
++			return jQuery.handleError(s, xhr, "error", e);
++		}
++
+ 		// Need an extra try/catch for cross domain requests in Firefox 3
+ 		try {
+ 			// Set the correct header, if data is being sent

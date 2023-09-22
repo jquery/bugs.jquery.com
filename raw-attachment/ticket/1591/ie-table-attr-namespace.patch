@@ -1,0 +1,44 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 5711)
++++ src/core.js	(working copy)
+@@ -1072,6 +1072,9 @@
+ 				// browsers index elements by id/name on forms, give priority to attributes.
+ 				if( jQuery.nodeName( elem, "form" ) && elem.getAttributeNode(name) )
+ 					return elem.getAttributeNode( name ).nodeValue;
++				
++				if ( msie && jQuery.nodeName( elem, "table" ) && name.indexOf(':') > -1 && elem.attributes[name] === undefined )
++					return undefined;
+ 
+ 				return elem[ name ];
+ 			}
+@@ -1368,4 +1371,4 @@
+ // Helper function used by the dimensions and offset modules
+ function num(elem, prop) {
+ 	return elem[0] && parseInt( jQuery.curCSS(elem[0], prop, true), 10 ) || 0;
+-}
+\ No newline at end of file
++}
+Index: test/unit/core.js
+===================================================================
+--- test/unit/core.js	(revision 5711)
++++ test/unit/core.js	(working copy)
+@@ -317,7 +317,7 @@
+ });
+ 
+ test("attr(String)", function() {
+-	expect(26);
++	expect(28);
+ 	equals( jQuery('#text1').attr('value'), "Test", 'Check for value attribute' );
+ 	equals( jQuery('#text1').attr('value', "Test2").attr('defaultValue'), "Test", 'Check for defaultValue attribute' );
+ 	equals( jQuery('#text1').attr('type'), "text", 'Check for type attribute' );
+@@ -341,6 +341,9 @@
+ 	jQuery('<a id="tAnchor5"></a>').attr('href', '#5').appendTo('#main'); // using innerHTML in IE causes href attribute to be serialized to the full path
+ 	equals( jQuery('#tAnchor5').attr('href'), "#5", 'Check for non-absolute href (an anchor)' );
+ 
++	// Related to [1591] - IE 6 & 7 throw Invalid Parameter error when a namespaced attribute on a table tag is non-existent
++	ok( jQuery('#foo').attr('non:existent') === undefined, 'Make sure namespaced:attributes for div return undefined if non-existent' );
++	ok( jQuery('#table').attr('non:existent') === undefined, 'Make sure namespaced:attributes for table tag return undefined if non-existent (IE6+)' );
+ 
+ 	// Related to [5574] and [5683]
+ 	var body = document.body, $body = jQuery(body);

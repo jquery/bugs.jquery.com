@@ -1,0 +1,15 @@
+Index: jquery/src/core.js
+===================================================================
+--- jquery/src/core.js	(revision 5828)
++++ jquery/src/core.js	(working copy)
+@@ -376,8 +376,8 @@
+ 					for ( var i = one ? index : 0, max = one ? index + 1 : options.length; i < max; i++ ) {
+ 						var option = options[ i ];
+ 
+-						if ( option.selected ) {
+-							// Get the specifc value for the option
++						if ( option.selected && !option.disabled && !option.parentNode.disabled ) {
++							// Get the specific value for the option
+ 							value = jQuery(option).val();
+ 
+ 							// We don't need an array for one selects

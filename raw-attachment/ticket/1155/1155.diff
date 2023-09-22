@@ -1,0 +1,10 @@
+--- jquery-1.1.3.1.js	Thu Aug  2 16:40:28 2007
++++ jquery.js	Thu Aug  2 16:43:14 2007
+@@ -613,6 +613,7 @@
+ 		// We have to loop this way because IE & Opera overwrite the length
+ 		// expando of getElementsByTagName
+ 		for ( var i = 0; second[i]; i++ )
++		if (second[i].nodeType != 8)
+ 			first.push(second[i]);
+ 		return first;
+ 	},

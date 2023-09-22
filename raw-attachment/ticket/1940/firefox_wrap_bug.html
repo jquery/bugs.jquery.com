@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+</HEAD>
+
+<script type="text/javascript" src="jquery-1.2.1.js" > </script>
+
+<script type="text/javascript"  >
+
+$(document).ready(function(){
+
+	$("#testMe1").addClass("innerDiv").wrap( $(document.createElement("div") ).addClass("outerDiv") );
+
+	$("#testMe2").addClass("innerDiv").wrap("<div class='outerDiv'> </div>");
+
+	$("#testMe3").addClass("innerDiv")//.wrap("div");
+});
+
+</script>
+
+<style>
+.outerDiv {
+	width: 300px;
+	border: 2px solid red;
+	padding: 2px;
+	text-align:center;
+}
+
+.innerDiv {
+	width: 250px;
+	border: 1px solid blue;
+	padding: 2px;
+	text-align:center;
+}
+
+</style>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#FF0000" VLINK="#800000" ALINK="#FF00FF" BACKGROUND="?">
+
+<br/><br/><br/>
+
+<div id="testMe1"> Test element 1 </div>
+
+<br/>
+
+<div id="testMe2"> Test element 2</div>
+<br/>
+
+<div id="testMe3"> Test element 3</div>
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Ajax IE7 error</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css" media="screen">
+      
+    </style>
+    <script type="text/javascript">
+      $(document).ready(function() {
+          var request1 = $.ajax({
+            url: "test_abort1.php",
+            dataType: "text",
+            cache: false,
+            complete: function(res){
+              alert("Request 1: Status: " + res.status + ", Data: " + res.responseText);
+            }
+          });
+
+          request1.abort();
+
+          var request2 = $.ajax({
+            url: "test_abort2.php",
+            dataType: "text",
+            cache: false,
+            complete: function(res){
+              alert("Request 2: Status: " + res.status + ", Data: " + res.responseText);
+            }
+          });
+      });
+    </script>
+  </head>
+  <body>
+    <p>Test IE7 Abort</p>
+    <p>Expected behavior:<br>
+    On page load alert: "Request 1: Status: 0, Data: "<br>
+    5 seconds later alert: "Request 2: Status: 200, Data: Response from test_abort2.php"</p>
+  </body>
+</html>

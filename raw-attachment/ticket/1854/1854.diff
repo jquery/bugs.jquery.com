@@ -1,0 +1,42 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 3751)
++++ src/core.js	(working copy)
+@@ -319,15 +319,15 @@
+ 	},
+ 
+ 	not: function( selector ) {
+-		return this.pushStack(
+-			selector.constructor == String &&
+-			jQuery.multiFilter( selector, this, true ) ||
+-
+-			jQuery.grep(this, function(elem) {
+-				return selector.constructor == Array || selector.jquery ?
+-					jQuery.inArray( elem, selector ) < 0 :
+-					elem != selector;
+-			}) );
++		if (selector.constructor == String) 
++			return this.not(jQuery(selector));
++		else
++			return this.pushStack(
++				jQuery.grep(this, function(elem) {
++					return selector.constructor == Array || selector.jquery ?
++						jQuery.inArray( elem, selector ) < 0 :
++						elem != selector;
++				}) );
+ 	},
+ 
+ 	add: function( selector ) {
+Index: src/selector.js
+===================================================================
+--- src/selector.js	(revision 3751)
++++ src/selector.js	(working copy)
+@@ -320,7 +320,7 @@
+ 			// :not() is a special case that can be optimized by
+ 			// keeping it out of the expression list
+ 			if ( m[1] == ":" && m[2] == "not" )
+-				r = jQuery.filter(m[3], r, true).r;
++				r = jQuery(r).not(m[3]).get();
+ 
+ 			// We can get a big speed boost by filtering by class here
+ 			else if ( m[1] == "." )

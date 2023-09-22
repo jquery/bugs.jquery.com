@@ -1,0 +1,14 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 5791)
++++ core.js	(working copy)
+@@ -1228,6 +1228,9 @@
+ 	mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
+ };
+ 
++if( jQuery.browser.msie && this.XMLHttpRequest )
++	jQuery.browser.version = '7.0';
++
+ var styleFloat = jQuery.browser.msie ?
+ 	"styleFloat" :
+ 	"cssFloat";

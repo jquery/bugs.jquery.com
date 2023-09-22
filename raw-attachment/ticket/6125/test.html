@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.js"></script>
+<script type="text/ecmascript">
+Object.prototype.size = function () {
+	var len = 0;
+	for (var k in this) {
+		if (this.hasOwnProperty && this.hasOwnProperty(k)) {
+			len++;
+		}
+	};
+	return len;
+};
+
+function fail() {
+	$('p').fadeOut();
+};
+
+$(function() {
+	fail();
+});
+
+</script>
+</head>
+
+<body>
+<p>Hi, I'm an element!</p>
+</body>
+</html>

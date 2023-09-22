@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html> 
+<html> 
+<head> 
+<title></title> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js" type="text/javascript"></script>  
+	<style type="text/css">
+		#box {				
+			padding: 10px;
+		}
+	</style>
+	<script type="text/javascript">
+		function show () {
+			$("#box").slideDown("slow",function(){
+				$("#target").focus();
+			});
+		}
+	</script>
+    </head>
+    <body>
+        <input type="button" value="Click Here" onClick="show()" />
+            <div id="box" style="display:none">
+                <input type="text" id="target" />
+            </div>
+    </body>
+</html>
+

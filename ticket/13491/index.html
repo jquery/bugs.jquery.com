@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">#13491 (Cannot suppress X-Requested-With on same origin requests) - jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      :root{--ticket-info-background-color:#ffd;--ticket-info-border-color:#dd9;--ticket-table-border-color:#eed;--ticket-date-text-color:#996;--ticket-description-title-color:#663;--ticket-changes-text-color:#663;--ticket-changes-box-shadow:#f2f2f2}.ticket-info{position:relative;background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);padding:.5em .75em;margin-bottom:.5em}.ticket-number{font-size:1.15rem;font-weight:700;margin-right:.5em}.ticket-info span{font-size:.8125em;font-weight:700}.ticket-resolution,.ticket-status,.ticket-type{text-transform:uppercase}.missing{color:var(--text-color-link-disabled)}.ticket-title{border-bottom:1px solid #bbb;margin-top:1em;padding-bottom:.25em;font-weight:700;font-size:1.1875rem}.ticket-dates{color:var(--ticket-date-text-color);font-size:.8125rem}.ticket-dates p{margin:0 0 .5em}.ticket-properties{width:100%;text-align:left;font-size:.65rem;border-top:1px solid var(--ticket-table-border-color);margin:0}.ticket-properties th{font-weight:400;width:20%}.ticket-properties td,.ticket-properties th{padding:.25em .5em;border-bottom:1px dashed var(--ticket-table-border-color)}.ticket-info-bottom{padding:.5em}.ticket-description{font-size:.8125rem;margin-top:.5em}.ticket-description h2,.ticket-description h3,.ticket-description h4,.ticket-description h5,.ticket-description h6{text-transform:uppercase;font-weight:400}.ticket-description h1{font-size:1.1rem}.ticket-description h2{font-size:1rem}.ticket-description h3{font-size:.9rem}.ticket-description h4{font-size:.8rem}.ticket-description h5{font-size:.75rem}.ticket-description h6{font-size:.7rem}.ticket-description-title{color:var(--ticket-description-title-color);font-size:.75rem}details{padding:.5em 0;font-size:.8125rem}summary{color:var(--text-color-link);font-weight:700;font-size:.875rem;text-decoration:underline;cursor:pointer;text-shadow:.04em .04em var(--text-shadow-color)}.ticket-attachments{font-size:.75em}.ticket-comment-body{width:100%;padding-top:.5em}.ticket-change{margin:1em 0;clear:both}.ticket-change-header{font-size:.875rem;font-weight:700;box-shadow:1.4px 2.8px 5.6px 0 var(--ticket-changes-box-shadow)}.ticket-change-link{font-size:.85em}.ticket-change-content{width:100%}.ticket-changes{background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);color:var(--ticket-changes-text-color);font-size:.7rem;float:right;clear:right;margin:2em 0 1em 1.5em}.ticket-changes th{text-align:right;font-weight:400;text-transform:capitalize}.ticket-changes td,.ticket-changes th{padding:.25em;vertical-align:baseline}.ticket-changes .change-field-new{font-weight:700}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+<div class="flex-column" data-pagefind-body="">
+  
+
+  <nav class="content-nav">
+    <ul class="flex-row">
+      
+        <li>
+          <a href="/bugs.jquery.com/ticket/13490/">← Previous Ticket</a>
+        
+      
+      
+        </li><li>
+          <a href="/bugs.jquery.com/ticket/13492/">Next Ticket →</a>
+        </li>
+      
+    </ul>
+  </nav>
+
+
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="." class="ticket-number">#13491</a>
+      <span class="ticket-status">closed</span>
+      <span class="ticket-type">bug</span>
+      <span class="ticket-resolution">(notabug)</span>
+    </h3>
+
+    <div class="ticket-dates">
+      <p>Opened February 21, 2013 10:36AM UTC</p>
+      
+        <p>Closed February 21, 2013 11:20AM UTC</p>
+      
+      
+        <p>Last modified February 28, 2013 04:51AM UTC</p>
+      
+    </div>
+  </div>
+
+  <h1 class="ticket-title">Cannot suppress X-Requested-With on same origin requests</h1>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        nickshanks@nickshanks.com
+      </td>
+      <th>Owned by:</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        undecided
+      </td>
+      
+        <th class="missing">Milestone:</th>
+      
+      <td>
+        <a href="/bugs.jquery.com/milestone/None">None</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>unfiled</td>
+      
+        <th>Version:</th>
+      
+      <td>1.8.3</td>
+    </tr>
+    <tr>
+      
+        <th class="missing">Keywords:</th>
+      
+      <td></td>
+      
+        <th class="missing">Cc:</th>
+      
+      <td></td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
+    <div class="ticket-description"><p>I am trying to globally remove the X-Requested-With header from all AJAX requests to my own site (since I don't care whether it's AJAX or not, and I see no need to send the additional request header bytes).</p><p>I am not the first to want this. To wit:</p><p>This Fiddle does not work - <a href="http://jsfiddle.net/AUGQJ/1/" class="ext-link"><span class="icon"></span>http://jsfiddle.net/AUGQJ/1/</a></p><p>It was referenced from <a href="http://stackoverflow.com/questions/6432320/how-to-make-an-ajax-request-look-like-a-regular-normal-request" class="ext-link"><span class="icon"></span>http://stackoverflow.com/questions/6432320/how-to-make-an-ajax-request-look-like-a-regular-normal-request</a></p><p>It instead sends a header with an empty value.</p><p>The code at fault is:</p><pre class="wiki">// X-Requested-With header
+// For cross-domain requests, seeing as conditions for a preflight are
+// akin to a jigsaw puzzle, we simply never set it to be sure.
+// (it can always be set on a per-request basis or even using ajaxSetup)
+// For same-domain requests, won't change header if already provided.
+if(!s.crossDomain && !headers["X-Requested-With"])
+  headers["X-Requested-With"] = "XMLHttpRequest";
+</pre><p>which is immediately followed by</p><pre class="wiki">for(i in headers)
+  xhr.setRequestHeader(i, headers[i]);
+xhr.send();
+</pre><p>This means there is NO WAY to suppress the header from being sent on same-origin requests.</p><p>I would like to request one or two of these three changes which would allow this:</p><p>1. some flag that can be set to true in .ajaxSetup(), default to send (i.e. no change to current behaviour by default):</p><pre class="wiki">if(!s.crossDomain && !headers["X-Requested-With"] && !s.suppressRequestedWithHeader)
+  headers["X-Requested-With"] = "XMLHttpRequest";
+</pre><p>2. some flag that can be set to true in .ajaxSetup(), default to not send (i.e. reduces unnecessary internet traffic):</p><pre class="wiki">if(!s.crossDomain && !headers["X-Requested-With"] && s.sendRequestedWithHeader)
+  headers["X-Requested-With"] = "XMLHttpRequest";
+</pre><p>3. [not exclusive with 1 or 2] Validate that headers set have non-empty values:</p><pre class="wiki">for(i in headers)
+  if(headers[i] != '')
+    xhr.setRequestHeader(i, headers[i]);
+xhr.send();
+</pre><p>This will allow <code>jqXHR.setRequestHeader('X-Requested-With','')</code> to suppress the header (rather than use a boolean).</p><p>I would like <a href="/bugs.jquery.com/ticket/2">#2</a> and <a href="/bugs.jquery.com/ticket/3">#3</a> but I'd understand if you went with <a href="/bugs.jquery.com/ticket/1">#1</a> and <a href="/bugs.jquery.com/ticket/3">#3</a>. Only doing <a href="/bugs.jquery.com/ticket/1">#1</a> would be the most conservative and least helpful (barring of course, not fixing this bug!).</p></div>
+  </div>
+</div>
+
+<details>
+  <summary class="ticket-details-summary">Attachments (0)</summary>
+
+  <ul class="ticket-attachments">
+    
+  </ul>
+</details>
+
+<details open="">
+  <summary class="ticket-details-summary">Change History (7)</summary>
+  
+    <div class="ticket-change flex-column" id="comment:1">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 21, 2013 10:43AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:1">comment:1</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Additionally, your bug submission system failed to accurately reproduce what I typed. It should have saved the field value verbatim to the database, then on production of HTML output, escaped ampersands, less-than signs, and wrapped it in a PRE element. Instead it tried to do all kinds of fancy reformatting, resulting in a colossal mess. Congratulations.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:2">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 21, 2013 11:20AM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:2">comment:2</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">I am trying to globally remove the X-Requested-With header from all AJAX requests to my own site (since I don&#39;t care whether it&#39;s AJAX or not, and I see no need to send the additional request header bytes).&#92;
+&#92;
+I am not the first to want this. To wit:&#92;
+This Fiddle does not work - http://jsfiddle.net/AUGQJ/1/&#92;
+It was referenced from http://stackoverflow.com/questions/6432320/how-to-make-an-ajax-request-look-like-a-regular-normal-request&#92;
+&#92;
+It instead sends a header with an empty value.&#92;
+&#92;
+&#92;
+The code at fault is:&#92;
+&#92;
+// X-Requested-With header&#92;
+// For cross-domain requests, seeing as conditions for a preflight are&#92;
+// akin to a jigsaw puzzle, we simply never set it to be sure.&#92;
+// (it can always be set on a per-request basis or even using ajaxSetup)&#92;
+// For same-domain requests, won&#39;t change header if already provided.&#92;
+if(!s.crossDomain &amp;&amp; !headers[&quot;X-Requested-With&quot;])&#92;
+  headers[&quot;X-Requested-With&quot;] = &quot;XMLHttpRequest&quot;;&#92;
+&#92;
+which is immediately followed by&#92;
+&#92;
+for(i in headers)&#92;
+  xhr.setRequestHeader(i, headers[i]);&#92;
+xhr.send();&#92;
+&#92;
+This means there is NO WAY to suppress the header from being sent on same-origin requests.&#92;
+&#92;
+&#92;
+I would like to request one or two of these three changes which would allow this:&#92;
+&#92;
+1) some flag that can be set to true in .ajaxSetup(), default to send (i.e. no change to current behaviour by default):&#92;
+&#92;
+if(!s.crossDomain &amp;&amp; !headers[&quot;X-Requested-With&quot;] &amp;&amp; !s.suppressRequestedWithHeader)&#92;
+  headers[&quot;X-Requested-With&quot;] = &quot;XMLHttpRequest&quot;;&#92;
+&#92;
+2) some flag that can be set to true in .ajaxSetup(), default to not send (i.e. reduces unnecessary internet traffic):&#92;
+&#92;
+if(!s.crossDomain &amp;&amp; !headers[&quot;X-Requested-With&quot;] &amp;&amp; s.sendRequestedWithHeader)&#92;
+  headers[&quot;X-Requested-With&quot;] = &quot;XMLHttpRequest&quot;;&#92;
+&#92;
+3) [not exclusive with 1 or 2] Validate that headers set have non-empty values:&#92;
+&#92;
+for(i in headers)&#92;
+  if(headers[i] != &#39;&#39;)&#92;
+    xhr.setRequestHeader(i, headers[i]);&#92;
+xhr.send();&#92;
+&#92;
+This will allow jqXHR.setRequestHeader(&#39;X-Requested-With&#39;,&#39;&#39;) to suppress the header (rather than use a boolean).&#92;
+&#92;
+I would like #2 and #3 but I&#39;d understand if you went with #1 and #3. Only doing #1 would be the most conservative and least helpful (barring of course, not fixing this bug!).</span> → <span class="change-field-new">I am trying to globally remove the X-Requested-With header from all AJAX requests to my own site (since I don&#39;t care whether it&#39;s AJAX or not, and I see no need to send the additional request header bytes).&#92;
+&#92;
+I am not the first to want this. To wit:&#92;
+This Fiddle does not work - http://jsfiddle.net/AUGQJ/1/&#92;
+It was referenced from http://stackoverflow.com/questions/6432320/how-to-make-an-ajax-request-look-like-a-regular-normal-request&#92;
+&#92;
+It instead sends a header with an empty value.&#92;
+&#92;
+The code at fault is:&#92;
+&#92;
+{{{#!js&#92;
+// X-Requested-With header&#92;
+// For cross-domain requests, seeing as conditions for a preflight are&#92;
+// akin to a jigsaw puzzle, we simply never set it to be sure.&#92;
+// (it can always be set on a per-request basis or even using ajaxSetup)&#92;
+// For same-domain requests, won&#39;t change header if already provided.&#92;
+if(!s.crossDomain &amp;&amp; !headers[&quot;X-Requested-With&quot;])&#92;
+  headers[&quot;X-Requested-With&quot;] = &quot;XMLHttpRequest&quot;;&#92;
+}}}&#92;
+&#92;
+which is immediately followed by&#92;
+&#92;
+{{{#!js&#92;
+for(i in headers)&#92;
+  xhr.setRequestHeader(i, headers[i]);&#92;
+xhr.send();&#92;
+}}}&#92;
+&#92;
+This means there is NO WAY to suppress the header from being sent on same-origin requests.&#92;
+&#92;
+&#92;
+I would like to request one or two of these three changes which would allow this:&#92;
+&#92;
+1. some flag that can be set to true in .ajaxSetup(), default to send (i.e. no change to current behaviour by default):&#92;
+&#92;
+{{{#!js&#92;
+if(!s.crossDomain &amp;&amp; !headers[&quot;X-Requested-With&quot;] &amp;&amp; !s.suppressRequestedWithHeader)&#92;
+  headers[&quot;X-Requested-With&quot;] = &quot;XMLHttpRequest&quot;;&#92;
+}}}&#92;
+&#92;
+2. some flag that can be set to true in .ajaxSetup(), default to not send (i.e. reduces unnecessary internet traffic):&#92;
+&#92;
+{{{#!js&#92;
+if(!s.crossDomain &amp;&amp; !headers[&quot;X-Requested-With&quot;] &amp;&amp; s.sendRequestedWithHeader)&#92;
+  headers[&quot;X-Requested-With&quot;] = &quot;XMLHttpRequest&quot;;&#92;
+}}}&#92;
+&#92;
+3. [not exclusive with 1 or 2] Validate that headers set have non-empty values:&#92;
+&#92;
+{{{#!js&#92;
+for(i in headers)&#92;
+  if(headers[i] != &#39;&#39;)&#92;
+    xhr.setRequestHeader(i, headers[i]);&#92;
+xhr.send();&#92;
+}}}&#92;
+&#92;
+This will allow `jqXHR.setRequestHeader(&#39;X-Requested-With&#39;,&#39;&#39;)` to suppress the header (rather than use a boolean).&#92;
+&#92;
+I would like #2 and #3 but I&#39;d understand if you went with #1 and #3. Only doing #1 would be the most conservative and least helpful (barring of course, not fixing this bug!).</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ notabug</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:1 anonymous]:</p><blockquote> Additionally, your bug submission system failed to accurately reproduce what I typed. It should have saved the field value verbatim to the database, then on production of HTML output, escaped ampersands, less-than signs, and wrapped it in a PRE element. Instead it tried to do all kinds of fancy reformatting, resulting in a colossal mess. Congratulations.</blockquote><p>I guess you missed the <a href="http://bugs.jquery.com/wiki/WikiFormatting" class="ext-link"><span class="icon"></span>WikiFormatting</a> link. Congratulations.</p><p>I fixed your post for you.</p><p>The stackoverflow question you reference has nothing to do with <code>X-Requested-With</code>. It's just someone foolishly trying to bypass the same origin barrier by overriding the <code>Origin</code> header (which is impossible and pointless as is clearly stated in the selected answer).</p><p>jQuery always sent the <code>X-Requested-With</code> header for same-origin request (oldest version I could check this in is <a href="http://code.google.com/p/jqueryjs/downloads/detail?name=jquery-1.1.2.js&can=2&q=" class="ext-link"><span class="icon"></span>1.1.2</a>). It is completely harmless, as it will be ignored server-side unless some code specifically checks for it, and only costs 31 bytes. It won't go for backward compatibility purpose (because server-side code may rely on it).</p>
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:3">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 25, 2013 06:15PM UTC by <span class="author">nickshanks</span></span>
+        <a class="ticket-change-link" href="#comment:3">comment:3</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:2 jaubourg]:</p><blockquote> I guess you missed the <a href="http://bugs.jquery.com/wiki/WikiFormatting" class="ext-link"><span class="icon"></span>WikiFormatting</a> link. Congratulations.  I fixed your post for you.</blockquote><p>Thanks. It's appreciated. Yeah, I did miss that link—it's so incy-weency and <a href="http://www.nngroup.com/articles/horizontal-attention-leans-left/" class="ext-link"><span class="icon"></span>off on the right</a> where <a href="http://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/" class="ext-link"><span class="icon"></span>my eyes never wander</a>. That, and the lack of a real-time javascript-powered preview, which would have made things obvious before I hit submit.</p><blockquote> The stackoverflow question you reference has nothing to do with <code>X-Requested-With</code>. It's just someone foolishly trying to bypass the same origin barrier by overriding the <code>Origin</code> header (which is impossible and pointless as is clearly stated in the selected answer).</blockquote><p>I know. I was just referencing it as that's how I came around to trying this out.</p><blockquote> jQuery always sent the <code>X-Requested-With</code> header for same-origin request (oldest version I could check this in is <a href="http://code.google.com/p/jqueryjs/downloads/detail?name=jquery-1.1.2.js&can=2&q=" class="ext-link"><span class="icon"></span>1.1.2</a>). It is completely harmless, as it will be ignored server-side unless some code specifically checks for it, and only costs 31 bytes. It won't go for backward compatibility purpose (because server-side code may rely on it).</blockquote><p>I am not asking you to affect backwards compatibility (that was option 2, which you may still to consider for jQuery 2.x) but was only requesting the addition of an **opt-in** boolean so that we (we, who don't look for the header) can eliminate those 31 bytes of useless data between our server and our client. Smaller headers means fewer packets on average, which means fewer chances for users to get left hanging when packets go AWOL. It's not really about saving 31 bytes on megabit-per-second connections, but about serving up responses with fewer failures.</p><p>The main reason I filed this as a jQuery bug is so that I don't have to use a custom jQuery script, and can instead use a common CDN-hosted 'standard' version with all the multi-site cache priming goodness that comes with.</p><p>This request has merit and should be dismissed out-of-hand just by closing the bug and hoping myself and others writing same-origin web apps will just go away. I would like to hear the opinions of a few of jQuery's other developers before conceding and hosting my own altered copy.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:4">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 26, 2013 12:34AM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:4">comment:4</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:3 nickshanks]:</p><blockquote> Replying to [comment:2 jaubourg]:  &gt; I guess you missed the <a href="http://bugs.jquery.com/wiki/WikiFormatting" class="ext-link"><span class="icon"></span>WikiFormatting</a> link. Congratulations. &gt;  &gt; I fixed your post for you.  Thanks. It's appreciated. Yeah, I did miss that link—it's so incy-weency and <a href="http://www.nngroup.com/articles/horizontal-attention-leans-left/" class="ext-link"><span class="icon"></span>off on the right</a> where <a href="http://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/" class="ext-link"><span class="icon"></span>my eyes never wander</a>. That, and the lack of a real-time javascript-powered preview, which would have made things obvious before I hit submit.</blockquote><p>If you want to donate of your time and help on the bug tracker, the help will be more that appreciated. I too find this site hard to navigate and I do it daily. However, I do realize it's been done by volunteers that donated of their time so that people like me can fix bug for people like you. If you can do a better job, please, do it.</p><p>There's a preview button though and it's pretty easy to find in the interface.</p><blockquote> &gt; The stackoverflow question you reference has nothing to do with <code>X-Requested-With</code>. It's just someone foolishly trying to bypass the same origin barrier by overriding the <code>Origin</code> header (which is impossible and pointless as is clearly stated in the selected answer).  I know. I was just referencing it as that's how I came around to trying this out.</blockquote><p>So you didn't have any actual need first hand? We're just nitpicking here? No "it's breaking my app" bugs nor "look how enhanced the ajax module is now" feature requests around?</p><blockquote> &gt; jQuery always sent the <code>X-Requested-With</code> header for same-origin request (oldest version I could check this in is <a href="http://code.google.com/p/jqueryjs/downloads/detail?name=jquery-1.1.2.js&can=2&q=" class="ext-link"><span class="icon"></span>1.1.2</a>). It is completely harmless, as it will be ignored server-side unless some code specifically checks for it, and only costs 31 bytes. It won't go for backward compatibility purpose (because server-side code may rely on it).  I am not asking you to affect backwards compatibility (that was option 2, which you may still to consider for jQuery 2.x) but was only requesting the addition of an **opt-in** boolean so that we (we, who don't look for the header) can eliminate those 31 bytes of useless data between our server and our client.</blockquote><p>Actually, you are asking for backward compatibility breakage. Any backend dealing with jQuery knows this header will be defined, if we provide an opt-in boolean option, a **third-party** script will be able to change it globally using <code>ajaxSetup</code> thus breaking the assumption of the backend. It would spread unless specifically specified in the options of each request.</p><p>That's one of the reasons why we don't add options lightly in <code>ajax</code>.</p><blockquote> Smaller headers means fewer packets on average, which means fewer chances for users to get left hanging when packets go AWOL. It's not really about saving 31 bytes on megabit-per-second connections, but about serving up responses with fewer failures.</blockquote><p>Do you have any actual data that shows how many packets we're talking about on average? Or is this just some mental exercise in micro-optimization?</p><p>I'm sorry, but you still fail to show how mandatory the feature is to your applications and, more importantly, to others.</p><p>You don't check for the header, fine, so its presence doesn't do you any harm anyway.</p><blockquote> The main reason I filed this as a jQuery bug is so that I don't have to use a custom jQuery script, and can instead use a common CDN-hosted 'standard' version with all the multi-site cache priming goodness that comes with.</blockquote><p>I'm sorry, but if you use a custom version of jQuery to remove an innocuous header that's been here for at least 8 major versions without anyone complaining, you're doing it wrong (tm).</p><p>I actually seriously doubt you did so or actually intend to do so. Especially if you didn't try it out before you saw the comment on stackoverflow.</p><p>Also, if you do some research on the bug tracker, you'll realize that we had numerous bugs for when the header wasn't set (regressions), yet none regarding removing it, except **indirectly** in the context of CORS requests to avoid preflight (now, avoiding preflight **does** smooth user experience).</p><p>So far, you're the only person who has asked for the possibility to remove the header for all types of request on this bug tracker... for **8 major versions**.</p><blockquote> This request has merit and should be dismissed out-of-hand just by closing the bug and hoping myself and others writing same-origin web apps will just go away.</blockquote><p>I'm sorry, but the request doesn't have much merit. You admitted you saw a comment in an unrelated stackoverflow question, tried it out and are now compaigning for a new ajax option. All the while, you fail to provide any tangible need nor any kind of actual data to support this would enhance user experience.</p><p>You talk of others but, again, you're the only one who ever expressed this need.</p><blockquote> I would like to hear the opinions of a few of jQuery's other developers before conceding and hosting my own altered copy.</blockquote><p>I'm sure other jQuery's devs will appreciate your tone as much as I do.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:5">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 27, 2013 10:37AM UTC by <span class="author">nickshanks</span></span>
+        <a class="ticket-change-link" href="#comment:5">comment:5</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:4 jaubourg]:</p><blockquote> If you want to donate of your time and help on the bug tracker, the help will be more that appreciated...</blockquote><p>Understood. I'll look upstream to see if there's already a feature request for that at trac.</p><blockquote> There's a preview button though and it's pretty easy to find in the interface.</blockquote><p>Yes, I ignored that and shouldn't have done. </p><p>Like spell-checking, unless it happens inline as I type, I am prone to just skipping optional steps. I presume such is typical of human behaviour, since spelling errors before the advent of check-as-you-type were so common that realtime spell-checking had to be invented. I do the same thing on Wikipedia edits, never using the Preview button and then correcting it if it turns out unexpectedly.</p><blockquote> So you didn't have any actual need first hand? We're just nitpicking here? No "it's breaking my app" bugs</blockquote><p>Nothing is specifically broken that removing this would guarantee to fix (although see below for what is broken). I had assumed it would be a simple thing to add a boolean and an if() block around these two lines of code. My despondence grew from that naïve assumption.</p><blockquote> nor "look how enhanced the ajax module is now" feature requests around?</blockquote><p>not sure what you meant by this.</p><blockquote> Actually, you are asking for backward compatibility breakage. Any backend dealing with jQuery knows this header will be defined, if we provide an opt-in boolean option, a **third-party** script will be able to change it globally using <code>ajaxSetup</code> thus breaking the assumption of the backend. It would spread unless specifically specified in the options of each request.  That's one of the reasons why we don't add options lightly in <code>ajax</code>.</blockquote><p>That's a scenario that I hadn't considered as it is not part of my workflow. It's a good reason for closing this ticket, sufficient to make me withdraw my request for a second developer's opinion.</p><blockquote> Do you have any actual data that shows how many packets we're talking about on average?</blockquote><p>A simple approximation can be computed. Assume a packet size of 1500 bytes and that response sizes follow a flat distribution,† the chance of an extra packet being needed because of this header are 31/1500 or about 2%. For all the people in my company who work with the web app I am responsible for, and extrapolating from the complaints I hear from a vocal few who otherwise seem representative, we see perhaps 100 timeouts a day on response retrieval (most of the app's users are on 3G company-issued iPhones, driving around the country with potentially unreliable data connections). I have no idea how many of those are due to packet loss though.‡</p><p>Eliminating unnecessary headers, including this one, was just part of a wider push I have been doing to improve caching and reduce response size of the web app. I have managed to more than halve the size of many responses during this process. All those 2%s add up!</p><p>† I have not produced a bell-curve distribution graph for my own app, but the <a href="http://www.httparchive.org/interesting.php#responsesizes" class="ext-link"><span class="icon"></span>global average for websites is about 6k</a> for text/html responses. I also realise that there would be a non-zero minimum as even a 204 response carries certain HTTP headers too.</p><p>‡ Our web host is in the US, which doesn't help, as every request has to cross the Atlantic, my boss won't move to a different hosting company, and our BT-provided office DSL line has an uptime considerably less than a web hosting company can offer, so we don't want to host it in-house. Timeouts on GET requests are the least severe, and non-idempotent ones like POST and PATCH are the worst, since the user doesn't know the state of the resource with certainty. Often when I investigate these non-GET timeouts, I find that the resource does get updated but the client never receives the HTML page saying 'done'. I suspect the GET timeouts are similar but haven't investigated those since they are of less consequence.</p><blockquote> Or is this just some mental exercise in micro-optimization?</blockquote><p>As I say, this was not an individual, specific micro-optimisation but just a small part of an onslaught to reduce network bandwidth and improve successful response rates. I was only intending to spend 1-3 minutes on Google to discover where the switch was to toggle this header off (under the assumption that there was such a switch). That amount of time was worth spending for the expected benefits.</p><blockquote> I'm sorry, but you still fail to show how mandatory the feature is to your applications and, more importantly, to others.</blockquote><p>It is not. I wasn't trying to show that it was mandatory (and thought I had conveyed such).</p><blockquote> You don't check for the header, fine, so its presence doesn't do you any harm anyway.</blockquote><p>I wouldn't jump to that conclusion just yet. I will let the other changes made recently bed in for a while, and see if our response timeout rate drops. If it does, my suspicions that packet loss is the primary cause will be strengthened.</p><blockquote> &gt; The main reason I filed this as a jQuery bug is so that I don't have to use a custom jQuery script, and can instead use a common CDN-hosted 'standard' version with all the multi-site cache priming goodness that comes with.  I'm sorry, but if you use a custom version of jQuery to remove an innocuous header that's been here for at least 8 major versions without anyone complaining, you're doing it wrong (tm).</blockquote><p>What other options do I have? I am willing to explore them. Anything to help get rid of this header.</p><blockquote> I actually seriously doubt you did so or actually intend to do so.</blockquote><p>Doubt I did what? We were hosting our own (unmodified) copy of jQuery up until August last year when I switched to Google's CDN. The trade-off was marginal. An extra DNS lookup, establishing a network connection for just a single request (no benefit from keep-alive), and introducing another server that could potentially go down and bring the company to a halt, vs. closer geo-location (remember, the rest of the web app is served from 5000 miles away) and intangible potential cross-site cache priming. I even imported HTTP Archive's 21 GB (gzipped!) SQL database to find out which was the most common version to link to (1.7.2 at the time, <a href="http://statichtml.com/2011/google-ajax-libraries-caching.html" class="ext-link"><span class="icon"></span>inspired by Steve Webster</a>) to improve chances of a cache hit. Google only uses long Expire/max-age headers on the three-digit versions; the 'latest 1.x' versioning scheme uses just 1hr expire times, and would have resulted in hundreds of 304s per day, and since this is often the only request to Google's CDN, eliminating the entire network connection by specifying a specific version can only help.</p><blockquote> Especially if you didn't try it out before you saw the comment on stackoverflow.</blockquote><p>I found that page after Googling for ways to remove this header. The failure of the technique used in the Stack Overflow answer is what led to me looking at the jQuery code, and consequently, filing this feature request.</p><blockquote> I'm sorry, but the request doesn't have much merit. You admitted you saw a comment in an unrelated stackoverflow question,</blockquote><p>The **question** on that page was unrelated, yes, but <a href="http://stackoverflow.com/a/6432369/760706" class="ext-link"><span class="icon"></span>one of the answers</a> was not, and it was a comment on that answer that linked to the jsfiddle, which I only provided as your ticket report form asked for one.</p><blockquote> tried it out and are now compaigning for a new ajax option. All the while, you fail to provide any tangible need nor any kind of actual data to support this would enhance user experience.</blockquote><p>Hopefully I have explained why I felt the need to ask for this. For 2% it was worth the 5 minutes required to write the initial ticket. It has now spiralled into a much bigger use of my time and yours (for which I am grateful, even if that's difficult to express in a debate like this).</p><blockquote> You talk of others but, again, you're the only one who ever expressed this need.</blockquote><p>Fair enough. I am the first. Yay me.</p><blockquote> &gt; I would like to hear the opinions of a few of jQuery's other developers before conceding and hosting my own altered copy.  I'm sure other jQuery's devs will appreciate your tone as much as I do.</blockquote><p>Tone? Apart from 1. being a bit pissed off at all my formatting got eaten (and not realising it would be so easily fixable) and thus my knee-jerk first comment, and 2. a feeling that the swiftness with which the bug was closed, having had only one person look at it, meant that it was not being taken seriously. I felt it had been dismissed out-of-hand without good reason (you didn't say why it would break compatibility in your first comment).</p><p>Please don't try to read too much into my choice of words earlier. I report bugs in software only when I have reached the end of a frustrating road trying to get the software to do as I wish it to (jQuery being the latest in a *very* long list). Thus I am already annoyed/angry/upset/pissed off by the time I click the "New Ticket" button and vent into a text field. My all-time worst job would be to work on the customer support phones for an ISP or utility company and have to deal with angry customers day in, day out!</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:6">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 27, 2013 12:03PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:6">comment:6</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> Understood. I'll look upstream to see if there's already a feature request for that at trac.</blockquote><p>The best place to report issues regarding the bug tracker itself is <a href="https://github.com/jquery/bugs.jquery.com/issues" class="ext-link"><span class="icon"></span>here</a>. It's a private repo but we could probably work something out if you wanna help here.</p><blockquote> What other options do I have? I am willing to explore them. Anything to help get rid of this header.</blockquote><p>You could trick jQuery into thinking it's always doing cross-domain requests:</p><pre class="wiki">$.ajaxSetup({
+  crossDomain: true
+});
+
+// You probably want to make sure this won't
+// break on browsers that do not support cors
+$.support.cors = true;
+</pre><p>But it's tricky because it will make all of the script and jsonp requests use script tag injection as a side effect.</p><p>Another solution is to extract the xhr transport from the source <a href="https://github.com/jquery/jquery/blob/1.9-stable/src/ajax/xhr.js#L48" class="ext-link"><span class="icon"></span>here</a>, and do something like this:</p><pre class="wiki">$.ajaxTransport( "+", function( s ) {
+   // your tweaked transport code here
+});
+</pre><p>That way, you can tweak your transport, making sure it is used instead of the default one (that's what the <code>"+"</code> specifies). A good way to get advantage of the Google CDN while customizing the internals of ajax to suit your needs (at the cost of some more bytes upfront though but nothing like the entire jQuery script).</p><blockquote> Hopefully I have explained why I felt the need to ask for this. For 2% it was worth the 5 minutes required to write the initial ticket. It has now spiralled into a much bigger use of my time and yours (for which I am grateful, even if that's difficult to express in a debate like this).</blockquote><p>That's much appreciated here too ;)</p><p>Let me summarize what are the blockers our side:</p><ul><li>we don't want of an option specific to <code>X-Requested-With</code></li><li>we don't want to give the impression you can remove headers set by the browser itself (<code>header: { Origin: false }</code> if you see what I mean), that would be a hugely confusing API (works for some headers, not for others)</li><li>we don't want nasty breakage because some third-party script is trigger happy</li></ul><p>On the other hand, it would be nice not to have <code>X-Requested-With</code> set by default. It should probably have been on an opt-in basis from the start :/</p><p>We **could** remove the default <code>X-Requested-With</code> value knowing that it would be dead easy to add it back manually for all requests:</p><pre class="wiki">$.ajaxSetup({
+  headers: {
+    "X-Requested-With": "XMLHttpRequest"
+  }
+});
+</pre><p>However, this would pose a problem for cross-domain requests since we would have to special case this specific header in the transport anyway which kinda defeats the purpose of not handling it anymore. Which brings us back to the idea of being able to unset headers (so that you could unset <code>X-Requested-With</code> for your crossDomain requests).</p><p>That's why it's probably better if we act as if <code>X-Requested-With</code> was a standard header set by the browser (nearly like what we do know, if we except it's possible to override it with another non-empty value). After all, there are (bad) tricks to remove it anyway (as given earlier in this comment).</p><p>So, tl;dr: it doesn't seem a widespread enough need to warrant the breakage and confusion needed to make it possible without resorting to existing tricks.</p><blockquote> Please don't try to read too much into my choice of words earlier. I report bugs in software only when I have reached the end of a frustrating road trying to get the software to do as I wish it to (jQuery being the latest in a *very* long list). Thus I am already annoyed/angry/upset/pissed off by the time I click the "New Ticket" button and vent into a text field. My all-time worst job would be to work on the customer support phones for an ISP or utility company and have to deal with angry customers day in, day out!</blockquote><p>I guarantee that answering bug reports and feature requests on a project like jQuery is quite the jading experience sometimes. We know about frustrated customers! ;P</p><p>Please, let us know how this went and what your conclusions were regarding the incidence of packet losses on those timeouts. You made me very curious.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:7">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 28, 2013 04:51AM UTC by <span class="author">dcherman</span></span>
+        <a class="ticket-change-link" href="#comment:7">comment:7</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>FWIW just because I found this interesting, you could probably do this with the least amount of additional code ( and avoiding the crossdomain issues ) by removing the capability for setting that header entirely from the XHR if you absolutely never want it set.</p><p><a href="https://gist.github.com/dcherman/5054258" class="ext-link"><span class="icon"></span>https://gist.github.com/dcherman/5054258</a></p><p>If you only want to do it for requests to your domain, then you could use the same concept but apply it in a prefilter and restrict the conditions when it's done.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</details>
+</div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

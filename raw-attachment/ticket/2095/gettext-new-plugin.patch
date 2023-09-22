@@ -1,0 +1,282 @@
+Index: plugins/gettext/test/index.html
+===================================================================
+--- plugins/gettext/test/index.html	(revision 0)
++++ plugins/gettext/test/index.html	(revision 0)
+@@ -0,0 +1,70 @@
++<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
++<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
++<head>
++<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
++<title>jquery.gettext.js Unit Test</title>
++
++<!-- load latest build of jquery.js -->
++<script type="text/javascript" src="../../../jquery/dist/jquery.js"></script>
++
++<!-- load jquery.metadata.js plugin-->
++<script type="text/javascript" src="../../metadata/jquery.metadata.js"></script>
++
++<!-- load testrunner from jquery project -->
++<script type="text/javascript" src="../../../jquery/test/data/testrunner.js"></script>
++
++<!-- load jquery.gettext.js (this is what we're testing! -->
++<script type="text/javascript" src="../jquery.gettext.js"></script>
++
++<link rel="Stylesheet" media="screen" href="../../../jquery/test/data/testsuite.css" />
++
++<script>
++
++test("string formatting", function() {
++    var x = [
++        ["hello world", "hello world"],
++        ["%s %s", "%s %s"],
++        ["%s %s", 1, "1 %s"],
++        ["%s %s", 1, 2, 3, "1 2"],
++        ["%{key}", "%{key}"],
++        ["%{key}", {}, "%{key}"],
++        ["%{universe} %{anwer}", {anser: 42}, "%{universe} 42"],
++        ["%{universe} %{anwer}", {anser: 42, x:'y'}, "%{universe} 42"]
++    ]
++    for (var i=0;i<x.length; i++) {
++        var wanted = x[i].pop();
++        ok( _.apply(this, x[i]), "_( " + x[i] + " ) -> " + wanted );
++    }
++    
++    expect(x.length);
++});
++
++test("string translation", function() {
++    $("#gettext").getText();
++    ok( $.gettext.table.hello == "bonjour" );
++    
++    ok( _("hello") == "bonjour" );
++    ok( _("welcome") == "bienvenue" );
++    
++    expect(3);
++})
++
++</script>
++</head>
++<body id="body">
++	<h1 id="banner">jquery.gettext.js - Test Suite</h1>
++	<h2 id="userAgent"></h2>
++
++	<!-- Test HTML -->
++	<div id="main" style="display: none;">
++            <div id="targetDiv"></div>
++	</div>
++
++	<ol id="tests"></ol>
++
++        <div id="gettext" class="{gettext:{
++            hello: 'bonjour',
++            welcome: 'bienvenue'
++        }}" style="visibility: hidden">this div holds the translations</div>
++</body>
++</html>
+Index: plugins/gettext/tools/extract.sh
+===================================================================
+--- plugins/gettext/tools/extract.sh	(revision 0)
++++ plugins/gettext/tools/extract.sh	(revision 0)
+@@ -0,0 +1,5 @@
++#!/bin/sh
++# 
++# This is an example how you can extract the strings from javascript files.
++
++xgettext -L C -k_ *.js -o extract.pot
+
+Property changes on: plugins/gettext/tools/extract.sh
+___________________________________________________________________
+Name: svn:executable
+   + *
+
+Index: plugins/gettext/jquery.gettext.js
+===================================================================
+--- plugins/gettext/jquery.gettext.js	(revision 0)
++++ plugins/gettext/jquery.gettext.js	(revision 0)
+@@ -0,0 +1,149 @@
++/*
++ * jQuery GetText Plugin
++ * version: 0.1
++ * @requires jQuery v1.1 or later
++ *
++ * Dual licensed under the MIT and GPL licenses:
++ *   http://www.opensource.org/licenses/mit-license.php
++ *   http://www.gnu.org/licenses/gpl.html
++ *
++ * Revision: $Id$
++ */
++(function($){
++/**
++ * gettext() provides a mechanism for replacing strings by translations.
++ * 
++ * gettext uses the jQuery.gettext.table to find the equivalents in another
++ * language. It also supports two way of substituting variables in the string.
++ *
++ * The first argument is always the string to be translated. Then come
++ * eventually the variables to substitute. There are two substitution formats.
++ *
++ * The first one, is a positionned format, where "%s" gets replaced. If an
++ * argument is missing, the "%s" is simply left in place.
++ *
++ * @example _("%s %s", 1, 2);
++ * @desc gives : "1 2"
++ *
++ * The second one, uses keywords. It is useful if the position can change in
++ * other languages. The missing keywords are also left in place.
++ *
++ * @example _("%{key} %{word}", {word: 2, key: 1});
++ * @desc gives: "1 2"
++ *
++ * Note that both formats cannot be used simultaneously.
++ *
++ * @example
++ * (function($,_){
++ * 
++ *   _("Translate %s", "me);
++ *
++ * })(jQuery, jQuery.gettext)
++ * @desc Just a short example on how it could be used in another plugin.
++ 
++ * @name gettext
++ * @type Function
++ * @param str String The string that you want to replace
++ * @param args  Optional arguments to be placed in the string, can be of variable size
++ * @cat Plugins/GetText
++ * @return String
++ */
++$.gettext = $.gettext || function(str, args) {
++    arguments[0] = $.gettext.translate.apply($.gettext, [arguments[0]]);
++    return $.gettext.format.apply($.gettext, arguments);
++}
++
++$.extend($.gettext, {
++    /**
++     * This is the table that contains the translations. The keys are the
++     * original text and the values the translated-one. Note that only one
++     * language can be loaded at a time.
++     *
++     * @name table
++     * @type Object
++     */
++    table: {},
++    /**
++     * This is the methods that does the parameters substitution, a little
++     * bit like printf() but without parameter formatting.
++     * 
++     * @example format("simple %s", "substitution");
++     * @desc Substitues %s with the remaining parameters.
++     *
++     * @example format("simple %{s}", {s:"substitution"});
++     * @desc Substitues %{s} with the key in the given object.
++     *
++     * @name format
++     * @type Object
++     * @param str String The string you want to substitute in.
++     * @param args Optional argument to be placed in the string
++     * @cat Plugins/GetText
++     * @return String
++     */
++    format: function(str, obj) {
++        // %{xy} substitution
++        if (arguments.length == 2 && typeof obj == "object") {
++            str = str.replace(/%{([^}]+)}/g, function(match, key){
++                var x = obj[key];
++                if (x)
++                    return x
++                return match;
++            });
++        // %s substitution
++        } else if (arguments.length > 1) {
++            var index = 1;
++            var args = arguments; // provide arguments for scope
++            str = str.replace(/%s/g, function(match) {
++                var x = args[index];
++                index += 1;
++                if (x)
++                    return x;
++                return match;
++            })
++        }
++        return str;
++    },
++    /**
++     * This is the method that looks up the table for a corresponding translation.
++     * 
++     * @example translate("hello");
++     * @desc Try to get translated string and retruns it. Otherwise, returns the
++     * original string.
++     *
++     * @name translate
++     * @type Object
++     * @param str String used to lookup the table
++     * @cat Plugins/GetText
++     * @return String
++     */
++    translate: function(str) {
++        return this.table[str] || str;
++    }
++});
++
++/**
++ * Looks in each element for some "gettext" metadata and loads it in the
++ * translation table.
++ *
++ * @example $('#gettext').loadTanslations();
++ * @desc Loads the gettext metadatas of the #gettext element.
++ *
++ * @name getText
++ * @type jQuery
++ * @cat Plugins/GetText
++ * @return jQuery
++ */
++$.fn.getText = function() {
++    this.each(function(){
++        var translations = $(this).metadata().gettext;
++        if (translations)
++            $.extend($.gettext.table, translations);
++    });
++    return this;
++}
++    
++})(jQuery);
++
++/* GetText notation */
++if (typeof _ == "undefined")
++    _ = jQuery.gettext;
+\ No newline at end of file
+Index: plugins/gettext/META.json
+===================================================================
+--- plugins/gettext/META.json	(revision 0)
++++ plugins/gettext/META.json	(revision 0)
+@@ -0,0 +1,31 @@
++{
++	"name": "jQuery-GetText",
++	"version": 0.1,
++	"author": [
++		"Jonas Pfenniger <zimbatm@oree.ch>"
++	],
++	"abstract": "Translate javascript text easily.",
++	"license": "mit, gpl",
++	"distribution_type": "plugin",
++	"requires": {
++		"jQuery": ">= 1.0.3, < 1.2"
++	},
++	"build_requires": {
++		"jQuery.TestRunner": 0
++	},
++	"provides": {
++		"jQuery.GetText": {
++			"version": 0.1,
++			"file": "jquery.gettext.js"
++		}
++	},
++	"keywords": [
++		"translation",
++		"i18n"
++	],
++	"stability": "Development",
++	"meta-spec": {
++		"version": 1.3,
++		"url": "http://module-build.sourceforge.net/META-spec-v1.3.html"
++	}
++}

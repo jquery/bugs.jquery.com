@@ -1,0 +1,23 @@
+$(document).ready(
+	function ()
+	{
+		$('#song_list').Sortable({
+			accept: 	'song',
+			tolerance: 	'intersect',
+			handle: 	'.drag',
+			floats: 	true,
+			axis: 		'vertically',
+			helperclass: 'sorthelper',
+			onStop: 	function(ser)
+			{
+				// Serialize the order and update
+				var sorted = $.SortSerialize('song_list');
+				var ids	   = sorted.hash
+					.replace(/song_/g, '')
+					.replace(/list\[\]\=/g, '')
+					.split('&').join('~');
+				$.post('/playlists/update_sort/<?= $playlist->id; ?>', {id: <?= $playlist->id; ?>, ids: ids});
+			}
+		});
+	}
+);

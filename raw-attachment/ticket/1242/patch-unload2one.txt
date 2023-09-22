@@ -1,0 +1,13 @@
+Index: src/event/event.js
+===================================================================
+--- src/event/event.js	(revision 1957)
++++ src/event/event.js	(working copy)
+@@ -298,7 +298,7 @@
+ 	 * @cat Events
+ 	 */
+ 	bind: function( type, data, fn ) {
+-		return this.each(function(){
++		return type == "unload" ? this.one(type, data, fn) : this.each(function(){
+ 			jQuery.event.add( this, type, fn || data, fn && data );
+ 		});
+ 	},

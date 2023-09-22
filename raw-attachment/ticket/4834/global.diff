@@ -1,0 +1,23 @@
+Index: src/outro.js
+===================================================================
+--- src/outro.js	(revision 6414)
++++ src/outro.js	(working copy)
+@@ -1 +1,4 @@
++// Expose jQuery to the global object
++window.jQuery = window.$ = jQuery;
++
+ })(window);
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 6414)
++++ src/core.js	(working copy)
+@@ -28,9 +28,6 @@
+ 	// Save a reference to the core toString method
+ 	toString = Object.prototype.toString;
+ 
+-// Expose jQuery to the global object
+-window.jQuery = window.$ = jQuery;
+-
+ jQuery.fn = jQuery.prototype = {
+ 	init: function( selector, context ) {
+ 		var match, elem, ret;

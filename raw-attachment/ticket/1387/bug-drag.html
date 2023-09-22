@@ -1,0 +1,34 @@
+<html>
+<head>
+<script type="text/javascript" src="jquery.pack.js">/* jQuery core */</script>
+<script type="text/javascript" src="interface.js">/* jQuery Interface plugin */</script>
+<script type='text/javascript'>
+
+ $(document).ready(function(){
+ 	var elem = document.createElement('div');
+	elem = $(elem);
+	elem.css('width', '50px');
+	elem.css('height', '50px');
+	elem.text("Drag me");
+	elem.css('border', '1px dotted #000');
+	$('#DivBottom').append(elem);
+	elem.Draggable({containment:'parent'});
+});
+</script>
+</head>
+<body>
+
+<div id='DivTop' style='border:1px solid #000;background-color:#ffeeee'>
+This div is here<br/>
+to shift the real
+<br/>parent div away<br/>
+from 0/0.
+</div>
+
+<div id='DivBottom' style='width:200px;border:1px solid #000;background-color:#e0e0e0'>
+Try dragging<br/>
+with<br/>
+this<br/>
+area
+
+</body></html>

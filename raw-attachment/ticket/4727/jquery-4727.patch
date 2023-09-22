@@ -1,0 +1,30 @@
+Index: test/index.html
+===================================================================
+--- test/index.html	(revision 6371)
++++ test/index.html	(working copy)
+@@ -6,6 +6,7 @@
+ 	<link rel="Stylesheet" media="screen" href="qunit/testsuite.css" />
+ 	<style type="text/css" media="screen">
+ 		ol#empty { opacity: 0; filter:Alpha(opacity=0); } /* for testing opacity set in styles in IE */
++		.overlay-test { opacity: .3; filter:Alpha(opacity=30); } /* for testing fadeIn() to stylesheet-defined opacity */
+ 	</style>
+ 	<!-- Includes -->
+ 	<script type="text/javascript">
+Index: test/unit/fx.js
+===================================================================
+--- test/unit/fx.js	(revision 6371)
++++ test/unit/fx.js	(working copy)
+@@ -484,3 +484,13 @@
+ }
+ 
+ jQuery.makeTest.id = 1;
++
++test("fadeIn() to stylesheet-defined opacity", function() {
++	expect(1)
++	stop();
++	var overlay = jQuery("<div/>").addClass("overlay-test").appendTo("#main");
++	overlay.hide().fadeIn(function() {
++		same(overlay.css("opacity"), "0.3");
++		start();
++	});
++})

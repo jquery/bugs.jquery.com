@@ -1,0 +1,26 @@
+diff --git a/ui.sortable.js b/ui.sortable.js
+index 9288a57..c93fcb7 100644
+--- a/ui.sortable.js
++++ b/ui.sortable.js
+@@ -76,10 +76,10 @@
+ 				if(this.disabled || this.options.type == 'static') return false;
+ 
+ 				//Find out if the clicked node (or one of its parents) is a actual item in this.items
+-				var currentItem = null, nodes = $(e.target).parents().andSelf().each(function() {
+-					if($.data(this, 'ui-sortable-item')) currentItem = $(this);
+-				});
+-				if(currentItem && (!this.options.handle || $(e.target).parents().andSelf().is(this.options.handle))) {
++				var currentItem = $(e.target).add($(e.target).parents()).filter(function() {
++					return $.data(this, 'ui-sortable-item');
++				}).slice(0,1);
++				if(currentItem.length && (!this.options.handle || $(e.target).parents().andSelf().is(this.options.handle))) {
+ 					this.currentItem = currentItem;
+ 					return true;
+ 				} else return false; 
+@@ -447,4 +447,4 @@
+ 		}
+ 	});
+ 
+-})(jQuery);
+\ No newline at end of file
++})(jQuery);

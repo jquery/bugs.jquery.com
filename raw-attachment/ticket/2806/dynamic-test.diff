@@ -1,0 +1,27 @@
+Index: unit/ajax.js
+===================================================================
+--- test/unit/ajax.js	(revision 5473)
++++ unit/ajax.js	(working copy)
+@@ -811,6 +811,22 @@
+ 	});
+ });
+ 
++test("data option: evaluate function values (#2806)", function() {
++	stop();
++	$.ajax({
++		url: "data/echoQuery.php",
++		data: {
++			key: function() {
++				return "value";
++			}
++		},
++		success: function(result) {
++			equals( result, "key=value" );
++			start();
++		}
++	})
++});
++
+ }
+ 
+ //}

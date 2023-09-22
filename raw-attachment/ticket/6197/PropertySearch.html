@@ -1,0 +1,539 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Metadatasökning</title>
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.4/dijit/themes/tundra/tundra.css">
+		<link rel="stylesheet" type="text/css" href="/alfresco/css/main.css">
+		<style type="text/css">
+		body#PropertySearch {
+            margin: 0;
+            padding: 2em;
+		}
+        fieldset {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        fieldset legend {
+            display: none;
+        }
+        #queryComponents, #queryOperators, #queryText, #queryButtons {
+            padding: .5em 0;
+        }
+        #queryComponents input, #queryComponents select {
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+        #queryCompontentComparator, #queryCompontentValue {
+            display: inline;
+        }
+        #widget_propertyValue_dropdown {
+            border: 1px solid #f0f0f0;
+            background-color: #fff;
+        }
+        #searchResultWrap {
+            display: none;
+            border: 0;
+            width: 100%;
+            margin: 4px 0 0 0;
+        }
+        #searchResultWrap ul, #searchResultWrap li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        #searchResult li {
+            margin-bottom: .5em;
+        }
+        #searchResult li a, #searchResult li span {
+            margin: 0 0 0 1em;
+        }
+        #searchResultContainer .simplePagerContainer {
+            float: left;
+            clear: both;
+            width: 100%;
+        }
+        #selectSearchResultsButtons, #searchResultContainer ul.simplePagerNav {
+            float: left;
+            clear: both;
+            width: 100%;            
+            margin: .5em 0;
+        }
+        #searchResultContainer ul.simplePagerNav li {
+            list-style: none;
+            float: left;
+        }
+        #searchResultContainer ul.simplePagerNav li a {
+            float: left;
+            padding: .5em .66em;
+            border: 1px solid #fff;
+            color: #333;
+            text-decoration: none;
+            line-height: 1;
+            outline: 0 !important;
+        }
+        #searchResultContainer ul.simplePagerNav li.currentPage a {
+            border: 1px solid #048;
+            color: #048;
+        }
+        #selectSearchResultsButtons {
+            margin: .5em 0;
+        }
+        #selectSearchResultsButtons li {
+            float: left;
+            margin-right: 1em;
+            color: #048;
+            cursor: pointer;
+        }
+		</style>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="/alfresco/d/d/workspace/SpacesStore/240ac4c5-10ff-4582-ae5c-1acb990e038f/quickpager.jquery.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/dojo/1.4/dojo/dojo.xd.js" djConfig="locale: 'sv', parseOnLoad: true"></script>
+        <script type="text/javascript">
+		//<![CDATA[
+            dojo.require("dijit.form.DateTextBox");
+            
+            (function initDom() {
+                $(document).ready(function() {
+                    loadPropertiesFromSettings();
+
+                    $('#property').change(function() {
+                        loadComparisonType();                        
+                    });
+                    
+                    $('#queryButtonAnd').click(function() { buildQuery('AND'); });
+                    $('#queryButtonOr').click(function() { buildQuery('OR'); });
+                    $('#searchText').change(function() { pushToHistoryStack(); });
+                    $('#queryButtonUndo').click(function() { popFromHistoryStack(); });
+                    $('#queryButtonSearch').click(function() { performSearch(); });
+                    $('#selectAllSearchResultsButton').click(function() { toggleAllSearchResults(true); });
+                    $('#deselectAllSearchResultsButton').click(function() { toggleAllSearchResults(false); });
+                    $('#selectVisibleSearchResultsButton').click(function() { toggleVisibleSearchResults(true); });
+                    $('#deselectVisibleSearchResultsButton').click(function() { toggleVisibleSearchResults(false); });                    
+                });
+            })();
+            
+            function setZipButtonState(enabled) {
+                if (typeof enabled === 'undefined') {
+                    enabled = ($('#searchResult input[type=checkbox]:checked').length > 0);
+                }
+
+                if (enabled) {
+                    $('#zipButton').removeAttr('disabled');
+                } else {
+                    $('#zipButton').attr('disabled', true);
+                }
+            }
+            
+            function toggleAllSearchResults(selected) {
+                $('#searchResult input[type=checkbox]').attr('checked', selected);
+                setZipButtonState(selected);
+                return false;
+            }
+            
+            function toggleVisibleSearchResults(selected) {
+                $('#searchResult input[type=checkbox]:visible').attr('checked', selected);
+                if (selected) {
+                    setZipButtonState(selected);
+                } else {
+                    setZipButtonState();
+                }
+                return false;
+            }            
+
+            function loadPropertiesFromSettings(){
+                var url = "/alfresco/wcservice/jkptk/getSearchableProperties";
+                
+                jQuery.getJSON(url, null, function(data, textStatus) {
+                    var properties = data.properties;
+                    var select = document.getElementById("property");
+                    for (var i = 0; i < properties.length; i++) {
+                        var option = select.appendChild(document.createElement("option"));
+                        var property = properties[i];
+                        option.text = property.name;
+                        option.value = property.name;
+                        option.metadata = property.metadata;
+                        option.propertyType = property.type;
+                    }
+                });
+            }
+
+            function loadPropertyValues() {
+                var propertySelect = document.getElementById("property");
+                var propertyMetadata = propertySelect.options[propertySelect.selectedIndex].metadata;
+                var propertyType = propertySelect.options[propertySelect.selectedIndex].propertyType;
+                
+                var queryCompontentValue = document.getElementById("queryCompontentValue");
+                var oldSelect = document.getElementById("propertyValue");
+
+                if(oldSelect != null){
+                    var widget = dijit.byId("propertyValue");
+                    if(widget){
+                        widget.destroyRecursive();
+                    }else{
+                        queryCompontentValue.removeChild(oldSelect);
+                    }
+                }
+                    
+                if (propertyType == 'dynamicValueList') {
+                    loadDynamicValueList(propertyMetadata);
+                } else if (propertyType == 'date') {
+                    loadDate();
+                } else {
+                    loadSimpleText();
+                }
+            }
+            
+            function loadSimpleText(){
+                var queryCompontentValue = document.getElementById("queryCompontentValue");
+                var propertyValueText = queryCompontentValue.appendChild(document.createElement("input"));
+                propertyValueText.id = "propertyValue";
+            }
+
+            function loadDate(){
+                var props = {
+                    name: "propertyValue",
+                    id: "propertyValue",
+                    value: new Date(),
+                    lang: "sv-se",
+                    promptMessage: "yyyy-mm-dd",
+                    rangeMessage: "",
+                    invalidMessage: "Invalid date. Use yyyy-mm-dd format"
+                }
+                var queryCompontentValue = document.getElementById("queryCompontentValue");
+                var propertyValueDate = new dijit.form.DateTextBox(props, "swedish");
+                propertyValueDate.id = "propertyValue";
+                queryCompontentValue.appendChild(propertyValueDate.domNode);
+            }
+
+            function loadDynamicValueList(propertyValue) {
+                var url = '/alfresco/wcservice/jkptk/getDynamicValueList?property=' + propertyValue;
+
+                jQuery.getJSON(url, null, function(data, textStatus) {
+                    alert("H�mtat fil fr�n server");
+                    var propertiesValues = data.propertyValues;
+                    var queryCompontentValue = document.getElementById('queryCompontentValue');
+                    var propertyValueSelect = document.createElement('select');
+                    propertyValueSelect.setAttribute('id', 'propertyValue');
+                    var defaultOption = propertyValueSelect.appendChild(document.createElement('option'));
+                    defaultOption.text = 'Välj...';
+
+                    for (var i = 0, l = propertiesValues.length, option; i < l; i++) {
+                        option = propertyValueSelect.appendChild(document.createElement('option'));
+                        option.text = propertiesValues[i];
+                        option.value = propertiesValues[i];
+                    }
+                    
+                    queryCompontentValue.appendChild(propertyValueSelect);
+                });
+            }
+
+            function loadComparisonType() {
+                var propertySelect = document.getElementById('property');
+                var propertyType = propertySelect.options[propertySelect.selectedIndex].propertyType;
+                var url = '/alfresco/wcservice/jkptk/getComparators?type=' + propertyType;
+
+                jQuery.getJSON(url, null, function(data, textStatus) {
+                    var comparators = data.comparators;
+                    var queryCompontentComparator = document.getElementById('queryCompontentComparator');
+                    var oldSelect = document.getElementById("comparator");
+
+                    if (oldSelect != null) {
+                        queryCompontentComparator.removeChild(oldSelect);
+                    }
+
+                    var propertyTypeSelect = queryCompontentComparator.appendChild(document.createElement("select"));
+                    propertyTypeSelect.id = "comparator";
+                    
+                    if (comparators.length > 1) {
+                        var defaultOption = propertyTypeSelect.appendChild(document.createElement('option'));
+                        defaultOption.text = 'Välj...';
+                    }
+
+                    for (var i = 0, l = comparators.length, option; i < l; i++) {
+                        option = propertyTypeSelect.appendChild(document.createElement('option'));
+                        option.text = comparators[i];
+                        option.value = comparators[i];
+                    }
+
+                    loadPropertyValues();                    
+                });
+            }
+
+            function buildQuery(separator){
+                pushToHistoryStack();
+
+                var propertySelect = document.getElementById("property");
+                var comparatorSelect = document.getElementById("comparator");
+                var valueSelect = document.getElementById("propertyValue");
+                var property = propertySelect.options[propertySelect.selectedIndex].value;
+                var comparator = comparatorSelect.options[comparatorSelect.selectedIndex].value;
+                var value;
+                
+                if (valueSelect.tagName === 'SELECT') {
+                    value = valueSelect.options[valueSelect.selectedIndex].value;
+                } else {
+                    value = valueSelect.value;
+                }
+
+                var textArea = document.getElementById("searchText");
+                var query = textArea.value;
+
+                if (!query == "") {
+                    query += "\n" + separator;
+                }
+
+                query = query + "(\"";
+                query = query + property + "\" " + comparator + " \"" + value;
+                query = query + "\")";
+
+                textArea.value = query;
+            }
+
+            function popFromHistoryStack(){
+                var textArea = document.getElementById("searchText");
+                var history = textArea.history;
+                if(history == null || history.length == 0){
+                    return;
+                }
+                var query = history.pop();
+                textArea.value = query;
+            }
+
+            function pushToHistoryStack(){
+                var textArea = document.getElementById("searchText");
+                var query = textArea.value;
+
+                // Add history
+                var history = textArea.history;
+                if(history == null){
+                    history = new Array();
+                    textArea.history = history;
+                }
+                history.push(query);
+            }
+
+            function performSearch(){
+                var textArea = document.getElementById("searchText");
+                var query = textArea.value;
+                
+                if (query.length === 0) {
+                    buildQuery('OR');
+                    query = textArea.value;
+                }
+
+                var url = "/alfresco/wcservice/jkptk/propertySearch?q=" + query;
+
+                jQuery.getJSON(url, null, function(data, textStatus) {
+                    var searchResult = data.files;
+                    var searchResultContainer = document.getElementById("searchResultContainer");
+                    removeChildNodes(searchResultContainer);
+
+                    var searchResultList = document.createElement("ul");
+                    searchResultList.setAttribute('id', 'searchResult');
+                    
+                    var $li, $checkbox, $a, $name, $size, $type, $location, $metadata;
+                    var content;
+
+                    for (var i = 0; i < searchResult.length; i++) {
+                        content = searchResult[i];
+                        $li = $(document.createElement('li'));
+                        $checkbox = $(createCheckbox());
+                        $checkbox.attr('name', 'nodeRef');
+                        $checkbox.attr('value', content.nodeRef);
+                        $a = $(document.createElement("a"));
+                        $a.attr('href', content.url);                      
+                        $name = $(document.createTextNode(content.name));
+                        $a.append($name);
+                        $metadata = $(document.createElement('span'));
+                        $metadata.addClass('metadata');
+                        $size = $(document.createElement('span'));
+                        $size.text('Storlek: ' + content.size);
+                        $type = $(document.createElement('span'));
+                        $type.text('Typ: ' + content.mimetype);
+                        $location = $(document.createElement('span'));
+                        $location.text('Plats: ' + content.displayPath);                        
+                        $metadata.append($size);
+                        $metadata.append($type);
+                        $metadata.append($location);
+                        $li.append($checkbox);
+                        $li.append($a);
+                        $li.append($metadata);
+                        $(searchResultList).append($li);
+                    }
+
+                    searchResultContainer.appendChild(searchResultList);
+                    
+                    var $zipButton = $(createButton());
+                    $zipButton.attr('id', 'zipButton');
+                    $zipButton.val('Hämta som zip-arkiv');
+                    $zipButton.attr('disabled', true);
+                    $zipButton.click(function () {
+                        var selectedItems = $('#searchResult input[type=checkbox]:checked'); // get all checked checkboxes from the search result.
+                        var l = selectedItems.length;
+                        var queryString = [];
+                        var url;
+
+                        for (var i = 0; i < l; i++) {
+                            queryString[i] = 'nodeRef=' + selectedItems[i].value;
+                        }
+
+                        url = '/alfresco/wcservice/jkptk/zipArchive?' + queryString.join('&');
+                        window.open(url);
+                    });
+
+                    $(searchResultContainer).append($zipButton);
+                    initSearchResultItems();
+                    $("#searchResultContainer #searchResult").quickPager({ pagerLocation: 'both', pageSize: 10 } );
+                    $('#searchResultWrap').show();                    
+                });
+            }
+            
+            function initSearchResultItems() {
+                var $zipButton = $('#zipButton');
+                $('#searchResult input[type=checkbox]').click(function() {
+                    if ($(this).is(':checked')) {
+                        $zipButton.removeAttr('disabled');
+                    } else {
+                        setZipButtonState();
+                    }
+                });
+            }
+
+            function removeChildNodes(parent){
+                $(parent).empty();
+            }            
+
+            function createCheckbox(){               
+                var checkbox = document.createElement('input');
+                checkbox.setAttribute('type', 'checkbox');
+
+                return checkbox;
+            }
+
+            function createButton(){
+                var button = document.createElement("input");
+                button.setAttribute('type', 'button');
+
+                return button;
+            }
+		//]]>
+        </script>
+    </head>
+    <body id="PropertySearch">
+        <table style="border: 0; width: 100%;" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td style="width: 7px;"><img src="/alfresco/images/parts/lbgrey_01.gif" alt="" width="7" height="7"></td>
+              <td style="background-image: url(/alfresco/images/parts/lbgrey_02.gif);"><img src="/alfresco/images/parts/lbgrey_02.gif" alt="" width="7" height="7"></td>
+              <td style="width: 7px;"><img src="/alfresco/images/parts/lbgrey_03.gif" alt="" width="7" height="7"></td>
+            </tr>
+            <tr>
+              <td style="background-image: url(/alfresco/images/parts/lbgrey_04.gif);"><img src="/alfresco/images/parts/lbgrey_04.gif" alt="" width="7" height="7"></td>
+              <td style="background-color: white;">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <span class="mainSubTitle">Sökning</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td style="background-image: url(/alfresco/images/parts/lbgrey_06.gif);"><img src="/alfresco/images/parts/lbgrey_06.gif" alt="" width="7" height="7"></td>
+            </tr>
+            <tr>
+              <td style="width: 7px;"><img src="/alfresco/images/parts/lbgrey_dotted_07.gif" alt="" width="7" height="7"></td>
+              <td style="background-image: url(/alfresco/images/parts/lbgrey_dotted_08.gif);"><img src="/alfresco/images/parts/lbgrey_dotted_08.gif" alt="" height="7"></td>
+              <td style="width: 7px;"><img src="/alfresco/images/parts/lbgrey_dotted_09.gif" alt="" width="7" height="7"></td>
+            </tr>
+            <tr>
+              <td style="background-image: url(/alfresco/images/parts/white_04.gif);"><img src="/alfresco/images/parts/white_04.gif" alt="" width="7" height="7"></td>
+              <td>
+              <!-- content -->
+                    <fieldset>
+                    <legend></legend>
+                        <div id="queryComponents">
+                            <select id="property">
+                                <option value="">Välj ett fält...</option>
+                            </select>
+                            <div id="queryCompontentComparator"></div>
+                            <div id="queryCompontentValue"></div>
+                        </div>
+                        <div id="queryOperators">
+                            <input id="queryButtonAnd" type="button" value="OCH">
+                            <input id="queryButtonOr" type="button" value="ELLER">
+                        </div>
+                        <div id="queryText">
+                            <textarea id="searchText" cols="80" rows="10"></textarea>
+                        </div>
+                        <div id="queryButtons">
+                            <input id="queryButtonUndo" type="button" value="Ångra">
+                            <input id="queryButtonSearch" type="button" value="Sök">
+                        </div>
+                    </fieldset>
+              <!-- /content -->
+              </td>
+              <td style="background-image: url(/alfresco/images/parts/white_06.gif);"><img src="/alfresco/images/parts/white_06.gif" alt="" width="7" height="7"></td>
+            </tr>
+            <tr>
+              <td style="width: 7px;"><img src="/alfresco/images/parts/white_07.gif" alt="" width="7" height="7"></td>
+              <td style="background-image: url(/alfresco/images/parts/white_08.gif);"><img src="/alfresco/images/parts/white_08.gif" alt="" width="7" height="7"></td>
+              <td style="width: 7px;"><img src="/alfresco/images/parts/white_09.gif" alt="" width="7" height="7"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="searchResultWrap">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td style="width: 7px;"><img src="/alfresco/images/parts/lbgrey_01.gif" alt="" width="7" height="7"></td>
+              <td style="background-image: url(/alfresco/images/parts/lbgrey_02.gif);"><img src="/alfresco/images/parts/lbgrey_02.gif" alt="" width="7" height="7"></td>
+              <td style="width: 7px;"><img src="/alfresco/images/parts/lbgrey_03.gif" alt="" width="7" height="7"></td>
+            </tr>
+            <tr>
+              <td style="background-image: url(/alfresco/images/parts/lbgrey_04.gif);"><img src="/alfresco/images/parts/lbgrey_04.gif" alt="" width="7" height="7"></td>
+              <td style="background-color: white;">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <span class="mainSubTitle">Sökresultat</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td style="background-image: url(/alfresco/images/parts/lbgrey_06.gif);"><img src="/alfresco/images/parts/lbgrey_06.gif" alt="" width="7" height="7"></td>
+            </tr>
+            <tr>
+              <td style="width: 7px;"><img src="/alfresco/images/parts/lbgrey_dotted_07.gif" alt="" width="7" height="7"></td>
+              <td style="background-image: url(/alfresco/images/parts/lbgrey_dotted_08.gif);"><img src="/alfresco/images/parts/lbgrey_dotted_08.gif" alt="" height="7"></td>
+              <td style="width: 7px;"><img src="/alfresco/images/parts/lbgrey_dotted_09.gif" alt="" width="7" height="7"></td>
+            </tr>
+            <tr>
+              <td style="background-image: url(/alfresco/images/parts/white_04.gif);"><img src="/alfresco/images/parts/white_04.gif" alt="" width="7" height="7"></td>
+              <td>
+              <!-- content -->
+                <ul id="selectSearchResultsButtons">
+                    <li id="selectAllSearchResultsButton">Markera alla dokument</li>
+                    <li id="deselectAllSearchResultsButton">Avmarkera alla dokument</li>
+                    <li id="selectVisibleSearchResultsButton">Markera synliga dokument</li>
+                    <li id="deselectVisibleSearchResultsButton">Avmarkera synliga dokument</li>
+                </ul>
+                <div id="searchResultContainer"></div>
+              <!-- /content -->
+              </td>
+              <td style="background-image: url(/alfresco/images/parts/white_06.gif);"><img src="/alfresco/images/parts/white_06.gif" alt="" width="7" height="7"></td>
+            </tr>
+            <tr>
+              <td style="width: 7px;"><img src="/alfresco/images/parts/white_07.gif" alt="" width="7" height="7"></td>
+              <td style="background-image: url(/alfresco/images/parts/white_08.gif);"><img src="/alfresco/images/parts/white_08.gif" alt="" width="7" height="7"></td>
+              <td style="width: 7px;"><img src="/alfresco/images/parts/white_09.gif" alt="" width="7" height="7"></td>
+            </tr>
+          </tbody>
+        </table>        
+        </div>
+    </body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"> 
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#_Check').click(function(){
+					$(this).attr('checked', false); //does not work
+					$(this).attr('checked', ''); //does not work
+					$(this).removeAttr('checked'); //does not work
+					this.checked = false; //works
+			});
+		});	
+	</script>
+</head>
+<body>
+		<input type="checkbox" id="_Check" /><label for="_Check">Click Me</label>
+</body>
+</html>
+	

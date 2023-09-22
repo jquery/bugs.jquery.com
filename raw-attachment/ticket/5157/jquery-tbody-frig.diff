@@ -1,0 +1,51 @@
+--- jquery-1.3.2.js.orig	2009-07-05 17:02:00.000000000 +0100
++++ jquery-1.3.2.js	2009-09-03 09:43:57.000000000 +0100
+@@ -615,6 +615,10 @@
+ 	defaultView = document.defaultView || {},
+ 	toString = Object.prototype.toString;
+ 
++var	tagBlockStyle = {
++		TBODY:	'table-row-group'
++	};
++
+ jQuery.extend({
+ 	noConflict: function( deep ) {
+ 		window.$ = _$;
+@@ -731,6 +735,10 @@
+ 		}
+ 	},
+ 
++	blockDisplayStyle: function( elem ) {
++		return tagBlockStyle[ elem.tagName ] || "block";
++	},
++
+ 	// A method for quickly swapping in/out CSS properties to get correct calculations
+ 	swap: function( elem, options, callback ) {
+ 		var old = {};
+@@ -3801,7 +3809,7 @@
+ 						
+ 						display = elem.css("display");
+ 						if ( display === "none" )
+-							display = "block";
++							display = jQuery.blockDisplayStyle( elem );
+ 						
+ 						elem.remove();
+ 						
+@@ -4021,7 +4029,7 @@
+ 
+ 		// Set display property to block for height/width animations
+ 		if ( ( this.prop == "height" || this.prop == "width" ) && this.elem.style )
+-			this.elem.style.display = "block";
++			this.elem.style.display = jQuery.blockDisplayStyle( this.elem );
+ 	},
+ 
+ 	// Get the current size
+@@ -4114,7 +4122,7 @@
+ 					// Reset the display
+ 					this.elem.style.display = this.options.display;
+ 					if ( jQuery.css(this.elem, "display") == "none" )
+-						this.elem.style.display = "block";
++						this.elem.style.display = jQuery.blockDisplayStyle( this.elem );
+ 				}
+ 
+ 				// Hide the element if the "hide" operation was done

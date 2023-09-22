@@ -1,0 +1,13 @@
+Index: jquery/src/core.js
+===================================================================
+--- jquery/src/core.js	(revision 6263)
++++ jquery/src/core.js	(working copy)
+@@ -498,7 +498,7 @@
+ 	},
+ 
+ 	eq: function( i ) {
+-		return this.slice( i, +i + 1 );
++		return this.pushStack( this[i], 'eq', i );
+ 	},
+ 
+ 	slice: function() {

@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Test jQuery and Hover</title>
+<style>
+#area {
+	background-color: green;
+
+}
+
+#trigger {
+	background-color: red;
+	display: inline-block;
+	position: relative;
+}
+
+#display {
+	background-color: blue;
+	/*display: none;*/ /* <-- Uncomment this to see it magically work. */
+	padding: 1em;
+}
+</style>
+
+<script src="jquery-1.2.6.js"></script>
+<script>
+jQuery( document ).ready( function(){
+	var display = document.getElementById( 'display');
+	display.style.display = 'none';
+	var trigger = document.getElementById( 'trigger' );
+	trigger.onmouseover = function(){ display.style.display = 'block'; };
+});
+</script>
+</head>
+<body>
+
+<div id="area">
+	<div id="trigger">
+		Trigger
+	</div>
+
+	<div id="display">
+		Show me.
+	</div>
+</div>
+
+</body>
+</html>

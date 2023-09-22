@@ -1,0 +1,38 @@
+Index: test/unit/selector.js
+===================================================================
+--- test/unit/selector.js	(revision 4032)
++++ test/unit/selector.js	(working copy)
+@@ -8,7 +8,8 @@
+ 		if ( all[i].nodeType == 8 )
+ 			good = false;
+ 	ok( good, "Select all elements, no comment nodes" );
+-	t( "Element Selector", "p", ["firstp","ap","sndp","en","sap","first"] );
++	// make sure is case insensitive as well
++	t( "Element Selector", "P", ["firstp","ap","sndp","en","sap","first"] );
+ 	t( "Element Selector", "body", ["body"] );
+ 	t( "Element Selector", "html", ["html"] );
+ 	t( "Parent Element", "div p", ["firstp","ap","sndp","en","sap","first"] );
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 4032)
++++ src/core.js	(working copy)
+@@ -586,8 +586,8 @@
+ 	
+ 	// check if an element is in a (or is an) XML document
+ 	isXMLDoc: function( elem ) {
+-		return elem.documentElement && !elem.body ||
+-			elem.tagName && elem.ownerDocument && !elem.ownerDocument.body;
++		return elem && elem.documentElement && !elem.body ||
++			elem && elem.tagName && elem.ownerDocument && !elem.ownerDocument.body;
+ 	},
+ 
+ 	// Evalulates a script in a global context
+@@ -612,6 +612,8 @@
+ 	},
+ 
+ 	nodeName: function( elem, name ) {
++		if (jQuery.isXMLDoc(elem.ownerDocument))
++			return elem.nodeName == name;
+ 		return elem.nodeName && elem.nodeName.toUpperCase() == name.toUpperCase();
+ 	},
+ 	

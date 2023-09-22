@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-strict.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi">
+
+ 
+ 
+ <head>
+ <title>JQuery 1.2.6 - $(window).height() bug in Opera 9.5</title>
+ <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+<script type="text/javascript"
+    src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+
+<script type="text/javascript" >
+
+
+test = function(){
+    $("#info").text( $(window).height() + ". It should be " + window.innerHeight + "!");
+}
+
+$(document).ready(function() {
+
+
+    $("#info").after("<p>" + navigator.userAgent + "</p>" );
+
+    test();
+    $(window).resize( test );
+
+
+});
+
+
+</script>
+
+
+
+
+
+ </head>
+ <body>
+<div id="main">
+
+<h1>JQuery 1.2.6 - $(window).height() bug in Opera 9.5</h1>
+<p>The return value of <strong>$(window).height()</strong>  is wrong in Opera 9.5. Compare to Opera 9.2 or Firefox.  <a href="http://www.pithill.org/kuvat/opera9.5_jquerybug.png" >Here's a screenshot</a>.</p>
+<p>
+The value is now  <strong id="info"></strong>
+</p>
+
+</div>
+ </body>
+ </html>
+

@@ -1,0 +1,12 @@
+diff -Nru a/jQuery/src/core.js b/jQuery/src/core.js
+--- a/jQuery/src/core.js	2008-09-08 11:58:56.159963300 +0800
++++ b/jQuery/src/core.js	2008-09-08 12:02:42.139734300 +0800
+@@ -917,7 +917,7 @@
+ 
+ 			// If we're not dealing with a regular pixel number
+ 			// but a number that has a weird ending, we need to convert it to pixels
+-			if ( !/^\d+(px)?$/i.test( ret ) && /^\d/.test( ret ) ) {
++			if ( !/^-?\d+(px)?$/i.test( ret ) && /^-?\d/.test( ret ) ) {
+ 				// Remember the original values
+ 				var left = style.left, rsLeft = elem.runtimeStyle.left;
+ 

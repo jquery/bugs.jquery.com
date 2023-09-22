@@ -1,0 +1,173 @@
+<div class="belka">Lista klientów</div><br/>
+<?php foreach($this->klienci as $klienci) : ?>
+<?="<a id=\"klient_".$this->escape($klienci->id)."\" href=\"#.\"><img src='".$this->baseUrl."img/klient.jpg' align='absmiddle'/> ".$this->escape($klienci->nazwa_krotka)."</a>";?>
+
+<script>
+$(document).ready(function() {
+$('#klient_<?=$this->escape($klienci->id)?>').click(function() { $('#dialogBox<?=$this->escape($klienci->id)?>').dialog('open'); });
+$("#tab<?=$this->escape($klienci->id)?> > ul").tabs();
+});
+</script>
+
+<!-- Cachowany dialogBox z danymi -->
+<div id="dialogBox<?=$this->escape($klienci->id)?>" class="dialogBox" title="<?=$this->escape($klienci->nazwa_pelna)?>">
+
+        <div id="tab<?=$this->escape($klienci->id)?>" class="flora">
+            <ul>
+                <li><a href="#tab<?=$this->escape($klienci->id)?>_1"><span>Adres</span></a></li>
+                <li><a href="#tab<?=$this->escape($klienci->id)?>_2"><span>Zlecenia</span></a></li>
+		<li><a href="#tab<?=$this->escape($klienci->id)?>_3"><span>Notatki</span></a></li>
+            </ul>
+
+            <div id="tab<?=$this->escape($klienci->id)?>_1">
+<form id="form_klient_<?=$this->escape($klienci->id)?>" name="form_klient_<?=$this->escape($klienci->id)?>">
+<input name="id" type="hidden" value="<?=$this->escape($klienci->id)?>">
+<p class="opis">Nazwa skrócona<br />
+  <input name="nazwa_krotka<?=$this->escape($klienci->id)?>" type="text" id="nazwa_krotka<?=$this->escape($klienci->id)?>" size="50" value="<?=$this->escape($klienci->nazwa_krotka)?>" />
+</p>
+<p>Nazwa pe³na<br />
+  <input name="nazwa_pelna<?=$this->escape($klienci->id)?>" type="text" id="nazwa_pelna<?=$this->escape($klienci->id)?>" size="50" value="<?=$this->escape($klienci->nazwa_pelna)?>" />
+</p>
+<p>Adres<br />
+  <input type="text" name="adres<?=$this->escape($klienci->id)?>" id="adres<?=$this->escape($klienci->id)?>" value="<?=$this->escape($klienci->adres)?>" />
+</p>
+<p>Kod pocztowy<br />
+  <input type="text" name="kodp<?=$this->escape($klienci->id)?>" id="kodp<?=$this->escape($klienci->id)?>" value="<?=$this->escape($klienci->kodp)?>" />
+</p>
+<p>Miejscowosc<br />
+  <input type="text" name="miejscowosc<?=$this->escape($klienci->id)?>" id="miejscowosc<?=$this->escape($klienci->id)?>" value="<?=$this->escape($klienci->miejscowosc)?>" />
+</p>
+<p>Kraj<br />
+  <input name="kraj<?=$this->escape($klienci->id)?>" type="text" id="kraj<?=$this->escape($klienci->id)?>" value="<?=$this->escape($klienci->kraj)?>" />
+</p>
+<p>NIP 
+  <input type="text" name="nip<?=$this->escape($klienci->id)?>" id="nip<?=$this->escape($klienci->id)?>" value="<?=$this->escape($klienci->nip)?>" /> 
+  Regon 
+  <input type="text" name="regon<?=$this->escape($klienci->id)?>" id="regon<?=$this->escape($klienci->id)?>" value="<?=$this->escape($klienci->regon)?>" />
+ Pesel 
+ <input type="text" name="pesel<?=$this->escape($klienci->id)?>" id="pesel<?=$this->escape($klienci->id)?>" value="<?=$this->escape($klienci->pesel)?>" />
+</p>
+<p>Telefon 
+  <input type="text" name="tel<?=$this->escape($klienci->id)?>" id="tel<?=$this->escape($klienci->id)?>" value="<?=$this->escape($klienci->tel)?>" /> 
+  E-mail 
+  <input type="text" name="email<?=$this->escape($klienci->id)?>" id="email<?=$this->escape($klienci->id)?>" value="<?=$this->escape($klienci->email)?>" />
+  www 
+  <input type="text" name="www<?=$this->escape($klienci->id)?>" id="www<?=$this->escape($klienci->id)?>" value="<?=$this->escape($klienci->www)?>" />
+</p>
+<p>Bank 
+  <input type="text" name="bank_nazwa<?=$this->escape($klienci->id)?>" id="bank_nazwa<?=$this->escape($klienci->id)?>" value="<?=$this->escape($klienci->bank_nazwa)?>" />
+  Konto bankowe 
+  <input name="bank_konto<?=$this->escape($klienci->id)?>" type="text" id="bank_konto<?=$this->escape($klienci->id)?>" size="40" value="<?=$this->escape($klienci->bank_konto)?>" />
+</p>
+<p>Osoba obs³uguj¹ca </p>
+<p>
+<input name="rodzaj<?=$this->escape($klienci->id)?>" type="checkbox" id="rodzaj" value="1" <? if ( ($this->escape($klienci->rodzaj)=="1") || ($this->escape($klienci->rodzaj)=="3")) echo "checked";  ?> /> 
+klient<br />
+<input name="rodzaj2<?=$this->escape($klienci->id)?>" type="checkbox" id="rodzaj2" value="2" <? if ( ($this->escape($klienci->rodzaj)=="2") || ($this->escape($klienci->rodzaj)=="3")) echo "checked"; ?> /> 
+podwykonawca</p></form>
+
+</div>
+<div id="tab<?=$this->escape($klienci->id)?>_2">
+
+<script>
+    $('.zam<?=$this->escape($klienci->id)?>').click(function() { $('.zaminfo<?=$this->escape($klienci->id)?>').toggle(); })    
+    .hover(function () { $(this).addClass('podswietl'); }, function () { $(this).removeClass('podswietl'); });
+
+$(document).ready(function() {
+$('.zaminfo<?=$this->escape($klienci->id)?>').hide();
+
+$('.dodaj_zam_box').hide();
+$('#dodaj_zam').click( function() { $(".dodaj_zam_box").show(); })  
+
+$('.loader_zapis<?=$this->escape($klienci->id)?>,.loader_odczyt<?=$this->escape($klienci->id)?>').hide()
+
+$('#zapis<?=$this->escape($klienci->id)?>').click(function() {
+$('.loader_zapis<?=$this->escape($klienci->id)?>').show()
+var dane = $("form#form_klient_<?=$this->escape($klienci->id)?>").serialize();
+$.ajax({  
+type: "POST",  
+url: "<?=$this->baseUrl?>klienci/aktualizuj/id/<?=$this->escape($klienci->id)?>",  
+data: dane,  
+success: function(msg) { $('.loader_zapis<?=$this->escape($klienci->id)?>').hide(); alert(msg); } }); });
+
+$('#submit_nowe_zam<?=$this->escape($klienci->id)?>').click(function() {
+$('.loader_zapis<?=$this->escape($klienci->id)?>').show();
+var dane2 = $("form#form_zam<?=$this->escape($klienci->id)?>").serialize();
+$.ajax({type: "POST",url: "<?=$this->baseUrl?>zamowienia/dodaj/idk/<?=$this->escape($klienci->id)?>",
+data: dane2,
+success: function(msg) { $('.dodaj_zam_box').hide(); $('.loader_zapis<?=$this->escape($klienci->id)?>').hide(); alert(msg); } }); });
+
+$("#termin").datepicker({ 
+    showOn: "both", 
+    buttonImage: "<?=$this->baseUrl?>img/calendar.gif", 
+    buttonImageOnly: true 
+}).attr("readonly", "readonly");
+
+});
+
+</script>
+<a id="dodaj_zam" href="#.">Dodaj zamówienie</a>
+
+<div class="dodaj_zam_box">
+<!-- Formularz zamowienia -->
+<form id="form_zam<?=$this->escape($klienci->id)?>" name="form_zam<?=$this->escape($klienci->id)?>">
+  Termin realizacji<br />
+  <input type="text" name="termin" id="termin" value="" />
+  <br />
+  Koszt zlecenia<br />
+  <input type="text" name="koszt" id="koszt" />
+  <select name="waluta" id="waluta">
+    <option value="pln">PLN</option>
+  </select>
+  <br />
+  Nazwa<br />
+  <input type="text" name="nazwa" id="nazwa" />
+  <br />
+  Opis<br />
+  <textarea name="opis" id="opis" cols="45" rows="3"></textarea>
+  <br />
+  Komentarz
+  <br />
+  <textarea name="komentarz" id="komentarz" cols="45" rows="3"></textarea>
+<p>
+  <input type="button" name="submit_nowe_zam<?=$this->escape($klienci->id)?>" id="submit_nowe_zam<?=$this->escape($klienci->id)?>" value="Dodaj" />
+</p>
+</div>
+</form>
+
+<br/>
+<table width="650" border="0" cellspacing="0" cellpadding="0" class="smallfont">
+  <tr>
+    <td>Nr</td>
+    <td>Nazwa</td>
+    <td>Grafik</td>
+    <td>Podwykonawca</td>
+    <td>Termin</td>
+  </tr>
+  <tr class="zam<?=$this->escape($klienci->id)?>">
+    <td>1</td>
+    <td>Przyk³adowa nazwa</td>
+    <td>Jerzy Wiœniewski</td>
+    <td>Antonex</td>
+    <td>Termin</td>
+  </tr>
+</table>
+<div class="zaminfo<?=$this->escape($klienci->id)?>"><label class="smallfont">Tutaj bedzie pelny opis zlecenia</label></div>
+</div>
+<div id="tab<?=$this->escape($klienci->id)?>_3">
+  <textarea name="dodatkowe_dane<?=$this->escape($klienci->id)?>" id="dodatkowe_dane<?=$this->escape($klienci->id)?>" cols="45" rows="8" style="width:95%" class="smallfont"><?=$this->escape($klienci->dodatkowe_dane)?></textarea>
+</p></div>
+</div> <!-- koniec taba-->
+
+<p>
+  <div id="loader_zapis" class="loader_zapis<?=$this->escape($klienci->id)?>"><img src="<?=$this->baseUrl?>img/loader.gif" align="absmiddle"> Zapisujê...</div>
+  <div id="loader_odczyt" class="loader_odczyt<?=$this->escape($klienci->id)?>"><img src="<?=$this->baseUrl?>img/loader.gif" align="absmiddle"> Wczytujê...</div>  
+  <input type="button" name="zapis<?=$this->escape($klienci->id)?>" id="zapis<?=$this->escape($klienci->id)?>" value="Zapisz" class="button_grey" />
+  <input type="button" name="usun" id="usun" value="Usuñ" onclick="javascript:window.open('<?=$this->baseUrl?>klienci/usun/id/<?=$this->escape($klienci->id)?>','_top')" class="button_grey">
+</p>
+
+</div>
+<!-- koniec dialogBoxa -->
+
+<br/>
+<?php endforeach; ?> 

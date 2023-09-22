@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>untitled</title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="Adam van den Hoven">
+	<!-- Date: 2008-02-15 -->
+	
+	<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://marcgrabanski.com/code/ui-datepicker/core/ui.datepicker.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="http://marcgrabanski.com/code/ui-datepicker/core/ui.datepicker.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+<table>
+    <tr><td><label>Future Date:</label></td><td><input id="cal1" /></td></tr>
+    <tr><td><label>Date:       </label></td><td><input id="cal2" /></td></tr>
+</table>
+<script type="text/javascript" charset="utf-8">
+    jQuery(function($){
+        $("#cal1").attachDatepicker({
+            minDate:"1d"
+        });
+        $("#cal2").attachDatepicker();
+    })
+</script>
+</body>
+</html>

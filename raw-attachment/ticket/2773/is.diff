@@ -1,0 +1,15 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 5554)
++++ core.js	(working copy)
+@@ -349,7 +349,9 @@
+ 	},
+ 
+ 	is: function( selector ) {
+-		return !!selector && jQuery.multiFilter( selector, this ).length > 0;
++		return typeof selector == 'string' ? 
++			jQuery.multiFilter( selector, this ).length > 0 :
++			jQuery.inArray( selector, this ) != -1;
+ 	},
+ 
+ 	hasClass: function( selector ) {

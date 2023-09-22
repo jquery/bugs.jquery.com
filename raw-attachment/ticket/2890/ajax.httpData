@@ -1,0 +1,26 @@
+Index: ajax.js
+===================================================================
+--- ajax.js	(revision 5584)
++++ ajax.js	(working copy)
+@@ -453,17 +453,19 @@
+ 	httpData: function( r, type ) {
+ 		var ct = r.getResponseHeader("content-type"),
+ 			xml = type == "xml" || !type && ct && ct.indexOf("xml") >= 0,
++			script = type == "script" || !type && ct && ct.indexOf("script") >= 0,
++			json = type == "json" || !type && ct && ct.indexOf("json") >= 0,
+ 			data = xml ? r.responseXML : r.responseText;
+ 
+ 		if ( xml && data.documentElement.tagName == "parsererror" )
+ 			throw "parsererror";
+ 
+ 		// If the type is "script", eval it in global context
+-		if ( type == "script" )
++		if ( script )
+ 			jQuery.globalEval( data );
+ 
+ 		// Get the JavaScript object, if JSON is used.
+-		if ( type == "json" )
++		if ( json )
+ 			data = eval("(" + data + ")");
+ 
+ 		return data;

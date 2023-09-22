@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>
+		"Attribute Starts With"-Bug
+	</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+
+(function($) {
+	
+	
+	function test() {
+		
+		// 1. Attribute Starts With Selector [name^=value]
+		$('#res0').text($('a[href^=\\#]').size());
+		$('#res1').text($('body').find('a[href^=\\#]').size()); // ERROR
+		
+		$('#res0a').text($('a[href^=#]').size());
+		$('#res1a').text($('body').find('a[href^=#]').size());
+		
+		$('#res2').text($('a[title^=target]').size());
+		$('#res3').text($('body').find('a[title^=target]').size());
+		
+		// 2. Attribute Ends With Selector [name$=value]
+		$('#res4').text($('a[href$=test]').size());
+		$('#res5').text($('body').find('a[href$=test]').size());
+		
+		$('#res6').text($('a[href*=\\#]').size());
+		$('#res7').text($('body').find('a[href*=\\#]').size());
+		
+		// 3. Attribute Contains Selector [name*=value]
+		$('#res8').text($('a[href*=test]').size());
+		$('#res9').text($('body').find('a[href*=test]').size());  // ERROR
+	}
+	
+	$(document).ready(test);
+	
+})(jQuery);
+
+</script>
+
+</head>
+
+<body>
+	
+<div class="container">
+<a href="#target1test" title="target1test">Link to target1test</a><br />
+<a href="#target2test" title="target2test">Link to target2test</a><br />
+<a href="#target3test" title="target3test">Link to target3test</a><br />
+<a href="#target4test" title="target4test">Link to target4test</a><br />
+<a href="#target5test" title="target5test">Link to target5test</a><br />
+</div>
+
+<div class="result">
+	<h2>1. Attribute Starts With Selector [name^=value]</h2>
+	<code>$('a[href^=\\#]').size();</code>
+	<p id="res0"></p>
+	<code>$('body').find('a[href^=\\#]').size();</code>
+	<p id="res1"></p>
+	<h3>1.1 without escaping</h3>
+	<code>$('a[href^=#]').size();</code>
+	<p id="res0a"></p>
+	<code>$('body').find('a[href^=#]').size();</code>
+	<p id="res1a"></p>
+	<h3>1.2 without metacharacters</h3>
+	<code>$('a[title^=target]').size();</code>
+	<p id="res2"></p>
+	<code>$('body').find('a[title^=target]').size();</code>
+	<p id="res3"></p>
+	
+	<h2>2. Attribute Ends With Selector [name$=value]</h2>
+	<code>$('a[href$=test]').size();</code>
+	<p id="res4"></p>
+	<code>$('body').find('a[href$=test]').size();</code>
+	<p id="res5"></p>
+	
+	<h2>3. Attribute Contains Selector [name*=value]</h2>
+	<code>$('a[href*=\\#]').size();</code>
+	<p id="res6"></p>
+	<code>$('body').find('a[href*=\\#]').size();</code>
+	<p id="res7"></p>
+	<code>$('a[href*=test]').size();</code>
+	<p id="res8"></p>
+	<code>$('body').find('a[href*=test]').size();</code>
+	<p id="res9"></p>
+</div>
+
+</body>
+</html>

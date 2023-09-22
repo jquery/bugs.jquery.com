@@ -1,0 +1,29 @@
+--- C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\selector.js-revBASE.svn005.tmp.js	ven. janv. 23 13:36:43 2009
++++ C:\Dev\SVN\jQuery\trunk\jquery\src\selector.js	ven. janv. 23 13:29:10 2009
+@@ -6,7 +6,7 @@
+  */
+ (function(){
+ 
+-var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^[\]]*\]|['"][^'"]+['"]|[^[\]'"]+)+\]|\\.|[^ >+~,(\[]+)+|[>+~])(\s*,\s*)?/g,
++var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^[\]]*\]|['"][^'"]+['"]|[^[\]'"]+)+\]|\[[^\/]*\/=\/.*\/[ig]{0,2}\]|\\.|[^ >+~,(\[]+)+|[>+~])(\s*,\s*)?/g,
+ 	done = 0,
+ 	toString = Object.prototype.toString;
+ 
+@@ -233,7 +233,7 @@
+ 		ID: /#((?:[\w\u00c0-\uFFFF_-]|\\.)+)/,
+ 		CLASS: /\.((?:[\w\u00c0-\uFFFF_-]|\\.)+)/,
+ 		NAME: /\[name=['"]*((?:[\w\u00c0-\uFFFF_-]|\\.)+)['"]*\]/,
+-		ATTR: /\[\s*((?:[\w\u00c0-\uFFFF_-]|\\.)+)\s*(?:(\S?=)\s*(['"]*)(.*?)\3|)\s*\]/,
++		ATTR: /\[\s*((?:[\w\u00c0-\uFFFF_-]|\\.)+)\s*(?:(\S?=)\s*(?:(['"]*)([^/].*?)\3|\/(.*)\/([ig]*))|)\s*\]/,
+ 		TAG: /^((?:[\w\u00c0-\uFFFF\*_-]|\\.)+)/,
+ 		CHILD: /:(only|nth|last|first)-child(?:\((even|odd|[\dn+-]*)\))?/,
+ 		POS: /:(nth|eq|gt|lt|first|last|even|odd)(?:\((\d*)\))?(?=[^-]|$)/,
+@@ -571,6 +571,8 @@
+ 				value === check :
+ 				type === "*=" ?
+ 				value.indexOf(check) >= 0 :
++				type === "/="?
++				!!value.match(new RegExp(match[5], match[6])):
+ 				type === "~=" ?
+ 				(" " + value + " ").indexOf(check) >= 0 :
+ 				!match[4] ?

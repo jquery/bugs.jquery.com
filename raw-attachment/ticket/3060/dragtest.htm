@@ -1,0 +1,184 @@
+<html>
+<head>
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Draggables demo - Interface plugin for jQuery</title>
+        <script type="text/javascript" src="jquery-1.2.1.pack.js"></script>
+        <script type="text/javascript" src="iutil.js"></script>
+        <script type="text/javascript" src="idrag.js"></script>
+<style type="text/css" media="all">
+
+body
+{
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+}
+
+.draggable {
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    border: 1px solid #0090DF;
+    background-color: #68BFEF;
+    padding: 10px;
+    text-align: center;
+}
+
+#parentElem
+{
+    width: 402px;
+    height: 160px;
+    background-color: #FFDFDF;
+    border: 10px solid #900;
+    padding: 20px;
+    top: 150px;
+    left: 0px;
+    position: absolute;
+    overflow: hidden;
+    margin: 10px;
+    color: #000;
+    border-left-width: 10px;
+}
+#insideParent
+{
+    width: 100px;
+    height: 100px;
+    background-color: #9c0;
+    color: #fff;
+}
+#drag1
+{
+    top: 10px;
+    left: 10px;
+}
+#drag2
+{
+    top: 10px;
+    left: 130px;
+}
+#drag3
+{
+    top: 10px;
+    left: 250px;
+}
+#drag4
+{
+    top: 10px;
+    left: 370px;
+}
+#drag5
+{
+    top: 80px;
+    left: 10px;
+}
+#drag6
+{
+    top: 80px;
+    left: 130px;
+}
+#drag7
+{
+    top: 80px;
+    left: 250px;
+}
+#drag7 div
+{
+    cursor: move;
+    background-color: #900;
+    height: 15px;
+}
+#drag8
+{
+    top: 80px;
+    left: 370px;
+}
+.frameClass
+{
+    border: 1px dotted #999;
+}
+</style>
+</head>
+<body>
+<div id="parentElem">border: 5px; padding: 5px; margin: 5px;<div id="insideParent">Drag me inside my parrent</div></div>
+<div id="drag1" class="draggable"><a href="index.php">Drag me</a></div>
+<div id="drag2" class="draggable">Ghostly</div>
+<div id="drag3" class="draggable">Revert</div>
+<div id="drag4" class="draggable">Moved by grid [50,50]</div>
+<div id="drag5" class="draggable">Moved only vertically</div>
+<div id="drag6" class="draggable">Moved only horizontally</div>
+<div id="drag7" class="draggable"><div></div>Drag by handle</div>
+<div id="drag8" class="draggable">with cursorAt</div>
+<script type="text/javascript">
+$(document).ready(
+    function()
+    {
+        $('#drag1').Draggable({snapDistance: 10, frameClass: 'frameClass'});
+        $('#drag2').Draggable(
+            {
+                ghosting:   true,
+                opacity:    0.5,
+                fx:         300
+            }
+        );
+        $('#drag3').Draggable(
+            {
+                revert:     true,
+                fx:         100
+            }
+        );
+        $('#drag4').Draggable(
+            {
+                grid:       [50,50]
+            }
+        );
+        $('#drag5').Draggable(
+            {
+                axis:   'vertically'
+            }
+        );
+        $('#drag6').Draggable(
+            {
+                axis:   'horizontally'
+            }
+        );
+        $('#drag7').Draggable(
+            {
+                handle: 'div'
+            }
+        );
+        $('#insideParent').Draggable(
+            {
+                zIndex:     1000,
+                ghosting:   false,
+                opacity:    0.7,
+                containment : 'parent'
+            }
+        );
+        $('#drag8').Draggable(
+            {
+                /* onDragModifier : function(x,y)
+                {
+                    var centerx = 600;
+                    var centery = 400;
+                    var angle = Math.atan((centery-y)/(centerx-x));
+                    if((centerx-x)>=0)
+                        angle += Math.PI;
+                    radius = 160;
+                    return {
+                        x: radius * Math.cos(angle) + centerx,
+                        y: radius * Math.sin(angle) + centery
+                    }
+                }
+                */
+                cursorAt: { top: -5, left: -5 }
+            }
+        );
+    }
+);
+</script>
+</body>
+</html>

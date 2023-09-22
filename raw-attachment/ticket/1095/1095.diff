@@ -1,0 +1,13 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 3505)
++++ src/core.js	(working copy)
+@@ -748,7 +748,7 @@
+ 				// Otherwise, we need to flip out more values
+ 				} else {
+ 					elem = jQuery( elem.cloneNode(true) )
+-						.find(":radio").removeAttr("checked").end()
++						.find(":radio").removeAttr("checked").removeAttr("defaultChecked").end()
+ 						.css({
+ 							visibility: "hidden",
+ 							position: "absolute",

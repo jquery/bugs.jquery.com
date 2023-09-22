@@ -1,0 +1,19 @@
+Index: jquery-1.3.2.js
+===================================================================
+--- jquery-1.3.2.js	(revision 83)
++++ jquery-1.3.2.js	(working copy)
+@@ -3105,9 +3105,11 @@
+ // Window isn't included so as not to unbind existing unload events
+ jQuery( window ).bind( 'unload', function(){ 
+ 	for ( var id in jQuery.cache )
+-		// Skip the window
+-		if ( id != 1 && jQuery.cache[ id ].handle )
+-			jQuery.event.remove( jQuery.cache[ id ].handle.elem );
++		try {
++			// Skip the window
++			if ( id != 1 && jQuery.cache[ id ].handle )
++				jQuery.event.remove( jQuery.cache[ id ].handle.elem );
++		} catch(e){}
+ }); 
+ (function(){
+ 

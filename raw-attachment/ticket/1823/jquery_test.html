@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      function doIt() {
+        var $container = $("#container");
+
+        $container.animate({width:'hide'}, 5000);
+        $container.animate({fontSize:'2em'}, {queue:false, duration:500});
+        $container.show(500);
+        $container.slideDown(500);
+        $container.slideUp(500);
+      }
+
+      $(function () {
+        $("#doit").click(doIt);
+      });
+    </script>
+  </head>
+  <body>
+    <button id="doit">Do It</button>
+    <div id="container">
+      Hi
+    </div>
+    <div id="adiv">This animation should reduce the width to nothing and change the font size bigger, THEN show, slideDown, slideUp.  With the bug it tries to do multiple things at once.</div>
+  </body>
+</html>

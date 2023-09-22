@@ -1,0 +1,16 @@
+Index: jquery/src/attributes.js
+===================================================================
+--- jquery/src/attributes.js	(revision 6414)
++++ jquery/src/attributes.js	(working copy)
+@@ -36,7 +36,12 @@
+ 	},
+ 
+ 	hasClass: function( selector ) {
+-		return !!selector && this.is( "." + selector );
++		return !!selector && this.is(
++			"." +							// prepend dot to look for class
++			jQuery.trim(selector)			// trim blanks
++			.replace(/([:.#])/g, '\\$1')	// escape metachars
++			.replace(/\s+/g, '.')			// join space-separated classes with dots
++		);
+ 	},

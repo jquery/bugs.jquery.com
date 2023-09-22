@@ -1,0 +1,28 @@
+--- u/temp/jquery-treeview/jquery.treeview.async.js 
++++ home/mb/wdev/cheiron/cryo/Cryo/root/static/c/treeview/jquery.treeview.async.js 
+@@ -42,6 +42,8 @@
+ 		}
+ 		$.each(response, createNode, [child]);
+         $(container).treeview({add: child});
++
++        if (settings.ajaxload) settings.ajaxload();
+     });
+ }
+ 
+@@ -50,8 +52,16 @@
+ 	if (!settings.url) {
+ 		return proxied.apply(this, arguments);
+ 	}
++
++    if ( settings.ajaxload ) {
++        var callback = settings.ajaxload;
++        settings.ajaxload = function() {
++            return callback.apply($(this).parent()[0], arguments);
++        };
++    }
++	
+ 	var container = this;
+	load(settings, "source", this, container);
+ 	var userToggle = settings.toggle;
+ 	return proxied.call(this, $.extend({}, settings, {
+ 		collapsed: true,

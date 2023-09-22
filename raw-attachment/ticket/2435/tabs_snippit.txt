@@ -1,0 +1,21 @@
+//Call to Load Tabs
+$(document).ready(function(){
+		$("#tabNav > ul").tabs({ajaxOptions: {cache: false}});
+		});
+
+//Call to swap to the first tab
+function navTest()
+{
+	$("#tabNav > ul").tabs('select', 0);
+}
+
+
+
+//Tabs Code
+<div id="tabNav" class="flora">
+	<ul>
+		<li><a href="ajax/ajaxAgentOfficePanels.cfm?page=currentOffices"><span>Current Offices</span></a></li>
+		<li><a href="ajax/ajaxAgentOfficePanels.cfm?page=addOffices"><span>Add Office</span></a></li>
+		<li><a href="ajax/ajaxAgentOfficePanels.cfm?page=disconnectOffices"><span>Disconnect Office</span></a></li>
+	</ul>
+</div>

@@ -1,0 +1,14 @@
+Index: current/ui.mouse.js
+===================================================================
+--- current/ui.mouse.js	(revision 3817)
++++ current/ui.mouse.js	(working copy)
+@@ -168,7 +168,8 @@
+ 				this.pos[1] -= o.po.top;
+ 			}
+ 			
+-			this.slowMode = (o.cursorAt && (o.cursorAt.top-o.margins.top > 0 || o.cursorAt.bottom-o.margins.bottom > 0) && (o.cursorAt.left-o.margins.left > 0 || o.cursorAt.right-o.margins.right > 0)) ? true : false; //If cursorAt is within the helper, set slowMode to true
++			// slowMode: manually check the physical bounds of droppables for intersection, rather than using the mouseover and mouseout listeners
++			this.slowMode = (o.cursorAtIgnore || (o.cursorAt && (o.cursorAt.top-o.margins.top > 0 || o.cursorAt.bottom-o.margins.bottom > 0) && (o.cursorAt.left-o.margins.left > 0 || o.cursorAt.right-o.margins.right > 0))) ? true : false; //If cursorAt is ignored or within the helper, set slowMode to true
+ 			
+ 			if(!o.nonDestructive) $(this.helper).css('position', 'absolute');
+ 			if(o.helper != 'original') $(this.helper).appendTo((o.appendTo == 'parent' ? a.parentNode : o.appendTo)).show();

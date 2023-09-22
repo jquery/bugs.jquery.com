@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta name="keywords" content="Show / Hide TD, HTML web development web design serverside clientside database XML CSS DHTML JavaScript developer discussion forums Perl PHP ecommerce scripting affiliate domains accessability business matters webdeveloper.com internet.com" />
+	<meta name="description" content="[Archive] Show / Hide TD JavaScript" />
+	
+	<title>Show / Hide TD [Archive]  - WebDeveloper.com</title>
+	<link rel="stylesheet" type="text/css" href="http://www.webdeveloper.com/forum/archive/archive.css" />
+</head>
+<body>
+
+<script src="/script/jquery-1.2.6.pack.js" type="text/javascript"></script>
+<script src="/script/addproducts.js" type="text/javascript"></script>
+<script src="/script/listbox.js" type="text/javascript"></script>
+
+<script>
+
+function findControlByID(targ) {
+
+		re = new RegExp(':' + targ + '$')
+
+		for (x = 0; x <document.forms.length; x++) {
+
+			for(y = 0; y < document.forms[x].elements.length; y++) {
+			
+				elm = document.forms[x].elements[y]
+			
+				if (re.test(elm.name)) {return elm}
+			
+			}
+			
+		}	
+
+}
+
+jQuery(document).ready(function() {
+
+	$('.clickbutton').click(function () {
+		
+		alert(document.getElementById('bSelect'));
+		//$('.aSelect').moveElements($('.bSelect'));
+		var left = $('.aSelect').children('option:selected').eq(0);
+		$('.bSelect').append(left);
+		document.getElementById('bSelect').options[document.getElementById('bSelect').options.length-1].selected = 'true';
+			
+	})	
+	
+})	
+
+</script>
+
+<form action="">
+<select name="aSelect" class="aSelect" id="aSelect" multiple="true" size="5" style="width:184px;height:250px;">
+<option value="opt1">option 1
+<option value="opt2">option 2
+<option value="opt3">option 3
+<option value="opt4">option 4
+<option value="opt5">option 5
+<option value="opt6">option 6
+<option value="opt7">option 7
+<option value="opt8">option 8
+<option value="opt9">option 9
+<option value="opt10">option 10
+<option value="opt11">option 11
+<option value="opt12">option 12
+<option value="opt13">option 13
+<option value="opt14">option 14
+<option value="opt15">option 15
+<option value="opt16">option 16
+<option value="opt17">option 17
+<option value="opt18">option 18
+<option value="opt19">option 19
+<option value="opt20">option 20
+<option value="opt21">option 21
+<option value="opt22">option 22
+<option value="opt23">option 23
+<option value="opt24">option 24
+<option value="opt25">option 25
+</select><br>
+
+<select name="bSelect" class="bSelect" id="bSelect" multiple="true" size="5" style="width:184px;height:250px;">
+<option value="opta">option a
+<option value="optb">option b
+<option value="optc">option c
+<option value="optd">option d
+<option value="opte">option e
+<option value="optf">option f
+<option value="optg">option g
+<option value="opth">option h
+<option value="opti">option i
+<option value="optj">option j
+<option value="optk">option k
+<option value="optl">option l
+<option value="optm">option m
+<option value="optn">option n
+<option value="optn">option o
+<option value="opto">option p
+<option value="optp">option q
+<option value="optq">option r
+<option value="optr">option s
+<option value="opts">option t
+<option value="optt">option u
+<option value="optu">option v
+<option value="optv">option w
+<option value="optw">option x
+<option value="optx">option y
+<option value="opty">option z	
+</select>
+
+<input type="button" value="test" class="clickbutton"><br><br>
+
+</form>
+</body>
+</html>

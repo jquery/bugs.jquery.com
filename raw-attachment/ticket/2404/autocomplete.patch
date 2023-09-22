@@ -1,0 +1,13 @@
+Index: plugins/autocomplete/jquery.autocomplete.js
+===================================================================
+--- plugins/autocomplete/jquery.autocomplete.js	(revision 4817)
++++ plugins/autocomplete/jquery.autocomplete.js	(working copy)
+@@ -363,7 +363,7 @@
+ 		if ( !value ) {
+ 			return [""];
+ 		}
+-		var words = value.split( $.trim( options.multipleSeparator ) );
++		var words = value.split( options.multipleSeparator );
+ 		var result = [];
+ 		$.each(words, function(i, value) {
+ 			if ( $.trim(value) )

@@ -1,0 +1,1629 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">#11489 ($.post() requires a value back) - jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      :root{--ticket-info-background-color:#ffd;--ticket-info-border-color:#dd9;--ticket-table-border-color:#eed;--ticket-date-text-color:#996;--ticket-description-title-color:#663;--ticket-changes-text-color:#663;--ticket-changes-box-shadow:#f2f2f2}.ticket-info{position:relative;background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);padding:.5em .75em;margin-bottom:.5em}.ticket-number{font-size:1.15rem;font-weight:700;margin-right:.5em}.ticket-info span{font-size:.8125em;font-weight:700}.ticket-resolution,.ticket-status,.ticket-type{text-transform:uppercase}.missing{color:var(--text-color-link-disabled)}.ticket-title{border-bottom:1px solid #bbb;margin-top:1em;padding-bottom:.25em;font-weight:700;font-size:1.1875rem}.ticket-dates{color:var(--ticket-date-text-color);font-size:.8125rem}.ticket-dates p{margin:0 0 .5em}.ticket-properties{width:100%;text-align:left;font-size:.65rem;border-top:1px solid var(--ticket-table-border-color);margin:0}.ticket-properties th{font-weight:400;width:20%}.ticket-properties td,.ticket-properties th{padding:.25em .5em;border-bottom:1px dashed var(--ticket-table-border-color)}.ticket-info-bottom{padding:.5em}.ticket-description{font-size:.8125rem;margin-top:.5em}.ticket-description h2,.ticket-description h3,.ticket-description h4,.ticket-description h5,.ticket-description h6{text-transform:uppercase;font-weight:400}.ticket-description h1{font-size:1.1rem}.ticket-description h2{font-size:1rem}.ticket-description h3{font-size:.9rem}.ticket-description h4{font-size:.8rem}.ticket-description h5{font-size:.75rem}.ticket-description h6{font-size:.7rem}.ticket-description-title{color:var(--ticket-description-title-color);font-size:.75rem}details{padding:.5em 0;font-size:.8125rem}summary{color:var(--text-color-link);font-weight:700;font-size:.875rem;text-decoration:underline;cursor:pointer;text-shadow:.04em .04em var(--text-shadow-color)}.ticket-attachments{font-size:.75em}.ticket-comment-body{width:100%;padding-top:.5em}.ticket-change{margin:1em 0;clear:both}.ticket-change-header{font-size:.875rem;font-weight:700;box-shadow:1.4px 2.8px 5.6px 0 var(--ticket-changes-box-shadow)}.ticket-change-link{font-size:.85em}.ticket-change-content{width:100%}.ticket-changes{background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);color:var(--ticket-changes-text-color);font-size:.7rem;float:right;clear:right;margin:2em 0 1em 1.5em}.ticket-changes th{text-align:right;font-weight:400;text-transform:capitalize}.ticket-changes td,.ticket-changes th{padding:.25em;vertical-align:baseline}.ticket-changes .change-field-new{font-weight:700}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+<div class="flex-column" data-pagefind-body="">
+  
+
+  <nav class="content-nav">
+    <ul class="flex-row">
+      
+        <li>
+          <a href="/bugs.jquery.com/ticket/11488/">← Previous Ticket</a>
+        
+      
+      
+        </li><li>
+          <a href="/bugs.jquery.com/ticket/11490/">Next Ticket →</a>
+        </li>
+      
+    </ul>
+  </nav>
+
+
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="." class="ticket-number">#11489</a>
+      <span class="ticket-status">closed</span>
+      <span class="ticket-type">bug</span>
+      <span class="ticket-resolution">(invalid)</span>
+    </h3>
+
+    <div class="ticket-dates">
+      <p>Opened March 20, 2012 01:33PM UTC</p>
+      
+        <p>Closed April 02, 2012 04:20PM UTC</p>
+      
+      
+        <p>Last modified February 13, 2013 06:15PM UTC</p>
+      
+    </div>
+  </div>
+
+  <h1 class="ticket-title">$.post() requires a value back</h1>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        eldmannen+jquery@gmail.com
+      </td>
+      <th>Owned by:</th>
+      <td>eldmannen+jquery@gmail.com</td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        low
+      </td>
+      
+        <th class="missing">Milestone:</th>
+      
+      <td>
+        <a href="/bugs.jquery.com/milestone/None">None</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>ajax</td>
+      
+        <th>Version:</th>
+      
+      <td>1.7.1</td>
+    </tr>
+    <tr>
+      
+        <th class="missing">Keywords:</th>
+      
+      <td></td>
+      
+        <th class="missing">Cc:</th>
+      
+      <td></td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
+    <div class="ticket-description"><p>$.post("/Foo", { id: "2" }</p><p>This will make Firefox state "no element found".</p><p>If on the server side there is:</p><p><a href="/bugs.jquery.com/wiki/HttpPost">HttpPost</a></p><p>public void Foo(int id)</p><p>{</p><p>    // Nothing</p><p>}</p><p>However, if I switch the 'void' to 'bool' and return true, then it works:</p><p><a href="/bugs.jquery.com/wiki/HttpPost">HttpPost</a></p><p>public bool Foo(int id)</p><p>{</p><p>    return true;</p><p>}</p><p>And Firefox does not say "no element found" anymore.</p><p>It seems that jQuery requires/expects a value to be returned by the server for the POST request.</p><p>However, the server already returns HTTP 200 OK which should be enough.</p></div>
+  </div>
+</div>
+
+<details>
+  <summary class="ticket-details-summary">Attachments (0)</summary>
+
+  <ul class="ticket-attachments">
+    
+  </ul>
+</details>
+
+<details open="">
+  <summary class="ticket-details-summary">Change History (44)</summary>
+  
+    <div class="ticket-change flex-column" id="comment:1">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 20, 2012 02:13PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:1">comment:1</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/11490">#11490</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:2">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 20, 2012 02:13PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:2">comment:2</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/11491">#11491</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:3">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 20, 2012 02:29PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:3">comment:3</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>component:</th>
+                  <td>
+                    
+                      <span class="change-field-old">unfiled</span> → <span class="change-field-new">ajax</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>owner:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ eldmannen+jquery@gmail.com</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">pending</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Thanks for taking the time to contribute to the jQuery project! Please provide a complete reduced test case on jsFiddle to help us assess your ticket!</p><p>Additionally, be sure to test against the "jQuery (edge)" version to ensure the issue still exists. To get you started, use this boilerplate: <a href="http://jsfiddle.net/FrKyN/" class="ext-link"><span class="icon"></span>http://jsfiddle.net/FrKyN/</a>  </p><p>Open the link and click to "Fork" (in the top menu) to begin.</p>
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:4">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 20, 2012 03:51PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:4">comment:4</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>The only code on the client side is:</p><p>$.post("/Foo", { id: "2" });</p><p>The other is on the server-side, return or not return. So not much to put on jsfiddle as this depends on a server to post to.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:5">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 20, 2012 04:08PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:5">comment:5</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Please see: <a href="http://doc.jsfiddle.net/use/echo.html" class="ext-link"><span class="icon"></span>http://doc.jsfiddle.net/use/echo.html</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:6">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 20, 2012 05:26PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:6">comment:6</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I am unable to reproduce it using jsfiddle and the echo service.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:7">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 20, 2012 07:29PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:7">comment:7</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>priority:</th>
+                  <td>
+                    
+                      <span class="change-field-old">undecided</span> → <span class="change-field-new">low</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ invalid</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">pending</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Closing per OP</p>
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:8">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 21, 2012 10:43AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:8">comment:8</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>It is not possible to reproduce this with the echo service provided by jsfiddle because of limitations in jsfiddle. Namely it always returns a Content-Type header.</p><p>The bug occurs when the response does not contain a Content-Type header.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:9">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 21, 2012 03:33PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:9">comment:9</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>This still sounds like an issue with your server software and not with jQuery.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:10">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 21, 2012 03:55PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:10">comment:10</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>No, this is a issue with jQuery.</p><p>The server behaves correct and sends 200 OK or 404 Not Found.</p><p>jQuery should understand that, instead jQuery bugs out when a Content-Type isn't specified.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:11">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 21, 2012 04:06PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:11">comment:11</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>If there's no content type, jQuery probably can't guess the dataType. Try providing it explicitly if you are unable to correct the problem of a missing content type on the server. That would be good practice regardless.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:12">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 22, 2012 11:00AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:12">comment:12</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>But I have nothing to return. Hence I don't need no content-type since there is no content served.</p><p>jQuery does a POST to do the server and the server saves the data and returns nothing except HTTP 200 OK.</p><p>Why should I have to specify a Content-Type when I am not returning any content?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:13">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 22, 2012 02:15PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:13">comment:13</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Could you try this... </p><p>What happens if you replace the the call to <code>$.post</code> with a <code>$.ajax</code>:</p><pre class="wiki">
+$.ajax({
+  url: "/Foo", 
+  data: { id: "2" }, 
+  contentType: "application/x-www-form-urlencoded", 
+  success: function() {
+    console.log( "success" );
+  },
+  error: function(xhr, status, error) {
+    console.log( xhr.status + ": " + xhr.statusText );
+  }
+})
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:14">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 22, 2012 03:01PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:14">comment:14</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I tried the above code by you (which uses a GET request).</p><p>It also results in "no element found" in the <a href="/bugs.jquery.com/wiki/JavaScript">JavaScript</a> console.</p><p>Neither the success or error handlers seem to trigger though.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:15">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 22, 2012 03:09PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:15">comment:15</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Sorry, i actually forgot to explicitly specify the request type.</p><pre class="wiki">
+$.ajax({
+  type: "POST", 
+  url: "/Foo", 
+  data: { id: "2" }, 
+  contentType: "application/x-www-form-urlencoded", 
+  success: function() {
+    console.log( "success" );
+  },
+  error: function(xhr, status, error) {
+    console.log( xhr.status + ": " + xhr.statusText );
+  }
+})
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:16">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 22, 2012 03:28PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:16">comment:16</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I tried your revised code (which now uses POST).</p><p>I still get the same "no element found" in the <a href="/bugs.jquery.com/wiki/JavaScript">JavaScript</a> console.</p><p>Neither the success or error handler gets triggered.</p><pre class="wiki">
+    public void Foo(int id)
+    {
+    }
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:17">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 26, 2012 10:02AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:17">comment:17</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:15 rwaldron]:</p><blockquote> ...</blockquote><p>This bug is marked as invalid, but I am not convinced it is invalid.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:18">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 26, 2012 10:13AM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:18">comment:18</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:17 anonymous]:</p><blockquote> Replying to [comment:15 rwaldron]: &gt; ...  This bug is marked as invalid, but I am not convinced it is invalid.</blockquote><p>I'm not convinced either but we'd need a reduced test case to assess that.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:19">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 26, 2012 02:04PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:19">comment:19</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:18 jaubourg]:</p><blockquote> Replying to [comment:17 anonymous]: &gt; Replying to [comment:15 rwaldron]: &gt; &gt; ... &gt;  &gt; This bug is marked as invalid, but I am not convinced it is invalid.  I'm not convinced either but we'd need a reduced test case to assess that.</blockquote><p>Then please open the bug again.</p><p>I've provided both client-side source code and server-side source code.</p><p>Bug isn't difficult to reproduce. The testcase is small, but I have no server online. You can write run the source provided in C#/ASP.NET or re-write it trivially in PHP, Python, Ruby or anything.</p><pre class="wiki">
+&lt;?php
+header_remove("Content-Type");
+?&gt;
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:20">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 26, 2012 02:20PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:20">comment:20</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>We cannot (and will not) investigate bugs reports without a complete reduced test case (ie: some page and/or jsFiddle demonstrating the issue). Exception being a team member having a lot of free time and especially interested in the issue.</p><p>It's not about us not willing, it's about us needing to feed ourselves with one paid (and time-consuming) activity or another.</p><p>If you want a bug investigated, the bare minimum is to provide a complete reduced test case.  If you don't, then you're asking for support (because we can't establish if you don't have a trivial error your side unless we engage in a dialogue with you) and the bug tracker is not the place for this (IRC is).</p><p>So, again, provide a complete reduced test case, not out-of-context code snippets or "good god, isn't it obvious you have a bug" remarks: we need something simple and verifiable before we invest time (first to determine if it IS a bug, then to determine if it warrants fixing -- ie, no trivial workaround --, then to determine a proper fix).</p><p>Again, there is nothing against you personally. It's just that I, as an example, cannot take 20 minutes of my time on every ajax bug report just to explain why we need a reproducible test case (like I just did). So think about actually investigating them all.</p><p>Help us help you: provide a complete reduced test case.</p><p>Replying to [comment:19 anonymous]:</p><blockquote> Replying to [comment:18 jaubourg]: &gt; Replying to [comment:17 anonymous]: &gt; &gt; Replying to [comment:15 rwaldron]: &gt; &gt; &gt; ... &gt; &gt;  &gt; &gt; This bug is marked as invalid, but I am not convinced it is invalid. &gt;  &gt; I'm not convinced either but we'd need a reduced test case to assess that. Then please open the bug again. I've provided both client-side source code and server-side source code. Bug isn't difficult to reproduce. The testcase is small, but I have no server online. You can write run the source provided in C#/ASP.NET or re-write it trivially in PHP, Python, Ruby or anything.  <pre class="wiki">
+&gt; &lt;?php
+&gt; header_remove("Content-Type");
+&gt; ?&gt;
+&gt; </pre></blockquote>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:21">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 26, 2012 05:51PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:21">comment:21</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:20 jaubourg]:</p><blockquote> We cannot (and will not) investigate bugs reports without a complete reduced test case (ie: some page and/or jsFiddle demonstrating the issue). Exception being a team member having a lot of free time and especially interested in the issue.</blockquote><p>I do not need support, I can workaround this bug by adding a Content-Type header or using bool instead of void.</p><p>I do understand you want a jsfiddle, but it is not possible to create a fiddle for this as jsfiddle always provides a header and does not have any support for removing modifying HTTP headers.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:22">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 30, 2012 05:00PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:22">comment:22</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>thx for providing the workaround. friggin error was driving me crazy. </p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:23">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 01, 2012 12:34PM UTC by <span class="author">Eldmannen</span></span>
+        <a class="ticket-change-link" href="#comment:23">comment:23</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:15 rwaldron]:</p><blockquote> Sorry, i actually forgot to explicitly specify the request type.</blockquote><p>Now this bug have been independently confirmed (by the above poster).</p><p>Replying to [comment:20 jaubourg]:</p><blockquote> ...</blockquote><p>Now this bug have been independently confirmed (by the above poster).</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:24">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 01, 2012 01:20PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:24">comment:24</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-old strikethrough">invalid</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">closed</span> → <span class="change-field-new">reopened</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>And as expected, I lost an hour trying to reproduce to no avail. The following test passes:</p><pre class="wiki">
+test( "jQuery.ajax - empty response with no ContentType should succeed", function() {
+
+	stop();
+
+	expect( 1 );
+
+	jQuery.ajax( url( "data/emptyNoContentType.php" ), {
+		success: function( data ) {
+			strictEqual( data, "", "empty response with no content type should return success with empty string" );
+		},
+		error: function() {
+			ok( false, "error" );
+		},
+		complete: function() {
+			start();
+		}
+	});
+
+});
+</pre><p>with emptyNoContentType.php being:</p><pre class="wiki">
+&lt;?php
+
+header( "Content-Type:" );
+
+</pre><p>(only way to neuter Content-Type in apache apparently: if you use header_remove( "Content-Type" ), apache will just add text/html on my local config)</p><p>Before I get shouted on, I also tested adding the following snippet, directly in ajax.js (line <a href="/bugs.jquery.com/ticket/458">#458</a>) to test responses with no content-type:</p><pre class="wiki">
+try {
+	delete responseHeaders[ "content-type" ];
+} catch( e ) {}
+</pre><p>No failure... and it also works with dataType: "json" (provides null to the success callback instead of "").</p><p>So, again, unless we get a reduced test case, this will stay as closed (and worksforme to boot).</p><p>The problem most probably lies in some arcane microsoft server config/behaviour that setting the Content-Type explicitly seems to solve.</p><p>Replying to [comment:23 Eldmannen]:</p><blockquote> Replying to [comment:15 rwaldron]: &gt; Sorry, i actually forgot to explicitly specify the request type. Now this bug have been independently confirmed (by the above poster).  Replying to [comment:20 jaubourg]: &gt; ... Now this bug have been independently confirmed (by the above poster).</blockquote>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:25">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 01, 2012 01:21PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:25">comment:25</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ worksforme</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">reopened</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:26">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2012 08:51AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:26">comment:26</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Here is a test case.</p><p><a href="http://lab.foreningshuset.se/" class="ext-link"><span class="icon"></span>http://lab.foreningshuset.se/</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:27">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2012 08:54AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:27">comment:27</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:25 jaubourg]:</p><p>See the test case.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:28">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2012 09:15AM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:28">comment:28</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:27 anonymous]:</p><blockquote> Replying to [comment:25 jaubourg]: See the test case.</blockquote><p>What am I supposed to see? Nothing ever show in the console (tested in Firefox, Chrome and IE). If there actually is a bug, why on earth is it so difficult to make a test case that demonstrates it?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:29">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2012 10:05AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:29">comment:29</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:28 jaubourg]:</p><blockquote> Replying to [comment:27 anonymous]: &gt; Replying to [comment:25 jaubourg]: &gt; See the test case.  What am I supposed to see? Nothing ever show in the console (tested in Firefox, Chrome and IE). If there actually is a bug, why on earth is it so difficult to make a test case that demonstrates it?</blockquote><p>On Chrome and IE, I can't get anything either.</p><p>But in Firefox 11, it shows up "no element found" when pressing the 'Does not work' button. It shows up in the Ctrl+Shift+K web console.</p><p>[[Image(<a href="http://img109.imageshack.us/img109/7460/jquery.png)" class="ext-link"><span class="icon"></span>http://img109.imageshack.us/img109/7460/jquery.png)</a>]]</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:30">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2012 10:50AM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:30">comment:30</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">The firefox only thing should have a red hearing right from the start. Here is what a 2 seconds search on google got me: http://stackoverflow.com/questions/975929/firefox-error-no-element-found?answertab=votes#tab-top (search terms: &quot;firefox no element found in console&quot;).</span> → <span class="change-field-new">1333383693906606</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>The firefox only thing should have been a red herring right from the start. Here is what a 2 seconds search on google got me: <a href="http://stackoverflow.com/questions/975929/firefox-error-no-element-found?answertab=votes#tab-top" class="ext-link"><span class="icon"></span>http://stackoverflow.com/questions/975929/firefox-error-no-element-found?answertab=votes#tab-top</a> (search terms: "firefox no element found in console").</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:31">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2012 04:20PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:31">comment:31</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-old strikethrough">worksforme</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">closed</span> → <span class="change-field-new">reopened</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:32">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2012 04:20PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:32">comment:32</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ invalid</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">reopened</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:33">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 11, 2012 04:53PM UTC by <span class="author">Rodrigo Rosenfeld Rosas &lt;rr.rosas@gmail.com&gt;</span></span>
+        <a class="ticket-change-link" href="#comment:33">comment:33</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Okay, I've also first thought this was a jQuery issue and that was how I found this issue. But it turned out that the problem was in my application.</p><p>Here is a sample server that won't send the content-type header:</p><p><a href="https://github.com/rosenfeld/jquery-ajax-callback-example" class="ext-link"><span class="icon"></span>https://github.com/rosenfeld/jquery-ajax-callback-example</a></p><p>This code hosted on Heroku:</p><p><a href="http://jquery-ajax-callback.heroku.com/" class="ext-link"><span class="icon"></span>http://jquery-ajax-callback.heroku.com/</a></p><p>In my case, I was serving a "remove" action with "head :ok" in a Rails application. But due to a strange issue with <a href="/bugs.jquery.com/wiki/CoffeeScript">CoffeeScript</a>, instead of '/fields/remove/1', I was sending '/fields/remove/1.json' and hence Rails was setting the dataType to 'application/json' even so I thought it wouldn't. Here is the <a href="/bugs.jquery.com/wiki/CoffeeScript">CoffeeScript</a> issue that made me confused:</p><p><a href="https://github.com/jashkenas/coffee-script/issues/947" class="ext-link"><span class="icon"></span>https://github.com/jashkenas/coffee-script/issues/947</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:34">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 07, 2013 05:40PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:34">comment:34</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I think the case is jQuery wants a return value though I couldn't prove it one way or the other.  </p><p>I didn't want to change the content type for this one thing so I simply changed the 'void' to a 'bool' that always returns true and all is well.  </p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:35">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 07, 2013 06:17PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:35">comment:35</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Yes, changing it from 'void' to 'bool' does work, because it makes ASP.NET return 'true' or 'false' as output.</p><p>I think jQuery ought to accept an empty body too, so the server can just send the HTTP status code.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:36">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 07, 2013 06:23PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:36">comment:36</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Please stop attaching vague problem descriptions to closed bugs. If you have a test case and specific issue, open a new ticket. **However**, I suggest you start by asking on a forum to ensure is isn't a problem in your application.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:37">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 07, 2013 06:26PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:37">comment:37</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:36 dmethvin]:</p><blockquote> Please stop attaching vague problem descriptions to closed bugs. If you have a test case and specific issue, open a new ticket. **However**, I suggest you start by asking on a forum to ensure is isn't a problem in your application.</blockquote><p>I just replied to the post by anonymous, it was not me who posted here.</p><p>I think many people experienced this bug, this is reproducible and not a bug in a application, it is a bug in jQuery.</p><p>jQuery does not allow empty bodies as a response from $.post(), even though it is valid, as a user may want to return only HTTP status code, without any content.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:38">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 07, 2013 06:39PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:38">comment:38</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>This is where vague problem descriptions don't help, but I will take a guess.</p><p>If the server is responding with <code>Content-Type: application/json</code> then an empty response (no characters) is **not** valid JSON, which you can determine by trying <code>JSON.parse("")</code>. The server should either return a different content type or send a valid JSON response such as <code>{}</code> or <code>null</code> for the response body.</p><p>If my guess was wrong and this is not what is happening, then see my previous comment. Discuss the issue on a forum to ensure it's valid, create a test case, and make a new ticket .</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:39">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 07, 2013 06:49PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:39">comment:39</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:38 dmethvin]:</p><blockquote> If the server is responding with <code>Content-Type: application/json</code> then an empty response (no characters) is **not** valid JSON, which you can determine by trying <code>JSON.parse("")</code>. The server should either return a different content type or send a valid JSON response such as <code>{}</code> or <code>null</code> for the response body.</blockquote><p>This happens when the ASP.NET functions is declared as 'public void', hence the server would not respond with the Content-Type application/json.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:40">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 07, 2013 06:51PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:40">comment:40</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> If my guess was wrong and this is not what is happening, then see my previous comment. Discuss the issue on a forum to ensure it's valid, create a test case, and make a new ticket .</blockquote>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:41">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 11, 2013 02:20PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:41">comment:41</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I've now compared the output of public bool to public void.</p><p>The difference is that public bool methods outputs additional headers that public void methods does not.</p><pre class="wiki">
+Content-Type: text/html; charset=utf-8
+Content-Encoding: gzip
+Vary: Accept-Encoding
+</pre><p>Unless it has todo with Content-Length of void being 0.</p><p>It seems jQuery has a problem handling responses which does not include a Content-Type header.</p><p>public bool <a href="/bugs.jquery.com/wiki/DoesWork">DoesWork</a>()</p><pre class="wiki">
+HTTP/1.1 200 OK
+Cache-Control: private
+Content-Type: text/html; charset=utf-8
+Content-Encoding: gzip
+Vary: Accept-Encoding
+Server: Microsoft-IIS/8.0
+X-AspNetMvc-Version: 4.0
+X-AspNet-Version: 4.0.30319
+X-SourceFiles: =?UTF-8?B?YzpcdXNlcnNcam9uYXRoYW4uZmh1c2V0XGRvY3VtZW50c1x2aXN1YWwgc3R1ZGlvIDIwMTJcUHJvamVjdHNcTXZjQXBwbGljYXRpb24zXE12Y0FwcGxpY2F0aW9uM1xIb21lXEJvb2w=?=
+X-Powered-By: ASP.NET
+Date: Mon, 11 Feb 2013 14:10:27 GMT
+Content-Length: 123
+</pre><p>public void <a href="/bugs.jquery.com/wiki/DoesNotWork">DoesNotWork</a>()</p><pre class="wiki">
+HTTP/1.1 200 OK
+Cache-Control: private
+Server: Microsoft-IIS/8.0
+X-AspNetMvc-Version: 4.0
+X-AspNet-Version: 4.0.30319
+X-SourceFiles: =?UTF-8?B?YzpcdXNlcnNcam9uYXRoYW4uZmh1c2V0XGRvY3VtZW50c1x2aXN1YWwgc3R1ZGlvIDIwMTJcUHJvamVjdHNcTXZjQXBwbGljYXRpb24zXE12Y0FwcGxpY2F0aW9uM1xIb21lXFZvaWQ=?=
+X-Powered-By: ASP.NET
+Date: Mon, 11 Feb 2013 14:10:01 GMT
+Content-Length: 0
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:42">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 12, 2013 09:22AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:42">comment:42</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>This can not be reproduced in PHP, because header_remove(), header_remove("Content-Type"), header_remove("Content-Length"); does not remove the Content-Type and Content-Length headers.</p><p>However, if you do header('Content-Type:'); you can actually get rid of the Content-Type header. But this does not work for the Content-Length header.</p><p>So the problem seems to be that jQuery expects a Content-Length header.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:43">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 12, 2013 09:49AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:43">comment:43</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Note that the "no element found" entry only shows in Ctrl+Alt+K, and not in the Firebug console.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:44">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 13, 2013 06:15PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:44">comment:44</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I've been able to successfully reproduce this under not only ASP.NET but also on PHP.</p><pre class="wiki">
+&lt;?php
+
+function main() {
+?&gt;
+&lt;script src="jquery-1.9.0.js"&gt;&lt;/script&gt;
+&lt;input type="button" id="moo" value="meow"&gt;
+&lt;script&gt;
+$('#moo').on('click', function() {
+  console.log('Button pressed');
+  $.post('?op=test', { id: '2' });
+});
+&lt;/script&gt;
+&lt;?php
+}
+
+function meow() {
+  header('Content-Type:');
+}
+
+switch($_GET['op']) {
+  case "test":
+    meow();
+    break;
+  default:
+    main();
+    break;
+}
+
+?&gt;
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</details>
+</div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

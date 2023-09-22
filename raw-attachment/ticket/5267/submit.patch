@@ -1,0 +1,190 @@
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 6581)
++++ src/event.js	(working copy)
+@@ -63,15 +63,6 @@
+ 			var handlers = events[ type ],
+ 				special = this.special[ type ] || {};
+ 
+-			if ( special.add ) {
+-				var modifiedHandler = special.add.call( elem, handler, data, namespaces );
+-				if ( modifiedHandler && jQuery.isFunction( modifiedHandler ) ) {
+-					modifiedHandler.guid = modifiedHandler.guid || handler.guid;
+-					handler = modifiedHandler;
+-				}
+-			}
+-
+-			// Init the event handler queue
+ 			if ( !handlers ) {
+ 				handlers = events[ type ] = {};
+ 
+@@ -88,6 +79,14 @@
+ 				}
+ 			}
+ 
++			if ( special.add ) {
++				var modifiedHandler = special.add.call( elem, handler, data, namespaces, handlers );
++				if ( modifiedHandler && jQuery.isFunction( modifiedHandler ) ) {
++					modifiedHandler.guid = modifiedHandler.guid || handler.guid;
++					handler = modifiedHandler;
++				}
++			}
++
+ 			// Add the function to the element's handler list
+ 			handlers[ handler.guid ] = handler;
+ 
+@@ -109,7 +108,7 @@
+ 			return;
+ 		}
+ 
+-		var events = jQuery.data( elem, "events" ), ret, type;
++		var events = jQuery.data( elem, "events" ), ret, type, fn;
+ 
+ 		if ( events ) {
+ 			// Unbind all events for the element
+@@ -139,6 +138,7 @@
+ 					if ( events[ type ] ) {
+ 						// remove the given handler for the given type
+ 						if ( handler ) {
++							var fn = events[ type ][ handler.guid ]
+ 							delete events[ type ][ handler.guid ];
+ 
+ 						// remove all handlers for the given type
+@@ -152,7 +152,7 @@
+ 						}
+ 
+ 						if ( special.remove ) {
+-							special.remove.call( elem, namespaces );
++							special.remove.call( elem, namespaces, fn );
+ 						}
+ 
+ 						// remove generic event handler if no more handlers exist
+@@ -402,12 +402,16 @@
+ 		},
+ 
+ 		live: {
+-			add: function( proxy, data, namespaces ) {
++			add: function( proxy, data, namespaces, live ) {
+ 				jQuery.extend( proxy, data || {} );
+-				proxy.guid += data.selector + data.live;
+-				jQuery.event.add( this, data.live, liveHandler, data );
++				if(data.live == "submit" && !jQuery.support.submitBubbles){
++					jQuery.event.special.live.special[data.live].apply(this,arguments)
++					proxy.guid += data.selector + data.live;
++				}else{
++					proxy.guid += data.selector + data.live;
++					jQuery.event.add( this, data.live, liveHandler, data );
++				}		
+ 			},
+-
+ 			remove: function( namespaces ) {
+ 				if ( namespaces.length ) {
+ 					var remove = 0, name = new RegExp("(^|\\.)" + namespaces[0] + "(\\.|$)");
+@@ -422,7 +426,8 @@
+ 						jQuery.event.remove( this, namespaces[0], liveHandler );
+ 					}
+ 				}
+-			}
++			},
++			special:{}
+ 		}
+ 	}
+ };
+@@ -534,38 +539,33 @@
+ 	};
+ });
+ 
++
++//if(!jQuery.support.submitBubbles)
+ (function() {
+-	
+ 	var event = jQuery.event,
+-		special = event.special,
+-		handle  = event.handle;
++		special = event.special.live.special,
++		handle  = event.handle, beforeFilter = {
++			click: function(e){
++				return jQuery(e.target).filter(":submit, :image").length
++			},
++			keypress : function(e){
++				return jQuery(e.target).filter(":text, :password").length && e.keyCode == 13
++			}
++		};
+ 
+-	special.submit = {
+-		setup: function(data, namespaces) {
+-			if(data.selector) {
+-				event.add(this, 'click.specialSubmit', function(e, eventData) {
+-					if(jQuery(e.target).filter(":submit, :image").closest(data.selector).length) {
+-						e.type = "submit";
+-						return handle.call( this, e, eventData );
+-					}
+-				});
+-				
+-				event.add(this, 'keypress.specialSubmit', function( e, eventData ) {
+-					if(jQuery(e.target).filter(":text, :password").closest(data.selector).length) {
+-						e.type = "submit";
+-						return handle.call( this, e, eventData );
+-					}
+-				});
+-			} else {
+-				return false;
++		special.submit = function(proxy, data, namespaces, live ) {
++			data.beforeFilter = beforeFilter
++			proxy.altLive = ["click","keypress"]
++			proxy.altLiveGUIDs = {
++				click :    proxy.guid+data.selector+"special.click",
++				keypress : proxy.guid+data.selector+"special.keypress"
+ 			}
+-		},
+-		
+-		remove: function(namespaces) {
+-			event.remove(this, 'click.specialSubmit');
+-			event.remove(this, 'keypress.specialSubmit');
++			jQuery.event.add( this, "click", liveHandler, data );
++			live[proxy.altLiveGUIDs.click] = true;
++			jQuery.event.add( this, "keypress", liveHandler, data );
++			live[proxy.altLiveGUIDs.keypress] = true;
+ 		}
+-	};
++
+ 	
+ })();
+ 
+@@ -742,7 +742,10 @@
+ 	var stop = true, elems = [], args = arguments;
+ 
+ 	jQuery.each( jQuery.data( this, "events" ).live || [], function( i, fn ) {
+-		if ( fn.live === event.type ) {
++		if (jQuery.isFunction(fn) &&  fn.live === event.type || (fn.altLive && jQuery.inArray(event.type, fn.altLive)>=-1  )  ) {
++			var data= fn.data;
++			if(data.beforeFilter && data.beforeFilter[event.type] && !data.beforeFilter[event.type](event))
++				return;
+ 			var elem = jQuery( event.target ).closest( fn.selector )[0];
+ 			if ( elem ) {
+ 				elems.push({ elem: elem, fn: fn });
+Index: src/support.js
+===================================================================
+--- src/support.js	(revision 6581)
++++ src/support.js	(working copy)
+@@ -78,7 +78,19 @@
+ 		});
+ 		div.cloneNode(true).fireEvent("onclick");
+ 	}
+-
++	var eventSupported = function(eventName) {
++	    var el = document.createElement('div');
++	    eventName = 'on' + eventName;
++	    var isSupported = (eventName in el);
++	    if (!isSupported) {
++	      el.setAttribute(eventName, 'return;');
++	      isSupported = typeof el[eventName] == 'function';
++	    }
++	    el = null;
++	    return isSupported;
++	}
++	jQuery.support.submitBubbles = eventSupported("submit")
++	
+ 	// Figure out if the W3C box model works as expected
+ 	// document.body must exist before we can do this
+ 	jQuery(function(){

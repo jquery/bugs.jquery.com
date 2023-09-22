@@ -1,0 +1,24 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+
+<div class='TestContainer'>
+	<div ID='ClickDiv' onclick='ClickDiv_Click();'>click me</div>
+	<input id='TextInput' type='text' onchange='TextInput_Change(event);' />
+</div>
+<script>
+	function TextInput_Change(event) {
+		if ($.browser.msie) {
+			alert("srcElement was " + event.srcElement.id + " but should be TextInput");
+		} else {
+			alert("srcElement was " + event.target.id + " and is be TextInput");
+		}
+	}
+	
+	function ClickDiv_Click() {
+		$("#TextInput").val("1");
+		$("#TextInput").change();
+	}
+	
+	$(document).ready(function() {
+		$("#ClickDiv").click();
+	});
+</script>

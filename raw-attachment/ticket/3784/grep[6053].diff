@@ -1,0 +1,24 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 6053)
++++ src/core.js	(working copy)
+@@ -1083,6 +1083,9 @@
+ 	},
+ 
+ 	grep: function( elems, callback, inv ) {
++		if( filter && !inv )
++			return filter.call( elems, callback );
++		
+ 		var ret = [];
+ 
+ 		// Go through the array, only saving the items
+@@ -1114,7 +1117,8 @@
+ // It's included for backwards compatibility and plugins,
+ // although they should work to migrate away.
+ 
+-var userAgent = navigator.userAgent.toLowerCase();
++var userAgent = navigator.userAgent.toLowerCase(),
++	filter = Array.prototype.filter;
+ 
+ // Figure out what browser is being used
+ jQuery.browser = {

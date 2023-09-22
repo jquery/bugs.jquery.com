@@ -1,0 +1,34 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 3817)
++++ src/core.js	(working copy)
+@@ -53,19 +53,23 @@
+ 					var elem = document.getElementById( match[3] );
+ 
+ 					// Make sure an element was located
+-					if ( elem )
++					if ( elem ) {
+ 						// Handle the case where IE and Opera return items
+ 						// by name instead of ID
+ 						if ( elem.id != match[3] )
+-							return jQuery().find( selector );
++							// Use document.all if it exist and contains more than one element
++							if ( document.all && document.all[ match[3] ].length > 1 )
++								jQuery.each( document.all[ match[3] ], function(index, element) {
++									if ( match[3] == element.id ) elem = element;
++								} );
++							else
++								return jQuery().find( selector );
+ 
+-						// Otherwise, we inject the element directly into the jQuery object
+-						else {
++						// Inject the element directly into the jQuery object
+ 							this[0] = elem;
+ 							this.length = 1;
+ 							return this;
+-						}
+-
++					}
+ 					else
+ 						selector = [];
+ 				}

@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="PSPad editor, www.pspad.com" />
+	<title>jQuery test file for case sensitivity issue</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<script type="text/javascript">
+//<![CDATA[
+		$(function() {
+			$('body').attr('bgColor', 'red');
+			$('body').attr('bgcolor', 'yellow');
+			$('#myImage').attr('usemap', '#myMap');
+		});
+//]]>
+	</script>
+	</head>
+	<body>
+		<img id="myImage" src="http://lolcat.com/images/lolcats/805.jpg" width="342" height="437" alt="lolcat" />
+		<map id="myMap" name="myMap">
+			<area shape="rect" coords="3,7,84,63" href="#" alt="kapshun" title="kapshun" />
+			<area shape="rect" coords="110,262,166,336" href="#" alt="ie projetc managor greeted bai web devlopars" title="ie projetc managor greeted bai web devlopars" />
+		</map>
+		<br />
+		expected: yellow background + image map is working
+	</body>
+</html>

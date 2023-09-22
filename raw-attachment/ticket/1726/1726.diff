@@ -1,0 +1,26 @@
+Index: src/fx.js
+===================================================================
+--- src/fx.js	(revision 3567)
++++ src/fx.js	(working copy)
+@@ -293,8 +293,8 @@
+ 		this.options.orig[this.prop] = jQuery.attr( this.elem.style, this.prop );
+ 		this.options.show = true;
+ 
+-		// Begin the animation
+-		this.custom(0, this.cur());
++		// Begin the animation - start from 1 to avoid flashing in IE
++		this.custom(this.prop == "width" || this.prop == "height" ? 1 : 0, this.cur());
+ 
+ 		// Make sure that we start at a small width/height to avoid any
+ 		// flash of content
+@@ -311,8 +311,8 @@
+ 		this.options.orig[this.prop] = jQuery.attr( this.elem.style, this.prop );
+ 		this.options.hide = true;
+ 
+-		// Begin the animation
+-		this.custom(this.cur(), 0);
++		// Begin the animation - end at 1 to avoid flashing in IE
++		this.custom(this.cur(), this.prop == "width" || this.prop == "height" ? 1 : 0);
+ 	},
+ 
+ 	// Each step of an animation

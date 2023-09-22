@@ -1,0 +1,46 @@
+Line 408
+
+// Catch cases where $(document).ready() is called after the
+// browser event has already occurred.
+if ( document.readyState === "complete" ) {
+	return jQuery.ready();
+}
+
+to
+
+// Catch cases where $(document).ready() is called after the
+// browser event has already occurred.
+if ( document.hasOwnProperty("readyState") && document.readyState === "complete" ) {
+	return jQuery.ready();
+}
+
+------------------------------------------------------------------------
+
+
+Line 1003
+
+return typeof name === "string" ? thisCache[ name ] : thisCache;
+
+to
+
+return typeof name === "string" && thisCache.hasOwnProperty(name) ? thisCache[ name ] : thisCache;
+
+
+------------------------------------------------------------------------
+
+
+Line 1776
+
+// Trigger the event, it is assumed that "handle" is a function
+var handle = jQuery.data( elem, "handle" );
+if ( handle ) {
+	handle.apply( elem, data );
+}
+
+to
+
+// Trigger the event, it is assumed that "handle" is a function
+var handle = jQuery.data( elem, "handle" );
+if ( handle && handle.hasOwnProperty('apply') ) {
+	handle.apply( elem, data );
+}

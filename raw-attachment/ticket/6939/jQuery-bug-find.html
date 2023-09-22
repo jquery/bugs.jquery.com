@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+ <title>empty</title>
+ <base href="http://www.google.com/images/srpr/">
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+</head>
+<body>
+
+<div class="item">
+<img src="nav_logo14.png" alt="img">
+</div>
+
+<script>
+jQuery(function () {
+    jQuery('BODY').append(jQuery(
+        '<div>'+
+        "jQuery('img[src*=nav]') : " + jQuery('img[src*=nav]').length + '<br>' +
+        "jQuery('img[src^=nav]') : " + jQuery('img[src^=nav]').length + '<br>' +
+        "jQuery('img[src*=http]') : " + jQuery('img[src*=http]').length + '<br>' +
+        "jQuery('img[src^=http]') : " + jQuery('img[src^=http]').length + '<br>' +
+        "jQuery('.item img[src*=nav]') : " + jQuery('.item img[src*=nav]').length + '<br>' +
+        "jQuery('.item img[src^=nav]') : " + jQuery('.item img[src^=nav]').length + '<br>' +
+        "jQuery('.item img[src*=http]') : " + jQuery('.item img[src*=http]').length + '<br>' +
+        "jQuery('.item img[src^=http]') : " + jQuery('.item img[src^=http]').length + '<br>' +
+        "jQuery('.item').find('img[src*=nav]') : " + jQuery('.item').find('img[src*=nav]').length + '<br>' +
+        "jQuery('.item').find('img[src^=nav]') : " + jQuery('.item').find('img[src^=nav]').length + '<br>' +
+        "jQuery('.item').find('img[src*=http]') : " + jQuery('.item').find('img[src*=http]').length + '<br>' +
+        "jQuery('.item').find('img[src^=http]') : " + jQuery('.item').find('img[src^=http]').length + '<br>' +
+        '</div>'
+        ));
+});
+</script>
+
+
+</body></html>

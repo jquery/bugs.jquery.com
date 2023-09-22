@@ -1,0 +1,22 @@
+Index: ajax.js
+===================================================================
+--- ajax.js	(revision 4441)
++++ ajax.js	(working copy)
+@@ -153,7 +153,7 @@
+ 			script: "text/javascript, application/javascript",
+ 			json: "application/json, text/javascript",
+ 			text: "text/plain",
+-			default: "*/*"
++			'default': "*/*"
+ 		}
+ 	},
+ 	
+@@ -287,7 +287,7 @@
+ 			// Set the Accepts header for the server, depending on the dataType
+ 			xml.setRequestHeader("Accept", s.dataType && s.accepts[ s.dataType ] ?
+ 				s.accepts[ s.dataType ] + ", */*" :
+-				s.accepts.default );
++				s.accepts['default'] );
+ 		} catch(e){}
+ 
+ 		// Allow custom headers/mimetypes

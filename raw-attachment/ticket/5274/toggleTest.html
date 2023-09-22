@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Toggle Test</title>
+		<style type="text/css">
+			.two1 { border:2px solid yellow; }
+			.two2 { border:2px solid green; }
+			
+			.one1 { background-color: white; }
+			.one2 { background-color: gray; }
+			.one3 { background-color: black; }
+		</style>
+	</head>
+	<body>
+		<div id="btnClose" class="icon">Click me</div>
+		<p>
+			Clicking on the text above should toggle the border between two states (green/yellow border) and toggle the background between three states (white/gray/black).
+			With jQuery 1.3.2 and nightly build it does not function correctly. With patch it works as expected.
+		</p>
+		
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
+		<script type="text/javascript">
+			$( document ).ready( function(){
+				$(".icon").toggle( 
+					function(){ $(this).removeClass('two2').addClass('two1') }, 
+					function(){ $(this).removeClass('two1').addClass('two2') }
+				);
+
+				$("#btnClose").toggle(
+					function(){	$(this).removeClass('one2 one3').addClass('one1'); }, 
+					function(){	$(this).removeClass('one1 one3').addClass('one2'); },
+					function(){ $(this).removeClass('one1 one2').addClass('one3'); }
+				);
+
+			});
+		</script>		
+	</body>
+</head>

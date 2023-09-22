@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<meta content="text/html; charset=utf8" http-equiv="Content-Type"/>
+	<title>jQuery Test</title>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+</head>
+<body>
+	<div />	
+	<script type="text/javascript">
+	google.load("jquery","1.3.2");
+	function convert_string_to_xml(strXML){	//Convert String to XML Document
+		if (window.ActiveXObject) {			//IE Method
+			xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+			xmlDoc.async="false";
+			xmlDoc.loadXML(strXML);
+			return xmlDoc;
+		} else {							//Other Browser Method
+			parser=new DOMParser();
+			xmlDoc=parser.parseFromString(strXML,"text/xml");
+			return xmlDoc;
+		}
+	}
+	</script>
+	<script type="text/javascript">
+	var xml ="<xml><model><jCpu><Intercept>jCpu_Inter_1</Intercept></jCpu><heap><Intercept>heap_Inter_1</Intercept></heap><host>px0</host></model><model><jCpu><Intercept>jCpu_Inter_2</Intercept></jCpu><heap><Intercept>heap_Inter_2</Intercept></heap><host>px5</host></model></xml>"
+	$xml_obj = $(convert_string_to_xml(xml) );
+	if(navigator.userAgent.indexOf("MSIE")>0)
+		$model = $xml_obj.find('host[text="px0"]').parent();
+	else
+		$model = $xml_obj.find('host[textContent="px0"]').parent();
+	string = "<p>"+
+		$model.find('jCpu Intercept').text()+"</p><p>"+
+		$model.find('jCpu>Intercept').text()+"</p>";
+	$('div').html(string);
+	</script>
+</body>
+</html>

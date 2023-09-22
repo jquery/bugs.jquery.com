@@ -1,0 +1,2726 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">#6485 (Solution for HTML5 in IE) - jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      :root{--ticket-info-background-color:#ffd;--ticket-info-border-color:#dd9;--ticket-table-border-color:#eed;--ticket-date-text-color:#996;--ticket-description-title-color:#663;--ticket-changes-text-color:#663;--ticket-changes-box-shadow:#f2f2f2}.ticket-info{position:relative;background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);padding:.5em .75em;margin-bottom:.5em}.ticket-number{font-size:1.15rem;font-weight:700;margin-right:.5em}.ticket-info span{font-size:.8125em;font-weight:700}.ticket-resolution,.ticket-status,.ticket-type{text-transform:uppercase}.missing{color:var(--text-color-link-disabled)}.ticket-title{border-bottom:1px solid #bbb;margin-top:1em;padding-bottom:.25em;font-weight:700;font-size:1.1875rem}.ticket-dates{color:var(--ticket-date-text-color);font-size:.8125rem}.ticket-dates p{margin:0 0 .5em}.ticket-properties{width:100%;text-align:left;font-size:.65rem;border-top:1px solid var(--ticket-table-border-color);margin:0}.ticket-properties th{font-weight:400;width:20%}.ticket-properties td,.ticket-properties th{padding:.25em .5em;border-bottom:1px dashed var(--ticket-table-border-color)}.ticket-info-bottom{padding:.5em}.ticket-description{font-size:.8125rem;margin-top:.5em}.ticket-description h2,.ticket-description h3,.ticket-description h4,.ticket-description h5,.ticket-description h6{text-transform:uppercase;font-weight:400}.ticket-description h1{font-size:1.1rem}.ticket-description h2{font-size:1rem}.ticket-description h3{font-size:.9rem}.ticket-description h4{font-size:.8rem}.ticket-description h5{font-size:.75rem}.ticket-description h6{font-size:.7rem}.ticket-description-title{color:var(--ticket-description-title-color);font-size:.75rem}details{padding:.5em 0;font-size:.8125rem}summary{color:var(--text-color-link);font-weight:700;font-size:.875rem;text-decoration:underline;cursor:pointer;text-shadow:.04em .04em var(--text-shadow-color)}.ticket-attachments{font-size:.75em}.ticket-comment-body{width:100%;padding-top:.5em}.ticket-change{margin:1em 0;clear:both}.ticket-change-header{font-size:.875rem;font-weight:700;box-shadow:1.4px 2.8px 5.6px 0 var(--ticket-changes-box-shadow)}.ticket-change-link{font-size:.85em}.ticket-change-content{width:100%}.ticket-changes{background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);color:var(--ticket-changes-text-color);font-size:.7rem;float:right;clear:right;margin:2em 0 1em 1.5em}.ticket-changes th{text-align:right;font-weight:400;text-transform:capitalize}.ticket-changes td,.ticket-changes th{padding:.25em;vertical-align:baseline}.ticket-changes .change-field-new{font-weight:700}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+<div class="flex-column" data-pagefind-body="">
+  
+
+  <nav class="content-nav">
+    <ul class="flex-row">
+      
+        <li>
+          <a href="/bugs.jquery.com/ticket/6484/">← Previous Ticket</a>
+        
+      
+      
+        </li><li>
+          <a href="/bugs.jquery.com/ticket/6486/">Next Ticket →</a>
+        </li>
+      
+    </ul>
+  </nav>
+
+
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="." class="ticket-number">#6485</a>
+      <span class="ticket-status">closed</span>
+      <span class="ticket-type">feature</span>
+      <span class="ticket-resolution">(fixed)</span>
+    </h3>
+
+    <div class="ticket-dates">
+      <p>Opened April 26, 2010 10:00PM UTC</p>
+      
+        <p>Closed September 19, 2011 08:47PM UTC</p>
+      
+      
+        <p>Last modified October 17, 2012 08:50PM UTC</p>
+      
+    </div>
+  </div>
+
+  <h1 class="ticket-title">Solution for HTML5 in IE</h1>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        jonathantneal
+      </td>
+      <th>Owned by:</th>
+      <td>rwaldron</td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        high
+      </td>
+      
+        <th class="missing">Milestone:</th>
+      
+      <td>
+        <a href="/bugs.jquery.com/milestone/1.7">1.7</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>core</td>
+      
+        <th>Version:</th>
+      
+      <td>1.4.4</td>
+    </tr>
+    <tr>
+      
+        <th>Keywords:</th>
+      
+      <td>html5,innershiv,innershim,needsreview,1.7-discuss</td>
+      
+        <th>Cc:</th>
+      
+      <td>paul.irish, SlexAxton</td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
+    <div class="ticket-description"><p>I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.</p><p>Issues / Solutions:</p><p>1. HTML5 is not supported on a document, html5 elements will not properly contain contents</p>  <ul><li>document.createElement('X') triggers support for 'X' element (you know this one, it's the "shiv I mean shim" method)</li></ul><p>1. HTML5 is not supported with innerHTML</p>  <ul><li>HTML5 added with innerHTML is supported when the element being innerHTML'd is already appended to a shim'd document (or document fragment!)</li></ul><p>1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode'd</p>  <ul><li>use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)</li></ul><p>Example of solutions, in action, with comments:</p><p><a href="http://pastie.org/935834" class="ext-link"><span class="icon"></span>http://pastie.org/935834</a></p><p></p><hr><p></p><p>EDIT by paulirish.. the scope of this ticket it only to fix <a href="/bugs.jquery.com/ticket/2">#2</a> and <a href="/bugs.jquery.com/ticket/3">#3</a>. the markup in the document will still require the basic html5shiv/modernizr to adjust. </p><p>this fix will correct the assumption that "jquery is broken" because it cannot handle ajax'd in html5 content and the like. </p></div>
+  </div>
+</div>
+
+<details>
+  <summary class="ticket-details-summary">Attachments (0)</summary>
+
+  <ul class="ticket-attachments">
+    
+  </ul>
+</details>
+
+<details open="">
+  <summary class="ticket-details-summary">Change History (62)</summary>
+  
+    <div class="ticket-change flex-column" id="comment:1">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 29, 2010 04:58PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:1">comment:1</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ needsreview</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>priority:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ undecided</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:2">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 29, 2010 05:05PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:2">comment:2</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ invalid</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:3">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 05, 2010 02:02AM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:3">comment:3</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-old strikethrough">needsreview</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Take a look at modernizr for this, it's kind of heavy to put into jQuery core because everyone would pay the price for it.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:4">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 06, 2010 07:37PM UTC by <span class="author">SlexAxton</span></span>
+        <a class="ticket-change-link" href="#comment:4">comment:4</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>cc:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ paul.irish, SlexAxton</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ html5, innershiv, innershim, needsreview</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>milestone:</th>
+                  <td>
+                    
+                      <span class="change-field-old">1.4.3</span> → <span class="change-field-new">1.5</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>priority:</th>
+                  <td>
+                    
+                      <span class="change-field-old">undecided</span> → <span class="change-field-new">high</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-old strikethrough">invalid</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">closed</span> → <span class="change-field-new">reopened</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>version:</th>
+                  <td>
+                    
+                      <span class="change-field-old">1.4.2</span> → <span class="change-field-new">1.4.4</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>We've talked about different ways to handle this in the 1.5 feature list. I'm going to open this back up as something we are actively considering.</p>
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:5">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 06, 2010 07:40PM UTC by <span class="author">paul.irish</span></span>
+        <a class="ticket-change-link" href="#comment:5">comment:5</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/5327">#5327</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:6">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 06, 2010 07:47PM UTC by <span class="author">paul.irish</span></span>
+        <a class="ticket-change-link" href="#comment:6">comment:6</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+- HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
++ document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+&#92;
+- HTML5 is not supported with innerHTML&#92;
++ HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+&#92;
+- &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
++ use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span> → <span class="change-field-new">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>The major problem is dealing with new elements either ajax'd in or created on the fly... issue <a href="/bugs.jquery.com/ticket/2">#2</a> of Jon's above.</p><p>More detail from the closed dupe <a href="/bugs.jquery.com/ticket/5327">#5327</a> is here: :  <a href="http://stackoverflow.com/questions/1191164/jquery-html5-append-appendto-and-ie" class="ext-link"><span class="icon"></span>http://stackoverflow.com/questions/1191164/jquery-html5-append-appendto-and-ie</a> </p><p>Test case: <a href="http://jsfiddle.net/DVnmE/" class="ext-link"><span class="icon"></span>http://jsfiddle.net/DVnmE/</a></p><p>Remy's test case: <a href="http://jsbin.com/olizu" class="ext-link"><span class="icon"></span>http://jsbin.com/olizu</a></p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:7">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 17, 2011 12:15AM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:7">comment:7</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>milestone:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ 1.next</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>So right now we're looking for a good patch to this. I'm going to bring it up again for 1.7. If we had had a patch for 1.6, it probably would've landed then.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:8">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 17, 2011 11:04PM UTC by <span class="author">timmywil</span></span>
+        <a class="ticket-change-link" href="#comment:8">comment:8</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">reopened</span> → <span class="change-field-new">open</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:9">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 02, 2011 06:45PM UTC by <span class="author">timmywil</span></span>
+        <a class="ticket-change-link" href="#comment:9">comment:9</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/9049">#9049</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:10">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 22, 2011 07:27PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:10">comment:10</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-old">html5, innershiv, innershim, needsreview</span> → <span class="change-field-new">html5,innershiv,innershim,needsreview,1.7-discuss</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Nominating ticket for 1.7 discussion.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:11">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 22, 2011 09:27PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:11">comment:11</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span> → <span class="change-field-new">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1, I believe we said we'd try this, but I'm beginning to think we should first try out a plugin.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:12">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 23, 2011 12:01AM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:12">comment:12</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1, Gain is obvious but what is the cost in size?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:13">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 23, 2011 03:18AM UTC by <span class="author">timmywil</span></span>
+        <a class="ticket-change-link" href="#comment:13">comment:13</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1, I would use this a lot.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:14">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 23, 2011 03:37PM UTC by <span class="author">ajpiano</span></span>
+        <a class="ticket-change-link" href="#comment:14">comment:14</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">+1</span> → <span class="change-field-new">1306165091201089</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span> → <span class="change-field-new">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1, I'm for this and it would be a boon for many, but the problem isn't size - it's speed.  We'd need to see a patch and do a lot of perf analysis..</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:15">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 23, 2011 05:20PM UTC by <span class="author">paul.irish</span></span>
+        <a class="ticket-change-link" href="#comment:15">comment:15</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1, major painpoint for developers. </p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:16">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 23, 2011 09:35PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:16">comment:16</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1, Fan of a team-supported solution, but first as a plugin and not in core for 1.7</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:17">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 26, 2011 03:26AM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:17">comment:17</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>See also: <a href="/bugs.jquery.com/ticket/6286">#6286</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:18">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 03, 2011 01:32PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:18">comment:18</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span> → <span class="change-field-new">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1, Only if this can be done in such a way that doesn't cripple performance.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:19">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 03, 2011 02:42PM UTC by <span class="author">scottgonzalez</span></span>
+        <a class="ticket-change-link" href="#comment:19">comment:19</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1, I'd like to see performance impact</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:20">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 04, 2011 01:19AM UTC by <span class="author">paul.irish</span></span>
+        <a class="ticket-change-link" href="#comment:20">comment:20</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span> → <span class="change-field-new">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I was working with jdbarlett on a new version of innerShiv <a href="http://jdbartlett.github.com/innershiv/" class="ext-link"><span class="icon"></span>http://jdbartlett.github.com/innershiv/</a> that is much faster... </p><p><a href="https://gist.github.com/7e1c3c76db44e5a249ff" class="ext-link"><span class="icon"></span>https://gist.github.com/7e1c3c76db44e5a249ff</a> is the general idea.</p><p>We feature test to see if the shiv is necessary, and we also regex against the input to see if we should even bother shiv'ing it. If it is, then we innerHTML it into an on-DOM div and grab the new childNodes which we'll use in a docFragment. </p><p>Currently it supports two signatures:</p><pre class="wiki">    innerShiv(htmlstring) // documentFragment
+    innerShiv(htmlstring, false) // array of nodes
+</pre><p>But that clearly could be simplified for its purposes within jQuery.</p><p>From a perf standpoints the questions I have are:</p><ul><li>does the --- 1) add a node to the dom 2) innnerHTML inside of it 3) pull it off --- trick have a significant hit?</li><li>is the regex against the incoming string worth it?</li></ul><p>I'm gonna be quite busy, but I'll try to take a stab at this within jQuery and get some perf numbers, sometime, if no one else beats me to it. Help requested :)</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:21">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 04, 2011 10:17PM UTC by <span class="author">addyosmani</span></span>
+        <a class="ticket-change-link" href="#comment:21">comment:21</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span> → <span class="change-field-new">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:22">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 05, 2011 08:35PM UTC by <span class="author">ajpiano</span></span>
+        <a class="ticket-change-link" href="#comment:22">comment:22</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span> → <span class="change-field-new">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1, especially if we're able to limit its impact in the ways paul describes above</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:23">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 06, 2011 03:49PM UTC by <span class="author">jzaefferer</span></span>
+        <a class="ticket-change-link" href="#comment:23">comment:23</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span> → <span class="change-field-new">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:24">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 14, 2011 06:21PM UTC by <span class="author">paul.irish</span></span>
+        <a class="ticket-change-link" href="#comment:24">comment:24</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Started looking at the code around this and I&#39;m gonna leave my notes, in case they can help someone else...&#92;
+&#92;
+Talked with jdbarlett about this at TXJS and we agreed the shiv&#39;ing approach within Shimprove http://www.iecss.com/shimprove/ is probably a better choice here.&#92;
+&#92;
+Essentially, that approach is this:&#92;
+{{{#!js&#92;
+var frag = document.createDocumentFragment();&#92;
+frag.createElement(&#39;abbr&#39;);&#92;
+frag.createElement(&#39;aside&#39;);&#92;
+// etc, ...&#92;
+&#92;
+// fragment can now accept unknown element nodes&#92;
+}}}&#92;
+&#92;
+It looks like we&#39;ll want test coverage for:&#92;
+&#92;
+*  `html()` when using the innerHTML shortcut fast path&#92;
+* `clone()`&#92;
+* append/prepend/before/after/replaceWith and appendto/prependto/insertbefore/insertafter/replaceAll and wrap/wrapInner/wrapAll ... all use `domManip` so really only a single code path there should be sufficient.&#92;
+&#92;
+Implementation notes:&#92;
+&#92;
+* Appears as though everything is within manipulation.js&#92;
+* `buildFragment()` is used by domManip and looks to be the right place to improve things&#92;
+* a docFrag is made before sending it off to `jQuery.clean()` along with the html string. We could shiv it before clean or maybe within clean&#92;
+&#92;
+Open questions:&#92;
+&#92;
+* regex to test against incoming html? (or some indexOf magic?)&#92;
+* There is an innerHTML set action inside of clean(). Does that collapse unknown elements, or no, since it&#39;s still off-dom?&#92;
+</span> → <span class="change-field-new">1308075724686908</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>_comment1:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Started looking at the code around this and I&#39;m gonna leave my notes, in case they can help someone else...&#92;
+&#92;
+Talked with jdbarlett about this at TXJS and we agreed the shiv&#39;ing approach within Shimprove http://www.iecss.com/shimprove/ is probably a better choice here.&#92;
+&#92;
+Essentially, that approach is this:&#92;
+{{{#!js&#92;
+var frag = document.createDocumentFragment();&#92;
+frag.createElement(&#39;abbr&#39;);&#92;
+frag.createElement(&#39;aside&#39;);&#92;
+// etc, ...&#92;
+&#92;
+// fragment can now accept unknown element nodes&#92;
+}}}&#92;
+&#92;
+It looks like we&#39;ll want test coverage for:&#92;
+&#92;
+*  `html()` when using the innerHTML shortcut fast path&#92;
+* `clone()`&#92;
+* `append/prepend/before/after/replaceWith` and `appendto/prependto/insertbefore/insertafter/replaceAll` and `wrap/wrapInner/wrapAll` ... all use `domManip` so really only a single code path there should be sufficient.&#92;
+&#92;
+Implementation notes:&#92;
+&#92;
+* Appears as though everything is within manipulation.js&#92;
+* `buildFragment()` is used by domManip and looks to be the right place to improve things&#92;
+* a docFrag is made before sending it off to `jQuery.clean()` along with the html string. We could shiv it before clean or maybe within clean&#92;
+&#92;
+Open questions:&#92;
+&#92;
+* regex to test against incoming html? (or some indexOf magic?)&#92;
+* There is an innerHTML set action inside of clean(). Does that collapse unknown elements, or no, since it&#39;s still off-dom?&#92;
+</span> → <span class="change-field-new">1308075840043378</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>_comment2:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Started looking at the code around this and I&#39;m gonna leave my notes, in case they can help someone else...&#92;
+&#92;
+Talked with jdbarlett about this at TXJS and we agreed the shiv&#39;ing approach within Shimprove http://www.iecss.com/shimprove/ is probably a better choice here. Well, actually the pastie jon linked in this issue&#39;s description has that code in a more readable format.&#92;
+&#92;
+Essentially, that approach is this:&#92;
+{{{#!js&#92;
+var frag = document.createDocumentFragment();&#92;
+frag.createElement(&#39;abbr&#39;);&#92;
+frag.createElement(&#39;aside&#39;);&#92;
+// etc, ...&#92;
+&#92;
+// fragment can now accept unknown element nodes&#92;
+}}}&#92;
+&#92;
+It looks like we&#39;ll want test coverage for:&#92;
+&#92;
+*  `html()` when using the innerHTML shortcut fast path&#92;
+* `clone()`&#92;
+* `append/prepend/before/after/replaceWith` and `appendto/prependto/insertbefore/insertafter/replaceAll` and `wrap/wrapInner/wrapAll` ... all use `domManip` so really only a single code path there should be sufficient.&#92;
+&#92;
+Implementation notes:&#92;
+&#92;
+* Appears as though everything is within manipulation.js&#92;
+* `buildFragment()` is used by domManip and looks to be the right place to improve things&#92;
+* a docFrag is made before sending it off to `jQuery.clean()` along with the html string. We could shiv it before clean or maybe within clean&#92;
+&#92;
+Open questions:&#92;
+&#92;
+* regex to test against incoming html? (or some indexOf magic?)&#92;
+* There is an innerHTML set action inside of clean(). Does that collapse unknown elements, or no, since it&#39;s still off-dom?&#92;
+</span> → <span class="change-field-new">1308075877921044</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>_comment3:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Started looking at the code around this and I&#39;m gonna leave my notes, in case they can help someone else...&#92;
+&#92;
+Talked with jdbarlett about this at TXJS and we agreed the shiv&#39;ing approach within Shimprove http://www.iecss.com/shimprove/ is probably a better choice here. Well, actually [http://pastie.org/935834 the pastie jon linked] in this issue&#39;s description has that code in a more readable format.&#92;
+&#92;
+Essentially, that approach is this:&#92;
+{{{#!js&#92;
+var frag = document.createDocumentFragment();&#92;
+frag.createElement(&#39;abbr&#39;);&#92;
+frag.createElement(&#39;aside&#39;);&#92;
+// etc, ...&#92;
+&#92;
+// fragment can now accept unknown element nodes&#92;
+}}}&#92;
+&#92;
+It looks like we&#39;ll want test coverage for:&#92;
+&#92;
+*  `html()` when using the innerHTML shortcut fast path&#92;
+* `clone()`&#92;
+* `append/prepend/before/after/replaceWith` and `appendto/prependto/insertbefore/insertafter/replaceAll` and `wrap/wrapInner/wrapAll` ... all use `domManip` so really only a single code path there should be sufficient.&#92;
+&#92;
+Implementation notes:&#92;
+&#92;
+* Appears as though everything is within manipulation.js&#92;
+* `buildFragment()` is used by domManip and looks to be the right place to improve things&#92;
+* a docFrag is made before sending it off to `jQuery.clean()` along with the html string. We could shiv it before clean or maybe within clean&#92;
+&#92;
+Open questions:&#92;
+&#92;
+* regex to test against incoming html? (or some indexOf magic?)&#92;
+* There is an innerHTML set action inside of clean(). Does that collapse unknown elements, or no, since it&#39;s still off-dom?&#92;
+</span> → <span class="change-field-new">1308076026285283</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span> → <span class="change-field-new">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>Started looking at the code around this and I'm gonna leave my notes, in case they can help someone else...</p><p>Talked with jdbarlett about this at TXJS and we agreed the shiv'ing approach within Shimprove <a href="http://www.iecss.com/shimprove/" class="ext-link"><span class="icon"></span>http://www.iecss.com/shimprove/</a> is probably a better choice here. Well, actually <a href="http://pastie.org/935834" class="ext-link"><span class="icon"></span>the pastie jon linked</a> in this issue's description has that code in a more readable format.</p><p>Essentially, that approach is this:</p><pre class="wiki">var frag = document.createDocumentFragment();
+frag.createElement('abbr');
+frag.createElement('aside');
+// etc, ...
+
+// fragment can now accept unknown element nodes
+</pre><p>It looks like we'll want test coverage for:</p><ul><li> <code>html()</code> when using the innerHTML shortcut fast path</li><li><code>clone()</code></li><li><code>append/prepend/before/after/replaceWith</code> and <code>appendto/prependto/insertbefore/insertafter/replaceAll</code> and <code>wrap/wrapInner/wrapAll</code> ... all use <code>domManip</code> so really only a single code path there should be sufficient.</li></ul><p>Implementation notes:</p><ul><li>Appears as though everything is within manipulation.js</li><li><code>buildFragment()</code> is used by domManip and looks to be the right place to improve things</li><li>a docFrag is made before sending it off to <code>jQuery.clean()</code> along with the html string. We could shiv it before clean or maybe within clean</li><li>We'll probably want a test in $.support to know if a browser collapses unknown elems. <a href="https://github.com/Modernizr/Modernizr/blob/b3c5909a334dfddc619683554f7d7b8e075777b4/modernizr.js#L919-921" class="ext-link"><span class="icon"></span>The test used in Modernizr</a> would work well.</li></ul><p>Open questions:</p><ul><li>regex to test against incoming html? (or some indexOf magic?)</li><li>There is an innerHTML set action inside of clean(). Does that collapse unknown elements, or no, since it's still off-dom?</li></ul>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:25">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 22, 2011 05:03PM UTC by <span class="author">paul.irish</span></span>
+        <a class="ticket-change-link" href="#comment:25">comment:25</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>WIP here: <a href="https://github.com/paulirish/jquery/commits/ticket6485" class="ext-link"><span class="icon"></span>https://github.com/paulirish/jquery/commits/ticket6485</a>  </p><ul><li>unit test coverage and $.support.unknownElems added.</li></ul><p>so far, the <code>.innerHTML</code> use from within <code>clean()</code> is looking like trouble that'll have to be worked around</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:26">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 28, 2011 08:47PM UTC by <span class="author">aspilicious</span></span>
+        <a class="ticket-change-link" href="#comment:26">comment:26</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Drupal is working on his drupal8 release. We are planning to include shiv (inner shiv) stuff because we are going to go html5 all the way. BUT apparantly jquery is going to integrate those things for us in their next release.</p><p>Correct? When will this happen? 3 months? 6 months? a year? I would like to get this info so we can make a roadmap for drupal8.</p><p>Thnx!</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:27">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 28, 2011 11:28PM UTC by <span class="author">jon_neal</span></span>
+        <a class="ticket-change-link" href="#comment:27">comment:27</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I tracked the bugs down to manipulation.js, within the clean function, specifically where html strings are converted into DOM nodes; the line that reads.</p><pre class="wiki">
+div = context.createElement("div")
+</pre><p>This element is used to append the strings, and it's not part of a shimmed document.  I successfully experimented by adding the following.</p><pre class="wiki">
+html5elementsArr = 'abbr|article|aside|audio|canvas|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|subline|summary|time|video'.split('|'),
+html5elementsArrLen = html5elementsArr.length,
+html5elementsArrCar = -1,						
+html5safeFrag = context.createDocumentFragment();
+if (html5safeFrag.createElement) while (++html5elementsArrCar &lt; html5elementsArrLen) html5safeFrag.createElement(html5elementsArr[html5elementsArrCar]);
+html5safeFrag.appendChild(div);
+</pre><p>Of course, this html5safe fragment could have been previously generated, but for experimental purposes it worked, completely.  I ran the unit tests that Paul Irish shared, and loaded up old IE7 and IE8.  They passed: 100%.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:28">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 28, 2011 11:40PM UTC by <span class="author">paul.irish</span></span>
+        <a class="ticket-change-link" href="#comment:28">comment:28</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I think we got success here. :)</p><p>I can take point to integrate that code in jquery style, commit that and PR it.</p><p>The test suite index.html will also need the basic html5 shiv run on it for some of these new tests to pass in IE. I hope that's okay.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:29">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 29, 2011 12:19AM UTC by <span class="author">paul.irish</span></span>
+        <a class="ticket-change-link" href="#comment:29">comment:29</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Committed Jon's raw patch to my branch.. <a href="https://github.com/paulirish/jquery/commits/ticket6485" class="ext-link"><span class="icon"></span>https://github.com/paulirish/jquery/commits/ticket6485</a></p><p>snover indicates we'll probably need a test similar to <a href="https://github.com/jquery/jquery/commit/0a0cf/#diff-1" class="ext-link"><span class="icon"></span>https://github.com/jquery/jquery/commit/0a0cf/#diff-1</a></p><p>for this patch.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:30">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 29, 2011 02:04PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:30">comment:30</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Is there anyway that we can handle creation of elements without maintaining an internal hard-coded list? I seem to recall seeing something somewhere... </p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:31">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 11, 2011 08:48PM UTC by <span class="author">ajpiano</span></span>
+        <a class="ticket-change-link" href="#comment:31">comment:31</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>milestone:</th>
+                  <td>
+                    
+                      <span class="change-field-old">1.next</span> → <span class="change-field-new">1.7</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:32">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 12, 2011 08:09PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:32">comment:32</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/9496">#9496</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:33">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 29, 2011 08:51PM UTC by <span class="author">paul.irish</span></span>
+        <a class="ticket-change-link" href="#comment:33">comment:33</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>snover gave some feedback to Jonathan the day we were working on this that was useful so I tracked it back down and it's cleaned up and available here <a href="http://oksoclap.com/fNZvdYRdAU" class="ext-link"><span class="icon"></span>http://oksoclap.com/fNZvdYRdAU</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:34">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 15, 2011 08:50PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:34">comment:34</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>owner:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ rwaldron</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">open</span> → <span class="change-field-new">assigned</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:35">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 31, 2011 07:44PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:35">comment:35</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Worked on this today, but ultimately, I&#39;m hitting walls. Here are screen shots of one of the tests when I pull the branch as-is (resolving a minor conflict is required)&#92;
+&#92;
+IE8 http://gyazo.com/950889903bb10ad7e947ef221b9b2a16.png&#92;
+&#92;
+IE7 http://gyazo.com/127aca2933a2f3905bdcc80ba07ae23f.png&#92;
+&#92;
+IE6 http://gyazo.com/4a16f40faf1fe6c4da40b83949d359c8.png&#92;
+</span> → <span class="change-field-new">1314819971060167</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>Worked on this today, but ultimately, I'm hitting walls. Here are screen shots of one of the tests when I pull the branch as-is (resolving a minor conflict is required)</p><p>IE8 <a href="http://gyazo.com/950889903bb10ad7e947ef221b9b2a16.png" class="ext-link"><span class="icon"></span>http://gyazo.com/950889903bb10ad7e947ef221b9b2a16.png</a></p><p>IE7 <a href="http://gyazo.com/127aca2933a2f3905bdcc80ba07ae23f.png" class="ext-link"><span class="icon"></span>http://gyazo.com/127aca2933a2f3905bdcc80ba07ae23f.png</a></p><p>IE6 <a href="http://gyazo.com/4a16f40faf1fe6c4da40b83949d359c8.png" class="ext-link"><span class="icon"></span>http://gyazo.com/4a16f40faf1fe6c4da40b83949d359c8.png</a></p><p>When I change the test to use:</p><p><code>article.width()</code></p><p>The result changes in IE8</p><p><a href="http://gyazo.com/f524046a6b4b7aa51ab83f2adb54c804.png" class="ext-link"><span class="icon"></span>http://gyazo.com/f524046a6b4b7aa51ab83f2adb54c804.png</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:36">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 31, 2011 09:20PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:36">comment:36</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">More research stuff... &#92;
+&#92;
+Running this fiddle: http://jsfiddle.net/rwaldron/t6hqK/show&#92;
+&#92;
+Produces the following results:&#92;
+&#92;
+&#92;
+http://gyazo.com/4f54690fa9126ea78285b71518d97c76.png</span> → <span class="change-field-new">1314825721581785</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>More research stuff... </p><p>Running this fiddle: <a href="http://jsfiddle.net/rwaldron/t6hqK/show" class="ext-link"><span class="icon"></span>http://jsfiddle.net/rwaldron/t6hqK/show</a></p><p>Produces the following results:</p><p>IE vs. FF <a href="http://gyazo.com/4f54690fa9126ea78285b71518d97c76.png" class="ext-link"><span class="icon"></span>http://gyazo.com/4f54690fa9126ea78285b71518d97c76.png</a></p><p>IE6, 7, 8 <a href="http://gyazo.com/de3be2b41f306b06ec9cc86269f7a3d8.png" class="ext-link"><span class="icon"></span>http://gyazo.com/de3be2b41f306b06ec9cc86269f7a3d8.png</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:37">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 31, 2011 10:06PM UTC by <span class="author">jonathantneal@hotmail.com</span></span>
+        <a class="ticket-change-link" href="#comment:37">comment:37</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><strong>rwaldon</strong>, unless specified by the browser or the CSS, elements are display: inline by default, so IE is handling them the way it would normally handle inline elements</p><p>Running this fiddle: <a href="http://jsfiddle.net/t6hqK/5/show/" class="ext-link"><span class="icon"></span>http://jsfiddle.net/t6hqK/5/show/</a></p><p>Produces the following results in IE6: <a href="http://s4.postimage.org/5hrhkupqg/ie6_html5.png" class="ext-link"><span class="icon"></span>http://s4.postimage.org/5hrhkupqg/ie6_html5.png</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:38">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed September 07, 2011 04:14PM UTC by <span class="author">paul.irish</span></span>
+        <a class="ticket-change-link" href="#comment:38">comment:38</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834</span> → <span class="change-field-new">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834&#92;
+&#92;
+&#92;
+-------------&#92;
+&#92;
+EDIT by paulirish.. the scope of this ticket it only to fix #2 and #3. the markup in the document will still require the basic html5shiv/modernizr to adjust. &#92;
+&#92;
+this fix will correct the assumption that &quot;jquery is broken&quot; because it cannot handle ajax&#39;d in html5 content and the like. </span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:39">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed September 07, 2011 05:18PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:39">comment:39</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Request for review: <a href="https://github.com/jquery/jquery/pull/490/" class="ext-link"><span class="icon"></span>https://github.com/jquery/jquery/pull/490/</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:40">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed September 15, 2011 04:54PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:40">comment:40</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/10283">#10283</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:41">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed September 15, 2011 05:14PM UTC by <span class="author">Haprog</span></span>
+        <a class="ticket-change-link" href="#comment:41">comment:41</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1, I just spent a whole day at work figuring out why my code breaks on IE8 and older. It would really help if there was a good solution to this issue.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:42">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed September 15, 2011 05:16PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:42">comment:42</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>@Haprog This is coming in 1.7, barring any disastrous findings :)</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:43">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed September 19, 2011 08:47PM UTC by <span class="author">Rick Waldron</span></span>
+        <a class="ticket-change-link" href="#comment:43">comment:43</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ fixed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">assigned</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Landing pull request 490. 1.7 HTML5 Support for innerHTML, clone & style. Fixes <a href="/bugs.jquery.com/ticket/6485">#6485</a>.</p><p>More Details:</p> <ul><li><a href="https://github.com/jquery/jquery/pull/490" class="ext-link"><span class="icon"></span>https://github.com/jquery/jquery/pull/490</a></li> <li><a href="http://bugs.jquery.com/ticket/6485" class="ext-link"><span class="icon"></span>http://bugs.jquery.com/ticket/6485</a> </li></ul><p> Changeset: 9ecdb2472be7661477564e46bce51432d4a5a84e</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:44">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 05, 2011 02:41PM UTC by <span class="author">ajpiano</span></span>
+        <a class="ticket-change-link" href="#comment:44">comment:44</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/10427">#10427</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:45">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 06, 2011 09:12AM UTC by <span class="author">bmustiata</span></span>
+        <a class="ticket-change-link" href="#comment:45">comment:45</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>If I may, I think this issue should be extended to really support unknown elements for IE7/8. The problem is that the current implementation has ''a list of unknown'' elements.</p><p>This causes in my view (at least) two problems:</p><p>1. If tomorrow html5 decide to add a new element, old versions of the applications that use the current jQuery version will suddenly stop working until they upgrade their jQuery, and for any new element this list must be upgraded.</p><p>2. This approach also doesn't allow custom elements to be created that are not (and will never be) part of HTML5. We are actually using this in an application, where we create custom rendered metadata nodes on the fly (we receive them via AJAX). Elements are things like &lt;loop&gt;, &lt;metatarget&gt;, etc.</p><p>I am currently working on a fork where I try to allow creation of completely unknown elements, because currently (in the 1.7 beta):</p><p>jQuery('&lt;customelement&gt;some content&lt;/customelement&gt;');</p><p>has a different outcome in IE8 than in IE9 (or any other decent browser).</p><p>I hope you find these requirements acceptable for reopening this, or even better in my opinion reopening the duplicate issue 10427. (since HTML5 support is implemented, and only custom elements are not working).</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:46">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 14, 2011 02:20PM UTC by <span class="author">jdbartlett</span></span>
+        <a class="ticket-change-link" href="#comment:46">comment:46</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Perhaps it'd be more appropriate to open a new bug for this (please yell if so), but it looks like this has been marked "fixed" prematurely; I tried innerShiv's test page with jQ1.7b2 and Test 2 (which checks for innerShiv support built into jQuery) <strong>fails</strong> in IE8 :o :( :_(</p><p><a href="http://jsbin.com/igerig" class="ext-link"><span class="icon"></span>http://jsbin.com/igerig</a></p><p>Looking at the DOM tree, IE seems to be recognizing the elements properly, and I can style them if I use class names, but it's not styling based on tag names alone.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:47">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 14, 2011 06:12PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:47">comment:47</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834&#92;
+&#92;
+&#92;
+-------------&#92;
+&#92;
+EDIT by paulirish.. the scope of this ticket it only to fix #2 and #3. the markup in the document will still require the basic html5shiv/modernizr to adjust. &#92;
+&#92;
+this fix will correct the assumption that &quot;jquery is broken&quot; because it cannot handle ajax&#39;d in html5 content and the like. </span> → <span class="change-field-new">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+&#92;
+&#92;
+&#92;
+-------------&#92;
+&#92;
+EDIT by paulirish.. the scope of this ticket it only to fix #2 and #3. the markup in the document will still require the basic html5shiv/modernizr to adjust. &#92;
+&#92;
+this fix will correct the assumption that &quot;jquery is broken&quot; because it cannot handle ajax&#39;d in html5 content and the like. </span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I'm not at a machine that I can test from, but the first thing that comes to mind is that you'll still need to shiv/shim (whatever) the elements themselves - jQuery has no intention of providing that.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:48">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 14, 2011 06:33PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:48">comment:48</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+&#92;
+&#92;
+&#92;
+-------------&#92;
+&#92;
+EDIT by paulirish.. the scope of this ticket it only to fix #2 and #3. the markup in the document will still require the basic html5shiv/modernizr to adjust. &#92;
+&#92;
+this fix will correct the assumption that &quot;jquery is broken&quot; because it cannot handle ajax&#39;d in html5 content and the like. </span> → <span class="change-field-new">I wanted to propose some solutions to be used for some major HTML5 issues in IE6, IE7, and IE8, especially in regards to javascript and jQuery.&#92;
+&#92;
+Issues / Solutions:&#92;
+1. HTML5 is not supported on a document, html5 elements will not properly contain contents&#92;
+  * document.createElement(&#39;X&#39;) triggers support for &#39;X&#39; element (you know this one, it&#39;s the &quot;shiv I mean shim&quot; method)&#92;
+1. HTML5 is not supported with innerHTML&#92;
+  * HTML5 added with innerHTML is supported when the element being innerHTML&#39;d is already appended to a shim&#39;d document (or document fragment!)&#92;
+1. &lt;HTML5_elements&gt; become &lt;:HTML5_elements&gt; when element is cloneNode&#39;d&#92;
+  * use an alternate cloneNode function, the default is broken and should not be used in IE anyway (for example: it should not clone events)&#92;
+&#92;
+Example of solutions, in action, with comments:&#92;
+&#92;
+http://pastie.org/935834&#92;
+&#92;
+&#92;
+-------------&#92;
+&#92;
+EDIT by paulirish.. the scope of this ticket it only to fix #2 and #3. the markup in the document will still require the basic html5shiv/modernizr to adjust. &#92;
+&#92;
+this fix will correct the assumption that &quot;jquery is broken&quot; because it cannot handle ajax&#39;d in html5 content and the like. </span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Sorry, my mobile browser seems to like to remove urls from the original description text</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:49">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 14, 2011 09:25PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:49">comment:49</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Yeah, innerShiv's test page includes Rem's HTML5shim (otherwise none of the tests would pass at all) -- it's actually the test set I used when developing the original innerShiv. jQuery 1.7's HTML5 support is substantially the same technique as innerShiv, which is why it's so odd that this isn't working. Either I've done something really stupid in the test page, or something's going on between the HTML being cleaned and appended that's causing the breakage.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:50">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 14, 2011 09:26PM UTC by <span class="author">jdbartlett</span></span>
+        <a class="ticket-change-link" href="#comment:50">comment:50</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>(That last "anonymous" was me again, BTW!)</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:51">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 14, 2011 09:37PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:51">comment:51</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Would be nice if all of those tests appeared on screen without the need for scrolling. I screen capped this: <a href="http://gyazo.com/d02e3887ccc6c561915421e43cad02b8.png" class="ext-link"><span class="icon"></span>http://gyazo.com/d02e3887ccc6c561915421e43cad02b8.png</a> running in IE7 via <a href="/bugs.jquery.com/wiki/BrowserStack">BrowserStack</a> - not sure if that's even useful or meaningful</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:52">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 14, 2011 09:59PM UTC by <span class="author">jdbartlett</span></span>
+        <a class="ticket-change-link" href="#comment:52">comment:52</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>It's just the 2nd test that's affected (the other tests use innerShiv). Here's another version with the other tests removed:</p><p><a href="http://jsbin.com/igerig/3" class="ext-link"><span class="icon"></span>http://jsbin.com/igerig/3</a></p><p>Expected result (seen in IE9 and good browsers): <a href="http://d.pr/MKFP" class="ext-link"><span class="icon"></span>http://d.pr/MKFP</a></p><p>Actual result (seen in IE6, IE7, IE8): <a href="http://d.pr/SSZk" class="ext-link"><span class="icon"></span>http://d.pr/SSZk</a></p><p>HTML5shim is included (line 27 of the source).</p><p>Line 51 of the source shows the test that's being used.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:53">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 14, 2011 10:08PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:53">comment:53</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Maybe I'm missing something... I see the same thing in both screenshots.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:54">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 14, 2011 10:20PM UTC by <span class="author">jdbartlett</span></span>
+        <a class="ticket-change-link" href="#comment:54">comment:54</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Ah. The section element's background color in the IE&lt;=8 screenshot is red, whereas it's red in the IE9 screenshot.</p><p>But never mind that! Here's an even simpler demonstration:</p><p><a href="http://jsbin.com/obomec" class="ext-link"><span class="icon"></span>http://jsbin.com/obomec</a></p><p>In this demonstration, jQuery appends a section to an article. The CSS uses the "section" tag as a selector to style the section's background pink. Works in all good browsers, but ''not'' in IE &lt;= 8. :(</p><p>Here's exactly the same code, but using a class name ("pink") instead of an HTML5 tag name as a selector:</p><p><a href="http://jsbin.com/obomec/2/" class="ext-link"><span class="icon"></span>http://jsbin.com/obomec/2/</a></p><p>When using a class name as a selector instead of a tag name, the page is styled successfully.</p><p>innerShiv uses _exactly_ the same technique as the jQuery 1.7 fix, but I've never before encountered this problem with being able to style based of class selectors but not tags, which is why I suspect something's happening between the innerShiv fix and the append.</p><p>Hope that helps clarify the problem.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:55">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 14, 2011 10:22PM UTC by <span class="author">jdbartlett</span></span>
+        <a class="ticket-change-link" href="#comment:55">comment:55</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>"The section element's background color in the IE&lt;=8 screenshot is red, whereas it's red in the IE9 screenshot."</p><p>Ugh. Obviously, I meant to say:</p><p>"The section element's background color in the IE&lt;=8 screenshot is red, whereas it's GREEN in the IE9 screenshot."</p><p>GREEN! GREEN, damn it! There is a difference! Honest! :)</p><p>But anyway. The other demonstration is much easier code to read.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:56">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 14, 2011 11:08PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:56">comment:56</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Dig it: <a href="http://bugs.jquery.com/ticket/10501" class="ext-link"><span class="icon"></span>http://bugs.jquery.com/ticket/10501</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:57">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 16, 2011 10:15PM UTC by <span class="author">heruan@aldu.net</span></span>
+        <a class="ticket-change-link" href="#comment:57">comment:57</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Is the cloning issue fixed? I still get &lt;:section&gt;&lt;/:section&gt; on cloned &lt;section&gt;s in IE8 (with jQuery 1.7 and html5shiv).</p><ul><li><a href="http://jsbin.com/usogez/2/" class="ext-link"><span class="icon"></span>http://jsbin.com/usogez/2/</a></li></ul>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:58">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 17, 2011 01:29AM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:58">comment:58</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Fix is coming in 1.7.1</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:59">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 16, 2011 10:42PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:59">comment:59</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I'm using 1.7.1 and I still get the ":"-bug using clone(). Are there any news regarding this bug?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:60">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 23, 2012 10:38AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:60">comment:60</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>This is still happening as of 1.8, anyone have a fix for this they would like to share?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:61">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 23, 2012 12:46PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:61">comment:61</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> This is still happening as of 1.8, anyone have a fix for this they would like to share?</blockquote><p>I have no idea what "this" you are referring to but I am sure it can be answered better on a forum than on a closed bug tracker ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:62">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 17, 2012 08:50PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:62">comment:62</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I think 'this' is referring to cloning still not working.  I have the same problem using 1.8.2 with Modernizr 2.6.1.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</details>
+</div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

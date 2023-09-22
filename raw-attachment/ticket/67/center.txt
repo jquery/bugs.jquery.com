@@ -1,0 +1,59 @@
+$.fn.center = function(f) {
+	return this.each(function(){
+		if ( !f && this.nodeName == 'IMG' &&
+				 !this.offsetWidth && !this.offsetHeight ) {
+			var self = this;
+			setTimeout(function(){
+				$(self).center(true);
+			}, 13);
+		} else {
+			var s = this.style;
+			var p = this.parentNode;
+			var b = document.body;
+			var t = 0;
+
+			if ( f != "vertical" )
+			{
+				if ( $.css(p,"position") == 'static' )
+					p.style.position = 'relative';
+				s.position = 'absolute';
+				if ( ! isNaN(parseInt($.css(p,"width"))) )
+				{
+					t = parseInt(($.css(p,"width") - $.css(this,"width"))/2);
+					if ( t > 0 )
+						s.left = t + "px";
+					else
+						s.left = "0px";
+				}
+				else if ( ! isNaN( b.clientWidth ) )
+				{
+					t = parseInt((b.clientWidth - $.css(this,"width"))/2);
+					if ( t > 0 )
+						s.left = t + "px";
+					else
+						s.left = "0px";
+				}
+			}
+
+			if ( f != "horizontal" )
+			{
+				if ( ! isNaN(parseInt($.css(p,"height"))) )
+				{
+					t = parseInt(($.css(p,"height") - $.css(this,"height"))/2);
+					if ( t > 0 )
+						s.top = t + "px";
+					else
+						s.top = "0px";
+				}
+				else if ( ! isNaN( b.clientHeight ) )
+				{
+					t = parseInt((b.clientHeight - $.css(this,"height"))/2);
+					if ( t > 0 )
+						s.top = t + "px";
+					else
+						s.top = "0px";
+				}
+			}
+		}
+  });
+};

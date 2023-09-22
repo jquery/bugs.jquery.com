@@ -1,0 +1,145 @@
+--- jquery-latest.js	Mon Jan 22 13:42:55 2007
++++ jquery.js	Sat Feb  3 03:06:52 2007
+@@ -7,7 +7,7 @@
+  * Dual licensed under the MIT (MIT-LICENSE.txt)
+  * and GPL (GPL-LICENSE.txt) licenses.
+  *
+- * $Date: 2007-01-22 00:27:54 -0500 (Mon, 22 Jan 2007) $
++ * $Date: 2007/02/02 19:06:52 $
+  * $Rev: 1153 $
+  */
+ 
+@@ -1857,14 +1857,17 @@
+ 			data: params,
+ 			ifModified: ifModified,
+ 			complete: function(res, status){
+-				if ( status == "success" || !ifModified && status == "notmodified" )
++				if ( status.split(" ")[0] != "error" || !ifModified && status == "notmodified" ) {
+ 					// Inject the HTML into all the matched elements
+-					self.attr("innerHTML", res.responseText)
++					self.attr("innerHTML", res.responseText);
+ 					  // Execute all the scripts inside of the newly-injected HTML
+-					  .evalScripts()
++					//if(jQuery.browser.msie)
++					    jQuery.evalInlineScripts(res.responseText);
++				        //else
++					//    self.evalScripts();
+ 					  // Execute callback
+-					  .each( callback, [res.responseText, status, res] );
+-				else
++					self.each( callback, [res.responseText, status, res] );
++				} else
+ 					callback.apply( self, [res.responseText, status, res] );
+ 			}
+ 		});
+@@ -2016,10 +2019,15 @@
+ 				requestDone = true;
+ 				var status;
+ 				try {
+-					status = jQuery.httpSuccess( xml ) && isTimeout != "timeout" ?
+-						s.ifModified && jQuery.httpNotModified( xml, s.url ) ? "notmodified" : "success" : "error";
++				        status = jQuery.httpSuccess( xml );
++				        if(status.split(" ")[0] != "error" &&
++					   isTimeout != "timeout" &&
++					   s.ifModified &&
++					   jQuery.httpNotModified( xml, s.url )) {
++					    status = "redirect 304";
++					}
+ 					// Make sure that the request was successful or notmodified
+-					if ( status != "error" ) {
++					if ( status.split(" ")[0] != "error" ) {
+ 						// Cache Last-Modified header, if ifModified mode.
+ 						var modRes;
+ 						try {
+@@ -2042,7 +2050,7 @@
+ 					} else
+ 						jQuery.handleError(s, xml, status);
+ 				} catch(e) {
+-					status = "error";
++					status = "error exception";
+ 					jQuery.handleError(s, xml, status, e);
+ 				}
+ 
+@@ -2102,7 +2110,7 @@
+ 
+ 		// Fire the global callback
+ 		if ( s.global )
+-			jQuery.event.trigger( "ajaxError", [xml, s, e] );
++			jQuery.event.trigger( "ajaxError", [xml, s, e, status] );
+ 	},
+ 
+ 	// Counter for holding the number of active queries
+@@ -2110,12 +2118,30 @@
+ 
+ 	// Determines if an XMLHttpRequest was successful or not
+ 	httpSuccess: function( r ) {
++	    var status;
+ 		try {
+-			return !r.status && location.protocol == "file:" ||
+-				( r.status >= 200 && r.status < 300 ) || r.status == 304 ||
+-				jQuery.browser.safari && r.status == undefined;
+-		} catch(e){}
+-		return false;
++		    var status_code = r.status;
++		    status = "error unknow";
++		    if(!r.status && location.protocol == "file:" ||
++		       jQuery.browser.safari && r.status == undefined) {
++			status = "success"
++		    } else if(status_code >= 600) {
++			if(status_code == 12029 || status_code == 12152) {
++			    status = "error connection";
++			} else if(status_code == 1223) {
++			    status = "success 204";
++			}
++		    } else if(status_code >= 200 && status_code < 300) {
++			status = "success " + status_code;
++		    } else if(status_code >= 300 && status_code < 400) {
++			status = "redirect " + status_code;
++		    } else if(status_code >= 400 && status_code < 600) {
++			status = "error " + status_code;
++		    }
++		} catch(e){
++		    status = "error connection";
++		}
++		return status;
+ 	},
+ 
+ 	// Determines if an XMLHttpRequest returns NotModified
+@@ -2195,7 +2221,35 @@
+ 			window.setTimeout( data, 0 );
+ 		else
+ 			eval.call( window, data );
+-	}
+-
++	},
++    
++        evalInlineScripts: function(data) {
++	    var frags = [];
++	    
++	    while((sts = data.search(/<[ ]*script(>|[^>]*>)/ig)) >= 0) {
++		data = data.substring(sts);
++		var sub = data.substring(0, data.search(">"));
++		var url, i;
++		
++		if(sub.search(/src=/i) >= 0) {
++		    url = sub.replace(/.*[\n\t\r ]src=("[^"]+"|'[^']+').*/i, "$1"); // ");
++		    src = src.substring(1, src.length - 1);
++                    url = data.substring(7);
++		    jQuery.getScript(url);
++	        } else {
++		    var i;
++		    if(data.search(/<[ ]*script(>|[^>]*>)[\n\t\r ]*<!--/i) != 0) {
++			data = data.substring(data.search(">") + 1);
++			i = data.search(/<\/[ ]*script[ ]*>/i);
++		    } else {
++			data = data.substring(data.search("<!--") + 4);
++			i = data.search("-->");
++		    }
++		    jQuery.globalEval(data.substring(0, i));
++		    data = data.substring(i);
++		}
++	    }
++        }
++    
+ });
+ }

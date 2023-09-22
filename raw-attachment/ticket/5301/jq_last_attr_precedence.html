@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+		<title>Unexpected selector precedence</title>
+		<script type="text/javascript" src="jquery-1.3.2.js"></script>
+		<script type="text/ecmascript">
+			$(function() { $("input:last[value=foo]").css("background-color", "red"); });
+			$(function() { $("input[value=foo]:last").css("border", "2px solid blue"); });
+		</script>
+	</head>
+	<body>
+		<input value="foo"/>
+		<input value="foo"/>
+		<input value="bar"/>
+	</body>
+</html>

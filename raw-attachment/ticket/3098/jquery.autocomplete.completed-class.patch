@@ -1,0 +1,99 @@
+*** jquery.autocomplete.js.old	2008-06-28 13:26:49.000000000 +0100
+--- jquery.autocomplete.js	2008-06-28 13:27:47.000000000 +0100
+***************
+*** 215,231 ****
+  		}
+  		
+  		$input.val(v);
+  		hideResultsNow();
+  		$input.trigger("result", [selected.data, selected.value]);
+  		return true;
+  	}
+  	
+  	function onChange(crap, skipPrevCheck) {
+- 		if( lastKeyPressCode == KEY.DEL ) {
+- 			select.hide();
+- 			return;
+- 		}
+- 		
+  		var currentValue = $input.val();
+  		
+  		if ( !skipPrevCheck && currentValue == previousValue )
+--- 215,229 ----
+  		}
+  		
+  		$input.val(v);
++ 		if( options.completedClass ){
++ 			$input.addClass(options.completedClass);
++ 		}
+  		hideResultsNow();
+  		$input.trigger("result", [selected.data, selected.value]);
+  		return true;
+  	}
+  	
+  	function onChange(crap, skipPrevCheck) {
+  		var currentValue = $input.val();
+  		
+  		if ( !skipPrevCheck && currentValue == previousValue )
+***************
+*** 241,246 ****
+--- 239,245 ----
+  			request(currentValue, receiveData, hideResultsNow);
+  		} else {
+  			stopLoading();
++ 			clearCompletedClass();
+  			select.hide();
+  		}
+  	};
+***************
+*** 279,284 ****
+--- 278,303 ----
+  		}
+  	};
+  
++ 	// Add class to input when completely matches term
++ 	function addCompletedClass(data){
++ 		if( options.completedClass ){
++ 			var v = lastWord($input.val()).toLowerCase();
++ 			for (var i=0; i < data.length; i++) {
++ 				if( v == data[i].value.toLowerCase() ) {
++ 					$input.addClass(options.completedClass);
++ 					return;
++ 				}
++ 			}
++ 			$input.removeClass(options.completedClass);
++ 		}
++ 	};
++ 
++ 	function clearCompletedClass(){
++ 		if ( options.completedClass ){
++ 			$input.removeClass(options.completedClass);
++ 		}
++ 	}
++ 
+  	function hideResults() {
+  		clearTimeout(timeout);
+  		timeout = setTimeout(hideResultsNow, 200);
+***************
+*** 315,322 ****
+--- 334,343 ----
+  			stopLoading();
+  			select.display(data, q);
+  			autoFill(q, data[0].value);
++ 			addCompletedClass(data);
+  			select.show();
+  		} else {
++ 			clearCompletedClass();
+  			hideResultsNow();
+  		}
+  	};
+***************
+*** 389,394 ****
+--- 410,416 ----
+  	inputClass: "ac_input",
+  	resultsClass: "ac_results",
+  	loadingClass: "ac_loading",
++ 	completedClass: "ac_completed",
+  	minChars: 1,
+  	delay: 400,
+  	matchCase: false,

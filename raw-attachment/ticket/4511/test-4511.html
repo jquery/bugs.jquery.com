@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>test</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+</script>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<style type="text/css" media="screen">
+body { background-color: #fff; font: 16px Helvetica, Arial; color: #000; }
+</style>
+</head>
+<body>
+<div id="testBox1" style="position: relative">
+    <div>test</div>
+    <p style="position: absolute; left: 0; top: 0">This text should fade out.</p>
+</div>
+<br><br>
+<button type="button" onclick="$('#testBox1').fadeOut()">fade out</button>
+<!-- works -->
+<hr>
+
+<div id="testBox2" style="position: relative">
+    <div style="float: left">test</div>
+    <p style="position: absolute; left: 0; top: 0">This text should fade out.</p>
+</div>
+<br><br>
+<button type="button" onclick="$('#testBox2').fadeOut()">fade out</button>
+<!-- doesn't work -->
+<hr>
+
+<div id="testBox3" style="position: relative">
+    <p style="position: absolute; left: 0; top: 0">This text should fade out.</p>
+</div>
+<br><br>
+<button type="button" onclick="$('#testBox3').fadeOut()">fade out</button>
+<!-- doesn't work -->
+
+</body>
+</html>

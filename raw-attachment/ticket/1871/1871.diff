@@ -1,0 +1,27 @@
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 3830)
++++ src/event.js	(working copy)
+@@ -195,7 +195,8 @@
+ 
+ 		// Namespaced event handlers
+ 		var parts = event.type.split(".");
+-		event.type = parts[0];
++		if (parts[1])
++			event.type = parts[0];
+ 
+ 		var handlers = jQuery.data(this, "events") && jQuery.data(this, "events")[event.type], args = Array.prototype.slice.call( arguments, 1 );
+ 		args.unshift( event );
+@@ -233,7 +234,11 @@
+ 		// store a copy of the original event object 
+ 		// and clone to set read-only properties
+ 		var originalEvent = event;
+-		event = jQuery.extend({}, originalEvent);
++		var F = function () {};
++		F.prototype = originalEvent;
++		event = new F();
++		if (!event.type)
++			event = jQuery.extend({}, originalEvent);
+ 		
+ 		// add preventDefault and stopPropagation since 
+ 		// they will not work on the clone

@@ -1,0 +1,33 @@
+Index: src/fx.js
+===================================================================
+--- src/fx.js	(revision 5084)
++++ src/fx.js	(working copy)
+@@ -35,7 +35,7 @@
+ 	
+ 	toggle: function( fn, fn2 ){
+ 		return jQuery.isFunction(fn) && jQuery.isFunction(fn2) ?
+-			this._toggle( fn, fn2 ) :
++			this._toggle.apply( this, arguments ) :
+ 			fn ?
+ 				this.animate({
+ 					height: "toggle", width: "toggle", opacity: "toggle"
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 5084)
++++ src/event.js	(working copy)
+@@ -433,13 +433,13 @@
+ 
+ 		return this.click(function(event) {
+ 			// Figure out which function to execute
+-			this.lastToggle = 0 == this.lastToggle ? 1 : 0;
++			this.lastToggle = (this.lastToggle||0) % args.length
+ 			
+ 			// Make sure that clicks stop
+ 			event.preventDefault();
+ 			
+ 			// and execute the function
+-			return args[this.lastToggle].apply( this, arguments ) || false;
++			return args[this.lastToggle++].apply( this, arguments ) || false;
+ 		});
+ 	},
+ 

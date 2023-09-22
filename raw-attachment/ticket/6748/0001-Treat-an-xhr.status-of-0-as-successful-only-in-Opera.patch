@@ -1,0 +1,38 @@
+From 75d4b59a4c72ab6fde3aa1e815947639213ea9da Mon Sep 17 00:00:00 2001
+From: Ben Newman <ben@quora.com>
+Date: Wed, 30 Jun 2010 22:25:17 +0000
+Subject: [PATCH] Treat an xhr.status of 0 as successful only in Opera, where 0 really means 304.  In Chrome Mac, for example, an xhr.status of 0 means an error occurred.
+
+---
+ src/ajax.js |    7 ++++---
+ 1 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/src/ajax.js b/src/ajax.js
+index 2c4f13c..42b74cf 100644
+--- a/src/ajax.js
++++ b/src/ajax.js
+@@ -627,9 +627,10 @@ jQuery.extend( jQuery.ajax, {
+ 		try {
+ 			// IE error sometimes returns 1223 when it should be 204 so treat it as success, see #1450
+ 			return !xhr.status && location.protocol === "file:" ||
+-				// Opera returns 0 when status is 304
+ 				( xhr.status >= 200 && xhr.status < 300 ) ||
+-				xhr.status === 304 || xhr.status === 1223 || xhr.status === 0;
++				( xhr.status === 304 || xhr.status === 1223 ||
++				  // Opera returns 0 when status is 304
++				  ( xhr.status === 0 && jQuery.browser.opera ) );
+ 		} catch(e) {}
+ 
+ 		return false;
+@@ -649,7 +650,7 @@ jQuery.extend( jQuery.ajax, {
+ 		}
+ 
+ 		// Opera returns 0 when status is 304
+-		return xhr.status === 304 || xhr.status === 0;
++		return xhr.status === 304 || ( xhr.status === 0 && jQuery.browser.opera );
+ 	},
+ 
+ 	httpData: function( xhr, type, s ) {
+-- 
+1.5.4.3
+

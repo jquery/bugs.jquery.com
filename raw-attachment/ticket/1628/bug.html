@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>test</title>
+		<script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.2.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				// clone p
+				$("body p:last").clone().appendTo("body");
+
+				// show the length using jq and dom calls
+				alert("We clone an existing paragraph in body.\n" + 
+				      "Paragraph count returned using:\n\n" +
+				      "jq: " + $("body p").length + "\n" +
+				      "dom: " + document.getElementsByTagName("body")[0]
+				                        .getElementsByTagName("p").length);
+			});
+		</script>
+	</head>
+
+	<body>
+		<p>Blah</p>
+	</body>
+</html>

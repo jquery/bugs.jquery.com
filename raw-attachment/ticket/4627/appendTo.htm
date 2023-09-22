@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="keywords" content="jquery, append, bug" />
+<meta name="description" content="Bug" />
+<meta name="lang" content="en-us" />
+<meta name="author" content="Thiago Lagden" />
+<title>Bug</title>
+
+<script src="js/jquery-1.3.2.min.js" type="text/javascript" charset="UTF-8"></script>
+
+<script type="text/javascript">
+var controllerID='11';
+var controllerEID='1';
+var controllerPARENTID='0';
+
+$(document).ready(function(){
+
+	// Bug
+	$('<input type="hidden" name="id" value="'+controllerID+'" />').appendTo('#frm');
+
+	// Fine
+	//$('<input type="hidden" name="uid" value="'+controllerID+'" />').appendTo('#frm');
+
+	$('<input type="hidden" name="eid" value="'+controllerEID+'" />').appendTo('#frm');
+	$('<input type="hidden" name="parentId" value="'+controllerPARENTID+'" />').appendTo('#frm');
+
+	$('#bt').click(function(){postar();return false;});
+
+});
+
+function postar(){
+
+	var f=$('#frm');
+
+	// Bug returns [object HTMLInputElement]<input type="hidden" value="11" name="id">
+	// Expected frm
+	alert(f.get(0).id);
+	
+}
+
+</script>
+
+</head>
+<body>
+	<form action="post.php" id="frm" method="post" onsubmit="return false;">
+		<label for="nome">Nome: </label>
+		<input type="text" id="nome" name="nome" /><br/>
+		<button id="bt">OK</button>
+	</form>
+</body>
+</html> 

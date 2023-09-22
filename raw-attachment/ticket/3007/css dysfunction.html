@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>.css dysfunction</title>
+	<style>
+		* { font-family:verdana; line-height:150%; }
+		label { border:1px solid red; padding:3px; margin:2px; width:50px }
+		div { border:1px solid green; }		
+	</style>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	<script>
+		$(function() {
+			$('#p').text($('div').css('marginLeft'));
+			$('#c').text($('div').css('margin-left'));
+		});
+	</script>
+</head>
+<body>
+	<div style='margin-left:5cm'>Div having a '5cm' left margin in 'style' attribute</div>
+	$('div).css('marginLeft') = <label id='p'></label>
+	<br/>
+	$('div).css('margin-left') = <label id='c'></label>
+</body>
+</html>

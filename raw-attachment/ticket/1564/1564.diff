@@ -1,0 +1,14 @@
+--- ..\jquery.js Mon Nov 19 16:14:13 2007
++++ jquery.js Thu Nov 29 08:03:39 2007
+@@ -1927,7 +1927,10 @@
+ 				val = jQuery.data(element, "handle").apply( element, data );
+ 
+ 			// Handle triggering native .onfoo handlers
+-			if ( !fn && element["on"+type] && element["on"+type].apply( element, data ) === false )
++			var onevent = element["on"+type] || jQuery.attr(element, "on"+type);
++			if (typeof onevent == "string")
++				onevent = new Function(onevent);
++			if ( !fn && onevent && onevent.apply( element, data ) === false )
+ 				val = false;
+ 
+ 			// Extra functions don't get the custom event object

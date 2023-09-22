@@ -1,0 +1,38 @@
+Index: ui.datepicker.js
+===================================================================
+--- ui.datepicker.js	(revision 5056)
++++ ui.datepicker.js	(working copy)
+@@ -533,6 +533,15 @@
+ 			document.body.clientWidth;
+ 		var browserHeight = window.innerHeight || document.documentElement.clientHeight ||
+ 			document.body.clientHeight;
++
++		var _nextNode = $.datepicker._lastInput.parentNode;
++		var _parentsScrollLeft = 0;
++		var _parentsScrollTop = 0;
++		while(_nextNode.parentNode){
++			_parentsScrollLeft += parseInt("0" + _nextNode.scrollLeft, 10);
++			_parentsScrollTop += parseInt("0" + _nextNode.scrollTop, 10);
++			_nextNode = _nextNode.parentNode;
++		}
+ 		var scrollX = (isFixed ? 0 : document.documentElement.scrollLeft || document.body.scrollLeft);
+ 		var scrollY = (isFixed ? 0 : document.documentElement.scrollTop || document.body.scrollTop);
+ 		// reposition date picker horizontally if outside the browser window
+@@ -541,7 +550,7 @@
+ 				(browserWidth + scrollX)) {
+ 			inst._datepickerDiv.css('left', Math.max(scrollX,
+ 				pos[0] + (inst._input ? $(inst._input[0]).width() : null) - inst._datepickerDiv.width() -
+-				(isFixed && $.browser.opera ? document.documentElement.scrollLeft : 0)) + 'px');
++				(isFixed && $.browser.opera ? document.documentElement.scrollLeft : 0)) - _parentsScrollLeft + 'px');
+ 		}
+ 		// reposition date picker vertically if outside the browser window
+ 		if ((inst._datepickerDiv.offset().top + inst._datepickerDiv.height() -
+@@ -549,7 +558,7 @@
+ 				(browserHeight + scrollY) ) {
+ 			inst._datepickerDiv.css('top', Math.max(scrollY,
+ 				pos[1] - (this._inDialog ? 0 : inst._datepickerDiv.height()) -
+-				(isFixed && $.browser.opera ? document.documentElement.scrollTop : 0)) + 'px');
++				(isFixed && $.browser.opera ? document.documentElement.scrollTop : 0)) - _parentsScrollTop + 'px');
+ 		}
+ 	},
+ 	

@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>focus test</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+    <style type="text/css">
+    #log {
+    	border: 1px solid red;
+    	width: 80%;
+    	height: 100px;
+    	overflow: auto;
+    }
+    </style>
+    <script type="text/javascript">
+    $(document).ready (function () {
+        var counter = 0;
+        
+        var fields = $('.field');
+        fields.focus (function () {
+            $('#log').prepend ([
+                counter++,
+                ") field '",
+                $(this).attr ('id'),
+                "' focused<br/>",
+            ].join (''));
+        });
+        
+        fields.focus ();
+    });
+    </script>
+</head>
+<body>
+    <input type="text" id="one" class="field" />
+    <input type="text" id="two" class="field" />
+    <div id="log"></div>
+</body>
+</html>

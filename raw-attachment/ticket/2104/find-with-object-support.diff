@@ -1,0 +1,15 @@
+Index: D:/Data/SKL-workspace/jquery/src/core.js
+===================================================================
+--- D:/Data/SKL-workspace/jquery/src/core.js	(revision 4340)
++++ D:/Data/SKL-workspace/jquery/src/core.js	(working copy)
+@@ -281,6 +281,10 @@
+ 	},
+ 
+ 	find: function( selector ) {
++		// Quickly handle non-string expressions
++		if ( typeof selector != "string" )
++			return jQuery(selector);
++		
+ 		var elems = jQuery.map(this, function(elem){
+ 			return jQuery.find( selector, elem );
+ 		});

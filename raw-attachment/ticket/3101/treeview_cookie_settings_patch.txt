@@ -1,0 +1,13 @@
+Index: jquery.treeview.js
+===================================================================
+--- jquery.treeview.js	(revision 18)
++++ jquery.treeview.js	(working copy)
+@@ -169,7 +169,7 @@
+ 				branches.each(function(i, e) {
+ 					data[i] = $(e).is(":has(>ul:visible)") ? 1 : 0;
+ 				});
+-				$.cookie(settings.cookieId, data.join("") );
++				$.cookie(settings.cookieId, data.join(""), {expires: settings.cookieExpires, path: settings.cookiePath, domain: settings.cookieDomain, secure: settings.cookieSecure} );
+ 			}
+ 			
+ 			function deserialize() {

@@ -1,0 +1,10 @@
+@@ -5867,7 +5867,8 @@
+                var timers = jQuery.timers;
+
+                for ( var i = 0; i < timers.length; i++ ) {
+-                       if ( !timers[i]() ) {
++                       var timer = timers[i];
++                       if ( !timers[i]() && timers[i] === timer ) {
+                                timers.splice(i--, 1);
+                        }
+                }

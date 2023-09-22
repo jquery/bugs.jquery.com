@@ -1,0 +1,1277 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">#12790 (AJAX Post on IE10 / Windows 8) - jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      :root{--ticket-info-background-color:#ffd;--ticket-info-border-color:#dd9;--ticket-table-border-color:#eed;--ticket-date-text-color:#996;--ticket-description-title-color:#663;--ticket-changes-text-color:#663;--ticket-changes-box-shadow:#f2f2f2}.ticket-info{position:relative;background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);padding:.5em .75em;margin-bottom:.5em}.ticket-number{font-size:1.15rem;font-weight:700;margin-right:.5em}.ticket-info span{font-size:.8125em;font-weight:700}.ticket-resolution,.ticket-status,.ticket-type{text-transform:uppercase}.missing{color:var(--text-color-link-disabled)}.ticket-title{border-bottom:1px solid #bbb;margin-top:1em;padding-bottom:.25em;font-weight:700;font-size:1.1875rem}.ticket-dates{color:var(--ticket-date-text-color);font-size:.8125rem}.ticket-dates p{margin:0 0 .5em}.ticket-properties{width:100%;text-align:left;font-size:.65rem;border-top:1px solid var(--ticket-table-border-color);margin:0}.ticket-properties th{font-weight:400;width:20%}.ticket-properties td,.ticket-properties th{padding:.25em .5em;border-bottom:1px dashed var(--ticket-table-border-color)}.ticket-info-bottom{padding:.5em}.ticket-description{font-size:.8125rem;margin-top:.5em}.ticket-description h2,.ticket-description h3,.ticket-description h4,.ticket-description h5,.ticket-description h6{text-transform:uppercase;font-weight:400}.ticket-description h1{font-size:1.1rem}.ticket-description h2{font-size:1rem}.ticket-description h3{font-size:.9rem}.ticket-description h4{font-size:.8rem}.ticket-description h5{font-size:.75rem}.ticket-description h6{font-size:.7rem}.ticket-description-title{color:var(--ticket-description-title-color);font-size:.75rem}details{padding:.5em 0;font-size:.8125rem}summary{color:var(--text-color-link);font-weight:700;font-size:.875rem;text-decoration:underline;cursor:pointer;text-shadow:.04em .04em var(--text-shadow-color)}.ticket-attachments{font-size:.75em}.ticket-comment-body{width:100%;padding-top:.5em}.ticket-change{margin:1em 0;clear:both}.ticket-change-header{font-size:.875rem;font-weight:700;box-shadow:1.4px 2.8px 5.6px 0 var(--ticket-changes-box-shadow)}.ticket-change-link{font-size:.85em}.ticket-change-content{width:100%}.ticket-changes{background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);color:var(--ticket-changes-text-color);font-size:.7rem;float:right;clear:right;margin:2em 0 1em 1.5em}.ticket-changes th{text-align:right;font-weight:400;text-transform:capitalize}.ticket-changes td,.ticket-changes th{padding:.25em;vertical-align:baseline}.ticket-changes .change-field-new{font-weight:700}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+<div class="flex-column" data-pagefind-body="">
+  
+
+  <nav class="content-nav">
+    <ul class="flex-row">
+      
+        <li>
+          <a href="/bugs.jquery.com/ticket/12789/">← Previous Ticket</a>
+        
+      
+      
+        </li><li>
+          <a href="/bugs.jquery.com/ticket/12791/">Next Ticket →</a>
+        </li>
+      
+    </ul>
+  </nav>
+
+
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="." class="ticket-number">#12790</a>
+      <span class="ticket-status">closed</span>
+      <span class="ticket-type">bug</span>
+      <span class="ticket-resolution">(cantfix)</span>
+    </h3>
+
+    <div class="ticket-dates">
+      <p>Opened October 25, 2012 11:47PM UTC</p>
+      
+        <p>Closed November 26, 2012 09:48PM UTC</p>
+      
+      
+        <p>Last modified November 01, 2013 09:25PM UTC</p>
+      
+    </div>
+  </div>
+
+  <h1 class="ticket-title">AJAX Post on IE10 / Windows 8</h1>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        Tigroo
+      </td>
+      <th>Owned by:</th>
+      <td>Tigroo</td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        undecided
+      </td>
+      
+        <th class="missing">Milestone:</th>
+      
+      <td>
+        <a href="/bugs.jquery.com/milestone/None">None</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>unfiled</td>
+      
+        <th>Version:</th>
+      
+      <td>1.8.2</td>
+    </tr>
+    <tr>
+      
+        <th class="missing">Keywords:</th>
+      
+      <td></td>
+      
+        <th>Cc:</th>
+      
+      <td>jaubourg</td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
+    <div class="ticket-description"><p>AJAX Post on IE10 / Windows 8 is not working.</p><p>Smaple JS:</p><pre class="wiki">
+$.ajax({
+  type: "POST",
+  url: "test.php",
+  data: { test: "John" }
+}).done(function( msg ) {
+  alert( "output: " + msg );
+});
+
+</pre><p>Sample test.php</p><pre class="wiki">
+&lt;?php
+echo "I GOT IIIITTTT :  ".$_POST['test'];
+?&gt;
+</pre></div>
+  </div>
+</div>
+
+<details>
+  <summary class="ticket-details-summary">Attachments (0)</summary>
+
+  <ul class="ticket-attachments">
+    
+  </ul>
+</details>
+
+<details open="">
+  <summary class="ticket-details-summary">Change History (37)</summary>
+  
+    <div class="ticket-change flex-column" id="comment:1">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 26, 2012 12:27PM UTC by <span class="author">Tigroo</span></span>
+        <a class="ticket-change-link" href="#comment:1">comment:1</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>More precisions : It seems like all data arguments are not passing. If switch the compatibility mode from IE10 to IE9, it works.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:2">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 26, 2012 01:20PM UTC by <span class="author">mikesherov</span></span>
+        <a class="ticket-change-link" href="#comment:2">comment:2</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>cc:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ jaubourg</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>Jaubourg, could you kindly take a look at this. IE10 was just released, so I want to be extra cautious with this bug. Thanks!</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:3">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 26, 2012 01:49PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:3">comment:3</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I'd gladly look with a jsfiddle demonstrating the issue :)</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:4">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 30, 2012 10:44PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:4">comment:4</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>owner:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ Tigroo</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">pending</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>@Tigroo, please provide a test case that demonstrates the problem, preferably at jsfiddle.net or jsbin.com.</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:5">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 01, 2012 07:23PM UTC by <span class="author">jonesjunior3</span></span>
+        <a class="ticket-change-link" href="#comment:5">comment:5</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Hi </p><p>i have the same issue, please see</p><p><a href="http://stackoverflow.com/questions/13101729/jquery-ajax-call-works-in-all-browser-except-ie-10" class="ext-link"><span class="icon"></span>http://stackoverflow.com/questions/13101729/jquery-ajax-call-works-in-all-browser-except-ie-10</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:6">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 01, 2012 09:37PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:6">comment:6</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>same issue here. :/</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:7">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 02, 2012 03:39PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:7">comment:7</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Having the same issue on Windows 8 but with Chrome too... could this be an underlying OS issue rather than IE10?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:8">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 06, 2012 08:54AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:8">comment:8</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Any update on this issue?</p><p>Do you need any further information?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:9">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 06, 2012 09:08AM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:9">comment:9</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>As said above, a jsfiddle, or jsbin, demonstrating the issue.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:10">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 06, 2012 11:01AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:10">comment:10</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="http://jsfiddle.net/L6bJ2/6/" class="ext-link"><span class="icon"></span>http://jsfiddle.net/L6bJ2/6/</a></p><p>you have to be using ie10 on windows 8 for it not to work</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:11">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 06, 2012 01:28PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:11">comment:11</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ worksforme</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">pending</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I am running Windows 8 with IE10 10.0.9200.16384 and your example works fine for me, it echoes back the data. This simpler version also works: <a href="http://jsfiddle.net/RebaT/5/show" class="ext-link"><span class="icon"></span>http://jsfiddle.net/RebaT/5/show</a></p><p>Perhaps Microsoft slipstreamed in some last-minute patch to fix it. If you're still experiencing problems, make sure you have run Windows Update. Also be sure there are no toolbars or other add-ins installed.</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:12">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 06, 2012 03:37PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:12">comment:12</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Hi I have checked windows update, I have also removed ie 10 and reinstalled it. the request body is always empty.</p><p>Do you have any other suggestions?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:13">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 06, 2012 04:08PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:13">comment:13</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Try creating a simple example with bare XMLHttpRequest and a request body to see if that works. That way you can determine whether jQuery is involved at all.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:14">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 13, 2012 10:46PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:14">comment:14</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>We recently ran into this as well on a 32-bit machine that had just upgraded from Windows 7. Oddly, the behaviour couldn't be reproduced while the metro version of IE10.</p><p>The response body was simply empty (triggering our automated error handling). </p><p>Resetting to default IE10's settings resolved the issue, but it's worrying if this is a common scenario in the field.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:15">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 13, 2012 11:08PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:15">comment:15</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> Resetting to default IE10's settings resolved the issue</blockquote><p>What was the difference between the previous settings and the default settings?</p><p>It doesn't sound like this is a jQuery problem, but if anyone can contribute more than a "me too" response it would be welcome. As I said above, a non-jQuery repro case would be helpful too.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:16">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 14, 2012 05:29PM UTC by <span class="author">Scootin159</span></span>
+        <a class="ticket-change-link" href="#comment:16">comment:16</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I too had this same issue (clean Windows 8 install), and restoring the default settings in IE 10 resolved the issue for me.</p><p>I'm not aware of any settings I had changed from the baseline install (I never use IE other than for web testing, so I try to leave it as "default" as possible).</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:17">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 14, 2012 06:01PM UTC by <span class="author">Scootin159</span></span>
+        <a class="ticket-change-link" href="#comment:17">comment:17</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>This may or may not be related information:</p><p>Environment: Fresh windows 8 install, restored IE 10 defaults, all updates</p><p>Website is available at 2 URL's, AJAX call is hardcoded to go to "URL 1" at both URL's</p><p>Test Case:</p><ul><li>Open browser to URL 1, ajax works</li><li>Modify URL in address bar to URL 2, ajax works</li><li>Close browser window</li><li>Reopen, go to URL 2, ajax does not work</li></ul><p>Given this, I'm wondering if this may be an issue with IE 10 caching a listing of "allowed URL's" per-tab, and not allowing you to access URL's outside of that via AJAX.</p><p>Added information, if and only if AJAX fails, I get the following error in the IE 10 developer tools console:</p><p>SEC7118: XMLHttpRequest for &lt;&lt;url 1&gt;&gt; required Cross Origin Resource Sharing (CORS). </p><p>SEC7120: Origin &lt;&lt;url 2&gt;&gt; not found in Access-Control-Allow-Origin header. </p><p>SCRIPT7002: XMLHttpRequest: Network Error 0x80070005, Access is denied.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:18">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 16, 2012 08:54AM UTC by <span class="author">werner@brutaldev.com</span></span>
+        <a class="ticket-change-link" href="#comment:18">comment:18</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>The sample above most definitely does not work in IE10 v10.0.9200.16438 on Windows 7.</p><p>The POST data does not get sent to the server which can easily be confirmed with a Fiddler/Charles trace. Links to <a href="http://fiddle.jshell.net/_display/test.php" class="ext-link"><span class="icon"></span>http://fiddle.jshell.net/_display/test.php</a> removed because it thinks I' spamming.</p><p>The above code sample using Chrome (running in jsFiddle with jQuery 1.8.2 and catching the request in Fiddler):</p><p></p><hr><p></p><p>''POST [[test.php link]] HTTP/1.1</p><p>Host: fiddle.jshell.net</p><p>Connection: keep-alive</p><p>Content-Length: 9</p><p>Origin: <a href="http://fiddle.jshell.net" class="ext-link"><span class="icon"></span>http://fiddle.jshell.net</a></p><p>X-Requested-With: XMLHttpRequest</p><p>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) <a href="/bugs.jquery.com/wiki/AppleWebKit">AppleWebKit</a>/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11</p><p>Content-Type: application/x-www-form-urlencoded; charset=UTF-8</p><p>Accept: */*</p><p>Referer: [[removed]]</p><p>Accept-Encoding: gzip,deflate,sdch</p><p>Accept-Language: en-US,en;q=0.8,en-ZA;q=0.6</p><p>Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3</p><p>test=John''</p><p></p><hr><p></p><p>The POST data is clearly visible. Using the same code but running in IE10:</p><p></p><hr><p></p><p>''POST [[test.php link]] HTTP/1.1</p><p>Accept: */*</p><p>Content-Type: application/x-www-form-urlencoded; charset=UTF-8</p><p>X-Requested-With: XMLHttpRequest</p><p>Referer: [[removed]]</p><p>Accept-Language: en-ZA</p><p>Accept-Encoding: gzip, deflate</p><p>User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)</p><p>Host: fiddle.jshell.net</p><p>Content-Length: 0</p><p>DNT: 1</p><p>Connection: Keep-Alive</p><p>Pragma: no-cache''</p><p></p><hr><p></p><p>No POST data is in the request. Just for good measure I ran the same test in IE10 but the RTM in Windows 8. Desktop works correctly but it appears it's running in compatibility mode:</p><p></p><hr><p></p><p>POST [[test.php link]] HTTP/1.1</p><p>Accept: */*</p><p>Content-Type: application/x-www-form-urlencoded; charset=UTF-8</p><p>X-Requested-With: XMLHttpRequest</p><p>Referer: [[removed]]</p><p>Accept-Language: en-us</p><p>Accept-Encoding: gzip, deflate</p><p>User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.2; Trident/6.0; Touch; .NET4.0E; .NET4.0C; Tablet PC 2.0)</p><p>Host: fiddle.jshell.net</p><p>Content-Length: 9</p><p>DNT: 1</p><p>Connection: Keep-Alive</p><p>Pragma: no-cache</p><p>test=John</p><p></p><hr><p></p><p>I couldn't get the Fiddler loopback working in IE10 Metro so my testing stopped there...</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:19">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 16, 2012 01:31PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:19">comment:19</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Does the same problem happen when using a bare XHR? In other words, is this a jQuery problem, or is it an IE10 problem?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:20">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 17, 2012 04:43PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:20">comment:20</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I too have same problem</p><p>works in all browser expect IE10 Release preview for Windows 7 - 32 bit</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:21">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 19, 2012 02:07PM UTC by <span class="author">werner@brutaldev.com</span></span>
+        <a class="ticket-change-link" href="#comment:21">comment:21</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>OK, we can write this off as an IE10 in Windows 7 bug. Standard XHR does not work either when POSTing in Win7-IE10:</p><pre class="wiki">
+var xmlhttp=new XMLHttpRequest();
+xmlhttp.open("POST","test.php",true);
+xmlhttp.send(JSON.stringify({ test: "John" }));
+</pre><p>The above code still has no POST data in the body when using IE10 (async or not). This is only an issue on the desktop in Windows 7. IE10 in Windows 8 is working correctly. MS really dropped the ball here...</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:22">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 19, 2012 07:46PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:22">comment:22</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Thanks @werner! IE10 on Windows 7 is still a preview, not a release. If it isn't happening on Windows 8 anymore I suspect Microsoft just needs to back-port some patches that haven't landed in the Windows 7 version yet. In any case it doesn't sound like something jQuery can or should fix or work around, since it seems like a fix should arrive shortly.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:23">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 20, 2012 03:24PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:23">comment:23</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/12925">#12925</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:24">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 20, 2012 09:45PM UTC by <span class="author">nicholas@pdsys.org</span></span>
+        <a class="ticket-change-link" href="#comment:24">comment:24</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>That basic XHR example also fails in Windows 8, IE10 desktop mode. Looks like an MS issue. What a mess.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:25">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 21, 2012 12:02AM UTC by <span class="author">ericlaw (ex-msft)</span></span>
+        <a class="ticket-change-link" href="#comment:25">comment:25</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>If you want to get Fiddler working in Metro, follow these steps: <a href="http://www.fiddler2.com/r/?win8el" class="ext-link"><span class="icon"></span>http://www.fiddler2.com/r/?win8el</a></p><p>Important: If you have "Free Download Manager" or a similar add-on installed, it is known to cause this problem with IE10 (even when disabled). The issue is that Free Download Manager has an incomplete thunk of some URLMon interfaces, and this interferes with POST uploads.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:26">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 26, 2012 09:46PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:26">comment:26</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-old strikethrough">worksforme</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">closed</span> → <span class="change-field-new">reopened</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:27">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 26, 2012 09:48PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:27">comment:27</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ cantfix</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">reopened</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>This appears to be a widespread problem with POST requests on IE10, one that we do not control, so there is **no need to post further feedback** in this ticket. Here is the Microsoft ticket for the problem; note that you will need to create a login to view:</p><p><a href="http://connect.microsoft.com/IE/feedback/details/771016" class="ext-link"><span class="icon"></span>http://connect.microsoft.com/IE/feedback/details/771016</a></p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:28">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 29, 2013 08:59AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:28">comment:28</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I faced the same problem but it was caused by <a href="/bugs.jquery.com/wiki/HttpWatch">HttpWatch</a> plugin in IE10. See release notes <a href="http://www.httpwatch.com/download/versionhistory/" class="ext-link"><span class="icon"></span>http://www.httpwatch.com/download/versionhistory/</a> (Version 8.5.35 - 28 Mar 2013 )</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:29">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 07, 2013 01:20AM UTC by <span class="author">brettryan</span></span>
+        <a class="ticket-change-link" href="#comment:29">comment:29</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>The MS connect page no longer exists, does anyone have any information if Microsoft are actually addressing this?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:30">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 04, 2013 02:45PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:30">comment:30</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>in&lt;head&gt;&lt;/head&gt;</p><p>里添加</p><p>&lt;meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" &gt;</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:31">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 05, 2013 12:51AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:31">comment:31</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>This will work on compatibility mode of IE10.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:32">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 06, 2013 03:51PM UTC by <span class="author">robson_douglas@hotmail.com</span></span>
+        <a class="ticket-change-link" href="#comment:32">comment:32</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I found this error and after very hours and some coffees, I discover the reason for this error. Windows 8 pre-installed version don't have  permission to use some resource from HMLHTTPRequest.</p><p>The user must run this command on 'execute program': gpupdate /force</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:33">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 15, 2013 05:38PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:33">comment:33</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>yangzh@glodon.com</p><p>close httpwatch</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:34">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed September 05, 2013 10:51AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:34">comment:34</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>so what is the solution then?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:35">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed September 05, 2013 12:44PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:35">comment:35</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Per <a href="http://bugs.jquery.com/ticket/12790#comment:26," class="ext-link"><span class="icon"></span>http://bugs.jquery.com/ticket/12790#comment:26,</a> remove or disable add-ons such as Free Download Manager that are interfering with the browser.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:36">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 04, 2013 03:30PM UTC by <span class="author">sean pu</span></span>
+        <a class="ticket-change-link" href="#comment:36">comment:36</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I got this bug too, i will try all way that shared above.</p><p>Thank you all.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:37">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 01, 2013 09:25PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:37">comment:37</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Just an FYI - I had a similar issue with IE 10 with http request whether with JQuery and just javascript code.  The issue was actually caused by Google Gears.  After disabling, the issue went away.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</details>
+</div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

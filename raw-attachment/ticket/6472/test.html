@@ -1,0 +1,30 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+</head>
+<body>
+<div id="test">
+  <div myattr="foobar">
+	<div myattr="">second</div>
+  </div>
+</div>
+<textarea id="log" style="width:40em;height:20em">
+<div id="test">
+  <div myattr="foobar">
+	<div myattr="">second</div>
+  </div>
+</div>
+</textarea>
+<script type="text/javascript">
+	function logger(msg) {
+	  $('#log').append(msg + "\n");
+	}
+  jQuery(function() {
+	  logger('init');
+	  logger("$('#test *[myattr]').length              : " + $('#test *[myattr]').length );
+	  logger("$('#test').find('*[myattr]').length      : " + $('#test').find('*[myattr]').length);
+	  logger("$('#test').find('*[myattr=\"\"]').length   : " + $('#test').find('*[myattr=""]').length);
+  });
+</script>
+</html>

@@ -1,0 +1,173 @@
+<html>
+	<head>
+		<title>Bug #929 Test</title>
+	
+		<script type="text/javascript" src="js/jQuery-1.1/jquery.js"></script>
+		<script type="text/javascript" src="js/jQuery-1.1/jquery.compat-1.0.js"></script>
+		<script type="text/javascript" src="js/jQuery-1.1/interface-1.1.2/interface.js"></script>
+		<script type="text/javascript" src="js/jQuery-1.1/interface-1.1.2/src/iutil.js"></script>
+	
+		<script type="text/javascript" src="js/jQuery-1.1/interface-1.1.2/src/ifx.js"></script>
+		<script type="text/javascript" src="js/jQuery-1.1/interface-1.1.2/src/ifxslide.js"></script>
+		<script type="text/javascript" src="js/jQuery-1.1/interface-1.1.2/src/iautocompleter.js"></script>
+		<script type="text/javascript" src="js/jQuery-1.1/interface-1.1.2/src/idrag.js"></script>
+		<script type="text/javascript" src="js/jQuery-1.1/interface-1.1.2/src/idrop.js"></script>
+		<script type="text/javascript" src="js/jQuery-1.1/interface-1.1.2/src/isortables.js"></script>
+	
+		<script type="text/javascript">
+		/**
+		 * Adapted from: http://www.dyve.net/jquery/?editable
+		 */
+		
+		$.fn.editable = function(options) {
+			// Options
+			options = arrayMerge({
+				"callin": null,
+				"url": "url",
+				"idName": "id",
+				"valName": "val",
+				"callback": null,
+				"saving": "saving ...",
+				"delayOnBlur": 0,
+				"extraParams": {},
+				"editClass": null
+			}, options);
+			// Set up
+			this.click(function(e) {
+					if (this.editing) return;
+					if (!this.editable) this.editable = function() {
+						var me = this;
+						if (options.callin) {
+							options.callin($(me).attr(options.idName));
+						}
+						var width = $(me).width();
+						me.editing = true;
+						me.orgHTML = $(me).html();
+						me.innerHTML = "";
+						if (options.editClass) $(me).addClass(options.editClass);
+						var i = createInputElement(me.orgHTML);
+						$(i).addClass(options.editClass);
+						$(i).css("width", width+20);
+						var t = 0;
+						me.appendChild(i);
+						i.focus();
+						$(i).blur(
+								options.delayOnBlur ? function() { t = setTimeout(reset, options.delayOnBlur) } : reset
+							)
+							.keydown(function(e) {
+								if (e.keyCode == 27) { // ESC
+									e.preventDefault;
+									reset
+								} else if (e.keyCode == 13) { // ENTER
+									e.preventDefault;
+									var p = {};
+									p[options.idName] = $(me).attr(options.idName);
+									p[$(i).name()] = $(i).val();
+									p = arrayMerge(p, options.extraParams);
+									$(me).html(options.saving);
+									$.post(
+										options.url,
+										p,
+										function(data) {
+											if (options.callback) {
+												options.callback(me, data);
+											}
+											m.editing = false;
+										});
+								}
+							});
+						/*$(f).submit(function(e) {
+							if (t) clearTimeout(t);
+							e.preventDefault();
+							var p = {};
+							p[i.name] = $(i).val();
+							$(me).html(options.saving).load(options.url, arrayMerge(options.extraParams, p), function() {
+								// Remove script tags
+								me.innerHTML = me.innerHTML.replace(/<\s*script\s*.*>.*<\/\s*script\s*.*>/gi, "");
+								// Callback if necessary
+								if (options.callback) options.callback(me); 
+								// Release
+								me.editing = false;						
+							});
+						}); */
+						function reset() {
+							me.innerHTML = me.orgHTML;
+							if (options.editClass) $(me).removeClass(options.editClass);
+							me.editing = false;					
+						}
+					};
+					this.editable();
+				})
+			;
+			// Don't break the chain
+			return this;
+			// Helper functions
+			function arrayMerge(a, b) {
+				if (a) {
+					if (b) for(var i in b) a[i] = b[i];
+					return a;
+				} else {
+					return b;		
+				}
+			};
+			function createInputElement(v) {
+				var i = document.createElement("input");
+				i.type = "text";
+				$(i).val(v);
+				i.name = options.valName;
+				return i;
+			}
+		};
+		
+		</script>
+		
+		<style type="text/css">
+		.editClass {
+			display: inline;
+		}
+		</style>
+		
+	</head>
+	
+	<script type="text/javascript">
+	
+		var blankFn = function() {}
+	
+		var disableDrag = function(id) {
+			$("#"+id).DraggableDestroy();
+		}
+	
+		$(document).ready(function() {
+			$(".dropZone").Sortable({
+				accept:		'dropItem',
+				opacity:	0.4,
+				revert:		true,
+				ghosting:	true,
+				tolerance:	'intersect',
+				fit:		true,
+				fx:			200
+			});
+			$(".dropItem").editable({
+				editClass:	"editClass",
+				idName:		"id",
+				valName:	"name",
+				callin:		disableDrag
+			});
+		});
+	
+	</script>
+	
+	<body>
+		<ul class="dropZone">
+			<li class="dropItem" id="e1">Hello, I could be edited</li>
+			<li class="dropItem" id="e2">Me too!</li>
+			<li class="dropItem" id="e3">Me three!</li>
+			<li class="dropItem" id="e4">I don't want to be edited :-(</li>
+		</ul>
+		<hr>
+		<ul class="dropZone">
+			<li class="dropItem" id="e5">I'm also editable!</li>
+		</ul>
+	</body>
+</html>		
+			

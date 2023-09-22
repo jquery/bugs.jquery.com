@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>Clone event</title>
+<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script> 
+<script type="text/javascript">
+	$(function(){
+
+		// Checks for support of special characters in names.
+		jQuery.support.noCloneAttribute = (function(){
+			var retrun = false;
+			// Create an input with normal name,
+			// adjust name with special characters stripped out by IE
+			// and append it to the document.
+			var item = jQuery("<input name='test' id='test' />").attr('name',"test[]").appendTo(document.body);
+			// Get above input name and it should be 6 characters long.
+			retrun = (jQuery("#test").clone().attr('name').length == 6);
+			// Cleanup.
+			jQuery(item).remove();
+			return retrun;
+		})();
+		
+		alert("TEST noCloneAttribute:\n\n" + jQuery.support.noCloneAttribute);
+		
+		$("#input1").attr('name',$("#input1").attr('name')+"[]");
+		$("#input2").attr('name',$("#input2").attr('name')+".test");
+		$("#input3").attr('name',$("#input3").attr('name')+" test");   
+		
+		alert("TEST NORMAL:\n\n" + document.getElementById("line").cloneNode(true).innerHTML);
+		
+		alert("TEST JQUERY old:\n\n" + $("#line").clone().html());	   
+		
+		jQuery.fn.clone = jQuery.prototype.clone = function( events ) {
+			// Do the clone
+			var ret = this.map(function(){
+				if ( !jQuery.support.noCloneEvent && !jQuery.isXMLDoc(this) ) {
+					
+					// IE copies events bound via attachEvent when
+					// using cloneNode. Calling detachEvent on the
+					// clone will also remove the events from the orignal
+					
+					// In order to get around this, we use innerHTML.
+					// Unfortunately, this means some modifications to
+					// attributes in IE that are actually only stored
+					// as properties will not be copied (such as the
+					// the name attribute on an input).
+					var html = this.outerHTML;
+					if ( !html ) {
+						var div = this.ownerDocument.createElement("div");
+						div.appendChild( this.cloneNode(true) );
+						html = div.innerHTML;			
+					}
+					
+					
+					if(!jQuery.support.noCloneAttribute) {
+						//Search all tags in outerHTML method
+						jQuery.each(this.outerHTML.toString().match(/<[^<]*>/g),function(i,alltag){
+							//Foreach tag find an attribute name id 
+							var idtag=alltag.toString().match("id=[^ >]*");
+							if(idtag) {
+								//If id exists get the id value
+								idtag=idtag.toString().split("=")[1];
+								
+								//Array Attributes who doens't change by javascripts methods like name in IE
+								var attributes=['name'];
+								
+								//Foreach attribute declared above change to new values
+								jQuery.each(attributes,function(j,attrs){
+									//Find old value of the object
+									var old_value=alltag.toString().match(attrs+"=[^ >]*");
+									//Find new value of the object modified by any method
+									var new_value=$("#"+idtag).attr(attrs);			
+									//If diferent values replace with new value					
+									if(old_value!=new_value) html=html.replace(old_value,attrs+"="+new_value);
+								});
+							}						
+						});			
+					}
+	
+					return jQuery.clean([html.replace(/ jQuery\d+="(?:\d+|null)"/g, "").replace(/^\s*/, "")])[0];	
+				} else
+					return this.cloneNode(true);
+				
+			});
+	
+			// Copy the events from the original to the clone
+			if ( events === true ) {
+				var orig = this.find("*").andSelf(), i = 0;
+	
+				ret.find("*").andSelf().each(function(){
+					if ( this.nodeName !== orig[i].nodeName )
+						return;
+	
+					var events = jQuery.data( orig[i], "events" );
+	
+					for ( var type in events ) {
+						for ( var handler in events[ type ] ) {
+							jQuery.event.add( this, type, events[ type ][ handler ], events[ type ][ handler ].data );
+						}
+					}
+	
+					i++;
+				});
+			}
+			
+			// Return the cloned set
+			return ret;
+		}
+		alert("TEST JQUERY new:\n\n" + $("#line").clone().html());	   
+	});
+</script>
+</head>
+
+<body>
+<table>
+<tr id="line">
+<td>
+<input name="a" type="text" id="input1" size="10"/>
+<input name="b" type="text" id="input2" size="10">
+<input name="c" type="text" id="input3" size="10">
+</td>
+</tr>
+</table>
+
+</body>
+</html> 

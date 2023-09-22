@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<title>jQuery 1.1.3 IE Opacity Bug</title>
+
+	<!-- Use 1.1.3 packed or unpacked -->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+
+			$("#fadein").click(function(){
+
+				$("#block").animate({ opacity: 'show' }, "slow");
+
+//				Or use fadeIn() instead
+//				$("#block").fadeIn("slow");
+
+				return false;
+			});
+
+
+			$("#fadeout").click(function(){
+
+				$("#block").animate({ opacity: 'hide' }, "slow");
+
+//				Or use fadeOut() instead
+//				$("#block").fadeOut("slow");
+
+				return false;
+			});
+
+		});
+	</script>
+</head>
+
+<body>
+
+
+<h1>jQuery 1.1.3 Opacity Bug</h1>
+
+<p>Animation with opacity changes <strong>fail</strong> in IE6 and IE7 with the new jQuery
+1.1.3 release. The opacity style is not properly altered, just the display style at the
+end of the animation. This also affects <code>.fadeIn()</code> and
+<code>.fadeOut()</code>, which call the <code>.animate()</code> function.</p>
+
+
+<p><a href="#" id="fadeout">Fade Out</a></p>
+<p><a href="#" id="fadein">Fade In</a></p>
+
+
+<div id="block">
+
+	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla.</p>
+
+</div>
+
+
+</body>
+</html>

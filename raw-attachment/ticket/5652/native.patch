@@ -1,0 +1,13 @@
+diff --git a/public/javascripts/libraries/jquery.js b/public/javascripts/libraries/jquery.js
+index 6b39ab4..0819dc6 100644
+--- a/public/javascripts/libraries/jquery.js
++++ b/public/javascripts/libraries/jquery.js
+@@ -1038,7 +1038,7 @@ jQuery.event = {
+ 		if ( !bubbling && nativeFn && !event.isDefaultPrevented() && !(jQuery.nodeName(elem, 'a') && type === "click") ) {
+ 			this.triggered = true;
+ 			try {
+-				nativeFn();
++				nativeFn.apply(elem);
+ 			// prevent IE from throwing an error for some hidden elements
+ 			} catch (e) {}
+ 		}

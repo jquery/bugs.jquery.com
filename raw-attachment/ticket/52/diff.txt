@@ -1,0 +1,13 @@
+Index: jquery/jquery.js
+===================================================================
+--- jquery/jquery.js	(revisi¢n: 133)
++++ jquery/jquery.js	(copia de trabajo)
+@@ -276,7 +276,7 @@
+ 		return this.each(function(){jQuery.event.remove(this,t,f);});
+ 	},
+ 	trigger: function(t) {
+-		return this.each(function(){jQuery.event.trigger(this,t);});
++		return this.each(function(){jQuery.event.trigger(t, null, this);});
+ 	},
+ 	
+ 	pushStack: function(a,args) {

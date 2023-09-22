@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Testing die() and live() methods</title>
+</head>
+<body>
+Click on the first element - you should just get a message that everything is ok. <br />
+<a href="some-other-file.html">Some element</a>
+
+<p>
+Ok, click on the button now - it should remove the event *only* from the second element.
+</p>
+
+<div class="someClass">
+<a href="#">Some other element</a>
+</div>
+<br />
+<input class="button" type="submit" value="Crash it!" />
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">
+$( function(){
+  $('a').live('click', function(){
+    alert('aye-aye! Everything works fine!');
+    return false;
+  });
+
+  $('.button').click( function(){
+    $('.someClass a').die('click');
+    alert('OK, click ont he first element now...');
+    return false;
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="PSPad editor, www.pspad.com" />
+	<title>jQuery test file for AREA bug</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<script type="text/javascript">
+//<![CDATA[
+		$(function() {
+			$('#test_trigger_link').bind('click', runTests);
+		});
+		var runTests = function() {
+			appendLn("--------------------------");
+			appendLn("running some tests");
+			{
+				var ok = ($('<area />').length > 0);
+				appendLn('test 1: creating an empty area tag - ' + getResultString(ok));
+			}
+			{
+				var ok = ($('<area alt="something" />').length > 0);
+				appendLn('test 2: creating an area tag with an alt prop - ' + getResultString(ok));
+			}
+			{
+				var ok = ($('<area href="#something" />').length > 0);
+				appendLn('test 3: creating an area tag with a href prop - ' + getResultString(ok));
+			}
+			{
+				var ok = ($('<area alt="something" href="#something" />').length > 0);
+				appendLn('test 4: creating an area tag with a href+alt prop - ' + getResultString(ok));
+			}
+			{
+				var ok = ($('<area />').attr({href: '#something', alt: 'something'}).length > 0);
+				appendLn('test 5: creating an area tag, then adding props - ' + getResultString(ok));
+			}
+		};
+		var append = function(str) {
+			$('#test_output').append(str);
+		};
+		var appendLn = function(str) {
+			append(str);
+			append(($.browser.msie ? '\r' : '\n')); // bah
+		};
+		var getResultString = function(result) {
+			return (result ? 'passed' : 'FAILED');
+		};
+//]]>
+	</script>
+	</head>
+	<body>
+		<a id="test_trigger_link" href="javascript:void(0);">Im in ur bugtraq (klik me!)</a>
+		<br />
+		<textarea id="test_output" rows="20" cols="80" readonly="readonly"></textarea>
+	</body>
+</html>

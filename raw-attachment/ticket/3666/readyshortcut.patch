@@ -1,0 +1,11 @@
+--- core.js.orig	Sat Nov 29 18:15:55 2008 UTC
++++ core.js	Sat Nov 29 18:15:46 2008 UTC
+@@ -77,7 +77,7 @@
+ 		// HANDLE: $(function)
+ 		// Shortcut for document ready
+ 		} else if ( jQuery.isFunction( selector ) )
+-			return jQuery( document )[ jQuery.fn.ready ? "ready" : "load" ]( selector );
++			return jQuery( document ).ready( selector );
+ 
+ 		return this.setArray(jQuery.makeArray(selector));
+ 	},

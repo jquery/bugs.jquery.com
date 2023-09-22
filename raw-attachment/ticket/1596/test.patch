@@ -1,0 +1,34 @@
+Index: build/runtest/test.js
+===================================================================
+--- build/runtest/test.js	(revision 3216)
++++ build/runtest/test.js	(working copy)
+@@ -9,11 +9,11 @@
+     
+     // Load the tests
+     load(
+-        "src/jquery/coreTest.js",
+-        "src/selector/selectorTest.js",
+-        "src/event/eventTest.js"
+-        //"src/fx/fxTest.js",
+-        //"src/ajax/ajaxTest.js"
++        "test/unit/core.js",
++        "test/unit/selector.js",
++        "test/unit/event.js"
++        //"test/unit/fx.js"
++        //"test/unit/ajax.js"
+     );
+     
+     // Display the results
+Index: build.xml
+===================================================================
+--- build.xml	(revision 3216)
++++ build.xml	(working copy)
+@@ -175,7 +175,7 @@
+ 
+     <target name="clean">
+         <delete dir="${DOCS_DIR}" />
+-        <delete dir="${TEST_DIR}" />
++        <!-- <delete dir="${TEST_DIR}" /> -->
+         <delete dir="${DIST_DIR}" />
+     </target>
+ 

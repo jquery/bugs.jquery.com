@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <link rel="stylesheet" type="text/css" href="slowcss.php?t=1" />
+    <script type="text/javascript" src="../jquery.test.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        $("button:first").click(function () {
+              $("#cdiv").text("current width = " + $("#tester").css("width"));
+            });
+        $("#adiv").text("ready width = " + $("#tester").css("width"));
+      });
+      window.onload = function () {
+        $("#bdiv").text("onload width = " + $("#tester").css("width"));
+      };
+    </script>
+  </head>
+  <body>
+    <button>Click to show current width</button>
+    <div id="tester">This div has a 100px width set in external CSS file</div>
+    <div id="adiv"></div>
+    <div id="bdiv"></div>
+    <div id="cdiv"></div>
+  </body>
+</html>

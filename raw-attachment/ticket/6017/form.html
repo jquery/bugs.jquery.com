@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title></title>
+</head>
+<body>
+<form action="" method="post" enctype="multipart/form-data">
+				<fieldset>
+					<legend>Submit a project<span></span></legend>
+					<fieldset id="project_data">
+						<ul>
+							<li id="kind_of_talent_li">
+								<label for="kind_of_talent_input">
+									<span>What kind of talent do you need? (or request a specific person)</span>
+									<input type="text" name="kind_of_talent" id="kind_of_talent_input" value="" />
+									<input type="hidden" name="kind_of_talent_req" value="STRING" />
+									<input type="hidden" name="kind_of_talent_gui" value="What kind of talent do you need" />
+								</label>
+								<p class="help_text">
+									Enter a job title, person’s name, or describe the type of person you need
+								</p>
+								<div class="help_text">
+									<h4>Examples</h4>
+									<ul>
+										<li>Web designer</li>
+										<li>Jane Smith</li>
+										<li>Entrepreneur</li>
+									</ul>
+								</div>
+							</li>
+							<li id="need_to_do_li">
+								<label for="need_to_do_input">
+									<span>What do you need them to do?</span>
+									<input type="text" name="need_to_do" id="need_to_do_input" value="" />
+									<input type="hidden" name="need_to_do_req" value="STRING" />
+									<input type="hidden" name="need_to_do_gui" value="What do you need them to do" />
+								</label>
+								<p class="help_text">
+									Summarize the project in a sentence or so
+								</p>
+								<div class="help_text">
+									<h4>Examples</h4>
+									<ul>
+										<li>I need someone to create expense reports from 4 months of receipts from my business travel.</li>
+										<li>I need assistance writing a blog for my finance startup.</li>
+										<li>I want to create custom reports in Salesforce</li>
+									</ul>
+								</div>
+							</li>
+							<li id="why_li">
+								<label for="why_input">
+									<span>Why would you like this done?</span>
+									<textarea name="why" id="why_input" rows="3" cols="50"></textarea>
+									<input type="hidden" name="why_input_req" value="STRING" />
+									<input type="hidden" name="why_input_gui" value="Why would you like this done" />
+								</label>
+								<p class="help_text">
+									Enter additional details, software needs, or other information that might help
+								</p>
+								<div class="help_text">
+									<h4>Examples</h4>
+									<p>
+										I need assistance writing regular blog entries for my cloud computing
+										startup whose website is www.xyz.com.  I want to drive search engine
+										traffic to my site and also start conversations with visitors. Ideally
+										the talent would have experience and knowledge about the latest
+										developments in enterprise cloud computing. I'm looking to start
+										conversations about news like this: www.wxyz.com/news
+									</p>
+								</div>
+							</li>
+							<li id="scope_li">
+								<fieldset>
+									<legend><span>What is the estimated scope of this project?</span></legend>
+									<ul>
+										<li id="small_li">
+											<label for="small_input">
+												<input type="radio" name="project_scope" value="small" id="small_input" />
+												<span>Small <span>(a few hours)</span></span>
+											</label>
+										</li>
+										<li id="large_li">
+											<label for="large_input">
+												<input type="radio" name="project_scope" value="large" id="large_input" />
+												<span>Large</span>
+											</label>
+										</li>
+										<li id="ongoing_li">
+											<label for="ongoing_input">
+												<input type="radio" name="project_scope" value="ongoing" id="ongoing_input" />
+												<span>Ongoing <span>(weekly or monthly)</span></span>
+											</label>
+										</li>
+									</ul>
+									<input type="hidden" name="scope_req" value="SELECT" />
+									<input type="hidden" name="scope_gui" value="Scope" />
+									<div class="help_text">
+										<h4>Examples</h4>
+										<ul>
+											<li>
+												<strong>
+													Small:
+												</strong>
+												proofing and formatting
+												a Powerpoint; updating a
+												website with new content
+											</li>
+											<li>
+												<strong>
+													Large:
+												</strong>
+												helping to create an
+												investor presentation;
+												building a new website
+											</li>
+											<li>
+												<strong>
+													Ongoing:
+												</strong>
+												scheduling meetings;
+												making sales calls to
+												leads, monthly expense
+												reports
+											</li>
+										</ul>
+									</div>
+								</fieldset>
+							</li>
+							<li id="deadline_li">
+								<label for="deadline_input">
+									<span>What are your deadline constraints?</span>
+									<input type="text" name="deadline" id="deadline_input" value="" />
+									<input type="hidden" name="deadline_req" value="STRING" />
+									<input type="hidden" name="deadline_gui" value="Deadline" />
+								</label>
+								<p class="help_text">
+									Provide a date or timespan and any details that might help
+								</p>
+								<div class="help_text">
+									<h4>Examples</h4>
+									<ul>
+										<li>I have a presentation on the 16th, so I'll need it by the morning of the 14th.</li>
+										<li>Flexible, but ideally within the next 3 weeks.</li>
+										<li>At the end of every month.</li>
+									</ul>
+								</div>
+							</li>
+							<li id="budget_li">
+								<label for="budget_input">
+									<span>What are your budget constraints?</span>
+									<input type="text" name="budget" id="budget_input" value="" />
+									<input type="hidden" name="budget_req" value="STRING" />
+									<input type="hidden" name="budgett_gui" value="Budget" />
+								</label>
+								<p class="help_text">
+									Tell us your dollars or hours expectations, or ask us for an estimate
+								</p>
+								<div class="help_text">
+									<h4>Examples</h4>
+									<ul>
+										<li>Less than 10 hours.</li>
+										<li>up to $200.</li>
+										<li>I'm not sure and need an estimate.</li>
+										<li>4 hours a month.</li>
+									</ul>
+								</div>
+							</li>
+							<li id="coupon_li">
+								<label for="coupon_input">
+									<span>I have a coupon code</span>
+									<input type="text" name="coupon" id="coupon_input" value="" />
+								</label>
+								<p class="help_text">
+									Enter your coupon code
+								</p>
+							</li>
+						</ul>
+					</fieldset>
+					<fieldset id="register" class="register_or_login open">
+						<legend><span>How can we reach you?</span></legend>
+						<label for="id_name">
+							<span class="help_text">First and Last Name</span>
+							<input type="text" id="id_name" name="name" value="" />
+						</label>
+						<label for="id_email">
+							<span class="help_text">Email Address</span>
+							<input type="text" id="id_email" name="email" value="" />
+						</label>
+						<label for="id_terms">
+							<input type="checkbox" id="id_terms" name="agree to terms and contitions" value="1" />
+						</label>
+					</fieldset>
+					<fieldset id="login" class="register_or_login">
+						<legend><span>Already a Client? Please sign in</span></legend>
+						<label for="id_existing_email">
+							<span class="help_text">Email Address</span>
+							<input type="text" name="existing_email" id="id_existing_email" value=""/>
+						</label>
+						<label for="id_password">
+							<span class="help_text">Password</span>
+							<input type="password" name="password" id="id_password" />
+						</label>
+						<p id="forgot_password">
+							<a href="#">Forgot password?</a>
+						</p>
+					</fieldset>
+					<fieldset id="submit">
+						<input type="image" src="images/submit.png" name="submit" value="submit" />
+
+					</fieldset>
+				</fieldset>
+			</form>
+</body>
+</html>

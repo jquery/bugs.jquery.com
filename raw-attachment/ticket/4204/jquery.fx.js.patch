@@ -1,0 +1,15 @@
+--- a/src/fx.js	2009-02-28 18:47:15.000000000 -0600
++++ b/src/fx.js	2009-02-28 18:50:18.000000000 -0600
+@@ -95,6 +95,12 @@
+ 	},
+ 
+ 	fadeTo: function(speed,to,callback){
++		for ( var i = 0, l = this.length; i < l; i++ ){
++			if ( jQuery(this[i]).is(":hidden") ) {
++				this[i].style.opacity = 0;
++				jQuery(this[i]).show();
++			}
++		};
+ 		return this.animate({opacity: to}, speed, callback);
+ 	},
+ 

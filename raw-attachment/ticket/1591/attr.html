@@ -1,0 +1,40 @@
+<html>
+<head>
+	<title>PAGE TITLE</title>
+	<script src="jquery-1.2.js"></script>
+	<script>
+	$(function() {
+		alert($('#table1').attr('ric:attrib'));
+		alert($('#div2').attr('ric:attrib'));
+		alert($('#table2').attr('ric:attrib'));
+	});
+
+	</script>
+	<style>
+		body, td {
+			font-family: sans-serif;
+			font-size: 11px;
+		}
+		td {
+			white-space: nowrap;
+			padding: 1px;
+			border: 1px solid #CDCDCD;
+		}
+	</style>
+</head>
+<body>
+	<table id="table1" ric:attrib="test">
+		<tbody>
+			<tr><td>Data 1</td></tr>
+		</tbody>
+	</table>
+	<table id="table2">
+		<tbody>
+			<tr><td>Data 1</td></tr>
+		</tbody>
+	</table>
+	<div id="div2">
+		div content
+	</div>
+</body>
+</html>

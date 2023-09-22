@@ -1,0 +1,38 @@
+--- jquery-1.3.2-orig/dist/jquery.js	2009-02-19 15:38:25.000000000 -0700
++++ jquery-1.3.2-release/dist/jquery.js	2009-07-21 12:08:24.000000000 -0600
+@@ -110,7 +110,7 @@
+ 		return num === undefined ?
+
+ 			// Return a 'clean' array
+-			Array.prototype.slice.call( this ) :
++			Array.prototype.slice.call( this, 0 ) :
+
+ 			// Return just the object
+ 			this[ num ];
+@@ -2479,7 +2479,7 @@
+ 			// Namespaced event handlers
+ 			var namespaces = type.split(".");
+ 			type = namespaces.shift();
+-			handler.type = namespaces.slice().sort().join(".");
++			handler.type = namespaces.slice(0).sort().join(".");
+
+ 			// Get the current list of functions bound to this event
+ 			var handlers = events[type];
+@@ -2543,7 +2543,7 @@
+ 					// Namespaced event handlers
+ 					var namespaces = type.split(".");
+ 					type = namespaces.shift();
+-					var namespace = RegExp("(^|\\.)" + namespaces.slice().sort().join(".*\\.") + "(\\.|$)");
++					var namespace = RegExp("(^|\\.)" + namespaces.slice(0).sort().join(".*\\.") + "(\\.|$)");
+
+ 					if ( events[type] ) {
+ 						// remove the given handler for the given type
+@@ -2676,7 +2676,7 @@
+ 		// Cache this now, all = true means, any handler
+ 		all = !namespaces.length && !event.exclusive;
+ 		
+-		var namespace = RegExp("(^|\\.)" + namespaces.slice().sort().join(".*\\.") + "(\\.|$)");
++		var namespace = RegExp("(^|\\.)" + namespaces.slice(0).sort().join(".*\\.") + "(\\.|$)");
+
+ 		handlers = ( jQuery.data(this, "events") || {} )[event.type];
+

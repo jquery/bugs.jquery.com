@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Empty attr</title>
+		<style>
+			#css a[href=""] { color: green; }
+		</style>
+	</head>
+	<body>
+		<div id="css">
+			<h1>CSS</h1>
+			<p><a>No href</a></p>
+			<p><a href="">Empty href</a></p>
+		</div>
+
+		<div id="jquery">
+			<h1>jQuery</h1>
+			<p><a>No href</a></p>
+			<p><a href="">Empty href</a></p>
+		</div>
+
+		<script type="text/javascript" src="http://code.jquery.com/jquery-nightly.min.js"></script>
+		<script type="text/javascript">
+			$('#jquery a[href=""]').css({color: "green"});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,52 @@
+<html>
+<head>
+<script type="text/javascript" charset="UTF-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+</head>
+<body>
+
+<script>
+count = 0;
+function getHtml() {
+	var html = ['<div id="mytable"><table>'];
+ 	count++;
+ 	for (var i = 0; i < 20; i++) {
+  		html.push('<tr>');
+  			for (var j = 0; j < 6; j++)
+   				html.push('<td>Test: ' + count + 'cell_' + i + '_' + j + '</td>');
+  		html.push('</tr>');
+ 	}
+ 	html.push('</table></div>');
+ return html.join('');
+}
+
+function intervalRender() {
+	var id = window._intervalID;
+	if (!id) {
+		id = setInterval(function () {
+			jQuery('#mytable').replaceWith(getHtml());
+		}, 1000);
+	}
+}
+
+function leakLessMemory() {
+	var id = window._intervalID;
+	if (!id) {
+		id = setInterval(function () {
+			jQuery('#mytable')[0].outerHTML = getHtml();
+		}, 1000);
+	}
+}
+
+jQuery(document).ready(function() {
+	intervalRender();
+	//leakLessMemory();
+});
+</script>
+
+
+
+<div id="mytable">
+</div>
+
+</body>
+</html>

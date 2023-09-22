@@ -1,0 +1,13 @@
+--- ui.droppable.js	2007-12-07 03:22:24.000000000 -0800
++++ ui.droppable-overlap.js	2007-12-15 00:03:50.000000000 -0800
+@@ -165,6 +165,10 @@
+ 		var l = oDrop.offset.left, r = l + oDrop.item.element.offsetWidth, 
+ 		    t = oDrop.offset.top,  b = t + oDrop.item.element.offsetHeight;
+ 		switch (toleranceMode) {
++			case 'overlap':
++				dao = $(oDrag.helper).offset();
++				dpo = oDrop.offset;
++				return ( dao.top == dpo.top && dao.left == dpo.left );
+ 			case 'fit':
+ 				return (   l < x1 && x2 < r
+ 					&& t < y1 && y2 < b);

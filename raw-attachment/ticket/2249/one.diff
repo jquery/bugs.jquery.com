@@ -1,0 +1,13 @@
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 5084)
++++ src/event.js	(working copy)
+@@ -403,7 +403,7 @@
+ 	one: function( type, data, fn ) {
+ 		return this.each(function(){
+ 			jQuery.event.add( this, type, function(event) {
+-				jQuery(this).unbind(event);
++				jQuery(this).unbind(event, arguments.callee);
+ 				return (fn || data).apply( this, arguments);
+ 			}, fn && data);
+ 		});

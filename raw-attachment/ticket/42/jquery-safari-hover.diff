@@ -1,0 +1,14 @@
+--- jquery-1.0a.js	2006-07-01 07:15:52.000000000 -0700
++++ jquery-1.0a-fixed.js	2006-07-08 18:23:16.000000000 -0700
+@@ -878,7 +878,10 @@
+ 	// A private function for haandling mouse 'hovering'
+ 	function handleHover(e) {
+ 		// Check if mouse(over|out) are still within the same parent element
+-		var p = e.fromElement || e.toElement || e.relatedTarget;
++		if (e.type == "mouseover")
++		    var p = e.fromElement || e.relatedTarget;
++		else
++		    var p = e.toElement || e.relatedTarget;
+ 		while ( p && p != this ) p = p.parentNode;
+ 		
+ 		// If we actually just moused on to a sub-element, ignore it

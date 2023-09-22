@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.2.2.js"></script>
+        <script type="text/javascript">
+            jQuery(function($) { 
+                var options = ['zero', 'one', 'two', 'three'];
+                var select  = $('select');
+
+                $.each(options, function(value, text) {
+                    select.append('<option value="' + value + '">' + text + '</option>');
+                });
+                select.val(2);
+            });
+        </script>
+    </head>
+    <body>
+        <select></select>
+    </body>
+</html>

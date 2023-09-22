@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title><!-- Insert your title here --></title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/ui/ui.mouse.js"></script>
+    <script type="text/javascript" src="../var/www/httpdocs/jQuery.com/UI/SVN/ui.draggable.js"></script>
+    <script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/ui/ui.draggable.ext.js"></script>
+    <script>
+  $(document).ready(function(){
+                $("#block").draggable();
+                $("#next").draggable({containment: 'parent'});
+  });
+  </script>
+  <style>
+#block {
+   background-color: #68BFEF;
+   width: 150px; 
+   height: 370px;
+   margin: 10px; 
+}
+#next { 
+   background-color: #FF0000;
+   width: 150px; 
+   height: 70px;
+   margin: 10px; 
+}
+</style>
+</head>
+<body>
+    <div id="block"><div id="next"></div></div>
+</body>
+</html>

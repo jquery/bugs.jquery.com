@@ -1,0 +1,12 @@
+--- jquery.tools.min.js	2010-08-26 12:21:16.975929412 -0700
++++ jquery.tools.min.js.orig	2010-08-26 12:21:10.915930547 -0700
+@@ -1917,7 +1917,8 @@
+ 			namespace = new RegExp("(^|\\.)" + namespaces.slice(0).sort().join("\\.(?:.*\\.)?") + "(\\.|$)");
+ 		}
+ 
+-		var events = jQuery.data(this, "events"), handlers = events[ event.type ];
++		events = jQuery.data(this, "events") || {};
++                handlers = events[ event.type ];
+ 
+ 		if ( events && handlers ) {
+ 			// Clone the handlers to prevent manipulation

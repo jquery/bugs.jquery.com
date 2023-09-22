@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <!-- Using jQuery 1.3.x shows the problem: The selector "tr td" no longer works. -->
+        <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.js"></script>
+
+        <!-- jQuery 1.2.6 works on lower case nodeNames, too, so "tr td" works fine, even after dom replacement -->
+        <!--<script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.2.6.js"></script>-->
+    </head>
+    <body>
+        <table id="testTable"><tr><td>One</td></tr><tr><td>Two</td></tr></table>
+
+        Rows in table before DOM replacement: <span id="rowCountOld"></span><br>
+        Rows in table after DOM replacement: <span id="rowCountNew"></span>
+
+        <script type="text/javascript">
+            /**
+             * Simulates an Ajax4JSF request by parsing XML and using it to replace a DOM element in the original document.
+             */
+            function simulateA4j() {
+                // This is faked. A real a4j request would read the document from XMLHttpRequest.responseXML
+                var parser = new DOMParser();
+                var tableText = '<html xmlns="http://www.w3.org/1999/xhtml"><body>'
+                        + '<table id="testTable"><tr><td>One</td></tr><tr><td>Two</td></tr></table>'
+                        + '</body></html>';
+                var doc = parser.parseFromString(tableText, "text/xml");
+
+                var body = $('body')[0];
+                var newNode = doc.childNodes[0].childNodes[0].childNodes[0]; // html -> body -> table
+                var oldNode = $('#testTable')[0];
+
+                // This is how a4j actually does the replacement on FF (on IE outerHtml is used)
+                body.replaceChild(newNode, oldNode);
+            }
+
+            $('#rowCountOld').text($('tr td').length); // "2"
+
+            simulateA4j();
+
+            $('#rowCountNew').text($('tr td').length); // should be "2", is "0" when using jQuery 1.3.x
+        </script>
+
+    </body>
+</html>

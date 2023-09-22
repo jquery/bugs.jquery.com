@@ -1,0 +1,141 @@
+
+    <html>
+    <head>
+
+    <title>Insert title here    </title>
+
+    <script type="text/javascript" src="/Library/jQuery/jquery.min.js">    </script>
+    <script>
+
+$(document).ready(function() {
+
+	$('#linkListLinkOutput').click(function(event) {
+		  if ($(event.target).parents('tr').attr('id')) {
+		      var link = $(event.target).parents('tr').attr('id').split('_');
+		  }
+
+		  if ($(event.target).hasClass('nav_new')) {
+	      removeAddAndEditLinkForms();
+	      showAddLinkForm($(event.target).parents('tr').attr('id'), link[2], link[3]);
+	      return false;
+	    }
+      return false;
+	 });
+
+
+
+  function removeAddAndEditLinkForms() {
+    removeAddLinkForm();
+  }
+
+  function removeAddLinkForm() {
+	    $('#addLinkListLink')
+	      .hide()
+	      .appendTo('#linkListLinks');
+	}
+  
+	function showAddLinkForm(link, parentId, position) {
+	  $('#addLinkListLink form input[name="parentId"]').attr('value', parentId);
+	  $('#addLinkListLink form input[name="position"]').attr('value', position);
+	  $('#addLinkListLink')
+	    .insertBefore( "#" + link )
+	    .fadeIn();
+	  console.log('Link List name: ' + $('#addLinkListLink').attr('id'));
+	}
+
+});
+
+
+	
+    </script>
+    </head>
+    <body>
+
+    <div id="content">
+    <div id="statusMessage"/>
+    <div id="linkListLinkOutput">
+    <table class="hierarchical widthFull" id="linkListLinks" border=1>
+    <tbody>
+      <tr class="head">
+        <th>Name    </th>
+		    <th>Link    </th>
+		    <th>Image    </th>
+		    <th style="width: 75px;">Options    </th>
+      </tr>
+      <tr id="1678_6_0_1">
+	    <td style="padding-left: 40px;" class="level1">    
+	       <a class="nav_down" href="#">Down    </a> Worship Net    
+	    </td>
+	    <td>None    
+	    </td>
+	    <td>Beautiful Sky: beautiful-sky.jpg    
+	    </td>
+	    <td>    
+	      <a title="Add a link at this position" class="nav_new" href="#">Add    </a>     
+        <a title="Edit is not functional in this example" >Edit    </a>     
+        <a title="Delete is not functional in this example" >Delete    </a>    
+      </td>
+      </tr>
+      <tr id="4159_6_0_2">
+      <td style="padding-left: 40px;" class="level1">    
+        <a class="nav_up" href="#">Up    </a>     
+        <a class="nav_down" href="#">Down    </a> many many many links    
+      </td>
+	    <td>None    </td>
+	    <td>None    </td>
+	    <td>    
+	        <a title="Add a link at this position" class="nav_new" href="#">Add    </a>     
+	        <a title="Edit is not functional in this example" >Edit    </a>     
+	        <a title="Delete is not functional in this example" >Delete    </a>    
+	    </td>
+	    </tr>
+	    <tr id="4161_6_0_10">
+	    <td style="padding-left: 40px;" class="level1">    
+	        <a class="nav_up" href="#">Up    </a> MOre and more links    
+	    </td>
+	    <td>None    </td>
+	    <td>None    </td>
+	    <td>    
+	        <a title="Add a link at this position" class="nav_new" href="#">Add    </a>     
+	        <a title="Edit is not functional in this example" >Edit    </a>     
+	        <a title="Delete is not functional in this example" >Delete    </a>    </td>
+	    </tr>
+	    <tr style="display: none;" id="addLinkListLink">
+	    <td colspan="4">
+
+    <form method="post" action="Capture.php" class="tempForm" id="addLinkListLinkForm" name="addLinkListLinkForm">
+	    <table>    
+	      <tbody>    
+	      <tr><th>    
+	        <label for="name">Name:    </label>    
+	      </th>    
+	      <td>    
+	          <input type="text" value="" maxlength="255" id="name" name="name"/>    
+	      </td>    
+	      </tr>
+	      <tr>    
+	        <th>    
+	          <label for="text">Description:    </label>    
+	        </th>    
+	        <td>    
+	          <textarea id="text" name="text"/>     </textarea>    
+	        </td>    
+	      </tr>    
+	      </tbody>    
+	    </table>    
+	    <input type="submit" value="Save" name="saveButton" class="blah"/>    
+	    <input type="submit" value="Cancel" name="cancelButton" class="blah cancel"/>    
+	    <input type="hidden" value="0" name="parentId"/>    
+	    <input type="hidden" value="6" name="listId"/>    
+	    <input type="hidden" value="1" name="position"/>
+    </form>
+
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    </body>
+    </html>

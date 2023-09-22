@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>QUnit Module Bug</title>
+		<!-- unit test stuff -->
+		<link type="text/css" href="http://dev.jquery.com/view/trunk/qunit/testsuite.css" rel="stylesheet" />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+		<script type="text/javascript" src="http://dev.jquery.com/view/trunk/qunit/testrunner.js"></script>		
+		<!-- unit test stuff -->
+	</head>
+	<body>
+		<script type="text/javascript">
+			var testObj = function(){
+				var _arr = [];
+				return {
+					add: function(item){
+						_arr.push(item);
+					},
+					getCount: function(){
+						return _arr.length;
+					},
+					getItem: function(index){
+						return _arr[index];
+					},
+					removeAll: function(){
+						_arr = [];
+					}
+				}
+			};
+			
+			$(document).ready(function(){
+				/*
+				window.setup = function(){
+					this.testObj = new testObj();
+					this.n = 100;
+					this.populate = function(){
+						for (var i = 0; i < this.n; i++) {
+							this.testObj.add('item' + i);
+						}
+					}
+				}
+				window.teardown = function(){
+					this.testObj.removeAll();
+				}
+				*/
+				
+				module('bug', {
+					setup: function(){
+						this.testObj = new testObj();
+						this.n = 100;
+						this.populate = function(){
+							for (var i = 0; i < this.n; i++) {
+								this.testObj.add('item' + i);
+							}
+						}
+					},
+					teardown: function(){
+						this.testObj.removeAll();
+					}
+				});
+				
+				test('check if the array contains items', function(){
+					this.setup();// wouldn't be nessasacy if the module setup worked
+					
+					this.populate();
+					expect(1);					
+					equals(this.testObj.getItem(43), 'item43');
+					
+					this.teardown();// wouldn't be nessasacy if the module setup worked
+				});
+				
+				test('Final integrity test', function(){
+					expect(2);
+					equals(this.testObj.getCount(), 0, '0 or there is a test that bleeds');
+					equals(this.n, 100, '100 or there is a test that bleeds');
+				});
+				
+			});
+		</script>
+		<h1>QUnit Module Bug</h1>
+        <h2 id="banner"></h2>
+		<h2 id="userAgent"></h2>
+        <ol id="tests"></ol>
+        <div id="results"></div>
+        <div id="main"></div>
+	</body>
+</html>

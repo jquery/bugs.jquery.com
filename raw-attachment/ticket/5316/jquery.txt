@@ -1,0 +1,29 @@
+var jq = $("<selector1>") // selects more than one element
+jq.replaceAll("<selector2>") 
+
+only the first matched element from jq will show up as the replacement for "<selector2>"
+
+Possible Fix:  See Attachment
+
+
+
+jQuery.each({
+	appendTo: "append",
+	prependTo: "prepend",
+	insertBefore: "before",
+	insertAfter: "after",
+	replaceAll: "replaceWith"
+}, function(name, original){
+	jQuery.fn[ name ] = function( selector ) {
+		var ret = [], insert = jQuery( selector );
+
+		for ( var i = 0, l = insert.length; i < l; i++ ) {
+			var elems = (i > 0 ? this.clone(true) : this).get();
+			//jQuery.fn[ original ].apply( jQuery(insert[i]), elems );	// this is wrong
+			jQuery.fn[ original ].call( jQuery(insert[i]), elems );	// this is what it should be
+			ret = ret.concat( elems );
+		}
+
+		return this.pushStack( ret, name, selector );
+	};
+});

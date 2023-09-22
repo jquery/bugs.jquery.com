@@ -1,0 +1,143 @@
+ $.validator.setDefaults({
+
+ focusInvalidElement: true,
+ 
+			onblur: false,
+			
+			onkeyup: false,
+			
+			onsubmit: true,
+			 
+ submitHandler: function(form) {
+ 	//alert(form.id);
+				var fson = zajajFSON(form.id);
+				zajajXtreme(bpwczajaj.saveItem(idReg, gLocal_database, gLocal_table, gTancar, fson));
+ }
+
+ });
+	 		
+ 	var gValErrNum = 0 ;
+ 	var gaValMsg = new Array();
+ 	
+		var jValidator = $('#bpwcForm').validate({ 
+
+ rules: { 
+docw_literal: { 
+required : true ,
+maxlength : 255 } ,
+
+usr_seqlvl: { 
+required : true ,
+digits : true } ,
+
+usr_smtpaddr: { 
+maxlength : 255 } ,
+
+usr_usrnotes: { 
+maxlength : 255 } ,
+
+usr_codbuss: { 
+digits : true } ,
+
+usr_numemp: { 
+digits : true } ,
+
+usr_usr: { 
+maxlength : 255 ,
+remote : '/BUWE/BPWC/wpbcPopAux.php?camp=usr_usr&opsel=S/var/usr&database=behrusuarios' } ,
+
+usr_telf: { 
+maxlength : 255 } ,
+
+bpwc_jsForm: { 
+remote : '/BUWE/BUSE/valida.bpwc.php?buse_cond=["usr_codbuss == 512"]' } } ,
+
+ messages: { 
+docw_literal: { 
+required : "Campo Nombre completo de usuario obligatorio." ,
+maxlength : "Campo Nombre completo de usuario supera máxima longitud permitida." } ,
+
+usr_seqlvl: { 
+required : "Campo Nivel de seguridad obligatorio." ,
+digits : "Campo Nivel de seguridad ha de ser numérico." } ,
+
+usr_smtpaddr: { 
+maxlength : "Campo Dirección smtp supera máxima longitud permitida." } ,
+
+usr_usrnotes: { 
+maxlength : "Campo Usuario Notes supera máxima longitud permitida." } ,
+
+usr_codbuss: { 
+digits : "Campo Sección BUSS ha de ser numérico." } ,
+
+usr_numemp: { 
+digits : "Campo Número de empleado ha de ser numérico." } ,
+
+usr_usr: { 
+maxlength : "Campo Identificador de persona supera máxima longitud permitida." ,
+remote : "Campo Identificador de persona no existe en S/var/usr." } ,
+
+usr_telf: { 
+maxlength : "Campo Telefono/s supera máxima longitud permitida." } ,
+
+bpwc_jsForm: { 
+remote : "|usr_codbuss|Secció BUSS ha de ser FB-IM" } }
+ });
+		
+		$('#bpwcForm').bind('invalid-form.validate', function(e, lVal) 
+		{
+		/**
+		 * procedim a deixar els tabs amb el color normal
+		 */
+		for (var i in aTabs)
+		{
+			if (i > 0)
+			{
+				ajtabbar.setCustomStyle('ajt_'+aTabs[i],'#F4F3EE');
+			}
+		}
+
+
+		var jjError = "ERRORES en el FORMULARIO:\n";
+		var jFirstTab = '';
+		var jFirstField = '';
+		
+		//alert(gaValMsg.toString());
+		
+		for (var i in lVal.errorMap)
+		{
+			jCamp = i;
+			jErrorMsg = lVal.errorMap[i];
+			/**
+			 * controlem el tema de que sigui un error de 
+			 * de formulari bpwc_jsForm
+			 */
+			if (i == 'bpwc_jsForm' && jErrorMsg.substring(0,1) == '|')
+			{
+				jaMsg = jErrorMsg.split('|');
+				//alert(jaMsg.toString());
+				jCamp = jaMsg[1];
+				jErrorMsg = jaMsg[2];
+			}
+			
+			/**
+			 * carreguem el missatge d'error
+			 * i ens guardem a quin tab i quin
+			 * camp es el primer.
+			 */
+			jjError = jjError + jErrorMsg + "\n";
+			ajtabbar.setCustomStyle('ajt_'+aFldTabs[jCamp],'red');
+			if (jFirstTab == '')
+			{
+				jFirstTab = 'ajt_'+aFldTabs[jCamp];
+				jFirstField = jCamp;
+			}
+			
+		}
+		ajtabbar.setTabActive(jFirstTab,true);
+		document.getElementById(jFirstField).focus();
+		ajtabbar.setCustomStyle(jFirstTab,'red');
+		alert(jjError);
+ 
+ });
+

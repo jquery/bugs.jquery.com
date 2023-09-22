@@ -1,0 +1,13 @@
+Index: ui.resizable.js
+===================================================================
+--- ui.resizable.js	(revision 4460)
++++ ui.resizable.js	(working copy)
+@@ -165,7 +165,7 @@
+ 
+ 			var el = this.helper, o = this.options;
+ 			var change = function(a,b) {
+-				var mod = (e['page'+(/(top|height)/.test(a) ? 'Y' : 'X')] - o.startPosition[(/(top|height)/.test(a) ? 'top' : 'left')]) * (b ? -1 : 1);
++				var mod = (e['page'+(/(top|height)/.test(a) ? 'Y' : 'X')] - o.startPosition[''+(/(top|height)/.test(a) ? 'top' : 'left')]) * (b ? -1 : 1);
+ 				el.css(a, o['current'+(/(height|width)/.test(a) ? 'Size' : 'Position')][a] - mod);
+ 			};
+ 			

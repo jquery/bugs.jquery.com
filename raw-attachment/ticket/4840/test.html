@@ -1,0 +1,59 @@
+<html>
+<head>
+	<title>Memory Leak</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<script src="/js/jquery/jquery.js"></script>
+	<script language="javascript">
+
+		var secs = 15;
+		var appInterval = 20;
+		var timerRunning = false;
+		var timerID = 0;
+		var delay = 1000;
+
+		function initQueue( interval ) {
+			appInterval = interval;
+			secs = appInterval;
+			StopTheTimer( );
+			StartTheTimer( );
+		}
+
+		function StopTheTimer( ) {
+			if ( timerRunning )
+				clearTimeout( timerID );
+			timerRunning = false;
+		}
+		function StartTheTimer( ) {
+			if ( secs == 0 )
+			{
+				StopTheTimer();
+				$.ajax( {
+					url : '/ipsum2.htm',
+					type : 'get',
+					success : function ( message ) {
+			// No Memory leak vvvvv
+			//			var x = document.getElementById("queue");
+			//			x.innerHTML = message;
+			// Has Memory leak vvvvv
+			//			$('#queue').empty();  // with or with out this, it does the same thing.
+						$( '#queue' ).html( message );
+					}
+				} );
+
+				secs = appInterval;
+			}
+
+			window.status = "Updating  status in " + secs + "s.";
+			secs = secs - 1;
+			timerRunning = true;
+			timerID = self.setTimeout( "StartTheTimer();", delay );
+		}
+	</script>
+</head>
+<BODY onLoad="javascript: initQueue( 20 );">
+
+	<div id="queue">here
+	</div>
+
+</BODY>
+</HTML>

@@ -1,0 +1,97 @@
+Index: jquery/test/unit/selector.js
+===================================================================
+--- jquery/test/unit/selector.js	(revision 5836)
++++ jquery/test/unit/selector.js	(working copy)
+@@ -126,7 +126,7 @@
+ 	t( "Nth Child", "p:nth-child(1)", ["firstp","sndp"] );
+ 	
+ 	t( "Last Child", "p:last-child", ["sap"] );
+-	t( "Last Child", "a:last-child", ["simon1","anchor1","mark","yahoo","anchor2","simon"] );
++	t( "Last Child", "a:last-child", ["simon1","anchor1","mark","yahoo","anchor2","simon","hreflangus", "hreflangcockney", "hreflanguk", "reltest1", "reltest2", "reltest3"] );
+ 	
+ 	t( "Nth-child", "#main form#form > *:nth-child(2)", ["text2"] );
+ 	t( "Nth-child", "#main form#form > :nth-child(2)", ["text2"] );
+@@ -152,7 +152,7 @@
+ });
+ 
+ test("attributes", function() {
+-	expect(20);
++	expect(24);
+ 	t( "Attribute Exists", "a[title]", ["google"] );
+ 	t( "Attribute Exists", "*[title]", ["google"] );
+ 	t( "Attribute Exists", "[title]", ["google"] );
+@@ -169,6 +169,11 @@
+ 	t( "Attribute Begins With", "a[href ^= 'http://www']", ["google","yahoo"] );
+ 	t( "Attribute Ends With", "a[href $= 'org/']", ["mark"] );
+ 	t( "Attribute Contains", "a[href *= 'google']", ["google","groups"] );
++
++	t( "Attribute Has Exactly (~=)", "a[rel ~= 'appendix'][rel ~= 'help']", ["reltest2"] );
++	t( "Attribute Has Exactly (~=)", "a[rel ~= 'section']", ["reltest3"] );
++	t( "Attribute Begins With (|=)", "a[hreflang |= 'en']", ["mark", "hreflangus", "hreflangcockney", "hreflanguk"] );
++	t( "Attribute Begins With (|=)", "a[hreflang |= 'en-us']", ["hreflangus"] );
+ 	
+ 	t("Select options via [selected]", "#select1 option[selected]", ["option1a"] );
+ 	t("Select options via [selected]", "#select2 option[selected]", ["option2d"] );
+@@ -185,7 +190,7 @@
+ 	expect(35);
+ 	t( "First Child", "p:first-child", ["firstp","sndp"] );
+ 	t( "Last Child", "p:last-child", ["sap"] );
+-	t( "Only Child", "a:only-child", ["simon1","anchor1","yahoo","anchor2"] );
++	t( "Only Child", "a:only-child", ["simon1","anchor1","yahoo","anchor2", "hreflangus", "hreflangcockney", "hreflanguk", "reltest1", "reltest2", "reltest3"] );
+ 	t( "Empty", "ul:empty", ["firstUL"] );
+ 	t( "Enabled UI Element", "#form input:enabled", ["text1","radio1","radio2","check1","check2","hidden1","hidden2","name"] );
+ 	t( "Disabled UI Element", "#form input:disabled", ["text2"] );
+@@ -193,7 +198,7 @@
+ 	t( "Selected Option Element", "#form option:selected", ["option1a","option2d","option3b","option3c"] );
+ 	t( "Text Contains", "a:contains('Google')", ["google","groups"] );
+ 	t( "Text Contains", "a:contains('Google Groups')", ["groups"] );
+-	t( "Element Preceded By", "p ~ div", ["foo","fx-queue","fx-tests", "moretests"] );
++	t( "Element Preceded By", "p ~ div", ["foo","fx-queue","fx-tests", "moretests", "newselectors"] );
+ 	t( "Not", "a.blog:not(.link)", ["mark"] );
+ 	t( "Not - multiple", "#form option:not(:contains('Nothing'),#option1b,:selected)", ["option1c", "option1d", "option2b", "option2c", "option3d", "option3e"] );
+ 	t( "Not - complex", "#form option:not([id^='opt']:gt(0):nth-child(-n+3))", [ "option1a", "option1d", "option2d", "option3d", "option3e"] );
+Index: jquery/test/index.html
+===================================================================
+--- jquery/test/index.html	(revision 5836)
++++ jquery/test/index.html	(working copy)
+@@ -187,6 +187,16 @@
+ 				<div><div class="hidden">hidden</div></div>
+ 			</div>
+ 		</div>
++		<div id="newselectors">
++			<ul>
++				<li><a href="http://example.com/" hreflang="en-us" id="hreflangus">example.com</a></li>
++				<li><a href="http://example.com/" hreflang="en-cockney" id="hreflangcockney">example.com</a></li>
++				<li><a href="http://example.com/" hreflang="en-uk" id="hreflanguk">example.com</a></li>
++				<li><a href="http://example.com/" rel="start next prev contents" id="reltest1">example.com</a></li>
++				<li><a href="http://example.com/" rel="appendix help" id="reltest2">example.com</a></li>
++				<li><a href="http://example.com/" rel="section" id="reltest3">example.com</a></li>
++			</ul>
++		</div>
+ 	</div>
+ 	</dl>
+ 	
+Index: jquery/src/selector.js
+===================================================================
+--- jquery/src/selector.js	(revision 5836)
++++ jquery/src/selector.js	(working copy)
+@@ -68,7 +68,7 @@
+ 	// The regular expressions that power the parsing engine
+ 	parse: [
+ 		// Match: [@value='test'], [@foo]
+-		/^(\[) *@?([\w:-]+) *([!*$^~=]*) *('?"?)(.*?)\4 *\]/,
++		/^(\[) *@?([\w:-]+) *([!*$^~|=]*) *('?"?)(.*?)\4 *\]/,
+ 
+ 		// Match: :contains('foo')
+ 		/^(:)([\w-]+)\("?'?(.*?(\(.*?\))?[^(]*?)"?'?\)/,
+@@ -344,7 +344,9 @@
+ 						 type == "!=" && z != m[5] ||
+ 						 type == "^=" && z && !z.indexOf(m[5]) ||
+ 						 type == "$=" && z.substr(z.length - m[5].length) == m[5] ||
+-						 (type == "*=" || type == "~=") && z.indexOf(m[5]) >= 0) ^ not )
++						 type == "*=" && z.indexOf(m[5]) >= 0 ||
++						 type == "~=" && (' '+z+' ').indexOf(' '+m[5]+' ') >= 0 ||
++						 type == "|=" && z.indexOf(m[5]) == 0 && (z.length == m[5].length || z.charAt(m[5].length) == '-')) ^ not )
+ 							tmp.push( a );
+ 				}
+ 

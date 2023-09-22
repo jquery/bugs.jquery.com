@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+<script type="text/javascript" src="jquery-1.2.6.js"></script>
+ <script type="text/javascript">
+  var ipVal=0;
+  function refreshProgress(){
+    ipVal = ipVal + 1;
+    $("#test1").val("t" + ipVal);
+    setTimeout(refreshProgress, 1500);
+  }
+   $(function(){
+    $("#formtest").submit(function(){
+     setTimeout(refreshProgress, 1500);
+    });
+   });
+ </script>
+</head>
+<body>
+ <button id="buttonTest">Click Me!</button>
+ <form id="formtest" action="s.jsp" >
+  <input id="test1" type="text" name="fname" value="Default" />
+  <input type="submit" id="submitButton" value="submit"/>
+ </form>
+</body>
+</html>
+

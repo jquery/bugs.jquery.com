@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<script src="assets/javascript/jquery-1.2.6-mod.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+<div id='div1'>
+	<div class='contents'>
+		<form class='form1' action='blah/'>
+			<input id='input1' type='text'/>
+		</form>
+	</div>
+</div>
+
+<div id='div2'>
+</div>
+
+<script type='text/javascript'>
+	$('#div2').empty().append($('.contents', $('#div1')).clone());
+</script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+From 1bdfd3de424a549c99095e7561fb8f6a805155fc Mon Sep 17 00:00:00 2001
+From: Luke Sheridan <luke.sheridan@g5platform.com>
+Date: Fri, 24 Sep 2010 11:37:33 -0700
+Subject: [PATCH] load script tags with selector
+
+---
+ src/ajax.js       |    2 +-
+ test/unit/ajax.js |   12 ++++++++++++
+ 2 files changed, 13 insertions(+), 1 deletions(-)
+
+diff --git a/src/ajax.js b/src/ajax.js
+index 78d9b24..1f856a5 100644
+--- a/src/ajax.js
++++ b/src/ajax.js
+@@ -64,7 +64,7 @@ jQuery.fn.extend({
+ 						jQuery("<div />")
+ 							// inject the contents of the document in, removing the scripts
+ 							// to avoid any 'Permission Denied' errors in IE
+-							.append(res.responseText.replace(rscript, ""))
++							.append(res.responseText)
+ 
+ 							// Locate the specified elements
+ 							.find(selector) :
+diff --git a/test/unit/ajax.js b/test/unit/ajax.js
+index 8e3c4b6..96176c8 100644
+--- a/test/unit/ajax.js
++++ b/test/unit/ajax.js
+@@ -576,6 +576,18 @@ test("load(String, Function) - check file with only a script tag", function() {
+ 	});
+ });
+ 
++test("load(String, Function) - check file with only a script tag loaded with a selector", function() {
++	expect(3);
++	stop();
++
++	jQuery('#first').load(url('data/test2.html')+" script", function() {
++		equals( jQuery('#foo').html(), 'foo', 'Check if script evaluation has modified DOM');
++		equals( testFoo, "foo", 'Check if script was evaluated after load' );
++
++		start();
++	});
++});
++
+ test("load(String, Object, Function)", function() {
+ 	expect(2);
+ 	stop();
+-- 
+1.7.3
+

@@ -1,0 +1,14 @@
+--- core.js.orig	2008-05-02 15:14:06.000000000 +0800
++++ core.js	2008-05-02 15:14:11.000000000 +0800
+@@ -144,6 +144,11 @@
+ 	index: function( elem ) {
+ 		var ret = -1;
+ 
++		// if the elem argument is a jQuery object, get the element
++		if (elem instanceof jQuery) {
++			elem = elem.get(0);
++		}
++
+ 		// Locate the position of the desired element
+ 		this.each(function(i){
+ 			if ( this == elem )

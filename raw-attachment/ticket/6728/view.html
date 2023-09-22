@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<script type="text/javascript" src="/jquery-1.4.2.js"></script> 
+	<!--<script type="text/javascript" src="/jquery-1.2.6.min.js"></script>	-->
+	<script type="text/javascript">
+		$(document).ready(function() 
+		{	
+			$("#button1").click( function(e) 
+			{
+				$.post("ajax.php", { a: "ir", i: 1, r: 2 });
+				return false;
+			});
+		});	
+	</script>
+
+	<style type="text/css">
+		div.votediv { font-size: 10px; color: #999; }
+		.vbnrm, .vbmed, .vbhi { margin: 0; padding: 0; float: left; display: inline-block; width: 20px; cursor: pointer; height: 20px;}
+		.vbhi { width: 33px; }
+		.b1 {background-position: 0 0;} .b2 {background-position: -19px 0;} .b3 {background-position: -38px 0;} .b4 {background-position: -57px 0;} .b5 {background-position: -76px 0;} .b6 {background-position: -95px 0;} .b7 {background-position: -114px 0;} .b8 {background-position: -133px 0;} .b9 {background-position: -152px 0;} .b10 {background-position: -174px 0;}
+	</style>	
+
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+
+<body id="body" style="margin: 0pt;">
+
+<br><br>
+<div class="votediv">
+<a class="b9" href="#" id="button1">CLICK ME!</a>
+</div>
+
+<br><br>
+
+Summary<br>
+-------------<br>
+
+Clicking the link does an ajax post. There is no visible response in the test case, but there should be no javascript error either.
+All this works fine in firefox.<br><br>
+
+In internet explorer 7 and 8, and jquery 1.4.2, the post will fail with a jQuery exception.<br>
+The exception occurs when it tries to create an XMLHTTPObject.<br><br>
+
+Usually if you force a reload of the page, by holding SHIFT+refresh, oddly, the link will then work. <br><br>
+
+Then go to the address bar, and hit enter so its basically using a cached copy, and the link will fail again.<br><br>
+
+This is an odd problem, and I dont know how to describe it, but the reload issue is not actually cache related that I can tell. Disabling the browser cache completely produces the same results.<br><br>
+
+Reverting to jquery 1.2.6 resolves the problem (although there might be later versions which work too) <br><br>
+ 
+</body></html>

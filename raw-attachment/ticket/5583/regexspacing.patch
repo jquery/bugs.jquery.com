@@ -1,0 +1,53 @@
+Index: jquery.js
+===================================================================
+--- jquery.js	(revision 59655)
++++ jquery.js	(revision 59671)
+@@ -30,7 +30,7 @@
+ 	// (both of which we optimize for)
+ 	quickExpr = /^[^<]*(<(.|\s)+>)[^>]*$|^#([\w-]+)$/,
+ 	// Is it a simple selector
+-	isSimple = / ^ .[ ^ :# \[\.,]*$/;
++	isSimple = /^.[^:# \[\.,]*$/;
+ 
+ jQuery.fn = jQuery.prototype = {
+ 	init: function( selector, context ) {
+@@ -460,7 +460,7 @@
+ 			if ( this.nodeType != 1 )
+ 				return;
+ 
+-			if ( jQuery.isArray( value ) && / radio | checkbox / .test( this.type ) )
++			if ( jQuery.isArray( value ) && /radio|checkbox/ .test( this.type ) )
+ 				this.checked = ( jQuery.inArray( this.value, value ) >= 0 ||
+ 					jQuery.inArray( this.name, value ) >= 0 );
+ 
+@@ -610,7 +610,7 @@
+ };
+ 
+ // exclude the following css properties to add px
+-var exclude = / z - ? index | font - ? weight | opacity | zoom | line - ? height /i,
++var exclude = /z-?index|font-?weight|opacity|zoom|line-?height/i,
+ 	// cache defaultView
+ 	defaultView = document.defaultView || { },
+ 	toString = Object.prototype.toString;
+@@ -791,7 +791,7 @@
+ 		}
+ 
+ 		// Make sure we're using the right name for getting the float value
+-		if ( name.match( / float /i ) )
++		if ( name.match( /float/i ) )
+ 			name = styleFloat;
+ 
+ 		if ( !force && style && style[ name ] )
+@@ -800,10 +800,10 @@
+ 		else if ( defaultView.getComputedStyle ) {
+ 
+ 			// Only "float" is needed here
+-			if ( name.match( / float /i ) )
++			if ( name.match( /float/i ) )
+ 				name = "float";
+ 
+-			name = name.replace( / ( [A - Z] ) /g, "-$1" ).toLowerCase();
++			name = name.replace( /([A-Z])/g, "-$1" ).toLowerCase();
+ 
+ 			var computedStyle = defaultView.getComputedStyle( elem, null );
+ 

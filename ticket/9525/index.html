@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">#9525 (performance: a really fast single-element $() wrapper?) - jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      :root{--ticket-info-background-color:#ffd;--ticket-info-border-color:#dd9;--ticket-table-border-color:#eed;--ticket-date-text-color:#996;--ticket-description-title-color:#663;--ticket-changes-text-color:#663;--ticket-changes-box-shadow:#f2f2f2}.ticket-info{position:relative;background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);padding:.5em .75em;margin-bottom:.5em}.ticket-number{font-size:1.15rem;font-weight:700;margin-right:.5em}.ticket-info span{font-size:.8125em;font-weight:700}.ticket-resolution,.ticket-status,.ticket-type{text-transform:uppercase}.missing{color:var(--text-color-link-disabled)}.ticket-title{border-bottom:1px solid #bbb;margin-top:1em;padding-bottom:.25em;font-weight:700;font-size:1.1875rem}.ticket-dates{color:var(--ticket-date-text-color);font-size:.8125rem}.ticket-dates p{margin:0 0 .5em}.ticket-properties{width:100%;text-align:left;font-size:.65rem;border-top:1px solid var(--ticket-table-border-color);margin:0}.ticket-properties th{font-weight:400;width:20%}.ticket-properties td,.ticket-properties th{padding:.25em .5em;border-bottom:1px dashed var(--ticket-table-border-color)}.ticket-info-bottom{padding:.5em}.ticket-description{font-size:.8125rem;margin-top:.5em}.ticket-description h2,.ticket-description h3,.ticket-description h4,.ticket-description h5,.ticket-description h6{text-transform:uppercase;font-weight:400}.ticket-description h1{font-size:1.1rem}.ticket-description h2{font-size:1rem}.ticket-description h3{font-size:.9rem}.ticket-description h4{font-size:.8rem}.ticket-description h5{font-size:.75rem}.ticket-description h6{font-size:.7rem}.ticket-description-title{color:var(--ticket-description-title-color);font-size:.75rem}details{padding:.5em 0;font-size:.8125rem}summary{color:var(--text-color-link);font-weight:700;font-size:.875rem;text-decoration:underline;cursor:pointer;text-shadow:.04em .04em var(--text-shadow-color)}.ticket-attachments{font-size:.75em}.ticket-comment-body{width:100%;padding-top:.5em}.ticket-change{margin:1em 0;clear:both}.ticket-change-header{font-size:.875rem;font-weight:700;box-shadow:1.4px 2.8px 5.6px 0 var(--ticket-changes-box-shadow)}.ticket-change-link{font-size:.85em}.ticket-change-content{width:100%}.ticket-changes{background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);color:var(--ticket-changes-text-color);font-size:.7rem;float:right;clear:right;margin:2em 0 1em 1.5em}.ticket-changes th{text-align:right;font-weight:400;text-transform:capitalize}.ticket-changes td,.ticket-changes th{padding:.25em;vertical-align:baseline}.ticket-changes .change-field-new{font-weight:700}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+<div class="flex-column" data-pagefind-body="">
+  
+
+  <nav class="content-nav">
+    <ul class="flex-row">
+      
+        <li>
+          <a href="/bugs.jquery.com/ticket/9524/">← Previous Ticket</a>
+        
+      
+      
+        </li><li>
+          <a href="/bugs.jquery.com/ticket/9526/">Next Ticket →</a>
+        </li>
+      
+    </ul>
+  </nav>
+
+
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="." class="ticket-number">#9525</a>
+      <span class="ticket-status">closed</span>
+      <span class="ticket-type">enhancement</span>
+      <span class="ticket-resolution">(duplicate)</span>
+    </h3>
+
+    <div class="ticket-dates">
+      <p>Opened June 06, 2011 03:04PM UTC</p>
+      
+        <p>Closed June 08, 2011 04:58PM UTC</p>
+      
+      
+        <p>Last modified June 11, 2011 07:42PM UTC</p>
+      
+    </div>
+  </div>
+
+  <h1 class="ticket-title">performance: a really fast single-element $() wrapper?</h1>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        shadedecho
+      </td>
+      <th>Owned by:</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        low
+      </td>
+      
+        <th class="missing">Milestone:</th>
+      
+      <td>
+        <a href="/bugs.jquery.com/milestone/1.next">1.next</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>core</td>
+      
+        <th>Version:</th>
+      
+      <td>1.6.1</td>
+    </tr>
+    <tr>
+      
+        <th class="missing">Keywords:</th>
+      
+      <td></td>
+      
+        <th class="missing">Cc:</th>
+      
+      <td></td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
+    <div class="ticket-description"><p>A common (and major) performance anti-pattern in jquery is the oft-seen $(elem) single-element collection wrapping, which invokes the performance-heavy $() constructor for the special case where all someone wants is the special jquery decorations on top of a single element (don't need collection/stack management).</p><p>For example:</p><p><a href="http://jsperf.com/scriptjunkie-premature-3/6" class="ext-link"><span class="icon"></span>http://jsperf.com/scriptjunkie-premature-3/6</a></p><p>Inside jquery functions like .each(), it's extremely common to have the pattern of $(this) wrapping, because someone wants to call the special jquery operations/decorations on the object instead of doing bare DOM element manip. It's quite rare in that pattern for someone to be setting up a jquery collection which they will add elements to, etc. They really just need (usually) a single-element collection, and a faster wrapper would be very nice for that purpose.</p><p>As an example:</p><p><a href="http://jsperf.com/dollar-vs-dollar-underscore" class="ext-link"><span class="icon"></span>http://jsperf.com/dollar-vs-dollar-underscore</a></p><p>Ext.fly() is apparently similar (disclaimer, I have no Ext experience to speak of). The idea is to have a quick and fast $()-like constructor for creating a jquery object wrapper around only a single-element. In other words, no need for all the stack manipulation stuff (ostensibly seems is what slows down $() construction).</p><p>In my jsperf test, I created $_(). I think it's possible that $() might be special-cased in some way, but I honestly think that such a constructor should be a special name, because the single-element collection is creates is special, and has caveats (like no stack manipulation, etc).</p><p>Also, *my* $_() is quite flawed, as doing this from the outside is (afaict) impossible without the caveat as noted. But it seems like internally jquery could easily and quickly create the object wrapper, and simply assign the first and only element via the <code>elem.context = elem[0] = obj</code> approach.</p></div>
+  </div>
+</div>
+
+<details>
+  <summary class="ticket-details-summary">Attachments (0)</summary>
+
+  <ul class="ticket-attachments">
+    
+  </ul>
+</details>
+
+<details open="">
+  <summary class="ticket-details-summary">Change History (9)</summary>
+  
+    <div class="ticket-change flex-column" id="comment:1">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 08, 2011 04:58PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:1">comment:1</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ duplicate</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I do not think this is a feature to be added to jQuery, but a pattern that jQuery users (including core) could follow to improve performance. There are too many gotchas to do this by default. </p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:2">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 08, 2011 04:58PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:2">comment:2</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Duplicate of <a href="/bugs.jquery.com/ticket/9481">#9481</a>.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:3">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 08, 2011 05:08PM UTC by <span class="author">shadedecho</span></span>
+        <a class="ticket-change-link" href="#comment:3">comment:3</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>just curious, why would having a separate $_() (or something else) type of constructor, which the dev would be explicitly using to get a single-elem collection (just the wrapper, not the stack) have too many gotchas?</p><p>By contrast, I think trying to automatically do it inside of $() would have way more gotchas.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:4">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 08, 2011 06:31PM UTC by <span class="author">shadedecho</span></span>
+        <a class="ticket-change-link" href="#comment:4">comment:4</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>FWIW, I do NOT think this is a duplicate of that other ticket, though they have similar goals. I do not want the caveat that each call to $_() or $.fly() gives a single-elem collection that shares from a single global $() collection. This is the caveat I noted in my performance benchmark on jsperf.com, and it's quite undesirable.</p><p>What I'm asking for with this ticket is to be able to create a jquery wrapper object (with all the jquery helper methods) around a single object, but have it not do any of the internal stack management stuff (that apparently is the mostly costly perf wise).</p><p>It would have to be an explicit and separate API, or at the least require a flag param to $(), such that I as a dev and expressing that I want to opt out of the "collection" part of the jquery wrapper, and give me only the single-elem wrapper, because I don't intend to use this as a collection.</p><p>In fact, the jquery-like object I'm suggesting would possibly not even need any of the jquery methods for explicitly dealing with the stack/collection, such as .end(), .find(), .add(), etc.</p><p>I would only need the helpers, like attr(), css(), bind(), etc.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:5">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 08, 2011 07:20PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:5">comment:5</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>component:</th>
+                  <td>
+                    
+                      <span class="change-field-old">unfiled</span> → <span class="change-field-new">core</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>priority:</th>
+                  <td>
+                    
+                      <span class="change-field-old">undecided</span> → <span class="change-field-new">low</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> What I'm asking for with this ticket is to be able to create a jquery wrapper object (with all the jquery helper methods) around a single object, but have it not do any of the internal stack management stuff (that apparently is the mostly costly perf wise). </blockquote><p>Unfortunately, this change is simply not plausible.</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:6">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 08, 2011 09:32PM UTC by <span class="author">shadedecho</span></span>
+        <a class="ticket-change-link" href="#comment:6">comment:6</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>would you mind explaining why it's not plausible? If after a jquery collection is created, I can simply assign .context and [0] to my element, and effectively get what I want, why can't that be done as a shortcut for me, in a performant way, without doing the extra work?</p><p>also, is this really still just a duplicate of the other ticket?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:7">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 09, 2011 03:56PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:7">comment:7</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">If you only need to do `$(this)` once, the overhead is not that great and there is no need for another constructor, especially if it has unusual gotchas people have to remember. The overhead only becomes important in loops. For that case you can use a pattern:&#92;
+{{{&#92;
+var $this = $();&#92;
+this.each(function(){&#92;
+    $this[0] = this;&#92;
+    // carry on with $this&#92;
+});&#92;
+}}}&#92;
+Like I said in the other ticket, I do think there could be a benefit to this pattern, even inside core itself, but I do not think we need to create a second-class-citizen constructor to handle this case. &#92;
+&#92;
+Do you have some code that is bottlenecking on `$(this)`? If so I&#39;d like to see it. Start a thread in the forum under the &quot;Developing jQuery Core&quot; section and we can take a look.&#92;
+</span> → <span class="change-field-new">1307635072091699</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>If you only need to do <code>$(this)</code> once, the overhead is not that great and there is no need for another constructor, especially if it has unusual gotchas people have to remember. The overhead only becomes important in loops. For that case you can use a pattern:</p><pre class="wiki">
+var $this = $(document);
+this.each(function(){
+    $this[0] = this;
+    // carry on with $this
+});
+</pre><p>Like I said in the other ticket, I do think there could be a benefit to this pattern, even inside core itself, but I do not think we need to create a second-class-citizen constructor to handle this case. </p><p>Do you have some code that is bottlenecking on <code>$(this)</code>? If so I'd like to see it. Start a thread in the forum under the "Developing jQuery Core" section and we can take a look.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:8">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 09, 2011 04:24PM UTC by <span class="author">shadedecho</span></span>
+        <a class="ticket-change-link" href="#comment:8">comment:8</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">If you look at:&#92;
+&#92;
+http://jsperf.com/dollar-vs-dollar-underscore&#92;
+&#92;
+You&#39;ll see that your suggested snippet is in spirit the same thing as I already explored.&#92;
+&#92;
+It works fine for the case where you only ever need to deal with one such single-element-wrapper-instance at a time, because that global $() instance can just be re-used over and over.&#92;
+&#92;
+But, the major caveat comes if more than one such wrapper needs to be used. For instance, say inside an .each() loop, I need to wrap $(this) AND $(this.parentNode), and I need to use the two together at the same time. In the case of a solution where a global &quot;flyweight&quot; collection is just re-used, this falls apart completely, because they trample on each other.&#92;
+&#92;
+So, in that case, being able to do $_(this) and $_(this.parentNode), or whatever, is strongly desirable. The awkward (and non-performant) workaround options are:&#92;
+&#92;
+1. use `$this[0] = this` to speed that operation up, but use the slower $(this.parentNode) for the other(s).&#92;
+&#92;
+2. only use one wrapper at a time, swapping back and forth as necessary, like:&#92;
+&#92;
+$elem[0] = this;&#92;
+var rel = $elem.attr(&quot;rel&quot;);&#92;
+$elem[0] = this.parentNdoe;&#92;
+var parent_rel = $elem.attr(&quot;rel&quot;) + &quot;|&quot; + rel;&#92;
+$elem.attr(&quot;rel&quot;,parent_rel);&#92;
+$elem[0] = this;&#92;
+$elem.attr(&quot;rel&quot;, parent_rel);&#92;
+&#92;
+And btw, I know my example is a little contrived, as wrapping `this.parentNode` is silly compared to just doing $this.parent(). But the spirit of this is that I have two different nodes that I need to access at the same time, and I would ideally like each of them to have the handy jquery wrappers around them. But neither of them am I using as a collection where I need the overhead of stack management.&#92;
+&#92;
+$(A) and $(B) works fine for that purpose, except that they&#39;re much slower, compared to if I happen to already have two unused/idle collections sitting around, like $a and $b, that I can just do the quick assign like `$a[0] = a` and `$b[0] = b`.&#92;
+&#92;
+So, ideally, what I&#39;d like is a quick way to get a simple single-element collection for any object (as many as I need at a time), without the performance overhead of doing the collection/stack-management stuff.</span> → <span class="change-field-new">1307636729703408</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>_comment1:</th>
+                  <td>
+                    
+                      <span class="change-field-old">If you look at:&#92;
+&#92;
+http://jsperf.com/dollar-vs-dollar-underscore&#92;
+&#92;
+You&#39;ll see that your suggested snippet is in spirit the same thing as I already explored.&#92;
+&#92;
+It works fine for the case where you only ever need to deal with one such single-element-wrapper-instance at a time, because that global $() instance can just be re-used over and over.&#92;
+&#92;
+But, the major caveat comes if more than one such wrapper needs to be used. For instance, say inside an .each() loop, I need to wrap $(this) AND $(this.parentNode), and I need to use the two together at the same time. In the case of a solution where a global &quot;flyweight&quot; collection is just re-used, this falls apart completely, because they trample on each other.&#92;
+&#92;
+So, in that case, being able to do $_(this) and $_(this.parentNode), or whatever, is strongly desirable. The awkward (and non-performant) workaround options are:&#92;
+&#92;
+1. use `$this[0] = this` to speed that operation up, but use the slower $(this.parentNode) for the other(s).&#92;
+&#92;
+2. only use one wrapper at a time, swapping back and forth as necessary, like:&#92;
+&#92;
+$elem[0] = this;&#92;
+var rel = $elem.attr(&quot;rel&quot;);&#92;
+$elem[0] = this.parentNdoe;&#92;
+var parent_rel = $elem.attr(&quot;rel&quot;) + &quot;|&quot; + rel;&#92;
+$elem.attr(&quot;rel&quot;,parent_rel);&#92;
+$elem[0] = this;&#92;
+$elem.attr(&quot;rel&quot;, parent_rel);&#92;
+&#92;
+And btw, I know my example is a little contrived, as wrapping `this.parentNode` is silly compared to just doing $this.parent(). But the spirit of this is that I have two different nodes that I need to access at the same time, and I would ideally like each of them to have the handy jquery wrappers around them. But neither of them am I using as a collection where I need the overhead of stack management.&#92;
+&#92;
+$(A) and $(B) works fine for that purpose, except that they&#39;re much slower, compared to if I happen to already have two unused/idle collections sitting around, like $a and $b, that I can just do the quick assign like `$a[0] = A` and `$b[0] = B`.&#92;
+&#92;
+So, ideally, what I&#39;d like is a quick way to get a simple single-element collection for any object (as many as I need at a time), without the performance overhead of doing the collection/stack-management stuff.</span> → <span class="change-field-new">1307637256652669</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>If you look at:</p><p><a href="http://jsperf.com/dollar-vs-dollar-underscore" class="ext-link"><span class="icon"></span>http://jsperf.com/dollar-vs-dollar-underscore</a></p><p>You'll see that your suggested snippet is in spirit the same thing as I already explored.</p><p>It works fine for the case where you only ever need to deal with one such single-element-wrapper-instance at a time, because that global <code>$()</code> instance can just be re-used over and over.</p><p>But, the major caveat comes if more than one such wrapper needs to be used. For instance, say inside an .each() loop, I need to wrap <code>$(this)</code> AND <code>$(this.parentNode)</code>, and I need to use the two together at the same time. In the case of a solution where a global "flyweight" collection is just re-used, this falls apart completely, because they trample on each other.</p><p>So, in that case, being able to do <code>$_(this)</code> and <code>$_(this.parentNode)</code>, or whatever, is strongly desirable. The awkward (and non-performant) workaround options are:</p><p>1. use <code>$this[0] = this</code> to speed that operation up, but use the slower <code>$(this.parentNode)</code> for the other(s).</p><p>2. only use one wrapper at a time, swapping back and forth as necessary, like:</p><pre class="wiki">
+$elem[0] = this;
+var rel = $elem.attr("rel");
+$elem[0] = this.parentNdoe;
+var parent_rel = $elem.attr("rel") + "|" + rel;
+$elem.attr("rel",parent_rel);
+$elem[0] = this;
+$elem.attr("rel", parent_rel);
+</pre><p>And btw, I know my example is a little contrived, as wrapping <code>this.parentNode</code> is silly compared to just doing <code>$this.parent()</code>. But the spirit of this is that I have two different nodes that I need to access at the same time, and I would ideally like each of them to have the handy jquery wrappers around them. But neither of them am I using as a collection where I need the overhead of stack management.</p><p><code>$(A)</code> and <code>$(B)</code> works fine for that purpose, except that they're much slower, compared to if I happen to already have two unused/idle collections sitting around, like <code>$a</code> and <code>$b</code>, that I can just do the quick assign like <code>$a[0] = A</code> and <code>$b[0] = B</code>.</p><p>So, ideally, what I'd like is a quick way to get a simple single-element collection for any object (as many as I need at a time), without the performance overhead of doing the collection/stack-management stuff.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:9">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 11, 2011 07:42PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:9">comment:9</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> Do you have some code that is bottlenecking on $(this)? If so I'd like to see it. Start a thread in the forum under the "Developing jQuery Core" section and we can take a look. </blockquote>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</details>
+</div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

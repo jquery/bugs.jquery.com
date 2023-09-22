@@ -1,0 +1,31 @@
+About specialEasing.
+
+If you're trying to animate font size using special per-property easing it won't work.
+For example:
+  $("span").animate({
+    font-size:'2em'
+  }, {
+    duration: 1000,
+    specialEasing: {
+      'font-size': 'special'
+    }
+  }); 
+
+A conflict is between 
+    5328   var name = p.replace(rdashAlpha, fcamelCase);
+and
+    5618   var specialEasing = this.options.specialEasing && this.options.specialEasing[this.prop];
+
+this.prop will be 'fontSize' instead of 'font-size' but 'fontSize' is not a CSS name.
+
+This will work:
+  $("span").animate({
+    font-size:'2em'
+  }, {
+    duration: 1000,
+    specialEasing: {
+      'fontSize': 'special'
+    }
+  }); 
+
+Sorry for my awful english.

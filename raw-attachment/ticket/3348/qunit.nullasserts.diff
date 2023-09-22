@@ -1,0 +1,25 @@
+Index: testrunner.js
+===================================================================
+--- testrunner.js	(revision 5843)
++++ testrunner.js	(working copy)
+@@ -217,6 +217,20 @@
+ }
+ 
+ /**
++ * Asserts that the object is null.
++ */
++function isNull(a, msg){
++    _config.Test.push( [ a === null, msg ] );
++}
++
++/**
++ * Asserts that the object is not null.
++ */
++function notNull(a, msg){
++    _config.Test.push( [ a != null, msg ] );
++}
++
++/**
+  * Asserts that two arrays are the same
+  */
+ function isSet(a, b, msg) {

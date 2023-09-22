@@ -1,0 +1,13 @@
+Index: current/ui.dialog.js
+===================================================================
+--- current/ui.dialog.js	(revision 3970)
++++ current/ui.dialog.js	(working copy)
+@@ -9,7 +9,7 @@
+ 	$.fn.dialogInit = function(o) {
+ 		return this.each(function() {
+ 			if (!$(this).is(".ui-dialog")) {
+-				$.ui.dialogInit(this, o);
++				new $.ui.dialogInit(this, o);
+ 			}			
+ 		});
+ 	}

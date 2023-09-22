@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml' lang='en' dir='ltr'>
+<head>
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+
+  <title>jquery extend array bug</title>
+
+  <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js'></script>
+
+  <script type='text/javascript'>
+
+  $(document).ready(function(){
+    var target, original;
+
+    target = {
+      array : [1, 2, 3]
+    };
+    newObject = {
+      array : [4, 5]
+    };
+
+    note('arrays properties for both objects : target (first) and newObject (second)');
+    note(target.array.join());
+    note(newObject.array.join());
+
+    $.extend(target, newObject);
+
+    note('target is extended by newObject (not deep)');
+    note(target.array.join());
+    note(newObject.array.join());
+
+    target.array[0] = 6;
+
+    note('first value of target array changed to 6');
+    note(target.array.join());
+    note(newObject.array.join());
+    note("BUG: newObject's array's first value also changes as it is referenced");
+
+    note("deep copy is not the solution, as the newObject array should replace the target array, not extend it:");
+    note('(RESETTING VARIABLES: DEEP COPY)');
+
+    target = {
+      array : [1, 2, 3]
+    };
+    original = {
+      array : [4, 5]
+    };
+
+    $.extend(true, target, original);
+
+    note("undesired behaviour: target array is too long");
+
+    note(target.array.join());
+    note(original.array.join());
+
+    target.array[0] = 6;
+
+    note("but the array has been correctly cloned, not referenced");
+
+    note(target.array.join());
+    note(original.array.join());
+
+
+
+    note("...implementing the proposed fix...");
+    jQuery.extend = jQuery.fn.extend = function() {
+      // copy reference to target object
+      var target = arguments[0] || {}, i = 1, length = arguments.length, deep = false, options, name, src, copy;
+
+      // Handle a deep copy situation
+      if ( typeof target === "boolean" ) {
+        deep = target;
+        target = arguments[1] || {};
+        // skip the boolean and the target
+        i = 2;
+      }
+
+      // Handle case when target is a string or something (possible in deep copy)
+      if ( typeof target !== "object" && !jQuery.isFunction(target) ) {
+        target = {};
+      }
+
+      // extend jQuery itself if only one argument is passed
+      if ( length === i ) {
+        target = this;
+        --i;
+      }
+
+      for ( ; i < length; i++ ) {
+        // Only deal with non-null/undefined values
+        if ( (options = arguments[ i ]) != null ) {
+          // Extend the base object
+          for ( name in options ) {
+            src = target[ name ];
+            copy = options[ name ];
+
+            // Prevent never-ending loop
+            if ( target === copy ) {
+              continue;
+            }
+
+            // Recurse if we're merging object literal values or arrays
+            if ( deep && copy && ( jQuery.isPlainObject(copy) || jQuery.isArray(copy) ) ) {
+              var clone = src && ( jQuery.isPlainObject(src) || jQuery.isArray(src) ) ? src
+                : jQuery.isArray(copy) ? [] : {};
+
+              // Never move original objects, clone them
+              target[ name ] = jQuery.extend( deep, clone, copy );
+
+            // Don't bring in undefined values
+            } else if ( copy !== undefined ) {
+              //target[ name ] = copy;
+              target[ name ] = ( jQuery.isArray!==undefined && jQuery.isArray(copy) )
+              ? target[ name ] = copy.slice(0) : target[ name ] = copy;
+            }
+          }
+        }
+      }
+
+      // Return the modified object
+      return target;
+    };
+
+
+    target = {
+      array : [1, 2, 3]
+    };
+    newObject = {
+      array : [4, 5]
+    };
+
+    $.extend(target, newObject);
+
+    target.array[0] = 6;
+
+    note('(RESETTING VARIABLES: PROPOSED FIX)');
+    note('final result (as desired)');
+    note(target.array.join());
+    note(newObject.array.join());
+
+
+  });
+
+  function note(msg){
+    $('#log').append( $('<p/>').text(msg) );
+  }
+
+  </script>
+
+
+</head>
+<body>
+
+<p>original values</p>
+<pre>
+  target = {
+    array : [1, 2, 3]
+  };
+  newObject = {
+    array : [4, 5]
+  };
+</pre>
+
+<div id='log'>
+</div>
+
+</body>
+</html>

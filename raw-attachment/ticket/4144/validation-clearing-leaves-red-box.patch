@@ -1,0 +1,27 @@
+Index: crane-web/src/main/webapp/script/jquery/jquery.validate.js
+===================================================================
+--- crane-web/src/main/webapp/script/jquery/jquery.validate.js	(revision Shelved version)
++++ crane-web/src/main/webapp/script/jquery/jquery.validate.js	(revision Local version)
+@@ -321,9 +321,9 @@
+ 			this.currentElements = $(element);
+ 			var result = this.check( element );
+ 			if ( result ) {
+-				delete this.invalid[element.name];
++				delete this.invalid[this.idOrName(element)];
+ 			} else {
+-				this.invalid[element.name] = true;
++				this.invalid[this.idOrName(element)] = true;
+ 			}
+ 			if ( !this.numberOfInvalids() ) {
+ 				// Hide error containers on last error
+@@ -549,8 +549,8 @@
+ 				message: message,
+ 				element: element
+ 			});
+-			this.errorMap[element.name] = message;
+-			this.submitted[element.name] = message;
++			this.errorMap[this.idOrName(element)] = message;
++			this.submitted[this.idOrName(element)] = message;
+ 		},
+ 		
+ 		addWrapper: function(toToggle) {

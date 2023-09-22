@@ -1,0 +1,2552 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">JqueryValidate-CustomMetaMessages-unix.patch on Ticket #2908 – Attachment – jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shadow:0 1px #fff;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#b3d4fc}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#b3d4fc}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f2f0}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{color:#9a6e3a;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}pre[class*=language-diff]{--eleventy-code-padding:1.25em;padding-left:var(--eleventy-code-padding);padding-right:var(--eleventy-code-padding)}.token.deleted{background-color:#8e2e2e;color:inherit}.token.inserted{background-color:#44824a;color:inherit}.token.prefix.deleted,.token.prefix.inserted,.token.prefix.unchanged{-webkit-user-select:none;user-select:none;display:inline-flex;align-items:center;justify-content:center;padding-top:2px;padding-bottom:2px}.token.prefix.deleted,.token.prefix.inserted{width:var(--eleventy-code-padding);background-color:rgba(0,0,0,.2)}.token.deleted:not(.prefix),.token.inserted:not(.prefix){display:block;margin-left:calc(-1 * var(--eleventy-code-padding));margin-right:calc(-1 * var(--eleventy-code-padding));text-decoration:none;color:inherit}:root{--attachment-info-bg-color:#f7f7f0;--attachment-info-border-color:#d7d7d7;--attachment-download-link-color:#666}h1,h2,h3,h4,h5,h6{font-weight:700}h3{font-size:.875rem}h6{font-size:.6875rem}.attachment-info{padding:.25em .5em;margin:1em 0;background-color:var(--attachment-info-bg-color);border:1px solid var(--attachment-info-border-color)}.attachment-info h6{font-family:var(--font-family-alternate)}.attachment-download{margin:2em 0;gap:.5em}.attachment-download-link[href],.attachment-download-link[href]:visited{color:var(--attachment-download-link-color)}.attachment img,.attachment picture{display:block;max-width:100%;height:auto}code[class*=language-],pre[class*=language-]{font-size:.75rem}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+
+<div class="flex-column attachment">
+  <nav class="content-nav">
+    <ul class="flex-row">
+      <li>
+        <a href="/bugs.jquery.com/ticket/2908">Back to Ticket #2908</a>
+      </li>
+    </ul>
+  </nav>
+
+  <h1>
+    <a href="/bugs.jquery.com/ticket/2908">Ticket #2908</a>: JqueryValidate-CustomMetaMessages-unix.patch
+  
+  <hr>
+
+  <div class="attachment-info">
+    <h6>File JqueryValidate-CustomMetaMessages-unix.patch, 77.1 KB (added by DaneOConnor, May 21, 2008 02:34PM UTC)</h6>
+    
+  </div>
+
+  
+    <div class="attachment-preview">
+      
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: demo/custom-messages-metadata-demo.htm
+===================================================================
+--- demo/custom-messages-metadata-demo.htm	(revision 0)
++++ demo/custom-messages-metadata-demo.htm	(revision 0)
+@@ -0,0 +1,85 @@
++<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
++<html xmlns="http://www.w3.org/1999/xhtml">
++<head>
++<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
++<title>jQuery validation plug-in - comment form example</title>
++
++<link rel="stylesheet" type="text/css" media="screen" href="css/screen.css">
++
++<script src="../lib/jquery.js" type="text/javascript"></script>
++<script src="../jquery.validate.js" type="text/javascript"></script>
++<script src="../lib/jquery.metadata.js" type="text/javascript"></script>
++
++<!-- for styling the form -->
++<script src="js/cmxforms.js" type="text/javascript"></script>
++
++<script type="text/javascript">
++$(document).ready(function() {
++	$("#commentForm").validate({meta: "validate"});
++	$("#commentForm2").validate();
++	$("#commentForm3").validate({
++								messages:{
++										email:{ 
++											required:'Enter this!'
++										}
++									}		
++								});
++
++});
++</script>
++
++<style type="text/css">
++form { width: 500px; }
++form label { width: 250px; }
++form label.error, 
++form input.submit { margin-left: 253px; }
++</style>
++
++</head>
++<body>
++<!-- Custom messages with custom "meta" setting -->
++<form class="cmxform" id="commentForm" method="post" action=".">
++	<fieldset>
++		<legend>Please enter your email address</legend>
++		<p>
++
++			<label for="cemail">E-Mail *</label>
++			<input id="cemail" name="email" class="{validate:{required:true, email:true, messages:{required:'Please enter your email address', email:'Please enter a valid email address'}}}">
++		</p>
++		<p>
++			<input class="submit" type="submit" value="Submit">
++		</p>
++	</fieldset>
++</form>
++<!-- Custom messages with default "meta" setting -->
++<form class="cmxform" id="commentForm2" method="post" action=".">
++	<fieldset>
++		<legend>Please enter your email address</legend>
++		<p>
++
++			<label for="cemail">E-Mail *</label>
++			<input id="cemail" name="email" class="{required:true, email:true, messages:{required:'Please enter your email address', email:'Please enter a valid email address'}}">
++		</p>
++		<p>
++			<input class="submit" type="submit" value="Submit">
++		</p>
++	</fieldset>
++</form>
++<!-- Custom message for "required" in metadata is overriden by a validate option -->
++<form class="cmxform" id="commentForm3" method="post" action=".">
++	<fieldset>
++		<legend>Please enter your email address</legend>
++		<p>
++
++			<label for="cemail">E-Mail *</label>
++			<input id="cemail" name="email" class="{required:true, email:true, messages:{required:'Please enter your email address', email:'Please enter a valid email address'}}">
++		</p>
++		<p>
++			<input class="submit" type="submit" value="Submit">
++		</p>
++	</fieldset>
++</form>
++
++
++</body>
++</html>
+\ No newline at end of file
+Index: jquery.validate.js
+===================================================================
+--- jquery.validate.js	(revision 5616)
++++ jquery.validate.js	(working copy)
+@@ -1,1131 +1,1151 @@
+-/*
+- * jQuery validation plug-in 1.3
+- *
+- * http://bassistance.de/jquery-plugins/jquery-plugin-validation/
+- * http://docs.jquery.com/Plugins/Validation
+- *
+- * Copyright (c) 2006 - 2008 Jörn Zaefferer
+- *
+- * $Id$
+- *
+- * Dual licensed under the MIT and GPL licenses:
+- *   http://www.opensource.org/licenses/mit-license.php
+- *   http://www.gnu.org/licenses/gpl.html
+- */
+-
+-jQuery.extend(jQuery.fn, {
+-	// http://docs.jquery.com/Plugins/Validation/validate
+-	validate: function( options ) {
+-		
+-		// if nothing is selected, return nothing; can't chain anyway
+-		if (!this.length) {
+-			options && options.debug && window.console && console.warn( "nothing selected, can't validate, returning nothing" );
+-			return;
+-		}
+-		
+-		// check if a validator for this form was already created
+-		var validator = jQuery.data(this[0], 'validator');
+-		if ( validator ) {
+-			return validator;
+-		}
+-		
+-		validator = new jQuery.validator( options, this[0] );
+-		jQuery.data(this[0], 'validator', validator); 
+-		
+-		if ( validator.settings.onsubmit ) {
+-		
+-			// allow suppresing validation by adding a cancel class to the submit button
+-			this.find(".cancel:submit").click(function() {
+-				validator.cancelSubmit = true;
+-			});
+-		
+-			// validate the form on submit
+-			this.submit( function( event ) {
+-				if ( validator.settings.debug )
+-					// prevent form submit to be able to see console output
+-					event.preventDefault();
+-					
+-				function handle() {
+-					if ( validator.settings.submitHandler ) {
+-						validator.settings.submitHandler.call( validator, validator.currentForm );
+-						return false;
+-					}
+-					return true;
+-				}
+-					
+-				// prevent submit for invalid forms or custom submit handlers
+-				if ( validator.cancelSubmit ) {
+-					validator.cancelSubmit = false;
+-					return handle();
+-				}
+-				if ( validator.form() ) {
+-					if ( validator.pendingRequest ) {
+-						validator.formSubmitted = true;
+-						return false;
+-					}
+-					return handle();
+-				} else {
+-					validator.focusInvalid();
+-					return false;
+-				}
+-			});
+-		}
+-		
+-		return validator;
+-	},
+-	// http://docs.jquery.com/Plugins/Validation/valid
+-	valid: function() {
+-        if ( jQuery(this[0]).is('form')) {
+-            return this.validate().form();
+-        } else {
+-            var valid = false;
+-            var validator = jQuery(this[0].form).validate();
+-            this.each(function() {
+-				valid |= validator.element(this);
+-            });
+-            return valid;
+-        }
+-    },
+-	// attributes: space seperated list of attributes to retrieve and remove
+-	removeAttrs: function(attributes) {
+-		var result = {},
+-			$element = this;
+-		$.each(attributes.split(/\s/), function() {
+-			result[this] = $element.attr(this);
+-			$element.removeAttr(this);
+-		});
+-		return result;
+-	},
+-	// http://docs.jquery.com/Plugins/Validation/rules
+-	rules: function(command, argument) {
+-		var element = this[0];
+-		
+-		if (command) {
+-			var staticRules = jQuery.data(element.form, 'validator').settings.rules;
+-			var existingRules = jQuery.validator.staticRules(element);
+-			switch(command) {
+-			case "add":
+-				$.extend(existingRules, jQuery.validator.normalizeRule(argument));
+-				staticRules[element.name] = existingRules;
+-				break;
+-			case "remove":
+-				if (!argument) {
+-					delete staticRules[element.name];
+-					return existingRules;
+-				}
+-				var filtered = {};
+-				$.each(argument.split(/\s/), function(index, method) {
+-					filtered[method] = existingRules[method];
+-					delete existingRules[method];
+-				});
+-				return filtered;
+-			}
+-		}
+-		
+-		var data = jQuery.validator.normalizeRules(
+-		jQuery.extend(
+-			{},
+-			jQuery.validator.metadataRules(element),
+-			jQuery.validator.classRules(element),
+-			jQuery.validator.attributeRules(element),
+-			jQuery.validator.staticRules(element)
+-		), element);
+-		
+-		// make sure required is at front
+-		if (data.required) {
+-			var param = data.required;
+-			delete data.required;
+-			data = $.extend({required: param}, data);
+-		}
+-		
+-		return data;
+-	},
+-	// destructive add
+-	push: function( t ) {
+-		return this.setArray( this.add(t).get() );
+-	}
+-});
+-
+-// Custom selectors
+-jQuery.extend(jQuery.expr[":"], {
+-	// http://docs.jquery.com/Plugins/Validation/blank
+-	blank: function(a) {return !jQuery.trim(a.value);},
+-	// http://docs.jquery.com/Plugins/Validation/filled
+-	filled: function(a) {return !!jQuery.trim(a.value);},
+-	// http://docs.jquery.com/Plugins/Validation/unchecked
+-	unchecked: function(a) {return !a.checked;}
+-});
+-
+-
+-jQuery.format = function(source, params) {
+-	if ( arguments.length == 1 ) 
+-		return function() {
+-			var args = jQuery.makeArray(arguments);
+-			args.unshift(source);
+-			return jQuery.format.apply( this, args );
+-		};
+-	if ( arguments.length > 2 && params.constructor != Array  ) {
+-		params = jQuery.makeArray(arguments).slice(1);
+-	}
+-	if ( params.constructor != Array ) {
+-		params = [ params ];
+-	}
+-	jQuery.each(params, function(i, n) {
+-		source = source.replace(new RegExp("\\{" + i + "\\}", "g"), n);
+-	});
+-	return source;
+-};
+-
+-// constructor for validator
+-jQuery.validator = function( options, form ) {
+-	this.settings = jQuery.extend( {}, jQuery.validator.defaults, options );
+-	this.currentForm = form;
+-	this.init();
+-};
+-
+-jQuery.extend(jQuery.validator, {
+-
+-	defaults: {
+-		messages: {},
+-		groups: {},
+-		rules: {},
+-		errorClass: "error",
+-		errorElement: "label",
+-		focusInvalid: true,
+-		errorContainer: jQuery( [] ),
+-		errorLabelContainer: jQuery( [] ),
+-		onsubmit: true,
+-		ignore: [],
+-		onfocusin: function(element) {
+-			this.lastActive = element;
+-				
+-			// hide error label and remove error class on focus if enabled
+-			if ( this.settings.focusCleanup && !this.blockFocusCleanup ) {
+-				this.settings.unhighlight && this.settings.unhighlight.call( this, element, this.settings.errorClass );
+-				this.errorsFor(element).hide();
+-			}
+-		},
+-		onfocusout: function(element) {
+-			if ( !this.checkable(element) && (element.name in this.submitted || !this.optional(element)) ) {
+-				this.element(element);
+-			}
+-		},
+-		onkeyup: function(element) {
+-			if ( element.name in this.submitted || element == this.lastElement ) {
+-				this.element(element);
+-			}
+-		},
+-		onclick: function(element) {
+-			if ( element.name in this.submitted )
+-				this.element(element);
+-		},
+-		highlight: function( element, errorClass ) {
+-			jQuery( element ).addClass( errorClass );
+-		},
+-		unhighlight: function( element, errorClass ) {
+-			jQuery( element ).removeClass( errorClass );
+-		}
+-	},
+-
+-	// http://docs.jquery.com/Plugins/Validation/Validator/setDefaults
+-	setDefaults: function(settings) {
+-		jQuery.extend( jQuery.validator.defaults, settings );
+-	},
+-
+-	messages: {
+-		required: "This field is required.",
+-		remote: "Please fix this field.",
+-		email: "Please enter a valid email address.",
+-		url: "Please enter a valid URL.",
+-		date: "Please enter a valid date.",
+-		dateISO: "Please enter a valid date (ISO).",
+-		dateDE: "Bitte geben Sie ein gültiges Datum ein.",
+-		number: "Please enter a valid number.",
+-		numberDE: "Bitte geben Sie eine Nummer ein.",
+-		digits: "Please enter only digits",
+-		creditcard: "Please enter a valid credit card.",
+-		equalTo: "Please enter the same value again.",
+-		accept: "Please enter a value with a valid extension.",
+-		maxlength: jQuery.format("Please enter no more than {0} characters."),
+-		maxLength: jQuery.format("Please enter no more than {0} characters."),
+-		minlength: jQuery.format("Please enter at least {0} characters."),
+-		minLength: jQuery.format("Please enter at least {0} characters."),
+-		rangelength: jQuery.format("Please enter a value between {0} and {1} characters long."),
+-		rangeLength: jQuery.format("Please enter a value between {0} and {1} characters long."),
+-		rangeValue: jQuery.format("Please enter a value between {0} and {1}."),
+-		range: jQuery.format("Please enter a value between {0} and {1}."),
+-		maxValue: jQuery.format("Please enter a value less than or equal to {0}."),
+-		max: jQuery.format("Please enter a value less than or equal to {0}."),
+-		minValue: jQuery.format("Please enter a value greater than or equal to {0}."),
+-		min: jQuery.format("Please enter a value greater than or equal to {0}.")
+-	},
+-	
+-	autoCreateRanges: false,
+-	
+-	prototype: {
+-		
+-		init: function() {
+-			this.labelContainer = jQuery(this.settings.errorLabelContainer);
+-			this.errorContext = this.labelContainer.length && this.labelContainer || jQuery(this.currentForm);
+-			this.containers = jQuery(this.settings.errorContainer).add( this.settings.errorLabelContainer );
+-			this.submitted = {};
+-			this.valueCache = {};
+-			this.pendingRequest = 0;
+-			this.pending = {};
+-			this.invalid = {};
+-			this.reset();
+-			
+-			var groups = (this.groups = {});
+-			jQuery.each(this.settings.groups, function(key, value) {
+-				jQuery.each(value.split(/\s/), function(index, name) {
+-					groups[name] = key;
+-				});
+-			});
+-			var rules = this.settings.rules;
+-			jQuery.each(rules, function(key, value) {
+-				rules[key] = jQuery.validator.normalizeRule(value);
+-			});
+-			
+-			function delegate(event) {
+-				var validator = jQuery.data(this[0].form, "validator");
+-				validator.settings["on" + event.type] && validator.settings["on" + event.type].call(validator, this[0] );
+-			}
+-			jQuery(this.currentForm)
+-				.delegate("focusin focusout keyup", ":text, :password, :file, select, textarea", delegate)
+-				.delegate("click", ":radio, :checkbox", delegate);
+-		},
+-
+-		// http://docs.jquery.com/Plugins/Validation/Validator/form
+-		form: function() {
+-			this.checkForm();
+-			jQuery.extend(this.submitted, this.errorMap);
+-			this.invalid = jQuery.extend({}, this.errorMap);
+-			if (!this.valid())
+-				jQuery(this.currentForm).triggerHandler("invalid-form.validate", [this]);
+-			this.showErrors();
+-			return this.valid();
+-		},
+-		
+-		checkForm: function() {
+-			this.prepareForm();
+-			for ( var i = 0, elements = this.elements(); elements[i]; i++ ) {
+-				this.check( elements[i] );
+-			}
+-			return this.valid(); 
+-		},
+-		
+-		// http://docs.jquery.com/Plugins/Validation/Validator/element
+-		element: function( element ) {
+-			element = this.clean( element );
+-			this.lastElement = element;
+-			this.prepareElement( element );
+-			var result = this.check( element );
+-			if ( result ) {
+-				delete this.invalid[element.name];
+-			} else {
+-				this.invalid[element.name] = true;
+-			}
+-			if ( !this.numberOfInvalids() ) {
+-				// Hide error containers on last error
+-				this.toHide.push( this.containers );
+-			}
+-			this.showErrors();
+-			return result;
+-		},
+-
+-		// http://docs.jquery.com/Plugins/Validation/Validator/showErrors
+-		showErrors: function(errors) {
+-			if(errors) {
+-				// add items to error list and map
+-				jQuery.extend( this.errorMap, errors );
+-				this.errorList = [];
+-				for ( var name in errors ) {
+-					this.errorList.push({
+-						message: errors[name],
+-						element: this.findByName(name)[0]
+-					});
+-				}
+-				// remove items from success list
+-				this.successList = jQuery.grep( this.successList, function(element) {
+-					return !(element.name in errors);
+-				});
+-			}
+-			this.settings.showErrors
+-				? this.settings.showErrors.call( this, this.errorMap, this.errorList )
+-				: this.defaultShowErrors();
+-		},
+-		
+-		// http://docs.jquery.com/Plugins/Validation/Validator/resetForm
+-		resetForm: function() {
+-			if ( jQuery.fn.resetForm )
+-				jQuery( this.currentForm ).resetForm();
+-			this.prepareForm();
+-			this.hideErrors();
+-			this.elements().removeClass( this.settings.errorClass );
+-		},
+-		
+-		numberOfInvalids: function() {
+-			return this.objectLength(this.invalid);
+-		},
+-		
+-		objectLength: function( obj ) {
+-			var count = 0;
+-			for ( var i in obj )
+-				count++;
+-			return count;
+-		},
+-		
+-		hideErrors: function() {
+-			this.addWrapper( this.toHide ).hide();
+-		},
+-		
+-		valid: function() {
+-			return this.size() == 0;
+-		},
+-		
+-		size: function() {
+-			return this.errorList.length;
+-		},
+-		
+-		focusInvalid: function() {
+-			if( this.settings.focusInvalid ) {
+-				try {
+-					jQuery(this.findLastActive() || this.errorList.length && this.errorList[0].element || []).filter(":visible").focus();
+-				} catch(e) { /* ignore IE throwing errors when focusing hidden elements */ }
+-			}
+-		},
+-		
+-		findLastActive: function() {
+-			var lastActive = this.lastActive;
+-			return lastActive && jQuery.grep(this.errorList, function(n) {
+-				return n.element.name == lastActive.name;
+-			}).length == 1 && lastActive;
+-		},
+-		
+-		elements: function() {
+-			var validator = this,
+-				rulesCache = {};
+-			
+-			// select all valid inputs inside the form (no submit or reset buttons)
+-			// workaround with jQuery([]).add until http://dev.jquery.com/ticket/2114 is solved
+-			return jQuery([]).add(this.currentForm.elements)
+-			.filter("input, select, textarea")
+-			.not(":submit, :reset, [disabled]")
+-			.not( this.settings.ignore )
+-			.filter(function() {
+-				!this.name && validator.settings.debug && window.console && console.error( "%o has no name assigned", this);
+-			
+-				// select only the first element for each name, and only those with rules specified
+-				if ( this.name in rulesCache || !validator.objectLength($(this).rules()) )
+-					return false;
+-				
+-				rulesCache[this.name] = true;
+-				return true;
+-			});
+-		},
+-		
+-		clean: function( selector ) {
+-			return jQuery( selector )[0];
+-		},
+-		
+-		errors: function() {
+-			return jQuery( this.settings.errorElement + "." + this.settings.errorClass, this.errorContext );
+-		},
+-		
+-		reset: function() {
+-			this.successList = [];
+-			this.errorList = [];
+-			this.errorMap = {};
+-			this.toShow = jQuery( [] );
+-			this.toHide = jQuery( [] );
+-			this.formSubmitted = false;
+-		},
+-		
+-		prepareForm: function() {
+-			this.reset();
+-			this.toHide = this.errors().push( this.containers );
+-		},
+-		
+-		prepareElement: function( element ) {
+-			this.reset();
+-			this.toHide = this.errorsFor(element);
+-		},
+-	
+-		check: function( element ) {
+-			element = this.clean( element );
+-			
+-			// if radio/checkbox, validate first element in group instead
+-			if (this.checkable(element)) {
+-				element = this.findByName( element.name )[0];
+-			}
+-			
+-			var rules = $(element).rules();
+-			var dependencyMismatch = false;
+-			for( method in rules ) {
+-				var rule = { method: method, parameters: rules[method] };
+-				try {
+-					var result = jQuery.validator.methods[method].call( this, jQuery.trim(element.value), element, rule.parameters );
+-					
+-					// if a method indicates that the field is optional and therefore valid,
+-					// don't mark it as valid when there are no other rules
+-					if ( result == "dependency-mismatch" ) {
+-						dependencyMismatch = true;
+-						continue;
+-					}
+-					dependencyMismatch = false;
+-					
+-					if ( result == "pending" ) {
+-						this.toHide = this.toHide.not( this.errorsFor(element) );
+-						return;
+-					}
+-					
+-					if( !result ) {
+-						this.formatAndAdd( element, rule );
+-						return false;
+-					}
+-				} catch(e) {
+-					this.settings.debug && window.console && console.log("exception occured when checking element " + element.id
+-						 + ", check the '" + rule.method + "' method");
+-					throw e;
+-				}
+-			}
+-			if (dependencyMismatch)
+-				return;
+-			if ( this.objectLength(rules) )
+-				this.successList.push(element);
+-			return true;
+-		},
+-		
+-		// return the custom message for the given element name and validation method
+-		customMessage: function( name, method ) {
+-			var m = this.settings.messages[name];
+-			return m && (m.constructor == String
+-				? m
+-				: m[method]);
+-		},
+-		
+-		// return the first defined argument, allowing empty strings
+-		findDefined: function() {
+-			for(var i = 0; i < arguments.length; i++) {
+-				if (arguments[i] !== undefined)
+-					return arguments[i];
+-			}
+-			return undefined;
+-		},
+-		
+-		defaultMessage: function( element, method) {
+-			return this.findDefined(
+-				this.customMessage( element.name, method ),
+-				// title is never undefined, so handle empty string as undefined
+-				element.title || undefined,
+-				jQuery.validator.messages[method],
+-				"<strong>Warning: No message defined for " + element.name + "</strong>"
+-			);
+-		},
+-		
+-		formatAndAdd: function( element, rule ) {
+-			var message = this.defaultMessage( element, rule.method );
+-			if ( typeof message == "function" ) 
+-				message = message.call(this, rule.parameters, element);
+-			this.errorList.push({
+-				message: message,
+-				element: element
+-			});
+-			this.errorMap[element.name] = message;
+-			this.submitted[element.name] = message;
+-		},
+-		
+-		addWrapper: function(toToggle) {
+-			if ( this.settings.wrapper )
+-				toToggle.push( toToggle.parents( this.settings.wrapper ) );
+-			return toToggle;
+-		},
+-		
+-		defaultShowErrors: function() {
+-			for ( var i = 0; this.errorList[i]; i++ ) {
+-				var error = this.errorList[i];
+-				this.settings.highlight && this.settings.highlight.call( this, error.element, this.settings.errorClass );
+-				this.showLabel( error.element, error.message );
+-			}
+-			if( this.errorList.length ) {
+-				this.toShow.push( this.containers );
+-			}
+-			if (this.settings.success) {
+-				for ( var i = 0; this.successList[i]; i++ ) {
+-					this.showLabel( this.successList[i] );
+-				}
+-			}
+-			if (this.settings.unhighlight) {
+-				for ( var i = 0, elements = this.validElements(); elements[i]; i++ ) {
+-					this.settings.unhighlight.call( this, elements[i], this.settings.errorClass );
+-				}
+-			}
+-			this.toHide = this.toHide.not( this.toShow );
+-			this.hideErrors();
+-			this.addWrapper( this.toShow ).show();
+-		},
+-		
+-		validElements: function() {
+-			return this.elements().not(this.invalidElements());
+-		},
+-		
+-		invalidElements: function() {
+-			return jQuery(this.errorList).map(function() {
+-				return this.element;
+-			});
+-		},
+-		
+-		showLabel: function(element, message) {
+-			var label = this.errorsFor( element );
+-			if ( label.length ) {
+-				// refresh error/success class
+-				label.removeClass().addClass( this.settings.errorClass );
+-			
+-				// check if we have a generated label, replace the message then
+-				label.attr("generated") && label.html(message);
+-			} else {
+-				// create label
+-				label = jQuery("<" + this.settings.errorElement + "/>")
+-					.attr({"for":  this.idOrName(element), generated: true})
+-					.addClass(this.settings.errorClass)
+-					.html(message || "");
+-				if ( this.settings.wrapper ) {
+-					// make sure the element is visible, even in IE
+-					// actually showing the wrapped element is handled elsewhere
+-					label = label.hide().show().wrap("<" + this.settings.wrapper + ">").parent();
+-				}
+-				if ( !this.labelContainer.append(label).length )
+-					this.settings.errorPlacement
+-						? this.settings.errorPlacement(label, jQuery(element) )
+-						: label.insertAfter(element);
+-			}
+-			if ( !message && this.settings.success ) {
+-				label.text("");
+-				typeof this.settings.success == "string"
+-					? label.addClass( this.settings.success )
+-					: this.settings.success( label );
+-			}
+-			this.toShow.push(label);
+-		},
+-		
+-		errorsFor: function(element) {
+-			return this.errors().filter("[@for='" + this.idOrName(element) + "']");
+-		},
+-		
+-		idOrName: function(element) {
+-			return this.groups[element.name] || (this.checkable(element) ? element.name : element.id || element.name);
+-		},
+-
+-		checkable: function( element ) {
+-			return /radio|checkbox/i.test(element.type);
+-		},
+-		
+-		findByName: function( name ) {
+-			// select by name and filter by form for performance over form.find("[name=...]")
+-			var form = this.currentForm;
+-			return jQuery(document.getElementsByName(name)).map(function(index, element) {
+-				return element.form == form && element.name == name && element  || null;
+-			});
+-		},
+-		
+-		getLength: function(value, element) {
+-			switch( element.nodeName.toLowerCase() ) {
+-			case 'select':
+-				return jQuery("option:selected", element).length;
+-			case 'input':
+-				if( this.checkable( element) )
+-					return this.findByName(element.name).filter(':checked').length;
+-			}
+-			return value.length;
+-		},
+-	
+-		depend: function(param, element) {
+-			return this.dependTypes[typeof param]
+-				? this.dependTypes[typeof param](param, element)
+-				: true;
+-		},
+-	
+-		dependTypes: {
+-			"boolean": function(param, element) {
+-				return param;
+-			},
+-			"string": function(param, element) {
+-				return !!jQuery(param, element.form).length;
+-			},
+-			"function": function(param, element) {
+-				return param(element);
+-			}
+-		},
+-		
+-		optional: function(element) {
+-			return !jQuery.validator.methods.required.call(this, jQuery.trim(element.value), element) && "dependency-mismatch";
+-		},
+-		
+-		startRequest: function(element) {
+-			if (!this.pending[element.name]) {
+-				this.pendingRequest++;
+-				this.pending[element.name] = true;
+-			}
+-		},
+-		
+-		stopRequest: function(element, valid) {
+-			this.pendingRequest--;
+-			// sometimes synchronization fails, make pendingRequest is never < 0
+-			if (this.pendingRequest < 0)
+-				this.pendingRequest = 0;
+-			delete this.pending[element.name];
+-			if ( valid && this.pendingRequest == 0 && this.formSubmitted && this.form() ) {
+-				jQuery(this.currentForm).submit();
+-			}
+-		},
+-		
+-		previousValue: function(element) {
+-			return jQuery.data(element, "previousValue") || jQuery.data(element, "previousValue", previous = {
+-				old: null,
+-				valid: true,
+-				message: this.defaultMessage( element, "remote" )
+-			});
+-		}
+-		
+-	},
+-	
+-	classRuleSettings: {
+-		required: {required: true},
+-		email: {email: true},
+-		url: {url: true},
+-		date: {date: true},
+-		dateISO: {dateISO: true},
+-		dateDE: {dateDE: true},
+-		number: {number: true},
+-		numberDE: {numberDE: true},
+-		digits: {digits: true},
+-		creditcard: {creditcard: true}
+-	},
+-	
+-	addClassRules: function(className, rules) {
+-		className.constructor == String ?
+-			this.classRuleSettings[className] = rules :
+-			jQuery.extend(this.classRuleSettings, className);
+-	},
+-	
+-	classRules: function(element) {
+-		var rules = {};
+-		var classes = jQuery(element).attr('class');
+-		classes && jQuery.each(classes.split(' '), function() {
+-			if (this in jQuery.validator.classRuleSettings) {
+-				jQuery.extend(rules, jQuery.validator.classRuleSettings[this]);
+-			}
+-		});
+-		return rules;
+-	},
+-	
+-	attributeRules: function(element) {
+-		var rules = {};
+-		var $element = jQuery(element);
+-		
+-		for (method in jQuery.validator.methods) {
+-			var value = $element.attr(method);
+-			// allow 0 but neither undefined nor empty string
+-			if (value !== undefined && value !== '') {
+-				rules[method] = value;
+-			}
+-		}
+-		
+-		// maxlength may be returned as -1, 2147483647 (IE) and 524288 (safari) for text inputs
+-		if (rules.maxlength && /-1|2147483647|524288/.test(rules.maxlength)) {
+-			delete rules.maxlength;
+-			// deprecated
+-			delete rules.maxLength;
+-		}
+-		
+-		return rules;
+-	},
+-	
+-	metadataRules: function(element) {
+-		if (!jQuery.metadata) return {};
+-		
+-		var meta = jQuery.data(element.form, 'validator').settings.meta;
+-		return meta ?
+-			jQuery(element).metadata()[meta] :
+-			jQuery(element).metadata();
+-	},
+-	
+-	staticRules: function(element) {
+-		var rules = {};
+-		var validator = jQuery.data(element.form, 'validator');
+-		if (validator.settings.rules) {
+-			rules = jQuery.validator.normalizeRule(validator.settings.rules[element.name]) || {};
+-		}
+-		return rules;
+-	},
+-	
+-	normalizeRules: function(rules, element) {
+-		// convert deprecated rules
+-		jQuery.each({
+-			minLength: 'minlength',
+-			maxLength: 'maxlength',
+-			rangeLength: 'rangelength',
+-			minValue: 'min',
+-			maxValue: 'max',
+-			rangeValue: 'range'
+-		}, function(dep, curr) {
+-			if (rules[dep]) {
+-				rules[curr] = rules[dep];
+-				delete rules[dep];
+-			}
+-		});
+-		
+-		// handle dependency check
+-		$.each(rules, function(prop, val) {
+-			// ignore rule when param is explicitly false, eg. required:false
+-			if (val === false) {
+-				delete rules[prop];
+-				return;
+-			}
+-			if (val.param || val.depends) {
+-				var keepRule = true;
+-				switch (typeof val.depends) {
+-					case "string":
+-						keepRule = !!jQuery(val.depends, element.form).length;
+-						break;
+-					case "function":
+-						keepRule = val.depends.call(element, element);
+-						break;
+-				}
+-				if (keepRule) {
+-					rules[prop] = val.param !== undefined ? val.param : true;
+-				} else {
+-					delete rules[prop];
+-				}
+-			}
+-		});
+-		
+-		// evaluate parameters
+-		jQuery.each(rules, function(rule, parameter) {
+-			rules[rule] = jQuery.isFunction(parameter) ? parameter(element) : parameter;
+-		});
+-		
+-		// clean number parameters
+-		jQuery.each(['minlength', 'maxlength', 'min', 'max'], function() {
+-			if (rules[this]) {
+-				rules[this] = Number(rules[this]);
+-			}
+-		});
+-		jQuery.each(['rangelength', 'range'], function() {
+-			if (rules[this]) {
+-				rules[this] = [Number(rules[this][0]), Number(rules[this][1])];
+-			}
+-		});
+-		
+-		if (jQuery.validator.autoCreateRanges) {
+-			// auto-create ranges
+-			if (rules.min && rules.max) {
+-				rules.range = [rules.min, rules.max];
+-				delete rules.min;
+-				delete rules.max;
+-			}
+-			if (rules.minlength && rules.maxlength) {
+-				rules.rangelength = [rules.minlength, rules.maxlength];
+-				delete rules.minlength;
+-				delete rules.maxlength;
+-			}
+-		}
+-		
+-		return rules;
+-	},
+-	
+-	// Converts a simple string to a {string: true} rule, e.g., "required" to {required:true}
+-	normalizeRule: function(data) {
+-		if( typeof data == "string" ) {
+-			var transformed = {};
+-			jQuery.each(data.split(/\s/), function() {
+-				transformed[this] = true;
+-			});
+-			data = transformed;
+-		}
+-		return data;
+-	},
+-	
+-	// http://docs.jquery.com/Plugins/Validation/Validator/addMethod
+-	addMethod: function(name, method, message) {
+-		jQuery.validator.methods[name] = method;
+-		jQuery.validator.messages[name] = message;
+-		if (method.length < 3) {
+-			jQuery.validator.addClassRules(name, jQuery.validator.normalizeRule(name));
+-		}
+-	},
+-
+-	methods: {
+-
+-		// http://docs.jquery.com/Plugins/Validation/Methods/required
+-		required: function(value, element, param) {
+-			// check if dependency is met
+-			if ( !this.depend(param, element) )
+-				return "dependency-mismatch";
+-			switch( element.nodeName.toLowerCase() ) {
+-			case 'select':
+-				var options = jQuery("option:selected", element);
+-				return options.length > 0 && ( element.type == "select-multiple" || (jQuery.browser.msie && !(options[0].attributes['value'].specified) ? options[0].text : options[0].value).length > 0);
+-			case 'input':
+-				if ( this.checkable(element) )
+-					return this.getLength(value, element) > 0;
+-			default:
+-				return value.length > 0;
+-			}
+-		},
+-		
+-		// http://docs.jquery.com/Plugins/Validation/Methods/remote
+-		remote: function(value, element, param) {
+-			if ( this.optional(element) )
+-				return "dependency-mismatch";
+-			
+-			var previous = this.previousValue(element);
+-			
+-			if (!this.settings.messages[element.name] )
+-				this.settings.messages[element.name] = {};
+-			this.settings.messages[element.name].remote = typeof previous.message == "function" ? previous.message(value) : previous.message;
+-			
+-			if ( previous.old !== value ) {
+-				previous.old = value;
+-				var validator = this;
+-				this.startRequest(element);
+-				var data = {};
+-				data[element.name] = value;
+-				jQuery.ajax({
+-					url: param,
+-					mode: "abort",
+-					port: "validate" + element.name,
+-					dataType: "json",
+-					data: data,
+-					success: function(response) {
+-						if ( !response ) {
+-							var errors = {};
+-							errors[element.name] =  response || validator.defaultMessage( element, "remote" );
+-							validator.showErrors(errors);
+-						} else {
+-							var submitted = validator.formSubmitted;
+-							validator.prepareElement(element);
+-							validator.formSubmitted = submitted;
+-							validator.successList.push(element);
+-							validator.showErrors();
+-						}
+-						previous.valid = response;
+-						validator.stopRequest(element, response);
+-					}
+-				});
+-				return "pending";
+-			} else if( this.pending[element.name] ) {
+-				return "pending";
+-			}
+-			return previous.valid;
+-		},
+-
+-		// http://docs.jquery.com/Plugins/Validation/Methods/minlength
+-		minlength: function(value, element, param) {
+-			return this.optional(element) || this.getLength(value, element) >= param;
+-		},
+-		
+-		// deprecated, to be removed in 1.3
+-		minLength: function(value, element, param) {
+-			return jQuery.validator.methods.minlength.apply(this, arguments);
+-		},
+-	
+-		// http://docs.jquery.com/Plugins/Validation/Methods/maxlength
+-		maxlength: function(value, element, param) {
+-			return this.optional(element) || this.getLength(value, element) <= param;
+-		},
+-		
+-		// deprecated, to be removed in 1.3
+-		maxLength: function(value, element, param) {
+-			return jQuery.validator.methods.maxlength.apply(this, arguments);
+-		},
+-		
+-		// http://docs.jquery.com/Plugins/Validation/Methods/rangelength
+-		rangelength: function(value, element, param) {
+-			var length = this.getLength(value, element);
+-			return this.optional(element) || ( length >= param[0] && length <= param[1] );
+-		},
+-		
+-		// deprecated, to be removed in 1.3
+-		rangeLength: function(value, element, param) {
+-			return jQuery.validator.methods.rangelength.apply(this, arguments);
+-		},
+-	
+-		// http://docs.jquery.com/Plugins/Validation/Methods/min
+-		min: function( value, element, param ) {
+-			return this.optional(element) || value >= param;
+-		},
+-		
+-		// deprecated, to be removed in 1.3
+-		minValue: function() {
+-			return jQuery.validator.methods.min.apply(this, arguments);
+-		},
+-		
+-		// http://docs.jquery.com/Plugins/Validation/Methods/max
+-		max: function( value, element, param ) {
+-			return this.optional(element) || value <= param;
+-		},
+-		
+-		// deprecated, to be removed in 1.3
+-		maxValue: function() {
+-			return jQuery.validator.methods.max.apply(this, arguments);
+-		},
+-		
+-		// http://docs.jquery.com/Plugins/Validation/Methods/range
+-		range: function( value, element, param ) {
+-			return this.optional(element) || ( value >= param[0] && value <= param[1] );
+-		},
+-		
+-		// deprecated, to be removed in 1.3
+-		rangeValue: function() {
+-			return jQuery.validator.methods.range.apply(this, arguments);
+-		},
+-		
+-		// http://docs.jquery.com/Plugins/Validation/Methods/email
+-		email: function(value, element) {
+-			// contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
+-			return this.optional(element) || /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i.test(element.value);
+-		},
+-	
+-		// http://docs.jquery.com/Plugins/Validation/Methods/url
+-		url: function(value, element) {
+-			// contributed by Scott Gonzalez: http://projects.scottsplayground.com/iri/
+-			return this.optional(element) || /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(element.value);
+-		},
+-        
+-		// http://docs.jquery.com/Plugins/Validation/Methods/date
+-		date: function(value, element) {
+-			return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+-		},
+-	
+-		// http://docs.jquery.com/Plugins/Validation/Methods/dateISO
+-		dateISO: function(value, element) {
+-			return this.optional(element) || /^\d{4}[\/-]\d{1,2}[\/-]\d{1,2}$/.test(value);
+-		},
+-	
+-		// http://docs.jquery.com/Plugins/Validation/Methods/dateDE
+-		dateDE: function(value, element) {
+-			return this.optional(element) || /^\d\d?\.\d\d?\.\d\d\d?\d?$/.test(value);
+-		},
+-	
+-		// http://docs.jquery.com/Plugins/Validation/Methods/number
+-		number: function(value, element) {
+-			return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?$/.test(value);
+-		},
+-	
+-		// http://docs.jquery.com/Plugins/Validation/Methods/numberDE
+-		numberDE: function(value, element) {
+-			return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:\.\d{3})+)(?:,\d+)?$/.test(value);
+-		},
+-		
+-		// http://docs.jquery.com/Plugins/Validation/Methods/digits
+-		digits: function(value, element) {
+-			return this.optional(element) || /^\d+$/.test(value);
+-		},
+-		
+-		// http://docs.jquery.com/Plugins/Validation/Methods/creditcard
+-		// based on http://en.wikipedia.org/wiki/Luhn
+-		creditcard: function(value, element) {
+-			if ( this.optional(element) )
+-				return "dependency-mismatch";
+-			// accept only digits and dashes
+-			if (/[^0-9-]+/.test(value))
+-				return false;
+-			var nCheck = 0,
+-				nDigit = 0,
+-				bEven = false;
+-
+-			value = value.replace(/\D/g, "");
+-
+-			for (n = value.length - 1; n >= 0; n--) {
+-				var cDigit = value.charAt(n);
+-				var nDigit = parseInt(cDigit, 10);
+-				if (bEven) {
+-					if ((nDigit *= 2) > 9)
+-						nDigit -= 9;
+-				}
+-				nCheck += nDigit;
+-				bEven = !bEven;
+-			}
+-
+-			return (nCheck % 10) == 0;
+-		},
+-		
+-		// http://docs.jquery.com/Plugins/Validation/Methods/accept
+-		accept: function(value, element, param) {
+-			param = typeof param == "string" ? param : "png|jpe?g|gif";
+-			return this.optional(element) || value.match(new RegExp(".(" + param + ")$", "i")); 
+-		},
+-		
+-		// http://docs.jquery.com/Plugins/Validation/Methods/equalTo
+-		equalTo: function(value, element, param) {
+-			return value == jQuery(param).val();
+-		}
+-		
+-	}
+-	
+-});
+-
+-// ajax mode: abort
+-// usage: $.ajax({ mode: "abort"[, port: "uniqueport"]});
+-// if mode:"abort" is used, the previous request on that port (port can be undefined) is aborted via XMLHttpRequest.abort() 
+-;(function($) {
+-	var ajax = $.ajax;
+-	var pendingRequests = {};
+-	$.ajax = function(settings) {
+-		// create settings for compatibility with ajaxSetup
+-		settings = jQuery.extend(settings, jQuery.extend({}, jQuery.ajaxSettings, settings));
+-		var port = settings.port;
+-		if (settings.mode == "abort") {
+-			if ( pendingRequests[port] ) {
+-				pendingRequests[port].abort();
+-			}
+-			return (pendingRequests[port] = ajax.apply(this, arguments));
+-		}
+-		return ajax.apply(this, arguments);
+-	};
+-})(jQuery);
+-
+-// provides cross-browser focusin and focusout events
+-// IE has native support, in other browsers, use event caputuring (neither bubbles)
+-
+-// provides delegate(type: String, delegate: Selector, handler: Callback) plugin for easier event delegation
+-// handler is only called when $(event.target).is(delegate), in the scope of the jQuery-object for event.target 
+-
+-// provides triggerEvent(type: String, target: Element) to trigger delegated events
+-;(function($) {
+-	$.each({
+-		focus: 'focusin',
+-		blur: 'focusout'	
+-	}, function( original, fix ){
+-		$.event.special[fix] = {
+-			setup:function() {
+-				if ( $.browser.msie ) return false;
+-				this.addEventListener( original, $.event.special[fix].handler, true );
+-			},
+-			teardown:function() {
+-				if ( $.browser.msie ) return false;
+-				this.removeEventListener( original,
+-				$.event.special[fix].handler, true );
+-			},
+-			handler: function(e) {
+-				arguments[0] = $.event.fix(e);
+-				arguments[0].type = fix;
+-				return $.event.handle.apply(this, arguments);
+-			}
+-		};
+-	});
+-	$.extend($.fn, {
+-		delegate: function(type, delegate, handler) {
+-			return this.bind(type, function(event) {
+-				var target = $(event.target);
+-				if (target.is(delegate)) {
+-					return handler.apply(target, arguments);
+-				}
+-			});
+-		},
+-		triggerEvent: function(type, target) {
+-			return this.triggerHandler(type, [jQuery.event.fix({ type: type, target: target })]);
+-		}
+-	})
+-})(jQuery);
++/*
++ * jQuery validation plug-in 1.3
++ *
++ * http://bassistance.de/jquery-plugins/jquery-plugin-validation/
++ * http://docs.jquery.com/Plugins/Validation
++ *
++ * Copyright (c) 2006 - 2008 Jörn Zaefferer
++ *
++ * $Id$
++ *
++ * Dual licensed under the MIT and GPL licenses:
++ *   http://www.opensource.org/licenses/mit-license.php
++ *   http://www.gnu.org/licenses/gpl.html
++ */
++
++jQuery.extend(jQuery.fn, {
++	// http://docs.jquery.com/Plugins/Validation/validate
++	validate: function( options ) {
++		
++		// if nothing is selected, return nothing; can't chain anyway
++		if (!this.length) {
++			options && options.debug && window.console && console.warn( "nothing selected, can't validate, returning nothing" );
++			return;
++		}
++		
++		// check if a validator for this form was already created
++		var validator = jQuery.data(this[0], 'validator');
++		if ( validator ) {
++			return validator;
++		}
++		
++		validator = new jQuery.validator( options, this[0] );
++		jQuery.data(this[0], 'validator', validator); 
++		
++		if ( validator.settings.onsubmit ) {
++		
++			// allow suppresing validation by adding a cancel class to the submit button
++			this.find(".cancel:submit").click(function() {
++				validator.cancelSubmit = true;
++			});
++		
++			// validate the form on submit
++			this.submit( function( event ) {
++				if ( validator.settings.debug )
++					// prevent form submit to be able to see console output
++					event.preventDefault();
++					
++				function handle() {
++					if ( validator.settings.submitHandler ) {
++						validator.settings.submitHandler.call( validator, validator.currentForm );
++						return false;
++					}
++					return true;
++				}
++					
++				// prevent submit for invalid forms or custom submit handlers
++				if ( validator.cancelSubmit ) {
++					validator.cancelSubmit = false;
++					return handle();
++				}
++				if ( validator.form() ) {
++					if ( validator.pendingRequest ) {
++						validator.formSubmitted = true;
++						return false;
++					}
++					return handle();
++				} else {
++					validator.focusInvalid();
++					return false;
++				}
++			});
++		}
++		
++		return validator;
++	},
++	// http://docs.jquery.com/Plugins/Validation/valid
++	valid: function() {
++        if ( jQuery(this[0]).is('form')) {
++            return this.validate().form();
++        } else {
++            var valid = false;
++            var validator = jQuery(this[0].form).validate();
++            this.each(function() {
++				valid |= validator.element(this);
++            });
++            return valid;
++        }
++    },
++	// attributes: space seperated list of attributes to retrieve and remove
++	removeAttrs: function(attributes) {
++		var result = {},
++			$element = this;
++		$.each(attributes.split(/\s/), function() {
++			result[this] = $element.attr(this);
++			$element.removeAttr(this);
++		});
++		return result;
++	},
++	// http://docs.jquery.com/Plugins/Validation/rules
++	rules: function(command, argument) {
++		var element = this[0];
++		
++		if (command) {
++			var staticRules = jQuery.data(element.form, 'validator').settings.rules;
++			var existingRules = jQuery.validator.staticRules(element);
++			switch(command) {
++			case "add":
++				$.extend(existingRules, jQuery.validator.normalizeRule(argument));
++				staticRules[element.name] = existingRules;
++				break;
++			case "remove":
++				if (!argument) {
++					delete staticRules[element.name];
++					return existingRules;
++				}
++				var filtered = {};
++				$.each(argument.split(/\s/), function(index, method) {
++					filtered[method] = existingRules[method];
++					delete existingRules[method];
++				});
++				return filtered;
++			}
++		}
++		
++		var ruleList = jQuery.extend({},
++			jQuery.validator.metadataRules(element),
++			jQuery.validator.classRules(element),
++			jQuery.validator.attributeRules(element),
++			jQuery.validator.staticRules(element)
++			);
++		var data = jQuery.validator.normalizeRules(ruleList, element);
++		
++		
++		// make sure required is at front
++		if (data.required) {
++			var param = data.required;
++			delete data.required;
++			data = $.extend({required: param}, data);
++		}
++		
++		return data;
++	},
++	// destructive add
++	push: function( t ) {
++		return this.setArray( this.add(t).get() );
++	}
++});
++
++// Custom selectors
++jQuery.extend(jQuery.expr[":"], {
++	// http://docs.jquery.com/Plugins/Validation/blank
++	blank: function(a) {return !jQuery.trim(a.value);},
++	// http://docs.jquery.com/Plugins/Validation/filled
++	filled: function(a) {return !!jQuery.trim(a.value);},
++	// http://docs.jquery.com/Plugins/Validation/unchecked
++	unchecked: function(a) {return !a.checked;}
++});
++
++
++jQuery.format = function(source, params) {
++	if ( arguments.length == 1 ) 
++		return function() {
++			var args = jQuery.makeArray(arguments);
++			args.unshift(source);
++			return jQuery.format.apply( this, args );
++		};
++	if ( arguments.length > 2 && params.constructor != Array  ) {
++		params = jQuery.makeArray(arguments).slice(1);
++	}
++	if ( params.constructor != Array ) {
++		params = [ params ];
++	}
++	jQuery.each(params, function(i, n) {
++		source = source.replace(new RegExp("\\{" + i + "\\}", "g"), n);
++	});
++	return source;
++};
++
++// constructor for validator
++jQuery.validator = function( options, form ) {
++	this.settings = jQuery.extend( {}, jQuery.validator.defaults, options );
++	this.currentForm = form;
++	this.init();
++};
++
++jQuery.extend(jQuery.validator, {
++
++	defaults: {
++		messages: {},
++		groups: {},
++		rules: {},
++		errorClass: "error",
++		errorElement: "label",
++		focusInvalid: true,
++		errorContainer: jQuery( [] ),
++		errorLabelContainer: jQuery( [] ),
++		onsubmit: true,
++		ignore: [],
++		onfocusin: function(element) {
++			this.lastActive = element;
++				
++			// hide error label and remove error class on focus if enabled
++			if ( this.settings.focusCleanup && !this.blockFocusCleanup ) {
++				this.settings.unhighlight && this.settings.unhighlight.call( this, element, this.settings.errorClass );
++				this.errorsFor(element).hide();
++			}
++		},
++		onfocusout: function(element) {
++			if ( !this.checkable(element) && (element.name in this.submitted || !this.optional(element)) ) {
++				this.element(element);
++			}
++		},
++		onkeyup: function(element) {
++			if ( element.name in this.submitted || element == this.lastElement ) {
++				this.element(element);
++			}
++		},
++		onclick: function(element) {
++			if ( element.name in this.submitted )
++				this.element(element);
++		},
++		highlight: function( element, errorClass ) {
++			jQuery( element ).addClass( errorClass );
++		},
++		unhighlight: function( element, errorClass ) {
++			jQuery( element ).removeClass( errorClass );
++		}
++	},
++
++	// http://docs.jquery.com/Plugins/Validation/Validator/setDefaults
++	setDefaults: function(settings) {
++		jQuery.extend( jQuery.validator.defaults, settings );
++	},
++
++	messages: {
++		required: "This field is required.",
++		remote: "Please fix this field.",
++		email: "Please enter a valid email address.",
++		url: "Please enter a valid URL.",
++		date: "Please enter a valid date.",
++		dateISO: "Please enter a valid date (ISO).",
++		dateDE: "Bitte geben Sie ein gültiges Datum ein.",
++		number: "Please enter a valid number.",
++		numberDE: "Bitte geben Sie eine Nummer ein.",
++		digits: "Please enter only digits",
++		creditcard: "Please enter a valid credit card.",
++		equalTo: "Please enter the same value again.",
++		accept: "Please enter a value with a valid extension.",
++		maxlength: jQuery.format("Please enter no more than {0} characters."),
++		maxLength: jQuery.format("Please enter no more than {0} characters."),
++		minlength: jQuery.format("Please enter at least {0} characters."),
++		minLength: jQuery.format("Please enter at least {0} characters."),
++		rangelength: jQuery.format("Please enter a value between {0} and {1} characters long."),
++		rangeLength: jQuery.format("Please enter a value between {0} and {1} characters long."),
++		rangeValue: jQuery.format("Please enter a value between {0} and {1}."),
++		range: jQuery.format("Please enter a value between {0} and {1}."),
++		maxValue: jQuery.format("Please enter a value less than or equal to {0}."),
++		max: jQuery.format("Please enter a value less than or equal to {0}."),
++		minValue: jQuery.format("Please enter a value greater than or equal to {0}."),
++		min: jQuery.format("Please enter a value greater than or equal to {0}.")
++	},
++	
++	autoCreateRanges: false,
++	
++	prototype: {
++		
++		init: function() {
++			this.labelContainer = jQuery(this.settings.errorLabelContainer);
++			this.errorContext = this.labelContainer.length && this.labelContainer || jQuery(this.currentForm);
++			this.containers = jQuery(this.settings.errorContainer).add( this.settings.errorLabelContainer );
++			this.submitted = {};
++			this.valueCache = {};
++			this.pendingRequest = 0;
++			this.pending = {};
++			this.invalid = {};
++			this.reset();
++			
++			var groups = (this.groups = {});
++			jQuery.each(this.settings.groups, function(key, value) {
++				jQuery.each(value.split(/\s/), function(index, name) {
++					groups[name] = key;
++				});
++			});
++			var rules = this.settings.rules;
++			jQuery.each(rules, function(key, value) {
++				rules[key] = jQuery.validator.normalizeRule(value);
++			});
++			
++			function delegate(event) {
++				var validator = jQuery.data(this[0].form, "validator");
++				validator.settings["on" + event.type] && validator.settings["on" + event.type].call(validator, this[0] );
++			}
++			jQuery(this.currentForm)
++				.delegate("focusin focusout keyup", ":text, :password, :file, select, textarea", delegate)
++				.delegate("click", ":radio, :checkbox", delegate);
++		},
++
++		// http://docs.jquery.com/Plugins/Validation/Validator/form
++		form: function() {
++			this.checkForm();
++			jQuery.extend(this.submitted, this.errorMap);
++			this.invalid = jQuery.extend({}, this.errorMap);
++			if (!this.valid())
++				jQuery(this.currentForm).triggerHandler("invalid-form.validate", [this]);
++			this.showErrors();
++			return this.valid();
++		},
++		
++		checkForm: function() {
++			this.prepareForm();
++			for ( var i = 0, elements = this.elements(); elements[i]; i++ ) {
++				this.check( elements[i] );
++			}
++			return this.valid(); 
++		},
++		
++		// http://docs.jquery.com/Plugins/Validation/Validator/element
++		element: function( element ) {
++			element = this.clean( element );
++			this.lastElement = element;
++			this.prepareElement( element );
++			var result = this.check( element );
++			if ( result ) {
++				delete this.invalid[element.name];
++			} else {
++				this.invalid[element.name] = true;
++			}
++			if ( !this.numberOfInvalids() ) {
++				// Hide error containers on last error
++				this.toHide.push( this.containers );
++			}
++			this.showErrors();
++			return result;
++		},
++
++		// http://docs.jquery.com/Plugins/Validation/Validator/showErrors
++		showErrors: function(errors) {
++			if(errors) {
++				// add items to error list and map
++				jQuery.extend( this.errorMap, errors );
++				this.errorList = [];
++				for ( var name in errors ) {
++					this.errorList.push({
++						message: errors[name],
++						element: this.findByName(name)[0]
++					});
++				}
++				// remove items from success list
++				this.successList = jQuery.grep( this.successList, function(element) {
++					return !(element.name in errors);
++				});
++			}
++			this.settings.showErrors
++				? this.settings.showErrors.call( this, this.errorMap, this.errorList )
++				: this.defaultShowErrors();
++		},
++		
++		// http://docs.jquery.com/Plugins/Validation/Validator/resetForm
++		resetForm: function() {
++			if ( jQuery.fn.resetForm )
++				jQuery( this.currentForm ).resetForm();
++			this.prepareForm();
++			this.hideErrors();
++			this.elements().removeClass( this.settings.errorClass );
++		},
++		
++		numberOfInvalids: function() {
++			return this.objectLength(this.invalid);
++		},
++		
++		objectLength: function( obj ) {
++			var count = 0;
++			for ( var i in obj )
++				count++;
++			return count;
++		},
++		
++		hideErrors: function() {
++			this.addWrapper( this.toHide ).hide();
++		},
++		
++		valid: function() {
++			return this.size() == 0;
++		},
++		
++		size: function() {
++			return this.errorList.length;
++		},
++		
++		focusInvalid: function() {
++			if( this.settings.focusInvalid ) {
++				try {
++					jQuery(this.findLastActive() || this.errorList.length && this.errorList[0].element || []).filter(":visible").focus();
++				} catch(e) { /* ignore IE throwing errors when focusing hidden elements */ }
++			}
++		},
++		
++		findLastActive: function() {
++			var lastActive = this.lastActive;
++			return lastActive && jQuery.grep(this.errorList, function(n) {
++				return n.element.name == lastActive.name;
++			}).length == 1 && lastActive;
++		},
++		
++		elements: function() {
++			var validator = this,
++				rulesCache = {};
++			
++			// select all valid inputs inside the form (no submit or reset buttons)
++			// workaround with jQuery([]).add until http://dev.jquery.com/ticket/2114 is solved
++			return jQuery([]).add(this.currentForm.elements)
++			.filter("input, select, textarea")
++			.not(":submit, :reset, [disabled]")
++			.not( this.settings.ignore )
++			.filter(function() {
++				!this.name && validator.settings.debug && window.console && console.error( "%o has no name assigned", this);
++			
++				// select only the first element for each name, and only those with rules specified
++				if ( this.name in rulesCache || !validator.objectLength($(this).rules()) )
++					return false;
++				
++				rulesCache[this.name] = true;
++				return true;
++			});
++		},
++		
++		clean: function( selector ) {
++			return jQuery( selector )[0];
++		},
++		
++		errors: function() {
++			return jQuery( this.settings.errorElement + "." + this.settings.errorClass, this.errorContext );
++		},
++		
++		reset: function() {
++			this.successList = [];
++			this.errorList = [];
++			this.errorMap = {};
++			this.toShow = jQuery( [] );
++			this.toHide = jQuery( [] );
++			this.formSubmitted = false;
++		},
++		
++		prepareForm: function() {
++			this.reset();
++			this.toHide = this.errors().push( this.containers );
++		},
++		
++		prepareElement: function( element ) {
++			this.reset();
++			this.toHide = this.errorsFor(element);
++		},
++	
++		check: function( element ) {
++			element = this.clean( element );
++			
++			// if radio/checkbox, validate first element in group instead
++			if (this.checkable(element)) {
++				element = this.findByName( element.name )[0];
++			}
++			
++			var rules = $(element).rules();
++			var dependencyMismatch = false;
++			for( method in rules ) {
++				var rule = { method: method, parameters: rules[method] };
++				try {
++					var result = jQuery.validator.methods[method].call( this, jQuery.trim(element.value), element, rule.parameters );
++					
++					// if a method indicates that the field is optional and therefore valid,
++					// don't mark it as valid when there are no other rules
++					if ( result == "dependency-mismatch" ) {
++						dependencyMismatch = true;
++						continue;
++					}
++					dependencyMismatch = false;
++					
++					if ( result == "pending" ) {
++						this.toHide = this.toHide.not( this.errorsFor(element) );
++						return;
++					}
++					
++					if( !result ) {
++						this.formatAndAdd( element, rule );
++						return false;
++					}
++				} catch(e) {
++					this.settings.debug && window.console && console.log("exception occured when checking element " + element.id
++						 + ", check the '" + rule.method + "' method");
++					throw e;
++				}
++			}
++			if (dependencyMismatch)
++				return;
++			if ( this.objectLength(rules) )
++				this.successList.push(element);
++			return true;
++		},
++		
++		// return the custom message for the given element and validation method speicifed in the element's "messages" metadata 
++		customMetaMessage: function(element, method) {
++			if (!jQuery.metadata) return undefined;
++			
++			var metaKey = jQuery.data(element.form, 'validator').settings.meta;
++			var meta = metaKey ? 
++				jQuery(element).metadata()[metaKey] : 
++				jQuery(element).metadata();
++			
++			return meta.messages ? 
++				meta.messages[method] : 
++				undefined;
++		},
++				
++		// return the custom message for the given element name and validation method
++		customMessage: function( name, method ) {
++			var m = this.settings.messages[name];
++			return m && (m.constructor == String
++				? m
++				: m[method]);
++		},
++		
++		// return the first defined argument, allowing empty strings
++		findDefined: function() {
++			for(var i = 0; i < arguments.length; i++) {
++				if (arguments[i] !== undefined)
++					return arguments[i];
++			}
++			return undefined;
++		},
++		
++		defaultMessage: function( element, method) {
++			return this.findDefined(
++				this.customMessage( element.name, method ),
++				this.customMetaMessage( element, method ),
++				// title is never undefined, so handle empty string as undefined
++				element.title || undefined,
++				jQuery.validator.messages[method],
++				"<strong>Warning: No message defined for " + element.name + "</strong>"
++			);
++		},
++		
++		formatAndAdd: function( element, rule ) {
++			var message = this.defaultMessage( element, rule.method );
++			if ( typeof message == "function" ) 
++				message = message.call(this, rule.parameters, element);
++			this.errorList.push({
++				message: message,
++				element: element
++			});
++			this.errorMap[element.name] = message;
++			this.submitted[element.name] = message;
++		},
++		
++		addWrapper: function(toToggle) {
++			if ( this.settings.wrapper )
++				toToggle.push( toToggle.parents( this.settings.wrapper ) );
++			return toToggle;
++		},
++		
++		defaultShowErrors: function() {
++			for ( var i = 0; this.errorList[i]; i++ ) {
++				var error = this.errorList[i];
++				this.settings.highlight && this.settings.highlight.call( this, error.element, this.settings.errorClass );
++				this.showLabel( error.element, error.message );
++			}
++			if( this.errorList.length ) {
++				this.toShow.push( this.containers );
++			}
++			if (this.settings.success) {
++				for ( var i = 0; this.successList[i]; i++ ) {
++					this.showLabel( this.successList[i] );
++				}
++			}
++			if (this.settings.unhighlight) {
++				for ( var i = 0, elements = this.validElements(); elements[i]; i++ ) {
++					this.settings.unhighlight.call( this, elements[i], this.settings.errorClass );
++				}
++			}
++			this.toHide = this.toHide.not( this.toShow );
++			this.hideErrors();
++			this.addWrapper( this.toShow ).show();
++		},
++		
++		validElements: function() {
++			return this.elements().not(this.invalidElements());
++		},
++		
++		invalidElements: function() {
++			return jQuery(this.errorList).map(function() {
++				return this.element;
++			});
++		},
++		
++		showLabel: function(element, message) {
++			var label = this.errorsFor( element );
++			if ( label.length ) {
++				// refresh error/success class
++				label.removeClass().addClass( this.settings.errorClass );
++			
++				// check if we have a generated label, replace the message then
++				label.attr("generated") && label.html(message);
++			} else {
++				// create label
++				label = jQuery("<" + this.settings.errorElement + "/>")
++					.attr({"for":  this.idOrName(element), generated: true})
++					.addClass(this.settings.errorClass)
++					.html(message || "");
++				if ( this.settings.wrapper ) {
++					// make sure the element is visible, even in IE
++					// actually showing the wrapped element is handled elsewhere
++					label = label.hide().show().wrap("<" + this.settings.wrapper + ">").parent();
++				}
++				if ( !this.labelContainer.append(label).length )
++					this.settings.errorPlacement
++						? this.settings.errorPlacement(label, jQuery(element) )
++						: label.insertAfter(element);
++			}
++			if ( !message && this.settings.success ) {
++				label.text("");
++				typeof this.settings.success == "string"
++					? label.addClass( this.settings.success )
++					: this.settings.success( label );
++			}
++			this.toShow.push(label);
++		},
++		
++		errorsFor: function(element) {
++			return this.errors().filter("[@for='" + this.idOrName(element) + "']");
++		},
++		
++		idOrName: function(element) {
++			return this.groups[element.name] || (this.checkable(element) ? element.name : element.id || element.name);
++		},
++
++		checkable: function( element ) {
++			return /radio|checkbox/i.test(element.type);
++		},
++		
++		findByName: function( name ) {
++			// select by name and filter by form for performance over form.find("[name=...]")
++			var form = this.currentForm;
++			return jQuery(document.getElementsByName(name)).map(function(index, element) {
++				return element.form == form && element.name == name && element  || null;
++			});
++		},
++		
++		getLength: function(value, element) {
++			switch( element.nodeName.toLowerCase() ) {
++			case 'select':
++				return jQuery("option:selected", element).length;
++			case 'input':
++				if( this.checkable( element) )
++					return this.findByName(element.name).filter(':checked').length;
++			}
++			return value.length;
++		},
++	
++		depend: function(param, element) {
++			return this.dependTypes[typeof param]
++				? this.dependTypes[typeof param](param, element)
++				: true;
++		},
++	
++		dependTypes: {
++			"boolean": function(param, element) {
++				return param;
++			},
++			"string": function(param, element) {
++				return !!jQuery(param, element.form).length;
++			},
++			"function": function(param, element) {
++				return param(element);
++			}
++		},
++		
++		optional: function(element) {
++			return !jQuery.validator.methods.required.call(this, jQuery.trim(element.value), element) && "dependency-mismatch";
++		},
++		
++		startRequest: function(element) {
++			if (!this.pending[element.name]) {
++				this.pendingRequest++;
++				this.pending[element.name] = true;
++			}
++		},
++		
++		stopRequest: function(element, valid) {
++			this.pendingRequest--;
++			// sometimes synchronization fails, make pendingRequest is never < 0
++			if (this.pendingRequest < 0)
++				this.pendingRequest = 0;
++			delete this.pending[element.name];
++			if ( valid && this.pendingRequest == 0 && this.formSubmitted && this.form() ) {
++				jQuery(this.currentForm).submit();
++			}
++		},
++		
++		previousValue: function(element) {
++			return jQuery.data(element, "previousValue") || jQuery.data(element, "previousValue", previous = {
++				old: null,
++				valid: true,
++				message: this.defaultMessage( element, "remote" )
++			});
++		}
++		
++	},
++	
++	classRuleSettings: {
++		required: {required: true},
++		email: {email: true},
++		url: {url: true},
++		date: {date: true},
++		dateISO: {dateISO: true},
++		dateDE: {dateDE: true},
++		number: {number: true},
++		numberDE: {numberDE: true},
++		digits: {digits: true},
++		creditcard: {creditcard: true}
++	},
++	
++	addClassRules: function(className, rules) {
++		className.constructor == String ?
++			this.classRuleSettings[className] = rules :
++			jQuery.extend(this.classRuleSettings, className);
++	},
++	
++	classRules: function(element) {
++		var rules = {};
++		var classes = jQuery(element).attr('class');
++		classes && jQuery.each(classes.split(' '), function() {
++			if (this in jQuery.validator.classRuleSettings) {
++				jQuery.extend(rules, jQuery.validator.classRuleSettings[this]);
++			}
++		});
++		return rules;
++	},
++	
++	attributeRules: function(element) {
++		var rules = {};
++		var $element = jQuery(element);
++		
++		for (method in jQuery.validator.methods) {
++			var value = $element.attr(method);
++			// allow 0 but neither undefined nor empty string
++			if (value !== undefined && value !== '') {
++				rules[method] = value;
++			}
++		}
++		
++		// maxlength may be returned as -1, 2147483647 (IE) and 524288 (safari) for text inputs
++		if (rules.maxlength && /-1|2147483647|524288/.test(rules.maxlength)) {
++			delete rules.maxlength;
++			// deprecated
++			delete rules.maxLength;
++		}
++		
++		return rules;
++	},
++	
++	metadataRules: function(element) {
++		if (!jQuery.metadata) return {};
++		
++		var meta = jQuery.data(element.form, 'validator').settings.meta;
++		return meta ?
++			jQuery(element).metadata()[meta] :
++			jQuery(element).metadata();
++	},
++	
++	staticRules: function(element) {
++		var rules = {};
++		var validator = jQuery.data(element.form, 'validator');
++		if (validator.settings.rules) {
++			rules = jQuery.validator.normalizeRule(validator.settings.rules[element.name]) || {};
++		}
++		return rules;
++	},
++	
++	normalizeRules: function(rules, element) {
++		// convert deprecated rules
++		jQuery.each({
++			minLength: 'minlength',
++			maxLength: 'maxlength',
++			rangeLength: 'rangelength',
++			minValue: 'min',
++			maxValue: 'max',
++			rangeValue: 'range'
++		}, function(dep, curr) {
++			if (rules[dep]) {
++				rules[curr] = rules[dep];
++				delete rules[dep];
++			}
++		});
++		
++		// handle dependency check
++		$.each(rules, function(prop, val) {
++			// ignore rule when param is explicitly false, eg. required:false
++			if (val === false) {
++				delete rules[prop];
++				return;
++			}
++			if (val.param || val.depends) {
++				var keepRule = true;
++				switch (typeof val.depends) {
++					case "string":
++						keepRule = !!jQuery(val.depends, element.form).length;
++						break;
++					case "function":
++						keepRule = val.depends.call(element, element);
++						break;
++				}
++				if (keepRule) {
++					rules[prop] = val.param !== undefined ? val.param : true;
++				} else {
++					delete rules[prop];
++				}
++			}
++		});
++		
++		// evaluate parameters
++		jQuery.each(rules, function(rule, parameter) {
++			rules[rule] = jQuery.isFunction(parameter) ? parameter(element) : parameter;
++		});
++		
++		// clean number parameters
++		jQuery.each(['minlength', 'maxlength', 'min', 'max'], function() {
++			if (rules[this]) {
++				rules[this] = Number(rules[this]);
++			}
++		});
++		jQuery.each(['rangelength', 'range'], function() {
++			if (rules[this]) {
++				rules[this] = [Number(rules[this][0]), Number(rules[this][1])];
++			}
++		});
++		
++		if (jQuery.validator.autoCreateRanges) {
++			// auto-create ranges
++			if (rules.min && rules.max) {
++				rules.range = [rules.min, rules.max];
++				delete rules.min;
++				delete rules.max;
++			}
++			if (rules.minlength && rules.maxlength) {
++				rules.rangelength = [rules.minlength, rules.maxlength];
++				delete rules.minlength;
++				delete rules.maxlength;
++			}
++		}
++		
++		// To support custom messages in metadata ignore rule methods titled "messages"
++		if (rules.messages) {
++			delete rules.messages
++		}
++		
++		return rules;
++	},
++	
++	// Converts a simple string to a {string: true} rule, e.g., "required" to {required:true}
++	normalizeRule: function(data) {
++		if( typeof data == "string" ) {
++			var transformed = {};
++			jQuery.each(data.split(/\s/), function() {
++				transformed[this] = true;
++			});
++			data = transformed;
++		}
++		return data;
++	},
++	
++	// http://docs.jquery.com/Plugins/Validation/Validator/addMethod
++	addMethod: function(name, method, message) {
++		jQuery.validator.methods[name] = method;
++		jQuery.validator.messages[name] = message;
++		if (method.length < 3) {
++			jQuery.validator.addClassRules(name, jQuery.validator.normalizeRule(name));
++		}
++	},
++
++	methods: {
++
++		// http://docs.jquery.com/Plugins/Validation/Methods/required
++		required: function(value, element, param) {
++			// check if dependency is met
++			if ( !this.depend(param, element) )
++				return "dependency-mismatch";
++			switch( element.nodeName.toLowerCase() ) {
++			case 'select':
++				var options = jQuery("option:selected", element);
++				return options.length > 0 && ( element.type == "select-multiple" || (jQuery.browser.msie && !(options[0].attributes['value'].specified) ? options[0].text : options[0].value).length > 0);
++			case 'input':
++				if ( this.checkable(element) )
++					return this.getLength(value, element) > 0;
++			default:
++				return value.length > 0;
++			}
++		},
++		
++		// http://docs.jquery.com/Plugins/Validation/Methods/remote
++		remote: function(value, element, param) {
++			if ( this.optional(element) )
++				return "dependency-mismatch";
++			
++			var previous = this.previousValue(element);
++			
++			if (!this.settings.messages[element.name] )
++				this.settings.messages[element.name] = {};
++			this.settings.messages[element.name].remote = typeof previous.message == "function" ? previous.message(value) : previous.message;
++			
++			if ( previous.old !== value ) {
++				previous.old = value;
++				var validator = this;
++				this.startRequest(element);
++				var data = {};
++				data[element.name] = value;
++				jQuery.ajax({
++					url: param,
++					mode: "abort",
++					port: "validate" + element.name,
++					dataType: "json",
++					data: data,
++					success: function(response) {
++						if ( !response ) {
++							var errors = {};
++							errors[element.name] =  response || validator.defaultMessage( element, "remote" );
++							validator.showErrors(errors);
++						} else {
++							var submitted = validator.formSubmitted;
++							validator.prepareElement(element);
++							validator.formSubmitted = submitted;
++							validator.successList.push(element);
++							validator.showErrors();
++						}
++						previous.valid = response;
++						validator.stopRequest(element, response);
++					}
++				});
++				return "pending";
++			} else if( this.pending[element.name] ) {
++				return "pending";
++			}
++			return previous.valid;
++		},
++
++		// http://docs.jquery.com/Plugins/Validation/Methods/minlength
++		minlength: function(value, element, param) {
++			return this.optional(element) || this.getLength(value, element) >= param;
++		},
++		
++		// deprecated, to be removed in 1.3
++		minLength: function(value, element, param) {
++			return jQuery.validator.methods.minlength.apply(this, arguments);
++		},
++	
++		// http://docs.jquery.com/Plugins/Validation/Methods/maxlength
++		maxlength: function(value, element, param) {
++			return this.optional(element) || this.getLength(value, element) <= param;
++		},
++		
++		// deprecated, to be removed in 1.3
++		maxLength: function(value, element, param) {
++			return jQuery.validator.methods.maxlength.apply(this, arguments);
++		},
++		
++		// http://docs.jquery.com/Plugins/Validation/Methods/rangelength
++		rangelength: function(value, element, param) {
++			var length = this.getLength(value, element);
++			return this.optional(element) || ( length >= param[0] && length <= param[1] );
++		},
++		
++		// deprecated, to be removed in 1.3
++		rangeLength: function(value, element, param) {
++			return jQuery.validator.methods.rangelength.apply(this, arguments);
++		},
++	
++		// http://docs.jquery.com/Plugins/Validation/Methods/min
++		min: function( value, element, param ) {
++			return this.optional(element) || value >= param;
++		},
++		
++		// deprecated, to be removed in 1.3
++		minValue: function() {
++			return jQuery.validator.methods.min.apply(this, arguments);
++		},
++		
++		// http://docs.jquery.com/Plugins/Validation/Methods/max
++		max: function( value, element, param ) {
++			return this.optional(element) || value <= param;
++		},
++		
++		// deprecated, to be removed in 1.3
++		maxValue: function() {
++			return jQuery.validator.methods.max.apply(this, arguments);
++		},
++		
++		// http://docs.jquery.com/Plugins/Validation/Methods/range
++		range: function( value, element, param ) {
++			return this.optional(element) || ( value >= param[0] && value <= param[1] );
++		},
++		
++		// deprecated, to be removed in 1.3
++		rangeValue: function() {
++			return jQuery.validator.methods.range.apply(this, arguments);
++		},
++		
++		// http://docs.jquery.com/Plugins/Validation/Methods/email
++		email: function(value, element) {
++			// contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
++			return this.optional(element) || /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i.test(element.value);
++		},
++	
++		// http://docs.jquery.com/Plugins/Validation/Methods/url
++		url: function(value, element) {
++			// contributed by Scott Gonzalez: http://projects.scottsplayground.com/iri/
++			return this.optional(element) || /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(element.value);
++		},
++        
++		// http://docs.jquery.com/Plugins/Validation/Methods/date
++		date: function(value, element) {
++			return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
++		},
++	
++		// http://docs.jquery.com/Plugins/Validation/Methods/dateISO
++		dateISO: function(value, element) {
++			return this.optional(element) || /^\d{4}[\/-]\d{1,2}[\/-]\d{1,2}$/.test(value);
++		},
++	
++		// http://docs.jquery.com/Plugins/Validation/Methods/dateDE
++		dateDE: function(value, element) {
++			return this.optional(element) || /^\d\d?\.\d\d?\.\d\d\d?\d?$/.test(value);
++		},
++	
++		// http://docs.jquery.com/Plugins/Validation/Methods/number
++		number: function(value, element) {
++			return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?$/.test(value);
++		},
++	
++		// http://docs.jquery.com/Plugins/Validation/Methods/numberDE
++		numberDE: function(value, element) {
++			return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:\.\d{3})+)(?:,\d+)?$/.test(value);
++		},
++		
++		// http://docs.jquery.com/Plugins/Validation/Methods/digits
++		digits: function(value, element) {
++			return this.optional(element) || /^\d+$/.test(value);
++		},
++		
++		// http://docs.jquery.com/Plugins/Validation/Methods/creditcard
++		// based on http://en.wikipedia.org/wiki/Luhn
++		creditcard: function(value, element) {
++			if ( this.optional(element) )
++				return "dependency-mismatch";
++			// accept only digits and dashes
++			if (/[^0-9-]+/.test(value))
++				return false;
++			var nCheck = 0,
++				nDigit = 0,
++				bEven = false;
++
++			value = value.replace(/\D/g, "");
++
++			for (n = value.length - 1; n >= 0; n--) {
++				var cDigit = value.charAt(n);
++				var nDigit = parseInt(cDigit, 10);
++				if (bEven) {
++					if ((nDigit *= 2) > 9)
++						nDigit -= 9;
++				}
++				nCheck += nDigit;
++				bEven = !bEven;
++			}
++
++			return (nCheck % 10) == 0;
++		},
++		
++		// http://docs.jquery.com/Plugins/Validation/Methods/accept
++		accept: function(value, element, param) {
++			param = typeof param == "string" ? param : "png|jpe?g|gif";
++			return this.optional(element) || value.match(new RegExp(".(" + param + ")$", "i")); 
++		},
++		
++		// http://docs.jquery.com/Plugins/Validation/Methods/equalTo
++		equalTo: function(value, element, param) {
++			return value == jQuery(param).val();
++		}
++		
++	}
++	
++});
++
++// ajax mode: abort
++// usage: $.ajax({ mode: "abort"[, port: "uniqueport"]});
++// if mode:"abort" is used, the previous request on that port (port can be undefined) is aborted via XMLHttpRequest.abort() 
++;(function($) {
++	var ajax = $.ajax;
++	var pendingRequests = {};
++	$.ajax = function(settings) {
++		// create settings for compatibility with ajaxSetup
++		settings = jQuery.extend(settings, jQuery.extend({}, jQuery.ajaxSettings, settings));
++		var port = settings.port;
++		if (settings.mode == "abort") {
++			if ( pendingRequests[port] ) {
++				pendingRequests[port].abort();
++			}
++			return (pendingRequests[port] = ajax.apply(this, arguments));
++		}
++		return ajax.apply(this, arguments);
++	};
++})(jQuery);
++
++// provides cross-browser focusin and focusout events
++// IE has native support, in other browsers, use event caputuring (neither bubbles)
++
++// provides delegate(type: String, delegate: Selector, handler: Callback) plugin for easier event delegation
++// handler is only called when $(event.target).is(delegate), in the scope of the jQuery-object for event.target 
++
++// provides triggerEvent(type: String, target: Element) to trigger delegated events
++;(function($) {
++	$.each({
++		focus: 'focusin',
++		blur: 'focusout'	
++	}, function( original, fix ){
++		$.event.special[fix] = {
++			setup:function() {
++				if ( $.browser.msie ) return false;
++				this.addEventListener( original, $.event.special[fix].handler, true );
++			},
++			teardown:function() {
++				if ( $.browser.msie ) return false;
++				this.removeEventListener( original,
++				$.event.special[fix].handler, true );
++			},
++			handler: function(e) {
++				arguments[0] = $.event.fix(e);
++				arguments[0].type = fix;
++				return $.event.handle.apply(this, arguments);
++			}
++		};
++	});
++	$.extend($.fn, {
++		delegate: function(type, delegate, handler) {
++			return this.bind(type, function(event) {
++				var target = $(event.target);
++				if (target.is(delegate)) {
++					return handler.apply(target, arguments);
++				}
++			});
++		},
++		triggerEvent: function(type, target) {
++			return this.triggerHandler(type, [jQuery.event.fix({ type: type, target: target })]);
++		}
++	})
++})(jQuery);</code></pre>
+    </div>
+  
+
+  <div class="attachment-download flex-column flex-center">
+    <h3>Download in other formats:</h3>
+    <a class="attachment-download-link" download="" href="/bugs.jquery.com/raw-attachment/ticket/2908/JqueryValidate-CustomMetaMessages-unix.patch">Original Format</a>
+  </div>
+</h1></div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

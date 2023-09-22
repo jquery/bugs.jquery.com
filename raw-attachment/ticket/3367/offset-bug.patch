@@ -1,0 +1,58 @@
+Index: offset.js
+===================================================================
+--- offset.js	(revision 5843)
++++ offset.js	(working copy)
+@@ -82,6 +82,27 @@
+ 					Math.max(doc.documentElement.scrollTop,  doc.body.scrollTop));
+ 		}
+ 
++		// test whether the owner doc of our element is in an iframe
++		if ( window.document !== doc ){ 
++			var oF;
++			// some broswers support the document.defaultView and window.frameElement properties
++			if(typeof(doc.defaultView) != 'undefined' && typeof(doc.defaultView.frameElement) != 'undefined'){
++				oF = doc.defaultView.frameElement;
++			}
++			else {
++				// we aren't able to shortcut to the frame element so search for it
++				oF = findTheFrame.call(window, doc);
++				
++				// add a defaultView and frameElement
++				doc.defaultView = oF.contentWindow;
++				if(typeof(doc.defaultView.frameElement) == 'undefined') doc.defaultView.frameElement = oF;
++			}
++			
++			//if(oF === null) throw 'bad';
++			var frameOff = jQuery.fn.offset.call( [oF] );
++			add(frameOff.left, frameOff.top);
++		}
++
+ 		// Return an object with top and left properties
+ 		results = { top: top, left: left };
+ 	}
+@@ -95,6 +116,25 @@
+ 		top += parseInt(t, 10) || 0;
+ 	}
+ 
++	// helper function to recursively find the iframe containing the supplied document
++	function findTheFrame(doc){
++		var toReturn = null;
++		var iframes = this.document.getElementsByTagName('iframe');
++		// loop through all the iframes in the current document
++		for(var x = 0; x < iframes.length; x++){
++			// if this is the right iframe its document will match the document we're looking for
++			if(iframes[x].contentWindow.document === doc){
++				toReturn = iframes[x];
++			}
++			else {
++				// recurse into the iframe's window and check any nested iframes
++				toReturn = findTheFrame.call(iframes[x].contentWindow, doc);
++			}
++			if(toReturn !== null) break;
++		}
++		return toReturn;
++	}
++
+ 	return results;
+ };
+ 

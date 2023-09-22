@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>Sub-forms</title>
+    <style type="text/css">
+        body{background-color:#fff}
+        form p,dd{padding:5px 150px;margin:0;min-width:400px}
+        form p label:first-child{float:left;width:140px;margin-left:-148px;padding:2px;text-align:right}
+    </style>
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!--<script type="text/javascript" src="jquery.js"></script>-->
+    
+    <script type="text/javascript">
+        /*  Patch
+            =========================== */
+
+        // get all form elements
+        function getElements(form) {
+            return $(form).find(":input")
+	            .not($(form).find("form :input"));
+        }
+
+        // get 'successful' form elements, except the submit button clicked 
+        // http://www.w3.org/TR/html401/interact/forms.html#h-17.13
+        function getElementsSuccess(form) {
+            return getElements(form)
+	            .not("[name=], :submit, :reset, [disabled], :radio:not(:checked), :checkbox:not(:checked)")
+        }
+
+		$.fn.serializeArray = function() {
+		    return this.map(function() {
+		        return jQuery.nodeName(this, "form") ?
+				    jQuery.makeArray(getElementsSuccess(this)) : this;
+		    })
+		    .map(function(i, elem) {
+		        var val = jQuery(this).val();
+		        return val == null ? null :
+				    val.constructor == Array ?
+					    jQuery.map(val, function(val, i) {
+					        return { name: elem.name, value: val };
+					    }) :
+					    { name: elem.name, value: val };
+		    }).get();
+		}
+
+        /*  =========================== */
+
+		$(document).ready(function() {
+		    $("#Form")
+		        .prepend($("#SubForm"))
+		        .submit(function() {
+		            var expected =
+		                "Name=Name+Test&".concat(
+		                "Name=Name+2+Test&",
+		                "Checked=Checked+Test&",
+		                "Radio=Radio+3+Test&",
+		                "Description=Description+Test&",
+		                "Type=Type+Two+Test");
+
+		            var result = $(this).serialize();
+
+		            $("#Result")
+		                .empty()
+		                .append(
+		                    "<h3>".concat(expected == result ? "Success" : "Failure", "</h3>",
+		                    "<dl>",
+		                        "<dt>Expected</dt><dd><pre>", expected.split("&").join("&\n"), "</pre></dd>",
+		                        "<dt>Result</dt><dd><pre>", result.split("&").join("&\n"), "</pre></dd>",
+		                    "</dl>")
+		                    );
+
+		            return false;
+		        });
+		});
+    </script>
+</head>
+<body>
+   
+    <form id="Form">
+        <p>
+            <label for="Name">Name</label>
+            <input id="Name" name="Name" value="Name Test" />
+        </p>
+        <p>
+            <label for="Name2">Name 2</label>
+            <input id="Name2" name="Name" value="Name 2 Test" />
+        </p>
+        <p>
+            <label for="Name3">Name 3 Disabled</label>
+            <input id="Name3" name="Name" value="Name 3 Test" disabled="disabled" />
+        </p>
+        <p>
+            <label for="Checked">Checked</label>
+            <input id="Checked" name="Checked" value="Checked Test" type="checkbox" checked="checked" />
+        </p>
+        <p>
+            <label for="Unchecked">Unchecked</label>
+            <input id="Unchecked" name="Unchecked" value="Unchecked Test" type="checkbox" />
+        </p>
+        <p>
+            <label for="Radio1">Radio 1</label>
+            <input id="Radio1" name="Radio" value="Radio 1 Test" type="radio" />
+            <label for="Radio2">Radio 2</label>
+            <input id="Radio2" name="Radio" value="Radio 2 Test" type="radio" />
+            <label for="Radio3">Radio 3</label>
+            <input id="Radio3" name="Radio" value="Radio 3 Test" type="radio" checked="checked" />
+        </p>
+        <p>
+            <label for="Description">Description</label>
+            <textarea id="Description" name="Description">Description Test</textarea>
+        </p>
+        <p>
+            <label for="Type">Type</label>
+            <select id="Type" name="Type">
+                <option>Type One Test</option>
+                <option selected="selected">Type Two Test</option>
+                <option>Type Three Test</option>
+            </select>
+        </p>
+        <p>
+            <label for="NoName">No Name</label>
+            <input id="NoName" value="No Name Test" />
+        </p>
+        
+        <p>
+            <input name="Submit1" type="submit" value="Submit 1 Test" />
+            <input name="Submit2" type="submit" value="Submit 2 Test" />
+            <input name="Reset" type="reset" value="Reset Test" />
+        </p>
+    
+    </form>
+
+    <form id="SubForm">
+    
+        <p>
+            <label for="SubFormItem">Sub Form Item</label>
+            <input id="SubFormItem" name="SubFormItem" value="Sub Form Item Test" />
+        </p>
+        
+    </form>
+    
+    <div id="Result"></div>
+
+</body>
+</html>

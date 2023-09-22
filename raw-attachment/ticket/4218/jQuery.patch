@@ -1,0 +1,40 @@
+Index: 3_code/main/resources/js/1_jquery-1.3.2.js
+===================================================================
+--- 3_code/main/resources/js/1_jquery-1.3.2.js	(revision 399)
++++ 3_code/main/resources/js/1_jquery-1.3.2.js	(revision 400)
+@@ -1686,7 +1686,7 @@
+ 				if ( (elem = checkSet[i]) ) {
+ 					while ( (elem = elem.previousSibling) && elem.nodeType !== 1 ) {}
+ 
+-					checkSet[i] = isPartStrNotTag || elem && elem.nodeName === part ?
++					checkSet[i] = isPartStrNotTag || elem && jQuery.nodeName(elem, part) ?
+ 						elem || false :
+ 						elem === part;
+ 				}
+@@ -1706,7 +1706,7 @@
+ 					var elem = checkSet[i];
+ 					if ( elem ) {
+ 						var parent = elem.parentNode;
+-						checkSet[i] = parent.nodeName === part ? parent : false;
++						checkSet[i] = jQuery.nodeName(parent, part) ? parent : false;
+ 					}
+ 				}
+ 			} else {
+@@ -2002,7 +2002,7 @@
+ 			return elem.nodeType === 1 && elem.getAttribute("id") === match;
+ 		},
+ 		TAG: function(elem, match){
+-			return (match === "*" && elem.nodeType === 1) || elem.nodeName === match;
++			return (match === "*" && elem.nodeType === 1) || jQuery.nodeName(elem, match);
+ 		},
+ 		CLASS: function(elem, match){
+ 			return (" " + (elem.className || elem.getAttribute("class")) + " ")
+@@ -2273,7 +2273,7 @@
+ 					elem.sizset = i;
+ 				}
+ 
+-				if ( elem.nodeName === cur ) { // Ajax: "td" != "TD"
++				if ( jQuery.nodeName(elem, cur) ) {
+ 					match = elem;
+ 					break;
+ 				}

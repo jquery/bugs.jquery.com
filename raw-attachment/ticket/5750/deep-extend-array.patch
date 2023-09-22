@@ -1,0 +1,59 @@
+diff --git src/core.js src/core.js
+index 93f04ec..9f9eefb 100644
+--- src/core.js
++++ src/core.js
+@@ -313,10 +313,16 @@ jQuery.extend = jQuery.fn.extend = function() {
+ 					continue;
+ 				}
+ 
+-				// Recurse if we're merging object literal values
+-				if ( deep && copy && jQuery.isPlainObject(copy) ) {
+-					// Don't extend not object literals
+-					var clone = src && jQuery.isPlainObject(src) ? src : {};
++				// Recurse if we're merging object literal values or arrays
++				if ( deep && copy && ( jQuery.isPlainObject(copy) || jQuery.isArray(copy) ) ) {
++					var clone = {};
++					// Only extend object literals or arrays
++					if ( src && ( jQuery.isPlainObject(src) || jQuery.isArray(src) ) ) {
++						clone = src;
++					// Don't clone an array with an object
++					} else if ( jQuery.isArray (copy) ) {
++						clone = [];
++					}
+ 
+ 					// Never move original objects, clone them
+ 					target[ name ] = jQuery.extend( deep, clone, copy );
+diff --git test/unit/core.js test/unit/core.js
+index e3adc60..c779e28 100644
+--- test/unit/core.js
++++ test/unit/core.js
+@@ -657,7 +657,7 @@ test("jQuery.merge()", function() {
+ });
+ 
+ test("jQuery.extend(Object, Object)", function() {
+-	expect(25);
++	expect(27);
+ 
+ 	var settings = { xnumber1: 5, xnumber2: 7, xstring1: "peter", xstring2: "pan" },
+ 		options = { xnumber2: 1, xstring2: "x", xxx: "newstring" },
+@@ -667,7 +667,9 @@ test("jQuery.extend(Object, Object)", function() {
+ 		deep1copy = { foo: { bar: true } },
+ 		deep2 = { foo: { baz: true }, foo2: document },
+ 		deep2copy = { foo: { baz: true }, foo2: document },
+-		deepmerged = { foo: { bar: true, baz: true }, foo2: document };
++		deepmerged = { foo: { bar: true, baz: true }, foo2: document },
++		arr = [1, 2, 3],
++		nestedarray = { arr: arr };
+ 
+ 	jQuery.extend(settings, options);
+ 	same( settings, merged, "Check if extended: settings must be extended" );
+@@ -682,6 +684,9 @@ test("jQuery.extend(Object, Object)", function() {
+ 	same( deep2.foo, deep2copy.foo, "Check if not deep2: options must not be modified" );
+ 	equals( deep1.foo2, document, "Make sure that a deep clone was not attempted on the document" );
+ 
++	ok( jQuery.extend(true, [], arr) !== arr, "Deep extend of array must clone array" );
++	ok( jQuery.extend(true, {}, nestedarray).arr !== arr, "Deep extend of object must clone child array" );
++
+ 	var empty = {};
+ 	var optionsWithLength = { foo: { length: -1 } };
+ 	jQuery.extend(true, empty, optionsWithLength);

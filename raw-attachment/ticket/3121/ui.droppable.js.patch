@@ -1,0 +1,58 @@
+Index: ui.droppable.js
+===================================================================
+--- ui.droppable.js	(revision 393)
++++ ui.droppable.js	(working copy)
+@@ -64,6 +64,10 @@
+ 		if (this.options.accept.call(this.element,(draggable.currentItem || draggable.element))) {
+ 			$.ui.plugin.call(this, 'over', [e, this.ui(draggable)]);
+ 			this.element.triggerHandler("dropover", [e, this.ui(draggable)], this.options.over);
++			
++			// For an exclusive draggable, note which drop zone it is currently over.
++			if (draggable.options.exclusive)
++				draggable.options.isover = this;
+ 		}
+ 		
+ 	},
+@@ -75,6 +79,9 @@
+ 		if (this.options.accept.call(this.element,(draggable.currentItem || draggable.element))) {
+ 			$.ui.plugin.call(this, 'out', [e, this.ui(draggable)]);
+ 			this.element.triggerHandler("dropout", [e, this.ui(draggable)], this.options.out);
++			
++			// Add exclusive code.
++			draggable.options.isover = null;
+ 		}
+ 		
+ 	},
+@@ -188,12 +195,16 @@
+ 		
+ 	},
+ 	drop: function(draggable, e) {
+-		
++
++		// Check if the draggable is set for exclusive and if it has already been flagged as over the first element.
++		var exclusive = draggable.options.exclusive;
++		var isover = draggable.options.isover;
++
+ 		var dropped = false;
+ 		$.each($.ui.ddmanager.droppables, function() {
+ 			
+ 			if(!this.options) return;
+-			if (!this.options.disabled && this.visible && $.ui.intersect(draggable, this, this.options.tolerance))
++			if (!this.options.disabled && this.visible && (!exclusive || !isover || isover==this) && $.ui.intersect(draggable, this, this.options.tolerance))
+ 				dropped = this.drop.call(this, e);
+ 			
+ 			if (!this.options.disabled && this.visible && this.options.accept.call(this.element,(draggable.currentItem || draggable.element))) {
+@@ -213,8 +224,12 @@
+ 		//Run through all droppables and check their positions based on specific tolerance options
+ 		$.each($.ui.ddmanager.droppables, function() {
+ 			
++			// Check if the draggable is set for exclusive and if it has already been flagged as over the first element.
++			var exclusive = draggable.options.exclusive;
++			var isover = draggable.options.isover;
++			
+ 			if(this.options.disabled || this.greedyChild || !this.visible) return;
+-			var intersects = $.ui.intersect(draggable, this, this.options.tolerance);
++			var intersects = (!exclusive || !isover || isover==this) && $.ui.intersect(draggable, this, this.options.tolerance);
+ 			
+ 			var c = !intersects && this.isover == 1 ? 'isout' : (intersects && this.isover == 0 ? 'isover' : null);
+ 			if(!c) return;

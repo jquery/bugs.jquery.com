@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <title> new document </title>
+      <script src="jquery.js" type="text/javascript"></script>
+      <script type="text/javascript">
+         $(function() {
+            $("table.highlightAlts tr:odd").css("backgroundColor","#ddd");
+            $("table.highlightAlts tr:odd").hide();
+            $("table.highlightAlts tr:even").click(function(){
+               $(this).next().show('slow');
+            });
+         });
+      </script>
+
+      <style type="text/css">
+         ol li {display: inline; border-right: solid 1px #000;}
+      </style>
+   </head>
+   <body>
+      <table class="highlightAlts" cellspacing="0" border="1" width="50%">
+         <tr><td>A</td><td>Alpha</td></tr>
+         <tr><td colspan="2">This is the phonetic equivalent to the letter 'A'</td></tr>
+         <tr><td>B</td><td>Bravo</td></tr>
+         <tr><td colspan="2">This is the phonetic equivalent to the letter 'B'</td></tr>
+         <tr><td>C</td><td>Charlie</td></tr>
+         <tr><td colspan="2">This is the phonetic equivalent to the letter 'C'</td></tr>
+         <tr class="zebra"><td>D</td><td>Delta</td></tr>
+         <tr><td colspan="2">This is the phonetic equivalent to the letter 'D'</td></tr>
+         <tr><td>E</td><td>Echo</td></tr>
+         <tr><td colspan="2">This is the phonetic equivalent to the letter 'E'</td></tr>
+         <tr class="zebra"><td>F</td><td>Foxtrot</td></tr>
+         <tr><td colspan="2">This is the phonetic equivalent to the letter 'F'</td></tr>
+         <tr><td>G</td><td>Golf</td></tr>
+         <tr><td colspan="2">This is the phonetic equivalent to the letter 'G'</td></tr>
+      </table>
+   </body>
+</html>
+

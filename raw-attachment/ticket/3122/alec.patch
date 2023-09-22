@@ -1,0 +1,23 @@
+97c97,99
+< 				cookieId: "treeview"
+---
+> 				cookieId: "treeview",
+> 				cookiePath: "/",
+> 				cookieExpires: 0
+99a102,106
+> 			var cookieOptions = $.extend({
+> 			  expires: settings.cookieExpires,
+> 			  path: settings.cookiePath
+> 			});
+> 			
+172c179
+< 				$.cookie(settings.cookieId, data.join("") );
+---
+> 				$.cookie(settings.cookieId, data.join(""), cookieOptions );
+180c187,190
+< 						$(e).find(">ul")[ parseInt(data[i]) ? "show" : "hide" ]();
+---
+>             if (!$(e).hasClass("open") && !$(e).hasClass("closed"))
+>             {
+> 						  $(e).find(">ul")[ parseInt(data[i]) ? "show" : "hide" ]();
+>             }

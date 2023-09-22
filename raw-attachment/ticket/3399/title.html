@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang=en>
+  <head>
+    <title>jquery attribute selectors - title</title>
+    <style type="text/css">
+      div {
+        padding: 1em;
+        margin: 0 1em 1em 0;
+        float: left;
+      }
+      p {
+        clear: left;
+      }
+      div, div.notitle.found { background: #f00 }
+      div.found, div.notitle { background: #0f0 }
+    </style>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $('div[title]').addClass('found').html('OK');
+        $('div.notitle.found').html('FAIL');
+      });
+    </script>
+  </head>
+  <body>
+    <div title="">FAIL</div>           <!-- empty-string attr: should match -->
+    <div title="Some title">FAIL</div> <!-- non-empty attr: should match -->
+    <div class=notitle>OK</div>        <!-- no attr: should not match -->
+    <p>There should be three green boxes saying "OK"</p>
+  </body>
+</html>

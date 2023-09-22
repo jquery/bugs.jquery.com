@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Test</title>
+    <style type="text/css">
+      div#hider { display : none; }
+    </style>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript">
+      $(function () {
+            var iframe = document.createElement("iframe");
+            iframe.src = "index-blank.html";
+            iframe.width = "100%";
+            iframe.height = "125";
+            iframe.style.border = "none";
+            $("div[id='source']").append(iframe);
+
+            $(window).load(function () {
+                  var doc = iframe.contentDocument || iframe.contentWindow.document;
+                  var source = "<html>" +
+                               "  <head>" +
+                               "    <script src='jquery.js'></sc" + "ript>" +
+                               "    <script>" +
+                               "      $(function () {" +
+                               "        $('p').show('slow');" +
+                               "      });" +
+                               "    </sc" + "ript>" +
+                               "  </head>" +
+                               "  <body>" +
+                               "    <p style='display:none;'>hiya</p>" +
+                               "  </body>" +
+                               "</html>";
+                  doc.open();
+                  doc.write( source );
+                  doc.close();
+                });
+
+            $("button").click(function () {
+                  $("div#hider").show();
+                });
+          });
+    </script>
+  </head>
+  <body>
+    <button>Show</button>
+    <div id="hider">
+      <div id="source"></div>
+    </div>
+  </body>
+</html>

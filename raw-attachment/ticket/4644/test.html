@@ -1,0 +1,51 @@
+<head>
+<script type="text/javascript" src="http://www.kennisnet.nl/js/jquery.js"></script>
+
+<script type="text/javascript">
+jQuery.fn.test = function() {
+
+   return this.each(function() {
+
+      var $select  = $(this);
+      var $options = $select.find('.options');
+
+      var options = $options.find('li');
+
+      alert(options.index($('.active')));
+
+   });
+
+}
+
+$(function() {
+
+   $('.select').test();
+
+});
+</script>
+</head>
+
+<body>
+<div class="select">
+   <div class="options">
+      <ul>
+         <li><a href="#">Option 1</a></li>
+         <li class="active"><a href="#">Option 2</a></li>
+         <li><a href="#">Option 3</a></li>
+         <li><a href="#">Option 4</a></li>
+         <li><a href="#">Option 5</a></li>
+      </ul>
+   </div>
+</div>
+<div class="select">
+   <div class="options">
+      <ul>
+         <li><a href="#">Option 1</a></li>
+         <li><a href="#">Option 2</a></li>
+         <li class="active"><a href="#">Option 3</a></li>
+         <li><a href="#">Option 4</a></li>
+         <li><a href="#">Option 5</a></li>
+      </ul>
+   </div>
+</div>
+</body>

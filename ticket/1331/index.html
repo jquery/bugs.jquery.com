@@ -1,0 +1,1183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">#1331 (Latest Nightlies Crash Safari 1.3.2) - jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      :root{--ticket-info-background-color:#ffd;--ticket-info-border-color:#dd9;--ticket-table-border-color:#eed;--ticket-date-text-color:#996;--ticket-description-title-color:#663;--ticket-changes-text-color:#663;--ticket-changes-box-shadow:#f2f2f2}.ticket-info{position:relative;background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);padding:.5em .75em;margin-bottom:.5em}.ticket-number{font-size:1.15rem;font-weight:700;margin-right:.5em}.ticket-info span{font-size:.8125em;font-weight:700}.ticket-resolution,.ticket-status,.ticket-type{text-transform:uppercase}.missing{color:var(--text-color-link-disabled)}.ticket-title{border-bottom:1px solid #bbb;margin-top:1em;padding-bottom:.25em;font-weight:700;font-size:1.1875rem}.ticket-dates{color:var(--ticket-date-text-color);font-size:.8125rem}.ticket-dates p{margin:0 0 .5em}.ticket-properties{width:100%;text-align:left;font-size:.65rem;border-top:1px solid var(--ticket-table-border-color);margin:0}.ticket-properties th{font-weight:400;width:20%}.ticket-properties td,.ticket-properties th{padding:.25em .5em;border-bottom:1px dashed var(--ticket-table-border-color)}.ticket-info-bottom{padding:.5em}.ticket-description{font-size:.8125rem;margin-top:.5em}.ticket-description h2,.ticket-description h3,.ticket-description h4,.ticket-description h5,.ticket-description h6{text-transform:uppercase;font-weight:400}.ticket-description h1{font-size:1.1rem}.ticket-description h2{font-size:1rem}.ticket-description h3{font-size:.9rem}.ticket-description h4{font-size:.8rem}.ticket-description h5{font-size:.75rem}.ticket-description h6{font-size:.7rem}.ticket-description-title{color:var(--ticket-description-title-color);font-size:.75rem}details{padding:.5em 0;font-size:.8125rem}summary{color:var(--text-color-link);font-weight:700;font-size:.875rem;text-decoration:underline;cursor:pointer;text-shadow:.04em .04em var(--text-shadow-color)}.ticket-attachments{font-size:.75em}.ticket-comment-body{width:100%;padding-top:.5em}.ticket-change{margin:1em 0;clear:both}.ticket-change-header{font-size:.875rem;font-weight:700;box-shadow:1.4px 2.8px 5.6px 0 var(--ticket-changes-box-shadow)}.ticket-change-link{font-size:.85em}.ticket-change-content{width:100%}.ticket-changes{background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);color:var(--ticket-changes-text-color);font-size:.7rem;float:right;clear:right;margin:2em 0 1em 1.5em}.ticket-changes th{text-align:right;font-weight:400;text-transform:capitalize}.ticket-changes td,.ticket-changes th{padding:.25em;vertical-align:baseline}.ticket-changes .change-field-new{font-weight:700}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+<div class="flex-column" data-pagefind-body="">
+  
+
+  <nav class="content-nav">
+    <ul class="flex-row">
+      
+        <li>
+          <a href="/bugs.jquery.com/ticket/1330/">← Previous Ticket</a>
+        
+      
+      
+        </li><li>
+          <a href="/bugs.jquery.com/ticket/1332/">Next Ticket →</a>
+        </li>
+      
+    </ul>
+  </nav>
+
+
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="." class="ticket-number">#1331</a>
+      <span class="ticket-status">closed</span>
+      <span class="ticket-type">bug</span>
+      <span class="ticket-resolution">(fixed)</span>
+    </h3>
+
+    <div class="ticket-dates">
+      <p>Opened June 28, 2007 02:42PM UTC</p>
+      
+        <p>Closed July 06, 2007 01:39PM UTC</p>
+      
+      
+        <p>Last modified March 14, 2012 04:42AM UTC</p>
+      
+    </div>
+  </div>
+
+  <h1 class="ticket-title">Latest Nightlies Crash Safari 1.3.2</h1>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        jhenry
+      </td>
+      <th>Owned by:</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        critical
+      </td>
+      
+        <th class="missing">Milestone:</th>
+      
+      <td>
+        <a href="/bugs.jquery.com/milestone/1.1.4">1.1.4</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>core</td>
+      
+        <th>Version:</th>
+      
+      <td>1.1.3</td>
+    </tr>
+    <tr>
+      
+        <th class="missing">Keywords:</th>
+      
+      <td></td>
+      
+        <th class="missing">Cc:</th>
+      
+      <td></td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
+    <div class="ticket-description"><p>Version 1.1.2 loads correctly in Safari 1.3.2, but version 1.1.3a and the current nightly builds are crashing Safari 1.3.2 (browser exits) on load with a page as simple as</p><pre class="wiki">
+&lt;html&gt;&lt;head&gt;&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;&lt;/head&gt;&lt;/html&gt;
+</pre></div>
+  </div>
+</div>
+
+<details>
+  <summary class="ticket-details-summary">Attachments (2)</summary>
+
+  <ul class="ticket-attachments">
+    
+      <li>
+        <a href="/bugs.jquery.com/attachment/ticket/1331/safari_unicode_regexp.patch/index.html">safari_unicode_regexp.patch</a> (0.6 KB) - added by jhenry
+        <strong>July 05, 2007 03:21PM UTC</strong>.<br>
+        
+      </li>
+    
+      <li>
+        <a href="/bugs.jquery.com/attachment/ticket/1331/safari_unicode_regexp_2.patch/index.html">safari_unicode_regexp_2.patch</a> (0.6 KB) - added by jhenry
+        <strong>July 05, 2007 11:06PM UTC</strong>.<br>
+        
+      </li>
+    
+  </ul>
+</details>
+
+<details open="">
+  <summary class="ticket-details-summary">Change History (32)</summary>
+  
+    <div class="ticket-change flex-column" id="comment:1">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 02, 2007 08:09PM UTC by <span class="author">jhenry</span></span>
+        <a class="ticket-change-link" href="#comment:1">comment:1</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I know that this will be very hard to diagnose without an OS10.3 machine on which to test (since Apple doesn't allow Safari 1.3.2 to run on OS10.4).  If no one has an installation of OS10.3, let me know and I'll see if I can come up with a way to test the engine.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:2">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 02, 2007 08:13PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:2">comment:2</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>version:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ 1.1.3</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I don't have a 10.3 machine - nor do I know anyone who has one. Anything that you can do to break it down will help us. The ideal situation would be one where you can say "I can comment out this line and the problem is now fixed."</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:3">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 02, 2007 08:22PM UTC by <span class="author">jhenry</span></span>
+        <a class="ticket-change-link" href="#comment:3">comment:3</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I'm not familiar with the jquery codebase, so I'm not sure where I'd start commenting out lines.  Could you give me a few svn revision numbers to check out and build during the 1.1.2 to 1.1.3a timeline so I can determine which check-in broke the tree for Safari 1.3.2?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:4">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 02, 2007 09:49PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:4">comment:4</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Well, 1.1.2 was 1465 and 1.1.3a was 1938 - I guess maybe taking a look at every 100 rev or so would be a start, we could drill down from there. You could also do a binary search - split the revisions in half (start at 1700 or so) and if it's broken, go down revision, if it's not broken, go up.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:5">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 02, 2007 10:54PM UTC by <span class="author">jhenry</span></span>
+        <a class="ticket-change-link" href="#comment:5">comment:5</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I started doing some tests on this, and I found that using the uncompressed version of jquery does not crash safari 1.3.2.  It's only the packed version that is causing the error.  I will find the revision at which the packer starts causing safari to crash.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:6">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 02, 2007 11:08PM UTC by <span class="author">jhenry</span></span>
+        <a class="ticket-change-link" href="#comment:6">comment:6</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>This is the revision that causes the packed code to crash safari:</p><p><a href="http://dev.jquery.com/changeset/1595" class="ext-link"><span class="icon"></span>http://dev.jquery.com/changeset/1595</a></p><p>1594 works.</p><p>I'm taking a look at the packer to see if there's a good reason for this to happen on those strings.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:7">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 02, 2007 11:44PM UTC by <span class="author">jhenry</span></span>
+        <a class="ticket-change-link" href="#comment:7">comment:7</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Applying this diff makes safari 1.3.2 not crash  (however, nothing works correctly because all the selectors are broken):</p><pre class="wiki">
+Index: src/selector/selector.js
+===================================================================
+--- src/selector/selector.js    (revision 2214)
++++ src/selector/selector.js    (working copy)
+@@ -61,9 +61,11 @@
+                // Match: :contains('foo')
+                /^(:)([\\w-]+)\\("?'?(.*?(\\(.*?\\))?[^(]*?)"?'?\\)/,
+ 
++               jQuery.chars = "(?:[\\\\w\\u0128-\\uFFFF*_-]|\\\\\\\\.)"
++
+                // Match: :even, :last-chlid, #id, .class
+                new RegExp("^([:.#]*)(" + 
+-                       ( jQuery.chars = "(?:[\\\\w\\u0128-\\uFFFF*_-]|\\\\\\\\.)" ) + "+)")
++                       ( jQuery.chars ) + "+)")
+        ],
+ 
+        multiFilter: function( expr, elems, not ) {
+</pre><p>If I simply replace all instances of jQuery.chars with the string that is assigned to it in the line above, jQuery loads in Firefox (and works) but crashes Safari 1.3.2.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:8">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 02, 2007 11:58PM UTC by <span class="author">jhenry</span></span>
+        <a class="ticket-change-link" href="#comment:8">comment:8</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I accidentally omitted a semicolon in the above diff.  Adding the semicolon causes safari to crash and everything to work again, so it isn't the placement of that assignment inside the string concatenation that is causing the crash.  It is the packing of something in that string (or so it appears).</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:9">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 03, 2007 12:07AM UTC by <span class="author">jhenry</span></span>
+        <a class="ticket-change-link" href="#comment:9">comment:9</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I'm sorry for all the misleading comments on this ticket.  I made a mistake during one of the first builds and copied the unpacked jquery.js from the source directory rather than the dist directory and thus assumed that the file was not crashing safari when it was unpacked in my simple test case of loading the library.</p><p>This is not the case.  It crashes it compressed or uncompressed.  The revision where the bug appears is still correct.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:10">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 03, 2007 12:20AM UTC by <span class="author">bcherne</span></span>
+        <a class="ticket-change-link" href="#comment:10">comment:10</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>@jhenry: Please confirm this on unpacked version (from jresig's original 1.1.3 release email)... on line 849, if you remove (?:[\\\\w\\u0128-\\uFFFF*_-]|\\\\\\\\.) then Safari 1.3.2 does not crash.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:11">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 03, 2007 12:25AM UTC by <span class="author">bcherne</span></span>
+        <a class="ticket-change-link" href="#comment:11">comment:11</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>More specifically, if I remove "\\u0128-\\uFFFF" from line 849, then Safari 1.3.2 does not crash when loading jquery-1.1.3.js. I don't understand enough about regular expressions or what this code does to recommend changes... hopefully this is enough...</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:12">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 03, 2007 01:59AM UTC by <span class="author">bcherne</span></span>
+        <a class="ticket-change-link" href="#comment:12">comment:12</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Possible solution!</p><p>@jhenry, please confirm....</p><p>If you escape the slashes (so it becomes "\\\\u0128-\\\\uFFFF") then Safari 1.3.2 does not crash, AND it successfully parses IDs and classes and what not. However, Safari 2.0.4 does not understand this... it requires the single slash.</p><p>\\\\u0128-\\\\uFFFF works in:</p><p>Safari 1.3.2</p><p><a href="/bugs.jquery.com/wiki/MacFF2">MacFF2</a>, <a href="/bugs.jquery.com/wiki/WinFF2">WinFF2</a></p><p><a href="/bugs.jquery.com/wiki/WinIE6">WinIE6</a>, <a href="/bugs.jquery.com/wiki/WinIE7">WinIE7</a></p><p>\\u0128-\\uFFFF works in:</p><p>Safari 2.0.4</p><p><a href="/bugs.jquery.com/wiki/MacFF2">MacFF2</a>, <a href="/bugs.jquery.com/wiki/WinFF2">WinFF2</a></p><p><a href="/bugs.jquery.com/wiki/WinIE6">WinIE6</a>, <a href="/bugs.jquery.com/wiki/WinIE7">WinIE7</a></p><p>I'll let you guys figure out how to implement it... I don't want to have all the fun. :) Also note that "\\u0128\\uFFFF" (sans hyphen) does not crash Safari 1.3.2... but obviously does not have the intended result either. :)</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:13">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 03, 2007 03:00AM UTC by <span class="author">jhenry</span></span>
+        <a class="ticket-change-link" href="#comment:13">comment:13</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>The real problem is that Safari 2.0.4 doesn't understand \\\\u0128 as a unicode character.  Safari 2.0.4 requires \\u0128 to match in a regular expression.  This can be verified using the following test:</p><pre class="wiki">
+\\u0041 == A: &lt;span id="jsUnicodeResults2"&gt;Test Not Run&lt;/span&gt;&lt;script type="text/javascript"&gt;document.getElementById("jsUnicodeResults2").innerHTML = ("\\u0041" == "A");&lt;/script&gt;&lt;br /&gt;
+Regex "\\u0041" matches "A": &lt;span id="jsUnicodeResults4"&gt;Test Not Run&lt;/span&gt;&lt;script type="text/javascript"&gt;var jsReTest2 = new RegExp("\\u0041");document.getElementById("jsUnicodeResults4").innerHTML = (jsReTest2.exec("A") != null);
+</pre><p>It would seem to me that doing browser version detection to slot in the appropriate character codes for Safari 2.0.4 would solve the problem, but it has to detect for Safari 2.0.4 rather than the others.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:14">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 03, 2007 03:08PM UTC by <span class="author">jhenry</span></span>
+        <a class="ticket-change-link" href="#comment:14">comment:14</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>On getting in to work this morning and checking on my 10.3 box, I found that using the escaped slash in the sequence \\\\u0128-\\\\u0FFF doesn't crash safari 1.3.2, but it doesn't really work either (none of the selectors seem to be working to allow jquery to operate).</p><p>The closest I can get to working in Safari 1.3.2 by changing that one line of code is to remove the unicode sequences.</p><p>So code for a workaround might be:</p><pre class="wiki">
+
+if(safari) {
+  if(version &lt; 2) {
+    unicode = "";
+  }
+  else {
+    unicode = "\\u0128-\\u0FFF";
+  }
+}
+else {
+  unicode = "\\\\u0128-\\\\u0FFF";
+}
+
+jQuery.chars = "(?:[\\\\w" + unicode + "*_-]|\\\\\\\\.)";
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:15">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 03, 2007 03:30PM UTC by <span class="author">bcherne</span></span>
+        <a class="ticket-change-link" href="#comment:15">comment:15</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I tested Safari 1.3.2 yesterday with some simple selectors (#foo, .bar, :even) and those seemed to be working with the \\\\u0128-\\\\u0FFF code. Is there a test suite I should be using instead?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:16">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 03, 2007 04:46PM UTC by <span class="author">jhenry</span></span>
+        <a class="ticket-change-link" href="#comment:16">comment:16</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I was just doing quick tests by dropping the modified jquery into my development site and one of the applications on the page was a tabber.  All the divs in the tabber were layered on top of each other in Safari 1.3.2 with the \\\\u0128-\\\\u0FFF code.  With the unicode removed, the visibility on each of the divs was set correctly.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:17">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 03, 2007 06:37PM UTC by <span class="author">bcherne</span></span>
+        <a class="ticket-change-link" href="#comment:17">comment:17</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Darn! I knew it was too good to be true. My simple tests were too simple... they work even when I remove unicode characters!</p><p>What do lines 848 and 849 do? The "Match :even, :last-child, #id, .class" comment doesn't seem to encapsulate what that line really does, or am I missing something? The other way of asking this is: if we remove \\u0128-\\u0FFF what should break?</p><p>Obviously getting Safari 1.3.2 to not crash is a priority (especially now that this is an official release and out in the wild). But breaking Safari 1.3.2 in some way (by removing the unicode) needs to be noted. .... and I'm still hoping we can find a work around ....</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:18">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 03, 2007 07:08PM UTC by <span class="author">bcherne</span></span>
+        <a class="ticket-change-link" href="#comment:18">comment:18</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>These folks have run into the same problem: <a href="http://dev.rubyonrails.org/ticket/8332" class="ext-link"><span class="icon"></span>http://dev.rubyonrails.org/ticket/8332</a></p><p>Their solution was to replace "\\u0128-\\u0FFF" with "\\\\s\\\\S" ... the comment for their fix was "Replaced Unicode range with another any-character character class." I made the change in my local jquery-1.1.3.js, Safari 1.3.2 does not crash and jQuery seems to work.</p><p>Is "\\u0128-\\u0FFF" synonymous with "\\\\s\\\\S" ... are we losing/gaining anything? How can I test to make sure this pattern still works as intended?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:19">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 03, 2007 07:34PM UTC by <span class="author">jhenry</span></span>
+        <a class="ticket-change-link" href="#comment:19">comment:19</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Browsing through other project repositories, I've found definitive information that unicode ranges in Safari 1.3.2 will never work.</p><p><a href="http://webkit.org/blog/32/webkit-fixes-in-safari-202-mac-os-x-1043/" class="ext-link"><span class="icon"></span>http://webkit.org/blog/32/webkit-fixes-in-safari-202-mac-os-x-1043/</a></p><p>Another project was reporting a similar trouble with safari crashing.  They wanted to match any character and they chose to use the combination of spaces and not spaces \\s\\S.  We can use "not spaces" here to accomplish the same thing.</p><p><a href="http://dev.rubyonrails.org/attachment/ticket/8332/scriptfragment-no-unicode.diff" class="ext-link"><span class="icon"></span>http://dev.rubyonrails.org/attachment/ticket/8332/scriptfragment-no-unicode.diff</a></p><p>The code will then read something similar to:</p><pre class="wiki">
+
+jQuery.chars = "(?:[\\\\S&&[^DO_NOT_MATCH_THIS]]|\\\\\\\\.)";
+
+</pre><p>I've confirmed that new <a href="/bugs.jquery.com/wiki/RegExp">RegExp</a>("\\\\S").exec("\\u0129") returns true in safari which means that \\u0129 is matching as not a space.</p><p>There are obviously characters that should explicitly not be matched, and those should be negated in the intersection of the regexp.  John: can you weigh in here on what this pattern should *not* match so we can build an analogue without the unicode patterns?  If we cannot do it without using unicode patterns, we should simply remove unicode support for any build less than Safari 2.0.2 as they're not supported in the regular expression engine for that browser.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:20">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 03, 2007 07:36PM UTC by <span class="author">jhenry</span></span>
+        <a class="ticket-change-link" href="#comment:20">comment:20</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>bcherne: it appears as though we were working on similar lines at the same time.  I just need to know what in the unicode range \\u0001 to \\u0128 we cannot match in this regular expression so that it can go in the intersection with \\S.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:21">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 04, 2007 03:22PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:21">comment:21</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Thanks for doing all the hard work on this, jhenry - I think the ideal solution is just going to be falling back to a less-powerful regexp in Safari 1.3. Something like:</p><p>  jQuery.browser.safari && jQuery.browser.version &lt; "2.0.0" ? "\\\\w" : "Unicode Regexp"</p><p>I'll look into this later today, to see if I can find a better solution.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:22">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 04, 2007 04:15PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:22">comment:22</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ fixed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Fixed in SVN rev [2233]. jhenry, let me know if this works for you, I plan on pushing it live later today.</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:23">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 05, 2007 04:57AM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:23">comment:23</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>milestone:</th>
+                  <td>
+                    
+                      <span class="change-field-old">1.1.3</span> → <span class="change-field-new">1.1.4</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:24">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 05, 2007 10:59AM UTC by <span class="author">Ru</span></span>
+        <a class="ticket-change-link" href="#comment:24">comment:24</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-old strikethrough">fixed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">closed</span> → <span class="change-field-new">reopened</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Hi, I've retested this on OS X 10.3.x with Safari 1.2 and 1.3 and this bug is still open, it still crashes the browser :( - please let me know if you have any more luck with this or if you'd like me to test.</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:25">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 05, 2007 01:43PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:25">comment:25</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>@Ru, jhrenry - No one that I know has a copy of Safari 1.3 to test with, so please any help is appreciated. I committed the fix that jhenry recommended - if it's still crashing, then it's not related to what jhenry mentioned.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:26">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 05, 2007 01:56PM UTC by <span class="author">jhenry</span></span>
+        <a class="ticket-change-link" href="#comment:26">comment:26</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Safari uses an internal build number for the version number instead of something sane like "2.0.2".  The build number for 2.0.2 is 416.12, so the test string should be something like:</p><pre class="wiki">
+jQuery.browser.safari && jQuery.browser.version &lt; "416.12" ? "\\\\w" : "Unicode Regexp"
+</pre><p>I will patch the version in svn and test it as soon as I have access to my 1.3.2 box.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:27">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 05, 2007 02:11PM UTC by <span class="author">Ru</span></span>
+        <a class="ticket-change-link" href="#comment:27">comment:27</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>@ john  - Hey, I'm currently testing with browsercam and it reports the error.  I'm trying to get remote access or physical access to the particular Mac build but its taking time :(</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:28">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 05, 2007 03:21PM UTC by <span class="author">jhenry</span></span>
+        <a class="ticket-change-link" href="#comment:28">comment:28</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Attached is a patch against r2248 verified working in Safari 1.3.2.  Note that "\\\\w" isn't enough as the character groups must be the same as the other half of the regexp for things to work correctly.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:29">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 05, 2007 07:17PM UTC by <span class="author">jhenry</span></span>
+        <a class="ticket-change-link" href="#comment:29">comment:29</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Incidentally, you do not need Safari 1.3.2 (and OS10.3.9) to test for this bug.  You can test in safari 2.0.0 available at <a href="http://www.michelf.com/projects/multi-safari/" class="ext-link"><span class="icon"></span>http://www.michelf.com/projects/multi-safari/</a> on a machine that has OS10.4 installed.  (This is because the bug was fixed in 2.0.2)</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:30">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 05, 2007 08:44PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:30">comment:30</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>@jhenry - I applied your patch (SVN rev [2253]) and loaded it up in Safari 2.0.0, but it still crashes. Can you confirm this?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:31">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 05, 2007 11:05PM UTC by <span class="author">jhenry</span></span>
+        <a class="ticket-change-link" href="#comment:31">comment:31</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>It's a problem with the revision number comparison.  It's not crashing for me in 1.3.2 because it can interpret the revision number as a float (eg. xyz.w).  The reason that it's crashing in 2.0.0 is because the revision is not a valid floating point number.  It is 412.2.2.  If you add a parseInt(), it works.</p><p>Attached is an updated patch that works with 2.0.0.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:32">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 06, 2007 01:39PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:32">comment:32</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ fixed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">reopened</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Committed in SVN rev [2256] - works in Safari 2.0.0 for me - great work jhenry. I wanna try and fix up a couple other bugs then I may do a 1.1.3.2 release - or just go straight to 1.1.4.</p><p>In the meantime, you can grab the code from the jQuery nightlies:</p><p><a href="http://code.jquery.com/nightlies/jquery-nightly.js" class="ext-link"><span class="icon"></span>http://code.jquery.com/nightlies/jquery-nightly.js</a></p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+</details>
+</div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

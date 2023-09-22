@@ -1,0 +1,31 @@
+Index: selector.js
+===================================================================
+--- selector.js	(révision 5962)
++++ selector.js	(copie de travail)
+@@ -68,7 +68,7 @@
+ 	// The regular expressions that power the parsing engine
+ 	parse: [
+ 		// Match: [@value='test'], [@foo]
+-		/^(\[) *@?([\w:-]+) *([!*$^~=]*) *('?"?)(.*?)\4 *\]/,
++		/^(\[) *@?([\w:-]+) *([!*$^~=]*) *('?"?)(\/?)(.*?)\5([ig]*)\4 *\]/,
+ 
+ 		// Match: :contains('foo')
+ 		/^(:)([\w-]+)\("?'?(.*?(\(.*?\))?[^(]*?)"?'?\)/,
+@@ -340,11 +340,12 @@
+ 						z = jQuery.attr(a,m[2]) || '';
+ 
+ 					if ( (type == "" && !!z ||
+-						 type == "=" && z == m[5] ||
+-						 type == "!=" && z != m[5] ||
+-						 type == "^=" && z && !z.indexOf(m[5]) ||
+-						 type == "$=" && z.substr(z.length - m[5].length) == m[5] ||
+-						 (type == "*=" || type == "~=") && z.indexOf(m[5]) >= 0) ^ not )
++						 type == "=" && z == m[6] ||
++						 type == "!=" && z != m[6] ||
++						 type == "^=" && z && !z.indexOf(m[6]) ||
++						 type == "$=" && z.substr(z.length - m[6].length) == m[6] ||
++						 type == "*=" && z.indexOf(m[6]) >= 0 ||
++						 type == "~=" && !!z.match(new RegExp(m[6], m[7])) )^ not )
+ 							tmp.push( a );
+ 				}
+ 

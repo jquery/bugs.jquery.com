@@ -1,0 +1,35 @@
+Index: src/fx.js
+===================================================================
+--- src/fx.js	(revision 3694)
++++ src/fx.js	(working copy)
+@@ -219,6 +219,7 @@
+ 	},
+ 	
+ 	timers: [],
++	timerId: null,
+ 
+ 	fx: function( elem, options, prop ){
+ 		this.options = options;
+@@ -273,16 +274,18 @@
+ 
+ 		jQuery.timers.push(t);
+ 
+-		if ( jQuery.timers.length == 1 ) {
+-			var timer = setInterval(function(){
++		if ( jQuery.timerId == null ) {
++			jQuery.timerId = setInterval(function(){
+ 				var timers = jQuery.timers;
+ 				
+ 				for ( var i = 0; i < timers.length; i++ )
+ 					if ( !timers[i]() )
+ 						timers.splice(i--, 1);
+ 
+-				if ( !timers.length )
+-					clearInterval( timer );
++				if ( !timers.length ) {
++					clearInterval( jQuery.timerId );
++					jQuery.timerId = null;
++				}
+ 			}, 13);
+ 		}
+ 	},

@@ -1,0 +1,156 @@
+Index: demo/custom-messages-metadata-demo.htm
+===================================================================
+--- demo/custom-messages-metadata-demo.htm	(revision 0)
++++ demo/custom-messages-metadata-demo.htm	(revision 0)
+@@ -0,0 +1,85 @@
++<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
++<html xmlns="http://www.w3.org/1999/xhtml">
++<head>
++<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
++<title>jQuery validation plug-in - comment form example</title>
++
++<link rel="stylesheet" type="text/css" media="screen" href="css/screen.css" />
++
++<script src="../lib/jquery.js" type="text/javascript"></script>
++<script src="../jquery.validate.js" type="text/javascript"></script>
++<script src="../lib/jquery.metadata.js" type="text/javascript"></script>
++
++<!-- for styling the form -->
++<script src="js/cmxforms.js" type="text/javascript"></script>
++
++<script type="text/javascript">
++$(document).ready(function() {
++	$("#commentForm").validate({meta: "validate"});
++	$("#commentForm2").validate();
++	$("#commentForm3").validate({
++								messages:{
++										email:{ 
++											required:'Enter this!'
++										}
++									}		
++								});
++
++});
++</script>
++
++<style type="text/css">
++form { width: 500px; }
++form label { width: 250px; }
++form label.error, 
++form input.submit { margin-left: 253px; }
++</style>
++
++</head>
++<body>
++<!-- Custom messages with custom "meta" setting -->
++<form class="cmxform" id="commentForm" method="post" action="">
++	<fieldset>
++		<legend>Please enter your email address</legend>
++		<p>
++
++			<label for="cemail">E-Mail *</label>
++			<input id="cemail" name="email" class="{validate:{required:true, email:true, messages:{required:'Please enter your email address', email:'Please enter a valid email address'}}}"/>
++		</p>
++		<p>
++			<input class="submit" type="submit" value="Submit"/>
++		</p>
++	</fieldset>
++</form>
++<!-- Custom messages with default "meta" setting -->
++<form class="cmxform" id="commentForm2" method="post" action="">
++	<fieldset>
++		<legend>Please enter your email address</legend>
++		<p>
++
++			<label for="cemail">E-Mail *</label>
++			<input id="cemail" name="email" class="{required:true, email:true, messages:{required:'Please enter your email address', email:'Please enter a valid email address'}}"/>
++		</p>
++		<p>
++			<input class="submit" type="submit" value="Submit"/>
++		</p>
++	</fieldset>
++</form>
++<!-- Custom message for "required" in metadata is overriden by a validate option -->
++<form class="cmxform" id="commentForm3" method="post" action="">
++	<fieldset>
++		<legend>Please enter your email address</legend>
++		<p>
++
++			<label for="cemail">E-Mail *</label>
++			<input id="cemail" name="email" class="{required:true, email:true, messages:{required:'Please enter your email address', email:'Please enter a valid email address'}}"/>
++		</p>
++		<p>
++			<input class="submit" type="submit" value="Submit"/>
++		</p>
++	</fieldset>
++</form>
++
++
++</body>
++</html>
+\ No newline at end of file
+Index: jquery.validate.js
+===================================================================
+--- jquery.validate.js	(revision 5616)
++++ jquery.validate.js	(working copy)
+@@ -122,15 +122,15 @@
+ 			}
+ 		}
+ 		
+-		var data = jQuery.validator.normalizeRules(
+-		jQuery.extend(
+-			{},
++		var ruleList = jQuery.extend({},
+ 			jQuery.validator.metadataRules(element),
+ 			jQuery.validator.classRules(element),
+ 			jQuery.validator.attributeRules(element),
+ 			jQuery.validator.staticRules(element)
+-		), element);
++			);
++		var data = jQuery.validator.normalizeRules(ruleList, element);
+ 		
++		
+ 		// make sure required is at front
+ 		if (data.required) {
+ 			var param = data.required;
+@@ -496,6 +496,20 @@
+ 			return true;
+ 		},
+ 		
++		// return the custom message for the given element and validation method speicifed in the element's "messages" metadata 
++		customMetaMessage: function(element, method) {
++			if (!jQuery.metadata) return undefined;
++			
++			var metaKey = jQuery.data(element.form, 'validator').settings.meta;
++			var meta = metaKey ? 
++				jQuery(element).metadata()[metaKey] : 
++				jQuery(element).metadata();
++			
++			return meta.messages ? 
++				meta.messages[method] : 
++				undefined;
++		},
++				
+ 		// return the custom message for the given element name and validation method
+ 		customMessage: function( name, method ) {
+ 			var m = this.settings.messages[name];
+@@ -516,6 +530,7 @@
+ 		defaultMessage: function( element, method) {
+ 			return this.findDefined(
+ 				this.customMessage( element.name, method ),
++				this.customMetaMessage( element, method ),
+ 				// title is never undefined, so handle empty string as undefined
+ 				element.title || undefined,
+ 				jQuery.validator.messages[method],
+@@ -831,6 +846,11 @@
+ 			}
+ 		}
+ 		
++		// To support custom messages in metadata ignore rule methods titled "messages"
++		if (rules.messages) {
++			delete rules.messages
++		}
++		
+ 		return rules;
+ 	},
+ 	

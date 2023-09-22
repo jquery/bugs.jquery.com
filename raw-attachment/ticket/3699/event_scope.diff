@@ -1,0 +1,149 @@
+Index: test/unit/event.js
+===================================================================
+--- test/unit/event.js	(revision 6337)
++++ test/unit/event.js	(working copy)
+@@ -162,6 +162,25 @@
+ 	jQuery("#firstp").trigger("custom");
+ });
+ 
++test("bind(), with scope", function() {
++	expect(4);
++	var scope = { myScope: true },
++		data = { myData: true },
++		handler1 = function( event ) {
++			equals( this, scope, "bind() with scope" );
++		},
++		handler2 = function( event ) {
++			equals( this, scope, "bind() with scope and data" );
++			equals( event.data, data, "bind() with scope and data" );
++		};
++	
++	jQuery("#firstp")
++		.bind("click", handler1, scope).click().unbind("click", handler1)
++		.bind("click", data, handler2, scope).click().unbind("click", handler2);
++
++	ok( !jQuery.data(jQuery("#firstp")[0], "events"), "Event handler unbound when using scope and data." );
++});
++
+ test("unbind(type)", function() {
+ 	expect( 0 );
+ 	
+@@ -490,7 +509,7 @@
+ });
+ 
+ test(".live()/.die()", function() {
+-	expect(54);
++	expect(57);
+ 
+ 	var submit = 0, div = 0, livea = 0, liveb = 0;
+ 
+@@ -587,6 +606,17 @@
+ 	jQuery("#foo").live("click", function(e, data){ equals( data, true, "live with trigger data" ); });
+ 	jQuery("#foo").trigger("click", true).die("click");
+ 
++	// Test binding with scope
++	jQuery("#foo").live("click", function(e){ equals( this.foo, "bar", "live with event scope" ); }, { foo: "bar" });
++	jQuery("#foo").trigger("click").die("click");
++
++	// Test binding with scope and data
++	jQuery("#foo").live("click", true, function(e){
++		equals( e.data, true, "live event with event scope and data" );
++		equals( this.foo, "bar", "live with event scope and data" ); 
++	}, { foo: "bar" });
++	jQuery("#foo").trigger("click").die("click");
++
+ 	// Verify that return false prevents default action
+ 	jQuery("#anchor2").live("click", function(){ return false; });
+ 	var hash = window.location.hash;
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 6337)
++++ src/event.js	(working copy)
+@@ -374,8 +374,12 @@
+ 		return event;
+ 	},
+ 
+-	proxy: function( fn, proxy ) {
+-		proxy = proxy || function() { return fn.apply( this, arguments ); };
++	proxy: function( fn, proxy, scope ) {
++		if ( proxy !== undefined && !jQuery.isFunction( proxy ) ) {
++			scope = proxy;
++			proxy = undefined;
++		}
++		proxy = proxy || function() { return fn.apply( scope !== undefined ? scope : this, arguments ); };
+ 		// Set the guid of unique handler to the same of original handler, so it can be removed
+ 		proxy.guid = fn.guid = fn.guid || proxy.guid || this.guid++;
+ 		// So proxy can be declared as an argument
+@@ -506,19 +510,35 @@
+ });
+ 
+ jQuery.fn.extend({
+-	bind: function( type, data, fn ) {
+-		return type === "unload" ? this.one(type, data, fn) : this.each(function() {
+-			jQuery.event.add( this, type, fn || data, fn && data );
++	bind: function( type, data, fn, scope ) {
++		if ( jQuery.isFunction( data ) ) {
++			if ( fn !== undefined ) {
++				scope = fn;
++			}
++			fn = data;
++			data = undefined;
++		}
++		fn = scope === undefined ? fn : jQuery.event.proxy( fn, scope );
++		return type === "unload" ? this.one(type, data, fn, scope) : this.each(function() {
++			jQuery.event.add( this, type, fn, data, scope );
+ 		});
+ 	},
+ 
+-	one: function( type, data, fn ) {
+-		var one = jQuery.event.proxy( fn || data, function( event ) {
++	one: function( type, data, fn, scope ) {
++		if ( jQuery.isFunction( data ) ) {
++			if ( fn !== undefined ) {
++				scope = fn;
++			}
++			fn = data;
++			data = undefined;
++		}
++		fn = scope === undefined ? fn : jQuery.event.proxy( fn, scope );
++		var one = jQuery.event.proxy( fn, function( event ) {
+ 			jQuery( this ).unbind( event, one );
+-			return (fn || data).apply( this, arguments );
++			return (fn).apply( this, arguments );
+ 		});
+ 		return this.each(function() {
+-			jQuery.event.add( this, type, one, fn && data );
++			jQuery.event.add( this, type, one, data, scope );
+ 		});
+ 	},
+ 
+@@ -587,10 +607,17 @@
+ 		return this;
+ 	},
+ 
+-	live: function( type, data, fn ) {
++	live: function( type, data, fn, scope ) {
++		if ( jQuery.isFunction( data ) ) {
++			if ( fn !== undefined ) {
++				scope = fn;
++			}
++			fn = data;
++			data = undefined;
++		}
+ 		jQuery( this.context ).bind( liveConvert( type, this.selector ), {
+-			data: fn && data, selector: this.selector, live: type
+-		}, fn || data );
++			data: data, selector: this.selector, live: type
++		}, fn, scope );
+ 		return this;
+ 	},
+ 
+@@ -618,7 +645,7 @@
+ 
+ 	jQuery.each(elems, function() {
+ 		event.currentTarget = this.elem;
+-		event.data = this.fn.data
++		event.data = this.fn.data;
+ 		if ( this.fn.apply( this.elem, args ) === false ) {
+ 			return (stop = false);
+ 		}

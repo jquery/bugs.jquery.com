@@ -1,0 +1,122 @@
+<script type="text/javascript">
+$(function(){
+$("#WebPartWPQ4 *").css('font-family','helvetica');
+$("#WebPartWPQ4 *").css('font-size','12px');
+$("#WebPartWPQ4 *").css('font-weight','bold');
+$("#WebPartWPQ4 *:not(a)").css('color','#555');
+
+$("#WebPartWPQ5 *").css('font-family','helvetica');
+$("#WebPartWPQ5 *").css('font-size','12px');
+$("#WebPartWPQ5 *").css('font-weight','bold');
+$("#WebPartWPQ5 *:not(a)").css('color','#555');
+
+var selector = $("table[class=ms-summarystandardbody][summary=Images] > tbody > tr:gt(0) > td > a[Onfocus=OnLink(this)] ");
+var Tnlimit = 3;
+selector.each(function(){
+	var url = $(this).attr("href");
+        $(".ISlideShow").append("<div><img alt='img' src='"+url+"'/></div>");
+	if (Tnlimit !=0){
+		$(".ImagesFetched").append("<img alt='img' src='"+url+"'/>");
+	Tnlimit -=1;
+	}});
+        
+        var Icount = $(".ISlideShow div").length;
+        var fade = setInterval("rotateImages()",5000);
+	$(".ISlideShow div").hover(function(){
+                 clearInterval(fade);
+		$(".Thumbnails").show();
+	      },function(){
+		$(".Thumbnails").hide();
+	         $(".ISlideShow div").show();
+		fade = setInterval("rotateImages()",5000);
+	});
+	$(".Thumbnails").hover(function(){
+                 clearInterval(fade);
+		$(".Thumbnails").show();
+		},function(){
+		$(".Thumbnails").hide();
+                 $(".ISlideShow div").show();
+		fade = setInterval("rotateImages()",5000);
+	});
+	$(".Thumbnails img").hover(function(){
+		var checkurl = $(this).attr("src");
+		$(".ISlideShow div").hide();
+		$(".ISlideShow div img[src = '"+checkurl+"']").parent().show();
+	},function(){
+
+	});
+        var x = $('div#WebPartWPQ7').width();
+        $('.Thumbnails .TImages').css('width',x);
+        var y = $(".Thumbnails div img").length;
+        var BGwidth = 95*y;
+	$(".Thumbnails .transparent").css('width',BGwidth);
+	$(".Thumbnails .transparent").css('margin-left',x-BGwidth);
+ });
+ function rotateImages(){
+	var oCurPhoto = $(".ISlideShow div.current");
+	var oNxtPhoto = oCurPhoto.next();
+	if(oNxtPhoto.length == 0)
+		oNxtPhoto = $(".ISlideShow div:eq(0)");
+	oCurPhoto.removeClass("current").addClass("previous");
+	oNxtPhoto.css({opacity:0}).addClass("current").animate({opacity:1},1000,function(){oCurPhoto.removeClass("previous");});
+  }
+ </script>
+ <style type="text/css">
+        div.ISlideShow{
+		width:344px;
+		height:209px;	
+	}
+	.ISlideShow div{
+		position:absolute;
+		z-index:0;
+	}
+	.ISlideShow div img{
+		width:344px;
+		height:209px;
+	}
+	.ISlideShow div.previous{
+		z-index:1;
+	}
+	.ISlideShow div.current{
+		z-index:2;
+		opacity:1;
+	}
+	.Thumbnails{
+		display:none;
+	}
+	.Thumbnails .TImages{
+		position:absolute;
+		z-index:3;
+		margin-top:-70px; 
+	}
+	.Thumbnails .transparent{
+		position:absolute;
+		z-index:2;
+		background-color:#fff;
+		 filter: alpha(opacity=50);  
+                 -moz-opacity: 0.5;  
+                 -khtml-opacity: 0.5;  
+                 opacity: 0.5;  
+                 height:70px;
+		margin-top:-70px; 
+	}
+	.Thumbnails div{
+		float:right;
+		padding-top:5px;
+	}
+	.Thumbnails div img{
+		width:75px;
+		height:50px;
+		margin-right:15px;
+	}	
+    
+ </style>
+<div class="ISlideShow" style ="width:100%"></div>
+<div class="Thumbnails">
+	<div class="TImages">
+		<div class="ImagesFetched"></div>
+	</div>
+	<div class="transparent">
+		&nbsp;
+	</div>
+</div>

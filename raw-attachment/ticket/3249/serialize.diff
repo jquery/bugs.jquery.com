@@ -1,0 +1,13 @@
+Index: jquery/src/ajax.js
+===================================================================
+--- jquery/src/ajax.js	(revision 5825)
++++ jquery/src/ajax.js	(working copy)
+@@ -66,7 +66,7 @@
+ 	},
+ 	serializeArray: function() {
+ 		return this.map(function(){
+-			return jQuery.nodeName(this, "form") ?
++			return this.elements ?
+ 				jQuery.makeArray(this.elements) : this;
+ 		})
+ 		.filter(function(){

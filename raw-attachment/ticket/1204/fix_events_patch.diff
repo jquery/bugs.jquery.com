@@ -1,0 +1,43 @@
+Index: /Users/yehudakatz/Documents/workspace/jquery/trunk/jquery/src/event/event.js
+===================================================================
+--- /Users/yehudakatz/Documents/workspace/jquery/trunk/jquery/src/event/event.js	(revision 1912)
++++ /Users/yehudakatz/Documents/workspace/jquery/trunk/jquery/src/event/event.js	(working copy)
+@@ -186,6 +186,23 @@
+ 		if ( !event.target && event.srcElement )
+ 			event.target = event.srcElement;
+ 
++    // Add relatedTarget, if necessary
++    if ( typeof event.relatedTarget == "undefined" && typeof event.fromElement != "undefined" )
++      event.relatedTarget = (event.fromElement == event.target) ? event.toElement : event.fromElement;
++
++    // Add metaKey to non-Mac browsers (use ctrl for PC's and Meta for Macs)
++    if ( typeof event.metaKey == "undefined" && typeof event.ctrlKey != "undefined" )
++      event.metaKey = event.ctrlKey;
++
++    // Add modifiers (allows easy determination of key-combinations)
++    if ( typeof event.modifiers == "undefined" && typeof event.ctrlKey != "undefined" )
++      event.modifiers = (event.altKey ? 1 : 0) + (event.ctrlKey ? 2 : 0) + (event.shiftKey ? 4 : 0);
++
++    // Add which for click: 1 == left; 2 == middle; 3 == right
++    // Note: button is not normalized, so don't use it
++    if ( typeof event.which == "undefined" && typeof event.button != "undefined" )
++      event.which = (event.button & 1 ? 1 : ( event.button & 2 ? 3 : ( event.button & 4 ? 2 : 0 ) ));
++
+ 		// Calculate pageX/Y if missing and clientX/Y available
+ 		if ( event.pageX == undefined && event.clientX != undefined ) {
+ 			var e = document.documentElement || document.body;
+@@ -192,6 +209,14 @@
+ 			event.pageX = event.clientX + e.scrollLeft;
+ 			event.pageY = event.clientY + e.scrollTop;
+ 		}
++
++    // Add which for keypresses: keyCode
++    if ( (typeof event.which == "undefined" || event.type == "keypress") && typeof event.keyCode != "undefined" )
++      event.which = event.keyCode;    
++
++    // If it's a keypress event, add charCode to IE
++    if ( typeof event.charCode == "undefined" && event.type == "keypress" )
++      event.charCode = event.keyCode;
+ 				
+ 		// check if target is a textnode (safari)
+ 		if (jQuery.browser.safari && event.target.nodeType == 3) {

@@ -1,0 +1,14 @@
+Index: ajax.js
+===================================================================
+--- ajax.js	(revision 5615)
++++ ajax.js	(working copy)
+@@ -27,7 +27,8 @@
+ 
+ 			// Otherwise, build a param string
+ 			} else {
+-				params = jQuery.param( params );
++				if( params.constructor != String )
++					params = jQuery.param( params );
+ 				type = "POST";
+ 			}
+ 

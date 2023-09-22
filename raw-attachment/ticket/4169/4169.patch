@@ -1,0 +1,14 @@
+Index: src/selector.js
+===================================================================
+--- src/selector.js	(revision 6215)
++++ src/selector.js	(working copy)
+@@ -427,7 +427,8 @@
+ 					}
+ 					return false;
+ 				}
+-			} else if ( Expr.match.POS.test( match[0] ) || Expr.match.CHILD.test( match[0] ) ) {
++			} else if ( match[1] === "has" ){
++            } else if ( Expr.match.POS.test( match[0] ) || Expr.match.CHILD.test( match[0] ) ) {
+ 				return true;
+ 			}
+ 			

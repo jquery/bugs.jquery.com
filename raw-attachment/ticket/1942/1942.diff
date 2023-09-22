@@ -1,0 +1,37 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 3845)
++++ src/core.js	(working copy)
+@@ -749,7 +749,7 @@
+ 			elem.style[ name ] = elem.style[ "old" + name ];
+ 	},
+ 
+-	css: function( elem, name ) {
++	css: function( elem, name, force ) {
+ 		if ( name == "height" || name == "width" ) {
+ 			var old = {}, height, width;
+ 
+@@ -799,7 +799,7 @@
+ 				width;
+ 		}
+ 
+-		return jQuery.curCSS( elem, name );
++		return jQuery.curCSS( elem, name, force );
+ 	},
+ 
+ 	curCSS: function( elem, name, force ) {
+Index: src/fx.js
+===================================================================
+--- src/fx.js	(revision 3845)
++++ src/fx.js	(working copy)
+@@ -254,8 +254,8 @@
+ 		if ( this.elem[this.prop] != null && this.elem.style[this.prop] == null )
+ 			return this.elem[ this.prop ];
+ 
+-		var r = parseFloat(jQuery.curCSS(this.elem, this.prop, force));
+-		return r && r > -10000 ? r : parseFloat(jQuery.css(this.elem, this.prop)) || 0;
++		var r = parseFloat(jQuery.css(this.elem, this.prop, force));
++		return r && r > -10000 ? r : parseFloat(jQuery.curCSS(this.elem, this.prop)) || 0;
+ 	},
+ 
+ 	// Start an animation from one number to another

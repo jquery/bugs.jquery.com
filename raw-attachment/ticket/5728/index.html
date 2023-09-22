@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>index</title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="Matthew Wozniak">
+	<!-- Date: 2009-12-29 -->
+	<script src="http://code.jquery.com/jquery-latest.pack.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+		var foo;
+		$(function(){
+			foo = $("<img id='foo' src='http://www.google.com/images/srpr/logo1w.png'>");
+			foo.attr("height", 111);
+			console.log(foo.attr("height")); // does *not* work in IE8
+			console.log(foo.get(0).getAttribute("height")); //does return 111
+		});
+	</script>
+</head>
+<body>
+</body>
+</html>

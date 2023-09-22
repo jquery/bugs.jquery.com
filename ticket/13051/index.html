@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">#13051 (Double script loading when present in an HTML page called in AJAX (IE &amp;lt; 10)) - jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      :root{--ticket-info-background-color:#ffd;--ticket-info-border-color:#dd9;--ticket-table-border-color:#eed;--ticket-date-text-color:#996;--ticket-description-title-color:#663;--ticket-changes-text-color:#663;--ticket-changes-box-shadow:#f2f2f2}.ticket-info{position:relative;background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);padding:.5em .75em;margin-bottom:.5em}.ticket-number{font-size:1.15rem;font-weight:700;margin-right:.5em}.ticket-info span{font-size:.8125em;font-weight:700}.ticket-resolution,.ticket-status,.ticket-type{text-transform:uppercase}.missing{color:var(--text-color-link-disabled)}.ticket-title{border-bottom:1px solid #bbb;margin-top:1em;padding-bottom:.25em;font-weight:700;font-size:1.1875rem}.ticket-dates{color:var(--ticket-date-text-color);font-size:.8125rem}.ticket-dates p{margin:0 0 .5em}.ticket-properties{width:100%;text-align:left;font-size:.65rem;border-top:1px solid var(--ticket-table-border-color);margin:0}.ticket-properties th{font-weight:400;width:20%}.ticket-properties td,.ticket-properties th{padding:.25em .5em;border-bottom:1px dashed var(--ticket-table-border-color)}.ticket-info-bottom{padding:.5em}.ticket-description{font-size:.8125rem;margin-top:.5em}.ticket-description h2,.ticket-description h3,.ticket-description h4,.ticket-description h5,.ticket-description h6{text-transform:uppercase;font-weight:400}.ticket-description h1{font-size:1.1rem}.ticket-description h2{font-size:1rem}.ticket-description h3{font-size:.9rem}.ticket-description h4{font-size:.8rem}.ticket-description h5{font-size:.75rem}.ticket-description h6{font-size:.7rem}.ticket-description-title{color:var(--ticket-description-title-color);font-size:.75rem}details{padding:.5em 0;font-size:.8125rem}summary{color:var(--text-color-link);font-weight:700;font-size:.875rem;text-decoration:underline;cursor:pointer;text-shadow:.04em .04em var(--text-shadow-color)}.ticket-attachments{font-size:.75em}.ticket-comment-body{width:100%;padding-top:.5em}.ticket-change{margin:1em 0;clear:both}.ticket-change-header{font-size:.875rem;font-weight:700;box-shadow:1.4px 2.8px 5.6px 0 var(--ticket-changes-box-shadow)}.ticket-change-link{font-size:.85em}.ticket-change-content{width:100%}.ticket-changes{background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);color:var(--ticket-changes-text-color);font-size:.7rem;float:right;clear:right;margin:2em 0 1em 1.5em}.ticket-changes th{text-align:right;font-weight:400;text-transform:capitalize}.ticket-changes td,.ticket-changes th{padding:.25em;vertical-align:baseline}.ticket-changes .change-field-new{font-weight:700}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+<div class="flex-column" data-pagefind-body="">
+  
+
+  <nav class="content-nav">
+    <ul class="flex-row">
+      
+        <li>
+          <a href="/bugs.jquery.com/ticket/13050/">← Previous Ticket</a>
+        
+      
+      
+        </li><li>
+          <a href="/bugs.jquery.com/ticket/13052/">Next Ticket →</a>
+        </li>
+      
+    </ul>
+  </nav>
+
+
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="." class="ticket-number">#13051</a>
+      <span class="ticket-status">closed</span>
+      <span class="ticket-type">bug</span>
+      <span class="ticket-resolution">(wontfix)</span>
+    </h3>
+
+    <div class="ticket-dates">
+      <p>Opened December 13, 2012 04:32PM UTC</p>
+      
+        <p>Closed April 02, 2013 08:38PM UTC</p>
+      
+      
+    </div>
+  </div>
+
+  <h1 class="ticket-title">Double script loading when present in an HTML page called in AJAX (IE &lt; 10)</h1>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        vvo
+      </td>
+      <th>Owned by:</th>
+      <td>vvo</td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        low
+      </td>
+      
+        <th class="missing">Milestone:</th>
+      
+      <td>
+        <a href="/bugs.jquery.com/milestone/None">None</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>ajax</td>
+      
+        <th>Version:</th>
+      
+      <td>1.8.3</td>
+    </tr>
+    <tr>
+      
+        <th class="missing">Keywords:</th>
+      
+      <td></td>
+      
+        <th class="missing">Cc:</th>
+      
+      <td></td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
+    <div class="ticket-description"><p>jQuery version: 1.8.3</p><p>browsers: IE &lt; 10</p><p>I have set up a test page: <a href="http://jsbin.com/itovoz/1" class="ext-link"><span class="icon"></span>http://jsbin.com/itovoz/1</a></p><p>It is a simple page including jQuery 1.8.3 that makes an AJAX call to another jsbin.com page.</p><p>In this AJAX called page I included a &lt;script&gt; tag, this &lt;script&gt; will be loaded twice by all IE &lt; 10.</p><p>What's expected:</p><p>jquery.cookie.min.js is downloaded and executed once</p><p>What's happening:</p><p>jquery.cookie.min.js is downloaded twice</p><p>I noticed I could not ALWAYS reproduce it, I have set up tests page in webpagetest to confirm the behavior, you'll see it's loaded twice:</p><p>IE7: <a href="http://www.webpagetest.org/result/121213_S7_5b2f160556db35d8b71345f84706eb37/1/details/" class="ext-link"><span class="icon"></span>http://www.webpagetest.org/result/121213_S7_5b2f160556db35d8b71345f84706eb37/1/details/</a></p><p>IE8: <a href="http://www.webpagetest.org/result/121213_GF_3df9e063700cc48adcbdf2e602aedfa6/1/details/" class="ext-link"><span class="icon"></span>http://www.webpagetest.org/result/121213_GF_3df9e063700cc48adcbdf2e602aedfa6/1/details/</a></p><p>IE9:</p><p><a href="http://www.webpagetest.org/result/121213_7B_fba12e3b23d9ef5be765693a048a813c/1/details/" class="ext-link"><span class="icon"></span>http://www.webpagetest.org/result/121213_7B_fba12e3b23d9ef5be765693a048a813c/1/details/</a></p><p>Could not reproduce on IE10.</p><p>As I said, sometimes everything is fine which is strange, example on IE8:</p><p><a href="http://www.webpagetest.org/result/121213_4Z_36b3072c31b505e77694f8b0a379d656/1/details/" class="ext-link"><span class="icon"></span>http://www.webpagetest.org/result/121213_4Z_36b3072c31b505e77694f8b0a379d656/1/details/</a></p><p>This is a BIG performance regression and is affecting a lot of websites.</p><p>Very hard to notice but as a webperformance consultant I have seen it many times lately on multiple clients.</p><p>jQuery 1.4.4 is not affected.</p><p>test page: <a href="http://jsbin.com/idasoh/1" class="ext-link"><span class="icon"></span>http://jsbin.com/idasoh/1</a></p><p>test result: <a href="http://www.webpagetest.org/result/121213_FV_400864dd640776b3624b48a940b4978d/1/details/" class="ext-link"><span class="icon"></span>http://www.webpagetest.org/result/121213_FV_400864dd640776b3624b48a940b4978d/1/details/</a> (ran multiple times)</p><p>jQuery 1.6.2 is affected</p><p>test page: <a href="http://jsbin.com/ivicav/1" class="ext-link"><span class="icon"></span>http://jsbin.com/ivicav/1</a></p><p>test result: <a href="http://www.webpagetest.org/result/121213_NS_87f1194933b718ddbc4901c156638178/1/details/" class="ext-link"><span class="icon"></span>http://www.webpagetest.org/result/121213_NS_87f1194933b718ddbc4901c156638178/1/details/</a></p></div>
+  </div>
+</div>
+
+<details>
+  <summary class="ticket-details-summary">Attachments (0)</summary>
+
+  <ul class="ticket-attachments">
+    
+  </ul>
+</details>
+
+<details open="">
+  <summary class="ticket-details-summary">Change History (9)</summary>
+  
+    <div class="ticket-change flex-column" id="comment:1">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 13, 2012 04:51PM UTC by <span class="author">vvo</span></span>
+        <a class="ticket-change-link" href="#comment:1">comment:1</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Also, I could not find the documentation part that talk about the weird (but needed I guess) ?51651321 added to every &lt;script&gt; inserted in AJAX.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:2">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 13, 2012 04:55PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:2">comment:2</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Sorry, I can&#39;t repro on your jsbin test case with IE9. http://i.imgur.com/EhJOv.png&#92;
+&#92;
+Can you try with the current code and see if the problem is still there for you? http://code.jquery.com/jquery-git.js&#92;
+&#92;
+In general, it&#39;s **not a good idea** to design pages load scripts this way. Use `$.getScript()` or use a script loader rather than injecting HTML that happens to have script tags.</span> → <span class="change-field-new">1355417795539197</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+              
+                <tr>
+                  <th>owner:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ vvo</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">pending</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>Sorry, I can't repro on your jsbin test case with IE9. <a href="http://i.imgur.com/EhJOv.png" class="ext-link"><span class="icon"></span>http://i.imgur.com/EhJOv.png</a></p><p>Can you try with the current code and see if the problem is still there for you? <a href="http://code.jquery.com/jquery-git.js" class="ext-link"><span class="icon"></span>http://code.jquery.com/jquery-git.js</a></p><p>In general, it's **not a good idea** to design pages that load scripts this way. Use <code>$.getScript()</code> or use a script loader rather than injecting HTML that happens to have script tags.</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:3">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 13, 2012 05:41PM UTC by <span class="author">vvo</span></span>
+        <a class="ticket-change-link" href="#comment:3">comment:3</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Thanks for answering so fast.&#92;
+&#92;
+All I can say is that you should try harder.&#92;
+As I said and prove (see WPT links for IE8 working well sometimes), this is not happening everytime so this must be based on a timer or something.&#92;
+&#92;
+Here&#39;s another catch using HTTPWatch on IE9, http://i.imgur.com/e4IHa.png&#92;
+And using IE9 developper tools http://i.imm.io/OZpq.png&#92;
+&#92;
+Yes its not a good idea but this is a regression since it should work as the docs says: &#92;
+&#92;
+ &quot;html&quot;: Returns HTML as plain text; included script tags are evaluated when inserted in the DOM.&#92;
+&#92;
+from http://api.jquery.com/jQuery.ajax/&#92;
+&#92;
+Using jQuery.load this way is perfectly fine, I mean I never stumbled accross a &quot;jQuery best practice&quot; saying that we should not do that.&#92;
+&#92;
+The docs of jQuery.ajax even says that if there&#39;s a &lt;script&gt; in it it will work fine since it will be evaluating it so why not doing it? (I&#39;m trying to find justification why some people are doing it)&#92;
+&#92;
+Yes this is a bad practice but a lot of people are doing this in production.</span> → <span class="change-field-new">1355420709578136</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">pending</span> → <span class="change-field-new">new</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>Thanks for answering so fast.</p><p>First, using latest jquery as you provided does not solves it: <a href="http://www.webpagetest.org/result/121213_4J_60683a5c9b7256e109b54801a1b9390a/1/details/." class="ext-link"><span class="icon"></span>http://www.webpagetest.org/result/121213_4J_60683a5c9b7256e109b54801a1b9390a/1/details/.</a></p><p>Second,</p><p>All I can say is that you should try harder (sorry really).</p><p>As I said and prove (see WPT links for IE8 working well sometimes), this is not happening everytime so this must be based on a timer or something.</p><p>Here's another catch using HTTPWatch on IE9, <a href="http://i.imgur.com/e4IHa.png" class="ext-link"><span class="icon"></span>http://i.imgur.com/e4IHa.png</a></p><p>And using IE9 developper tools <a href="http://i.imm.io/OZpq.png" class="ext-link"><span class="icon"></span>http://i.imm.io/OZpq.png</a></p><p>Yes its not a good idea but this is a regression since it should work as the docs says: </p><p> "html": Returns HTML as plain text; included script tags are evaluated when inserted in the DOM.</p><p>from <a href="http://api.jquery.com/jQuery.ajax/" class="ext-link"><span class="icon"></span>http://api.jquery.com/jQuery.ajax/</a></p><p>Using jQuery.load this way is perfectly fine, I mean I never stumbled accross a "jQuery best practice" saying that we should not do that.</p><p>The docs of jQuery.ajax even says that if there's a &lt;script&gt; in it it will work fine since it will be evaluating it so why not doing it? (I'm trying to find justification why some people are doing it)</p><p>Yes this is a bad practice but a lot of people are doing this in production.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:4">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 13, 2012 06:01PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:4">comment:4</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">open</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> All I can say is that you should try harder (sorry really).</blockquote><p>I can see that it occurred from the webpagetest traces. I can mark this open but since I can't repro it the ticket will probably not get any action. If you can repro it consistently you could trace through jQuery and see where the problem is occurring. </p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:5">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 13, 2012 06:01PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:5">comment:5</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>component:</th>
+                  <td>
+                    
+                      <span class="change-field-old">unfiled</span> → <span class="change-field-new">ajax</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>priority:</th>
+                  <td>
+                    
+                      <span class="change-field-old">undecided</span> → <span class="change-field-new">low</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:6">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 13, 2012 06:03PM UTC by <span class="author">vvo</span></span>
+        <a class="ticket-change-link" href="#comment:6">comment:6</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:4 dmethvin]:</p><blockquote> &gt; All I can say is that you should try harder (sorry really).  I can see that it occurred from the webpagetest traces. I can mark this open but since I can't repro it the ticket will probably not get any action. If you can repro it consistently you could trace through jQuery and see where the problem is occurring.  </blockquote><p>I'll try to do that yes. It seems very strange that you could NEVER reproduce it even after many reloads (and cache busting) ?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:7">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 06, 2013 08:39PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:7">comment:7</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>@vvo, still waiting on further analysis from you. I tried doing some debugging but the test case is using the compressed jquery and when I tried switching it to the uncompressed version on the jQuery CDN I was getting errors from jsbin.</p><p>As far as *why* it's requested twice, you can see the reason in the webpagetest.org traces:</p><pre class="wiki">
+http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.2/jquery.cookie.min.js
+http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.2/jquery.cookie.min.js?_=1355420580018
+</pre><p>Since the two requested URLs have different query strings the browser doesn't use the previously requested version.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:8">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 21, 2013 06:56PM UTC by <span class="author">vvo</span></span>
+        <a class="ticket-change-link" href="#comment:8">comment:8</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Hello, so I did a lot of digging.&#92;
+&#92;
+First you&#39;ll find a jquery fork with an simple example to reproduce the bug here: https://github.com/vvo/jquery/tree/double_script_bug. &#92;
+&#92;
+Here I copy paste my commit log:&#92;
+What I have found:&#92;
+&#92;
+The double script bug is easily reproductible.&#92;
+- Clear your browser cache&#92;
+- Use any network observer&#92;
+- cd jquery, launch http-server . -p 80 (npm install http-server)&#92;
+- browse with IE9 and network observer to http://ip:80&#92;
+- see double script loading. One for script.js, other for&#92;
+  script.js?timestamp&#92;
+&#92;
+The javascript is not executed two times, only once.&#92;
+&#92;
+But still it is loaded twice!&#92;
+&#92;
+I used &quot;blind man debugging&quot; (putting returns and reloading the page&#92;
+untill no more script/only one scrip loads)&#92;
+&#92;
+I tracked down the first javascript load (script.js) to be done by:&#92;
+src/manipulation.js#284:&#92;
+fragment = jQuery.buildFragment( args, this[ 0&#92;
+].ownerDocument, false, this );&#92;
+&#92;
+This function will create a new dom fragment element using the ajax&#92;
+request response text. If you return; just before this call, of course&#92;
+your page will fail but you&#39;ll see that there&#39;s no more script loaded.&#92;
+&#92;
+Then if you return just after, you&#39;ll see that there&#39;s the script.js&#92;
+loaded.&#92;
+&#92;
+The second load of scirpt.js?timestamp is done by the append function:&#92;
+manipulation.js#111&#92;
+this.appendChild( elem );&#92;
+&#92;
+So, creating a fragment with a &lt;script src&gt; in it will download the&#92;
+script once, then appending will download the script again (with a&#92;
+timestamp added, the timestamp is not a problem, this is the standard&#92;
+jQuery procedure of loading &lt;scripts&gt; in ajax calls)&#92;
+&#92;
+What we should do I guess is replace() just before creating the fragment&#92;
+to pre-add the timestamp to the script.&#92;
+&#92;
+As I just discovered jQuery core, I need some advice here.&#92;
+&#92;
+[[Image(http://dl.dropbox.com/u/3508235/7IE9%20test%20%5BRunning%5D%20-%20Oracle%20VM%20VirtualBox_006.png)]]</span> → <span class="change-field-new">1358794715218243</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>Hello, so I did a lot of digging.</p><p>First you'll find a jquery fork with an simple example to reproduce the bug here: <a href="https://github.com/vvo/jquery/tree/double_script_bug." class="ext-link"><span class="icon"></span>https://github.com/vvo/jquery/tree/double_script_bug.</a> </p><p>Here I copy paste my commit log:</p><p>What I have found:</p><p>The double script bug is easily reproductible.</p><ul><li>Clear your browser cache</li><li>Use any network observer</li><li>cd jquery, launch http-server . -p 80 (npm install http-server)</li><li>browse with IE9 and network observer to <a href="http://ip:80" class="ext-link"><span class="icon"></span>http://ip:80</a></li><li>see double script loading. One for script.js, other for</li></ul><p>  script.js?timestamp</p><p>The javascript is not executed two times, only once.</p><p>But still it is loaded twice!</p><p>I used "blind man debugging" (putting returns and reloading the page</p><p>untill no more script/only one script loads)</p><p>I tracked down the first javascript load (script.js) to be done by:</p><p><a href="https://github.com/vvo/jquery/blob/double_script_bug/src/manipulation.js#L284:" class="ext-link"><span class="icon"></span>https://github.com/vvo/jquery/blob/double_script_bug/src/manipulation.js#L284:</a></p><p>fragment = jQuery.buildFragment( args, this[ 0</p><p>].ownerDocument, false, this );</p><p>This function will create a new dom fragment element using the ajax</p><p>request response text. If you return; just before this call, of course</p><p>your page will fail but you'll see that there's no more script loaded.</p><p>Then if you return just after, you'll see that there's the script.js</p><p>loaded.</p><p>The second load of scirpt.js?timestamp is done by the append function:</p><p><a href="https://github.com/vvo/jquery/blob/double_script_bug/src/manipulation.js#L111" class="ext-link"><span class="icon"></span>https://github.com/vvo/jquery/blob/double_script_bug/src/manipulation.js#L111</a></p><p>this.appendChild( elem );</p><p>So, creating a fragment with a &lt;script src&gt; in it will download the</p><p>script once, then appending will download the script again (with a</p><p>timestamp added, the timestamp is not a problem, this is the standard</p><p>jQuery procedure of loading &lt;scripts&gt; in ajax calls)</p><p>What we should do I guess is replace() just before creating the fragment</p><p>to pre-add the timestamp to the script.</p><p>As I just discovered jQuery core, I need some advice here.</p><p>[[Image(<a href="http://dl.dropbox.com/u/3508235/7IE9%20test%20%5BRunning%5D%20-%20Oracle%20VM%20VirtualBox_006.png)" class="ext-link"><span class="icon"></span>http://dl.dropbox.com/u/3508235/7IE9%20test%20%5BRunning%5D%20-%20Oracle%20VM%20VirtualBox_006.png)</a>]]</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:9">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 08:38PM UTC by <span class="author">markelog</span></span>
+        <a class="ticket-change-link" href="#comment:9">comment:9</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ wontfix</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">open</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>In IE, script loading starts right after script element became a DOM-node, execution however, happens only after it's attached to the document – <a href="http://jsfiddle.net/YR5ar/," class="ext-link"><span class="icon"></span>http://jsfiddle.net/YR5ar/,</a> that's what happens in </p><pre class="wiki">jQuery.buildFragment</pre>, fixing that, would require manipulation of the argument string, which seems as overkill for that case.<p></p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+</details>
+</div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

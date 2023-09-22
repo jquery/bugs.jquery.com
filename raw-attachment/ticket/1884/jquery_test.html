@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      var html1 = "<a href='#'>hello #1</a><scr" + "ipt>$(function () { alert('I will execute');" +
+                  "$('a').click(function () { alert('hi'); return false; });" +
+                  "});</scr" + "ipt>";
+      var html2 = "<div><a href='#'>hello #2</a><scr" + "ipt>$(function () { alert('I will execute');" +
+                  "$('a').click(function () { alert('hi, but you won\\'t see me'); return false; });" +
+                  "});</scr" + "ipt></div>";
+      $(function () {
+        $("button:first").click(function () {
+              $("#adiv").text(html1);
+              $("#container").html(html1);
+            });
+        $("button:last").click(function () {
+              $("#adiv").text(html2);
+              $("#container").html(html2);
+            });
+      });
+    </script>
+  </head>
+  <body>
+    <button>Load outside parent</button>
+    <button>Load inside parent</button>
+    <div id="container">
+      Hi
+    </div>
+    <div id="adiv"></div>
+  </body>
+</html>

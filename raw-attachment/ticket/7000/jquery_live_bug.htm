@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<title>jQuery Live Bug</title>
+	</head>
+	<body>
+		<div id="live">
+			<select id="select_live_1">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+			<select id="select_live_2">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+		</div>
+		<div id="static">
+			<select id="select_static_1" onchange="staticFn();">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+		</div>
+		<script language="javascript" type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+		<script language="javascript" type="text/javascript">
+			function staticFn() {
+				alert("static change");
+			}
+            
+            function liveFn() {
+				alert("live change");
+			}
+
+			$(document).ready(function() {
+				$("#live select").live("change", liveFn);
+
+				/*$("#static select").change(staticFn);*/
+			});
+		</script>
+	</body>
+</html>

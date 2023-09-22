@@ -1,0 +1,1517 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">sizzle.patch on Ticket #3563 – Attachment – jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shadow:0 1px #fff;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#b3d4fc}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#b3d4fc}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f2f0}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{color:#9a6e3a;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}pre[class*=language-diff]{--eleventy-code-padding:1.25em;padding-left:var(--eleventy-code-padding);padding-right:var(--eleventy-code-padding)}.token.deleted{background-color:#8e2e2e;color:inherit}.token.inserted{background-color:#44824a;color:inherit}.token.prefix.deleted,.token.prefix.inserted,.token.prefix.unchanged{-webkit-user-select:none;user-select:none;display:inline-flex;align-items:center;justify-content:center;padding-top:2px;padding-bottom:2px}.token.prefix.deleted,.token.prefix.inserted{width:var(--eleventy-code-padding);background-color:rgba(0,0,0,.2)}.token.deleted:not(.prefix),.token.inserted:not(.prefix){display:block;margin-left:calc(-1 * var(--eleventy-code-padding));margin-right:calc(-1 * var(--eleventy-code-padding));text-decoration:none;color:inherit}:root{--attachment-info-bg-color:#f7f7f0;--attachment-info-border-color:#d7d7d7;--attachment-download-link-color:#666}h1,h2,h3,h4,h5,h6{font-weight:700}h3{font-size:.875rem}h6{font-size:.6875rem}.attachment-info{padding:.25em .5em;margin:1em 0;background-color:var(--attachment-info-bg-color);border:1px solid var(--attachment-info-border-color)}.attachment-info h6{font-family:var(--font-family-alternate)}.attachment-download{margin:2em 0;gap:.5em}.attachment-download-link[href],.attachment-download-link[href]:visited{color:var(--attachment-download-link-color)}.attachment img,.attachment picture{display:block;max-width:100%;height:auto}code[class*=language-],pre[class*=language-]{font-size:.75rem}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+
+<div class="flex-column attachment">
+  <nav class="content-nav">
+    <ul class="flex-row">
+      <li>
+        <a href="/bugs.jquery.com/ticket/3563">Back to Ticket #3563</a>
+      </li>
+    </ul>
+  </nav>
+
+  <h1>
+    <a href="/bugs.jquery.com/ticket/3563">Ticket #3563</a>: sizzle.patch
+  
+  <hr>
+
+  <div class="attachment-info">
+    <h6>File sizzle.patch, 41.2 KB (added by john, November 18, 2008 03:28AM UTC)</h6>
+    
+      <p>Sizzle Patch (v2)</p>
+    
+  </div>
+
+  
+    <div class="attachment-preview">
+      
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: test/unit/core.js
+===================================================================
+--- test/unit/core.js	(revision 5947)
++++ test/unit/core.js	(working copy)
+@@ -698,7 +698,9 @@
+ 	equals( expected, jQuery('#sap').text(), "Check for appending of array of elements" );
+ 
+ 	reset();
+-	expected = "This link has class=\"blog\": Simon Willison's WeblogTry them out:Yahoo";
++	expected = document.querySelectorAll ?
++		"This link has class=\"blog\": Simon Willison's WeblogYahooTry them out:" :
++		"This link has class=\"blog\": Simon Willison's WeblogTry them out:Yahoo";
+ 	jQuery('#sap').append(jQuery("#first, #yahoo"));
+ 	equals( expected, jQuery('#sap').text(), "Check for appending of jQuery object" );
+ 
+@@ -782,7 +784,9 @@
+ 	equals( expected, jQuery('#sap').text(), "Check for appending of array of elements" );
+ 
+ 	reset();
+-	expected = "This link has class=\"blog\": Simon Willison's WeblogTry them out:Yahoo";
++	expected = document.querySelectorAll ?
++		"This link has class=\"blog\": Simon Willison's WeblogYahooTry them out:" :
++		"This link has class=\"blog\": Simon Willison's WeblogTry them out:Yahoo";
+ 	jQuery("#first, #yahoo").appendTo('#sap');
+ 	equals( expected, jQuery('#sap').text(), "Check for appending of jQuery object" );
+ 
+@@ -809,7 +813,9 @@
+ 	equals( expected, jQuery('#sap').text(), "Check for prepending of array of elements" );
+ 
+ 	reset();
+-	expected = "Try them out:YahooThis link has class=\"blog\": Simon Willison's Weblog";
++	expected = document.querySelectorAll ?
++		"YahooTry them out:This link has class=\"blog\": Simon Willison's Weblog" :
++		"Try them out:YahooThis link has class=\"blog\": Simon Willison's Weblog";
+ 	jQuery('#sap').prepend(jQuery("#first, #yahoo"));
+ 	equals( expected, jQuery('#sap').text(), "Check for prepending of jQuery object" );
+ });
+@@ -840,7 +846,7 @@
+ 	jQuery('<select id="prependSelect1"></select>').prependTo('form:last');
+ 	jQuery('<select id="prependSelect2"><option>Test</option></select>').prependTo('form:last');
+ 
+-	t( "Prepend Select", "#prependSelect1, #prependSelect2", ["prependSelect1", "prependSelect2"] );
++	t( "Prepend Select", "#prependSelect2, #prependSelect1", ["prependSelect2", "prependSelect1"] );
+ });
+ 
+ test("before(String|Element|Array&lt;Element&gt;|jQuery)", function() {
+@@ -860,7 +866,9 @@
+ 	equals( expected, jQuery('#en').text(), "Insert array of elements before" );
+ 
+ 	reset();
+-	expected = "This is a normal link: Try them out:diveintomarkYahoo";
++	expected = document.querySelectorAll ?
++		"This is a normal link: diveintomarkTry them out:Yahoo" :
++		"This is a normal link: Try them out:diveintomarkYahoo";
+ 	jQuery('#yahoo').before(jQuery("#first, #mark"));
+ 	equals( expected, jQuery('#en').text(), "Insert jQuery before" );
+ });
+@@ -882,7 +890,9 @@
+ 	equals( expected, jQuery('#en').text(), "Insert array of elements before" );
+ 
+ 	reset();
+-	expected = "This is a normal link: Try them out:diveintomarkYahoo";
++	expected = document.querySelectorAll ?
++		"This is a normal link: diveintomarkTry them out:Yahoo" :
++		"This is a normal link: Try them out:diveintomarkYahoo";
+ 	jQuery("#first, #mark").insertBefore('#yahoo');
+ 	equals( expected, jQuery('#en').text(), "Insert jQuery before" );
+ });
+@@ -904,7 +914,9 @@
+ 	equals( expected, jQuery('#en').text(), "Insert array of elements after" );
+ 
+ 	reset();
+-	expected = "This is a normal link: YahooTry them out:diveintomark";
++	expected = document.querySelectorAll ?
++		"This is a normal link: YahoodiveintomarkTry them out:" :
++		"This is a normal link: YahooTry them out:diveintomark";
+ 	jQuery('#yahoo').after(jQuery("#first, #mark"));
+ 	equals( expected, jQuery('#en').text(), "Insert jQuery after" );
+ });
+@@ -1257,7 +1269,7 @@
+ 	expect(4);
+ 	isSet( jQuery("#en").siblings().andSelf().get(), q("sndp", "sap","en"), "Check for siblings and self" );
+ 	isSet( jQuery("#foo").children().andSelf().get(), q("sndp", "en", "sap", "foo"), "Check for children and self" );
+-	isSet( jQuery("#en, #sndp").parent().andSelf().get(), q("foo","en","sndp"), "Check for parent and self" );
++	isSet( jQuery("#sndp, #en").parent().andSelf().get(), q("foo","sndp","en"), "Check for parent and self" );
+ 	isSet( jQuery("#groups").parents("p, div").andSelf().get(), q("ap", "main", "groups"), "Check for parents and self" );
+ });
+ 
+@@ -1267,7 +1279,8 @@
+ 	isSet( jQuery("#sndp").siblings(":has(code)").get(), q("sap"), "Check for filtered siblings (has code child element)" );
+ 	isSet( jQuery("#sndp").siblings(":has(a)").get(), q("en", "sap"), "Check for filtered siblings (has anchor child element)" );
+ 	isSet( jQuery("#foo").siblings("form, b").get(), q("form", "lengthtest", "testForm", "floatTest"), "Check for multiple filters" );
+-	isSet( jQuery("#en, #sndp").siblings().get(), q("sndp", "sap", "en"), "Check for unique results from siblings" );
++	var set = document.querySelectorAll ? q("en", "sap", "sndp") : q("sndp", "sap", "en");
++	isSet( jQuery("#en, #sndp").siblings().get(), set, "Check for unique results from siblings" );
+ });
+ 
+ test("children([String])", function() {
+Index: test/unit/selector.js
+===================================================================
+--- test/unit/selector.js	(revision 5947)
++++ test/unit/selector.js	(working copy)
+@@ -31,13 +31,22 @@
+ 
+ test("broken", function() {
+ 	expect(7);
+-	t( "Broken Selector", "[", [] );
+-	t( "Broken Selector", "(", [] );
+-	t( "Broken Selector", "{", [] );
+-	t( "Broken Selector", "<", [] );
+-	t( "Broken Selector", "()", [] );
+-	t( "Broken Selector", "<>", [] );
+-	t( "Broken Selector", "{}", [] );
++	function broken(name, selector) {
++		try {
++			t( name, selector, [] );
++		} catch(e){
++			ok(  typeof e === "string" && e.indexOf("Syntax error") >= 0,
++				name + ": " + selector );
++		}
++	}
++	
++	broken( "Broken Selector", "[", [] );
++	broken( "Broken Selector", "(", [] );
++	broken( "Broken Selector", "{", [] );
++	broken( "Broken Selector", "<", [] );
++	broken( "Broken Selector", "()", [] );
++	broken( "Broken Selector", "<>", [] );
++	broken( "Broken Selector", "{}", [] );
+ });
+ 
+ test("id", function() {
+@@ -100,10 +109,17 @@
+ 
+ test("multiple", function() {
+ 	expect(4);
+-	t( "Comma Support", "a.blog, p", ["mark","simon","firstp","ap","sndp","en","sap","first"] );
+-	t( "Comma Support", "a.blog , p", ["mark","simon","firstp","ap","sndp","en","sap","first"] );
+-	t( "Comma Support", "a.blog ,p", ["mark","simon","firstp","ap","sndp","en","sap","first"] );
+-	t( "Comma Support", "a.blog,p", ["mark","simon","firstp","ap","sndp","en","sap","first"] );
++	
++	var results = ["mark","simon","firstp","ap","sndp","en","sap","first"];
++	
++	if ( document.querySelectorAll ) {
++		results = ["firstp","ap","mark","sndp","en","sap","simon","first"];
++	}
++	
++	t( "Comma Support", "a.blog, p", results);
++	t( "Comma Support", "a.blog , p", results);
++	t( "Comma Support", "a.blog ,p", results);
++	t( "Comma Support", "a.blog,p", results);
+ });
+ 
+ test("child and adjacent", function() {
+@@ -160,19 +176,26 @@
+ 	t( "Attribute Equals", "a[rel='bookmark']", ["simon1"] );
+ 	t( "Attribute Equals", 'a[rel="bookmark"]', ["simon1"] );
+ 	t( "Attribute Equals", "a[rel=bookmark]", ["simon1"] );
+-	t( "Multiple Attribute Equals", "#form input[type='hidden'],#form input[type='radio']", ["hidden1","radio1","radio2"] );
+-	t( "Multiple Attribute Equals", "#form input[type=\"hidden\"],#form input[type='radio']", ["hidden1","radio1","radio2"] );
+-	t( "Multiple Attribute Equals", "#form input[type=hidden],#form input[type=radio]", ["hidden1","radio1","radio2"] );
+ 	
++	var results = ["hidden1","radio1","radio2"];
++	
++	if ( document.querySelectorAll ) {
++		results = ["radio1", "radio2", "hidden1"];
++	}
++	
++	t( "Multiple Attribute Equals", "#form input[type='hidden'],#form input[type='radio']", results );
++	t( "Multiple Attribute Equals", "#form input[type=\"hidden\"],#form input[type='radio']", results );
++	t( "Multiple Attribute Equals", "#form input[type=hidden],#form input[type=radio]", results );
++	
+ 	t( "Attribute selector using UTF8", "span[lang=中文]", ["台北"] );
+ 	
+ 	t( "Attribute Begins With", "a[href ^= 'http://www']", ["google","yahoo"] );
+ 	t( "Attribute Ends With", "a[href $= 'org/']", ["mark"] );
+ 	t( "Attribute Contains", "a[href *= 'google']", ["google","groups"] );
+ 	
+-	t("Select options via [selected]", "#select1 option[selected]", ["option1a"] );
+-	t("Select options via [selected]", "#select2 option[selected]", ["option2d"] );
+-	t("Select options via [selected]", "#select3 option[selected]", ["option3b", "option3c"] );
++	t("Select options via :selected", "#select1 option:selected", ["option1a"] );
++	t("Select options via :selected", "#select2 option:selected", ["option2d"] );
++	t("Select options via :selected", "#select3 option:selected", ["option3b", "option3c"] );
+ 	
+ 	t( "Grouped Form Elements", "input[name='foo[bar]']", ["hidden2"] );
+ 	
+@@ -182,12 +205,12 @@
+ });
+ 
+ test("pseudo (:) selectors", function() {
+-	expect(35);
++	expect(34);
+ 	t( "First Child", "p:first-child", ["firstp","sndp"] );
+ 	t( "Last Child", "p:last-child", ["sap"] );
+ 	t( "Only Child", "a:only-child", ["simon1","anchor1","yahoo","anchor2"] );
+ 	t( "Empty", "ul:empty", ["firstUL"] );
+-	t( "Enabled UI Element", "#form input:enabled", ["text1","radio1","radio2","check1","check2","hidden1","hidden2","name"] );
++	t( "Enabled UI Element", "#form input:enabled", ["text1","radio1","radio2","check1","check2","hidden2","name"] );
+ 	t( "Disabled UI Element", "#form input:disabled", ["text2"] );
+ 	t( "Checked UI Element", "#form input:checked", ["radio2","check1"] );
+ 	t( "Selected Option Element", "#form option:selected", ["option1a","option2d","option3b","option3c"] );
+@@ -196,7 +219,7 @@
+ 	t( "Element Preceded By", "p ~ div", ["foo","fx-queue","fx-tests", "moretests"] );
+ 	t( "Not", "a.blog:not(.link)", ["mark"] );
+ 	t( "Not - multiple", "#form option:not(:contains('Nothing'),#option1b,:selected)", ["option1c", "option1d", "option2b", "option2c", "option3d", "option3e"] );
+-	t( "Not - complex", "#form option:not([id^='opt']:gt(0):nth-child(-n+3))", [ "option1a", "option1d", "option2d", "option3d", "option3e"] );
++	//t( "Not - complex", "#form option:not([id^='opt']:nth-child(-n+3))", [ "option1a", "option1d", "option2d", "option3d", "option3e"] );
+ 	t( "Not - recursive", "#form option:not(:not(:selected))[id^='option3']", [ "option3b", "option3c"] );
+ 	
+ 	t( "nth Element", "p:nth(1)", ["ap"] );
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 5947)
++++ src/core.js	(working copy)
+@@ -1313,7 +1313,7 @@
+ 	},
+ 
+ 	remove: function( selector ) {
+-		if ( !selector || jQuery.filter( selector, [ this ] ).r.length ) {
++		if ( !selector || jQuery(this).filter( selector ).length ) {
+ 			// Prevent memory leaks
+ 			jQuery( "*", this ).add([this]).each(function(){
+ 				jQuery.event.remove(this);
+Index: src/selector.js
+===================================================================
+--- src/selector.js	(revision 5947)
++++ src/selector.js	(working copy)
+@@ -1,444 +1,781 @@
+-var chars = jQuery.browser.safari && parseInt(jQuery.browser.version) < 417 ?
+-		"(?:[\\w*_-]|\\\\.)" :
+-		"(?:[\\w\u0128-\uFFFF*_-]|\\\\.)",
+-	quickChild = new RegExp("^>\\s*(" + chars + "+)"),
+-	quickID = new RegExp("^(" + chars + "+)(#)(" + chars + "+)"),
+-	quickClass = new RegExp("^([#.]?)(" + chars + "*)");
++/*
++ * Sizzle CSS Selector Engine
++ *  Copyright 2008, John Resig (http://ejohn.org/)
++ *  released under the MIT License
++ */
++(function(){
+ 
+-jQuery.extend({
+-	expr: {
+-		"": function(a,i,m){return m[2]=="*"||jQuery.nodeName(a,m[2]);},
+-		"#": function(a,i,m){return a.getAttribute("id")==m[2];},
+-		":": {
+-			// Position Checks
+-			lt: function(a,i,m){return i<m[3]-0;}, -="" gt:="" function(a,i,m){return="" i="">m[3]-0;},
+-			nth: function(a,i,m){return m[3]-0==i;},
+-			eq: function(a,i,m){return m[3]-0==i;},
+-			first: function(a,i){return i==0;},
+-			last: function(a,i,m,r){return i==r.length-1;},
+-			even: function(a,i){return i%2==0;},
+-			odd: function(a,i){return i%2;},
++var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^[\]]+\]|[^[\]]+)+\]|\\.|[^ >+~,(\[]+)+|[>+~])(\s*,\s*)?/g;
+ 
+-			// Child Checks
+-			"first-child": function(a){return a.parentNode.getElementsByTagName("*")[0]==a;},
+-			"last-child": function(a){return jQuery.nth(a.parentNode.lastChild,1,"previousSibling")==a;},
+-			"only-child": function(a){return !jQuery.nth(a.parentNode.lastChild,2,"previousSibling");},
++var cache = null;
++var done = 0;
+ 
+-			// Parent Checks
+-			parent: function(a){return a.firstChild;},
+-			empty: function(a){return !a.firstChild;},
++if ( document.addEventListener && !document.querySelectorAll ) {
++	cache = {};
++	function invalidate(){ cache = {}; }
++	document.addEventListener("DOMAttrModified", invalidate, false);
++	document.addEventListener("DOMNodeInserted", invalidate, false);
++	document.addEventListener("DOMNodeRemoved", invalidate, false);
++}
+ 
+-			// Text Check
+-			contains: function(a,i,m){return (a.textContent||a.innerText||jQuery(a).text()||"").indexOf(m[3])>=0;},
++var Sizzle = function(selector, context, results) {
++	var doCache = !results;
++	results = results || [];
++	context = context || document;
+ 
+-			// Visibility
+-			visible: function(a){return "hidden"!=a.type&&jQuery.css(a,"display")!="none"&&jQuery.css(a,"visibility")!="hidden";},
+-			hidden: function(a){return "hidden"==a.type||jQuery.css(a,"display")=="none"||jQuery.css(a,"visibility")=="hidden";},
++	if ( context.nodeType !== 1 && context.nodeType !== 9 )
++		return [];
++	
++	if ( !selector || typeof selector !== "string" ) {
++		return results;
++	}
+ 
+-			// Form attributes
+-			enabled: function(a){return !a.disabled;},
+-			disabled: function(a){return a.disabled;},
+-			checked: function(a){return a.checked;},
+-			selected: function(a){return a.selected||jQuery.attr(a,"selected");},
++	if ( cache && context === document && cache[ selector ] ) {
++		results.push.apply( results, cache[ selector ] );
++		return results;
++	}
++	
++	var parts = [], m, set, checkSet, check, mode, extra;
++	
++	// Reset the position of the chunker regexp (start from head)
++	chunker.lastIndex = 0;
++	
++	while ( (m = chunker.exec(selector)) !== null ) {
++		parts.push( m[1] );
++		
++		if ( m[2] ) {
++			extra = RegExp.rightContext;
++			break;
++		}
++	}
+ 
+-			// Form elements
+-			text: function(a){return "text"==a.type;},
+-			radio: function(a){return "radio"==a.type;},
+-			checkbox: function(a){return "checkbox"==a.type;},
+-			file: function(a){return "file"==a.type;},
+-			password: function(a){return "password"==a.type;},
+-			submit: function(a){return "submit"==a.type;},
+-			image: function(a){return "image"==a.type;},
+-			reset: function(a){return "reset"==a.type;},
+-			button: function(a){return "button"==a.type||jQuery.nodeName(a,"button");},
+-			input: function(a){return /input|select|textarea|button/i.test(a.nodeName);},
++	var ret = Sizzle.find( parts.pop(), context );
++	set = Sizzle.filter( ret.expr, ret.set );
+ 
+-			// :has()
+-			has: function(a,i,m){return jQuery.find(m[3],a).length;},
++	if ( parts.length > 0 ) {
++		checkSet = makeArray(set);
++	}
+ 
+-			// :header
+-			header: function(a){return /h\d/i.test(a.nodeName);},
++	while ( parts.length ) {
++		var cur = parts.pop(), pop = cur;
+ 
+-			// :animated
+-			animated: function(a){return jQuery.grep(jQuery.timers,function(fn){return a==fn.elem;}).length;}
++		if ( !Expr.relative[ cur ] ) {
++			cur = "";
++		} else {
++			pop = parts.pop();
+ 		}
+-	},
+ 
+-	// The regular expressions that power the parsing engine
+-	parse: [
+-		// Match: [@value='test'], [@foo]
+-		/^(\[) *@?([\w:-]+) *([!*$^~=]*) *('?"?)(.*?)\4 *\]/,
++		if ( pop == null ) {
++			pop = context;
++		}
+ 
+-		// Match: :contains('foo')
+-		/^(:)([\w-]+)\("?'?(.*?(\(.*?\))?[^(]*?)"?'?\)/,
++		var later = "", match;
+ 
+-		// Match: :even, :last-child, #id, .class
+-		new RegExp("^([:.#]*)(" + chars + "+)")
+-	],
++		// Position selectors must be done after the filter
++		if ( typeof pop === "string" ) {
++			while ( (match = Expr.match.POS.exec( pop )) ) {
++				later += match[0];
++				pop = pop.replace( Expr.match.POS, "" );
++			}
++		}
+ 
+-	multiFilter: function( expr, elems, not ) {
+-		var old, cur = [];
++		Expr.relative[ cur ]( checkSet, pop );
+ 
+-		while ( expr && expr != old ) {
+-			old = expr;
+-			var f = jQuery.filter( expr, elems, not );
+-			expr = f.t.replace(/^\s*,\s*/, "" );
+-			cur = not ? elems = f.r : jQuery.merge( cur, f.r );
++		if ( later ) {
++			Sizzle.filter( later, checkSet, true );
+ 		}
++	}
++	
++	if ( !checkSet ) {
++		checkSet = set;
++	}
+ 
+-		return cur;
+-	},
++	if ( !checkSet ) {
++		throw "Syntax error, unrecognized expression: " + (cur || selector);
++	}
++	if ( checkSet instanceof Array ) {
++		if ( context.nodeType === 1 ) {
++			for ( var i = 0; checkSet[i] != null; i++ ) {
++				if ( checkSet[i] && checkSet[i].nodeType === 1 && contains(context, checkSet[i]) ) {
++					results.push( set[i] );
++				}
++			}
++		} else {
++			for ( var i = 0; checkSet[i] != null; i++ ) {
++				if ( checkSet[i] && checkSet[i].nodeType === 1 ) {
++					results.push( set[i] );
++				}
++			}
++		}
++	} else {
++		makeArray( checkSet, results );
++	}
+ 
+-	find: function( t, context ) {
+-		// Quickly handle non-string expressions
+-		if ( typeof t !== "string" )
+-			return [ t ];
++	if ( extra ) {
++		arguments.callee( extra, context, results );
++	}
+ 
+-		// check to make sure context is a DOM element or a document
+-		if ( context && context.nodeType != 1 && context.nodeType != 9)
+-			return [ ];
++	if ( cache && doCache ) {
++		cache[selector] = results.slice(0);
++	}
+ 
+-		// Set the correct context (if none is provided)
+-		context = context || document;
++	return results;
++};
+ 
+-		// Initialize the search
+-		var ret = [context], done = [], last, nodeName;
++Sizzle.find = function(expr, context){
++	var set, match;
+ 
+-		// Continue while a selector expression exists, and while
+-		// we're no longer looping upon ourselves
+-		while ( t && last != t ) {
+-			var r = [];
+-			last = t;
++	if ( !expr ) {
++		return [];
++	}
+ 
+-			t = jQuery.trim(t);
++	var later = "", match;
+ 
+-			var foundToken = false,
++	// Pseudo-selectors could contain other selectors (like :not)
++	while ( (match = Expr.match.PSEUDO.exec( expr )) ) {
++		var left = RegExp.leftContext;
+ 
+-			// An attempt at speeding up child selectors that
+-			// point to a specific element tag
+-				re = quickChild,
++		if ( left.substr( left.length - 1 ) !== "\\" ) {
++			later += match[0];
++			expr = expr.replace( Expr.match.PSEUDO, "" );
++		} else {
++			// TODO: Need a better solution, fails: .class\:foo:realfoo(#id)
++			break;
++		}
++	}
+ 
+-				m = re.exec(t);
++	for ( var i = 0, l = Expr.order.length; i < l; i++ ) {
++		var type = Expr.order[i];
++		
++		if ( (match = Expr.match[ type ].exec( expr )) ) {
++			var left = RegExp.leftContext;
+ 
+-			if ( m ) {
+-				nodeName = m[1].toUpperCase();
++			if ( left.substr( left.length - 1 ) !== "\\" ) {
++				match[1] = (match[1] || "").replace(/\\/g, "");
++				set = Expr.find[ type ]( match, context );
+ 
+-				// Perform our own iteration and filter
+-				for ( var i = 0; ret[i]; i++ )
+-					for ( var c = ret[i].firstChild; c; c = c.nextSibling )
+-						if ( c.nodeType == 1 && (nodeName == "*" || c.nodeName.toUpperCase() == nodeName) )
+-							r.push( c );
++				if ( set != null ) {
++					expr = expr.replace( Expr.match[ type ], "" );
++					break;
++				}
++			}
++		}
++	}
+ 
+-				ret = r;
+-				t = t.replace( re, "" );
+-				if ( t.indexOf(" ") == 0 ) continue;
+-				foundToken = true;
+-			} else {
+-				re = /^([>+~])\s*(\w*)/i;
++	if ( !set ) {
++		set = context.getElementsByTagName("*");
++	}
+ 
+-				if ( (m = re.exec(t)) != null ) {
+-					r = [];
++	expr += later;
+ 
+-					var merge = {};
+-					nodeName = m[2].toUpperCase();
+-					m = m[1];
++	return {set: set, expr: expr};
++};
+ 
+-					for ( var j = 0, rl = ret.length; j < rl; j++ ) {
+-						var n = m == "~" || m == "+" ? ret[j].nextSibling : ret[j].firstChild;
+-						for ( ; n; n = n.nextSibling )
+-							if ( n.nodeType == 1 ) {
+-								var id = jQuery.data(n);
++Sizzle.filter = function(expr, set, inplace){
++	var old = expr, result = [], curLoop = set, match;
+ 
+-								if ( m == "~" && merge[id] ) break;
++	while ( expr && set.length ) {
++		for ( var type in Expr.filter ) {
++			if ( (match = Expr.match[ type ].exec( expr )) != null ) {
++				var anyFound = false, filter = Expr.filter[ type ], goodArray = null;
++				match[1] = (match[1] || "").replace(/\\/g, "");
+ 
+-								if (!nodeName || n.nodeName.toUpperCase() == nodeName ) {
+-									if ( m == "~" ) merge[id] = true;
+-									r.push( n );
+-								}
++				if ( curLoop == result ) {
++					result = [];
++				}
+ 
+-								if ( m == "+" ) break;
++				if ( Expr.preFilter[ type ] ) {
++					match = Expr.preFilter[ type ]( match, curLoop );
++
++					if ( match[0] === true ) {
++						goodArray = [];
++						var last = null, elem;
++						for ( var i = 0; (elem = curLoop[i]) !== undefined; i++ ) {
++							if ( elem && last !== elem ) {
++								goodArray.push( elem );
++								last = elem;
+ 							}
++						}
+ 					}
+ 
+-					ret = r;
++				}
+ 
+-					// And remove the token
+-					t = jQuery.trim( t.replace( re, "" ) );
+-					foundToken = true;
++				var goodPos = 0, found, item;
++
++				for ( var i = 0; (item = curLoop[i]) !== undefined; i++ ) {
++					if ( item ) {
++						if ( goodArray && item != goodArray[goodPos] ) {
++							goodPos++;
++						}
++
++						found = filter( item, match, goodPos, goodArray );
++						if ( inplace && found != null ) {
++							curLoop[i] = found ? curLoop[i] : false;
++						} else if ( found ) {
++							result.push( item );
++							anyFound = true;
++						}
++					}
+ 				}
++
++				if ( found !== undefined ) {
++					if ( !inplace ) {
++						curLoop = result;
++					}
++
++					expr = expr.replace( Expr.match[ type ], "" );
++
++					if ( !anyFound ) {
++						return [];
++					}
++
++					break;
++				}
+ 			}
++		}
+ 
+-			// See if there's still an expression, and that we haven't already
+-			// matched a token
+-			if ( t && !foundToken ) {
+-				// Handle multiple expressions
+-				if ( !t.indexOf(",") ) {
+-					// Clean the result set
+-					if ( context == ret[0] ) ret.shift();
+ 
+-					// Merge the result sets
+-					done = jQuery.merge( done, ret );
++		expr = expr.replace(/\s*,\s*/, "");
+ 
+-					// Reset the context
+-					r = ret = [context];
++		// Improper expression
++		if ( expr == old ) {
++			throw "Syntax error, unrecognized expression: " + expr;
++		}
+ 
+-					// Touch up the selector string
+-					t = " " + t.substr(1,t.length);
++		old = expr;
++	}
+ 
+-				} else {
+-					// Optimize for the case nodeName#idName
+-					var re2 = quickID;
+-					var m = re2.exec(t);
++	return curLoop;
++};
+ 
+-					// Re-organize the results, so that they're consistent
+-					if ( m ) {
+-						m = [ 0, m[2], m[3], m[1] ];
++var Expr = Sizzle.selectors = {
++	order: [ "ID", "NAME", "TAG" ],
++	match: {
++		ID: /#((?:[\w\u0128-\uFFFF_-]|\\.)+)/,
++		CLASS: /\.((?:[\w\u0128-\uFFFF_-]|\\.)+)/,
++		NAME: /\[name=((?:[\w\u0128-\uFFFF_-]|\\.)+)\]/,
++		ATTR: /\[((?:[\w\u0128-\uFFFF_-]|\\.)+)\s*(?:(\S{0,1}=)\s*(['"]*)(.*?)\3|)\]/,
++		TAG: /^((?:[\w\u0128-\uFFFF\*_-]|\\.)+)/,
++		CHILD: /:(only|nth|last|first)-child\(?(even|odd|[\dn+-]*)\)?/,
++		POS: /:(nth|eq|gt|lt|first|last|even|odd)\(?(\d*)\)?/,
++		PSEUDO: /:((?:[\w\u0128-\uFFFF_-]|\\.)+)(?:\((['"]*)((?:\([^\)]+\)|[^\2\(\)]*)+)\2\))?/
++	},
++	attrMap: {
++		"class": "className"
++	},
++	relative: {
++		"+": function(checkSet, part){
++			for ( var i = 0, l = checkSet.length; i < l; i++ ) {
++				var elem = checkSet[i];
++				if ( elem ) {
++					var cur = elem.previousSibling;
++					while ( cur && cur.nodeType !== 1 ) {
++						cur = cur.previousSibling;
++					}
++					checkSet[i] = cur || false;
++				}
++			}
+ 
+-					} else {
+-						// Otherwise, do a traditional filter check for
+-						// ID, class, and element selectors
+-						re2 = quickClass;
+-						m = re2.exec(t);
++			Sizzle.filter( part, checkSet, true );
++		},
++		">": function(checkSet, part){
++			if ( typeof part === "string" && !/\W/.test(part) ) {
++				part = part.toUpperCase();
++
++				for ( var i = 0, l = checkSet.length; i < l; i++ ) {
++					var elem = checkSet[i];
++					if ( elem ) {
++						var parent = elem.parentNode;
++						checkSet[i] = parent.nodeName === part ? parent : false;
+ 					}
++				}
++			} else {
++				for ( var i = 0, l = checkSet.length; i < l; i++ ) {
++					var elem = checkSet[i];
++					if ( elem ) {
++						checkSet[i] = elem.parentNode;
++						if ( typeof part !== "string" ) {
++							checkSet[i] = checkSet[i] == part;
++						}
++					}
++				}
+ 
+-					m[2] = m[2].replace(/\\/g, "");
++				if ( typeof part === "string" ) {
++					Sizzle.filter( part, checkSet, true );
++				}
++			}
++		},
++		"": function(checkSet, part){
++			var doneName = "done" + (done++), checkFn = dirCheck;
+ 
+-					var elem = ret[ret.length-1];
++			if ( !part.match(/\W/) ) {
++				var nodeCheck = part = part.toUpperCase();
++				checkFn = dirNodeCheck;
++			}
+ 
+-					// Try to do a global search by ID, where we can
+-					if ( m[1] == "#" && elem && elem.getElementById && !jQuery.isXMLDoc(elem) ) {
+-						// Optimization for HTML document case
+-						var oid = elem.getElementById(m[2]);
++			checkFn("parentNode", part, doneName, checkSet, nodeCheck);
++		},
++		"~": function(checkSet, part){
++			var doneName = "done" + (done++), checkFn = dirCheck;
+ 
+-						// Do a quick check for the existence of the actual ID attribute
+-						// to avoid selecting by the name attribute in IE
+-						// also check to insure id is a string to avoid selecting an element with the name of 'id' inside a form
+-						if ( (jQuery.browser.msie||jQuery.browser.opera) && oid && typeof oid.id === "string" && oid.id != m[2] )
+-							oid = jQuery('[@id="'+m[2]+'"]', elem)[0];
++			if ( !part.match(/\W/) ) {
++				var nodeCheck = part = part.toUpperCase();
++				checkFn = dirNodeCheck;
++			}
+ 
+-						// Do a quick check for node name (where applicable) so
+-						// that div#foo searches will be really fast
+-						ret = r = oid && (!m[3] || jQuery.nodeName(oid, m[3])) ? [oid] : [];
+-					} else {
+-						// We need to find all descendant elements
+-						for ( var i = 0; ret[i]; i++ ) {
+-							// Grab the tag name being searched for
+-							var tag = m[1] == "#" && m[3] ? m[3] : m[1] != "" || m[0] == "" ? "*" : m[2];
++			checkFn("previousSibling", part, doneName, checkSet, nodeCheck);
++		}
++	},
++	find: {
++		ID: function(match, context){
++			if ( context.getElementById ) {
++				var m = context.getElementById(match[1]);
++				return m ? [m] : [];
++			}
++		},
++		NAME: function(match, context){
++			return context.getElementsByName(match[1]);
++		},
++		TAG: function(match, context){
++			return context.getElementsByTagName(match[1]);
++		}
++	},
++	preFilter: {
++		CLASS: function(match){
++			return new RegExp( "(?:^|\\s)" + match[1] + "(?:\\s|$)" );
++		},
++		ID: function(match){
++			return match[1];
++		},
++		TAG: function(match){
++			return match[1].toUpperCase();
++		},
++		CHILD: function(match){
++			if ( match[1] == "nth" ) {
++				// parse equations like 'even', 'odd', '5', '2n', '3n+2', '4n-1', '-n+6'
++				var test = /(-?)(\d*)n((?:\+|-)?\d*)/.exec(
++					match[2] == "even" && "2n" || match[2] == "odd" && "2n+1" ||
++					!/\D/.test( match[2] ) && "0n+" + match[2] || match[2]);
+ 
+-							// Handle IE7 being really dumb about <object>s
+-							if ( tag == "*" && ret[i].nodeName.toLowerCase() == "object" )
+-								tag = "param";
++				// calculate the numbers (first)n+(last) including if they are negative
++				match[2] = (test[1] + (test[2] || 1)) - 0;
++				match[3] = test[3] - 0;
++			}
+ 
+-							r = jQuery.merge( r, ret[i].getElementsByTagName( tag ));
+-						}
++			// TODO: Move to normal caching system
++			match[0] = typeof get_length == "undefined" ? "done" + (done++) : "nodeCache";
+ 
+-						// It's faster to filter by class and be done with it
+-						if ( m[1] == "." )
+-							r = jQuery.classFilter( r, m[2] );
++			return match;
++		},
++		ATTR: function(match){
++			var name = match[1];
++			
++			if ( Expr.attrMap[name] ) {
++				match[1] = Expr.attrMap[name];
++			}
+ 
+-						// Same with ID filtering
+-						if ( m[1] == "#" ) {
+-							var tmp = [];
++			return match;
++		},
++		PSEUDO: function(match){
++			if ( match[1] === "not" ) {
++				match[3] = match[3].split(/\s*,\s*/);
++			}
++			
++			return match;
++		},
++		POS: function(match){
++			match.unshift( true );
++			return match;
++		}
++	},
++	filters: {
++		enabled: function(elem){
++			return elem.disabled === false && elem.type !== "hidden";
++		},
++		disabled: function(elem){
++			return elem.disabled === true;
++		},
++		checked: function(elem){
++			return elem.checked === true;
++		},
++		selected: function(elem){
++			// Accessing this property makes selected-by-default
++			// options in Safari work properly
++			elem.parentNode.selectedIndex;
++			return elem.selected === true;
++		},
++		parent: function(elem){
++			return !!elem.firstChild;
++		},
++		empty: function(elem){
++			return !elem.firstChild;
++		},
++		has: function(elem, i, match){
++			return !!Sizzle( match[3], elem ).length;
++		},
++		header: function(elem){
++			return /h\d/i.test( elem.nodeName );
++		},
++		text: function(elem){
++			return "text" === elem.type;
++		},
++		radio: function(elem){
++			return "radio" === elem.type;
++		},
++		checkbox: function(elem){
++			return "checkbox" === elem.type;
++		},
++		file: function(elem){
++			return "file" === elem.type;
++		},
++		password: function(elem){
++			return "password" === elem.type;
++		},
++		submit: function(elem){
++			return "submit" === elem.type;
++		},
++		image: function(elem){
++			return "image" === elem.type;
++		},
++		reset: function(elem){
++			return "reset" === elem.type;
++		},
++		button: function(elem){
++			return "button" === elem.type || elem.nodeName.toUpperCase() === "BUTTON";
++		},
++		input: function(elem){
++			return /input|select|textarea|button/i.test(elem.nodeName);
++		}
++	},
++	setFilters: {
++		first: function(elem, i){
++			return i === 0;
++		},
++		last: function(elem, i, match, array){
++			return i === array.length - 1;
++		},
++		even: function(elem, i){
++			return i % 2 === 0;
++		},
++		odd: function(elem, i){
++			return i % 2 === 1;
++		},
++		lt: function(elem, i, match){
++			return i < match[3] - 0;
++		},
++		gt: function(elem, i, match){
++			return i > match[3] - 0;
++		},
++		nth: function(elem, i, match){
++			return match[3] - 0 == i;
++		},
++		eq: function(elem, i, match){
++			return match[3] - 0 == i;
++		}
++	},
++	filter: {
++		CHILD: function(elem, match){
++			var type = match[1], parent = elem.parentNode;
+ 
+-							// Try to find the element with the ID
+-							for ( var i = 0; r[i]; i++ )
+-								if ( r[i].getAttribute("id") == m[2] ) {
+-									tmp = [ r[i] ];
+-									break;
+-								}
++			var doneName = match[0];
++			
++			if ( !parent[ doneName ] ) {
++				var count = 1;
+ 
+-							r = tmp;
+-						}
++				for ( var node = parent.firstChild; node; node = node.nextSibling ) {
++					if ( node.nodeType == 1 ) {
++						node.nodeIndex = count++;
++					}
++				}
+ 
+-						ret = r;
++				parent[ doneName ] = count - 1;
++			}
++
++			if ( type == "first" ) {
++				return elem.nodeIndex == 1;
++			} else if ( type == "last" ) {
++				return elem.nodeIndex == parent[ doneName ];
++			} else if ( type == "only" ) {
++				return parent[ doneName ] == 1;
++			} else if ( type == "nth" ) {
++				var add = false, first = match[2], last = match[3];
++
++				if ( first == 1 && last == 0 ) {
++					return true;
++				}
++
++				if ( first == 0 ) {
++					if ( elem.nodeIndex == last ) {
++						add = true;
+ 					}
++				} else if ( (elem.nodeIndex - last) % first == 0 && (elem.nodeIndex - last) / first >= 0 ) {
++					add = true;
++				}
+ 
+-					t = t.replace( re2, "" );
++				return add;
++			}
++		},
++		PSEUDO: function(elem, match, i, array){
++			var name = match[1], filter = Expr.filters[ name ];
++
++			if ( filter ) {
++				return filter( elem, i, match, array )
++			} else if ( name === "contains" ) {
++				return (elem.textContent || elem.innerText || "").indexOf(match[3]) >= 0;
++			} else if ( name === "not" ) {
++				var not = match[3];
++
++				for ( var i = 0, l = not.length; i < l; i++ ) {
++					if ( Sizzle.filter(not[i], [elem]).length > 0 ) {
++						return false;
++					}
+ 				}
+ 
++				return true;
+ 			}
++		},
++		ID: function(elem, match){
++			return elem.nodeType === 1 && elem.getAttribute("id") === match;
++		},
++		TAG: function(elem, match){
++			return (match === "*" && elem.nodeType === 1) || elem.nodeName === match;
++		},
++		CLASS: function(elem, match){
++			return match.test( elem.className );
++		},
++		ATTR: function(elem, match){
++			var result = elem[ match[1] ], value = result + "", type = match[2], check = match[4];
++			return result == null ?
++				false :
++				type === "=" ?
++				value === check :
++				type === "*=" || type === "~=" ?
++				value.indexOf(check) >= 0 :
++				!match[4] ?
++				result :
++				type === "!=" ?
++				value != check :
++				type === "^=" ?
++				value.indexOf(check) === 0 :
++				type === "$=" ?
++				value.substr(value.length - check.length) === check :
++				type === "|=" ?
++				value === check || value.substr(0, check.length + 1) === check + "-" :
++				false;
++		},
++		POS: function(elem, match, i, array){
++			var name = match[2], filter = Expr.setFilters[ name ];
+ 
+-			// If a selector string still exists
+-			if ( t ) {
+-				// Attempt to filter it
+-				var val = jQuery.filter(t,r);
+-				ret = r = val.r;
+-				t = jQuery.trim(val.t);
++			if ( filter ) {
++				return filter( elem, i, match, array );
+ 			}
+ 		}
++	}
++};
+ 
+-		// An error occurred with the selector;
+-		// just return an empty set instead
+-		if ( t )
+-			ret = [];
++function makeArray(array, results) {
++	array = Array.prototype.slice.call( array );
+ 
+-		// Remove the root context
+-		if ( ret && context == ret[0] )
+-			ret.shift();
++	if ( results ) {
++		results.push.apply( results, array );
++		return results;
++	}
++	
++	return array;
++}
+ 
+-		// And combine the results
+-		done = jQuery.merge( done, ret );
++// TODO: Need a proper check here
++if ( document.all && !window.opera ) {
++	function makeArray(array, results) {
++		if ( array instanceof Array ) {
++			return Array.prototype.slice.call( array );
++		}
+ 
+-		return done;
+-	},
++		var ret = results || [];
+ 
+-	classFilter: function(r,m,not){
+-		m = " " + m + " ";
+-		var tmp = [];
+-		for ( var i = 0; r[i]; i++ ) {
+-			var pass = (" " + r[i].className + " ").indexOf( m ) >= 0;
+-			if ( !not && pass || not && !pass )
+-				tmp.push( r[i] );
++		for ( var i = 0; array[i]; i++ ) {
++			ret.push( array[i] );
+ 		}
+-		return tmp;
+-	},
+ 
+-	filter: function(t,r,not) {
+-		var last;
++		return ret;
++	}
+ 
+-		// Look for common filter expressions
+-		while ( t && t != last ) {
+-			last = t;
++	Expr.find.ID = function(match, context){
++		if ( context.getElementById ) {
++			var m = context.getElementById(match[1]);
++			return m ? m.id === match[1] || m.getAttributeNode && m.getAttributeNode("id").nodeValue === match[1] ? [m] : undefined : [];
++		}
++	};
+ 
+-			var p = jQuery.parse, m;
++	Expr.filter.ID = function(elem, match){
++		var node = elem.getAttributeNode && elem.getAttributeNode("id");
++		return elem.nodeType === 1 && node && node.nodeValue === match;
++	};
++}
+ 
+-			for ( var i = 0; p[i]; i++ ) {
+-				m = p[i].exec( t );
++if ( document.querySelectorAll ) (function(){
++	var oldSizzle = Sizzle;
++	
++	window.Sizzle = Sizzle = function(query, context, extra){
++		context = context || document;
+ 
+-				if ( m ) {
+-					// Remove what we just matched
+-					t = t.substring( m[0].length );
++		if ( context === document ) {
++			try {
++				return makeArray( context.querySelectorAll(query) );
++			} catch(e){}
++		}
++		
++		return oldSizzle(query, context, extra);
++	};
+ 
+-					m[2] = m[2].replace(/\\/g, "");
++	Sizzle.find = oldSizzle.find;
++	Sizzle.filter = oldSizzle.filter;
++	Sizzle.selectors = oldSizzle.selectors;
++})();
++
++if ( document.getElementsByClassName ) {
++	Expr.order.splice(1, 0, "CLASS");
++	Expr.find.CLASS = function(match, context) {
++		return context.getElementsByClassName(match[1]);
++	};
++}
++
++function dirNodeCheck( dir, cur, doneName, checkSet, nodeCheck ) {
++	for ( var i = 0, l = checkSet.length; i < l; i++ ) {
++		var elem = checkSet[i];
++		if ( elem ) {
++			elem = elem[dir]
++			var match = false;
++
++			while ( elem && elem.nodeType ) {
++				var done = elem[doneName];
++				if ( done ) {
++					match = checkSet[ done ];
+ 					break;
+ 				}
+-			}
+ 
+-			if ( !m )
+-				break;
++				if ( elem.nodeType === 1 )
++					elem[doneName] = i;
+ 
+-			// :not() is a special case that can be optimized by
+-			// keeping it out of the expression list
+-			if ( m[1] == ":" && m[2] == "not" )
+-				// optimize if only one selector found (most common case)
+-				r = isSimple.test( m[3] ) ?
+-					jQuery.filter(m[3], r, true).r :
+-					jQuery( r ).not( m[3] );
++				if ( elem.nodeName === cur ) {
++					match = elem;
++					break;
++				}
+ 
+-			// We can get a big speed boost by filtering by class here
+-			else if ( m[1] == "." )
+-				r = jQuery.classFilter(r, m[2], not);
++				elem = elem[dir];
++			}
+ 
+-			else if ( m[1] == "[" ) {
+-				var tmp = [], type = m[3];
++			checkSet[i] = match;
++		}
++	}
++}
+ 
+-				for ( var i = 0, rl = r.length; i < rl; i++ ) {
+-					var a = r[i], z = a[ jQuery.props[m[2]] || m[2] ];
++function dirCheck( dir, cur, doneName, checkSet, nodeCheck ) {
++	for ( var i = 0, l = checkSet.length; i < l; i++ ) {
++		var elem = checkSet[i];
++		if ( elem ) {
++			elem = elem[dir]
++			var match = false;
+ 
+-					if ( z == null || /style|href|src|selected/.test(m[2]) )
+-						z = jQuery.attr(a,m[2]) || '';
++			while ( elem && elem.nodeType ) {
++				if ( elem[doneName] ) {
++					match = checkSet[ elem[doneName] ];
++					break;
++				}
+ 
+-					if ( (type == "" && !!z ||
+-						 type == "=" && z == m[5] ||
+-						 type == "!=" && z != m[5] ||
+-						 type == "^=" && z && !z.indexOf(m[5]) ||
+-						 type == "$=" && z.substr(z.length - m[5].length) == m[5] ||
+-						 (type == "*=" || type == "~=") && z.indexOf(m[5]) >= 0) ^ not )
+-							tmp.push( a );
++				if ( elem.nodeType === 1 ) {
++					elem[doneName] = i;
++
++					if ( Sizzle.filter( cur, [elem] ).length > 0 ) {
++						match = elem;
++						break;
++					}
+ 				}
+ 
+-				r = tmp;
++				elem = elem[dir];
++			}
+ 
+-			// We can get a speed boost by handling nth-child here
+-			} else if ( m[1] == ":" && m[2] == "nth-child" ) {
+-				var merge = {}, tmp = [],
+-					// parse equations like 'even', 'odd', '5', '2n', '3n+2', '4n-1', '-n+6'
+-					test = /(-?)(\d*)n((?:\+|-)?\d*)/.exec(
+-						m[3] == "even" && "2n" || m[3] == "odd" && "2n+1" ||
+-						!/\D/.test(m[3]) && "0n+" + m[3] || m[3]),
+-					// calculate the numbers (first)n+(last) including if they are negative
+-					first = (test[1] + (test[2] || 1)) - 0, last = test[3] - 0;
++			checkSet[i] = match;
++		}
++	}
++}
+ 
+-				// loop through all the elements left in the jQuery object
+-				for ( var i = 0, rl = r.length; i < rl; i++ ) {
+-					var node = r[i], parentNode = node.parentNode, id = jQuery.data(parentNode);
++if ( document.compareDocumentPosition ) {
++	function contains(a, b){
++		return a.compareDocumentPosition(b) & 16;
++	}
++} else {
++	function contains(a, b){
++		return a !== b && a.contains(b);
++	}
++}
+ 
+-					if ( !merge[id] ) {
+-						var c = 1;
++// EXPOSE
++jQuery.find = Sizzle;
++jQuery.filter = Sizzle.filter;
++jQuery.expr = Sizzle.selectors;
++jQuery.expr[":"] = jQuery.expr.filters;
+ 
+-						for ( var n = parentNode.firstChild; n; n = n.nextSibling )
+-							if ( n.nodeType == 1 )
+-								n.nodeIndex = c++;
++Sizzle.selectors.filters.hidden = function(elem){
++	return "hidden" === elem.type ||
++		jQuery.css(elem, "display") === "none" ||
++		jQuery.css(elem, "visibility") === "hidden";
++};
+ 
+-						merge[id] = true;
+-					}
++Sizzle.selectors.filters.visible = function(elem){
++	return "hidden" !== elem.type &&
++		jQuery.css(elem, "display") !== "none" &&
++		jQuery.css(elem, "visibility") !== "hidden";
++};
+ 
+-					var add = false;
++jQuery.multiFilter = function( expr, elems, not ) {
++	if ( not ) {
++		return jQuery.multiFilter( ":not(" + expr + ")", elems );
++	}
+ 
+-					if ( first == 0 ) {
+-						if ( node.nodeIndex == last )
+-							add = true;
+-					} else if ( (node.nodeIndex - last) % first == 0 && (node.nodeIndex - last) / first >= 0 )
+-						add = true;
++	var exprs = expr.split(/\s*,\s*/), cur = [];
+ 
+-					if ( add ^ not )
+-						tmp.push( node );
+-				}
++	for ( var i = 0; i < exprs.length; i++ ) {
++		cur = jQuery.merge( cur, jQuery.filter( exprs[i], elems ) );
++	}
+ 
+-				r = tmp;
++	return cur;
++};
+ 
+-			// Otherwise, find the expression to execute
+-			} else {
+-				var fn = jQuery.expr[ m[1] ];
+-				if ( typeof fn === "object" )
+-					fn = fn[ m[2] ];
++jQuery.dir = function( elem, dir ){
++	var matched = [], cur = elem[dir];
++	while ( cur && cur != document ) {
++		if ( cur.nodeType == 1 )
++			matched.push( cur );
++		cur = cur[dir];
++	}
++	return matched;
++};
+ 
+-				if ( typeof fn === "string" )
+-					fn = eval("false||function(a,i){return " + fn + ";}");
++jQuery.nth = function(cur, result, dir, elem){
++	result = result || 1;
++	var num = 0;
+ 
+-				// Execute it against the current filter
+-				r = jQuery.grep( r, function(elem, i){
+-					return fn(elem, i, m, r);
+-				}, not );
+-			}
+-		}
++	for ( ; cur; cur = cur[dir] )
++		if ( cur.nodeType == 1 && ++num == result )
++			break;
+ 
+-		// Return an array of filtered elements (r)
+-		// and the modified expression string (t)
+-		return { r: r, t: t };
+-	},
++	return cur;
++};
+ 
+-	dir: function( elem, dir ){
+-		var matched = [],
+-			cur = elem[dir];
+-		while ( cur && cur != document ) {
+-			if ( cur.nodeType == 1 )
+-				matched.push( cur );
+-			cur = cur[dir];
+-		}
+-		return matched;
+-	},
++jQuery.sibling = function(n, elem){
++	var r = [];
+ 
+-	nth: function(cur,result,dir,elem){
+-		result = result || 1;
+-		var num = 0;
++	for ( ; n; n = n.nextSibling ) {
++		if ( n.nodeType == 1 && n != elem )
++			r.push( n );
++	}
+ 
+-		for ( ; cur; cur = cur[dir] )
+-			if ( cur.nodeType == 1 && ++num == result )
+-				break;
++	return r;
++};
+ 
+-		return cur;
+-	},
++return;
+ 
+-	sibling: function( n, elem ) {
+-		var r = [];
++window.Sizzle = Sizzle;
+ 
+-		for ( ; n; n = n.nextSibling ) {
+-			if ( n.nodeType == 1 && n != elem )
+-				r.push( n );
+-		}
+-
+-		return r;
+-	}
+-});
++})();</object></m[3]-0;},></code></pre>
+    </div>
+  
+
+  <div class="attachment-download flex-column flex-center">
+    <h3>Download in other formats:</h3>
+    <a class="attachment-download-link" download="" href="/bugs.jquery.com/raw-attachment/ticket/3563/sizzle.patch">Original Format</a>
+  </div>
+</h1></div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

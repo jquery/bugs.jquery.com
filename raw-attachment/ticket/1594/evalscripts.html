@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/2002/REC-xhtml1-20020801/DTD/xhtml1-transitional.dtd">
+<html lang="fr">
+<head>
+
+	<title>.html() .evalScripts()</title>
+
+<script src="http://jqueryjs.googlecode.com/files/jquery-1.2.js" type="text/javascript"></script>
+
+<script type='text/javascript'><!--
+$(function(){
+
+	$('<div><\/div>').appendTo('body')
+	.html('A <scr'+"ipt>alert('A');<\/scr"+'ipt>');
+
+	$('<div><\/div>').appendTo('body')
+	.html('B<form> <scr'+"ipt>alert('B');<\/scr"+'ipt><\/form>');
+});
+// --></script>
+
+
+</head>
+
+<body>
+
+FF inserts both A and B.<br />
+MSIE and Safari insert A, not B
+
+</body>
+
+</html>

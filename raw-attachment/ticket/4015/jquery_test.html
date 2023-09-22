@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  
+  <script>
+  $(document).ready(function(){
+    
+    // Using multiple unit types within one animation.
+    $("#go").click(function(){
+      $("#block").animate({ 
+        width: "70%",
+        opacity: 0.4,
+        marginLeft: "0.6in",
+        fontSize: "3em", 
+        borderWidth: "10px"
+      }, 1500 );
+    });
+
+  });
+  </script>
+  <style>
+  div { 
+    background: url(http://static.jquery.com/files/rocker/images/logo_jquery_215x53.gif) no-repeat;
+    width:100px; 
+    border:1px solid green;
+  }
+  </style>
+</head>
+<body>
+  <button id="go">» Run</button>
+  <div id="block">Hello!
+	<img src="http://ui.jquery.com/images/home-nav-widgets.gif" width="50" height="50"/>
+  </div>
+</body>
+</html>

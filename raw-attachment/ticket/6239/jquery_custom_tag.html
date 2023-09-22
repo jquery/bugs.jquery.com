@@ -1,0 +1,24 @@
+<html>
+<head>
+  <title>Custom Tag Replacement</title>
+  <script src="http://www.hacres.com/js/jquery-1.4.2.min.js" type="text/javascript"></script>
+</head>
+<body>
+<p>The below appears fine both in Firefox and Chrome, but not IE7 nor IE8.</p>
+<p>
+<jtag type="events" key="133"></jtag>
+</p>
+<script language="javascript">
+  $(document).ready( function() {
+    $("jTag").each( function(){
+      var jTag = $(this);
+      jTag.html('<a href="http://www.hacres.com/education/event-calendar"><img src="http://www.hacres.com/images/loading.gif" alt="Click here if this continues to load..." /></a>');
+      var jTagUrl = "http://www.hacres.com/inc/jQueryTags.php?";
+      var attrs = ['type', 'src', 'key', 'rand', 'desc', 'limit', 'more'];
+      $.each(attrs, function(i,a) { if(jTag.attr(a)) jTagUrl += '&'+a+'='+jTag.attr(a); });
+      jTag.load( jTagUrl, function() { jTag.replaceWith( jTag.html() ); } );
+    });
+  });
+</script>
+</body>
+</html>

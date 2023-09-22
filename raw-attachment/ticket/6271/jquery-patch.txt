@@ -1,0 +1,17 @@
+--- sites/resources/fitzwilliam/js/base/jquery.js	(revision 4808)
++++ sites/resources/fitzwilliam/js/base/jquery.js	(working copy)
+@@ -4597,9 +4597,11 @@
+             style.zoom = 1;
+ 
+             // Set the alpha filter to set the opacity
+-            var opacity = parseInt( value, 10 ) + "" === "NaN" ? "" : "alpha(opacity=" + value * 100 + ")";
+-            var filter = style.filter || jQuery.curCSS( elem, "filter" ) || "";
+-            style.filter = ralpha.test(filter) ? filter.replace(ralpha, opacity) : opacity;
++            if(parseInt( value, 10 ) + "" !== "NaN") {
++               var opacity  = "alpha(opacity=" + value * 100 + ")";
++               var filter   = style.filter || jQuery.curCSS( elem, "filter" ) || "";
++               style.filter = ralpha.test(filter) ? filter.replace(ralpha, opacity) : opacity;
++            }
+          }
+ 
+          return style.filter && style.filter.indexOf("opacity=") >= 0 ?

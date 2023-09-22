@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; }
+      .hilite { background:yellow; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      function doIt() {
+        $("#s1").unbind("mouseout");
+        $("#s2").unbind("mouseout");
+      }
+
+      $(function () {
+        $("#doit").click(doIt);
+        $("#s1").mouseover(function () { $(this).addClass("hilite"); })
+                .mouseout(function() { $(this).removeClass("hilite"); });
+        $("#s2").hover(function () { $(this).addClass("hilite"); },
+                       function () { $(this).removeClass("hilite"); });
+      });
+    </script>
+  </head>
+  <body>
+    <button id="doit">Unbind mouseout</button>
+    <div id="adiv"></div>
+    <span id="s1">Span1</span>
+    <span id="s2">Span2</span>
+  </body>
+</html>

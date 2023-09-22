@@ -1,0 +1,1448 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">#8084 (jsonp transport overrides dataType: json setting) - jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      :root{--ticket-info-background-color:#ffd;--ticket-info-border-color:#dd9;--ticket-table-border-color:#eed;--ticket-date-text-color:#996;--ticket-description-title-color:#663;--ticket-changes-text-color:#663;--ticket-changes-box-shadow:#f2f2f2}.ticket-info{position:relative;background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);padding:.5em .75em;margin-bottom:.5em}.ticket-number{font-size:1.15rem;font-weight:700;margin-right:.5em}.ticket-info span{font-size:.8125em;font-weight:700}.ticket-resolution,.ticket-status,.ticket-type{text-transform:uppercase}.missing{color:var(--text-color-link-disabled)}.ticket-title{border-bottom:1px solid #bbb;margin-top:1em;padding-bottom:.25em;font-weight:700;font-size:1.1875rem}.ticket-dates{color:var(--ticket-date-text-color);font-size:.8125rem}.ticket-dates p{margin:0 0 .5em}.ticket-properties{width:100%;text-align:left;font-size:.65rem;border-top:1px solid var(--ticket-table-border-color);margin:0}.ticket-properties th{font-weight:400;width:20%}.ticket-properties td,.ticket-properties th{padding:.25em .5em;border-bottom:1px dashed var(--ticket-table-border-color)}.ticket-info-bottom{padding:.5em}.ticket-description{font-size:.8125rem;margin-top:.5em}.ticket-description h2,.ticket-description h3,.ticket-description h4,.ticket-description h5,.ticket-description h6{text-transform:uppercase;font-weight:400}.ticket-description h1{font-size:1.1rem}.ticket-description h2{font-size:1rem}.ticket-description h3{font-size:.9rem}.ticket-description h4{font-size:.8rem}.ticket-description h5{font-size:.75rem}.ticket-description h6{font-size:.7rem}.ticket-description-title{color:var(--ticket-description-title-color);font-size:.75rem}details{padding:.5em 0;font-size:.8125rem}summary{color:var(--text-color-link);font-weight:700;font-size:.875rem;text-decoration:underline;cursor:pointer;text-shadow:.04em .04em var(--text-shadow-color)}.ticket-attachments{font-size:.75em}.ticket-comment-body{width:100%;padding-top:.5em}.ticket-change{margin:1em 0;clear:both}.ticket-change-header{font-size:.875rem;font-weight:700;box-shadow:1.4px 2.8px 5.6px 0 var(--ticket-changes-box-shadow)}.ticket-change-link{font-size:.85em}.ticket-change-content{width:100%}.ticket-changes{background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);color:var(--ticket-changes-text-color);font-size:.7rem;float:right;clear:right;margin:2em 0 1em 1.5em}.ticket-changes th{text-align:right;font-weight:400;text-transform:capitalize}.ticket-changes td,.ticket-changes th{padding:.25em;vertical-align:baseline}.ticket-changes .change-field-new{font-weight:700}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+<div class="flex-column" data-pagefind-body="">
+  
+
+  <nav class="content-nav">
+    <ul class="flex-row">
+      
+        <li>
+          <a href="/bugs.jquery.com/ticket/8083/">← Previous Ticket</a>
+        
+      
+      
+        </li><li>
+          <a href="/bugs.jquery.com/ticket/8085/">Next Ticket →</a>
+        </li>
+      
+    </ul>
+  </nav>
+
+
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="." class="ticket-number">#8084</a>
+      <span class="ticket-status">closed</span>
+      <span class="ticket-type">bug</span>
+      <span class="ticket-resolution">(wontfix)</span>
+    </h3>
+
+    <div class="ticket-dates">
+      <p>Opened January 28, 2011 03:26PM UTC</p>
+      
+        <p>Closed February 05, 2011 12:25AM UTC</p>
+      
+      
+        <p>Last modified March 13, 2012 07:21PM UTC</p>
+      
+    </div>
+  </div>
+
+  <h1 class="ticket-title">jsonp transport overrides dataType: json setting</h1>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        anonymous
+      </td>
+      <th>Owned by:</th>
+      <td>anonymous</td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        low
+      </td>
+      
+        <th class="missing">Milestone:</th>
+      
+      <td>
+        <a href="/bugs.jquery.com/milestone/1.next">1.next</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>ajax</td>
+      
+        <th>Version:</th>
+      
+      <td>1.5rc1</td>
+    </tr>
+    <tr>
+      
+        <th class="missing">Keywords:</th>
+      
+      <td></td>
+      
+        <th class="missing">Cc:</th>
+      
+      <td></td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
+    <div class="ticket-description"><p>I upgrade my jquery lib from 1.5.b1 to 1.5.rc1. Now all my json ajax request don't work. I've got an "invalid label" error. (No problem with jquery 1.5.b1 or 1.4.4)</p></div>
+  </div>
+</div>
+
+<details>
+  <summary class="ticket-details-summary">Attachments (0)</summary>
+
+  <ul class="ticket-attachments">
+    
+  </ul>
+</details>
+
+<details open="">
+  <summary class="ticket-details-summary">Change History (34)</summary>
+  
+    <div class="ticket-change flex-column" id="comment:1">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 28, 2011 06:11PM UTC by <span class="author">snover</span></span>
+        <a class="ticket-change-link" href="#comment:1">comment:1</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>owner:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ anonymous</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">pending</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>This is not a useful bug report. Please follow the <a href="http://docs.jquery.com/How_to_Report_Bugs" class="ext-link"><span class="icon"></span>bug reporting guidelines</a> or use the <a href="http://forum.jquery.com" class="ext-link"><span class="icon"></span>jQuery Forum</a> for support requests.</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:2">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 28, 2011 11:34PM UTC by <span class="author">jitter</span></span>
+        <a class="ticket-change-link" href="#comment:2">comment:2</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>component:</th>
+                  <td>
+                    
+                      <span class="change-field-old">unfiled</span> → <span class="change-field-new">ajax</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>priority:</th>
+                  <td>
+                    
+                      <span class="change-field-old">undecided</span> → <span class="change-field-new">low</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:3">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 29, 2011 03:58AM UTC by <span class="author">jitter</span></span>
+        <a class="ticket-change-link" href="#comment:3">comment:3</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">After some quick googling this [http://www.bennadel.com/blog/99-JSON-Minor-But-VERY-Important-Detail-Creating-Syntax-Error-Invalid-Label.htm blog post by Ben Nadel] came up. Where he describes an issues related to evaluating json, in short doing `eval( json )` and forgetting the parentheses instead of `eval( &quot;(&quot; + json &quot;)&quot; )`.&#92;
+&#92;
+From this I made the following [http://jsfiddle.net/jitter/vghfT/ test case] which triggers this exception.&#92;
+&#92;
+How can this be fixed? Either by setting `dataType: &quot;json&quot;` or by fixing the server to return the correct `Content-Type` for json responses which would be `application/json` instead of `application/javascript`.&#92;
+&#92;
+So I guess your problem has a similar cause. You propably didn&#39;t specify the  `dataType: &quot;json&quot;` option on the ajax call and the server doesn&#39;t respond with the correct `Content-Type` header.&#92;
+&#92;
+What&#39;s still unclear to me is how what you have done worked in 1.4.4 and 1.5b1 but not in 1.5rc1, because afaik there wasn&#39;t a change which could have triggered this issue. The test case I gave above triggers the exception with all 3 versions of jQuery (1.4.4, 1.5b1, 1.5rc1).&#92;
+&#92;
+Thus it would be interesting to see a test case or more information by the reporter detailing what exactly does to trigger this in 1.5rc1 but not in 1.4.4 or 1.5b1.&#92;
+&#92;
+-----&#92;
+Related reading:&#92;
+&#92;
+- [https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Statements#label_Statement MDC The label Statement]&#92;
+</span> → <span class="change-field-new">1296273678216768</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>_comment1:</th>
+                  <td>
+                    
+                      <span class="change-field-old">After some quick googling this [http://www.bennadel.com/blog/99-JSON-Minor-But-VERY-Important-Detail-Creating-Syntax-Error-Invalid-Label.htm blog post by Ben Nadel] came up. Where he describes an issues related to evaluating json, in short doing `eval( json )` and forgetting the parentheses, instead of `eval( &quot;(&quot; + json &quot;)&quot; )`.&#92;
+&#92;
+From this I made the following [http://jsfiddle.net/jitter/vghfT/ test case] which triggers this exception.&#92;
+&#92;
+How can this be fixed? Either by setting `dataType: &quot;json&quot;` or by fixing the server to return the correct `Content-Type` for json responses, which would be `application/json` instead of `application/javascript`.&#92;
+&#92;
+So I guess your problem has a similar cause. You propably didn&#39;t specify the  `dataType: &quot;json&quot;` option on the ajax call and the server doesn&#39;t respond with the correct `Content-Type` header.&#92;
+&#92;
+What&#39;s still unclear to me is how what you have done worked, in 1.4.4 and 1.5b1 but not in 1.5rc1, because afaik there wasn&#39;t a change which could have triggered this issue. The test case I gave above triggers the exception with all 3 versions of jQuery (1.4.4, 1.5b1, 1.5rc1).&#92;
+&#92;
+Thus it would be interesting to see a test case or more information by the reporter, detailing what exactly he does to trigger this in 1.5rc1 but not in 1.4.4 or 1.5b1.&#92;
+&#92;
+-----&#92;
+Related reading:&#92;
+&#92;
+- [https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Statements#label_Statement MDC The label Statement]&#92;
+</span> → <span class="change-field-new">1296303108417465</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>After some quick googling this <a href="http://www.bennadel.com/blog/99-JSON-Minor-But-VERY-Important-Detail-Creating-Syntax-Error-Invalid-Label.htm" class="ext-link"><span class="icon"></span>blog post by Ben Nadel</a> came up. Where he describes an issues related to evaluating json, in short doing <code>eval( json )</code> and forgetting the parentheses, instead of <code>eval( "(" + json ")" )</code>.</p><p>From this I made the following <a href="http://jsfiddle.net/jitter/vghfT/" class="ext-link"><span class="icon"></span>test case</a> ~~which triggers this exception.~~ (not anymore as jsfiddle now returns the correct content type). You can this <a href="http://jsfiddle.net/jitter/vghfT/3/" class="ext-link"><span class="icon"></span>test case</a> which uses a little trick to simulate the behavior for a missing dataType statement and the server returning the wrong content type.</p><p>How can this be fixed? Either by setting <code>dataType: "json"</code> or by fixing the server to return the correct <code>Content-Type</code> for json responses, which would be <code>application/json</code> instead of <code>application/javascript</code>.</p><p>So I guess your problem has a similar cause. You propably didn't specify the  <code>dataType: "json"</code> option on the ajax call and the server doesn't respond with the correct <code>Content-Type</code> header.</p><p>What's still unclear to me is how what you have done worked, in 1.4.4 and 1.5b1 but not in 1.5rc1, because afaik there wasn't a change which could have triggered this issue. The test case I gave above triggers the exception with all 3 versions of jQuery (1.4.4, 1.5b1, 1.5rc1).</p><p>Thus it would be interesting to see a test case or more information by the reporter, detailing what exactly he does to trigger this in 1.5rc1 but not in 1.4.4 or 1.5b1.</p><p></p><hr><p></p><p>Related reading:</p><ul><li><a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Statements#label_Statement" class="ext-link"><span class="icon"></span>MDC The label Statement</a></li></ul>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:4">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 31, 2011 10:43PM UTC by <span class="author">Simon</span></span>
+        <a class="ticket-change-link" href="#comment:4">comment:4</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I get the same label-error. </p><pre class="wiki">
+ $.ajax({
+    url : _url,
+    dataType : 'json',
+    ifModified : true,
+    success : function (data, status, xhr) {
+          console.assert(typeof data === "object");
+    }
+});
+...
+</pre><p>My Firebug shows me that the request is handled like dataType would be 'jsonp'. A callback is added to the url: "...?callback=jQuery1507447478875469641_1296513129436&_=1296513132903"</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:5">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 31, 2011 11:30PM UTC by <span class="author">jitter</span></span>
+        <a class="ticket-change-link" href="#comment:5">comment:5</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:4 Simon]:</p><blockquote> I get the same label-error.    <pre class="wiki">
+&gt;  $.ajax({
+&gt;     url : _url,
+&gt;     dataType : 'json',
+&gt;     ifModified : true,
+&gt;     success : function (data, status, xhr) {
+&gt;           console.assert(typeof data === "object");
+&gt;     }
+&gt; });
+&gt; ...
+&gt; </pre>  My Firebug shows me that the request is handled like dataType would be 'jsonp'. A callback is added to the url: "...?callback=jQuery1507447478875469641_1296513129436&_=1296513132903"  </blockquote><p>Can you provide a test case for this? What does <code>_url</code> look like?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:6">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 01, 2011 08:53AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:6">comment:6</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">pending</span> → <span class="change-field-new">new</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>same error here with Jquery.1.5 release ... damned!</p><p>I have a valid JSON data file confirmed by <a href="http://www.jsonlint.com/" class="ext-link"><span class="icon"></span>http://www.jsonlint.com/</a></p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:7">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 01, 2011 11:18AM UTC by <span class="author">mechismo</span></span>
+        <a class="ticket-change-link" href="#comment:7">comment:7</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I'm seeing the same issue. In my case the problem seems to be because I'm extending my ajax settings with the defaults(jQuery.ajaxSettings):</p><p>settings = jQuery.extend(settings, jQuery.extend({}, jQuery.ajaxSettings, settings));</p><p>At this point the default settings have been already been modified by jQuery during init, line 6896:</p><pre class="wiki">
+// Default jsonp settings
+jQuery.ajaxSetup({
+	jsonp: "callback",
+	jsonpCallback: function() {
+		return jQuery.expando + "_" + ( jsc++ );
+	}
+});
+</pre><p>So when I call $.getJson with my extended settings jsonp and jsonpCallback are now set which causes the check for jsonp datatype to always succeed therefore treating the call as a jsonp call... line 6909:</p><pre class="wiki">
+	if ( s.dataTypes[ 0 ] === "jsonp" ||
+		originalSettings.jsonpCallback ||
+		originalSettings.jsonp != null ||
+		s.jsonp !== false && ( jsre.test( s.url ) ||
+				dataIsString && jsre.test( s.data ) ) ) {
+</pre><p>In my case the quick fix was to reset the jsonp and jsonpCallback back to null:</p><pre class="wiki">
+		settings = jQuery.extend(settings, jQuery.extend({}, jQuery.ajaxSettings, settings));
+		settings.jsonp = null;
+		settings.jsonpCallback = null;
+
+</pre><p>I haven't spent too much time on this so not sure exactly why this is happening but if you're seeing ajax calls treated as jsonp calls this may be the reason and the above quick fix should work.</p><p>HTH</p><p>Steve</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:8">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 01, 2011 02:13PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:8">comment:8</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>"In my case the quick fix was to reset the jsonp and jsonpCallback back to null.". Confirmed.</p><pre class="wiki">
+//  HACK:
+//    jquery-1.5 sets up jsonp for all json ajax requests
+//    undo the jsonp setting here so the json requests work again
+jQuery.ajaxSetup({
+  jsonp: null,
+  jsonpCallback: null
+});
+
+jQuery(function($) {
+  //  Do the rest of the application.
+  $.ajax({
+    url: 'data',
+    dataType: 'json',
+    success: function() { console.log('success') },
+    error: function() { console.log('error') }
+  });
+});
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:9">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 01, 2011 02:53PM UTC by <span class="author">skywalker@thedutchpirates.com</span></span>
+        <a class="ticket-change-link" href="#comment:9">comment:9</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:8 anonymous]:</p><blockquote> "In my case the quick fix was to reset the jsonp and jsonpCallback back to null.". </blockquote><p>In my case that works as well. Thanks!</p><blockquote>   <pre class="wiki">
+&gt; //  HACK:
+&gt; //    jquery-1.5 sets up jsonp for all json ajax requests
+&gt; //    undo the jsonp setting here so the json requests work again
+&gt; jQuery.ajaxSetup({
+&gt;   jsonp: null,
+&gt;   jsonpCallback: null
+&gt; });
+&gt; 
+&gt; jQuery(function($) {
+&gt;   //  Do the rest of the application.
+&gt;   $.ajax({
+&gt;     url: 'data',
+&gt;     dataType: 'json',
+&gt;     success: function() { console.log('success') },
+&gt;     error: function() { console.log('error') }
+&gt;   });
+&gt; });
+&gt; </pre> </blockquote>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:10">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 01, 2011 03:37PM UTC by <span class="author">snover</span></span>
+        <a class="ticket-change-link" href="#comment:10">comment:10</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">pending</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>summary:</th>
+                  <td>
+                    
+                      <span class="change-field-old">ajax json</span> → <span class="change-field-new">jsonp transport overrides dataType: json setting</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Please provide the URL that you are requesting and the URL of the page that is requesting it.</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:11">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 01, 2011 04:34PM UTC by <span class="author">scalvert</span></span>
+        <a class="ticket-change-link" href="#comment:11">comment:11</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I'm seeing the same problem here. Our json is very simple:</p><pre class="wiki">
+{"estimatedCost":"0","wordCount":"137"}
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:12">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 01, 2011 05:45PM UTC by <span class="author">deckberg@quantumsite.com</span></span>
+        <a class="ticket-change-link" href="#comment:12">comment:12</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>same problem here.  my quick fix was to wrap parentheses around my json and add the requesting callback on the server side.  hope this is fixed in the next update</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:13">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 02, 2011 02:25AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:13">comment:13</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">pending</span> → <span class="change-field-new">new</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>same problem here. </p><p>it was ok with jquery 1.4.2.</p><p>Downloaded the 1.5 version and now appears "label error"</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:14">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 02, 2011 11:04AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:14">comment:14</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:9 skywalker@…]:</p><blockquote> Replying to [comment:8 anonymous]:</blockquote><p>  It works for me </p><p>   </p><pre class="wiki">
+     jQuery.ajaxSetup({ jsonp: null, jsonpCallback: null});
+   </pre><p></p><p>  but I wonder if its bug or feature ;)</p><blockquote> &gt; "In my case the quick fix was to reset the jsonp and jsonpCallback back to null.".   In my case that works as well. Thanks! &gt;  &gt;  &gt; <pre class="wiki">
+&gt; &gt; //  HACK:
+&gt; &gt; //    jquery-1.5 sets up jsonp for all json ajax requests
+&gt; &gt; //    undo the jsonp setting here so the json requests work again
+&gt; &gt; jQuery.ajaxSetup({
+&gt; &gt;   jsonp: null,
+&gt; &gt;   jsonpCallback: null
+&gt; &gt; });
+&gt; &gt; 
+&gt; &gt; jQuery(function($) {
+&gt; &gt;   //  Do the rest of the application.
+&gt; &gt;   $.ajax({
+&gt; &gt;     url: 'data',
+&gt; &gt;     dataType: 'json',
+&gt; &gt;     success: function() { console.log('success') },
+&gt; &gt;     error: function() { console.log('error') }
+&gt; &gt;   });
+&gt; &gt; });
+&gt; &gt; </pre> &gt; </blockquote>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:15">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 02, 2011 05:54PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:15">comment:15</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>what the line of the jquery.1.5.js did you added the line?</p><pre class="wiki">
+jQuery.ajaxSetup({ jsonp: null, jsonpCallback: null});
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:16">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 02, 2011 06:24PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:16">comment:16</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Some information:</p><ul><li>Nullifying jsonp and jsonpCallback using ajaxSetup as was suggested will break jsonp.</li><li>jQuery.ajaxSettings is not documented and could very well end up not being exposed anymore in future versions.</li><li>There are other things that will break if you extend your settings with ajaxSettings (context, contentType and all the options that are objects and that need to be deep-extended).</li><li>Most of the time, you don't need to manually extend your own settings object using ajaxSettings prior to calling ajax since this is already done internally by ajax in a much safer way (with all the specificities of each option handled correctly for you).</li><li>The rare cases where you need to have access to ajaxSettings is generally to control some custom options you set up there are defined when they're not in the settings object you wish to provide to ajax. In this situation, it's much simpler and efficient to do something like this: <pre class="wiki"> ( "myValue" in settings ? settings : ajaxSettings ).myValue; </pre> and it has the advantage not to break anything.</li><li>Sometimes you wish to use your custom options and redefine (proxy) ajax to implement some additional behavior. In that case, I'd point you to prefilters: <a href="http://api.jquery.com/extending-ajax/#Prefilters" class="ext-link"><span class="icon"></span>http://api.jquery.com/extending-ajax/#Prefilters</a> and to the custom jQuery validation I recently made which provides a good example of how you'd feature detect jQuery 1.5 and use a prefilter or fall-back to proxying ajax for older versions: <a href="https://github.com/jaubourg/jquery-validation/blob/master/jquery.validate.js#L1084" class="ext-link"><span class="icon"></span>https://github.com/jaubourg/jquery-validation/blob/master/jquery.validate.js#L1084</a></li></ul><p>Also, make sure your ajax requests fail without any plugin installed. Some plugins will proxy ajax and do it wrong.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:17">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 03, 2011 05:35PM UTC by <span class="author">Ben Sgroi &lt;bsgroi@gmail.com&gt;</span></span>
+        <a class="ticket-change-link" href="#comment:17">comment:17</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I've been having the exact same problems listed above.  This appears to be a bug in the most recent version of jquery validate that only manifests in 1.5.  Ticket # 8064 is related:  <a href="http://bugs.jquery.com/ticket/8064." class="ext-link"><span class="icon"></span>http://bugs.jquery.com/ticket/8064.</a>  I used the forked jquery.validate.js provided there and the problem went away, though using the .ajaxSetup method recommended above is less problematic.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:18">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 04, 2011 12:20AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:18">comment:18</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>The jquery.validate.js provided in ticket 8064 listed above works for me!!!</p><p>Thanks!!!</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:19">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 05, 2011 12:25AM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:19">comment:19</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ wontfix</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I'll close this as wontfix. Let's mark all related present and future bugs as duplicate of this one and link to <a href="http://bugs.jquery.com/ticket/8084#comment:16" class="ext-link"><span class="icon"></span>http://bugs.jquery.com/ticket/8084#comment:16</a> so that posters get a good picture of what's happening and how to properly fix their code.</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:20">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 03, 2011 11:54AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:20">comment:20</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I know this ticket is Closed. But I ran into the same Issue and want to share how I got that fixed. There's only one single thing (I can see) which was Changed in how jQuery requests JSONP. The Callback name. </p><p>jQuery 1.4.x requested like </p><pre class="wiki">
+/json/?jsoncallback=jsonp15108140517397602155
+</pre><p>with jQuery 1.5.x this was changed to </p><pre class="wiki">
+/json/?jsoncallback=jQuery15108140517397602155_1299152711383&_=1299152711448
+</pre><p>which wasn't recognized (due to the '_' in the Callback-Name) as a valid Callback - which of course was depending heavily on my Application providing the data.</p><p>Anyone else who has this: Open your Browser and do the request by hand. Once with and once without the underscore and see what you get back. May be the Server-Side won't get that parameter as a callback as well.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:21">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 03, 2011 06:58PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:21">comment:21</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/8436">#8436</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:22">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 03, 2011 10:36PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:22">comment:22</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Also seems to happen when using the ajaxQueue plugin.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:23">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 06, 2011 11:20PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:23">comment:23</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/8452">#8452</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:24">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 07, 2011 04:40AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:24">comment:24</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Please explain to me (you may need to use small words) why this is not a bug.</p><p>On line 15 of /ajax/jsonp.js, ajaxPrefilter() is decorated with "json jsonp" even though the comment on line 14 clearly states that the purpose of the pre filter is to normalize JSONP requests, not JSON requests.</p><p>This pre filter adds the callback query string which causes my app to issue a 302 upon receipt.  It also adds an unnecessary callback function, which interferes with the processing of my JSON request.  Finally, the suggestion in comment 16 does not help me, since the pre filter is processed AFTER the pre filter in /ajax/jsonp.js, when the damage is done.</p><p>Please fix /ajax/jsonp.js by removing "json" from the pre filter.</p><p>counsellorben</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:25">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 08, 2011 09:05PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:25">comment:25</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/8454">#8454</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:26">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 08, 2011 09:44PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:26">comment:26</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Replying to [comment:24 anonymous]:&#92;
+&gt; Please explain to me (you may need to use small words) why this is not a bug.&#92;
+&gt; &#92;
+&gt; On line 15 of /ajax/jsonp.js, ajaxPrefilter() is decorated with &quot;json jsonp&quot; even though the comment on line 14 clearly states that the purpose of the pre filter is to normalize JSONP requests, not JSON requests.&#92;
+&gt; &#92;
+&gt; This pre filter adds the callback query string which causes my app to issue a 302 upon receipt.  It also adds an unnecessary callback function, which interferes with the processing of my JSON request.  Finally, the suggestion in comment 16 does not help me, since the pre filter is processed AFTER the pre filter in /ajax/jsonp.js, when the damage is done.&#92;
+&gt; &#92;
+&gt; Please fix /ajax/jsonp.js by removing &quot;json&quot; from the pre filter.&#92;
+&gt; &#92;
+&gt; counsellorben&#92;
+&#92;
+I suggest you actually read comment 16. Let me restate it, once again, anyway.&#92;
+&#92;
+This behaviour (a json request being promoted as jsonp) can only occur if:&#92;
+1) You provide the jsonp or jsonpCallback options or if your url contains one of the callback markers (=? or ??).&#92;
+2) You use a plugin that redefines ajax and changes the options passed to the method in such a way that falls into case 1 (most of the time, by extending the options with ajaxSettings which is totally unnecessary and can even spawn nasty bugs, even in 1.4.4).&#92;
+&#92;
+Would you be so kind as to try and remove the plugins you use then check your ajax requests. I guarantee you&#39;ll find the problem doesn&#39;t lie in 1.5 but in your application.&#92;
+&#92;
+Yes, the prefilter is applied to jsonp AND json requests ON PURPOSE. This is actually what makes it possible to issue jsonp requests using getJSON with a url that contains one of the callback markers (=? or ??). The dataType of the request is &quot;json&quot;, yet the prefilter has to be applied.&#92;
+&#92;
+The only thing 1.5 changed is that the default jsonp and jsonpCallback options now sit in ajaxSettings. Those were the only two options not to be stored in this structure previously. Doing so exhibited faults into existing plugins and applications (mainly because people seem to believe it is somehow necessary to manually extend options with ajaxSettings while ajax does it internally -- and without caveats).&#92;
+&#92;
+There&#39;s a lot of mis-conceptions in some of the presumed &quot;solutions&quot; to this ticket. If you actually take the time and read comment 16 carefully and stop presuming that the problem cannot possibly be on your side (because you see &quot;json&quot; somewhere in jQuery&#39;s code and are then convinced it&#39;s a blatant mistake while ignoring the fact jQuery has extensive unit tests regarding json requests that NEVER exhibit promotion to jsonp), then it will be a matter of seconds before you spot the problem in your application (or one of the plugins you use).&#92;
+&#92;
+In short, stop presuming: look at your code and plugins.&#92;
+&#92;
+Are those words numerous and small enough for you?</span> → <span class="change-field-new">1299620746154285</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>_comment1:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Replying to [comment:24 anonymous]:&#92;
+&gt; Please explain to me (you may need to use small words) why this is not a bug.&#92;
+&gt; &#92;
+&gt; On line 15 of /ajax/jsonp.js, ajaxPrefilter() is decorated with &quot;json jsonp&quot; even though the comment on line 14 clearly states that the purpose of the pre filter is to normalize JSONP requests, not JSON requests.&#92;
+&gt; &#92;
+&gt; This pre filter adds the callback query string which causes my app to issue a 302 upon receipt.  It also adds an unnecessary callback function, which interferes with the processing of my JSON request.  Finally, the suggestion in comment 16 does not help me, since the pre filter is processed AFTER the pre filter in /ajax/jsonp.js, when the damage is done.&#92;
+&gt; &#92;
+&gt; Please fix /ajax/jsonp.js by removing &quot;json&quot; from the pre filter.&#92;
+&gt; &#92;
+&gt; counsellorben&#92;
+&#92;
+I suggest you actually read comment 16. Let me restate it, once again, anyway.&#92;
+&#92;
+This behaviour (a json request being promoted as jsonp) can only occur if:7&#92;
+&#92;
+1) You provide the jsonp or jsonpCallback options or if your url contains one of the callback markers (=? or ??).&#92;
+&#92;
+2) You use a plugin that redefines ajax and changes the options passed to the method in such a way that falls into case 1 (most of the time, by extending the options with ajaxSettings which is totally unnecessary and can even spawn nasty bugs, even in 1.4.4).&#92;
+&#92;
+Would you be so kind as to try and remove the plugins you use then check your ajax requests. I guarantee you&#39;ll find the problem doesn&#39;t lie in 1.5 but in your application.&#92;
+&#92;
+Yes, the prefilter is applied to jsonp AND json requests ON PURPOSE. This is actually what makes it possible to issue jsonp requests using getJSON with a url that contains one of the callback markers (=? or ??). The dataType of the request is &quot;json&quot;, yet the prefilter has to be applied.&#92;
+&#92;
+The only thing 1.5 changed is that the default jsonp and jsonpCallback options now sit in ajaxSettings. Those were the only two options not to be stored in this structure previously. Doing so exhibited faults into existing plugins and applications (mainly because people seem to believe it is somehow necessary to manually extend options with ajaxSettings while ajax does it internally -- and without caveats).&#92;
+&#92;
+There&#39;s a lot of mis-conceptions in some of the presumed &quot;solutions&quot; to this ticket. If you actually take the time and read comment 16 carefully and stop presuming that the problem cannot possibly be on your side (because you see &quot;json&quot; somewhere in jQuery&#39;s code and are then convinced it&#39;s a blatant mistake while ignoring the fact jQuery has extensive unit tests regarding json requests that NEVER exhibit promotion to jsonp), then it will be a matter of seconds before you spot the problem in your application (or one of the plugins you use).&#92;
+&#92;
+In short, stop presuming: look at your code and plugins.&#92;
+&#92;
+Are those words numerous and small enough for you?</span> → <span class="change-field-new">1299620769838290</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:24 anonymous]:</p><blockquote> Please explain to me (you may need to use small words) why this is not a bug.  On line 15 of /ajax/jsonp.js, ajaxPrefilter() is decorated with "json jsonp" even though the comment on line 14 clearly states that the purpose of the pre filter is to normalize JSONP requests, not JSON requests.  This pre filter adds the callback query string which causes my app to issue a 302 upon receipt.  It also adds an unnecessary callback function, which interferes with the processing of my JSON request.  Finally, the suggestion in comment 16 does not help me, since the pre filter is processed AFTER the pre filter in /ajax/jsonp.js, when the damage is done.  Please fix /ajax/jsonp.js by removing "json" from the pre filter.  counsellorben</blockquote><p>I suggest you actually read comment 16. Let me restate it, once again, anyway.</p><p>This behaviour (a json request being promoted as jsonp) can only occur if:</p><p>1) You provide the jsonp or jsonpCallback options or if your url contains one of the callback markers (=? or ??).</p><p>2) You use a plugin that redefines ajax and changes the options passed to the method in such a way that falls into case 1 (most of the time, by extending the options with ajaxSettings which is totally unnecessary and can even spawn nasty bugs, even in 1.4.4).</p><p>Would you be so kind as to try and remove the plugins you use then check your ajax requests. I guarantee you'll find the problem doesn't lie in 1.5 but in your application.</p><p>Yes, the prefilter is applied to jsonp AND json requests ON PURPOSE. This is actually what makes it possible to issue jsonp requests using getJSON with a url that contains one of the callback markers (=? or ??). The dataType of the request is "json", yet the prefilter has to be applied.</p><p>The only thing 1.5 changed is that the default jsonp and jsonpCallback options now sit in ajaxSettings. Those were the only two options not to be stored in this structure previously. Doing so exhibited faults into existing plugins and applications (mainly because people seem to believe it is somehow necessary to manually extend options with ajaxSettings while ajax does it internally -- and without caveats).</p><p>There's a lot of mis-conceptions in some of the presumed "solutions" to this ticket. If you actually take the time and read comment 16 carefully and stop presuming that the problem cannot possibly be on your side (because you see "json" somewhere in jQuery's code and are then convinced it's a blatant mistake while ignoring the fact jQuery has extensive unit tests regarding json requests that NEVER exhibit promotion to jsonp), then it will be a matter of seconds before you spot the problem in your application (or one of the plugins you use).</p><p>In short, stop presuming: look at your code and plugins.</p><p>Are those words numerous and small enough for you?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:27">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 08, 2011 09:52PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:27">comment:27</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:20 anonymous]:</p><blockquote> I know this ticket is Closed. But I ran into the same Issue and want to share how I got that fixed. There's only one single thing (I can see) which was Changed in how jQuery requests JSONP. The Callback name.   jQuery 1.4.x requested like  <pre class="wiki">
+&gt; /json/?jsoncallback=jsonp15108140517397602155
+&gt; </pre>  with jQuery 1.5.x this was changed to  <pre class="wiki">
+&gt; /json/?jsoncallback=jQuery15108140517397602155_1299152711383&_=1299152711448
+&gt; </pre> which wasn't recognized (due to the '_' in the Callback-Name) as a valid Callback - which of course was depending heavily on my Application providing the data.  Anyone else who has this: Open your Browser and do the request by hand. Once with and once without the underscore and see what you get back. May be the Server-Side won't get that parameter as a callback as well.</blockquote><p>What's the backend (server) you're using that won't recognize a callback name with an underscore as a valid javascript identifier?</p><p>I think it would be worth opening a new ticket for this one. If a broad server-side system has problem with underscores, it's pretty easy to have it removed (if it's a custom server-side script, that's another story).</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:28">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 09, 2011 06:29AM UTC by <span class="author">altro</span></span>
+        <a class="ticket-change-link" href="#comment:28">comment:28</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I think, you must write about this hack in docs for jQuery, otherwise users will create duplicate issues (like me :-))</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:29">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 16, 2011 12:48PM UTC by <span class="author">hexa</span></span>
+        <a class="ticket-change-link" href="#comment:29">comment:29</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:27 jaubourg]:</p><blockquote> What's the backend (server) you're using that won't recognize a callback name with an underscore as a valid javascript identifier?</blockquote><p>I'm using Slim PHP Framework and an Application I wrote for that. An that App I used a regex which didn't match '_' as a valid character in a callback. Clearly my fault since I've written that in jQuery 1.4 times where the generated callback name did contain only a-z, A-Z & 0-9. So it was fine enough to match those. Now I simply return jsonp on my App in case the parameter 'jsoncallback' is set. In this case it was NOT a jQuery issue, but resulting in the same error ("invalid label" as outlines on the very first comment here).</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:30">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 25, 2011 02:22PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:30">comment:30</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/8940">#8940</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:31">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 01, 2011 01:50PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:31">comment:31</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I'm doing a "retry on error" attempt on $.ajax() call. </p><p>I noticed it was appending &callback=jQuery[big_number_here]_[bigger_number] to my URL. It's weird, because it's automatically changing to jsonp, while the initial request is clearly JSON only.</p><p>Then, I tried rewriting the dataType inside the 'error' callback to 'text json', and it appeared to fix it? I'm not even sure how this fixes it.</p><p>jsFiddle: <a href="http://jsfiddle.net/g2VJZ/11/" class="ext-link"><span class="icon"></span>http://jsfiddle.net/g2VJZ/11/</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:32">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 01, 2011 01:56PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:32">comment:32</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:31 anonymous]:</p><blockquote> I'm doing a "retry on error" attempt on $.ajax() call.  I noticed it was appending &callback=jQuery[big_number_here]_[bigger_number] to my URL. It's weird, because it's automatically changing to jsonp, while the initial request is clearly JSON only. Then, I tried rewriting the dataType inside the 'error' callback to 'text json', and it appeared to fix it? I'm not even sure how this fixes it. jsFiddle: <a href="http://jsfiddle.net/g2VJZ/11/" class="ext-link"><span class="icon"></span>http://jsfiddle.net/g2VJZ/11/</a></blockquote><p>the correct version is <a href="http://jsfiddle.net/g2VJZ/13/" class="ext-link"><span class="icon"></span>http://jsfiddle.net/g2VJZ/13/</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:33">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 03, 2011 05:04PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:33">comment:33</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>We have had these problems, but we see different behavior between the min and non-min jquery versions.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:34">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 06, 2011 12:51AM UTC by <span class="author">gahgneh</span></span>
+        <a class="ticket-change-link" href="#comment:34">comment:34</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>it seems that the <a href="http://jsfiddle.net/g2VJZ/13/" class="ext-link"><span class="icon"></span>http://jsfiddle.net/g2VJZ/13/</a> works now as expected, changing to 1.6, and how this was set to wontfix and it got fixed? lol</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</details>
+</div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

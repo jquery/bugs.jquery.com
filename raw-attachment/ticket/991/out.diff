@@ -1,0 +1,33 @@
+Index: src/ajax/ajax.js
+===================================================================
+--- src/ajax/ajax.js	(revision 1396)
++++ src/ajax/ajax.js	(working copy)
+@@ -647,6 +647,12 @@
+ 			// The transfer is complete and the data is available, or the request timed out
+ 			if ( xml && (xml.readyState == 4 || isTimeout == "timeout") ) {
+ 				requestDone = true;
++				
++				if (ival) {
++					clearInterval(ival);
++					ival = null;
++				}
++				
+ 				var status;
+ 				try {
+ 					status = jQuery.httpSuccess( xml ) && isTimeout != "timeout" ?
+@@ -692,11 +698,13 @@
+ 					s.complete(xml, status);
+ 
+ 				// Stop memory leaks
+-				xml.onreadystatechange = function(){};
++				// xml.onreadystatechange = function(){};
+ 				xml = null;
++				xml2 = null;
+ 			}
+ 		};
+-		xml.onreadystatechange = onreadystatechange;
++		//xml.onreadystatechange = onreadystatechange;
++		var ival = setInterval(onreadystatechange, 13);
+ 
+ 		// Timeout checker
+ 		if ( s.timeout > 0 )

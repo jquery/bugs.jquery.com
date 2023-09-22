@@ -1,0 +1,21 @@
+<!doctype html public "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head><title></title>
+<script language="javascript" src="jquery-1.4a2.min.js"></script>
+<script>
+$(document).ready(function(){
+$('form').submit(function(event){
+$('#place').html('submit override fired!');
+return false;
+});
+
+});
+</script>
+</head>
+<body>
+<form action="test.cgi" method="get">
+<input type="test" id="test" name="test" value="123"/>
+<button type="submit">submit</button><br/>
+</form>
+<div id="place"></div>
+</body>
+</html>

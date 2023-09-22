@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jQuery + Modernizr + &lt;section&gt; + IE7 = :( </title>
+</head>
+<!--
+<script src="modernizr-1.0.min.js" type="text/javascript" charset="utf-8"></script>
+-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+
+<style type="text/css" media="screen">
+	section{
+		display: block;
+		border: 1px solid #ddd;
+		margin: 20px;}
+		
+	#results{
+		background: #eee;
+		padding: 10px;
+		border: 1px solid #ddd;}
+	
+</style>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var sections = $('section').length;
+		var children = $('section *').length;
+		var paragraph= $('section p').length;
+		
+		$('<p/>').html('jQuery reports that there are '+sections+' <em>sections</em> with '+children+' total <em>children</em>, '+paragraph+' of which are <em>paragraphs</em>').appendTo('#results');
+	});
+</script>
+<body>
+	<div id="results">
+		<p>There are be 2 <em>sections</em> with 7 total <em>children</em>, 5 of which are <em>paragraphs</em></p>
+	</div>
+	<section class="first">
+		<h3>I am A Section!</h3>
+		<p>Child 1</p>
+		<p>Child 2</p>
+		<p>Child 3</p>
+	</section>
+
+	<section>
+		<h3>Me too!</h3>
+		<p>Child 2</p>
+		<p>Child 3</p>
+	</section>
+	
+</body>
+</html>

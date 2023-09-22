@@ -1,0 +1,28 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 3790)
++++ src/core.js	(working copy)
+@@ -483,8 +483,23 @@
+ 					if ( elem.nodeType == 1 )
+ 						scripts = scripts.add( jQuery( "script", elem ).remove() );
+ 
++					// IE6 fails to copy the checked state over on appendChild type calls
++					if ( jQuery.browser.msie && jQuery.browser.version == "6.0" ) {
++						var c = jQuery(elem).find("input").andSelf().filter(":checkbox,:radio");
++						c.each(function () {
++							this.saveChecked = this.checked;
++						});
++					}
++
+ 					// Inject the elements into the document
+ 					callback.call( obj, elem );
++
++					// set the checked values in IE6 (from above)
++					if ( c )
++						c.each(function () {
++							if (this.saveChecked)
++								this.checked = true;
++						});
+ 				}
+ 			});
+ 

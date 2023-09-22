@@ -1,0 +1,44 @@
+--- jquery.autocomplete.js
++++ (clipboard)
+@@ -317,17 +317,28 @@
+ 				extraParams[key] = typeof param == "function" ? param() : param;
+ 			});
+ 			
++			if (options.cleanUrl){
++				urlParam = options.url + '/' + lastWord(term) + '/' + options.max;
++				for (var key in extraParams){
++					urlParam += '/' + extraParams[key];
++				}
++				dataParam = {};
++			}else{
++				urlParam = options.url;
++				dataParam = $.extend({
++					q: lastWord(term),
++					limit: options.max
++				}, extraParams);
++			}
++			
+ 			$.ajax({
+ 				// try to leverage ajaxQueue plugin to abort previous requests
+ 				mode: "abort",
+ 				// limit abortion to this input
+ 				port: "autocomplete" + input.name,
+ 				dataType: options.dataType,
+-				url: options.url,
+-				data: $.extend({
+-					q: lastWord(term),
+-					limit: options.max
+-				}, extraParams),
++				url: urlParam,
++				data: dataParam,
+ 				success: function(data) {
+ 					var parsed = options.parse && options.parse(data) || parse(data);
+ 					cache.add(term, parsed);
+@@ -382,6 +393,7 @@
+ 	formatMatch: null,
+ 	autoFill: false,
+ 	width: 0,
++	cleanUrl: false,
+ 	multiple: false,
+ 	multipleSeparator: ", ",
+ 	highlight: function(value, term) {

@@ -1,0 +1,13 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 5790)
++++ core.js	(working copy)
+@@ -1039,7 +1039,7 @@
+ 		if (!elem || elem.nodeType == 3 || elem.nodeType == 8)
+ 			return undefined;
+ 
+-		var notxml = !jQuery.isXMLDoc( elem ),
++		var notxml = !jQuery.isXMLDoc( elem ) && !jQuery.nodeName( elem, 'svg' ),
+ 			// Whether we are setting (or getting)
+ 			set = value !== undefined,
+ 			msie = jQuery.browser.msie;

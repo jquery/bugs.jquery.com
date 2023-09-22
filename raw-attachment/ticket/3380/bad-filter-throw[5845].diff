@@ -1,0 +1,14 @@
+Index: selector.js
+===================================================================
+--- selector.js	(revision 5845)
++++ selector.js	(working copy)
+@@ -393,6 +393,9 @@
+ 				var fn = jQuery.expr[ m[1] ];
+ 				if ( typeof fn == "object" )
+ 					fn = fn[ m[2] ];
++					
++				if( !fn )
++					throw m[0] + ' is not a valid filter';
+ 
+ 				if ( typeof fn == "string" )
+ 					fn = eval("false||function(a,i){return " + fn + ";}");

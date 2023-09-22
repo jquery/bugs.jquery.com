@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="jquery-1.4.2.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+	
+	$("#selectbox").change(function() {
+	
+	/*
+	This snippet works
+	*/
+	$("*[id^='contactInfo.shippingAddress']").val("");
+	
+	/*
+	This snippet doesnot work
+	*/
+	//$("*[id^='contactInfo\\.shippingAddress']").val("");
+	
+	
+	});
+
+	
+	} );
+    </script>
+  </head>
+  <body>
+	<p>try starts here </p>
+	
+	<select id="selectbox">
+   <option value="1">1</option>
+   <option value="2">2</option>
+   <option value="3">3</option>
+   </select>
+	
+	<table>
+	<tr>
+	   <td><input id="contactInfo.shippingAddress.streetAddress1" name="contactInfo.shippingAddress.streetAddress1" type="text" value="address1" maxlength="100"/></td>
+
+
+<td><input id="contactInfo.shippingAddress.city" name="contactInfo.shippingAddress.city"  type="text" value="city" maxlength="100"/></td>
+   <td ><input id="contactInfo.shippingAddress.state" name="contactInfo.shippingAddress.state"  type="text" value="state" maxlength="100"/></td>
+   <td><input id="contactInfo.shippingAddress.addressZipCode" name="contactInfo.shippingAddress.addressZipCode"  type="text" value="123456" maxlength="10"/>
+   </td>
+	
+	</tr>	
+	</table>
+	
+	
+	<p>try Ends here </p>
+	<form>
+  </body>
+</html>

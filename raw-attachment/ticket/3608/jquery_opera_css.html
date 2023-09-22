@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>jQuery/Opera issue</title>
+  <script type="text/javascript" src="jquery-1.2.6.pack.js"></script>
+  <style type="text/css">span { display:inline-block; width:16px; height:16px; margin:2px; }</style>
+ </head>
+ <body>
+  <span style="background-color:#FF0000;"></span>
+ </body>
+ <script type="text/ecmascript">
+		
+	function report(span, context) {
+		alert([
+			context, 
+			"\tbackground-color: " + span.css("background-color"),
+			"\tbackgroundColor: " + span.css("backgroundColor"),
+		].join("\n"));
+	}
+		
+	var original = $("span").eq(0);
+	report(original, "Original element");
+	
+	var copy = original.clone();
+	report(copy, "Clone before insertion into DOM");
+	
+	original.after(copy);
+	report(copy, "Clone after insertion into DOM");
+
+ </script>
+</html>

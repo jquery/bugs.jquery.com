@@ -1,0 +1,15 @@
+<html>
+<head>
+<title>jQuery css font-size bug in Mozilla Firefox</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var el = $('#testPara');
+	$('#results').append('<p>$(el).css("font-size"): <b>'+$(el).css('font-size')+'</b> - el.get(0).style.fontSize: <b>'+el.get(0).style.fontSize+'</b> - $(el).height(): <b>'+$(el).height()+'</b></p>');
+});
+</script>
+</head>
+<body>
+<p id='testPara' style='font-size:5px;line-height:1;'>some really small text!</p>
+<div id='results'></div>
+</body></html>

@@ -1,0 +1,61 @@
+Index: plugins/tablesorter/2.0/jquery.tablesorter.js
+===================================================================
+--- plugins/tablesorter/2.0/jquery.tablesorter.js	(revision 4311)
++++ plugins/tablesorter/2.0/jquery.tablesorter.js	(working copy)
+@@ -137,9 +137,9 @@
+ 					for (var i=0;i < l; i++) {
+ 						var p = false;
+ 						
+-						if($.meta && ($($headers[i]).data() && $($headers[i]).data().sorter)  ) {
++						if($.metadata && ($($headers[i]).metadata() && $($headers[i]).metadata().sorter)  ) {
+ 						
+-							p = getParserById($($headers[i]).data().sorter);	
++							p = getParserById($($headers[i]).metadata().sorter);	
+ 						
+ 						} else if((table.config.headers[i] && table.config.headers[i].sorter)) {
+ 	
+@@ -287,7 +287,7 @@
+ 				
+ 				if(table.config.debug) { var time = new Date(); }
+ 				
+-				var meta = ($.meta) ? true : false, tableHeadersRows = [];
++				var metadata = ($.metadata) ? true : false, tableHeadersRows = [];
+ 			
+ 				for(var i = 0; i < table.tHead.rows.length; i++) { tableHeadersRows[i]=0; };
+ 				
+@@ -334,7 +334,7 @@
+ 			};
+ 			
+ 			function checkHeaderMetadata(cell) {
+-				if(($.meta) && ($(cell).data().sorter === false)) { return true; };
++				if(($.metadata) && ($(cell).metadata().sorter === false)) { return true; };
+ 				return false;
+ 			}
+ 			
+@@ -626,8 +626,8 @@
+ 						applyWidget(this);
+ 					});
+ 					
+-					if($.meta && ($(this).data() && $(this).data().sortlist)) {
+-						config.sortList = $(this).data().sortlist;
++					if($.metadata && ($(this).metadata() && $(this).metadata().sortlist)) {
++						config.sortList = $(this).metadata().sortlist;
+ 					}
+ 					// if user has supplied a sort list to constructor.
+ 					if(config.sortList.length > 0) {
+@@ -839,7 +839,7 @@
+ 	    },
+ 	    format: function(s,table,cell) {
+ 			var c = table.config, p = (!c.parserMetadataName) ? 'sortValue' : c.parserMetadataName;
+-	        return $(cell).data()[p];
++	        return $(cell).metadata()[p];
+ 	    },
+ 	  type: "numeric"
+ 	});
+@@ -858,4 +858,4 @@
+ 		}
+ 	});
+ 	
+-})(jQuery);
+\ No newline at end of file
++})(jQuery);

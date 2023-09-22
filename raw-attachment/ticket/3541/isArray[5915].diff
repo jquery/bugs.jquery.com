@@ -1,0 +1,77 @@
+Index: src/ajax.js
+===================================================================
+--- src/ajax.js	(revision 5914)
++++ src/ajax.js	(working copy)
+@@ -76,7 +76,7 @@
+ 		.map(function(i, elem){
+ 			var val = jQuery(this).val();
+ 			return val == null ? null :
+-				val.constructor == Array ?
++				jQuery.isArray(val) ?
+ 					jQuery.map( val, function(val, i){
+ 						return {name: elem.name, value: val};
+ 					}) :
+@@ -504,7 +504,7 @@
+ 
+ 		// If an array was passed in, assume that it is an array
+ 		// of form elements
+-		if ( a.constructor == Array || a.jquery )
++		if ( jQuery.isArray(a) || a.jquery )
+ 			// Serialize the form elements
+ 			jQuery.each( a, function(){
+ 				add( this.name, this.value );
+@@ -515,7 +515,7 @@
+ 			// Serialize the key/values
+ 			for ( var j in a )
+ 				// If the value is an array then the key names need to be repeated
+-				if ( a[j] && a[j].constructor == Array )
++				if ( jQuery.isArray(a[j]) )
+ 					jQuery.each( a[j], function(){
+ 						add( j, this );
+ 					});
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 5916)
++++ src/core.js	(working copy)
+@@ -407,7 +407,7 @@
+ 			if ( this.nodeType != 1 )
+ 				return;
+ 
+-			if ( value.constructor == Array && /radio|checkbox/.test( this.type ) )
++			if ( jQuery.isArray(value) && /radio|checkbox/.test( this.type ) )
+ 				this.checked = (jQuery.inArray(this.value, value) >= 0 ||
+ 					jQuery.inArray(this.name, value) >= 0);
+ 
+@@ -621,6 +621,10 @@
+ 	isFunction: function( fn ) {
+ 		return !!fn && !!fn.hasOwnProperty && fn instanceof Function;
+ 	},
++	
++	isArray: function( arr ){
++		return !!arr && arr.constructor == Array;
++	},
+ 
+ 	// check if an element is in a (or is an) XML document
+ 	isXMLDoc: function( elem ) {
+Index: src/fx.js
+===================================================================
+--- src/fx.js	(revision 5914)
++++ src/fx.js	(working copy)
+@@ -112,7 +112,7 @@
+ 	},
+ 
+ 	queue: function(type, fn){
+-		if ( jQuery.isFunction(type) || ( type && type.constructor == Array )) {
++		if ( jQuery.isFunction(type) || jQuery.isArray(type) ) {
+ 			fn = type;
+ 			type = "fx";
+ 		}
+@@ -121,7 +121,7 @@
+ 			return queue( this[0], type );
+ 
+ 		return this.each(function(){
+-			if ( fn.constructor == Array )
++			if ( jQuery.isArray(fn) )
+ 				queue(this, type, fn);
+ 			else {
+ 				queue(this, type).push( fn );

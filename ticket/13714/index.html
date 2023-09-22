@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">#13714 (jQuery.globalEval gotcha with strings that contain the &amp;quot;use strict&amp;quot; directive.) - jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      :root{--ticket-info-background-color:#ffd;--ticket-info-border-color:#dd9;--ticket-table-border-color:#eed;--ticket-date-text-color:#996;--ticket-description-title-color:#663;--ticket-changes-text-color:#663;--ticket-changes-box-shadow:#f2f2f2}.ticket-info{position:relative;background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);padding:.5em .75em;margin-bottom:.5em}.ticket-number{font-size:1.15rem;font-weight:700;margin-right:.5em}.ticket-info span{font-size:.8125em;font-weight:700}.ticket-resolution,.ticket-status,.ticket-type{text-transform:uppercase}.missing{color:var(--text-color-link-disabled)}.ticket-title{border-bottom:1px solid #bbb;margin-top:1em;padding-bottom:.25em;font-weight:700;font-size:1.1875rem}.ticket-dates{color:var(--ticket-date-text-color);font-size:.8125rem}.ticket-dates p{margin:0 0 .5em}.ticket-properties{width:100%;text-align:left;font-size:.65rem;border-top:1px solid var(--ticket-table-border-color);margin:0}.ticket-properties th{font-weight:400;width:20%}.ticket-properties td,.ticket-properties th{padding:.25em .5em;border-bottom:1px dashed var(--ticket-table-border-color)}.ticket-info-bottom{padding:.5em}.ticket-description{font-size:.8125rem;margin-top:.5em}.ticket-description h2,.ticket-description h3,.ticket-description h4,.ticket-description h5,.ticket-description h6{text-transform:uppercase;font-weight:400}.ticket-description h1{font-size:1.1rem}.ticket-description h2{font-size:1rem}.ticket-description h3{font-size:.9rem}.ticket-description h4{font-size:.8rem}.ticket-description h5{font-size:.75rem}.ticket-description h6{font-size:.7rem}.ticket-description-title{color:var(--ticket-description-title-color);font-size:.75rem}details{padding:.5em 0;font-size:.8125rem}summary{color:var(--text-color-link);font-weight:700;font-size:.875rem;text-decoration:underline;cursor:pointer;text-shadow:.04em .04em var(--text-shadow-color)}.ticket-attachments{font-size:.75em}.ticket-comment-body{width:100%;padding-top:.5em}.ticket-change{margin:1em 0;clear:both}.ticket-change-header{font-size:.875rem;font-weight:700;box-shadow:1.4px 2.8px 5.6px 0 var(--ticket-changes-box-shadow)}.ticket-change-link{font-size:.85em}.ticket-change-content{width:100%}.ticket-changes{background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);color:var(--ticket-changes-text-color);font-size:.7rem;float:right;clear:right;margin:2em 0 1em 1.5em}.ticket-changes th{text-align:right;font-weight:400;text-transform:capitalize}.ticket-changes td,.ticket-changes th{padding:.25em;vertical-align:baseline}.ticket-changes .change-field-new{font-weight:700}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+<div class="flex-column" data-pagefind-body="">
+  
+
+  <nav class="content-nav">
+    <ul class="flex-row">
+      
+        <li>
+          <a href="/bugs.jquery.com/ticket/13713/">← Previous Ticket</a>
+        
+      
+      
+        </li><li>
+          <a href="/bugs.jquery.com/ticket/13715/">Next Ticket →</a>
+        </li>
+      
+    </ul>
+  </nav>
+
+
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="." class="ticket-number">#13714</a>
+      <span class="ticket-status">closed</span>
+      <span class="ticket-type">bug</span>
+      <span class="ticket-resolution">(fixed)</span>
+    </h3>
+
+    <div class="ticket-dates">
+      <p>Opened April 02, 2013 08:09PM UTC</p>
+      
+        <p>Closed April 03, 2013 03:26PM UTC</p>
+      
+      
+        <p>Last modified April 04, 2013 12:23PM UTC</p>
+      
+    </div>
+  </div>
+
+  <h1 class="ticket-title">jQuery.globalEval gotcha with strings that contain the &quot;use strict&quot; directive.</h1>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        jdalton
+      </td>
+      <th>Owned by:</th>
+      <td>jdalton</td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        undecided
+      </td>
+      
+        <th class="missing">Milestone:</th>
+      
+      <td>
+        <a href="/bugs.jquery.com/milestone/None">None</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>unfiled</td>
+      
+        <th>Version:</th>
+      
+      <td>1.9.1</td>
+    </tr>
+    <tr>
+      
+        <th class="missing">Keywords:</th>
+      
+      <td></td>
+      
+        <th class="missing">Cc:</th>
+      
+      <td></td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
+    <div class="ticket-description"><p>jQuery.globalEval relies on indirect eval in modern browsers, but when text contains the "use strict" directive (<a href="http://es5.github.com/#x10.4.2;" class="ext-link"><span class="icon"></span>http://es5.github.com/#x10.4.2;</a> step 3; sub step 1), it's executed as if it's wrapped with an <a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/" class="ext-link"><span class="icon"></span>IIFE</a></p><pre class="wiki">
+(function() {
+  
+  var code = [
+    '"use strict";',
+    'var foo = 1;',
+    'console.log("inside eval window.foo: " + window.foo)'
+  ].join('\\n');
+      
+  var jqCode = [
+    '"use strict";',
+    'var foo = 1;',
+    'console.log("inside jQuery.globalEval window.foo: " + window.foo)'
+  ].join('\\n');
+  
+  (0, eval)(code);
+  jQuery.globalEval(jqCode);
+  console.log('local foo: ' + (typeof foo != 'undefined' ? foo : undefined));
+}());
+
+console.log('global foo: ' + window.foo);
+
+// =&gt; "inside eval window.foo: undefined"
+// =&gt; "inside jQuery.globalEval window.foo: undefined"
+// =&gt; "local foo: undefined"
+// =&gt; "global foo: undefined"
+</pre><p>See <a href="http://jsbin.com/ujedax/1" class="ext-link"><span class="icon"></span>http://jsbin.com/ujedax/1</a> (open the console)</p><p>The solution would be to attempt to use script injection instead.</p></div>
+  </div>
+</div>
+
+<details>
+  <summary class="ticket-details-summary">Attachments (0)</summary>
+
+  <ul class="ticket-attachments">
+    
+  </ul>
+</details>
+
+<details open="">
+  <summary class="ticket-details-summary">Change History (22)</summary>
+  
+    <div class="ticket-change flex-column" id="comment:1">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 08:29PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:1">comment:1</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I wouldn't be so fast to switch approaches entirely, we'll just exchange for a different set of quirks.</p><p>When/how does this impact real code?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:2">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 08:33PM UTC by <span class="author">jdalton</span></span>
+        <a class="ticket-change-link" href="#comment:2">comment:2</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Actually, script injection avoids the need to use <code>execScript</code> in old IE, and the extra parsing it requires too. The downside is that it requires the DOM.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:3">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 08:36PM UTC by <span class="author">jdalton</span></span>
+        <a class="ticket-change-link" href="#comment:3">comment:3</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>@kangax points out that instead of switching to script injection you can continue to use the indirect eval and simple prefix something like <code>1;</code> to the <code>data</code> string so that it's no longer a valid directive:</p><p><a href="https://twitter.com/kangax/status/319185222157619200" class="ext-link"><span class="icon"></span>https://twitter.com/kangax/status/319185222157619200</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:4">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 08:45PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:4">comment:4</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>The downside is also that it doesn't guarantee synchronous execution. Unless we can have definite proof this is no longer a problem?</p><p>Don't get me wrong, I'd love to switch back to script tag injection (so much less code and regexps and, now, insane "1;" prefixes and whatnot to act like a normal script tag obviously) but I know why we switched to the current eval/execScript madness.</p><p>Now ES5 eval acting differently if the code is strict doesn't make a lot of sense to me: the same code, executed in a script tag would have the vars declared globally, so why on earth is the standard asking for eval to change its semantics? Am I missing something huge here? Isn't it a bug in the standard?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:5">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 08:53PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:5">comment:5</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Actually killing the "use strict" directive with <code>1;</code> will change the way the code works so may not be the best approach /via @abozhilov</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:6">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 08:54PM UTC by <span class="author">jdalton</span></span>
+        <a class="ticket-change-link" href="#comment:6">comment:6</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>btw <code>anonymous</code> was me (switched browsers, forgot to sign in)</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:7">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 09:02PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:7">comment:7</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:6 jdalton]:</p><blockquote> btw <code>anonymous</code> was me (switched browsers, forgot to sign in)</blockquote><p>Having an icon that pops a browser at random suits you so well when you think about it ;)</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:8">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 09:03PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:8">comment:8</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:5 anonymous]:</p><blockquote> Actually killing the "use strict" directive with <code>1;</code> will change the way the code works so may not be the best approach /via @abozhilov</blockquote><p>I also agree with @abozhilov this is a problem in the spec.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:9">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 10:22PM UTC by <span class="author">jdalton</span></span>
+        <a class="ticket-change-link" href="#comment:9">comment:9</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>@jaubourg Naw, I like that ES5 eval code has this feature.</p><p>I don't think its a spec bug at all.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:10">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 10:27PM UTC by <span class="author">jdalton</span></span>
+        <a class="ticket-change-link" href="#comment:10">comment:10</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>For reference here is an earlier ticket related to the Firefox &lt; 4 issue:</p><p><a href="http://bugs.jquery.com/ticket/7862" class="ext-link"><span class="icon"></span>http://bugs.jquery.com/ticket/7862</a></p><p>Following jQuery's support page it should now be OK to use script injection again:</p><p><a href="http://jquery.com/browser-support/" class="ext-link"><span class="icon"></span>http://jquery.com/browser-support/</a></p><p>Here is the <a href="/bugs.jquery.com/wiki/GitHub">GitHub</a> thread following the commit to change from script injection to the current technique:</p><p><a href="https://github.com/jquery/jquery/commit/f3c6077da02f080f09d73ec4d8a8029f76654c2b" class="ext-link"><span class="icon"></span>https://github.com/jquery/jquery/commit/f3c6077da02f080f09d73ec4d8a8029f76654c2b</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:11">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 10:51PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:11">comment:11</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:9 jdalton]:</p><blockquote> @jaubourg Naw, I like that ES5 eval code has this feature. I don't think its a spec bug at all.</blockquote><p>Why? What could possibly be the use of this when you can just wrap code in a closure manually? Why could be the use of this except to effectively render eval useless?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:12">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 10:53PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:12">comment:12</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:10 jdalton]:</p><blockquote> For reference here is an earlier ticket related to the Firefox &lt; 4 issue: <a href="http://bugs.jquery.com/ticket/7862" class="ext-link"><span class="icon"></span>http://bugs.jquery.com/ticket/7862</a>  Following jQuery's support page it should now be OK to use script injection again: <a href="http://jquery.com/browser-support/" class="ext-link"><span class="icon"></span>http://jquery.com/browser-support/</a>  Here is the <a href="/bugs.jquery.com/wiki/GitHub">GitHub</a> thread following the commit to change from script injection to the current technique: <a href="https://github.com/jquery/jquery/commit/f3c6077da02f080f09d73ec4d8a8029f76654c2b" class="ext-link"><span class="icon"></span>https://github.com/jquery/jquery/commit/f3c6077da02f080f09d73ec4d8a8029f76654c2b</a></blockquote><p>&gt;</p><p>Yeah, it's probably time but I'd be much more re-assured by a FF bug tracker ticket that clearly states this is fixed.</p><p>Gotta create a unit test for this ;)</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:13">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 10:57PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:13">comment:13</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Replying to [comment:4 jaubourg]:&#92;
+&gt; Now ES5 eval acting differently if the code is strict doesn&#39;t make a lot of sense to me: the same code, executed in a script tag would have the vars declared globally, so why on earth is the standard asking for eval to change its semantics? Am I missing something huge here? Isn&#39;t it a bug in the standard?&#92;
+&#92;
+No bug. Strict mode must ensure static scoping semantics, which includes scope determinism. Specifically, global scope isn&#39;t implied the same way it is in non-strict mode. Also, if you could eval &quot;strict mode&quot; code in the global scope, should the the global environment record&#39;s strict flag then be set to true? I hope we all answered &quot;no&quot; to that question, since the &quot;strict-ness&quot; is static, not dynamic. Creating a fresh environment record to execute eval code with &quot;use strict&quot; is the only sane semantics&#92;
+&#92;
+&#92;
+Are we talking about changes in jQuery 2.x or 1.x?</span> → <span class="change-field-new">1364943540890221</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:4 jaubourg]:</p><blockquote> Now ES5 eval acting differently if the code is strict doesn't make a lot of sense to me: the same code, executed in a script tag would have the vars declared globally, so why on earth is the standard asking for eval to change its semantics? Am I missing something huge here? Isn't it a bug in the standard?</blockquote><p>No bug. Strict mode must ensure static scoping semantics, which includes scope determinism. Specifically, global scope isn't implied the same way it is in non-strict mode. Also, if you could eval "strict mode" code in the global scope, should the the global environment record's strict flag then be set to true? I hope we all answered "no" to that question, since the "strict-ness" is static, not dynamic. Creating a fresh environment record to execute global eval code with "use strict" is the only sane semantics</p><p>Are we talking about changes in jQuery 2.x or 1.x?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:14">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 11:03PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:14">comment:14</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:13 rwaldron]:</p><blockquote> Replying to [comment:4 jaubourg]: &gt; Now ES5 eval acting differently if the code is strict doesn't make a lot of sense to me: the same code, executed in a script tag would have the vars declared globally, so why on earth is the standard asking for eval to change its semantics? Am I missing something huge here? Isn't it a bug in the standard?  No bug. Strict mode must ensure static scoping semantics, which includes scope determinism. Specifically, global scope isn't implied the same way it is in non-strict mode. Also, if you could eval "strict mode" code in the global scope, should the the global environment record's strict flag then be set to true? I hope we all answered "no" to that question, since the "strict-ness" is static, not dynamic. Creating a fresh environment record to execute global eval code with "use strict" is the only sane semantics   Are we talking about changes in jQuery 2.x or 1.x?</blockquote><p>It's probably safe for both by now.</p><p>If I'm getting what you're saying correctly, then what is the semantics of inserting an inline script tag with strict code? Is this even specified btw?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:15">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 11:24PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:15">comment:15</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:14 jaubourg]:</p><blockquote> &gt; Are we talking about changes in jQuery 2.x or 1.x? It's probably safe for both by now.</blockquote><p>What is "probably safe" by now? </p><blockquote>  If I'm getting what you're saying correctly, then what is the semantics of inserting an inline script tag with strict code? Is this even specified btw?</blockquote><p>First, run this:</p><pre class="wiki">
+function foo() {
+  var arguments = 1;
+}
+
+foo(); // doesn't throw
+</pre><p>Then this:</p><pre class="wiki">
+var script = document.createElement("script");
+script.textContent = "'use strict'; console.log(1);";
+document.head.appendChild(script);
+
+</pre><p>Then this:</p><pre class="wiki">
+foo(); // doesn't throw
+
+Object.defineProperty(window, "c", { value: 1 });
+
+c = 2; // doesn't throw
+</pre><p>The global environment record won't become "strict" this way</p><p>Compare to an explicit, static strict mode opt-in:</p><pre class="wiki">
+(function() {
+  "use strict";
+
+  function foo() {
+    var arguments = 1;
+  }
+
+  foo(); // throws
+
+  // It won't get to here, because var arguments = 1; is a syntax error
+  // but if you comment out the above and re-run with just this....
+
+  Object.defineProperty(window, "c", { value: 1 });
+
+  c = 2; // throws
+
+}());
+
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:16">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 11:26PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:16">comment:16</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Also, the script element is not the business of the ECMAScript specification</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:17">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 02, 2013 11:49PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:17">comment:17</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> What is "probably safe" by now? </blockquote><p>To revert back to script tag injection.</p><p>Also, I'm getting the fact the global env won't become "strict" because of a single injected script tag. But if the following actually executes in strict mode, at the global level:</p><blockquote> <pre class="wiki">
+&gt; var script = document.createElement("script");
+&gt; script.textContent = "'use strict'; console.log(1);";
+&gt; document.head.appendChild(script);
+&gt; </pre></blockquote><p>Then I fail to see why <code>eval</code> does act differently.</p><p>Unless, of course, a script tag injected that way simply ignores the <code>"use strict";</code> directive but that doesn't seem to be the case.</p><p>This is the crux of my interrogation here. I'm well aware there are two separate standard bodies here but I'd expect them both to thrive for consistency, not take completely opposite decisions on executing script from source.</p><p>How can the problem of scope determinism you talk about incur such a constraint on <code>eval</code>, when the issue is pretty much ignored by the number one js env when using inline script tag injection? Which is wrong, if any?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:18">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 03, 2013 12:46AM UTC by <span class="author">m_gol</span></span>
+        <a class="ticket-change-link" href="#comment:18">comment:18</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">@ jaubourg `eval` behavior in this case can&#39;t be changed due to what rwaldron said. But how would you want the script injection method to behave in the same way? The only method I see to achieve that would be to require the following to make the following throw:&#92;
+{{{&#92;
+&lt;script&gt;&#39;use strict&#39;; var a = 2;&lt;/script&gt;&#92;
+&lt;script&gt;&#39;use strict&#39;; var b = a + 1;&lt;/script&gt;&#92;
+}}}&#92;
+&#92;
+This is because you can&#39;t detect if `&lt;script&gt;` tags have been present since the beginning or if one of them was injected using JavaScript code.&#92;
+&#92;
+On the other hand, not enclosing the `&#39;use strict&#39;;` directive inside a function is considered a bad idea anyway...</span> → <span class="change-field-new">1364950021815642</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>@ jaubourg <code>eval</code> behavior in this case can't be changed due to what rwaldron said. But how would you want the script injection method to behave in the same way? The only method I see to achieve that would be to require the following to throw:</p><pre class="wiki">
+&lt;script&gt;'use strict'; var a = 2;&lt;/script&gt;
+&lt;script&gt;'use strict'; var b = a + 1;&lt;/script&gt;
+</pre><p>This is because you can't detect if <code>&lt;script&gt;</code> tags have been present since the beginning or if one of them was injected using <a href="/bugs.jquery.com/wiki/JavaScript">JavaScript</a> code.</p><p>On the other hand, not enclosing the <code>'use strict';</code> directive inside a function is considered a bad idea anyway...</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:19">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 03, 2013 10:53AM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:19">comment:19</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>owner:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ jdalton</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">pending</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Hmmm, in Chrome, script tag injection acts like eval actually: <a href="http://jsbin.com/ujedax/2/," class="ext-link"><span class="icon"></span>http://jsbin.com/ujedax/2/,</a> @jdalton, did you actually test this with script tag injection? On which browsers?</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:20">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 03, 2013 02:42PM UTC by <span class="author">jdalton</span></span>
+        <a class="ticket-change-link" href="#comment:20">comment:20</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">@jaubourg Yes, I tested it before I reported the issue. You should try script injection in a more basic form before attempting to do it with jQuery. See http://jsbin.com/ewukuh/1.&#92;
+&#92;
+&#92;
+{{{&#92;
+// =&gt; inside eval window.foo: undefined&#92;
+// =&gt; inside jQuery.globalEval window.foo: undefined&#92;
+// =&gt; inside script tag injection window.foo: 1 1:3&#92;
+// =&gt; global foo: 1 &#92;
+}}}</span> → <span class="change-field-new">1365000154064442</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">pending</span> → <span class="change-field-new">new</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>@jaubourg Yes, I tested it before I reported the issue. You should try script injection in a more basic form before attempting to do it with jQuery. See <a href="http://jsbin.com/ewukuh/1." class="ext-link"><span class="icon"></span>http://jsbin.com/ewukuh/1.</a></p><pre class="wiki">
+// =&gt; inside eval window.foo: undefined
+// =&gt; inside jQuery.globalEval window.foo: undefined
+// =&gt; inside script tag injection window.foo: 1
+// =&gt; global foo: 1 
+</pre>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:21">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 03, 2013 03:26PM UTC by <span class="author">Rick Waldron</span></span>
+        <a class="ticket-change-link" href="#comment:21">comment:21</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ fixed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Fixes <a href="/bugs.jquery.com/ticket/13714">#13714</a>. jQuery.globalEval gotcha w/ strings that contain valid, prologue position strict mode pragma</p><p>Signed-off-by: Rick Waldron &lt;waldron.rick@gmail.com&gt; </p><p> Changeset: feea9394b75a5dcb16fad013a402b388f97cefba</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:22">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 04, 2013 12:23PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:22">comment:22</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:20 jdalton]:</p><blockquote> @jaubourg Yes, I tested it before I reported the issue. You should try script injection in a more basic form before attempting to do it with jQuery. See <a href="http://jsbin.com/ewukuh/1." class="ext-link"><span class="icon"></span>http://jsbin.com/ewukuh/1.</a>   <pre class="wiki">
+&gt; // =&gt; inside eval window.foo: undefined
+&gt; // =&gt; inside jQuery.globalEval window.foo: undefined
+&gt; // =&gt; inside script tag injection window.foo: 1
+&gt; // =&gt; global foo: 1 
+&gt; </pre></blockquote><p>And that's the silly frenchie owned by jQuery once again :/</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</details>
+</div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

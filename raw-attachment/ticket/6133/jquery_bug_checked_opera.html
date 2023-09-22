@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>:checked Bug</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+
+        // Duplicate <div class="boxes"> ...
+        $("a.inserter").click(function(e) {
+          e.preventDefault();
+          $(this).next().clone().appendTo("#root");
+          $("a.counter").click(); // ... and update the counter
+        });
+
+        // Count all elements :checked inside the document:
+        $("a.counter").click(function(e) {
+          e.preventDefault();
+          $("span.result").text($(":checked").length);
+        });
+
+        // Prefill the counter
+        $("a.counter").click();
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="root">
+      <pre><a class="counter" href="#">$(":checked").length</a>: <strong><span class="result">-</span></strong></pre><br />
+      <a class="inserter" href="#">Duplicate &lt;div&gt; with checkboxes and radiobuttons</a>
+
+      <div class="boxes">
+        <hr />
+        <form>
+          <input type="checkbox" name="c1" value="a" checked="checked" /> A<br />
+          <input type="checkbox" name="c1" value="d" checked="checked" /> B<br />
+          <br />
+          <input type="radio" name="r1" value="1" checked="checked" /> 1<br />
+          <input type="radio" name="r1" value="2" /> 2<br />
+        </form>
+      </div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+<html>
+<head>
+	<title>IE onclick + live</title>
+</head>
+<body>
+	<a href="http://jquery.com/" onclick="alert('clicked'); return false;">link</a>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(".whatever").live("click", function(event) {
+			event.preventDefault();
+		});
+	</script>
+</body>
+</html>

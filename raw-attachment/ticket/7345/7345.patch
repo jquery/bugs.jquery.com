@@ -1,0 +1,54 @@
+diff --git src/css.js src/css.js
+index 30cecf3..878dd66 100644
+--- src/css.js
++++ src/css.js
+@@ -6,6 +6,7 @@ var ralpha = /alpha\([^)]*\)/i,
+ 	rupper = /([A-Z])/g,
+ 	rnumpx = /^-?\d+(?:px)?$/i,
+ 	rnum = /^-?\d/,
++	rrelnum = /^([+\-]=)?([\d+.\-]+)(.*)$/,
+ 
+ 	cssShow = { position: "absolute", visibility: "hidden", display: "block" },
+ 	cssWidth = [ "Left", "Right" ],
+@@ -91,6 +92,14 @@ jQuery.extend({
+ 				value += "px";
+ 			}
+ 
++			if ( typeof value === "string" ) {
++				var parts = rrelnum.exec( value );
++				if ( parts && parts[1] ) {
++					var relVal = parseFloat( parts[2] );
++					value = ( ( parts[1] === "-=" ? -1 : 1 ) * relVal ) + jQuery.css( elem, name );
++				}
++			}
++
+ 			// If a hook was provided, use that value, otherwise just set the specified value
+ 			if ( !hooks || !("set" in hooks) || (value = hooks.set( elem, value )) !== undefined ) {
+ 				// Wrapped to prevent IE from throwing errors when 'invalid' values are provided
+diff --git test/unit/css.js test/unit/css.js
+index 4ec7c60..c3fcae5 100644
+--- test/unit/css.js
++++ test/unit/css.js
+@@ -103,6 +103,22 @@ test("css(String|Hash)", function() {
+ 	equals( child[0].style.fontSize, old, "Make sure font-size isn't changed on null." );
+ });
+ 
++test("css(String, String|Object) with relative values", function() {
++	var $elem = jQuery('#nothiddendiv');
++	$elem.css({ width: 1, height: 1 });
++	ok( [$elem.width(), $elem.height()], [1,1] );
++	$elem.css({ width: "+=9", height: "+=9" });
++	ok( [$elem.width(), $elem.height()], [10,10] );
++	$elem.css({ width: "-=9", height: "-=9" });
++	ok( [$elem.width(), $elem.height()], [1,1] );
++	$elem.css({ width: "+=9px", height: "+=9px" });
++	ok( [$elem.width(), $elem.height()], [10,10] );
++	$elem.css({ width: "-=9px", height: "-=9px" });
++	ok( [$elem.width(), $elem.height()], [1,1] );
++	$elem.css("width", "+=9").css("height", "+=9");
++	ok( [$elem.width(), $elem.height()], [10,10] );
++});
++
+ test("css(String, Object)", function() {
+ 	expect(22);
+ 

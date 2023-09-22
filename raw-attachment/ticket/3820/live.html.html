@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>jquery tests - 1.3b2 - live + html manipulation</title>
+	<script src="../dist/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<!-- script src="jquery.js" type="text/javascript" charset="utf-8"></script-->
+	<script type="text/javascript" charset="utf-8">
+	var livetimes1 = 0;
+	var livetimes2 = 0;
+	var clicktimes = 0;
+	var modifyDom = true;
+	$('a.test').live('click', function(){
+		$('#times1').html(++livetimes1);
+		if(modifyDom) {
+			$(this).html('<span>Click Me</span>');
+		}
+		return false;
+	});
+	$('a.test').live('click', function(){
+		$('#times2').html(++livetimes2);
+		return false;
+	});
+	$(function(){
+		$('a.test').click(function(){
+			$('#times3').html(++clicktimes);
+		});
+		$('#toggle').click(function(){
+			$('#mod').html(''+(modifyDom = !modifyDom));
+		});
+	});
+	</script>
+	<style type="text/css" media="screen">
+	</style>
+</head>
+<body>
+	<p><a href="#" class="test">Click Me</a></p>
+	<p>
+		1st live() clicks: <span id="times1">0</span><br/>
+		2nd live() clicks: <span id="times2">0</span><br/>
+		click() clicks: <span id="times3">0</span>
+	</p>
+	<p>Modify DOM: <span id="mod">true</span> <a href="#" id="toggle">toggle</a></p>
+</body>
+</html>

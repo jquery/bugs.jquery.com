@@ -1,0 +1,22 @@
+Index: test/unit/core.js
+===================================================================
+--- test/unit/core.js	(revision 5872)
++++ test/unit/core.js	(working copy)
+@@ -1364,7 +1364,7 @@
+ 	var div = jQuery("div").addClass("test").removeClass("test"),
+ 		pass = true;
+ 	for ( var i = 0; i < div.size(); i++ ) {
+-		if ( div.get(i).className.indexOf("test") != -1 ) pass = false;
++		if ( div.get(i).className.search(/(^|\s)test(\s|$)/) != -1 ) pass = false;
+ 	}
+ 	ok( pass, "Remove Class" );
+ 
+@@ -1373,7 +1373,7 @@
+ 	div.removeClass("test").removeClass("bar").removeClass("foo");
+ 	var pass = true;
+ 	for ( var i = 0; i < div.size(); i++ ) {
+-	 if ( div.get(i).className.match(/test|bar|foo/) ) pass = false;
++	 if ( div.get(i).className.search(/(^|\s)(test|bar|foo)(\s|$)/) != -1 ) pass = false;
+ 	}
+ 	ok( pass, "Remove multiple classes" );
+ 

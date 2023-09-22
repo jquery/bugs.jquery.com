@@ -1,0 +1,139 @@
+--- jquery-1.3.2.js.orig	2009-02-19 14:38:51.000000000 -0800
++++ jquery-1.3.2.js.1124	2009-08-07 14:34:49.000000000 -0700
+@@ -2955,18 +2955,20 @@
+ 	},
+ 
+ 	ready: function(fn) {
++		var doc = this[0];
++
+ 		// Attach the listeners
+-		bindReady();
++		bindReady(doc);
+ 
+ 		// If the DOM is already ready
+-		if ( jQuery.isReady )
++		if ( this.data('isReady') )
+ 			// Execute the function immediately
+-			fn.call( document, jQuery );
++			fn.call( doc, jQuery );
+ 
+ 		// Otherwise, remember the function for later
+ 		else
+ 			// Add the function to the wait list
+-			jQuery.readyList.push( fn );
++			this.queue( 'readyList', fn );
+ 
+ 		return this;
+ 	},
+@@ -3016,78 +3018,83 @@
+ }
+ 
+ jQuery.extend({
+-	isReady: false,
+-	readyList: [],
++	// NOTE: if official API, uncomment these two lines
++	// isReady: false,
+ 	// Handle when the DOM is ready
+-	ready: function() {
++	ready: function(doc) {
++		var $doc = jQuery(doc);
+ 		// Make sure that the DOM is not already loaded
+-		if ( !jQuery.isReady ) {
++		if ( !$doc.data('isReady') ) {
+ 			// Remember that the DOM is ready
+-			jQuery.isReady = true;
++			// NOTE: if official API, uncomment these two lines
++			// if ( doc === document ) jQuery.isReady = true;
++			$doc.data( 'isReady', true );
+ 
+ 			// If there are functions bound, to execute
+-			if ( jQuery.readyList ) {
++			if ( $doc.queue( 'readyList' ).length ) {
+ 				// Execute all of them
+-				jQuery.each( jQuery.readyList, function(){
+-					this.call( document, jQuery );
++				jQuery.each($doc.queue('readyList'), function(){
++					this.call( doc, jQuery );
+ 				});
+ 
+ 				// Reset the list of functions
+-				jQuery.readyList = null;
++				$doc.queue('readyList', []);
+ 			}
+ 
+ 			// Trigger any bound ready events
+-			jQuery(document).triggerHandler("ready");
++			$doc.triggerHandler("ready");
+ 		}
+ 	}
+ });
+ 
+-var readyBound = false;
++function bindReady(doc){
++        if (!doc) doc = document;
++        var $doc = jQuery(doc);
++        if ( $doc.data('readyBound') ) return;
++        $doc.data('readyBound', true);
+ 
+-function bindReady(){
+-	if ( readyBound ) return;
+-	readyBound = true;
++	var win = doc.defaultView || doc.parentWindow;
+ 
+ 	// Mozilla, Opera and webkit nightlies currently support this event
+-	if ( document.addEventListener ) {
++	if ( doc.addEventListener ) {
+ 		// Use the handy event callback
+-		document.addEventListener( "DOMContentLoaded", function(){
+-			document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
+-			jQuery.ready();
++		doc.addEventListener( "DOMContentLoaded", function(){
++			doc.removeEventListener( "DOMContentLoaded", arguments.callee, false );
++			jQuery.ready(doc);
+ 		}, false );
+ 
+ 	// If IE event model is used
+-	} else if ( document.attachEvent ) {
++	} else if ( doc.attachEvent ) {
+ 		// ensure firing before onload,
+ 		// maybe late but safe also for iframes
+-		document.attachEvent("onreadystatechange", function(){
+-			if ( document.readyState === "complete" ) {
+-				document.detachEvent( "onreadystatechange", arguments.callee );
+-				jQuery.ready();
++		doc.attachEvent("onreadystatechange", function(){
++			if ( doc.readyState === "complete" ) {
++				doc.detachEvent( "onreadystatechange", arguments.callee );
++				jQuery.ready(doc);
+ 			}
+ 		});
+ 
+ 		// If IE and not an iframe
+ 		// continually check to see if the document is ready
+-		if ( document.documentElement.doScroll && window == window.top ) (function(){
+-			if ( jQuery.isReady ) return;
++		if ( doc.documentElement.doScroll && win == win.top ) (function(){
++			if ( $doc.data( 'isReady' ) ) return;
+ 
+ 			try {
+ 				// If IE is used, use the trick by Diego Perini
+ 				// http://javascript.nwbox.com/IEContentLoaded/
+-				document.documentElement.doScroll("left");
++				doc.documentElement.doScroll("left");
+ 			} catch( error ) {
+ 				setTimeout( arguments.callee, 0 );
+ 				return;
+ 			}
+ 
+ 			// and execute any waiting functions
+-			jQuery.ready();
++			jQuery.ready(doc);
+ 		})();
+ 	}
+ 
+ 	// A fallback to window.onload, that will always work
+-	jQuery.event.add( window, "load", jQuery.ready );
++	jQuery.event.add( win, "load", function () { jQuery.ready(doc); } );
+ }
+ 
+ jQuery.each( ("blur,focus,load,resize,scroll,unload,click,dblclick," +

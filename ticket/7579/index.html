@@ -1,0 +1,1959 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">#7579 (jQuery.data() truncates numbers taken from data-xxx attributes) - jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      :root{--ticket-info-background-color:#ffd;--ticket-info-border-color:#dd9;--ticket-table-border-color:#eed;--ticket-date-text-color:#996;--ticket-description-title-color:#663;--ticket-changes-text-color:#663;--ticket-changes-box-shadow:#f2f2f2}.ticket-info{position:relative;background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);padding:.5em .75em;margin-bottom:.5em}.ticket-number{font-size:1.15rem;font-weight:700;margin-right:.5em}.ticket-info span{font-size:.8125em;font-weight:700}.ticket-resolution,.ticket-status,.ticket-type{text-transform:uppercase}.missing{color:var(--text-color-link-disabled)}.ticket-title{border-bottom:1px solid #bbb;margin-top:1em;padding-bottom:.25em;font-weight:700;font-size:1.1875rem}.ticket-dates{color:var(--ticket-date-text-color);font-size:.8125rem}.ticket-dates p{margin:0 0 .5em}.ticket-properties{width:100%;text-align:left;font-size:.65rem;border-top:1px solid var(--ticket-table-border-color);margin:0}.ticket-properties th{font-weight:400;width:20%}.ticket-properties td,.ticket-properties th{padding:.25em .5em;border-bottom:1px dashed var(--ticket-table-border-color)}.ticket-info-bottom{padding:.5em}.ticket-description{font-size:.8125rem;margin-top:.5em}.ticket-description h2,.ticket-description h3,.ticket-description h4,.ticket-description h5,.ticket-description h6{text-transform:uppercase;font-weight:400}.ticket-description h1{font-size:1.1rem}.ticket-description h2{font-size:1rem}.ticket-description h3{font-size:.9rem}.ticket-description h4{font-size:.8rem}.ticket-description h5{font-size:.75rem}.ticket-description h6{font-size:.7rem}.ticket-description-title{color:var(--ticket-description-title-color);font-size:.75rem}details{padding:.5em 0;font-size:.8125rem}summary{color:var(--text-color-link);font-weight:700;font-size:.875rem;text-decoration:underline;cursor:pointer;text-shadow:.04em .04em var(--text-shadow-color)}.ticket-attachments{font-size:.75em}.ticket-comment-body{width:100%;padding-top:.5em}.ticket-change{margin:1em 0;clear:both}.ticket-change-header{font-size:.875rem;font-weight:700;box-shadow:1.4px 2.8px 5.6px 0 var(--ticket-changes-box-shadow)}.ticket-change-link{font-size:.85em}.ticket-change-content{width:100%}.ticket-changes{background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);color:var(--ticket-changes-text-color);font-size:.7rem;float:right;clear:right;margin:2em 0 1em 1.5em}.ticket-changes th{text-align:right;font-weight:400;text-transform:capitalize}.ticket-changes td,.ticket-changes th{padding:.25em;vertical-align:baseline}.ticket-changes .change-field-new{font-weight:700}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+<div class="flex-column" data-pagefind-body="">
+  
+
+  <nav class="content-nav">
+    <ul class="flex-row">
+      
+        <li>
+          <a href="/bugs.jquery.com/ticket/7578/">← Previous Ticket</a>
+        
+      
+      
+        </li><li>
+          <a href="/bugs.jquery.com/ticket/7580/">Next Ticket →</a>
+        </li>
+      
+    </ul>
+  </nav>
+
+
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="." class="ticket-number">#7579</a>
+      <span class="ticket-status">closed</span>
+      <span class="ticket-type">bug</span>
+      <span class="ticket-resolution">(fixed)</span>
+    </h3>
+
+    <div class="ticket-dates">
+      <p>Opened November 19, 2010 10:58PM UTC</p>
+      
+        <p>Closed January 24, 2011 10:16PM UTC</p>
+      
+      
+        <p>Last modified October 15, 2012 09:57PM UTC</p>
+      
+    </div>
+  </div>
+
+  <h1 class="ticket-title">jQuery.data() truncates numbers taken from data-xxx attributes</h1>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        dmethvin
+      </td>
+      <th>Owned by:</th>
+      <td>dmethvin</td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        high
+      </td>
+      
+        <th class="missing">Milestone:</th>
+      
+      <td>
+        <a href="/bugs.jquery.com/milestone/1.8">1.8</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>data</td>
+      
+        <th>Version:</th>
+      
+      <td>1.4.4</td>
+    </tr>
+    <tr>
+      
+        <th class="missing">Keywords:</th>
+      
+      <td></td>
+      
+        <th class="missing">Cc:</th>
+      
+      <td></td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
+    <div class="ticket-description"><p>Test case: <a href="http://jsfiddle.net/dmethvin/8SsWK/" class="ext-link"><span class="icon"></span>http://jsfiddle.net/dmethvin/8SsWK/</a></p><p>Discussion: <a href="http://forum.jquery.com/topic/data-type-conversion" class="ext-link"><span class="icon"></span>http://forum.jquery.com/topic/data-type-conversion</a></p><p>I found an issue with using .data() to access data-* attributes and how it does automatic type conversion.  The conversion will break any string that just happens to look like a <a href="/bugs.jquery.com/wiki/JavaScript">JavaScript</a> value.  A simple example:</p><p>HTML:</p><p>   &lt;div id="foo" data-version="1.0"&gt;...&lt;/div&gt;</p><p>JS:</p><p>   jsversion = $("#foo").data("version");</p><p>jsversion is now the number 1.  That is totally wrong if you intend to use that attribute as a string.  (I was using it to create a URL where "1.0" is the valid value.)</p><p>You can get around this with direct access: $("#foo").attr("data-version") but that's not as much fun.  Also, the process is not reversible which is confusing:</p><p>   $("#foo").data("foo", "1.0");</p><p>   val = $("#foo").data("foo");</p><p>   <em> val is the string "1.0" and not converted to number 1.</em></p><p>    passing in 1.0 vs "1.0" would of course result in 1.</p><p>The data() docs say "Note that strings are left intact while <a href="/bugs.jquery.com/wiki/JavaScript">JavaScript</a> values are converted to their associated value (this includes booleans, numbers, objects, arrays, and null)".  That seems poorly worded since "1.0" is a string just as much as "true", "false", or "null".  It should say every attempt is made to convert the string to a <a href="/bugs.jquery.com/wiki/JavaScript">JavaScript</a> value otherwise it is left as a string.  It would be nice to also mention that if you need literal strings you must use the attr() method mentioned above.</p><p>I'd suggest the automatic conversion be removed and let users deal with it as needed.  Perhaps add a helper function or alternate data() function to do conversion.  The way it works now is intentional and has test cases but I'm unsure what the motivation of this conversion is in the first place?  Would it break a common use case to just always treat attributes as strings?</p></div>
+  </div>
+</div>
+
+<details>
+  <summary class="ticket-details-summary">Attachments (0)</summary>
+
+  <ul class="ticket-attachments">
+    
+  </ul>
+</details>
+
+<details open="">
+  <summary class="ticket-details-summary">Change History (56)</summary>
+  
+    <div class="ticket-change flex-column" id="comment:1">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 20, 2010 06:29PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:1">comment:1</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I've updated the test case with a few more examples. Based on these I think we'd be better to back off the magic for all but {} and [], returning everything else as string.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:2">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 21, 2010 01:01AM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:2">comment:2</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>component:</th>
+                  <td>
+                    
+                      <span class="change-field-old">unfiled</span> → <span class="change-field-new">data</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>milestone:</th>
+                  <td>
+                    
+                      <span class="change-field-old">1.5</span> → <span class="change-field-new">1.4.5</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>priority:</th>
+                  <td>
+                    
+                      <span class="change-field-old">undecided</span> → <span class="change-field-new">high</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">open</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:3">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 03, 2010 04:31AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:3">comment:3</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>If one would implement a getter for the "data-" attribute the way W3C proposes, the getter would have to return <strong>a string</strong>.</p><p>Quoting the W3C HTML5 Working Draft:</p><p>«Except where otherwise specified, attributes on HTML elements may have any string value, including the empty string. Except where explicitly stated, there is no restriction on what text can be specified in such attributes.»</p><p><a href="http://www.w3.org/TR/html5/elements.html#custom-data-attribute" class="ext-link"><span class="icon"></span>http://www.w3.org/TR/html5/elements.html#custom-data-attribute</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:4">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 09, 2010 02:48AM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:4">comment:4</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>owner:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ dmethvin</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">open</span> → <span class="change-field-new">assigned</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:5">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 09, 2010 02:51AM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:5">comment:5</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/7231">#7231</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:6">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 09, 2010 03:55AM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:6">comment:6</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Pull request: <a href="https://github.com/jquery/jquery/pull/124" class="ext-link"><span class="icon"></span>https://github.com/jquery/jquery/pull/124</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:7">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 09, 2010 05:40PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:7">comment:7</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ wontfix</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">assigned</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Uhhh... what? This is a major regression! As mentioned in other tickets - if you want the actual precise value just do: .attr("data-version").</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:8">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 09, 2010 05:53PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:8">comment:8</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-old strikethrough">wontfix</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">closed</span> → <span class="change-field-new">reopened</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:9">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 09, 2010 05:54PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:9">comment:9</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>So, I guess we should definitely discuss this more because 1.5 is a time during which we could change thing (although it'll definitely break code).</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:10">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 09, 2010 06:38PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:10">comment:10</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ needsreview</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>milestone:</th>
+                  <td>
+                    
+                      <span class="change-field-old">1.4.5</span> → <span class="change-field-new">1.5</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:11">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 09, 2010 11:14PM UTC by <span class="author">jitter</span></span>
+        <a class="ticket-change-link" href="#comment:11">comment:11</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/7742">#7742</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:12">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 16, 2010 09:55AM UTC by <span class="author">armloch@gmail.com</span></span>
+        <a class="ticket-change-link" href="#comment:12">comment:12</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>big problem for me. my "numbers" are too large and parseInt() doesn't parse them correctly:</p><p>var foo = "1283767437056205165"</p><p>parseInt(foo)</p><p>1283767437056205000</p><p>-</p><p> simon</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:13">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 20, 2010 12:37AM UTC by <span class="author">paul.irish</span></span>
+        <a class="ticket-change-link" href="#comment:13">comment:13</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I have updated the docs for $.fn.data to Dave's suggested text. <a href="http://api.jquery.com/data/" class="ext-link"><span class="icon"></span>http://api.jquery.com/data/</a></p><p>It now reads:</p><blockquote> Every attempt is made to convert the string to a <a href="/bugs.jquery.com/wiki/JavaScript">JavaScript</a> value (this includes booleans, numbers, objects, arrays, and null) otherwise it is left as a string. If you need literal strings you must use the attr() method.</blockquote>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:14">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 03, 2011 02:29PM UTC by <span class="author">jdub@bethesignal.org</span></span>
+        <a class="ticket-change-link" href="#comment:14">comment:14</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Found a related problem. Here's the HTML as rendered (not set up by jQuery):</p><pre class="wiki">
+&lt;a class=​"screen-name username" data-screen-name=​"0xDECAFB4D" href=​"https:​/​/​twitter.com/​0xDECAFB4D" title=​"mls" target=​"_blank"&gt;​0xDECAFB4D​&lt;/a&gt;
+</pre><p>Then at the console:</p><pre class="wiki">
+$('a[title=mls]').data('screen-name')
+0
+
+$('a[title=mls]').attr('data-screen-name')
+"0xDECAFB4D"
+</pre><p>Thanks. The suggestions to only add smarts to the [ and { cases sound pretty sensible to me. :-)</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:15">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 24, 2011 10:16PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:15">comment:15</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-old">needsreview</span> → <span class="change-field-new">needsdocs</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ wontfix</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">reopened</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:16">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 24, 2011 10:18PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:16">comment:16</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>If you want the data attributes as entered in the HTML, use .attr("data-whatever") instead. </p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:17">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 24, 2011 10:36PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:17">comment:17</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-old strikethrough">needsdocs</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:18">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 24, 2011 11:30PM UTC by <span class="author">jitter</span></span>
+        <a class="ticket-change-link" href="#comment:18">comment:18</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/8042">#8042</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:19">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 24, 2011 11:42PM UTC by <span class="author">embrangler</span></span>
+        <a class="ticket-change-link" href="#comment:19">comment:19</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Ugh. I disagree with wontfix-ing this.&#92;
+&#92;
+It&#39;s ok if .data() doesn&#39;t work for large ints, but it shouldn&#39;t pretend to be working and return wrong values.&#92;
+&#92;
+This text mentioned in comment 13 is misleading:&#92;
+{{{&#92;
+Every attempt is made to convert the string to a JavaScript value (this includes booleans, numbers, objects, arrays, and null) otherwise it is left as a string.&#92;
+}}}&#92;
+For large ints the result is a WRONG integer value. I would expect it to be a string, since it fails to convert properly.</span> → <span class="change-field-new">1295912617452825</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>Ugh. I disagree with wontfix-ing this.</p><p>It's ok if .data() doesn't work for large ints, but it shouldn't pretend to be working and return wrong values.</p><p>This text mentioned in comment 13 is misleading:</p><blockquote> Every attempt is made to convert the string to a <a href="/bugs.jquery.com/wiki/JavaScript">JavaScript</a> value (this includes booleans, numbers, objects, arrays, and null) otherwise it is left as a string.</blockquote><p>For large ints the result is a WRONG integer value. I would expect it to be a string, since it fails to convert properly.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:20">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 22, 2011 10:56PM UTC by <span class="author">jitter</span></span>
+        <a class="ticket-change-link" href="#comment:20">comment:20</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/8356">#8356</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:21">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 03, 2011 08:58PM UTC by <span class="author">addyosmani</span></span>
+        <a class="ticket-change-link" href="#comment:21">comment:21</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/8435">#8435</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:22">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 30, 2011 04:07AM UTC by <span class="author">ajpiano</span></span>
+        <a class="ticket-change-link" href="#comment:22">comment:22</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/8709">#8709</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:23">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 30, 2011 02:53PM UTC by <span class="author">awensley@gmail.com</span></span>
+        <a class="ticket-change-link" href="#comment:23">comment:23</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I also think not fixing this is a mistake.  What use is .data() if you can't trust the data it returns?</p><p>I guess I just can't use .data() for anything anymore then because I never know what values might trigger this bug.  Bummer.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:24">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 30, 2011 04:42PM UTC by <span class="author">mattw@techsoftinc.com</span></span>
+        <a class="ticket-change-link" href="#comment:24">comment:24</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>This would be less annoying if we could quote the string-that-looks-like-a-JS-value and have that work. But I just tried that, and it leaves the quotes in.</p><p>Using .attr("data-xxx") is problematic if the intent was to use the attribute to initialize the value at page load, then use .data to update the value at a later time. Now you no longer have a unified way to access the current value.</p><p>I guess I'll prefix and substring as my workaround.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:25">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 08, 2011 09:03AM UTC by <span class="author">jyrki@taiste.fi</span></span>
+        <a class="ticket-change-link" href="#comment:25">comment:25</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>The implicit conversion of .data causes too much problems. A few example:</p><pre class="wiki">
+  "01234" -&gt; 1234
+  "74e2" -&gt; 7400
+</pre><p>We're constantly having problems with this and now we are resorting in prefixing it. We can't use attr as we generate data attributes in mustache templates and modify them later on with .data. The data is random "hexadecimal" strings, so that's why we're running in severe problems with this.</p><p>This ticket should be reopened and the implicit behavior of the data function reconsidered</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:26">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 28, 2011 08:10PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:26">comment:26</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/9688">#9688</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:27">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 31, 2011 07:56AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:27">comment:27</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Automatic type conversion is a really bad idea and should be removed from jQuery.</p><p>I was storing some IDs as data attributes. IDs are strings not numbers - although they look like numbers. When I access them with the data() function they are cast as numbers and become corrupted because integers in <a href="/bugs.jquery.com/wiki/JavaScript">JavaScript</a> are only considered accurate up to 15 digits.</p><p>jQuery shouldn't be treating developers as idiots and trying to take control of their programs. If you want to have type conversion, have it as an option, but it should not be the default behaviour.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:28">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 01, 2011 08:13PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:28">comment:28</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>ok, this is completely massed up, why on earth would one do this? Is jQuery catering to kids? Stupid thing was converting my product codes with leading zeros to integers... so 00800 ended up 800... you should leave conversion up to developers...</p><p>had to change </p><p>var prodCode = $(itemBlock).data("prodcode");</p><p>to</p><p>var prodCode = $(itemBlock).attr("data-prodcode");</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:29">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 01, 2011 08:38PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:29">comment:29</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Unfortunately, before jQuery.fn.data() was open to the public, it was a core-use-only function that had nothing to do with HTML5 data-attrs (predates them), and as such, it stored only real <a href="/bugs.jquery.com/wiki/JavaScript">JavaScript</a> values - again, nothing to do with HTML5 data-attrs. Then one day it was given to the public... then soon after the public wanted it to interface with data-attrs, so jQuery allowed it, but the function still had to support all of the extant code using the original jQuery.fn.data() behaviour.</p><p>This explanation could've been derived by reading the above thread, so next time, try to be a little more understanding and a little less aggressive.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:30">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 01, 2011 11:00PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:30">comment:30</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I think we've explained the use of the <code>.data()</code> method pretty clearly here, I hope it helps:</p><p><a href="http://www.learningjquery.com./2011/09/using-jquerys-data-apis" class="ext-link"><span class="icon"></span>http://www.learningjquery.com./2011/09/using-jquerys-data-apis</a></p><p>TL;DR: If you simply want a string, use <code>.attr()</code> -- data attributes *are* attributes after all</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:31">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 22, 2011 01:51PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:31">comment:31</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/10856">#10856</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:32">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 02, 2011 08:44PM UTC by <span class="author">jdmarshall</span></span>
+        <a class="ticket-change-link" href="#comment:32">comment:32</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>The thread is basically apologizing for not following the spec, and for losing data precision.  Marking it "won't fix" is bound to earn you "aggressive" feedback.  I understand, now, how it got to be that way, and that's very interesting.  However, understanding is not the same as saying "It's okay".  This is definitely NOT okay.  </p><p>There has to be a way to share code without making both bits (mis)function identically.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:33">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 14, 2011 12:07AM UTC by <span class="author">jursetto</span></span>
+        <a class="ticket-change-link" href="#comment:33">comment:33</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>One trick to make sure your data isn't converted is to pass a quoted string inside a 1-element array, then reference that element.  This will ensure the JSON parser is engaged because it starts with [.  It also lets you pass arbitrary objects you do want converted (in which case you can't use </p><pre class="wiki">.attr()</pre>).<p></p><p>Example:</p><pre class="wiki">
+&lt;input id="abc" data-foo='["true"]' data-bar='[true]'&gt;
+
+$('#abc').data('foo')[0] -&gt; "true"
+$('#abc').data('bar')[0] -&gt; true
+
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:34">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 14, 2011 12:14AM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:34">comment:34</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Or... </p><p>data-foo="true"</p><pre class="wiki">
+$('#abc').attr('data-bar') -&gt; "true"
+</pre><p>... as shown above</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:35">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 14, 2011 01:40AM UTC by <span class="author">jursetto</span></span>
+        <a class="ticket-change-link" href="#comment:35">comment:35</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>That's right, but you skipped the second part of my comment; with attr() you can't accept either a boolean value OR a string, whereas you can with the technique above.  Ticket <a href="/bugs.jquery.com/ticket/7231">#7231</a> had some people asking for the ability to do both, although it looks like this ticket didn't.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:36">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 11, 2012 04:21PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:36">comment:36</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/11060">#11060</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:37">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 11, 2012 07:22PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:37">comment:37</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Wow, this is so beyond absurd. </p><p>Basically, you have a whole group of USERS who are asking you to fix this, with valid reasons, and you are basically ignoring them, saying to just use another method. Even though there is a perfectly acceptable, backwards compatible solution to this problem.</p><p>I can't even begin to understand the mentality behind this type of decision. dmethvin, are you just hard headed?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:38">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 11, 2012 07:32PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:38">comment:38</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Yes, I am hard headed if I see that changing documented interfaces will cause a lot of trouble. If I had a time machine I could go back and redefine this interface to be more compatible with the HTML5 spec that was not yet written, but I do not.</p><p>You feel passionately about changing this because you have no existing code that would break. Imagine how mad you would be if you had deployed code based on the current behavior and we changed it. </p><p>To use your pent-up energy, try writing a patch that makes it behave the way you ideally would like it to, but does not break old code. Or, just use <code>.attr()</code> which works fine.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:39">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 19, 2012 08:34AM UTC by <span class="author">david@wolever.net</span></span>
+        <a class="ticket-change-link" href="#comment:39">comment:39</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Would a patch be considered which allows quoted strings? For example, so that:  <code>… data-foo='"123"' …</code> could be used to force a string?</p><p>For example, changing the existing logic:</p><pre class="wiki">
+	data = data === "true" ? true :
+		data === "false" ? false :
+		data === "null" ? null :
+		jQuery.isNumeric( data ) ? parseFloat( data ) :
+		rbrace.test( data ) ? jQuery.parseJSON( data ) :
+		data;
+</pre><p>To move the <code>rbrace.test</code> call above <code>isNumeric</code>, and modifying it to include <code>"</code>:</p><pre class="wiki">
+	var jsonDataTest = /^(?:\\{.*\\}|\\[.*\\]|".*")$/
+	...
+	data = data === "true" ? true :
+		data === "false" ? false :
+		data === "null" ? null :
+		jsonDataTest.test( data ) ? jQuery.parseJSON( data ) :
+		jQuery.isNumeric( data ) ? parseFloat( data ) :
+		data;
+</pre><p>This would guarantee (I believe) that any JSON value in a <code>data-</code> property would be correctly encoded, and it would provide a safe (and probably backwards compatible?) mechanism for storing strings-which-look-like-numbers.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:40">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 19, 2012 02:16PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:40">comment:40</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Use <code>attr</code></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:41">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 19, 2012 07:16PM UTC by <span class="author">david@wolever.net</span></span>
+        <a class="ticket-change-link" href="#comment:41">comment:41</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>See also: <a href="https://github.com/jquery/jquery/pull/658" class="ext-link"><span class="icon"></span>https://github.com/jquery/jquery/pull/658</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:42">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 28, 2012 02:56AM UTC by <span class="author">draeton@gmail.com</span></span>
+        <a class="ticket-change-link" href="#comment:42">comment:42</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Considering the lack of will to patch jQuery, here's a simple plugin:</p><pre class="wiki">
+(function ($) {
+
+    "use strict";
+
+    var dataTest = /^data-/;
+
+    var dashesToCamelCase = function (name) {
+            return name.replace(dataTest, "").replace(/-\\w/g, function (str) {
+                return str.slice(1).toUpperCase();
+            });
+        };
+
+    $.fn.getData = function () {
+        var data = {};
+        var el = this.get(0);
+        var attr = el.attributes;
+        var name;
+        var i, l;
+
+        for (i = 0, l = attr.length; i &lt; l; i++) {
+            if (dataTest.test(attr[i].name)) {
+                name = dashesToCamelCase(attr[i].name);
+                data[name] = attr[i].nodeValue;
+            }
+        }
+
+        return data;
+    };
+
+}(jQuery));
+</pre><p><a href="https://gist.github.com/1928836" class="ext-link"><span class="icon"></span>https://gist.github.com/1928836</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:43">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 06, 2012 01:47PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:43">comment:43</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/11445">#11445</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:44">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 24, 2012 06:25PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:44">comment:44</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Better to fix this now than to have loads of more people continue to implement this poor solution. I'm sure more people are running into problems with their code right now than than would be affected by the change because they are counting on this automatic type conversion. Worse yet, many don't know about the problem till it hits them some time in the future when they least expect it.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:45">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 24, 2012 07:33PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:45">comment:45</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Can&#39;t be fixed with breaking core functionality, posting more comments won&#39;t change fact</span> → <span class="change-field-new">1332617795062923</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>Can't be fixed without breaking core functionality, posting more comments won't change fact</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:46">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 02, 2012 12:25AM UTC by <span class="author">dvirazulay</span></span>
+        <a class="ticket-change-link" href="#comment:46">comment:46</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Are you serious?</p><p>How about not supporting those users that used .data, thinking it will be treated as a string (like it should have been) and suddenly when their numbers grow over a certain point, or one decides to enter a number that will be truncated/rounded due to this and gets the wrong behavior out of it?</p><p>This will be a real mess to debug.</p><p>If no one can come up with a real reason why this might break old code, why not implement it? There was enough time to think of a valid reason not to fix this huge flaw, which makes .data obsolete and not reliable.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:47">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 02, 2012 12:29AM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:47">comment:47</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>@dvirazulay, it would never break old code because the <code>.data()</code> API existed before HTML5 defined <code>data-</code> att ... aw, just shut up and read this article. </p><p><a href="http://www.learningjquery.com/2011/09/using-jquerys-data-apis" class="ext-link"><span class="icon"></span>http://www.learningjquery.com/2011/09/using-jquerys-data-apis</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:48">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 03, 2012 04:56AM UTC by <span class="author">gibson042</span></span>
+        <a class="ticket-change-link" href="#comment:48">comment:48</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>@dvirazulay, feel free to plugin your desired behavior with a gist: <a href="https://gist.github.com/2861953." class="ext-link"><span class="icon"></span>https://gist.github.com/2861953.</a> Same goes for those passionate about <a href="/bugs.jquery.com/ticket/11297">#11297</a> and <a href="/bugs.jquery.com/ticket/10174">#10174</a>.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:49">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 10, 2012 08:59PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:49">comment:49</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/12052">#12052</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:50">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 11, 2012 04:33PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:50">comment:50</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/12060">#12060</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:51">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 25, 2012 02:33PM UTC by <span class="author">Dave Methvin</span></span>
+        <a class="ticket-change-link" href="#comment:51">comment:51</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-old">wontfix</span> → <span class="change-field-new">fixed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Fix <a href="/bugs.jquery.com/ticket/7579">#7579</a>. Don't convert to number if it changes the string. Close gh-852.</p><p>Net effect here is that hex numbers and most exponential-format numbers or long sequences of digits will remain strings rather than being coerced to numbers. `The people have spoken. </p><p> Changeset: ce15bd7d0c14106521bd21179b1507f2863d1960</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:52">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 25, 2012 02:36PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:52">comment:52</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>milestone:</th>
+                  <td>
+                    
+                      <span class="change-field-old">1.5</span> → <span class="change-field-new">1.8</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:53">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 17, 2012 03:32PM UTC by <span class="author">timmywil</span></span>
+        <a class="ticket-change-link" href="#comment:53">comment:53</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/12332">#12332</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:54">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed September 02, 2012 05:51AM UTC by <span class="author">latchkey</span></span>
+        <a class="ticket-change-link" href="#comment:54">comment:54</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I've been thinking a lot about this for the last couple of days and have come to the conclusion that this fix is a terrible idea that only creates even more confusion in the long term. It really is a hack on top of a bad design decision in the first place. Now, the message is 'use .data() instead of .attr() because it is kinda safe to use in certain circumstances.'  </p><p>If you generate a div such as &lt;div data-foo="4.000"&gt;&lt;/div&gt;, you get back a String... $('div').data('foo') despite the fact that the documentation says it tries to coerce numbers. If I do $('div').data('foo', 4.000) and then look at it with .data('foo'), it is a number. If I do data-foo="4000", it is a number. I'm sorry, but this is very inconsistent behavior.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:55">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed September 02, 2012 01:49PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:55">comment:55</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ needsdocs</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Proposed addition to the docs:</p><blockquote>  A value is only converted to a number if doing so doesn't change the value's representation. For example, "1E02" and "100" are equivalent as numbers but not as strings, so "1E04" remains a string. A value like "1.4000" is not converted to number because the trailing zeroes would be stripped.</blockquote>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:56">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 15, 2012 09:57PM UTC by <span class="author">mikesherov</span></span>
+        <a class="ticket-change-link" href="#comment:56">comment:56</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-old strikethrough">needsdocs</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+</details>
+</div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

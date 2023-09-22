@@ -1,0 +1,18 @@
+Index: src/ajax.js
+===================================================================
+--- src/ajax.js	(revision 5709)
++++ src/ajax.js	(working copy)
+@@ -473,11 +473,11 @@
+ 			data = filter( data, type );
+ 
+ 		// If the type is "script", eval it in global context
+-		if ( type == "script" )
++		if ( type == "script" || (ct && ct.indexOf("javascript") >= 0 ))
+ 			jQuery.globalEval( data );
+ 
+ 		// Get the JavaScript object, if JSON is used.
+-		if ( type == "json" )
++		if ( type == "json"  || (ct && ct.indexOf("json") >= 0 ))
+ 			data = eval("(" + data + ")");
+ 
+ 		return data;

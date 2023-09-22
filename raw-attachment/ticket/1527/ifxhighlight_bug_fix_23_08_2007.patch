@@ -1,0 +1,13 @@
+Index: ifxhighlight.js
+===================================================================
+--- ifxhighlight.js	(revision 2845)
++++ ifxhighlight.js	(working copy)
+@@ -33,7 +33,7 @@
+ 			callback = typeof callback == 'function' ? callback : null;
+ 			var oldColor = jQuery(this).css('backgroundColor');
+ 			var parentEl = this.parentNode;
+-			while(oldColor == 'transparent' && parentEl) {
++			while(oldColor == 'transparent' && parentEl && parentEl.nodeType !== 1) {
+ 				oldColor = jQuery(parentEl).css('backgroundColor');
+ 				parentEl = parentEl.parentNode;
+ 			}

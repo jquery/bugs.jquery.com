@@ -1,0 +1,20 @@
+
+
+$(document).ready(function() {
+ $('.asset').draggable({
+    helper: 'clone'
+    // connectToSortable:'#entries'
+  });
+ $('#entries').sortable({
+   stop:updateIDs
+ });
+ $('#entries').droppable({
+   accept : '.asset',
+   drop: function(event, ui)
+   {
+     var dropped = ui.draggable;
+     var assetID = dropped.data('id');
+     alert("dropped asset id is " + ui.draggable.data('id'));  // undefined if connectToSortable defined
+   }
+ });
+});

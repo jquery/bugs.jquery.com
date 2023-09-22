@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      .table-headng { background:yellow; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        $("button:first").click(function () {
+              $('th').parent().addClass('table-headng'); 
+              var s = "added new class...";
+              $("#adiv").text(s);
+            });
+      });
+    </script>
+  </head>
+  <body>
+    <button>Do It</button>
+<table border = "1">
+<tr>
+<th>Header 1</th>
+<th>Header 2</th>
+</tr>
+<tr>
+<td>Cell A</td>
+<td>Cell B</td>
+</tr>
+</table>
+   <div id="adiv"></div>
+  </body>
+</html>

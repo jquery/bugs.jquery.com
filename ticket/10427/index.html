@@ -1,0 +1,1185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">#10427 (Creating custom elements is broken on IE7 and 8 using $(&amp;#39;&amp;lt;...&amp;gt;&amp;#39;).) - jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      :root{--ticket-info-background-color:#ffd;--ticket-info-border-color:#dd9;--ticket-table-border-color:#eed;--ticket-date-text-color:#996;--ticket-description-title-color:#663;--ticket-changes-text-color:#663;--ticket-changes-box-shadow:#f2f2f2}.ticket-info{position:relative;background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);padding:.5em .75em;margin-bottom:.5em}.ticket-number{font-size:1.15rem;font-weight:700;margin-right:.5em}.ticket-info span{font-size:.8125em;font-weight:700}.ticket-resolution,.ticket-status,.ticket-type{text-transform:uppercase}.missing{color:var(--text-color-link-disabled)}.ticket-title{border-bottom:1px solid #bbb;margin-top:1em;padding-bottom:.25em;font-weight:700;font-size:1.1875rem}.ticket-dates{color:var(--ticket-date-text-color);font-size:.8125rem}.ticket-dates p{margin:0 0 .5em}.ticket-properties{width:100%;text-align:left;font-size:.65rem;border-top:1px solid var(--ticket-table-border-color);margin:0}.ticket-properties th{font-weight:400;width:20%}.ticket-properties td,.ticket-properties th{padding:.25em .5em;border-bottom:1px dashed var(--ticket-table-border-color)}.ticket-info-bottom{padding:.5em}.ticket-description{font-size:.8125rem;margin-top:.5em}.ticket-description h2,.ticket-description h3,.ticket-description h4,.ticket-description h5,.ticket-description h6{text-transform:uppercase;font-weight:400}.ticket-description h1{font-size:1.1rem}.ticket-description h2{font-size:1rem}.ticket-description h3{font-size:.9rem}.ticket-description h4{font-size:.8rem}.ticket-description h5{font-size:.75rem}.ticket-description h6{font-size:.7rem}.ticket-description-title{color:var(--ticket-description-title-color);font-size:.75rem}details{padding:.5em 0;font-size:.8125rem}summary{color:var(--text-color-link);font-weight:700;font-size:.875rem;text-decoration:underline;cursor:pointer;text-shadow:.04em .04em var(--text-shadow-color)}.ticket-attachments{font-size:.75em}.ticket-comment-body{width:100%;padding-top:.5em}.ticket-change{margin:1em 0;clear:both}.ticket-change-header{font-size:.875rem;font-weight:700;box-shadow:1.4px 2.8px 5.6px 0 var(--ticket-changes-box-shadow)}.ticket-change-link{font-size:.85em}.ticket-change-content{width:100%}.ticket-changes{background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);color:var(--ticket-changes-text-color);font-size:.7rem;float:right;clear:right;margin:2em 0 1em 1.5em}.ticket-changes th{text-align:right;font-weight:400;text-transform:capitalize}.ticket-changes td,.ticket-changes th{padding:.25em;vertical-align:baseline}.ticket-changes .change-field-new{font-weight:700}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+<div class="flex-column" data-pagefind-body="">
+  
+
+  <nav class="content-nav">
+    <ul class="flex-row">
+      
+        <li>
+          <a href="/bugs.jquery.com/ticket/10426/">← Previous Ticket</a>
+        
+      
+      
+        </li><li>
+          <a href="/bugs.jquery.com/ticket/10428/">Next Ticket →</a>
+        </li>
+      
+    </ul>
+  </nav>
+
+
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="." class="ticket-number">#10427</a>
+      <span class="ticket-status">closed</span>
+      <span class="ticket-type">bug</span>
+      <span class="ticket-resolution">(invalid)</span>
+    </h3>
+
+    <div class="ticket-dates">
+      <p>Opened October 05, 2011 02:16PM UTC</p>
+      
+        <p>Closed January 02, 2012 05:25PM UTC</p>
+      
+      
+        <p>Last modified January 30, 2012 03:10PM UTC</p>
+      
+    </div>
+  </div>
+
+  <h1 class="ticket-title">Creating custom elements is broken on IE7 and 8 using $(&#39;&lt;...&gt;&#39;).</h1>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        bmustiata
+      </td>
+      <th>Owned by:</th>
+      <td>rwaldron</td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        undecided
+      </td>
+      
+        <th class="missing">Milestone:</th>
+      
+      <td>
+        <a href="/bugs.jquery.com/milestone/"></a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>manipulation</td>
+      
+        <th>Version:</th>
+      
+      <td>1.7b1</td>
+    </tr>
+    <tr>
+      
+        <th>Keywords:</th>
+      
+      <td>1.8-discuss</td>
+      
+        <th class="missing">Cc:</th>
+      
+      <td></td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
+    <div class="ticket-description"><p><strong>Fiddle test case</strong>: <a href="http://jsfiddle.net/nmfCy/1/" class="ext-link"><span class="icon"></span>http://jsfiddle.net/nmfCy/1/</a></p><p><strong>Proposed Patch</strong>: <a href="http://download.androidknight.com/jquery-custom-elements-1.6.4.patch" class="ext-link"><span class="icon"></span>http://download.androidknight.com/jquery-custom-elements-1.6.4.patch</a></p><p><strong>Full-Original</strong>: <a href="http://download.androidknight.com/jquery-1.6.4-original.js" class="ext-link"><span class="icon"></span>http://download.androidknight.com/jquery-1.6.4-original.js</a></p><p><strong>Full-Patched</strong> : <a href="http://download.androidknight.com/jquery-1.6.4-patched.js" class="ext-link"><span class="icon"></span>http://download.androidknight.com/jquery-1.6.4-patched.js</a></p><p><strong>Description</strong>.</p><p>The expected nodes to be added is:</p><p>&lt;customelement&gt;</p><p>However in IE7/8 (IE9 works fine) two elements get created after innerHtml is set:</p><p>&lt;customelement&gt;</p><p>   and</p><p>&lt;/customelement&gt; (!!) - yes, with the beginning slash character as tagName,</p><p>and all the content that should belong in the &lt;customelement&gt; is now a sibling living between the two elements.</p><p>This needs to work, since the HTML5 elements do match the criteria of unknown elements, and creating them programatically now breaks the DOM structure in IE7/8 (same example but with a canvas element instead: <a href="http://jsfiddle.net/nmfCy/2/" class="ext-link"><span class="icon"></span>http://jsfiddle.net/nmfCy/2/</a>).</p><p>To make matters worse the added elements (via innerHtml) are unknown html elements, that do not allow creating child elements into them.</p><p>However, if we create the same element with document.createElement('customelement') and we append this one to the DOM, we can add children elements into it.</p><p>The given patch adds the check for custom elements support, and if it does not exists, it then attempts to find and fix the eventually broken newly created custom elements (in the clean method).</p><p>The patch was tested against IE7, IE8, IE9, Chrome 14.0 and Firefox 7.0.1.</p></div>
+  </div>
+</div>
+
+<details>
+  <summary class="ticket-details-summary">Attachments (0)</summary>
+
+  <ul class="ticket-attachments">
+    
+  </ul>
+</details>
+
+<details open="">
+  <summary class="ticket-details-summary">Change History (20)</summary>
+  
+    <div class="ticket-change flex-column" id="comment:1">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 05, 2011 02:41PM UTC by <span class="author">ajpiano</span></span>
+        <a class="ticket-change-link" href="#comment:1">comment:1</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ duplicate</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Thanks for your time and interest in helping out the jQuery project - you're right that this is a big issue, and a high priority one for us to solve.  However, we already did that, and it's already available in the jQuery 1.7 beta.  Given your interest in this issue, we'd appreciate your taking that for a spin.  Thanks!</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:2">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 05, 2011 02:41PM UTC by <span class="author">ajpiano</span></span>
+        <a class="ticket-change-link" href="#comment:2">comment:2</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Duplicate of <a href="/bugs.jquery.com/ticket/6485">#6485</a>.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:3">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 06, 2011 09:14AM UTC by <span class="author">bmustiata</span></span>
+        <a class="ticket-change-link" href="#comment:3">comment:3</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>If I may, I think this issue should be reopened to really support unknown elements for IE7/8. The problem is that the current implementation has ''a list of unknown'' elements.</p><p>This causes in my view (at least) two problems:</p><p>1. If tomorrow html5 decide to add a new element, old versions of the applications that use the current jQuery version will suddenly stop working until they upgrade their jQuery, and for any new element this list must be upgraded.</p><p>2. This approach also doesn't allow custom elements to be created that are not (and will never be) part of HTML5. We are actually using this in an application, where we create custom rendered metadata nodes on the fly (we receive them via AJAX). Elements are things like &lt;loop&gt;, &lt;metatarget&gt;, etc.</p><p>I am currently working on a fork where I try to allow creation of completely unknown elements, because currently (in the 1.7 beta):</p><p>jQuery('&lt;customelement&gt;some content&lt;/customelement&gt;');</p><p>has a different outcome in IE8 than in IE9 (or any other decent browser).</p><p>I hope you find these requirements acceptable for reopening this. (since HTML5 support is implemented, and only custom elements are not working).</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:4">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 06, 2011 01:08PM UTC by <span class="author">ajpiano</span></span>
+        <a class="ticket-change-link" href="#comment:4">comment:4</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>component:</th>
+                  <td>
+                    
+                      <span class="change-field-old">unfiled</span> → <span class="change-field-new">manipulation</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ 1.8-discuss</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>milestone:</th>
+                  <td>
+                    
+                      <span class="change-field-old">None</span> → <span class="change-field-new">1.8</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-old strikethrough">duplicate</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">closed</span> → <span class="change-field-new">reopened</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:5">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 06, 2011 01:08PM UTC by <span class="author">ajpiano</span></span>
+        <a class="ticket-change-link" href="#comment:5">comment:5</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>version:</th>
+                  <td>
+                    
+                      <span class="change-field-old">1.6.4</span> → <span class="change-field-new">1.7b1</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:6">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 06, 2011 01:13PM UTC by <span class="author">ajpiano</span></span>
+        <a class="ticket-change-link" href="#comment:6">comment:6</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Reopening for inclusion in 1.8 features discussion - it's too late and this feature is too different than HTML5 support for this to be included in 1.7.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:7">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 07, 2011 12:26AM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:7">comment:7</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">reopened</span> → <span class="change-field-new">open</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Marking as valid to get it out of the unreviewed bugs list. IMO we should only support heroic measures for HTML5 tags, as we do now in 1.7.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:8">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 07, 2011 01:20AM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:8">comment:8</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>@dmethvin I'm not sure it behooves us to try to support all magic.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:9">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 07, 2011 01:31AM UTC by <span class="author">ajpiano</span></span>
+        <a class="ticket-change-link" href="#comment:9">comment:9</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>what if the list of shiv'd elements had a fixHooks-esque accessible list for users to add more elements beyond the HTML5 set, but sparing us the possibility of shving on the fly?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:10">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 07, 2011 01:58AM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:10">comment:10</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Based on @ajpiano's idea <a href="https://github.com/rwldrn/jquery/pull/new/10427" class="ext-link"><span class="icon"></span>https://github.com/rwldrn/jquery/pull/new/10427</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:11">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 07, 2011 02:04AM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:11">comment:11</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>just kidding. that won't work. back to the drawing board.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:12">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 07, 2011 09:14AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:12">comment:12</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>@ajpiano: Should be fine with adding them via hooks.</p><p>Thus based on @ajpiano's and @rwaldron's idea: <a href="https://github.com/jquery/jquery/pull/533" class="ext-link"><span class="icon"></span>https://github.com/jquery/jquery/pull/533</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:13">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 07, 2011 01:31PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:13">comment:13</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>owner:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ rwaldron</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">open</span> → <span class="change-field-new">assigned</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:14">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 13, 2011 04:18PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:14">comment:14</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">&#39;&#39;&#39;Fiddle test case&#39;&#39;&#39;: [http://jsfiddle.net/nmfCy/1/]&#92;
+&#92;
+&#39;&#39;&#39;Proposed Patch&#39;&#39;&#39;: http://download.androidknight.com/jquery-custom-elements-1.6.4.patch&#92;
+&#92;
+&#39;&#39;&#39;Full-Original&#39;&#39;&#39;: [http://download.androidknight.com/jquery-1.6.4-original.js]&#92;
+&#92;
+&#39;&#39;&#39;Full-Patched&#39;&#39;&#39; : [http://download.androidknight.com/jquery-1.6.4-patched.js]&#92;
+&#92;
+&#39;&#39;&#39;Description&#39;&#39;&#39;.&#92;
+The expected nodes to be added is:&#92;
+&lt;customelement&gt;&#92;
+&#92;
+However in IE7/8 (IE9 works fine) two elements get created after innerHtml is set:&#92;
+&lt;customelement&gt;&#92;
+   and&#92;
+&lt;/customelement&gt; (!!) - yes, with the beginning slash character as tagName,&#92;
+&#92;
+and all the content that should belong in the &lt;customelement&gt; is now a sibling living between the two elements.&#92;
+&#92;
+This needs to work, since the HTML5 elements do match the criteria of unknown elements, and creating them programatically now breaks the DOM structure in IE7/8 (same example but with a canvas element instead: [http://jsfiddle.net/nmfCy/2/]).&#92;
+&#92;
+To make matters worse the added elements (via innerHtml) are unknown html elements, that do not allow creating child elements into them.&#92;
+&#92;
+However, if we create the same element with document.createElement(&#39;customelement&#39;) and we append this one to the DOM, we can add children elements into it.&#92;
+&#92;
+The given patch adds the check for custom elements support, and if it does not exists, it then attempts to find and fix the eventually broken newly created custom elements (in the clean method).&#92;
+&#92;
+The patch was tested against IE7, IE8, IE9, Chrome 14.0 and Firefox 7.0.1.</span> → <span class="change-field-new">&#39;&#39;&#39;Fiddle test case&#39;&#39;&#39;: [http://jsfiddle.net/nmfCy/1/]&#92;
+&#92;
+&#39;&#39;&#39;Proposed Patch&#39;&#39;&#39;: http://download.androidknight.com/jquery-custom-elements-1.6.4.patch&#92;
+&#92;
+&#39;&#39;&#39;Full-Original&#39;&#39;&#39;: [http://download.androidknight.com/jquery-1.6.4-original.js]&#92;
+&#92;
+&#39;&#39;&#39;Full-Patched&#39;&#39;&#39; : [http://download.androidknight.com/jquery-1.6.4-patched.js]&#92;
+&#92;
+&#39;&#39;&#39;Description&#39;&#39;&#39;.&#92;
+The expected nodes to be added is:&#92;
+&lt;customelement&gt;&#92;
+&#92;
+However in IE7/8 (IE9 works fine) two elements get created after innerHtml is set:&#92;
+&lt;customelement&gt;&#92;
+   and&#92;
+&lt;/customelement&gt; (!!) - yes, with the beginning slash character as tagName,&#92;
+&#92;
+and all the content that should belong in the &lt;customelement&gt; is now a sibling living between the two elements.&#92;
+&#92;
+This needs to work, since the HTML5 elements do match the criteria of unknown elements, and creating them programatically now breaks the DOM structure in IE7/8 (same example but with a canvas element instead: [http://jsfiddle.net/nmfCy/2/]).&#92;
+&#92;
+To make matters worse the added elements (via innerHtml) are unknown html elements, that do not allow creating child elements into them.&#92;
+&#92;
+However, if we create the same element with document.createElement(&#39;customelement&#39;) and we append this one to the DOM, we can add children elements into it.&#92;
+&#92;
+The given patch adds the check for custom elements support, and if it does not exists, it then attempts to find and fix the eventually broken newly created custom elements (in the clean method).&#92;
+&#92;
+The patch was tested against IE7, IE8, IE9, Chrome 14.0 and Firefox 7.0.1.</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+0</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:15">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 13, 2011 06:17PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:15">comment:15</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">&#39;&#39;&#39;Fiddle test case&#39;&#39;&#39;: [http://jsfiddle.net/nmfCy/1/]&#92;
+&#92;
+&#39;&#39;&#39;Proposed Patch&#39;&#39;&#39;: http://download.androidknight.com/jquery-custom-elements-1.6.4.patch&#92;
+&#92;
+&#39;&#39;&#39;Full-Original&#39;&#39;&#39;: [http://download.androidknight.com/jquery-1.6.4-original.js]&#92;
+&#92;
+&#39;&#39;&#39;Full-Patched&#39;&#39;&#39; : [http://download.androidknight.com/jquery-1.6.4-patched.js]&#92;
+&#92;
+&#39;&#39;&#39;Description&#39;&#39;&#39;.&#92;
+The expected nodes to be added is:&#92;
+&lt;customelement&gt;&#92;
+&#92;
+However in IE7/8 (IE9 works fine) two elements get created after innerHtml is set:&#92;
+&lt;customelement&gt;&#92;
+   and&#92;
+&lt;/customelement&gt; (!!) - yes, with the beginning slash character as tagName,&#92;
+&#92;
+and all the content that should belong in the &lt;customelement&gt; is now a sibling living between the two elements.&#92;
+&#92;
+This needs to work, since the HTML5 elements do match the criteria of unknown elements, and creating them programatically now breaks the DOM structure in IE7/8 (same example but with a canvas element instead: [http://jsfiddle.net/nmfCy/2/]).&#92;
+&#92;
+To make matters worse the added elements (via innerHtml) are unknown html elements, that do not allow creating child elements into them.&#92;
+&#92;
+However, if we create the same element with document.createElement(&#39;customelement&#39;) and we append this one to the DOM, we can add children elements into it.&#92;
+&#92;
+The given patch adds the check for custom elements support, and if it does not exists, it then attempts to find and fix the eventually broken newly created custom elements (in the clean method).&#92;
+&#92;
+The patch was tested against IE7, IE8, IE9, Chrome 14.0 and Firefox 7.0.1.</span> → <span class="change-field-new">&#39;&#39;&#39;Fiddle test case&#39;&#39;&#39;: [http://jsfiddle.net/nmfCy/1/]&#92;
+&#92;
+&#39;&#39;&#39;Proposed Patch&#39;&#39;&#39;: http://download.androidknight.com/jquery-custom-elements-1.6.4.patch&#92;
+&#92;
+&#39;&#39;&#39;Full-Original&#39;&#39;&#39;: [http://download.androidknight.com/jquery-1.6.4-original.js]&#92;
+&#92;
+&#39;&#39;&#39;Full-Patched&#39;&#39;&#39; : [http://download.androidknight.com/jquery-1.6.4-patched.js]&#92;
+&#92;
+&#39;&#39;&#39;Description&#39;&#39;&#39;.&#92;
+The expected nodes to be added is:&#92;
+&lt;customelement&gt;&#92;
+&#92;
+However in IE7/8 (IE9 works fine) two elements get created after innerHtml is set:&#92;
+&lt;customelement&gt;&#92;
+   and&#92;
+&lt;/customelement&gt; (!!) - yes, with the beginning slash character as tagName,&#92;
+&#92;
+and all the content that should belong in the &lt;customelement&gt; is now a sibling living between the two elements.&#92;
+&#92;
+This needs to work, since the HTML5 elements do match the criteria of unknown elements, and creating them programatically now breaks the DOM structure in IE7/8 (same example but with a canvas element instead: [http://jsfiddle.net/nmfCy/2/]).&#92;
+&#92;
+To make matters worse the added elements (via innerHtml) are unknown html elements, that do not allow creating child elements into them.&#92;
+&#92;
+However, if we create the same element with document.createElement(&#39;customelement&#39;) and we append this one to the DOM, we can add children elements into it.&#92;
+&#92;
+The given patch adds the check for custom elements support, and if it does not exists, it then attempts to find and fix the eventually broken newly created custom elements (in the clean method).&#92;
+&#92;
+The patch was tested against IE7, IE8, IE9, Chrome 14.0 and Firefox 7.0.1.</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>-1, HTML5 defines the tags we need to support. Adding custom tags smells like an ad-hoc attempt at parsing arbitrary XML using IE's tag-soup parser. Use a supported format like JSON instead.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:16">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 14, 2011 01:26AM UTC by <span class="author">mikesherov</span></span>
+        <a class="ticket-change-link" href="#comment:16">comment:16</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">&#39;&#39;&#39;Fiddle test case&#39;&#39;&#39;: [http://jsfiddle.net/nmfCy/1/]&#92;
+&#92;
+&#39;&#39;&#39;Proposed Patch&#39;&#39;&#39;: http://download.androidknight.com/jquery-custom-elements-1.6.4.patch&#92;
+&#92;
+&#39;&#39;&#39;Full-Original&#39;&#39;&#39;: [http://download.androidknight.com/jquery-1.6.4-original.js]&#92;
+&#92;
+&#39;&#39;&#39;Full-Patched&#39;&#39;&#39; : [http://download.androidknight.com/jquery-1.6.4-patched.js]&#92;
+&#92;
+&#39;&#39;&#39;Description&#39;&#39;&#39;.&#92;
+The expected nodes to be added is:&#92;
+&lt;customelement&gt;&#92;
+&#92;
+However in IE7/8 (IE9 works fine) two elements get created after innerHtml is set:&#92;
+&lt;customelement&gt;&#92;
+   and&#92;
+&lt;/customelement&gt; (!!) - yes, with the beginning slash character as tagName,&#92;
+&#92;
+and all the content that should belong in the &lt;customelement&gt; is now a sibling living between the two elements.&#92;
+&#92;
+This needs to work, since the HTML5 elements do match the criteria of unknown elements, and creating them programatically now breaks the DOM structure in IE7/8 (same example but with a canvas element instead: [http://jsfiddle.net/nmfCy/2/]).&#92;
+&#92;
+To make matters worse the added elements (via innerHtml) are unknown html elements, that do not allow creating child elements into them.&#92;
+&#92;
+However, if we create the same element with document.createElement(&#39;customelement&#39;) and we append this one to the DOM, we can add children elements into it.&#92;
+&#92;
+The given patch adds the check for custom elements support, and if it does not exists, it then attempts to find and fix the eventually broken newly created custom elements (in the clean method).&#92;
+&#92;
+The patch was tested against IE7, IE8, IE9, Chrome 14.0 and Firefox 7.0.1.</span> → <span class="change-field-new">&#39;&#39;&#39;Fiddle test case&#39;&#39;&#39;: [http://jsfiddle.net/nmfCy/1/]&#92;
+&#92;
+&#39;&#39;&#39;Proposed Patch&#39;&#39;&#39;: http://download.androidknight.com/jquery-custom-elements-1.6.4.patch&#92;
+&#92;
+&#39;&#39;&#39;Full-Original&#39;&#39;&#39;: [http://download.androidknight.com/jquery-1.6.4-original.js]&#92;
+&#92;
+&#39;&#39;&#39;Full-Patched&#39;&#39;&#39; : [http://download.androidknight.com/jquery-1.6.4-patched.js]&#92;
+&#92;
+&#39;&#39;&#39;Description&#39;&#39;&#39;.&#92;
+The expected nodes to be added is:&#92;
+&lt;customelement&gt;&#92;
+&#92;
+However in IE7/8 (IE9 works fine) two elements get created after innerHtml is set:&#92;
+&lt;customelement&gt;&#92;
+   and&#92;
+&lt;/customelement&gt; (!!) - yes, with the beginning slash character as tagName,&#92;
+&#92;
+and all the content that should belong in the &lt;customelement&gt; is now a sibling living between the two elements.&#92;
+&#92;
+This needs to work, since the HTML5 elements do match the criteria of unknown elements, and creating them programatically now breaks the DOM structure in IE7/8 (same example but with a canvas element instead: [http://jsfiddle.net/nmfCy/2/]).&#92;
+&#92;
+To make matters worse the added elements (via innerHtml) are unknown html elements, that do not allow creating child elements into them.&#92;
+&#92;
+However, if we create the same element with document.createElement(&#39;customelement&#39;) and we append this one to the DOM, we can add children elements into it.&#92;
+&#92;
+The given patch adds the check for custom elements support, and if it does not exists, it then attempts to find and fix the eventually broken newly created custom elements (in the clean method).&#92;
+&#92;
+The patch was tested against IE7, IE8, IE9, Chrome 14.0 and Firefox 7.0.1.</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+0, I'll punt to rwaldron on this one.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:17">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 14, 2011 04:08PM UTC by <span class="author">timmywil</span></span>
+        <a class="ticket-change-link" href="#comment:17">comment:17</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>-1, I'd rather follow spec</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:18">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 19, 2011 05:32PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:18">comment:18</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">&#39;&#39;&#39;Fiddle test case&#39;&#39;&#39;: [http://jsfiddle.net/nmfCy/1/]&#92;
+&#92;
+&#39;&#39;&#39;Proposed Patch&#39;&#39;&#39;: http://download.androidknight.com/jquery-custom-elements-1.6.4.patch&#92;
+&#92;
+&#39;&#39;&#39;Full-Original&#39;&#39;&#39;: [http://download.androidknight.com/jquery-1.6.4-original.js]&#92;
+&#92;
+&#39;&#39;&#39;Full-Patched&#39;&#39;&#39; : [http://download.androidknight.com/jquery-1.6.4-patched.js]&#92;
+&#92;
+&#39;&#39;&#39;Description&#39;&#39;&#39;.&#92;
+The expected nodes to be added is:&#92;
+&lt;customelement&gt;&#92;
+&#92;
+However in IE7/8 (IE9 works fine) two elements get created after innerHtml is set:&#92;
+&lt;customelement&gt;&#92;
+   and&#92;
+&lt;/customelement&gt; (!!) - yes, with the beginning slash character as tagName,&#92;
+&#92;
+and all the content that should belong in the &lt;customelement&gt; is now a sibling living between the two elements.&#92;
+&#92;
+This needs to work, since the HTML5 elements do match the criteria of unknown elements, and creating them programatically now breaks the DOM structure in IE7/8 (same example but with a canvas element instead: [http://jsfiddle.net/nmfCy/2/]).&#92;
+&#92;
+To make matters worse the added elements (via innerHtml) are unknown html elements, that do not allow creating child elements into them.&#92;
+&#92;
+However, if we create the same element with document.createElement(&#39;customelement&#39;) and we append this one to the DOM, we can add children elements into it.&#92;
+&#92;
+The given patch adds the check for custom elements support, and if it does not exists, it then attempts to find and fix the eventually broken newly created custom elements (in the clean method).&#92;
+&#92;
+The patch was tested against IE7, IE8, IE9, Chrome 14.0 and Firefox 7.0.1.</span> → <span class="change-field-new">&#39;&#39;&#39;Fiddle test case&#39;&#39;&#39;: [http://jsfiddle.net/nmfCy/1/]&#92;
+&#92;
+&#39;&#39;&#39;Proposed Patch&#39;&#39;&#39;: http://download.androidknight.com/jquery-custom-elements-1.6.4.patch&#92;
+&#92;
+&#39;&#39;&#39;Full-Original&#39;&#39;&#39;: [http://download.androidknight.com/jquery-1.6.4-original.js]&#92;
+&#92;
+&#39;&#39;&#39;Full-Patched&#39;&#39;&#39; : [http://download.androidknight.com/jquery-1.6.4-patched.js]&#92;
+&#92;
+&#39;&#39;&#39;Description&#39;&#39;&#39;.&#92;
+The expected nodes to be added is:&#92;
+&lt;customelement&gt;&#92;
+&#92;
+However in IE7/8 (IE9 works fine) two elements get created after innerHtml is set:&#92;
+&lt;customelement&gt;&#92;
+   and&#92;
+&lt;/customelement&gt; (!!) - yes, with the beginning slash character as tagName,&#92;
+&#92;
+and all the content that should belong in the &lt;customelement&gt; is now a sibling living between the two elements.&#92;
+&#92;
+This needs to work, since the HTML5 elements do match the criteria of unknown elements, and creating them programatically now breaks the DOM structure in IE7/8 (same example but with a canvas element instead: [http://jsfiddle.net/nmfCy/2/]).&#92;
+&#92;
+To make matters worse the added elements (via innerHtml) are unknown html elements, that do not allow creating child elements into them.&#92;
+&#92;
+However, if we create the same element with document.createElement(&#39;customelement&#39;) and we append this one to the DOM, we can add children elements into it.&#92;
+&#92;
+The given patch adds the check for custom elements support, and if it does not exists, it then attempts to find and fix the eventually broken newly created custom elements (in the clean method).&#92;
+&#92;
+The patch was tested against IE7, IE8, IE9, Chrome 14.0 and Firefox 7.0.1.</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+0, I want to revisit this and all the test cases involved.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:19">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 02, 2012 05:25PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:19">comment:19</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ invalid</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">assigned</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>This is no longer valid. The latest version of html5shim actually builds support into document.createElement directly.</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:20">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 30, 2012 03:10PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:20">comment:20</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>milestone:</th>
+                  <td>
+                    
+                      <span class="change-field-old strikethrough">1.8</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+</details>
+</div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

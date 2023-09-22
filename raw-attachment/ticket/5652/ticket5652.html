@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>jQuery 1.4a1 Test</title>
+
+	<script type="text/javascript" src="jquery-1.4a1.js"></script>
+	<script type="text/javascript">
+	
+		function testFocus(type) {
+			$("#text").html("");
+			
+			if (type == 'jquery') {
+				$("#tInput").focus();
+				$("#text").html("jQuery Focus Complete.");
+			} else {
+				document.getElementById('tInput').focus();
+				$("#text").html("Javascript Focus Complete");
+			}
+		}
+		
+		function testBlur(type) {
+			$("#text").html("");
+			
+			/* Re-Focus the input first using javascript (since we know that works). Otherwise clicking the link removes focus */
+			/* The if/else statement below should blur the input field anyways since it occurs after */
+			document.getElementById('tInput').focus();
+			
+			if (type == 'jquery') {
+				$("#tInput").blur();
+				$("#text").html("jQuery Blur Complete.");
+			} else {
+				document.getElementById('tInput').blur();
+				$("#text").html("Javascript Blur Complete");
+			}
+		}
+		
+		function testSubmit(type) {
+			$("#text").html("");
+			
+			alert("Submit function fired.");
+			
+			if (type == 'jquery') {
+				$("#testForm").submit();
+			} else {
+				document.getElementById('testForm').submit();
+			}
+		}
+		
+	</script>
+
+</head>
+
+<body>
+	
+	<h3 style="margin-bottom: 3px;">Focus</h3>
+	<input type="button" onclick="testFocus('jquery');" value="jQuery Focus" /> | <input type="button" onclick="testFocus('javascript');" value="Javascript Focus" />
+	
+	<h3 style="margin-bottom: 3px; border-top: 1px solid #e6e6e6; padding-top: 8px;">Blur</h3>
+	<input type="button" onclick="testBlur('jquery');" value="jQuery Blur" /> | <input type="button" onclick="testBlur('javascript')" value="Javascript Blur" />
+	
+	<h3 style="margin-bottom: 3px; border-top: 1px solid #e6e6e6; padding-top: 8px;">Submit</h3>
+	<input type="button" onclick="testSubmit('jquery');" value="jQuery Submit" /> | <input type="button" onclick="testSubmit('javascript');" value="Javascript Submit" />
+	
+	<br /><br />
+
+	<form action="test.php" id="testForm">
+	
+		<input type="text" name="test" id="tInput" />
+		
+		<span id="text" style="display: block; margin-top: 5px; color: #777;"></span>
+		
+	</form>
+
+</body>
+
+</html>

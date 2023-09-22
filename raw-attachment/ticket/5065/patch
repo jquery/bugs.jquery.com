@@ -1,0 +1,13 @@
+--- a/jquery-nightly.js	2009-08-15 13:13:01.000000000 -0700
++++ b/jquery-nightly.js	2009-08-15 13:12:27.000000000 -0700
+@@ -2358,8 +2358,8 @@
+ 	insertAfter: "after",
+ 	replaceAll: "replaceWith"
+ }, function(name, original){
+-	jQuery.fn[ name ] = function( selector ) {
+-		var ret = [], insert = jQuery( selector );
++	jQuery.fn[ name ] = function( selector, context ) {
++		var ret = [], insert = jQuery( selector, context );
+ 
+ 		for ( var i = 0, l = insert.length; i < l; i++ ) {
+ 			var elems = (i > 0 ? this.clone(true) : this).get();

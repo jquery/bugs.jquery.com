@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>has/contians reduction</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+	<script>
+		$(function(){
+			var hasFoundwithClass = 1 === $('#contingent tbody tr:has(.name:contains("foo"))').length;
+			var hasFoundWithoutClass = 1 === $('#contingent tbody tr:has(:contains("foo"))').length;
+			var hasFoundWithOnlyClass = 1 === $('#contingent tbody tr:has(.name)').length;
+			console.log("hasFoundwithClass: " + hasFoundwithClass
+			 	+ " hasFoundWithoutClass: " + hasFoundWithoutClass
+				+ " hasFoundWithOnlyClass: " + hasFoundWithOnlyClass);
+		});
+	</script>
+</head>
+<body>
+	<div id="contingent">
+		<table>
+			<tbody>
+				<tr>
+					<td>
+						<span class="name">foo</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+Index: jquery.form.js
+===================================================================
+--- jquery.form.js	(revision 5889)
++++ jquery.form.js	(working copy)
+@@ -105,6 +105,14 @@
+         options.data = q; // data is the query string for 'post'
+ 
+     var $form = this, callbacks = [];
++    if (options.disableWith) {
++      var submitButton = this.find('input[@type=submit]');
++      var submitButtonOldValue = submitButton.attr('value');
++      options.complete = function() {
++        submitButton.attr('value',submitButtonOldValue).attr('disabled',false);
++      }
++      submitButton.attr('value',options.disableWith).attr('disabled',true).blur();
++    }
+     if (options.resetForm) callbacks.push(function() { $form.resetForm(); });
+     if (options.clearForm) callbacks.push(function() { $form.clearForm(); });
+ 

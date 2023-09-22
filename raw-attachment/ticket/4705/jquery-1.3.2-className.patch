@@ -1,0 +1,92 @@
+--- jquery-1.3.2.js	2009-05-25 12:00:43.667854804 -0600
++++ jquery-1.3.2-modified-selectors.js	2009-05-26 22:52:33.748668152 -0600
+@@ -707,27 +707,54 @@
+ 	},
+ 
+ 	className: {
++
++		get: function( elem ) {
++			//var classNames = elem.className.baseVal || elem.className || elem.getAttribute("class");
++			var classNames = elem.getAttribute("class");
++			classNames = classNames ? classNames : "";
++			return classNames
++		},
++
++		set: function( elem, value ) {
++			elem.setAttribute("class", value);
++		},
++
++
+ 		// internal only, use addClass("class")
+ 		add: function( elem, classNames ) {
+ 			jQuery.each((classNames || "").split(/\s+/), function(i, className){
+-				if ( elem.nodeType == 1 && !jQuery.className.has( elem.className, className ) )
+-					elem.className += (elem.className ? " " : "") + className;
++				var curClassName = jQuery.className.get(elem);
++				if ( elem.nodeType == 1 && !jQuery.className.has( curClassName, className ) )
++				jQuery.className.set(elem, curClassName + (curClassName ? " " : "") + className);
+ 			});
+ 		},
+ 
+ 		// internal only, use removeClass("class")
+ 		remove: function( elem, classNames ) {
+ 			if (elem.nodeType == 1)
+-				elem.className = classNames !== undefined ?
+-					jQuery.grep(elem.className.split(/\s+/), function(className){
++				jQuery.className.set(elem, classNames !== undefined ?
++					jQuery.grep(jQuery.className.get(elem).split(/\s+/), function(className){
+ 						return !jQuery.className.has( classNames, className );
+ 					}).join(" ") :
+-					"";
++					""
++				);
+ 		},
+ 
+ 		// internal only, use hasClass("class")
+ 		has: function( elem, className ) {
+-			return elem && jQuery.inArray( className, (elem.className || elem).toString().split(/\s+/) ) > -1;
++			var classNames = "";
++			if (elem)
++				{
++					if (elem.getAttribute)
++						{
++							classNames = elem.jQuery.className.get(elem);
++						}
++					else
++						{
++							classNames = elem; // <-- ???
++						}
++				}
++			return elem && jQuery.inArray( className, classNames.toString().split(/\s+/) ) > -1;
+ 		}
+ 	},
+ 
+@@ -1779,7 +1806,8 @@
+ 
+ 			for ( var i = 0, elem; (elem = curLoop[i]) != null; i++ ) {
+ 				if ( elem ) {
+-					if ( not ^ (elem.className && (" " + elem.className + " ").indexOf(match) >= 0) ) {
++					var className = jQuery.className.get(elem);
++					if ( not ^ (className && (" " + className + " ").indexOf(match) >= 0) ) {
+ 						if ( !inplace )
+ 							result.push( elem );
+ 					} else if ( inplace ) {
+@@ -2005,7 +2033,8 @@
+ 			return (match === "*" && elem.nodeType === 1) || elem.nodeName === match;
+ 		},
+ 		CLASS: function(elem, match){
+-			return (" " + (elem.className || elem.getAttribute("class")) + " ")
++			var className = jQuery.className.get(elem);
++			return (" " + (className) + " ")
+ 				.indexOf( match ) > -1;
+ 		},
+ 		ATTR: function(elem, match){
+@@ -2207,7 +2236,7 @@
+ 	if ( div.querySelectorAll && div.querySelectorAll(".TEST").length === 0 ) {
+ 		return;
+ 	}
+-	
++
+ 	Sizzle = function(query, context, extra, seed){
+ 		context = context || document;
+ 

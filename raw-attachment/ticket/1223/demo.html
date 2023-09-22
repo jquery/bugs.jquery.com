@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+	<head>
+		<title>Demo</title>
+		<script src="jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			$(function() {
+				$("#link").click(function() {
+					$("#div1").append($("<select/>"));
+					$("<select/>").appendTo($("#div2"));
+					alert($("#div1").html());
+					alert($("#div2").html());
+					return false;
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="div1" style="border: 1px dotted black">
+			DIV1
+		</div>
+		<div id="div2" style="border: 1px dotted red">
+			DIV2
+		</div>
+		<a id="link" href="#">Test</a>
+	</body>
+</html>

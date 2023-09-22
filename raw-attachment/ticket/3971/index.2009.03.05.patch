@@ -1,0 +1,59 @@
+Index: test/unit/core.js
+===================================================================
+--- test/unit/core.js	(revision 6271)
++++ test/unit/core.js	(working copy)
+@@ -366,6 +366,7 @@
+ 	ok( pass, "Execute a function, Relative" );
+ });
+ 
++
+ test("index(Object)", function() {
+ 	expect(10);
+ 
+@@ -386,6 +387,18 @@
+ 	equals( elements.index( elements.eq(1) ), 1, "Pass in a jQuery object" );
+ });
+ 
++test("index(String|undefined)", function() {
++	expect(4);
++
++	equals( jQuery('#text2').index(), 2, "Check for index amongst siblings" );
++	equals( jQuery('#form').children().eq(4).index(), 4, "Check for index amongst siblings" );
++	equals( jQuery('#radio2').index('#form :radio') , 1, "Check for index within a selector" );
++    equals( jQuery('#radio2').index('#form :text') , -1, "Check for index not found within a selector" );
++	
++});
++
++
++
+ test("attr(String)", function() {
+ 	expect(27);
+ 	equals( jQuery('#text1').attr('value'), "Test", 'Check for value attribute' );
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 6271)
++++ src/core.js	(working copy)
+@@ -158,11 +158,19 @@
+ 	// Determine the position of an element within
+ 	// the matched set of elements
+ 	index: function( elem ) {
++			
++	  // legacy implementation
++	  if ( typeof elem === 'object'){
+ 		// Locate the position of the desired element
+-		return jQuery.inArray(
+-			// If it receives a jQuery object, the first element is used
+-			elem && elem.jquery ? elem[0] : elem
+-		, this );
++	    return jQuery.inArray(
++		        // If it receives a jQuery object, the first element is used
++	              elem && elem.jquery ? elem[0] : elem
++	             , this );
++	  }
++	  //return the index of the element in a new jQuery obj from selector or by default, amongst its own siblings.
++	  return jQuery.inArray(this[0],
++	            elem ? jQuery(elem) : jQuery.sibling(this[0].parentNode.firstChild,undefined) );
++	 
+ 	},
+ 
+ 	attr: function( name, value, type ) {

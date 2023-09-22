@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Manipulation in IE7 drops value of radio buttons</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+
+<body>
+<form>
+
+<h1>Manipulation in IE7 drops value of radio buttons</h1>
+
+<p>Instructions : check "female", then click button.</p>
+<p>In Firefox, the checked radio is kept -- That's correct.<br />
+   In IE, the checked radio is lost -- That's the bug.</p>
+
+<button type="button">Click to move both radio buttons down.</button>
+
+<h2>Source</h2>
+<div id="source">
+<input type="radio" name="sex" value="male" checked="checked" /> Male
+<input type="radio" name="sex" value="female" /> Female
+</div>
+
+<h2>Target</h2>
+<div id="target">
+</div>
+
+</form>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+   $("button").click(function(){
+      var source = $("#source");
+      var target = $("#target");
+      target.after(source); 
+      /* the same happens also with before, insertAfter, and insertBefore */
+   });
+});
+</script>
+
+</body>
+</html>

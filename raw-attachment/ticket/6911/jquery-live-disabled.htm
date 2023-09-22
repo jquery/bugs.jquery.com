@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ticket 6911</title>
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.4.2.min.js"></script>
+</head>
+<body>
+
+<p>Click on disabled [button1], no click event should fire. However, live click event fires in IE.</p>
+
+<div id="a">
+<input type="button" disabled="disabled" id="b1" value="button1">
+<input type="button" id="b2" value="button2">
+</div>
+
+<textarea id="log" rows="20" cols="100"></textarea>
+
+<script type="text/javascript">//<![CDATA[
+function log(m) { var t=$('#log');t.val(t.val()+'\n'+m); }
+$('#b1').click(function(){ log('click on #b1'); });
+$('#b2').click(function(){ log('click on #b2'); });
+$(':button','#a').live('click',function(){ log('live-click on #a :button'); });
+
+//]]></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<html>
+<head>
+<script language="javascript" src="jquery-1.3.2.js"></script>
+</head>
+<body>
+<script language="javascript">
+<!--
+$(function() {
+	var gutters = $('table tr');
+	var el = $('~tr.configOptions .gutter', gutters);
+	alert(el.html());
+	// should display <p>hello</p>
+});
+-->
+</script>
+<table border="1">
+<thead>
+	<tr>
+		<td>h1</td>
+		<td>h2</td>
+		<td>h3</td>
+	</tr>
+</thead>
+<tfoot>
+	<tr>
+		<td>f1</td>
+		<td>f2</td>
+		<td>f3</td>
+	</tr>
+</tfoot>
+<tbody>
+	<tr>
+		<td>b11</td>
+		<td>b12</td>
+		<td>b13<a href="#" class="togglerClass">click here</a></td>
+	</tr>
+	<tr class="configOptions">
+		<td>b21</td>
+		<td>b22</td>
+		<td>b23<div class="gutter"><p>hello</p></div></td>
+	</tr>
+</tbody>
+</table>
+</body>
+</html>

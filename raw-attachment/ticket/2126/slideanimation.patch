@@ -1,0 +1,18 @@
+Index: ui.accordion.js
+===================================================================
+--- ui.accordion.js	(revision 4422)
++++ ui.accordion.js	(working copy)
+@@ -32,7 +32,12 @@
+ 				},
+ 				duration: settings.duration,
+ 				easing: settings.easing,
+-				complete: settings.complete
++				complete: function() {
++					if ( !settings.autoheight ) {
++						settings.toShow.css("height", "auto");
++					}
++					settings.complete();
++				}
+ 			});
+ 		},
+ 		bounceslide: function(settings) {

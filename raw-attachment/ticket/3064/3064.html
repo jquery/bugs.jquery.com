@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>3064 Test Case</title>
+<script type="text/javascript" src="jquery-1.2.6.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+	$(document.forms[0].elements).each(function() {
+		$(this).val('2'); 
+	});
+});
+</script>
+</head>
+
+<body>
+<form method="get" action="">
+	<div>
+		<input name="asdf" type="text" />
+		<select name="singleoptgroupdisabled">
+			<optgroup label="" disabled="disabled">
+				<option value="1">One</option>
+				<option selected="selected" value="2">Two</option>
+				<option value="3">Three</option>
+				<option value="4">Four</option>
+			</optgroup>
+			<option value="5">Five</option>
+			<option value="6">Six</option>
+			<option value="7">Seven</option>
+			<option value="8">Eight</option>
+		</select>
+		<select name="singleoptiondisabled">
+			<optgroup label="subsection">
+				<option value="1">One</option>
+				<option value="2">Two</option>
+				<option value="3">Three</option>
+				<option value="4">Four</option>
+			</optgroup>
+			<option selected="selected" disabled="disabled" value="5">Five</option>
+			<option value="6">Six</option>
+			<option value="7">Seven</option>
+			<option value="8">Eight</option>
+		</select>
+		<select name="multipleoptgroupdisabled" multiple="multiple">
+			<optgroup label="subsection" disabled="disabled">
+				<option selected="selected" value="1">One</option>
+				<option selected="selected" value="2">Two</option>
+				<option value="3">Three</option>
+				<option value="4">Four</option>
+			</optgroup>
+			<option selected="selected" value="5">Five</option>
+			<option selected="selected" value="6">Six</option>
+			<option value="7">Seven</option>
+			<option value="8">Eight</option>
+		</select>
+		<select name="multipleoptiondisabled" multiple="multiple">
+			<optgroup label="subsection">
+				<option selected="selected" value="1">One</option>
+				<option selected="selected" value="2">Two</option>
+				<option value="3">Three</option>
+				<option value="4">Four</option>
+			</optgroup>
+			<option selected="selected" disabled="disabled" value="5">Five</option>
+			<option selected="selected" disabled="disabled" value="6">Six</option>
+			<option value="7">Seven</option>
+			<option value="8">Eight</option>
+		</select>
+		<input type="submit" value="Submit" />
+	</div>
+</form>
+
+</body>
+
+</html>

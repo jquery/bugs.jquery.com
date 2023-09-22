@@ -1,0 +1,952 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">potpourri.diff on Ticket #2743 – Attachment – jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shadow:0 1px #fff;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#b3d4fc}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#b3d4fc}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f2f0}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{color:#9a6e3a;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}pre[class*=language-diff]{--eleventy-code-padding:1.25em;padding-left:var(--eleventy-code-padding);padding-right:var(--eleventy-code-padding)}.token.deleted{background-color:#8e2e2e;color:inherit}.token.inserted{background-color:#44824a;color:inherit}.token.prefix.deleted,.token.prefix.inserted,.token.prefix.unchanged{-webkit-user-select:none;user-select:none;display:inline-flex;align-items:center;justify-content:center;padding-top:2px;padding-bottom:2px}.token.prefix.deleted,.token.prefix.inserted{width:var(--eleventy-code-padding);background-color:rgba(0,0,0,.2)}.token.deleted:not(.prefix),.token.inserted:not(.prefix){display:block;margin-left:calc(-1 * var(--eleventy-code-padding));margin-right:calc(-1 * var(--eleventy-code-padding));text-decoration:none;color:inherit}:root{--attachment-info-bg-color:#f7f7f0;--attachment-info-border-color:#d7d7d7;--attachment-download-link-color:#666}h1,h2,h3,h4,h5,h6{font-weight:700}h3{font-size:.875rem}h6{font-size:.6875rem}.attachment-info{padding:.25em .5em;margin:1em 0;background-color:var(--attachment-info-bg-color);border:1px solid var(--attachment-info-border-color)}.attachment-info h6{font-family:var(--font-family-alternate)}.attachment-download{margin:2em 0;gap:.5em}.attachment-download-link[href],.attachment-download-link[href]:visited{color:var(--attachment-download-link-color)}.attachment img,.attachment picture{display:block;max-width:100%;height:auto}code[class*=language-],pre[class*=language-]{font-size:.75rem}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+
+<div class="flex-column attachment">
+  <nav class="content-nav">
+    <ul class="flex-row">
+      <li>
+        <a href="/bugs.jquery.com/ticket/2743">Back to Ticket #2743</a>
+      </li>
+    </ul>
+  </nav>
+
+  <h1>
+    <a href="/bugs.jquery.com/ticket/2743">Ticket #2743</a>: potpourri.diff
+  
+  <hr>
+
+  <div class="attachment-info">
+    <h6>File potpourri.diff, 22.5 KB (added by flesler, April 25, 2008 03:15AM UTC)</h6>
+    
+  </div>
+
+  
+    <div class="attachment-preview">
+      
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ajax.js
+===================================================================
+<span class="token coord">--- ajax.js	(revision 5317)</span>
+<span class="token coord">+++ ajax.js	(working copy)</span>
+<span class="token coord">@@ -20,7 +20,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			if ( jQuery.isFunction( params ) ) {
+</span><span class="token prefix unchanged"> </span><span class="token line">				// We assume that it's the callback
+</span><span class="token prefix unchanged"> </span><span class="token line">				callback = params;
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				params = null;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				params = undefined;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">			// Otherwise, build a param string
+</span><span class="token prefix unchanged"> </span><span class="token line">			} else {
+</span></span><span class="token coord">@@ -74,7 +74,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		})
+</span><span class="token prefix unchanged"> </span><span class="token line">		.map(function(i, elem){
+</span><span class="token prefix unchanged"> </span><span class="token line">			var val = jQuery(this).val();
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			return val == null ? null :
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			return val == undefined ? undefined :
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				val.constructor == Array ?
+</span><span class="token prefix unchanged"> </span><span class="token line">					jQuery.map( val, function(val, i){
+</span><span class="token prefix unchanged"> </span><span class="token line">						return {name: elem.name, value: val};
+</span></span><span class="token coord">@@ -98,7 +98,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// shift arguments if data argument was ommited
+</span><span class="token prefix unchanged"> </span><span class="token line">		if ( jQuery.isFunction( data ) ) {
+</span><span class="token prefix unchanged"> </span><span class="token line">			callback = data;
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			data = null;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			data = undefined;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
+</span><span class="token prefix unchanged"> </span><span class="token line">		
+</span><span class="token prefix unchanged"> </span><span class="token line">		return jQuery.ajax({
+</span></span><span class="token coord">@@ -111,7 +111,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	getScript: function( url, callback ) {
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		return jQuery.get(url, null, callback, "script");
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		return jQuery.get(url, undefined, callback, "script");
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	getJSON: function( url, data, callback ) {
+</span></span><span class="token coord">@@ -144,9 +144,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		contentType: "application/x-www-form-urlencoded",
+</span><span class="token prefix unchanged"> </span><span class="token line">		processData: true,
+</span><span class="token prefix unchanged"> </span><span class="token line">		async: true,
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		data: null,
+</span><span class="token prefix deleted">-</span><span class="token line">		username: null,
+</span><span class="token prefix deleted">-</span><span class="token line">		password: null,
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		data: undefined,
+</span><span class="token prefix inserted">+</span><span class="token line">		username: undefined,
+</span><span class="token prefix inserted">+</span><span class="token line">		password: undefined,
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		accepts: {
+</span><span class="token prefix unchanged"> </span><span class="token line">			xml: "application/xml, text/xml",
+</span><span class="token prefix unchanged"> </span><span class="token line">			html: "text/html",
+</span></span><span class="token coord">@@ -207,7 +207,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			};
+</span><span class="token prefix unchanged"> </span><span class="token line">		}
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( s.dataType == "script" &amp;&amp; s.cache == null )
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( s.dataType == "script" &amp;&amp; s.cache == undefined )
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			s.cache = false;
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">		if ( s.cache === false &amp;&amp; s.type.toLowerCase() == "get" ) {
+</span></span><span class="token coord">@@ -223,7 +223,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			s.url += (s.url.match(/\?/) ? "&amp;" : "?") + s.data;
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">			// IE likes to send both get and post data, prevent this
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			s.data = null;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			s.data = undefined;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">		// Watch for a new set of requests
+</span></span><span class="token coord">@@ -311,7 +311,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// clear poll interval
+</span><span class="token prefix unchanged"> </span><span class="token line">				if (ival) {
+</span><span class="token prefix unchanged"> </span><span class="token line">					clearInterval(ival);
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					ival = null;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					ival = undefined;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				}
+</span><span class="token prefix unchanged"> </span><span class="token line">				
+</span><span class="token prefix unchanged"> </span><span class="token line">				status = isTimeout == "timeout" &amp;&amp; "timeout" ||
+</span></span><span class="token coord">@@ -351,7 +351,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">				// Stop memory leaks
+</span><span class="token prefix unchanged"> </span><span class="token line">				if ( s.async )
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					xml = null;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					xml = undefined;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			}
+</span><span class="token prefix unchanged"> </span><span class="token line">		};
+</span><span class="token prefix unchanged"> </span><span class="token line">		
+</span></span><span class="token coord">@@ -377,7 +377,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		try {
+</span><span class="token prefix unchanged"> </span><span class="token line">			xml.send(s.data);
+</span><span class="token prefix unchanged"> </span><span class="token line">		} catch(e) {
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			jQuery.handleError(s, xml, null, e);
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			jQuery.handleError(s, xml, undefined, e);
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
+</span><span class="token prefix unchanged"> </span><span class="token line">		
+</span><span class="token prefix unchanged"> </span><span class="token line">		// firefox 1.5 doesn't fire statechange for sync requests
+</span></span><span class="token coord">@@ -448,9 +448,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	httpData: function( r, type ) {
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var ct = r.getResponseHeader("content-type");
+</span><span class="token prefix deleted">-</span><span class="token line">		var xml = type == "xml" || !type &amp;&amp; ct &amp;&amp; ct.indexOf("xml") >= 0;
+</span><span class="token prefix deleted">-</span><span class="token line">		var data = xml ? r.responseXML : r.responseText;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var ct = r.getResponseHeader("content-type"),
+</span><span class="token prefix inserted">+</span><span class="token line">			xml = type == "xml" || !type &amp;&amp; ct &amp;&amp; ct.indexOf("xml") >= 0,
+</span><span class="token prefix inserted">+</span><span class="token line">			data = xml ? r.responseXML : r.responseText;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">		if ( xml &amp;&amp; data.documentElement.tagName == "parsererror" )
+</span><span class="token prefix unchanged"> </span><span class="token line">			throw "parsererror";
+</span></span>Index: core.js
+===================================================================
+<span class="token coord">--- core.js	(revision 5317)</span>
+<span class="token coord">+++ core.js	(working copy)</span>
+<span class="token coord">@@ -10,27 +10,26 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> */
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">// Map over jQuery in case of overwrite
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">if ( window.jQuery )
+</span><span class="token prefix deleted">-</span><span class="token line">	var _jQuery = window.jQuery;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">var _jQuery = this.jQuery,
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">var jQuery = window.jQuery = function( selector, context ) {
+</span><span class="token prefix deleted">-</span><span class="token line">	// The jQuery object is actually just the init constructor 'enhanced'
+</span><span class="token prefix deleted">-</span><span class="token line">	return new jQuery.prototype.init( selector, context );
+</span><span class="token prefix deleted">-</span><span class="token line">};
+</span><span class="token prefix deleted">-</span><span class="token line">
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">// Map over the $ in case of overwrite
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">if ( window.$ )
+</span><span class="token prefix deleted">-</span><span class="token line">	var _$ = window.$;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	_$ = this.$,
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">// Map the jQuery namespace to the '$' one
+</span><span class="token prefix deleted">-</span><span class="token line">window.$ = jQuery;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">//- when munging variables, every undefined turns into one-letter name.
+</span><span class="token prefix inserted">+</span><span class="token line">//- faster lookups: http://snurl.com/25pcd
+</span><span class="token prefix inserted">+</span><span class="token line">	undefined;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">var jQuery = this.jQuery = this.$ = function( selector, context ) {
+</span><span class="token prefix inserted">+</span><span class="token line">	// The jQuery object is actually just the init constructor 'enhanced'
+</span><span class="token prefix inserted">+</span><span class="token line">	return new jQuery.fn.init( selector, context );
+</span><span class="token prefix inserted">+</span><span class="token line">};
+</span><span class="token prefix inserted">+</span><span class="token line">	
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">// A simple way to check for HTML strings or ID strings
+</span><span class="token prefix unchanged"> </span><span class="token line">// (both of which we optimize for)
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">var quickExpr = /^[^&lt;]*(&lt;(.|\s)+>)[^>]*$|^#(\w+)$/;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">var quickExpr = /^[^&lt;]*(&lt;(.|\s)+>)[^>]*$|^#(\w+)$/,
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">// Is it a simple selector
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">var isSimple = /^.[^:#\[\.]*$/;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	isSimple = /^.[^:#\[\.]*$/;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">jQuery.fn = jQuery.prototype = {
+</span><span class="token prefix unchanged"> </span><span class="token line">	init: function( selector, context ) {
+</span></span><span class="token coord">@@ -148,15 +147,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	// Determine the position of an element within 
+</span><span class="token prefix unchanged"> </span><span class="token line">	// the matched set of elements
+</span><span class="token prefix unchanged"> </span><span class="token line">	index: function( elem ) {
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var ret = -1;
+</span><span class="token prefix deleted">-</span><span class="token line">
+</span><span class="token prefix deleted">-</span><span class="token line">		// Locate the position of the desired element
+</span><span class="token prefix deleted">-</span><span class="token line">		this.each(function(i){
+</span><span class="token prefix deleted">-</span><span class="token line">			if ( this == elem )
+</span><span class="token prefix deleted">-</span><span class="token line">				ret = i;
+</span><span class="token prefix deleted">-</span><span class="token line">		});
+</span><span class="token prefix deleted">-</span><span class="token line">
+</span><span class="token prefix deleted">-</span><span class="token line">		return ret;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		return jQuery.inArray( elem, this );
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	attr: function( name, value, type ) {
+</span></span><span class="token coord">@@ -193,7 +184,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	text: function( text ) {
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( typeof text != "object" &amp;&amp; text != null )
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( typeof text != "object" &amp;&amp; text != undefined )
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			return this.empty().append( (this[0] &amp;&amp; this[0].ownerDocument || document).createTextNode( text ) );
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">		var ret = "";
+</span></span><span class="token coord">@@ -306,7 +297,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// this is primarily for IE but the data expando shouldn't be copied over in any browser
+</span><span class="token prefix unchanged"> </span><span class="token line">		var clone = ret.find("*").andSelf().each(function(){
+</span><span class="token prefix unchanged"> </span><span class="token line">			if ( this[ expando ] != undefined )
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				this[ expando ] = null;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				this[ expando ] = undefined;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		});
+</span><span class="token prefix unchanged"> </span><span class="token line">		
+</span><span class="token prefix unchanged"> </span><span class="token line">		// Copy the events from the original to the clone
+</span></span><span class="token coord">@@ -359,9 +350,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	is: function( selector ) {
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		return selector ?
+</span><span class="token prefix deleted">-</span><span class="token line">			jQuery.multiFilter( selector, this ).length > 0 :
+</span><span class="token prefix deleted">-</span><span class="token line">			false;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		return !!selector &amp;&amp; jQuery.multiFilter( selector, this ).length > 0 ;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	hasClass: function( selector ) {
+</span></span><span class="token coord">@@ -383,7 +372,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					
+</span><span class="token prefix unchanged"> </span><span class="token line">					// Nothing was selected
+</span><span class="token prefix unchanged"> </span><span class="token line">					if ( index &lt; 0 )
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">						return null;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">						return undefined;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">					// Loop through all the selected options
+</span><span class="token prefix unchanged"> </span><span class="token line">					for ( var i = one ? index : 0, max = one ? index + 1 : options.length; i &lt; max; i++ ) {
+</span></span><span class="token coord">@@ -410,7 +399,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">			}
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			return undefined;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			return;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">		return this.each(function(){
+</span></span><span class="token coord">@@ -443,7 +432,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return value == undefined ?
+</span><span class="token prefix unchanged"> </span><span class="token line">			(this.length ?
+</span><span class="token prefix unchanged"> </span><span class="token line">				this[0].innerHTML :
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				null) :
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				undefined) :
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			this.empty().append( value );
+</span><span class="token prefix unchanged"> </span><span class="token line">	},
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token coord">@@ -473,13 +462,13 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		var parts = key.split(".");
+</span><span class="token prefix unchanged"> </span><span class="token line">		parts[1] = parts[1] ? "." + parts[1] : "";
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( value == null ) {
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( value == undefined ) {
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			var data = this.triggerHandler("getData" + parts[1] + "!", [parts[0]]);
+</span><span class="token prefix unchanged"> </span><span class="token line">			
+</span><span class="token prefix unchanged"> </span><span class="token line">			if ( data == undefined &amp;&amp; this.length )
+</span><span class="token prefix unchanged"> </span><span class="token line">				data = jQuery.data( this[0], key );
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			return data == null &amp;&amp; parts[1] ?
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			return data == undefined &amp;&amp; parts[1] ?
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				this.data( parts[0] ) :
+</span><span class="token prefix unchanged"> </span><span class="token line">				data;
+</span><span class="token prefix unchanged"> </span><span class="token line">		} else
+</span></span><span class="token coord">@@ -536,7 +525,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">};
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">// Give the init function the jQuery prototype for later instantiation
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">jQuery.prototype.init.prototype = jQuery.prototype;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">jQuery.fn.init.prototype = jQuery.fn;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">function evalScript( i, elem ) {
+</span><span class="token prefix unchanged"> </span><span class="token line">	if ( elem.src )
+</span></span><span class="token coord">@@ -570,27 +559,29 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		target = {};
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	// extend jQuery itself if only one argument is passed
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	if ( length == 1 ) {
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	if ( length - i == 0 ) {
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		target = this;
+</span><span class="token prefix unchanged"> </span><span class="token line">		i = 0;
+</span><span class="token prefix unchanged"> </span><span class="token line">	}
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	for ( ; i &lt; length; i++ )
+</span><span class="token prefix unchanged"> </span><span class="token line">		// Only deal with non-null/undefined values
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( (options = arguments[ i ]) != null )
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( (options = arguments[ i ]) != undefined )
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// Extend the base object
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			for ( var name in options ) {
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			for ( var name in options ) {				
+</span><span class="token prefix inserted">+</span><span class="token line">				var src = target[name], copy = options[name];
+</span><span class="token prefix inserted">+</span><span class="token line">
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// Prevent never-ending loop
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( target === options[ name ] )
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( target === copy )
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					continue;
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">				// Recurse if we're merging object values
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( deep &amp;&amp; options[ name ] &amp;&amp; typeof options[ name ] == "object" &amp;&amp; target[ name ] &amp;&amp; !options[ name ].nodeType )
+</span><span class="token prefix deleted">-</span><span class="token line">					target[ name ] = jQuery.extend( deep, target[ name ], options[ name ] );
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( deep &amp;&amp; copy &amp;&amp; typeof copy == "object" &amp;&amp; src &amp;&amp; !copy.nodeType )
+</span><span class="token prefix inserted">+</span><span class="token line">					target[ name ] = jQuery.extend( deep, src, copy );
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">				// Don't bring in undefined values
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				else if ( options[ name ] != undefined )
+</span><span class="token prefix deleted">-</span><span class="token line">					target[ name ] = options[ name ];
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				else if ( copy != undefined )
+</span><span class="token prefix inserted">+</span><span class="token line">					target[ name ] = copy;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">			}
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token coord">@@ -598,12 +589,12 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	return target;
+</span><span class="token prefix unchanged"> </span><span class="token line">};
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">var expando = "jQuery" + (new Date()).getTime(), uuid = 0, windowData = {};
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">var expando = "jQuery" + (+new Date), uuid = 0, windowData = {},
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">// exclude the following css properties to add px
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">var exclude = /z-?index|font-?weight|opacity|zoom|line-?height/i;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	exclude = /z-?index|font-?weight|opacity|zoom|line-?height/i,
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">// cache getComputedStyle
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">var getComputedStyle = document.defaultView &amp;&amp; document.defaultView.getComputedStyle;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	getComputedStyle = document.defaultView &amp;&amp; document.defaultView.getComputedStyle;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">jQuery.extend({
+</span><span class="token prefix unchanged"> </span><span class="token line">	noConflict: function( deep ) {
+</span></span><span class="token coord">@@ -800,7 +791,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	css: function( elem, name, force ) {
+</span><span class="token prefix unchanged"> </span><span class="token line">		if ( name == "width" || name == "height" ) {
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			var val, props = { position: "absolute", visibility: "hidden", display:"block" }, which = name == "width" ? [ "Left", "Right" ] : [ "Top", "Bottom" ];
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			var val, props = { position: "absolute", visibility: "hidden", display:"block" },
+</span><span class="token prefix inserted">+</span><span class="token line">				which = name == "width" ? [ "Left", "Right" ] : [ "Top", "Bottom" ];
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		
+</span><span class="token prefix unchanged"> </span><span class="token line">			function getWH() {
+</span><span class="token prefix unchanged"> </span><span class="token line">				val = name == "width" ? elem.offsetWidth : elem.offsetHeight;
+</span></span><span class="token coord">@@ -874,15 +866,15 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// If the element isn't reporting its values properly in Safari
+</span><span class="token prefix unchanged"> </span><span class="token line">			// then some display: none elements are involved
+</span><span class="token prefix unchanged"> </span><span class="token line">			else {
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				var swap = [], stack = [];
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				var swap = [], stack = [], a, i;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">				// Locate all of the parent display: none elements
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				for ( var a = elem; a &amp;&amp; color(a); a = a.parentNode )
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				for ( a = elem; a &amp;&amp; color(a); a = a.parentNode )
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					stack.unshift(a);
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">				// Go through and make them visible, but in reverse
+</span><span class="token prefix unchanged"> </span><span class="token line">				// (It would be better if we knew the exact display type that they had)
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				for ( var i = 0; i &lt; stack.length; i++ )
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				for ( i = 0; i &lt; stack.length; i++ )
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					if ( color( stack[ i ] ) ) {
+</span><span class="token prefix unchanged"> </span><span class="token line">						swap[ i ] = stack[ i ].style.display;
+</span><span class="token prefix unchanged"> </span><span class="token line">						stack[ i ].style.display = "block";
+</span></span><span class="token coord">@@ -890,13 +882,13 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">				// Since we flip the display style, we have to handle that
+</span><span class="token prefix unchanged"> </span><span class="token line">				// one special, otherwise get the value
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				ret = name == "display" &amp;&amp; swap[ stack.length - 1 ] != null ?
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				ret = name == "display" &amp;&amp; swap[ stack.length - 1 ] != undefined ?
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					"none" :
+</span><span class="token prefix unchanged"> </span><span class="token line">					( computedStyle &amp;&amp; computedStyle.getPropertyValue( name ) ) || "";
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">				// Finally, revert the display styles back
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				for ( var i = 0; i &lt; swap.length; i++ )
+</span><span class="token prefix deleted">-</span><span class="token line">					if ( swap[ i ] != null )
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				for ( i = 0; i &lt; swap.length; i++ )
+</span><span class="token prefix inserted">+</span><span class="token line">					if ( swap[ i ] != undefined )
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">						stack[ i ].style.display = swap[ i ];
+</span><span class="token prefix unchanged"> </span><span class="token line">			}
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token coord">@@ -946,7 +938,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				return;
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">			if ( elem.constructor == Number )
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				elem = elem.toString();
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				elem += '';
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			
+</span><span class="token prefix unchanged"> </span><span class="token line">			// Convert html string into DOM nodes
+</span><span class="token prefix unchanged"> </span><span class="token line">			if ( typeof elem == "string" ) {
+</span></span><span class="token coord">@@ -958,7 +950,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				});
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">				// Trim whitespace, otherwise indexOf won't work as expected
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				var tags = jQuery.trim( elem ).toLowerCase(), div = context.createElement("div");
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				var tags = jQuery.trim( elem ).toLowerCase(),
+</span><span class="token prefix inserted">+</span><span class="token line">					div = context.createElement("div");
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">				var wrap =
+</span><span class="token prefix unchanged"> </span><span class="token line">					// option or optgroup
+</span></span><span class="token coord">@@ -1353,7 +1346,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// Get or set width or height on the element
+</span><span class="token prefix unchanged"> </span><span class="token line">				size == undefined ?
+</span><span class="token prefix unchanged"> </span><span class="token line">					// Get width or height on the element
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					(this.length ? jQuery.css( this[0], type ) : null) :
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					(this.length ? jQuery.css( this[0], type ) : undefined) :
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">					// Set the width or height on the element (default to pixels if value is unitless)
+</span><span class="token prefix unchanged"> </span><span class="token line">					this.css( type, size.constructor == String ? size : size + "px" );
+</span></span>Index: event.js
+===================================================================
+<span class="token coord">--- event.js	(revision 5317)</span>
+<span class="token coord">+++ event.js	(working copy)</span>
+<span class="token coord">@@ -13,7 +13,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">		// For whatever reason, IE has trouble passing the window object
+</span><span class="token prefix unchanged"> </span><span class="token line">		// around, causing it to be cloned in the process
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( jQuery.browser.msie &amp;&amp; elem.setInterval != undefined )
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( jQuery.browser.msie &amp;&amp; elem.setInterval )
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			elem = window;
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">		// Make sure that the function being executed has a unique ID
+</span></span><span class="token coord">@@ -51,42 +51,42 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// event in IE.
+</span><span class="token prefix unchanged"> </span><span class="token line">		handle.elem = elem;
+</span><span class="token prefix unchanged"> </span><span class="token line">			
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			// Handle multiple events seperated by a space
+</span><span class="token prefix deleted">-</span><span class="token line">			// jQuery(...).bind("mouseover mouseout", fn);
+</span><span class="token prefix deleted">-</span><span class="token line">			jQuery.each(types.split(/\s+/), function(index, type) {
+</span><span class="token prefix deleted">-</span><span class="token line">				// Namespaced event handlers
+</span><span class="token prefix deleted">-</span><span class="token line">				var parts = type.split(".");
+</span><span class="token prefix deleted">-</span><span class="token line">				type = parts[0];
+</span><span class="token prefix deleted">-</span><span class="token line">				handler.type = parts[1];
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		// Handle multiple events separated by a space
+</span><span class="token prefix inserted">+</span><span class="token line">		// jQuery(...).bind("mouseover mouseout", fn);
+</span><span class="token prefix inserted">+</span><span class="token line">		jQuery.each(types.split(/\s+/), function(index, type) {
+</span><span class="token prefix inserted">+</span><span class="token line">			// Namespaced event handlers
+</span><span class="token prefix inserted">+</span><span class="token line">			var parts = type.split(".");
+</span><span class="token prefix inserted">+</span><span class="token line">			type = parts[0];
+</span><span class="token prefix inserted">+</span><span class="token line">			handler.type = parts[1];
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				// Get the current list of functions bound to this event
+</span><span class="token prefix deleted">-</span><span class="token line">				var handlers = events[type];
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			// Get the current list of functions bound to this event
+</span><span class="token prefix inserted">+</span><span class="token line">			var handlers = events[type];
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				// Init the event handler queue
+</span><span class="token prefix deleted">-</span><span class="token line">				if (!handlers) {
+</span><span class="token prefix deleted">-</span><span class="token line">					handlers = events[type] = {};
+</span><span class="token prefix deleted">-</span><span class="token line">		
+</span><span class="token prefix deleted">-</span><span class="token line">					// Check for a special event handler
+</span><span class="token prefix deleted">-</span><span class="token line">					// Only use addEventListener/attachEvent if the special
+</span><span class="token prefix deleted">-</span><span class="token line">					// events handler returns false
+</span><span class="token prefix deleted">-</span><span class="token line">					if ( !jQuery.event.special[type] || jQuery.event.special[type].setup.call(elem) === false ) {
+</span><span class="token prefix deleted">-</span><span class="token line">						// Bind the global event handler to the element
+</span><span class="token prefix deleted">-</span><span class="token line">						if (elem.addEventListener)
+</span><span class="token prefix deleted">-</span><span class="token line">							elem.addEventListener(type, handle, false);
+</span><span class="token prefix deleted">-</span><span class="token line">						else if (elem.attachEvent)
+</span><span class="token prefix deleted">-</span><span class="token line">							elem.attachEvent("on" + type, handle);
+</span><span class="token prefix deleted">-</span><span class="token line">					}
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			// Init the event handler queue
+</span><span class="token prefix inserted">+</span><span class="token line">			if (!handlers) {
+</span><span class="token prefix inserted">+</span><span class="token line">				handlers = events[type] = {};
+</span><span class="token prefix inserted">+</span><span class="token line">	
+</span><span class="token prefix inserted">+</span><span class="token line">				// Check for a special event handler
+</span><span class="token prefix inserted">+</span><span class="token line">				// Only use addEventListener/attachEvent if the special
+</span><span class="token prefix inserted">+</span><span class="token line">				// events handler returns false
+</span><span class="token prefix inserted">+</span><span class="token line">				if ( !jQuery.event.special[type] || jQuery.event.special[type].setup.call(elem) === false ) {
+</span><span class="token prefix inserted">+</span><span class="token line">					// Bind the global event handler to the element
+</span><span class="token prefix inserted">+</span><span class="token line">					if (elem.addEventListener)
+</span><span class="token prefix inserted">+</span><span class="token line">						elem.addEventListener(type, handle, false);
+</span><span class="token prefix inserted">+</span><span class="token line">					else if (elem.attachEvent)
+</span><span class="token prefix inserted">+</span><span class="token line">						elem.attachEvent("on" + type, handle);
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				}
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			}
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				// Add the function to the element's handler list
+</span><span class="token prefix deleted">-</span><span class="token line">				handlers[handler.guid] = handler;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			// Add the function to the element's handler list
+</span><span class="token prefix inserted">+</span><span class="token line">			handlers[handler.guid] = handler;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				// Keep track of which events have been used, for global triggering
+</span><span class="token prefix deleted">-</span><span class="token line">				jQuery.event.global[type] = true;
+</span><span class="token prefix deleted">-</span><span class="token line">			});
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			// Keep track of which events have been used, for global triggering
+</span><span class="token prefix inserted">+</span><span class="token line">			jQuery.event.global[type] = true;
+</span><span class="token prefix inserted">+</span><span class="token line">		});
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		
+</span><span class="token prefix unchanged"> </span><span class="token line">		// Nullify elem to prevent memory leaks in IE
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		elem = null;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		elem = undefined;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	guid: 1,
+</span></span><span class="token coord">@@ -140,7 +140,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">								else if (elem.detachEvent)
+</span><span class="token prefix unchanged"> </span><span class="token line">									elem.detachEvent("on" + type, jQuery.data(elem, "handle"));
+</span><span class="token prefix unchanged"> </span><span class="token line">							}
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">							ret = null;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">							ret = undefined;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">							delete events[type];
+</span><span class="token prefix unchanged"> </span><span class="token line">						}
+</span><span class="token prefix unchanged"> </span><span class="token line">					}
+</span></span><span class="token coord">@@ -151,7 +151,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			for ( ret in events ) break;
+</span><span class="token prefix unchanged"> </span><span class="token line">			if ( !ret ) {
+</span><span class="token prefix unchanged"> </span><span class="token line">				var handle = jQuery.data( elem, "handle" );
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( handle ) handle.elem = null;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( handle ) handle.elem = undefined;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				jQuery.removeData( elem, "events" );
+</span><span class="token prefix unchanged"> </span><span class="token line">				jQuery.removeData( elem, "handle" );
+</span><span class="token prefix unchanged"> </span><span class="token line">			}
+</span></span><span class="token coord">@@ -179,7 +179,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			if ( elem.nodeType == 3 || elem.nodeType == 8 )
+</span><span class="token prefix unchanged"> </span><span class="token line">				return undefined;
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			var val, ret, fn = jQuery.isFunction( elem[ type ] || null ),
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			var val, ret, fn = jQuery.isFunction( elem[ type ] || undefined ),
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// Check to see if we need to provide a fake event, or not
+</span><span class="token prefix unchanged"> </span><span class="token line">				event = !data[0] || !data[0].preventDefault;
+</span><span class="token prefix unchanged"> </span><span class="token line">			
+</span></span><span class="token coord">@@ -208,7 +208,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// Handle triggering of extra function
+</span><span class="token prefix unchanged"> </span><span class="token line">			if ( extra &amp;&amp; jQuery.isFunction( extra ) ) {
+</span><span class="token prefix unchanged"> </span><span class="token line">				// call the extra function and tack the current return value on the end for possible inspection
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				ret = extra.apply( elem, val == null ? data : data.concat( val ) );
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				ret = extra.apply( elem, val == undefined ? data : data.concat( val ) );
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// if anything is returned, give it precedence and have it overwrite the previous value
+</span><span class="token prefix unchanged"> </span><span class="token line">				if (ret !== undefined)
+</span><span class="token prefix unchanged"> </span><span class="token line">					val = ret;
+</span></span><span class="token coord">@@ -268,7 +268,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// Clean up added properties in IE to prevent memory leak
+</span><span class="token prefix unchanged"> </span><span class="token line">		if (jQuery.browser.msie)
+</span><span class="token prefix unchanged"> </span><span class="token line">			event.target = event.preventDefault = event.stopPropagation =
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				event.handler = event.data = null;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				event.handler = event.data = undefined;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">		return val;
+</span><span class="token prefix unchanged"> </span><span class="token line">	},
+</span></span><span class="token coord">@@ -297,7 +297,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		};
+</span><span class="token prefix unchanged"> </span><span class="token line">		
+</span><span class="token prefix unchanged"> </span><span class="token line">		// Fix timeStamp
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		event.timeStamp = event.timeStamp || +new Date;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		event.timeStamp = event.timeStamp || now();
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		
+</span><span class="token prefix unchanged"> </span><span class="token line">		// Fix target property, if necessary
+</span><span class="token prefix unchanged"> </span><span class="token line">		if ( !event.target )
+</span></span><span class="token coord">@@ -312,7 +312,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			event.relatedTarget = event.fromElement == event.target ? event.toElement : event.fromElement;
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">		// Calculate pageX/Y if missing and clientX/Y available
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( event.pageX == null &amp;&amp; event.clientX != null ) {
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( event.pageX == undefined &amp;&amp; event.clientX != undefined ) {
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			var doc = document.documentElement, body = document.body;
+</span><span class="token prefix unchanged"> </span><span class="token line">			event.pageX = event.clientX + (doc &amp;&amp; doc.scrollLeft || body &amp;&amp; body.scrollLeft || 0) - (doc.clientLeft || 0);
+</span><span class="token prefix unchanged"> </span><span class="token line">			event.pageY = event.clientY + (doc &amp;&amp; doc.scrollTop || body &amp;&amp; body.scrollTop || 0) - (doc.clientTop || 0);
+</span></span><span class="token coord">@@ -362,7 +362,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// If we actually just moused on to a sub-element, ignore it
+</span><span class="token prefix unchanged"> </span><span class="token line">				if ( withinElement(event, this) ) return true;
+</span><span class="token prefix unchanged"> </span><span class="token line">				// Execute the right handlers by setting the event type to mouseenter
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				arguments[0].type = "mouseenter";
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				event.type = "mouseenter";
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				return jQuery.event.handle.apply(this, arguments);
+</span><span class="token prefix unchanged"> </span><span class="token line">			}
+</span><span class="token prefix unchanged"> </span><span class="token line">		},
+</span></span><span class="token coord">@@ -384,7 +384,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// If we actually just moused on to a sub-element, ignore it
+</span><span class="token prefix unchanged"> </span><span class="token line">				if ( withinElement(event, this) ) return true;
+</span><span class="token prefix unchanged"> </span><span class="token line">				// Execute the right handlers by setting the event type to mouseleave
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				arguments[0].type = "mouseleave";
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				event.type = "mouseleave";
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				return jQuery.event.handle.apply(this, arguments);
+</span><span class="token prefix unchanged"> </span><span class="token line">			}
+</span><span class="token prefix unchanged"> </span><span class="token line">		}
+</span></span><span class="token coord">@@ -420,9 +420,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	triggerHandler: function( type, data, fn ) {
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( this[0] )
+</span><span class="token prefix deleted">-</span><span class="token line">			return jQuery.event.trigger( type, data, this[0], false, fn );
+</span><span class="token prefix deleted">-</span><span class="token line">		return undefined;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		return this[0] &amp;&amp; jQuery.event.trigger( type, data, this[0], false, fn );
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	toggle: function() {
+</span></span><span class="token coord">@@ -481,7 +479,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				});
+</span><span class="token prefix unchanged"> </span><span class="token line">				
+</span><span class="token prefix unchanged"> </span><span class="token line">				// Reset the list of functions
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				jQuery.readyList = null;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				jQuery.readyList = undefined;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			}
+</span><span class="token prefix unchanged"> </span><span class="token line">		
+</span><span class="token prefix unchanged"> </span><span class="token line">			// Trigger any bound ready events
+</span></span>Index: fx.js
+===================================================================
+<span class="token coord">--- fx.js	(revision 5317)</span>
+<span class="token coord">+++ fx.js	(working copy)</span>
+<span class="token coord">@@ -76,8 +76,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			if ( this.nodeType != 1)
+</span><span class="token prefix unchanged"> </span><span class="token line">				return false;
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			var opt = jQuery.extend({}, optall);
+</span><span class="token prefix deleted">-</span><span class="token line">			var hidden = jQuery(this).is(":hidden"), self = this;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			var opt = jQuery.extend({}, optall),
+</span><span class="token prefix inserted">+</span><span class="token line">				hidden = jQuery(this).is(":hidden"),
+</span><span class="token prefix inserted">+</span><span class="token line">				self = this;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			
+</span><span class="token prefix unchanged"> </span><span class="token line">			for ( var p in prop ) {
+</span><span class="token prefix unchanged"> </span><span class="token line">				if ( prop[p] == "hide" &amp;&amp; hidden || prop[p] == "show" &amp;&amp; !hidden )
+</span></span><span class="token coord">@@ -92,7 +93,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				}
+</span><span class="token prefix unchanged"> </span><span class="token line">			}
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( opt.overflow != null )
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( opt.overflow != undefined )
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				this.style.overflow = "hidden";
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">			opt.curAnim = jQuery.extend({}, prop);
+</span></span><span class="token coord">@@ -180,16 +181,14 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">var queue = function( elem, type, array ) {
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	if ( !elem )
+</span><span class="token prefix deleted">-</span><span class="token line">		return undefined;
+</span><span class="token prefix deleted">-</span><span class="token line">
+</span><span class="token prefix deleted">-</span><span class="token line">	type = type || "fx";
+</span><span class="token prefix deleted">-</span><span class="token line">
+</span><span class="token prefix deleted">-</span><span class="token line">	var q = jQuery.data( elem, type + "queue" );
+</span><span class="token prefix deleted">-</span><span class="token line">
+</span><span class="token prefix deleted">-</span><span class="token line">	if ( !q || array )
+</span><span class="token prefix deleted">-</span><span class="token line">		q = jQuery.data( elem, type + "queue", jQuery.makeArray(array) );
+</span><span class="token prefix deleted">-</span><span class="token line">
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	if ( elem ){
+</span><span class="token prefix inserted">+</span><span class="token line">		type = type || "fx";
+</span><span class="token prefix inserted">+</span><span class="token line">	
+</span><span class="token prefix inserted">+</span><span class="token line">		var q = jQuery.data( elem, type + "queue" );
+</span><span class="token prefix inserted">+</span><span class="token line">	
+</span><span class="token prefix inserted">+</span><span class="token line">		if ( !q || array )
+</span><span class="token prefix inserted">+</span><span class="token line">			q = jQuery.data( elem, type + "queue", jQuery.makeArray(array) );
+</span><span class="token prefix inserted">+</span><span class="token line">	}
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	return q;
+</span><span class="token prefix unchanged"> </span><span class="token line">};
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token coord">@@ -242,7 +241,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
+</span><span class="token prefix unchanged"> </span><span class="token line">	
+</span><span class="token prefix unchanged"> </span><span class="token line">	timers: [],
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	timerId: null,
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	timerId: undefined,
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	fx: function( elem, options, prop ){
+</span><span class="token prefix unchanged"> </span><span class="token line">		this.options = options;
+</span></span><span class="token coord">@@ -271,7 +270,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	// Get the current size
+</span><span class="token prefix unchanged"> </span><span class="token line">	cur: function(force){
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( this.elem[this.prop] != null &amp;&amp; this.elem.style[this.prop] == null )
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( this.elem[this.prop] != undefined &amp;&amp; this.elem.style[this.prop] == undefined )
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			return this.elem[ this.prop ];
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">		var r = parseFloat(jQuery.css(this.elem, this.prop, force));
+</span></span><span class="token coord">@@ -280,7 +279,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	// Start an animation from one number to another
+</span><span class="token prefix unchanged"> </span><span class="token line">	custom: function(from, to, unit){
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		this.startTime = (new Date()).getTime();
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		this.startTime = now();
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		this.start = from;
+</span><span class="token prefix unchanged"> </span><span class="token line">		this.end = to;
+</span><span class="token prefix unchanged"> </span><span class="token line">		this.unit = unit || this.unit || "px";
+</span></span><span class="token coord">@@ -297,7 +296,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">		jQuery.timers.push(t);
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( jQuery.timerId == null ) {
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( jQuery.timerId == undefined ) {
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			jQuery.timerId = setInterval(function(){
+</span><span class="token prefix unchanged"> </span><span class="token line">				var timers = jQuery.timers;
+</span><span class="token prefix unchanged"> </span><span class="token line">				
+</span></span><span class="token coord">@@ -307,7 +306,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">				if ( !timers.length ) {
+</span><span class="token prefix unchanged"> </span><span class="token line">					clearInterval( jQuery.timerId );
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					jQuery.timerId = null;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					jQuery.timerId = undefined;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				}
+</span><span class="token prefix unchanged"> </span><span class="token line">			}, 13);
+</span><span class="token prefix unchanged"> </span><span class="token line">		}
+</span></span><span class="token coord">@@ -343,7 +342,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	// Each step of an animation
+</span><span class="token prefix unchanged"> </span><span class="token line">	step: function(gotoEnd){
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var t = (new Date()).getTime();
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var t = now();
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">		if ( gotoEnd || t > this.options.duration + this.startTime ) {
+</span><span class="token prefix unchanged"> </span><span class="token line">			this.now = this.end;
+</span></span><span class="token coord">@@ -358,7 +357,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					done = false;
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">			if ( done ) {
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( this.options.display != null ) {
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( this.options.display != undefined ) {
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					// Reset the overflow
+</span><span class="token prefix unchanged"> </span><span class="token line">					this.elem.style.overflow = this.options.overflow;
+</span><span class="token prefix unchanged"> </span><span class="token line">				
+</span></span><span class="token coord">@@ -401,20 +400,26 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">};
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">jQuery.fx.step = {
+</span><span class="token prefix deleted">-</span><span class="token line">	scrollLeft: function(fx){
+</span><span class="token prefix deleted">-</span><span class="token line">		fx.elem.scrollLeft = fx.now;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">jQuery.extend( jQuery.fx, {
+</span><span class="token prefix inserted">+</span><span class="token line">	speeds: {
+</span><span class="token prefix inserted">+</span><span class="token line">		slow: 600,
+</span><span class="token prefix inserted">+</span><span class="token line">		fast: 200
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">
+</span><span class="token prefix deleted">-</span><span class="token line">	scrollTop: function(fx){
+</span><span class="token prefix deleted">-</span><span class="token line">		fx.elem.scrollTop = fx.now;
+</span><span class="token prefix deleted">-</span><span class="token line">	},
+</span><span class="token prefix deleted">-</span><span class="token line">
+</span><span class="token prefix deleted">-</span><span class="token line">	opacity: function(fx){
+</span><span class="token prefix deleted">-</span><span class="token line">		jQuery.attr(fx.elem.style, "opacity", fx.now);
+</span><span class="token prefix deleted">-</span><span class="token line">	},
+</span><span class="token prefix deleted">-</span><span class="token line">
+</span><span class="token prefix deleted">-</span><span class="token line">	_default: function(fx){
+</span><span class="token prefix deleted">-</span><span class="token line">		fx.elem.style[ fx.prop ] = fx.now + fx.unit;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	step: {
+</span><span class="token prefix inserted">+</span><span class="token line">		scrollLeft: function(fx){
+</span><span class="token prefix inserted">+</span><span class="token line">			fx.elem.scrollLeft = fx.now;
+</span><span class="token prefix inserted">+</span><span class="token line">		},
+</span><span class="token prefix inserted">+</span><span class="token line">	
+</span><span class="token prefix inserted">+</span><span class="token line">		scrollTop: function(fx){
+</span><span class="token prefix inserted">+</span><span class="token line">			fx.elem.scrollTop = fx.now;
+</span><span class="token prefix inserted">+</span><span class="token line">		},
+</span><span class="token prefix inserted">+</span><span class="token line">	
+</span><span class="token prefix inserted">+</span><span class="token line">		opacity: function(fx){
+</span><span class="token prefix inserted">+</span><span class="token line">			jQuery.attr(fx.elem.style, "opacity", fx.now);
+</span><span class="token prefix inserted">+</span><span class="token line">		},
+</span><span class="token prefix inserted">+</span><span class="token line">	
+</span><span class="token prefix inserted">+</span><span class="token line">		_default: function(fx){
+</span><span class="token prefix inserted">+</span><span class="token line">			fx.elem.style[ fx.prop ] = fx.now + fx.unit;
+</span><span class="token prefix inserted">+</span><span class="token line">		}
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	}
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">};
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">});
+</span></span>\ No newline at end of file
+Index: selector.js
+===================================================================
+<span class="token coord">--- selector.js	(revision 5317)</span>
+<span class="token coord">+++ selector.js	(working copy)</span>
+<span class="token coord">@@ -118,8 +118,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">			// An attempt at speeding up child selectors that
+</span><span class="token prefix unchanged"> </span><span class="token line">			// point to a specific element tag
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			var re = quickChild;
+</span><span class="token prefix deleted">-</span><span class="token line">			var m = re.exec(t);
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			var re = quickChild,
+</span><span class="token prefix inserted">+</span><span class="token line">				m = re.exec(t);
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">			if ( m ) {
+</span><span class="token prefix unchanged"> </span><span class="token line">				nodeName = m[1].toUpperCase();
+</span></span><span class="token coord">@@ -137,7 +137,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			} else {
+</span><span class="token prefix unchanged"> </span><span class="token line">				re = /^([>+~])\s*(\w*)/i;
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( (m = re.exec(t)) != null ) {
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( (m = re.exec(t)) != undefined ) {
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					r = [];
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">					var merge = {};
+</span></span><span class="token coord">@@ -188,8 +188,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">				} else {
+</span><span class="token prefix unchanged"> </span><span class="token line">					// Optimize for the case nodeName#idName
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					var re2 = quickID;
+</span><span class="token prefix deleted">-</span><span class="token line">					var m = re2.exec(t);
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					var re2 = quickID,
+</span><span class="token prefix inserted">+</span><span class="token line">						m = re2.exec(t);
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					
+</span><span class="token prefix unchanged"> </span><span class="token line">					// Re-organize the results, so that they're consistent
+</span><span class="token prefix unchanged"> </span><span class="token line">					if ( m ) {
+</span></span><span class="token coord">@@ -336,7 +336,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				for ( var i = 0, rl = r.length; i &lt; rl; i++ ) {
+</span><span class="token prefix unchanged"> </span><span class="token line">					var a = r[i], z = a[ jQuery.props[m[2]] || m[2] ];
+</span><span class="token prefix unchanged"> </span><span class="token line">					
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					if ( z == null || /href|src|selected/.test(m[2]) )
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					if ( z == undefined || /href|src|selected/.test(m[2]) )
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">						z = jQuery.attr(a,m[2]) || '';
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">					if ( (type == "" &amp;&amp; !!z ||
+</span></span><span class="token coord">@@ -410,8 +410,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
+</span><span class="token prefix unchanged"> </span><span class="token line">
+</span><span class="token prefix unchanged"> </span><span class="token line">	dir: function( elem, dir ){
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var matched = [];
+</span><span class="token prefix deleted">-</span><span class="token line">		var cur = elem[dir];
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var matched = [],
+</span><span class="token prefix inserted">+</span><span class="token line">			cur = elem[dir];
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		while ( cur &amp;&amp; cur != document ) {
+</span><span class="token prefix unchanged"> </span><span class="token line">			if ( cur.nodeType == 1 )
+</span><span class="token prefix unchanged"> </span><span class="token line">				matched.push( cur );</span></span></code></pre>
+    </div>
+  
+
+  <div class="attachment-download flex-column flex-center">
+    <h3>Download in other formats:</h3>
+    <a class="attachment-download-link" download="" href="/bugs.jquery.com/raw-attachment/ticket/2743/potpourri.diff">Original Format</a>
+  </div>
+</h1></div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

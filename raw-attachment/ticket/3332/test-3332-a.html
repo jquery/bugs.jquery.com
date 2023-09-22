@@ -1,0 +1,21 @@
+<html>
+<head>
+
+<script type="text/javascript" src="/survey2009/site_media/jquery/js/jquery-1.3.2.min.js"></script>
+
+  <script type="text/javascript">
+  $(document).ready(function(){
+
+    $("input").focus(function () { $("p").append("<br>focus "+this.id) });
+    $("input").blur(function () { $("p").append("<br>blur "+this.id) });
+    $("input").change(function () { $("p").append("<br>change "+this.id) });
+    $("input").click(function () { $("p").append("<br>click "+this.id) });
+  });
+  </script>
+</head>
+<body>
+  <input type="checkbox" name="test1" id="test1">
+  <input type="checkbox" name="test2" id="test2">
+  <p></p>
+</body>
+</html>

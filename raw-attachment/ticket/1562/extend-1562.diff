@@ -1,0 +1,18 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 5588)
++++ core.js	(working copy)
+@@ -579,8 +579,11 @@
+ 					continue;
+ 
+ 				// Recurse if we're merging object values
+-				if ( deep && copy && typeof copy == "object" && src && !copy.nodeType )
+-					target[ name ] = jQuery.extend( deep, src, copy );
++				if ( deep && copy && typeof copy == "object" && !copy.nodeType )
++					target[ name ] = jQuery.extend( deep, 
++						// Never move original objects, clone them
++						src || copy.length !== undefined ? [ ] : { }
++					, copy );
+ 
+ 				// Don't bring in undefined values
+ 				else if ( copy !== undefined )

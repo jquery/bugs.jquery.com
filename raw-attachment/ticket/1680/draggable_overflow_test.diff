@@ -1,0 +1,43 @@
+Index: ui/tests/sortable.html
+===================================================================
+--- ui/tests/sortable.html	(revision 4909)
++++ ui/tests/sortable.html	(working copy)
+@@ -70,6 +70,18 @@
+  position: relative;
+ }
+ 
++#with_overflow {
++	width: 100px;
++	height: 100px;
++	overflow-y: scroll;
++}
++
++#with_overflow DIV.item {
++	height: 10px;
++	border: 1px solid #999;
++	margin: 5px; padding: 10px;
++}
++
+ .hover {
+ 	background: #eee;	
+ }
+@@ -116,6 +128,8 @@
+ 	<br style='clear: both;' />
+ 	<br />
+ 	
++	<div id="with_overflow"></div>
++
+ 	<ul id='myul'>
+ 	    <li>Item 1</li>
+ 	    <li>Item 2</li>
+@@ -171,6 +185,10 @@
+ 		animated: true
+ 	});
+ 
++	var wo = $('#with_overflow')
++	for(var i=0; i<100; i++) { wo.append( '<div class="item">Item ' + i + '</div>' ); }
++	wo.sortable({ items: 'div.item' });
++
+ });
+ </script>
+ </body>

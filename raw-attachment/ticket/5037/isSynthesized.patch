@@ -1,0 +1,30 @@
+Index: test/unit/event.js
+===================================================================
+--- test/unit/event.js	(revision 6529)
++++ test/unit/event.js	(working copy)
+@@ -264,6 +264,13 @@
+ 	}).load();
+ });
+ 
++test("trigger() event.isSynthesized", function() {
++	expect(1);
++	jQuery('#check1').click(function(event) {
++	    ok( event.isSynthesized, "Check that click() knows it's a synthesized event" );
++	}).click();
++});
++
+ test("trigger() bubbling", function() {
+ 	expect(14);
+ 
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 6529)
++++ src/event.js	(working copy)
+@@ -207,6 +207,7 @@
+ 		}
+ 
+ 		event.currentTarget = elem;
++		event.isSynthesized = true;
+ 
+ 		// Trigger the event, it is assumed that "handle" is a function
+ 		var handle = jQuery.data(elem, "handle");

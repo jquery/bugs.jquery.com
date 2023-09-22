@@ -1,0 +1,14 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script> 
+<script type="text/javascript">
+$(function()
+{
+	$('#services').change(function()
+	{
+		$.post('/the/file.php', { key: $('#services')}, function(){});
+	});
+});
+</script>
+<select name="services" id="services"> 
+	<option value="">None</option> 
+	<option value="1">Other</option> 
+</select> 

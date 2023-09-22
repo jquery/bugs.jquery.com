@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Sortable List</title>
+<script type="text/javascript" src="js/jQuery.js"></script>
+<script src="js/interface.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready( function(){
+	$('#modules').Sortable({
+						accept : 'sortable',
+						activeclass : 'sort-active',
+						opacity: 	0.5
+						//ghosting: true,
+						//containment: 'parent',
+					});
+});
+</script>
+<style>
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-size: 62.5%;
+}
+
+#modules {
+	width: 300px;
+	padding: 20px;
+	margin: 30px;
+	list-style: none;
+	float: left;
+}
+
+.sort-active {
+	background: #FFC;
+}
+
+#modules li ul {
+	list-style: none;
+}
+
+#modules li {
+	background: #666;
+	color: #FFF;
+	margin: 1px 0;
+	padding: 2px 8px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#modules .info, .sortable {
+	margin: -1px 0;
+	background: #333;
+	color: #FFC;
+	font-size: 1em;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	text-align: center;
+	padding: 2px;
+}
+
+#modules .info em {
+	font-style: normal;
+	text-decoration: underline;
+	color: #6CF;
+}
+
+#modules li, .active-sort {
+	background: #9C6;
+}
+
+#modules #not-installed ul li {
+	background: #F77;
+}
+
+</style>
+</head>
+
+<body>
+	<ul id="modules">
+		<li class="info">Draggables over here <em>are not</em> allowed!</li>
+		
+		<li class="sortable" id="en">Some draggable</li>
+		<li class="sortable" id="to">Another one...</li>
+		<li class="sortable" id="tre">More coming</li>
+		<li class="sortable" id="fire">Wow! That's many</li>
+		<li class="sortable" id="fem">Now it's getting lame</li>
+		
+		<li class="info">Draggables under here <em>are</em> allowed! But it's impossible to place any LI's just over this.</li>
+		
+		<li class="sortable" id="dakkar">This one is alone :(</li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>live() dragend bug</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$().ready(function() {
+			
+			// *************** LIVE *************** 
+			$(".drag-live")
+				.attr("draggable", "true")
+				.live("dragstart dragend", function(e) {
+					switch(e.type) {
+						case "dragstart":
+							var dt = e.originalEvent.dataTransfer;
+							dt.setData("Text", "LIVE");
+							return true;
+							break;
+						case "dragend":
+							$(".log").append("LIVE: drag end!<br/>");
+							return false;
+							break;
+					}	
+				});
+
+			$(".drop-live").live("dragenter dragleave dragover drop", function(e) {
+				switch(e.type) {
+					case "dragenter": case "dragleave": case "dragover":
+	                    			return false;
+	                    			break;
+					case "drop":
+						var dt = e.originalEvent.dataTransfer;
+						var text = dt.getData("Text");
+						$(".log").append(text + ": dropped on the live() zone!<br/>");
+						return false;
+						break;
+				}
+			});
+			
+			// *************** BIND *************** 
+			$(".drag-bind")
+				.attr("draggable", "true")
+				.bind("dragstart", function(e) {
+					var dt = e.originalEvent.dataTransfer;
+					dt.setData("Text", "BIND");
+					return true;
+				})
+				.bind("dragend", function(e) {
+					$(".log").append("BIND: drag end!<br/>");
+					return false;
+				});
+
+			$(".drop-bind").bind("dragenter dragleave dragover drop", function(e) {
+				switch(e.type) {
+					case "dragenter": case "dragleave": case "dragover":
+                   				return false;
+                   				break;
+					case "drop":
+						var dt = e.originalEvent.dataTransfer;
+						var text = dt.getData("Text");
+						$(".log").append(text + ": dropped on the bind() zone!<br/>");
+						return false;
+						break;
+				}
+			});
+
+		});
+	</script>
+	<style type="text/css">
+		[draggable=true] {
+			-khtml-user-drag: element;
+			-webkit-user-drag: element;
+			-khtml-user-select: none;
+			-webkit-user-select: none;
+			
+		}
+
+		div {
+			float: left;
+			display: block;
+			margin: 10px;
+			padding: 10px;
+			width: 30%;
+		}
+
+		.drop-live { background: #ccc; height: 200px; }
+		.drop-bind { background: #ccc; height: 200px; }
+		.log { clear: both; width: 100%; }
+		.drag-live:hover,
+		.drag-bind:hover {
+			cursor: move;
+		}
+	</style>
+</head>
+<body>
+	<h1>Bugs</h1>
+	<ol>
+		<li>IE8 doesn't throw "dragend" events when using live() as the other browsers. It does work when using bind() though.</li>
+		<li>IE8 doesn't allow drops when using live() on the drop target, the other browsers do. It does work when using bind() though.</li>
+	</ol>
+	<div class="log">
+		<h2>Log</h2>
+	</div>
+	<div class="drag-live">
+		<h2>Drag using live()</h2>
+		<img src="http://static.jquery.com/books/jquery-for-designers_thumb.jpg" alt="" />
+	</div>
+	<div class="drag-bind">
+		<h2>Drag using bind()</h2>
+		<img src="http://static.jquery.com/books/jquery-in-action-2ed_thumb.jpg" alt="" />
+	</div>
+	<div class="drop-live">Drop zone using live()</div>
+	<div class="drop-bind">Drop zone using bind()</div>
+	
+</body>
+</html>

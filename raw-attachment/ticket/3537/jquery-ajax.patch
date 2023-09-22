@@ -1,0 +1,13 @@
+Index: jquery/src/ajax.js
+===================================================================
+--- jquery/src/ajax.js	(revision 5914)
++++ jquery/src/ajax.js	(working copy)
+@@ -446,7 +446,7 @@
+ 	httpSuccess: function( xhr ) {
+ 		try {
+ 			// IE error sometimes returns 1223 when it should be 204 so treat it as success, see #1450
+-			return !xhr.status && location.protocol == "file:" ||
++			return !xhr.status && location.protocol !== "http:" && location.protocol !== "https:" ||
+ 				( xhr.status >= 200 && xhr.status < 300 ) || xhr.status == 304 || xhr.status == 1223 ||
+ 				jQuery.browser.safari && xhr.status == undefined;
+ 		} catch(e){}

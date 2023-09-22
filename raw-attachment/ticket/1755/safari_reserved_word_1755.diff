@@ -1,0 +1,17 @@
+diff --git a/ui.mouse.js b/ui.mouse.js
+index b5fedd7..18cb03f 100644
+--- a/ui.mouse.js
++++ b/ui.mouse.js
+@@ -13,10 +13,10 @@
+ 					proto.plugins[i].push([option, set[i]]);
+ 				}
+ 			},
+-			call: function(instance, name, arguments) {
++			call: function(instance, name, args) {
+ 				var set = instance.plugins[name]; if(!set) return;
+ 				for (var i = 0; i < set.length; i++) {
+-					if (instance.options[set[i][0]]) set[i][1].apply(instance.element, arguments);
++					if (instance.options[set[i][0]]) set[i][1].apply(instance.element, args);
+ 				}
+ 			}	
+ 		},

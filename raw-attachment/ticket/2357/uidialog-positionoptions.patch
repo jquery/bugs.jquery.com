@@ -1,0 +1,23 @@
+Index: ui.dialog.js
+===================================================================
+--- ui.dialog.js	(revision 4770)
++++ ui.dialog.js	(working copy)
+@@ -146,6 +146,18 @@
+ 						top += (wnd.height() / 2) - (uiDialog.height() / 2);
+ 						left += 0;
+ 						break;
++					case 'top right':
++						top += 0;
++						left += (wnd.width()) - (uiDialog.width());
++						break;
++					case 'bottom left':
++						top += (wnd.height()) - (uiDialog.height());
++						left += 0;
++						break;
++					case 'bottom right':
++						top += (wnd.height()) - (uiDialog.height());
++						left += (wnd.width()) - (uiDialog.width());
++						break;					
+ 					default:
+ 						//center
+ 						top += (wnd.height() / 2) - (uiDialog.height() / 2);

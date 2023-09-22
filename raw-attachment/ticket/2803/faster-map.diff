@@ -1,0 +1,32 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 5458)
++++ core.js	(working copy)
+@@ -1185,22 +1185,18 @@
+ 	},
+ 
+ 	map: function( elems, callback ) {
+-		var ret = [];
++		var ret = [], value;
+ 
+ 		// Go through the array, translating each of the items to their
+ 		// new value (or values).
+ 		for ( var i = 0, length = elems.length; i < length; i++ ) {
+-			var value = callback( elems[ i ], i );
++			value = callback( elems[ i ], i );
+ 
+-			if ( value !== null && value != undefined ) {
+-				if ( value.constructor != Array )
+-					value = [ value ];
+-
+-				ret = ret.concat( value );
+-			}
++			if ( value != null )
++				ret[ ret.length ] = value;
+ 		}
+ 
+-		return ret;
++		return ret.concat.apply( [], ret );
+ 	}
+ });
+ 

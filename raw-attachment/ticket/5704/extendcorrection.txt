@@ -1,0 +1,29 @@
+﻿jQuery.extend = jQuery.fn.extend = function() {
+	...
+	for ( ; i < length; i++ )
+		// Only deal with non-null/undefined values
+		if ( (options = arguments[ i ]) != null )
+			// Extend the base object
+			for ( var name in options ) {
+				var src = target[ name ], copy = options[ name ];
+
+				// Prevent never-ending loop
+				if ( target === copy )
+					continue;
+
+				// Recurse if we're merging object values
+				if ( deep && copy && typeof copy === "object" && !copy.nodeType )
+					target[ name ] = jQuery.extend( deep, 
+						// Never move original objects, clone them
+						(typeof src === "object" ? src : null) || ( copy.length != null ? [ ] : { } ) //***Changed***
+					, copy );
+
+				// Don't bring in undefined values
+				else if ( copy !== undefined )
+					target[ name ] = copy;
+
+			}
+
+	// Return the modified object
+	return target;
+};

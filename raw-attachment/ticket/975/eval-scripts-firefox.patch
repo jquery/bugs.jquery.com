@@ -1,0 +1,16 @@
+Index: ajax.js
+===================================================================
+--- ajax.js	(revision 1365)
++++ ajax.js	(working copy)
+@@ -121,6 +121,11 @@
+ 	 * @cat Ajax
+ 	 */
+ 	evalScripts: function() {
++		if(jQuery.browser.mozilla) {
++			// Firefox eval's scripts when they get added to the DOM tree,
++			// so this isn't necessary here
++			return this;
++		}
+ 		return this.find("script").each(function(){
+ 			if ( this.src )
+ 				jQuery.getScript( this.src );

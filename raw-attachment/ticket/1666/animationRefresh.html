@@ -1,0 +1,49 @@
+<html>
+<head>
+  <script type="text/javascript" src="scripts/jquery-1.2.1.js"></script>
+  <script type="text/javascript" src="scripts/ui.mouse.js"></script>
+  <script type="text/javascript" src="scripts/ui.draggable.js"></script>
+  <script type="text/javascript" src="scripts/ui.draggable.ext.js"></script>
+  <script type="text/javascript" src="scripts/ui.droppable.js"></script>
+  <script type="text/javascript" src="scripts/ui.droppable.ext.js"></script>
+  <script type="text/javascript">
+	$(document).ready(function(){
+		$('.drop').droppable({
+			accept: '.drag',
+			drop: function(){alert("dropped!")},
+			activate: function(){$('.drop').animate({left: '+=400'}, 300);},
+			deactivate: function(){$('.drop').animate({left: '-=400'}, 300);}
+		});
+		$('.drag').draggable({
+			revert: true,
+			zIndex: 1000
+		});
+	});
+  </script>
+  <style>
+.drag {
+   position: absolute;
+   border: 2px solid #0090DF;
+   background-color: #68BFEF;
+   left: 50px;
+   top: 50px;
+   width: 150px; 
+   height: 70px;
+   margin: 10px; 
+}.drop{
+   position: relative;
+   border: 2px solid #0090DF;
+   background-color: #68BFEF;
+   left: 300px;
+   top: 50px;
+   width: 170px; 
+   height: 170px;
+   margin: 0px; 
+}
+</style>
+</head>
+<body>
+<div class="drag"></div>
+<div class="drop"></div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+--- jquery.js	2008-06-16 15:09:59.000000000 +0800
++++ jquery.js.new	2008-06-16 15:14:27.000000000 +0800
+@@ -2651,12 +2651,13 @@
+ 			jQuery.event.trigger( "ajaxStart" );
+ 
+ 		// Matches an absolute URL, and saves the domain
+-		var remote = /^(?:\w+:)?\/\/([^\/?#]+)/;
++		var remote = /^(\w+:)?\/\/([^\/?#]+)/;
+ 
+ 		// If we're requesting a remote document
+ 		// and trying to load JSON or Script with a GET
+ 		if ( s.dataType == "script" && type == "GET"
+-				&& remote.test(s.url) && remote.exec(s.url)[1] != location.host){
++				&& remote.test(s.url) && (remote.exec(s.url)[2] != location.host || 
++                                  remote.exec(s.url)[1] != location.protocol ){
+ 			var head = document.getElementsByTagName("head")[0];
+ 			var script = document.createElement("script");
+ 			script.src = s.url;

@@ -1,0 +1,13 @@
+Index: testrunner.js
+===================================================================
+--- testrunner.js	(revision 6320)
++++ testrunner.js	(working copy)
+@@ -255,7 +255,7 @@
+ 	triggerEvent: triggerEvent
+ });
+ 
+-$(window).load(function() {
++$(document).ready(function() {
+ 	$('#userAgent').html(navigator.userAgent);
+ 	var head = $('<div class="testrunner-toolbar"><label for="filter-pass">Hide passed tests</label></div>').insertAfter("#userAgent");
+ 	$('<input type="checkbox" id="filter-pass" />').attr("disabled", true).prependTo(head).click(function() {

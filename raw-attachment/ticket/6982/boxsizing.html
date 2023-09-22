@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div.content {
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 200px;
+  height: 100px;
+  padding: 10px;
+  border: solid black 10px;
+}
+
+div.border {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 200px;
+  height: 100px;
+  padding: 10px;
+  border: solid black 10px;
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+<script>
+$(function() {
+    $("div").each(function() {
+        var e = $(this);
+        e.width(300);       // Set the width
+        e.text(e.width());  // Queried width is different for border-box
+    });
+});
+</script>
+</head>
+<body>
+    Content box:
+<div class="content"></div>
+    Border box:
+<div class="border"></div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+From be83e65609ae9a186471a3a0916813c6f47954bc Mon Sep 17 00:00:00 2001
+From: Cheah Chu Yeow <chuyeow@gmail.com>
+Date: Tue, 23 Dec 2008 12:17:32 +0800
+Subject: [PATCH] Call getElementsByName conditionally in NAME selector function so that we don't incorrectly call it on a context that doesn't support the getElementsByName method (at this time, only the DOM Document object supports getElementsByName).
+
+---
+ sizzle.js             |    2 +-
+ test/unit/selector.js |    5 ++++-
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/sizzle.js b/sizzle.js
+index 6e564b5..515df1a 100644
+--- a/sizzle.js
++++ b/sizzle.js
+@@ -344,7 +344,7 @@ var Expr = Sizzle.selectors = {
+ 			}
+ 		},
+ 		NAME: function(match, context){
+-			return context.getElementsByName(match[1]);
++			return context.getElementsByName ? context.getElementsByName(match[1]) : null;
+ 		},
+ 		TAG: function(match, context){
+ 			return context.getElementsByTagName(match[1]);
+diff --git a/test/unit/selector.js b/test/unit/selector.js
+index d7e6362..1ff9eff 100644
+--- a/test/unit/selector.js
++++ b/test/unit/selector.js
+@@ -108,13 +108,16 @@ test("class", function() {
+ });
+ 
+ test("name", function() {
+-	expect(4);
++	expect(6);
+ 
+ 	t( "Name selector", "input[name=action]", ["text1"] );
+ 	t( "Name selector with single quotes", "input[name='action']", ["text1"] );
+ 	t( "Name selector with double quotes", 'input[name="action"]', ["text1"] );
+ 
+ 	t( "Name selector none-input", "*[name=iframe]", ["iframe"] );
++
++	isSet( jQuery("#form").find("input[name=action]"), q("text1"), "Name selector within the context of another element" );
++	isSet( jQuery("#form").find("input[name='foo[bar]']"), q("hidden2"), "Name selector for grouped form element within the context of another element" );
+ });
+ 
+ 
+-- 
+1.6.0.2
+

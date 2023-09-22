@@ -1,0 +1,1629 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">#9400 (Deprecate :text, :radio, :checkbox, etc. selector extensions) - jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      :root{--ticket-info-background-color:#ffd;--ticket-info-border-color:#dd9;--ticket-table-border-color:#eed;--ticket-date-text-color:#996;--ticket-description-title-color:#663;--ticket-changes-text-color:#663;--ticket-changes-box-shadow:#f2f2f2}.ticket-info{position:relative;background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);padding:.5em .75em;margin-bottom:.5em}.ticket-number{font-size:1.15rem;font-weight:700;margin-right:.5em}.ticket-info span{font-size:.8125em;font-weight:700}.ticket-resolution,.ticket-status,.ticket-type{text-transform:uppercase}.missing{color:var(--text-color-link-disabled)}.ticket-title{border-bottom:1px solid #bbb;margin-top:1em;padding-bottom:.25em;font-weight:700;font-size:1.1875rem}.ticket-dates{color:var(--ticket-date-text-color);font-size:.8125rem}.ticket-dates p{margin:0 0 .5em}.ticket-properties{width:100%;text-align:left;font-size:.65rem;border-top:1px solid var(--ticket-table-border-color);margin:0}.ticket-properties th{font-weight:400;width:20%}.ticket-properties td,.ticket-properties th{padding:.25em .5em;border-bottom:1px dashed var(--ticket-table-border-color)}.ticket-info-bottom{padding:.5em}.ticket-description{font-size:.8125rem;margin-top:.5em}.ticket-description h2,.ticket-description h3,.ticket-description h4,.ticket-description h5,.ticket-description h6{text-transform:uppercase;font-weight:400}.ticket-description h1{font-size:1.1rem}.ticket-description h2{font-size:1rem}.ticket-description h3{font-size:.9rem}.ticket-description h4{font-size:.8rem}.ticket-description h5{font-size:.75rem}.ticket-description h6{font-size:.7rem}.ticket-description-title{color:var(--ticket-description-title-color);font-size:.75rem}details{padding:.5em 0;font-size:.8125rem}summary{color:var(--text-color-link);font-weight:700;font-size:.875rem;text-decoration:underline;cursor:pointer;text-shadow:.04em .04em var(--text-shadow-color)}.ticket-attachments{font-size:.75em}.ticket-comment-body{width:100%;padding-top:.5em}.ticket-change{margin:1em 0;clear:both}.ticket-change-header{font-size:.875rem;font-weight:700;box-shadow:1.4px 2.8px 5.6px 0 var(--ticket-changes-box-shadow)}.ticket-change-link{font-size:.85em}.ticket-change-content{width:100%}.ticket-changes{background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);color:var(--ticket-changes-text-color);font-size:.7rem;float:right;clear:right;margin:2em 0 1em 1.5em}.ticket-changes th{text-align:right;font-weight:400;text-transform:capitalize}.ticket-changes td,.ticket-changes th{padding:.25em;vertical-align:baseline}.ticket-changes .change-field-new{font-weight:700}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+<div class="flex-column" data-pagefind-body="">
+  
+
+  <nav class="content-nav">
+    <ul class="flex-row">
+      
+        <li>
+          <a href="/bugs.jquery.com/ticket/9399/">← Previous Ticket</a>
+        
+      
+      
+        </li><li>
+          <a href="/bugs.jquery.com/ticket/9401/">Next Ticket →</a>
+        </li>
+      
+    </ul>
+  </nav>
+
+
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="." class="ticket-number">#9400</a>
+      <span class="ticket-status">closed</span>
+      <span class="ticket-type">enhancement</span>
+      <span class="ticket-resolution">(fixed)</span>
+    </h3>
+
+    <div class="ticket-dates">
+      <p>Opened May 22, 2011 07:21PM UTC</p>
+      
+        <p>Closed May 21, 2012 03:05AM UTC</p>
+      
+      
+        <p>Last modified December 28, 2013 08:42PM UTC</p>
+      
+    </div>
+  </div>
+
+  <h1 class="ticket-title">Deprecate :text, :radio, :checkbox, etc. selector extensions</h1>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        gnarf
+      </td>
+      <th>Owned by:</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        blocker
+      </td>
+      
+        <th class="missing">Milestone:</th>
+      
+      <td>
+        <a href="/bugs.jquery.com/milestone/1.8">1.8</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>selector</td>
+      
+        <th>Version:</th>
+      
+      <td>1.6.1</td>
+    </tr>
+    <tr>
+      
+        <th>Keywords:</th>
+      
+      <td>1.7-discuss</td>
+      
+        <th class="missing">Cc:</th>
+      
+      <td></td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
+    <div class="ticket-description"><p>Deprecate (for eventual removal) the input type selectors: :file :image :password :radio :reset :submit :text -- They are basically aliases to [type="file"] [type="image"] but can't use querySelectorAll - I think having these selectors around in the long term future is entirely unnecessary and confusing.</p></div>
+  </div>
+</div>
+
+<details>
+  <summary class="ticket-details-summary">Attachments (0)</summary>
+
+  <ul class="ticket-attachments">
+    
+  </ul>
+</details>
+
+<details open="">
+  <summary class="ticket-details-summary">Change History (49)</summary>
+  
+    <div class="ticket-change flex-column" id="comment:1">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 22, 2011 07:27PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:1">comment:1</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ 1.7-discuss</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Nominating ticket for 1.7 discussion.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:2">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 22, 2011 08:23PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:2">comment:2</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+0, Perhaps just map these to the qSA compat attr selectors</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:3">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 22, 2011 10:45PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:3">comment:3</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1, Yes, they should not exist in their current format - however I think that the selectors should be mapped to the associated CSS strings (e.g. :submit -&gt; [type=submit]).</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:4">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 23, 2011 12:28AM UTC by <span class="author">gnarf</span></span>
+        <a class="ticket-change-link" href="#comment:4">comment:4</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Do we already have the ability to map selectors?   If not - why not just take these selectors and make them into a {{{jQuery.formSelectors.js}}} that you can include to keep them?&#92;
+&#92;
+The actual implentation of some of these is not a simple search / replace, especially since they force {{{nodeName===&quot;input&quot;}}} as well, some of them search for multiple types (button/input submits for instance) and etc.&#92;
+&#92;
+I think keeping the selectors but doing some sort of replacement strings would be more than needed, especially when we can just provide a shim to add the functionality back / give REALLY DETAILED explanations of the better alternatives.</span> → <span class="change-field-new">1306110577946717</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>Do we already have the ability to map selectors pre-qSA?  I'm not sure it would be worth building this feature, it will likely only cause MORE confusion, not LESS.  </p><p>If not - why not just take these selectors and make them into a </p><pre class="wiki">jQuery.formSelectors.js</pre> that the end user can include to keep them if they need them?<p></p><p>The actual implentation of some of these is not a simple search / replace, especially since they force </p><pre class="wiki">nodeName==="input"</pre> as well, some of them search for multiple types (button/input submits for instance) and etc.<p></p><p>I think keeping the selectors but doing some sort of replacement strings would be more than needed, especially when we can just provide a shim to add the functionality back / give REALLY DETAILED explanations of the better alternatives.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:5">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 23, 2011 01:08AM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:5">comment:5</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1, </p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:6">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 23, 2011 05:13AM UTC by <span class="author">timmywil</span></span>
+        <a class="ticket-change-link" href="#comment:6">comment:6</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>-1, I'm not sure removing will be realistic.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:7">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 24, 2011 12:41AM UTC by <span class="author">timmywil</span></span>
+        <a class="ticket-change-link" href="#comment:7">comment:7</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>component:</th>
+                  <td>
+                    
+                      <span class="change-field-old">unfiled</span> → <span class="change-field-new">selector</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>priority:</th>
+                  <td>
+                    
+                      <span class="change-field-old">undecided</span> → <span class="change-field-new">low</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">open</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:8">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 24, 2011 10:33PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:8">comment:8</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1, Deprecate in docs immediately, remove totally in the future. Remapping in code forever won't remove the bloat.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:9">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 24, 2011 10:39PM UTC by <span class="author">timmywil</span></span>
+        <a class="ticket-change-link" href="#comment:9">comment:9</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1 I change my vote.  Just checked and I didn't realize these weren't css3 selectors.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:10">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 05, 2011 09:58PM UTC by <span class="author">ajpiano</span></span>
+        <a class="ticket-change-link" href="#comment:10">comment:10</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1, But if we remove this, we have to doc the hell out of it and make it fail obtrusively, kind of like when @ got deprecated - and we have to make the case that just like dropping @, it's a simple code change and it makes your code go faster.  And also provide a shim. These shortcuts are really popular.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:11">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 06, 2011 02:53PM UTC by <span class="author">danheberden</span></span>
+        <a class="ticket-change-link" href="#comment:11">comment:11</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:12">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 06, 2011 03:47PM UTC by <span class="author">scottgonzalez</span></span>
+        <a class="ticket-change-link" href="#comment:12">comment:12</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+0, we should be able to pre-process selectors and convert them to standard selectors, then we should move these to a core plugin</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:13">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 12, 2011 03:09PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:13">comment:13</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-old">1.7-discuss</span> → <span class="change-field-new">needsdocs 1.7-discuss</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>milestone:</th>
+                  <td>
+                    
+                      <span class="change-field-old">1.next</span> → <span class="change-field-new">1.7</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>priority:</th>
+                  <td>
+                    
+                      <span class="change-field-old">low</span> → <span class="change-field-new">blocker</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:14">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 19, 2011 06:37PM UTC by <span class="author">espressive</span></span>
+        <a class="ticket-change-link" href="#comment:14">comment:14</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1 for removing the non CSS3 selectors, updating documentation and clearly communicating change to the community.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:15">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 25, 2011 04:25PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:15">comment:15</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>milestone:</th>
+                  <td>
+                    
+                      <span class="change-field-old">1.7</span> → <span class="change-field-new">1.8</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Will tackle when we do the Sizzle rewrite.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:16">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 08, 2012 08:19PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:16">comment:16</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>summary:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Remove :input Selectors</span> → <span class="change-field-new">Deprecate :text, :radio, :checkbox, etc. selector extensions</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:17">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 21, 2012 03:05AM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:17">comment:17</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-old">needsdocs 1.7-discuss</span> → <span class="change-field-new">1.7-discuss</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ fixed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">open</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Docs updated. Again, this does not obligate us to remove them but I think it's clear they're not best practice. </p>
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:18">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 21, 2012 02:29PM UTC by <span class="author">scottgonzalez</span></span>
+        <a class="ticket-change-link" href="#comment:18">comment:18</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Might as well mention here that not using <code>:text</code> is painful for many users since <code>[type=text]</code> doesn't match <code>&lt;input&gt;</code>.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:19">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 21, 2012 02:44PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:19">comment:19</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>How do they get into that situation? Is there a common reason to not specify a type?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:20">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 21, 2012 03:04PM UTC by <span class="author">scottgonzalez</span></span>
+        <a class="ticket-change-link" href="#comment:20">comment:20</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I never specify type for text inputs, just like I never specify type for script or style tags. It's pretty common for developers to not specify the type attribute when creating text inputs.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:21">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 21, 2012 03:36PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:21">comment:21</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I see your point but leaving off the <code>type</code> also makes it hard for CSS to select so it can't be styled. That doesn't seem like good practice. </p><p>I'm using "deprecated" to mean the stuff <a href="http://blog.jquery.com/2011/11/08/building-a-slimmer-jquery/" class="ext-link"><span class="icon"></span>here</a> (things like: not best practice, unpopular, confusing, inefficient, ineffective, impractical to fix)  and it doesn't obligate us to remove it. Conversely, we *can't* remove something until we've deprecated it for a version so I'd rather be aggressive on this.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:22">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 25, 2012 02:51PM UTC by <span class="author">jsumners</span></span>
+        <a class="ticket-change-link" href="#comment:22">comment:22</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:19 dmethvin]:</p><blockquote> How do they get into that situation? Is there a common reason to not specify a type?</blockquote><p>From <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-input-element.html#the-input-element" class="ext-link"><span class="icon"></span>http://www.whatwg.org/specs/web-apps/current-work/multipage/the-input-element.html#the-input-element</a> regarding the presence of the <code>type</code> attribute:</p><p>"The missing value default is the Text state."</p><p>Thus, if you're writing "HTML5", it is perfectly valid markup, according to the spec, to <strong>not include</strong> a type attribute for basic text inputs.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:23">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 25, 2012 03:16PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:23">comment:23</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Right, I agree it *can* be done in HTML; the question is whether it *should* be done. Give me the standard CSS to select only <code>&lt;input /&gt;</code> and not <code>&lt;input type=checkbox&gt;</code> in order to style it, for example. Whatever that is, you can use it in jQuery as well. If it turns out to be difficult, then perhaps inputs without a type are possible, but not advisable. Therefore the deprecation. It doesn't mean you cannot do it, just that it is not a good idea.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:24">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 26, 2012 09:58PM UTC by <span class="author">csicky@gmail.com</span></span>
+        <a class="ticket-change-link" href="#comment:24">comment:24</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I use :text all the time, please do not set it as deprecated. </p><p>You can translate it if you wish behind the scenes to [type=text] and use that to select the elements, but I want to be able to write less.</p><p>Fantastic... I use jQuery to type less :|</p><p>JUST COUNT THE DAMN CHARACTERS!!!!</p><p>:text 5</p><p>[type=text] 11</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:25">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 26, 2012 10:03PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:25">comment:25</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>csicky@gmail.com - </p><p>Try to stay calm - there will be a supported back-compat plugin.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:26">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 26, 2012 10:10PM UTC by <span class="author">mikesherov</span></span>
+        <a class="ticket-change-link" href="#comment:26">comment:26</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:24 csicky@…]:</p><blockquote> I use :text all the time, please do not set it as deprecated.  You can translate it if you wish behind the scenes to [type=text] and use that to select the elements, but I want to be able to write less.  Fantastic... I use jQuery to type less :|  JUST COUNT THE DAMN CHARACTERS!!!!  :text 5  [type=text] 11</blockquote><p>I can't tell if this is a real complaint or a troll trolling us.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:27">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 26, 2012 10:46PM UTC by <span class="author">csicky@gmail.com</span></span>
+        <a class="ticket-change-link" href="#comment:27">comment:27</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>sorry, I am calm now :)</p><p>anyway in my opinion this should not be deprecated because it is <strong>less typing</strong> than the other selector</p><p>remember, the "write less" part in the logo...</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:28">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 13, 2012 03:54PM UTC by <span class="author">jamietre</span></span>
+        <a class="ticket-change-link" href="#comment:28">comment:28</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I see this deprecation is part of 1.8 release - the point about the value of ":text" because "text" is the default for "type" in HTML5 seems very relevant.</p><p>The discussion kind of died out and suddenly it's official, just wondering what the proposed "correct" way to select text inputs is now. Is it expected that the "type" element should be included no matter what, even though it's not required in HTML5, or would we be expected to use a selector that chooses type="text" or type is missing to properly select all text inputs from a valid HTML5 document? Honestly I can't even figure out a CSS selector that would work inline. You could say:</p><p>    input[type="text"], input[type!=""]</p><p>.. but that doesn't work inline (it would have to be it's own selector, since it depends on grouping for an "or" condition). And it's ugly as sin. And even that requires the jQuery "attribute not equals" extension!</p><p>This seems a very useful, and probably very widely used, feature to deprecate, without providing a clear path for an alternative.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:29">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 13, 2012 03:58PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:29">comment:29</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I think the best approach is to specify the <code>type</code> in the markup. Otherwise it can't be selected with CSS either. As with methods like <code>.live()</code> there is no set time for removing these, and some or all of them may not ever be removed. By deprecating them we are making it clear these are non-standard and not advisable.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:30">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 13, 2012 04:17PM UTC by <span class="author">jamietre</span></span>
+        <a class="ticket-change-link" href="#comment:30">comment:30</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>The fact that it can't be done with CSS doesn't seem like a good reason to remove a feature. Quite the opposite, it seems like an excellent reason for the inclusion of a feature. </p><p>":selected" does something that can't be done at all with CSS. So does ":input" (at least not inline). So does attribute !=. Aren't these useful features for that very reason? This seems like a step backwards. I like the fact that jQuery solves shortcomings of the browser & CSS. I realize that this isn't going to break anything today, or for some time, but whenever that feature is removed it sure will. This seems like something that's way too common, and involves a requirement to make changes to 100% valid HTML, to be removed.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:31">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 13, 2012 04:53PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:31">comment:31</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> The fact that it can't be done with CSS doesn't seem like a good reason to remove a feature.</blockquote><p>It's not removed. It's discouraged via deprecation, and the fact that it can't be done with CSS is a good reason to discourage it. Eventually you may want to  select text elements with CSS and be unable to do it.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:32">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 13, 2012 05:18PM UTC by <span class="author">jamietre</span></span>
+        <a class="ticket-change-link" href="#comment:32">comment:32</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Sure, I understand - but it's kinda the same thing. The goal of deprecating something is to remove it, and I wouldn't want to code against a deprecated feature if I could help it.</p><p>If the rationale is ensuring that whatever works with jQuery can also be done directly with CSS, does that mean that all other non-CSS pseudoclass selectors are likely to be deprecated in the future? Like :has(), :parent, :selected, and so on?</p><p>I'm just trying to understand the direction and rationale here. If the eventual target is to no longer support any non-true-CSS selectors (e.g. removing all jQuery extensions, in favor of only supporting the CSS4 spec) then that's fine, but that seems like a pretty big philosophical change to jQuery. CSS4 does deal with some stuff that jQuery extensions covered, but not everything, like this one and :selected, but probably others too.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:33">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 13, 2012 06:16PM UTC by <span class="author">gnarf</span></span>
+        <a class="ticket-change-link" href="#comment:33">comment:33</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>It is VERY easy to implement these selectors - and once they are deprecated, we can provide a plugin for the re-inclusion of these selectors.  Deprecation is about removing the size from the core library for the large number of people who don't even use these selectors... Those that do, can inject the selectors they need/use themselves.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:34">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 13, 2012 06:18PM UTC by <span class="author">gnarf</span></span>
+        <a class="ticket-change-link" href="#comment:34">comment:34</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Basically - we just need to take this chunk <a href="https://github.com/jquery/sizzle/blob/feb5de3f8fed345190bf5ae86eb37ace1150f35b/sizzle.js#L622-653" class="ext-link"><span class="icon"></span>https://github.com/jquery/sizzle/blob/feb5de3f8fed345190bf5ae86eb37ace1150f35b/sizzle.js#L622-653</a> and put it into a plugin.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:35">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 13, 2012 06:29PM UTC by <span class="author">jamietre</span></span>
+        <a class="ticket-change-link" href="#comment:35">comment:35</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">@gnarf, totally understand the rationale for removing features in general. I&#39;m just a bit confused by the decision to remove this one. The fact that something is easy to implement could be used as an argument for removing almost any single function of jQuery&#39;s. It&#39;s not a reason in and of itself. &#92;
+&#92;
+I fully support jQuery moving towards a more plugin type approach in general. I hardly use 90% of its functionality. But this is the core of jQuery: a selector engine, a DOM traversal tool, making it easier to do common tasks. Targeting text inputs for styling or other purposes is a very common task.</span> → <span class="change-field-new">1344884664316760</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>@gnarf, totally understand the rationale for removing features in general. I'm just a bit confused by the decision to remove this one. The fact that something is easy to implement could be used as an argument for removing almost any single function of jQuery's. It's not a reason in and of itself. </p><p>I fully support jQuery moving towards a more plugin type approach in general. I hardly use 90% of its functionality. But this is the core of jQuery: a selector engine, a DOM traversal and manipulation tool, making it easier to do common tasks. Targeting text inputs for styling or other purposes is a very common task.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:36">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 22, 2012 06:58PM UTC by <span class="author">kitsune</span></span>
+        <a class="ticket-change-link" href="#comment:36">comment:36</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Having :text match both &lt;input&gt; and &lt;input type="text"&gt; is a really useful feature; and selecting elements seems to be a pretty core part of jQuery.</p><p>I wanted to add that Google's mod_pagespeed also removes type="text" for the purposes of reducing HTML size</p><p><a href="https://developers.google.com/speed/docs/mod_pagespeed/filter-attribute-elide" class="ext-link"><span class="icon"></span>https://developers.google.com/speed/docs/mod_pagespeed/filter-attribute-elide</a></p><p>so dmethvin's proposal that everyone rewrite all their HTML to use type="text" seems to have real costs, and doesn't really seem to be appropriate for all use cases (e.g. people who are speed geeks)</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:37">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 22, 2012 07:21PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:37">comment:37</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> so dmethvin's proposal that everyone rewrite all their HTML to use type="text" </blockquote><p>For the sake of people who scroll to the bottom to spew, I did not propose that. If you have any doubt, you can Ctrl-F "dmethvin" on this page to see what I **did** write.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:38">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 24, 2012 06:38AM UTC by <span class="author">kitsune</span></span>
+        <a class="ticket-change-link" href="#comment:38">comment:38</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I read:</p><blockquote> Right, I agree it *can* be done in HTML; the question is whether it *should* be done. Give me the standard CSS to  select only &lt;input /&gt; and not &lt;input type=checkbox&gt; in order to style it, for example. Whatever that is, you can  use it in jQuery as well. If it turns out to be difficult, then perhaps inputs without a type are possible, but not  advisable. Therefore the deprecation. It doesn't mean you cannot do it, just that it is not a good idea.</blockquote><p>as advising people not to use inputs without a type.  If I misunderstood, I did not mean to "spew".  I meant to refer to your posts to say that I disagree and think that people should be able leave out the type attribute on input elements.</p><p>We have an internal library that is used to read from form inputs, and ran into a bug where all of a sudden text inputs where not being selected properly.  This was due to turning on the elide attributes optimization.  We put in a fix to use the :text pseudo-selector instead, and found that to be a nicely elegant fix.  While I agree that some of the other pseudo selectors, like :checkbox and :radio don't really do much useful "work", :text seems to do a very valuable normalization.</p><p>We also ended up implementing a filter that looked for all text-like inputs at once.  This one then selected HTML5 variants like [type=search],[type=email],[type=tel], etc.  I wonder if maybe a :text-like pseudo-selector might be useful to put in as a feature.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:39">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 10, 2012 08:13PM UTC by <span class="author">Joe T.</span></span>
+        <a class="ticket-change-link" href="#comment:39">comment:39</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>i'm not seeing any effective, efficient alternatives for losing this selector. The other input selectors i can understand, but this one is usefully generic & applies to multiple HTML tags.</p><p><strong>":input"</strong> matches any form input, correct? INPUT, SELECT, TEXTAREA, BUTTON...</p><p><strong>"input"</strong> matches INPUT tags only.</p><p>Thus:</p><p><strong>$(":input")</strong></p><p>is much simpler to write AND remember than</p><p><strong>$("input, select, textarea, button")</strong></p><p>if i want a collection of all (or some combination) of the inputs in a form.</p><p>i'm not about to throw a fit over typing a few more characters, but in the interest of code efficiency & cleanliness...</p><p>Perhaps an ''inputs()'' method that will shortcut the long selector list above? If an argument is provided, it filters for the matching elements?</p><p>'''$('#myForm').inputs()<strong> /* All inputs in the form */</strong></p><p>$('#myForm').inputs('[type=checkbox], select')''' /* Checks & SELECTs</p><p>etc... */</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:40">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 10, 2012 08:29PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:40">comment:40</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> in the interest of code efficiency & cleanliness</blockquote><p>Since <code>:input</code> is a non-standard selector extension, it is not efficient. It's also easy for later maintainers to overlook the leading colon, thinking that you meant <code>input</code> instead, so it's not good for readability or maintainability either.</p><p>The <code>.elements</code> property of the <code>form</code> element contains a list of all the inputs inside the form, and that is the fastest way to get all the inputs without any searching at all.</p><p>A plugin like the one you describe might help people who prefer not to use the standard selectors or <code>form.elements</code> but given there are already at least two good options I don't think a third method is needed in core.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:41">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 11, 2012 12:39PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:41">comment:41</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:40 dmethvin]:</p><blockquote> The <code>.elements</code> property of the <code>form</code> element contains a list of all the inputs inside the form, and that is the fastest way to get all the inputs without any searching at all.</blockquote><p>My efficiency reference was for the programmer, not necessarily for performance, but the point is moot. i was unaware of .elements. It may be useful to note that as an alternative on the :input API page.</p><p>On that note, is that property a jQuery object, or just the DOM elements? It would seem just as performance-inefficient to do <strong>$($("#myForm").elements)</strong> in order to get the inputs into a jQuery object. Now, i give you there are many ways to skin a cat, i'm just taking a basic example. Also, does .elements apply to ALL inputs within ALL forms passed to jQuery? '''$('form').elements''' == all inputs on the page?</p><p>You mention a second option for getting all elements in a form, but only discuss the .elements property. Did i miss something?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:42">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 11, 2012 02:57PM UTC by <span class="author">timmywil</span></span>
+        <a class="ticket-change-link" href="#comment:42">comment:42</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I'm not sure I'd recommend using <code>form.elements</code> in IE6/7. I don't know where I stand on the convenience of these selectors, but I don't think we will realistically be able to remove them in 1.9 or 2.0.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:43">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 11, 2012 03:21PM UTC by <span class="author">Joe T.</span></span>
+        <a class="ticket-change-link" href="#comment:43">comment:43</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:40 dmethvin]:</p><blockquote> The <code>.elements</code> property of the <code>form</code> element contains a list of all the inputs inside the form, and that is the fastest way to get all the inputs without any searching at all.</blockquote><p>Sorry, i noticed now that you were referring to the DOM form.elements property, not a jQuery property. While that may address the issue on a small scale:</p><p><strong>$(form.elements)</strong></p><p>it still doesn't help make an efficient jQuery collection when you're already using a jQuery chain:</p><p><strong>$("#myForm").<em>[something i want to to do the form]()</em>.elements</strong> == jQuery dead-end (just like .context most of the time)</p><p>nor specify whether the .elements property applies to all forms in a collection.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:44">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 11, 2012 03:41PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:44">comment:44</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>What's wrong with <code>.filter()</code>? Actually, nevermind, this thread is definitely off topic because we're not talking about a bug or a feature removal at this point. To get help with traversal, filtering, or writing a plugin, ask a question on our forum or <a href="/bugs.jquery.com/wiki/StackOverflow">StackOverflow</a>.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:45">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 11, 2012 05:24PM UTC by <span class="author">Joe T.</span></span>
+        <a class="ticket-change-link" href="#comment:45">comment:45</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:44 dmethvin]:</p><blockquote> What's wrong with <code>.filter()</code>? Actually, nevermind, this thread is definitely off topic because we're not talking about a bug or a feature removal at this point. To get help with traversal, filtering, or writing a plugin, ask a question on our forum or <a href="/bugs.jquery.com/wiki/StackOverflow">StackOverflow</a>.</blockquote><p>i disagree.</p><p>The purpose of my comments was to pose an argument against deprecating this particular selector until/unless an equally <em>effective</em> & <em>simple-to-use</em> alternative is offered. So far, i'm not convinced the suggestions match those requirements, which are fundamental qualities of jQuery.</p><p><code>.filter()</code> doesn't help unless the INPUT/etc. elements are already in the collection, in which case you're in the same boat as above: using a long selector to get them or wrapping the DOM <code>form.elements</code> which someone suggested may cause problems in old IE. If you meant <code>.find()</code>, you still start from the FORM and feed a long selector to get the full list of elements.</p><p>So it goes back to: This selector provides an EASY way to get all the inputs of a form, regardless of <em>tag</em>, but it hurts performance. On the other hand, the alternatives are either inconvenient or perform as badly as this selector. Weighed against each other, i say the ease of use wins and the selector should be kept.</p><p>i personally feel adding a method to replace this wouldn't be that harmful. It would use <code>.find()</code>, but would handle the long selector internally. Optionally, if a selector is passed to it, that would filter <code>.find()</code>'s results. The resulting executions should wash:</p><p>Let's assume a requirement to obtain all inputs of a form, no immediate filters (which is what this selector does in the first place).</p><pre class="wiki">
+/* Current (lack-of) alternative */
+$("#myForm").find("input, select, textarea, button")
+==
+$("#myForm").inputs() /* inputs() handles the above selector */
+
+/* Optional filtering argument */
+$("#myForm").find("input, select, textarea, button").filter("[name^=foo]")
+==
+$("#myForm").inputs("[name^=foo]") /* inputs() handles the selector & filters */
+</pre><p>So to emphasize the point: this feature impacts performance but keeps code simple. If it's removed, the alternatives offered improve performance, but do not retain simplicity.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:46">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 11, 2012 05:45PM UTC by <span class="author">ajpiano</span></span>
+        <a class="ticket-change-link" href="#comment:46">comment:46</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Keep in mind "deprecation" doesn't necessarily mean we are going to remove something - we often can't because of backcompat.  It is a denotation that we want to strongly discourage the use of a particular practise - in this case, these nonstandard form pseudoselectors. </p><p>Adding a new method to replace it wouldn't be "harmful," per se, unless we consider adding new API surface and filesize harmful - which we do. The best way to prove the demand is to release a plugin and then there's an implementation with its pros and cons we can evaluate, as well as the plugin's level of adoption.  This isn't the first time someone's wanted a traversal/filtering method that would make life easier, and it likely won't be the last. However,  something like this to core right now, especially when it could be fraught with issues in oldIE, isn't something we want to take on.  And again, :input isn't going anywhere, we just want to make the point that just because something is a little faster to type, it doesn't make it the best choice for your application.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:47">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 12, 2012 12:22AM UTC by <span class="author">Joe T.</span></span>
+        <a class="ticket-change-link" href="#comment:47">comment:47</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:46 ajpiano]:</p><blockquote> Keep in mind "deprecation" doesn't necessarily mean we are going to remove something - we often can't because of backcompat.  It is a denotation that we want to strongly discourage the use of a particular practise - in this case, these nonstandard form pseudoselectors. </blockquote><p>i understand deprecation isn't immediate removal, but it does imply an intent somewhere down the road. In any case, while i completely agree the non-standard type selectors should go, <code>:input</code> will be hard to get rid of without a suitable replacement. In the meantime, the whole block of code that deals with these selectors is stuck in the core, so i figured a replacement method might ease its removal. :)</p><p>Thanks for the feedback.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:48">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 17, 2012 08:54PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:48">comment:48</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>It's worth mentioning, this means changes to more than just your own code that you write, but also to all the plugins you use, one of the biggest assets to Jquery are the plugins.</p><p>I was searching for NEW HTML 5 types, e.g. :email for type="email" and came across this changeset.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:49">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 28, 2013 08:42PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:49">comment:49</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>After it's so widely used, jQuery becomes so smug these days. Every change require hunting and fixing bugs in plugins.</p><p>So what if I'm trolling? It's just feedback. Appreciate it while you get it!</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</details>
+</div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

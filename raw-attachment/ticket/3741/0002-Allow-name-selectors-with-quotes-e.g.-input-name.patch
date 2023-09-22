@@ -1,0 +1,63 @@
+From 19d4277284662a8ca6860d5ddcdd958b9af9ac88 Mon Sep 17 00:00:00 2001
+From: Cheah Chu Yeow <chuyeow@gmail.com>
+Date: Tue, 23 Dec 2008 12:02:54 +0800
+Subject: [PATCH] Allow name selectors with quotes (e.g. "input[name='foo']" vs "input[name=foo]") to use the NAME selector strategy (rather than falling back to the TAG strategy) and add a test suite for name selectors.
+
+---
+ sizzle.js             |    4 +---
+ test/unit/selector.js |   11 +++++++++++
+ 2 files changed, 12 insertions(+), 3 deletions(-)
+
+diff --git a/sizzle.js b/sizzle.js
+index 985e776..6e564b5 100644
+--- a/sizzle.js
++++ b/sizzle.js
+@@ -153,14 +153,12 @@ Sizzle.find = function(expr, context){
+ 
+ 	for ( var i = 0, l = Expr.order.length; i < l; i++ ) {
+ 		var type = Expr.order[i];
+-		
+ 		if ( (match = Expr.match[ type ].exec( expr )) ) {
+ 			var left = RegExp.leftContext;
+ 
+ 			if ( left.substr( left.length - 1 ) !== "\\" ) {
+ 				match[1] = (match[1] || "").replace(/\\/g, "");
+ 				set = Expr.find[ type ]( match, context );
+-
+ 				if ( set != null ) {
+ 					expr = expr.replace( Expr.match[ type ], "" );
+ 					break;
+@@ -262,7 +260,7 @@ var Expr = Sizzle.selectors = {
+ 	match: {
+ 		ID: /#((?:[\w\u0128-\uFFFF_-]|\\.)+)/,
+ 		CLASS: /\.((?:[\w\u0128-\uFFFF_-]|\\.)+)/,
+-		NAME: /\[name=((?:[\w\u0128-\uFFFF_-]|\\.)+)\]/,
++		NAME: /\[name=['"]*((?:[\w\u0128-\uFFFF_-]|\\.)+)['"]*\]/,
+ 		ATTR: /\[((?:[\w\u0128-\uFFFF_-]|\\.)+)\s*(?:(\S{0,1}=)\s*(['"]*)(.*?)\3|)\]/,
+ 		TAG: /^((?:[\w\u0128-\uFFFF\*_-]|\\.)+)/,
+ 		CHILD: /:(only|nth|last|first)-child\(?(even|odd|[\dn+-]*)\)?/,
+diff --git a/test/unit/selector.js b/test/unit/selector.js
+index 2727b0c..d7e6362 100644
+--- a/test/unit/selector.js
++++ b/test/unit/selector.js
+@@ -107,6 +107,17 @@ test("class", function() {
+ 	t( "Child escaped Class", "form > .test\\.foo\\[5\\]bar", ["test.foo[5]bar"] );
+ });
+ 
++test("name", function() {
++	expect(4);
++
++	t( "Name selector", "input[name=action]", ["text1"] );
++	t( "Name selector with single quotes", "input[name='action']", ["text1"] );
++	t( "Name selector with double quotes", 'input[name="action"]', ["text1"] );
++
++	t( "Name selector none-input", "*[name=iframe]", ["iframe"] );
++});
++
++
+ test("multiple", function() {
+ 	expect(4);
+ 	
+-- 
+1.6.0.2
+

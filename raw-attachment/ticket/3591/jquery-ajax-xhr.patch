@@ -1,0 +1,13 @@
+Index: ajax.js
+===================================================================
+--- ajax.js	(revision 5939)
++++ ajax.js	(working copy)
+@@ -400,7 +400,7 @@
+ 		function success(){
+ 			// If a local callback was specified, fire it and pass it the data
+ 			if ( s.success )
+-				s.success( data, status );
++				s.success( data, status, xhr );
+ 
+ 			// Fire the global callback
+ 			if ( s.global )

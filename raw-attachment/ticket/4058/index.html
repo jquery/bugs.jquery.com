@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var container = $('#container');
+
+            var containerSelecteds = function() {
+                return container.find('ul.selected');
+            };
+
+            var bodySelecteds = function() {
+                return $('ul.selected');
+            };
+
+            var select = function(nodes) {
+                containerSelecteds().removeClass('selected');
+
+                nodes.addClass('selected');
+
+                // the container html show me that the element has the class "selected"
+                alert(container.html());
+
+                // webkit (chrome and safari) says that there are no elements inside of <container> with the class "selected"
+                alert(containerSelecteds().length);
+
+                // but the element exists in the dom, and it has the classname "selected" !!
+                alert(bodySelecteds().length);
+            };
+
+            var element = $('<ul class="someclass"><li>MyText</li></ul>').appendTo(container);
+            select(element, false);
+        });
+    </script>
+</head>
+<body>
+    <div id="container" style="border:1px solid #ccc;height:300px;width:300px"></div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>wrapInner fails on empty elements</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script type="text/javascript" src="http://code.jquery.com/nightlies/jquery-nightly.js"></script>
+    <script type="text/javascript">
+
+        function wrapInner(selector)
+        {
+            $(selector).wrapInner("<div></div>");
+        };
+
+    </script>
+
+    <style type="text/css">
+        div { border:1px solid black; margin: 10px; min-height: 1em; }
+        body > div { width: 8em; min-height: 4em; }
+    </style>
+</head>
+
+<body>
+    #case 1
+    <div id="case1">
+        <div>inner div 1</div>
+        <div>inner div 2</div>
+    </div>
+
+    <input type="button" onclick='wrapInner("#case1")' value='$("#case1").wrapInner("<div></div>")' />
+    <br />
+    <br />
+
+    #case 2 (empty)
+    <div id="case2"></div>
+
+    <input type="button" onclick='wrapInner("#case2")' value='$("#case2").wrapInner("<div></div>")' />
+    <br />
+    <br />
+
+    #case 3 (contains a space [" "])
+    <div id="case3"> </div>
+
+    <input type="button" onclick='wrapInner("#case3")' value='$("#case3").wrapInner("<div></div>")' />
+    <br />
+    <br />
+
+
+</body>
+</html>

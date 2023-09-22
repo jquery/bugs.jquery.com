@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				// the find() method should return 1 element here but instead returns 0
+				var bug = $("#formId").find("input[name='parent[0].child[0]']");
+				if(bug.length == 0) {
+					alert("found a bug. Should have returned 1 element but instead returned 0");
+				}
+
+				
+				// escaping it doesn't work either
+				var escaped = $("#formId").find("input[name='parent\\[0\\]\\.child\\[0\\]']");
+				if(escaped.length == 0) {
+					alert("escaping doesn't work either");
+				}
+
+				
+				var workaround = $("#formId input[name='parent[0].child[0]']");
+				if (workaround.length == 1) {
+					alert("the workaround is to use the jQuery method, which properly finds the element");
+				}
+
+				
+				// strangely enough, one set of brackets works fine
+				var oneBracketWorks = $("#formId").find("input[name='parent[0].child']");
+				if (oneBracketWorks.length == 1) {
+					alert("strangely enough, using one set of brackets [] works fine");
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<form id="formId">
+			<input type="text" name="parent[0].child[0]" />
+			<input type="text" name="parent[0].child" />
+		</form>
+	</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+<h3>id attributes</h3>
+	<div>
+    <input type="radio" id="newsletter" value="Hot Fuzz" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" id="newsletters" value="Cold Fusion" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" id="accept" value="Evil Plans" />
+    <span>Not Found</span>
+  </div>
+<h3>name attributes</h3>
+	<div>
+    <input type="radio" name="newsletter" value="Hot Fuzz" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" name="newsletters" value="Cold Fusion" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" name="accept" value="Evil Plans" />
+    <span>Not Found</span>
+  </div>
+<h3>onmouseover attributes</h3>
+	<div>
+    <input type="radio" onmouseover="newsletter" value="Hot Fuzz" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" onmouseover="newsletters" value="Cold Fusion" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" onmouseover="accept" value="Evil Plans" />
+    <span>Not Found</span>
+  </div>
+<h3>onmouseout attributes</h3>
+	<div>
+    <input type="radio" onmouseout="newsletter" value="Hot Fuzz" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" onmouseout="newsletters" value="Cold Fusion" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" onmouseout="accept" value="Evil Plans" />
+    <span>Not Found</span>
+  </div>
+<h3>onblur attributes</h3>
+	<div>
+    <input type="radio" onblur="newsletter" value="Hot Fuzz" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" onblur="newsletters" value="Cold Fusion" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" onblur="accept" value="Evil Plans" />
+    <span>Not Found</span>
+  </div>
+<h3>onclick attributes</h3>
+	<div>
+    <input type="radio" onclick="newsletter" value="Hot Fuzz" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" onclick="newsletters" value="Cold Fusion" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" onclick="accept" value="Evil Plans" />
+    <span>Not Found</span>
+  </div>
+<h3>onfocus attributes</h3>
+	<div>
+    <input type="radio" onfocus="newsletter" value="Hot Fuzz" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" onfocus="newsletters" value="Cold Fusion" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" onfocus="accept" value="Evil Plans" />
+    <span>Not Found</span>
+  </div>
+<h3>onchange attributes</h3>
+	<div>
+    <input type="radio" onchange="newsletter" value="Hot Fuzz" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" onchange="newsletters" value="Cold Fusion" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" onchange="accept" value="Evil Plans" />
+    <span>Not Found</span>
+  </div>
+<h3>rel attributes</h3>
+	<div>
+    <input type="radio" rel="newsletter" value="Hot Fuzz" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" rel="newsletters" value="Cold Fusion" />
+    <span>Not Found</span>
+  </div>
+  <div>
+    <input type="radio" rel="accept" value="Evil Plans" />
+    <span>Not Found</span>
+  </div>
+
+<script>
+$(document).ready(function(){
+	$("input[id^='newsletter']").next().text("id attribute found");
+	$("input[name^='newsletter']").next().text("name attribute found");
+	$("input[onmouseover^='newsletter']").next().text("onmouseover attribute found");
+	$("input[onmouseout^='newsletter']").next().text("onmouseout attribute found");
+	$("input[onblur^='newsletter']").next().text("onblur attribute found");
+	$("input[onclick^='newsletter']").next().text("onclick attribute found");
+	$("input[onfocus^='newsletter']").next().text("onfocus attribute found");
+	$("input[onchange^='newsletter']").next().text("onchange attribute found");
+	$("input[rel^='newsletter']").next().text("rel attribute found");
+});
+</script>
+</body>
+</html>

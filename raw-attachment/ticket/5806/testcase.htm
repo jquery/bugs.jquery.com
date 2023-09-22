@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.4.min.js"></script>
+</head>
+<body>
+<div id="asd" style="white-space: pre">
+&lt;span&gt;Test&lt;/span&gt; Content after
+</div>
+<script>
+jQuery('#asd').contents().each(function() {
+    jQuery(this).replaceWith('<span>Test</span>Content after');
+    //jQuery(this).replaceWith('<span><span>Test</span>Content after</span>');
+    return false;
+});
+</script>
+</body>

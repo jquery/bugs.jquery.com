@@ -1,0 +1,30 @@
+Index: src/event/event.js
+===================================================================
+--- src/event/event.js	(revision 2018)
++++ src/event/event.js	(working copy)
+@@ -300,8 +300,10 @@
+ 	 * @cat Events
+ 	 */
+ 	bind: function( type, data, fn ) {
+-		return type == "unload" ? this.one(type, data, fn) : this.each(function(){
+-			jQuery.event.add( this, type, fn || data, fn && data );
++		return type == "unload" ? this.one(type, data, fn) : this.each(function(i,elem){
++			jQuery.each( type.split(/\s+/), function(){
++				jQuery.event.add( elem, this, fn || data, fn && data );
++			});
+ 		});
+ 	},
+ 	
+@@ -370,8 +372,10 @@
+ 	 * @cat Events
+ 	 */
+ 	unbind: function( type, fn ) {
+-		return this.each(function(){
+-			jQuery.event.remove( this, type, fn );
++		return this.each(function(i,elem){
++			jQuery.each( type.split(/\s+/), function(){
++				jQuery.event.remove( elem, this, fn );
++			});
+ 		});
+ 	},
+ 

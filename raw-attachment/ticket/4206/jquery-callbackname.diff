@@ -1,0 +1,61 @@
+diff --git a/src/ajax.js b/src/ajax.js
+index 0f5f805..e5526ee 100644
+--- a/src/ajax.js
++++ b/src/ajax.js
+@@ -195,7 +195,17 @@ jQuery.extend({
+ 
+ 		// Build temporary JSONP function
+ 		if ( s.dataType == "json" && (s.data && s.data.match(jsre) || s.url.match(jsre)) ) {
+-			jsonp = "jsonp" + jsc++;
++			if ( typeof s.callbackName === "string" ) {
++				// callbackName is used to request the given content with a constant URL.
++				// This enables both the browser and the server to cache the data.
++				// s.cache = false would negate the effect.
++				s.cache = true;
++
++				jsonp = "jsonp" + s.callbackName;
++				if ( window[ jsonp ] )
++					throw "callbackName " + s.callbackName + " not unique";
++			} else
++				jsonp = "jsonp" + jsc++;
+ 
+ 			// Replace the =? sequence both in the query string and the data
+ 			if ( s.data )
+diff --git a/test/unit/ajax.js b/test/unit/ajax.js
+index 0d2f071..81ae0b5 100644
+--- a/test/unit/ajax.js
++++ b/test/unit/ajax.js
+@@ -442,10 +442,10 @@ test("jQuery.getScript(String, Function) - no callback", function() {
+ });
+ 
+ test("jQuery.ajax() - JSONP, Local", function() {
+-	expect(7);
++	expect(8);
+ 
+ 	var count = 0;
+-	function plus(){ if ( ++count == 7 ) start(); }
++	function plus(){ if ( ++count == 8 ) start(); }
+ 
+ 	stop();
+ 
+@@ -504,6 +504,20 @@ test("jQuery.ajax() - JSONP, Local", function() {
+ 	});
+ 
+ 	jQuery.ajax({
++		url: "data/jsonp.php",
++		dataType: "jsonp",
++		callbackName: "Test",
++		success: function(data){
++			ok( data.data, "JSON results returned (GET, specified callbackName)" );
++			plus();
++		},
++		error: function(data){
++			ok( false, "Ajax error JSON (GET, specified callbackName)" );
++			plus();
++		}
++	});
++
++	jQuery.ajax({
+ 		type: "POST",
+ 		url: "data/jsonp.php",
+ 		dataType: "jsonp",

@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title></title> 
+	<meta content=""> <style></style>
+
+        <script src="jquery.js"></script> 
+	<script>
+
+                $(function(){
+                   $("#input1").attr('name',$("#input1").attr('name')+"[]");
+		   $("#input2").attr('name',$("#input2").attr('name')+".teste");
+		   $("#select1").attr('name',$("#select1").attr('name')+"123");   
+		   var obj_tr_clone=$("#line").clone();	
+		   alert(obj_tr_clone.html());	   
+            });
+
+        </script>
+
+    </head> <body>
+
+            <table>
+
+                <tr id="line">
+
+                    <td>
+			<input name="a" size="15" id="input1"/>
+			<input id="input2" name="b" size="11">
+			<select id="select1" name="c">
+				<option value="1">A</option>
+				<option value="2">B</option>
+				<option value="3">C</option>
+				<option value="4">D</option>
+				<option value="5">E</option>
+			</select>
+                </tr>
+
+            </table> </body>
+
+</html> 

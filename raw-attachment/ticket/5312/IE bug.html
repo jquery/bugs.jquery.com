@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+  <head>
+	<script>
+		function a(fn) { 
+			alert(fn);
+			alert(fn());
+			alert((fn === fn) + (fn() === fn()) + (fn === fn())); 
+		}
+		a(function b() { return b; });
+		
+		var f = function g() {
+			alert(f === g);
+			alert(f == g);
+		};
+		f();
+	</script>
+  </head>
+</html>

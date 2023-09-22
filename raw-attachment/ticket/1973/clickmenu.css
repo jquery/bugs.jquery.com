@@ -1,0 +1,255 @@
+div.cmDiv
+{
+	border: 1px solid black;
+	background-color: #eee;
+}
+.clickMenu
+{
+	margin: 0;
+	padding: 0;
+	cursor: default;
+	width: 200px;
+}
+.clickMenu, .clickMenu ul
+{
+	list-style: none;
+}
+.clickMenu ul
+{
+	margin: 0;
+	padding: 2px;
+	border: 1px solid black;
+	background-color: #eee;
+	min-width: 125px; /* ie doesnt know this :/ */
+	//float: left;/*ie again*/
+	/* //width: 100%;/ie again -- commented line out from original. */
+	//width: 125px; /* ie again */
+}
+.clickMenu div.outerbox
+{
+	display: none;
+	/*min-width: 106px;*/ /* firefox produces animation-flickering when the box is bigger than this :/ */
+	min-width: 126px;
+}
+.clickMenu div.inner
+{
+	//top: 20px; /* for ie */
+	left: 0;
+	margin: 0;
+}
+.clickMenu div.inner div.outerbox
+{
+	margin: 0;
+	left: 98px;
+	//left: 90px; /* for ie */
+	top: -3px;
+}
+.clickMenu li
+{
+	position: relative;
+	padding: 0 20px 0 2px;
+	/*white-space: nowrap; does not really work in ie */
+}
+.clickMenu li.main
+{
+	float: left;
+	padding: 0 10px;
+	/* background-color: #eee; */
+	//height: 20px; /* for ie */
+}
+.clickMenu li.main li
+{
+	z-index: 2;
+	min-width: 78px;
+}
+.clickMenu li.hover
+{
+	z-index: 1 !important; /* the hover z-index has to be below the normal one the hovering items may be drawn over a submenu */
+	background-color: #aaa;
+}
+.clickMenu img.liArrow
+{
+	position: absolute;
+	right: 5px;
+	top: 0.41em;
+}
+.clickMenu a
+{
+	text-decoration: none;
+	color: black;
+	cursor: default;
+}
+/* thats for the shadowbox */
+html>body div.outerbox
+{
+	padding: 0 5px 5px 0;
+}
+html>body div.shadowbox1
+{
+	position: absolute;
+	right: 0;
+	bottom: 5px;
+	width: 5px;
+	height: 100%;
+	background: url(myshadow.png) no-repeat right top;*/
+}
+html>body div.shadowbox2
+{
+	position: absolute;
+	bottom: 0;
+	right: 5px;
+	height: 5px;
+	width: 100%;
+	background: url(myshadow.png) left bottom;*/
+}
+html>body div.shadowbox3
+{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	height: 5px;
+	width: 5px;
+	background: url(myshadow.png) no-repeat right bottom;*/
+}
+html>body .innerbox
+{
+	margin: 0;
+	display: inherit;
+}
+
+
+/* Additions to original stylesheet*/
+
+.toolbar-text {
+    font-family:Myriad,Arial,Helvetica,clean,sans-serif;
+    font-size: .75em;
+}
+
+.toolbar-submenu {
+    font-family:Myriad,Arial,Helvetica,clean,sans-serif;
+    font-size: 0.95em;
+    text-align: top;
+    height:20px;
+}
+
+.icon-image {
+    width: 16px;
+    height: 16px;
+}
+
+.custom-toolbar {
+    background-color: #EEEEEE;
+    height: 20px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 1px 0 1px 10px;
+}
+
+.hide-custom-toolbar {
+	display:none;
+}
+
+.menu-and-tools {
+    top:0px;
+    left:0px;
+    position:absolute;
+    width:100%;
+}
+
+.custom-toolbar-icons-selected {
+    /* height: 16px;
+    width: 17px; */
+    padding: 0px 4px 0px 4px;
+    border: 1px #808080 solid;
+    background-color: #aaa;
+}
+
+.custom-toolbar-icons {
+    /* height: 16px;
+    width: 17px; */
+    padding: 1px 5px 1px 5px;
+    border: none;
+}
+
+.custom-toolbar-icons_onmouseup custom-toolbar-icons-onmouseover {
+    background-color: #aaa;
+}
+
+.custom-toolbar-icons_onmousedown {
+    background-color: #eee;
+}
+
+
+.block { 
+   /** position: absolute; */
+   /** position: relative; */
+   top: 150px;
+   left: 5px;
+   border: 2px solid #0090DF;
+   color: #68BFEF;
+   width: 75px; 
+   height: 75px;
+   margin: 10px;
+   z-index: 1000;
+}
+
+.block2 { 
+   /** position: absolute; */
+   /** postion:relative; */
+   top: 150px;
+   left: 5px;
+   border: 2px solid #0090DF;
+   color: #68BFEF;
+   width: 275px; 
+   height: 75px;
+   margin: 10px;
+   z-index: 1000;
+}
+
+
+.drop { 
+    background-color: #e9b96e;
+    text-color: black;
+    border: 3px double #c17d11;
+    width: 500px; 
+    height: 200px;
+    margin: 10px; 
+    position: absolute;
+    /** position: relative; */
+    top: 150px;
+    right: 5px;
+    opacity: 0.7;
+    
+}
+
+.drop2 { 
+    background-color: #e9b96e;
+    text-color: black;
+    border: 3px double #c17d11;
+    width: 500px; 
+    height: 200px;
+    margin: 10px; 
+    position: absolute;
+    /** position: relative; */
+    top: 150px;
+    left: 5px;
+    opacity: 0.7;
+   
+}
+
+
+.droppable-active {
+    opacity: 1.0;
+}
+.droppable-hover {
+    outline: 1px dotted black;
+    background-color: #white;
+}
+
+.draggable-active {
+	
+}
+
+
+

@@ -1,0 +1,13 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 6116)
++++ core.js	(working copy)
+@@ -712,7 +712,7 @@
+ 
+ 		// internal only, use hasClass("class")
+ 		has: function( elem, className ) {
+-			return jQuery.inArray( className, (elem.className || elem).toString().split(/\s+/) ) > -1;
++			return elem && jQuery.inArray( className, (elem.className || elem).toString().split(/\s+/) ) > -1;
+ 		}
+ 	},
+ 

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      function doIt() {
+        $("form").submit();
+        $("#adiv").text("submit attempted... did the page refresh or get # after url?");
+      }
+
+      $(function () {
+        $("#doit").click(doIt);
+      });
+    </script>
+  </head>
+  <body>
+    <button id="doit">Attempt Submit</button>
+    <form action="#submitworked">
+      <input type="text" id="submit" />
+    </form>
+    <div id="adiv"></div>
+  </body>
+</html>

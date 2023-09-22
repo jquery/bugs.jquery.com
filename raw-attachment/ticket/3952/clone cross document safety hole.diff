@@ -1,0 +1,11 @@
+--- C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\core.js-revBASE.svn000.tmp.js	jeu. janv. 22 13:12:03 2009
++++ C:\Dev\SVN\jQuery\trunk\jquery\src\core.js	jeu. janv. 22 13:11:50 2009
+@@ -298,7 +298,7 @@
+ 				// as properties will not be copied (such as the
+ 				// the name attribute on an input).
+ 				var clone = this.cloneNode(true),
+-					container = document.createElement("div");
++					container = this.ownerDocument.createElement("div");
+ 				container.appendChild(clone);
+ 				return jQuery.clean([container.innerHTML])[0];
+ 			} else

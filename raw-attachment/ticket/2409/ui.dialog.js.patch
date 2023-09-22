@@ -1,0 +1,41 @@
+Index: ui.dialog.js
+===================================================================
+RCS file: /usr/local/cvsrepo/imt/FirstLook.NET/prototypes/EmailManager/Javascripts/jquery.ui/1.5b/ui.dialog.js,v
+retrieving revision 1.1
+diff -u -r1.1 ui.dialog.js
+--- ui.dialog.js	25 Feb 2008 19:51:03 -0000	1.1
++++ ui.dialog.js	26 Feb 2008 00:39:36 -0000
+@@ -37,10 +37,14 @@
+ 			return options[key];
+ 		});
+ 
++        if (!options.container) {
++            options.container = 'body';
++        }
++        
+ 		var uiDialogContent = $(el).addClass('ui-dialog-content');
+ 
+ 		if (!uiDialogContent.parent().length) {
+-			uiDialogContent.appendTo('body');
++			uiDialogContent.appendTo(options.container);
+ 		}
+ 		uiDialogContent
+ 			.wrap(document.createElement('div'))
+@@ -121,7 +125,7 @@
+ 		
+ 		this.open = function() {
+ 			options.modal && overlay.show(self, options.overlay);
+-			uiDialog.appendTo('body');
++			uiDialog.appendTo(options.container);
+ 			var wnd = $(window), doc = $(document), top = doc.scrollTop(), left = doc.scrollLeft();
+ 			if (options.position.constructor == Array) {
+ 				// [x, y]
+@@ -225,7 +229,7 @@
+ 			this.selects = this.ie6 && $('select:visible').css('visibility', 'hidden');
+ 			var width = this.width();
+ 			var height = this.height();
+-			this.$el = $('<div/>').appendTo(document.body)
++			this.$el = $('<div/>').appendTo(options.container)
+ 				.addClass('ui-dialog-overlay').css($.extend({
+ 					borderWidth: 0, margin: 0, padding: 0,
+ 					position: 'absolute', top: 0, left: 0,

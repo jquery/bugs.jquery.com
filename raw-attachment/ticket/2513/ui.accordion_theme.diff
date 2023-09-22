@@ -1,0 +1,23 @@
+Index: ui.accordion.js
+===================================================================
+--- ui.accordion.js	(revision 4906)
++++ ui.accordion.js	(working copy)
+@@ -43,7 +43,7 @@
+ 	this.options = options = $.extend({}, $.ui.accordion.defaults, options);
+ 	this.element = container;
+ 	
+-	$(container).addClass("ui-accordion");
++	$(container).addClass('ui-accordion-container ui-accordion');
+ 	
+ 	if ( options.navigation ) {
+ 		var current = $(container).find("a").filter(options.navigationFilter);
+@@ -60,6 +60,9 @@
+ 	// calculate active if not specified, using the first header
+ 	options.headers = $(container).find(options.header);
+ 	options.active = findActive(options.headers, options.active);
++	
++	// add classNames and spans to headers
++	options.headers.addClass('ui-accordion-link').prepend('<span class="ui-accordion-left"></span>').append('<span class="ui-accordion-right"></span>');
+ 
+ 	if ( options.fillSpace ) {
+ 		var maxHeight = $(container).parent().height();

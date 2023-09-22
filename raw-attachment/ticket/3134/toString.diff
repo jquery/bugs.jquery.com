@@ -1,0 +1,13 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 5772)
++++ src/core.js	(working copy)
+@@ -615,7 +615,7 @@
+ 	// See test/unit/core.js for details concerning this function.
+ 	isFunction: function( fn ) {
+ 		return !!fn && typeof fn != "string" && !fn.nodeName &&
+-			fn.constructor != Array && /^[\s[]?function/.test( fn + "" );
++			fn.constructor != Array && /^[\s[]?function/.test( Object.toString.call(fn) );
+ 	},
+ 
+ 	// check if an element is in a (or is an) XML document

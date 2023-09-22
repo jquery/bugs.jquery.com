@@ -1,0 +1,40 @@
+Index: ifxscrollto.js
+===================================================================
+--- ifxscrollto.js	(revision 3054)
++++ ifxscrollto.js	(working copy)
+@@ -46,14 +46,32 @@
+ 			return this.each(
+ 				function()
+ 				{
+-					jQuery('a[@href*="#"]', this).click(
++					jQuery('a[@href^="#"]', this).click(
+ 						function(e)
+ 						{
+ 							parts = this.href.split('#');
+-							jQuery('#' + parts[1]).ScrollTo(speed, axis, easing);
+-							return false;
++							if(jQuery('#' + parts[1]).size() > 0) {
++								jQuery('#' + parts[1]).ScrollTo(speed, axis, easing);
++								return false;
++							} else if(jQuery('a[@name='+parts[1]+']').size() > 0) {
++								jQuery('a[@name='+parts[1]+']').ScrollTo(speed, axis, easing)
++								return false;
++							}
+ 						}
+ 					);
++					jQuery(document).ready(
++						function()	{
++							var loc = new String(document.location);
++							if (loc.search('#') != -1) {
++								var loc_parts = loc.split('#');
++								if(jQuery('#' + loc_parts[1]).size() > 0) {
++									jQuery('#' + loc_parts[1]).ScrollTo(speed, axis, easing);
++								} else if(jQuery('a[@name='+loc_parts[1]+']').size() > 0) {
++									jQuery('a[@name='+loc_parts[1]+']').ScrollTo(speed, axis, easing)
++								}
++							}
++						}
++					);
+ 				}
+ 			)
+ 		}

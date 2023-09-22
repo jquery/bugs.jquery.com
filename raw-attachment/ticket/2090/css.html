@@ -1,0 +1,16 @@
+<script type = "text/javascript" src = "../../public/static/js/jquery.js"></script>
+Has attribute, in DOM: <span id = "eg1">changeme</span><br />
+Has attribute, not in DOM: <span id = "eg2">changeme</span><br />
+Doesn't have attribute, in DOM: <span id = "eg3">changeme</span><br />
+Doesn't have attribute, not in DOM: <span id = "eg4">changeme</span><br />
+<div id = "inDOM" style = "display: none"></div>
+<script type = "text/javascript">
+$(document).ready(function() {
+    var newDiv = $('<div style = "display: none"></div>');
+    $('#eg1').text($('#inDOM').css('display'));
+    $('#eg2').text(newDiv.css('display'));
+    $('#eg3').text($('#inDOM').css('margin') || 'changed');
+    $('#eg4').text(newDiv.css('margin') || 'changed');
+    alert('Done');
+});
+</script>

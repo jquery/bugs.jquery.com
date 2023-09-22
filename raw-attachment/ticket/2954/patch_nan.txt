@@ -1,0 +1,13 @@
+Index: /home/lrbabe/workspace/jQuery/jquery/src/core.js
+===================================================================
+--- /home/lrbabe/workspace/jQuery/jquery/src/core.js	(revision 5654)
++++ /home/lrbabe/workspace/jQuery/jquery/src/core.js	(working copy)
+@@ -1098,7 +1098,7 @@
+ 
+ 				// Set the alpha filter to set the opacity
+ 				elem.filter = (elem.filter || "").replace( /alpha\([^)]*\)/, "" ) +
+-					(parseInt( value ) + '' == "NaN" ? "" : "alpha(opacity=" + value * 100 + ")");
++					(isNaN(parseInt(value))? "" : "alpha(opacity=" + value * 100 + ")");
+ 			}
+ 
+ 			return elem.filter && elem.filter.indexOf("opacity=") >= 0 ?

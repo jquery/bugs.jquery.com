@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Reset form selected option test</title>
+	<!-- Date: 2009-12-08 -->
+	<!--<script src="jquery-1.4a1.js" type="text/javascript" charset="utf-8"></script>-->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		var select_test = {
+			using_jq: function () {
+				var website_id, user_type, txt;
+
+				website_id = $('#website').val();
+				user_type = $('#user-type').val();
+
+				txt = '';
+				txt = 'Using jQuery:\n';
+				txt += 'Website = ' + website_id + '\n';
+				txt += 'User Type = ' + user_type;
+
+				alert(txt);
+			},
+			using_dom: function () {
+				var website, website_id, user, user_type, txt;
+
+				website = document.getElementById('website');
+				user = document.getElementById('user-type');
+
+				website_id = website.options[website.selectedIndex].value;
+				user_type = user.options[user.selectedIndex].value;
+
+				txt = '';
+				txt = 'Using Straight DOM:\n';
+				txt += 'Website = ' + website_id + '\n';
+				txt += 'User Type = ' + user_type + '\n';
+				txt += 'User selectedIndex = ' + user.selectedIndex + '\n';
+				txt += 'User selected = ' + user.options[user.selectedIndex].selected + '\n';
+
+				alert(txt);
+			}
+		};
+
+		$(document).ready(function () {
+			$('#btn_filter').click(function(event) {
+				event.preventDefault();
+				select_test.using_jq();
+				select_test.using_dom();
+			});
+		});
+	</script>
+</head>
+
+<body>
+<form action="index_submit" method="get">
+	<p>
+		<label for="website">Website</label>
+		<select id="website">
+			<option value="3">Site.com</option>
+		</select>
+	</p>
+
+	<p>
+		<label for="user-type">User Type</label>
+		<select id="user-type" name="user-type">
+			<option value="All">All</option>
+			<option value="External">External</option>
+			<option value="Internal">Internal</option>
+		</select>
+	</p>
+
+	<p>
+		<input type="reset" value="Reset Form">
+		<input type="submit" id="btn_filter" value="Refresh Results">
+	</p>
+</form>
+
+</body>
+</html>

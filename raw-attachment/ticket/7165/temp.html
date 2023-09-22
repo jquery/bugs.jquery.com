@@ -1,0 +1,33 @@
+<!doctype html>
+<html xmlns:ng="http://angularjs.org">
+  <head>
+    <title></title>
+    <script type="text/javascript"
+         src="http://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript">
+      function cacheLength() {
+        var l=0;
+        for (var i in $.cache) { l++ };
+        return l;
+      }
+
+      $(function() {
+          var length =  {
+            before: cacheLength()
+          }
+
+          $(document.body).html('<span>hello</span>');
+          $('span').wrap('<div>');
+          length.inBetween = cacheLength();
+          $(document.body).html('');
+          length.after = cacheLength();
+
+          console.log(length);
+          console.log('cached clean up properly: ', length.before == length.after);
+        }); 
+    </script>
+  </head>
+
+  <body>
+  </body>
+</html>

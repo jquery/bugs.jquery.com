@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>jQuery Test Select Value</title>
+<script language="JavaScript" src="../../thirdparty/jquery/jquery-1.3.2.min.js"></script>
+<script language="JavaScript">
+var dumpnjoin=function (text)
+{
+	var dumper = function(c, i)
+	{
+		console.log("i value=" + i.value);
+		text.push(i.value + ' (id=' + i.id + ')');
+	}
+	return dumper;
+}
+var joinjQueryElementValue = function(elements, delim)
+{
+	if (delim === undefined)
+	{
+		delim = ',';
+	}
+	var text = [];
+//	var dumper = dumpnjoin(text);
+//	elements.each(dumper);
+	elements.each(
+		function(c,i) { text.push(i.value + ' (id=' + i.id + ')'); }
+	);
+	return text.join(delim);
+}
+var showResults=function(caller)
+{
+	var bad = $("#inputs input[value='foo']");
+	var good = $("#inputs").find("input[value='foo']");
+	var badText = "Length: " + bad.length + ". Values: "
+		+ joinjQueryElementValue (bad, ", ");
+	var goodText = "Length: " + good.length + ". Values: "
+		+ joinjQueryElementValue (good, ", ");
+	$("#result_bad").text(badText);
+	$("#result_good").text(goodText);
+	$("#results").show();
+}
+</script>
+</head>
+<body>
+<div id="inputs">
+ <div>
+  <input type="text" id="input_1" value="foo" />
+ </div>
+ <div>
+  <input type="text" id="input_2" value="bar" />
+ </div>
+ <div>
+  <input type="text" id="input_3" value="lah" />
+ </div>
+ <p>Once this page is loaded kindly delete the text in the input box containing
+ "foo", and change the text in the box containing "lah" to "foo".
+ Then press the button below.
+ </p>
+ <a href="" class="inputbutton" onclick="showResults(this); return false;">
+  Show Results
+ </a>
+ <div id="results" style="display:none">
+  <p><code>$("#inputs input[value='foo']");</code> produces
+   <span id="result_bad"></span>
+  </p>
+  <p><code>$("#inputs").find("input[value='foo']");</code> produces
+   <span id="result_good"></span>
+  </p>
+ </div>
+</div>
+</body>
+</html>

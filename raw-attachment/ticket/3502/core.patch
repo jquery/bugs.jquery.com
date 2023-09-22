@@ -1,0 +1,40 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 5904)
++++ core.js	(working copy)
+@@ -167,7 +167,8 @@
+ 					type ?
+ 						this.style :
+ 						this,
+-					name, jQuery.prop( this, options[ name ], type, i, name )
++					name, jQuery.prop( this, options[ name ], type, i, name ),
++					type ? this : null
+ 				);
+ 		});
+ 	},
+@@ -1038,7 +1039,7 @@
+ 		return ret;
+ 	},
+ 
+-	attr: function( elem, name, value ) {
++	attr: function( elem, name, value, parent ) {
+ 		// don't set attributes on text and comment nodes
+ 		if (!elem || elem.nodeType == 3 || elem.nodeType == 8)
+ 			return undefined;
+@@ -1108,6 +1109,16 @@
+ 				// Set the alpha filter to set the opacity
+ 				elem.filter = (elem.filter || "").replace( /alpha\([^)]*\)/, "" ) +
+ 					(parseInt( value ) + '' == "NaN" ? "" : "alpha(opacity=" + value * 100 + ")");
++
++				// If all we have is 100% opacity, remove the filter attribute to prevent DirectX boggles.
++				if (elem.filter=="alpha(opacity=100)")
++				{
++					elem.removeAttribute('filter');
++
++					// If there was a class-based opacity assigned, re-set this to 100%.
++					if (parent && parent.currentStyle && parent.currentStyle.filter)
++						elem.filter = "alpha(opacity=100)";
++				}
+ 			}
+ 
+ 			return elem.filter && elem.filter.indexOf("opacity=") >= 0 ?

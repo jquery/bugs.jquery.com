@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>jQuery Ticket #3091 test case</title>
+		
+		<style>
+			body {
+				width: 750px;
+				margin: 2em auto;
+				font-family: Verdana, sans-serif;
+			}
+			table {
+				border: 1px solid #ccc;
+				border-collapse: collapse;
+				font-size: .8em;
+			}
+			th, td {
+				padding: .25em;
+				border: 1px solid #ccc;
+			}
+			p {
+				font-size: .8em;
+			}
+		</style>
+		
+		<script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.2.6.pack.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+				$('#toggle_foo3').toggle(
+					function() {
+						$('.foo' + 3).css('background-color', '#ccc');
+					},
+					function() {
+						$('.foo' + 3).css('background-color', 'transparent');
+					}
+				);
+				
+			});
+		</script>
+	</head>
+	
+	<body>
+		<p>jQuery Ticket #3091 test case</p>
+		
+		<table>
+			<caption>Browser Statistics Month by Month</caption>
+			<thead>
+				<tr>
+					<th>Month</th>
+					<th>IE 7</th>
+					<th>IE 6</th>
+					<th>IE 5</th>
+					<th>Firefox</th>
+					<th>Mozilla</th>
+					<th>Safari</th>
+					<th>Opera</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="month
+				someClass
+				otherClass
+				goodbye
+				foo2
+				bar56">
+					<td>June</td>
+					<td>27.0%</td>
+					<td>26.5%</td>
+					<td>0.5%</td>
+					<td>41.0%</td>
+					<td>0.5%</td>
+					<td>2.6%</td>
+					<td>1.7%</td>
+				</tr>
+				<tr class="month
+				someClass
+				otherClass
+				goodbye
+				foo4">
+					<td>May</td>
+					<td>26.5%</td>
+					<td>27.3%</td>
+					<td>0.7%</td>
+					<td>39.8%</td>
+					<td>0.7%</td>
+					<td>2.4%</td>
+					<td>1.5%</td>
+				</tr>
+				<tr class="month
+				someClass
+				otherClass
+				goodbye
+				foo3
+				bar12
+				hello78">
+					<td>April</td>
+					<td>24.9%</td>
+					<td>28.9%</td>
+					<td>1.0%</td>
+					<td>39.1%</td>
+					<td>0.9%</td>
+					<td>2.2%</td>
+					<td>1.4%</td>
+				</tr>
+				<tr class="month
+				someClass
+				otherClass
+				goodbye
+				foo3
+				hello15">
+					<td>March</td>
+					<td>23.3%</td>
+					<td>29.5%</td>
+					<td>1.1%</td>
+					<td>37.0%</td>
+					<td>1.1%</td>
+					<td>2.1%</td>
+					<td>1.4%</td>
+				</tr>
+				<tr class="month
+				someClass
+				otherClass
+				goodbye
+				bar56">
+					<td>February</td>
+					<td>22.7%</td>
+					<td>30.7%</td>
+					<td>1.3%</td>
+					<td>36.5%</td>
+					<td>1.2%</td>
+					<td>2.0%</td>
+					<td>1.4%</td>
+				</tr>
+				<tr class="month
+				someClass
+				otherClass
+				goodbye
+				foo321
+				bar
+				123">
+					<td>January</td>
+					<td>21.2%</td>
+					<td>32.0%</td>
+					<td>1.5%</td>
+					<td>36.4%</td>
+					<td>1.3%</td>
+					<td>1.9%</td>
+					<td>1.4%</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<p>Source: <a href="http://w3schools.com/browsers/browsers_stats.asp">W3 Schools</a></p>
+		
+		<p>
+			<input type="button" id="toggle_foo3" value="Toggle '.foo3'">
+		</p>
+		<p>
+			Clicking on the button should toggle the background color of March and April rows.
+		</p>
+	</body>
+</html>

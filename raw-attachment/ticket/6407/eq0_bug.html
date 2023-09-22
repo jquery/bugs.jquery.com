@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>:first bug</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+</head>
+
+<body>
+<script type="text/javascript">
+$(function() {
+	$("p:first").css('background-color', '#00ff00');
+	$("p").eq(0).css('font-weight', 'bold');
+});
+</script>
+<table cellpadding="5" cellspacing="0" border="2">
+	<tfoot>
+		<tr>
+			<td>
+				TFOOT:
+				<p>This paragraph should not be selected, since it is in the table footer. However, since its the first element in the DOM, it gets selected anyway.</p>
+			</td>
+		</tr>
+	</tfoot>
+	<tbody>
+		<tr>
+			<td>
+				TBODY:
+				<p>I would expect this paragraph to be selected since its displayed first on screen.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</body>
+</html>

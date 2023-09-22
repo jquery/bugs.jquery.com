@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html> 
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#check2, #check4").attr("checked", false);
+		//$("#check2, #check4").removeAttr("checked");
+		$("#check5").attr("checked", true);
+		var $sel = $("input[type=checkbox][checked]");
+		$("body").prepend("<p>There are "+ $sel.length + " check boxes checked</p>");
+		$sel.css({border: "1px solid #c00"});
+		$("input[type=checkbox]").each(function(){
+			$(this).after("  "+$(this).attr("checked")+" , "+this.checked+" , "+
+				this.getAttribute("checked")+"("+typeof(this.getAttribute("checked"))+")"+"<br>")
+		});
+	});	
+	</script>
+</head>
+<body>
+	<input type="checkbox" id="check1" checked="checked">
+	<input type="checkbox" id="check2" checked="checked">
+	<input type="checkbox" id="check3" checked>
+	<input type="checkbox" id="check4" checked>
+	<input type="checkbox" id="check5">
+	<input type="checkbox" id="check6">
+</body>
+</html>

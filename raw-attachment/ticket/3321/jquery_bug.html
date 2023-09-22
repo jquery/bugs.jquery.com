@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+        <html>
+        <head>
+        <meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+        <title>jquery 1.2.6 Safari Bug Demo</title>
+        <link rel="stylesheet" href="includes/css/styles.css" type="text/css" />
+        
+        <script src="http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js" type="text/javascript"></script>
+        
+        </head>
+        <body class="normal">
+        
+        <h5>Fields</h5>
+        
+        <input checked id="field1_id" name="field1_name" type="checkbox" />field 1<br />
+        <script type="text/javascript">
+        $(function() {
+            $('#field1_id').change(function () {
+                if ($('#field1_id:checked').length) {
+                    $('.field1_span').show();
+                } else {
+                    $('.field1_span').hide();
+                }
+            });
+            $('#field1_id').change();
+        })
+        </script>
+        
+        <input id="field2_id" name="field2_name" type="checkbox" />field 2<br />
+        <script type="text/javascript">
+        $(function() {
+            $('#field2_id').change(function () {
+                if ($('#field2_id:checked').length) {
+                    $('.field2_span').show();
+                } else {
+                    $('.field2_span').hide();
+                }
+            });
+            $('#field2_id').change();
+        })
+        </script>
+        
+        <input checked id="field3_id" name="field3_name" type="checkbox" />field 3<br />
+        <script type="text/javascript">
+        $(function() {
+            $('#field3_id').change(function () {
+                if ($('#field3_id:checked').length) {
+                    $('.field3_span').show();
+                } else {
+                    $('.field3_span').hide();
+                }
+            });
+            $('#field3_id').change();
+        })
+        </script>
+        
+        <h5>Data</h5>
+        <span class="field1_span">1.1</span> 
+        <span class="field2_span">1.2</span> 
+        <span class="field3_span">1.3</span>
+        <br />
+        
+        <span class="field1_span">2.1</span> 
+        <span class="field2_span">2.2</span> 
+        <span class="field3_span">2.3</span> 
+        <br />
+        
+        </div>
+        
+        </body>
+        </html>

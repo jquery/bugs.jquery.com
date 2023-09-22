@@ -1,0 +1,86 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 6194)
++++ src/core.js	(working copy)
+@@ -734,26 +734,32 @@
+ 			elem.style[ name ] = old[ name ];
+ 	},
+ 
+-	css: function( elem, name, force ) {
++	css: function( elem, name, force, extra ) {
+ 		if ( name == "width" || name == "height" ) {
+ 			var val, props = { position: "absolute", visibility: "hidden", display:"block" }, which = name == "width" ? [ "Left", "Right" ] : [ "Top", "Bottom" ];
+ 
+ 			function getWH() {
+ 				val = name == "width" ? elem.offsetWidth : elem.offsetHeight;
+-				var padding = 0, border = 0;
++
++				if ( extra === "border" )
++					return;
++
+ 				jQuery.each( which, function() {
+-					padding += parseFloat(jQuery.curCSS( elem, "padding" + this, true)) || 0;
+-					border += parseFloat(jQuery.curCSS( elem, "border" + this + "Width", true)) || 0;
++					if ( !extra )
++						val -= parseFloat(jQuery.curCSS( elem, "padding" + this, true)) || 0;
++					if ( extra === "margin" )
++						val += parseFloat(jQuery.curCSS( elem, "margin" + this, true)) || 0;
++					else
++						val -= parseFloat(jQuery.curCSS( elem, "border" + this + "Width", true)) || 0;
+ 				});
+-				val -= Math.round(padding + border);
+ 			}
+ 
+-			if ( jQuery(elem).is(":visible") )
++			if ( elem.offsetWidth !== 0 )
+ 				getWH();
+ 			else
+ 				jQuery.swap( elem, props, getWH );
+ 
+-			return Math.max(0, val);
++			return Math.max(0, Math.round(val));
+ 		}
+ 
+ 		return jQuery.curCSS( elem, name, force );
+Index: src/dimensions.js
+===================================================================
+--- src/dimensions.js	(revision 6194)
++++ src/dimensions.js	(working copy)
+@@ -2,22 +2,21 @@
+ jQuery.each([ "Height", "Width" ], function(i, name){
+ 
+ 	var tl = i ? "Left"  : "Top",  // top or left
+-		br = i ? "Right" : "Bottom"; // bottom or right
++		br = i ? "Right" : "Bottom", // bottom or right
++		lower = name.toLowerCase();
+ 
+ 	// innerHeight and innerWidth
+ 	jQuery.fn["inner" + name] = function(){
+-		return this[ name.toLowerCase() ]() +
+-			num(this, "padding" + tl) +
+-			num(this, "padding" + br);
++		return this[0] ?
++			jQuery.css( this[0], lower, false, "padding" ) :
++			null;
+ 	};
+ 
+ 	// outerHeight and outerWidth
+ 	jQuery.fn["outer" + name] = function(margin) {
+-		return this["inner" + name]() +
+-			num(this, "border" + tl + "Width") +
+-			num(this, "border" + br + "Width") +
+-			(margin ?
+-				num(this, "margin" + tl) + num(this, "margin" + br) : 0);
++		return this[0] ?
++			jQuery.css( this[0], lower, false, margin ? "margin" : "border" ) :
++			null;
+ 	};
+ 	
+ 	var type = name.toLowerCase();
+@@ -47,4 +46,4 @@
+ 					this.css( type, typeof size === "string" ? size : size + "px" );
+ 	};
+ 
+-});
+\ No newline at end of file
++});

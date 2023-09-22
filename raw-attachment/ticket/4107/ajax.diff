@@ -1,0 +1,11 @@
+Index: ajax.js
+===================================================================
+--- ajax.js	(revision 6125)
++++ ajax.js	(working copy)
+@@ -71,7 +71,7 @@
+ 		.filter(function(){
+ 			return this.name && !this.disabled &&
+ 				(this.checked || /select|textarea/i.test(this.nodeName) ||
+-					/text|hidden|password/i.test(this.type));
++					/text|hidden|password|search/i.test(this.type));
+ 		})

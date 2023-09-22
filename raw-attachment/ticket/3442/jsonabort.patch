@@ -1,0 +1,96 @@
+Index: jquery/src/ajax.js
+===================================================================
+--- jquery/src/ajax.js	(revision 5861)
++++ jquery/src/ajax.js	(working copy)
+@@ -175,7 +175,8 @@
+ 		s = jQuery.extend(true, s, jQuery.extend(true, {}, jQuery.ajaxSettings, s));
+ 
+ 		var jsonp, jsre = /=\?(&|$)/g, status, data,
+-			type = s.type.toUpperCase();
++			type = s.type.toUpperCase(),
++                        requestDone = false;
+ 
+ 		// convert data if not already a string
+ 		if ( s.data && s.processData && typeof s.data != "string" )
+@@ -206,15 +207,23 @@
+ 
+ 			// Handle JSONP-style loading
+ 			window[ jsonp ] = function(tmp){
+-				data = tmp;
+-				success();
+-				complete();
++                                requestDone = true;
++
++                                if(!window[ jsonp ].aborted)
++                                {
++                                        data = tmp;
++                                        success();
++                                        complete();
++                                }
+ 				// Garbage collect
+ 				window[ jsonp ] = undefined;
+ 				try{ delete window[ jsonp ]; } catch(e){}
+ 				if ( head )
+ 					head.removeChild( script );
+ 			};
++
++                        window[ jsonp ].aborted = false;
++                        window[ jsonp ].abort = function() { this.aborted = true; }
+ 		}
+ 
+ 		if ( s.dataType == "script" && s.cache == null )
+@@ -262,22 +271,49 @@
+ 				script.onload = script.onreadystatechange = function(){
+ 					if ( !done && (!this.readyState ||
+ 							this.readyState == "loaded" || this.readyState == "complete") ) {
+-						done = true;
+-						success();
+-						complete();
++                                                
++                                                requestDone = done = true;
++                                                
++                                                if(!script.aborted)
++                                                {
++                                                        success();
++                                                        complete();
++                                                }
++
+ 						head.removeChild( script );
+ 					}
+ 				};
++
++                                script.aborted = false;
++                                script.abort = function() { this.aborted = true; };
+ 			}
+ 
+ 			head.appendChild(script);
+ 
+ 			// We handle everything using the script element injection
++                        if(s.timeout > 0)
++                                setTimeout(function()
++                                {
++                                        if(requestDone)
++                                                return;
++
++                                        if(jsonp)
++                                                window[ jsonp ].abort();
++                                        else
++                                                script.abort();
++
++                                        if(s.error)
++                                                s.error("timeout");
++                                }, s.timeout);
++
++			// We handle everything using the script element injection
++                        if(jsonp)
++                                return window[ jsonp ];
++                        if(script)
++                                return script;
+ 			return undefined;
+ 		}
+ 
+-		var requestDone = false;
+-
+ 		// Create the request object
+ 		var xhr = s.xhr();
+ 

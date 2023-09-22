@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">#12213 (Add hook to cleanData to allow cleanup) - jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      :root{--ticket-info-background-color:#ffd;--ticket-info-border-color:#dd9;--ticket-table-border-color:#eed;--ticket-date-text-color:#996;--ticket-description-title-color:#663;--ticket-changes-text-color:#663;--ticket-changes-box-shadow:#f2f2f2}.ticket-info{position:relative;background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);padding:.5em .75em;margin-bottom:.5em}.ticket-number{font-size:1.15rem;font-weight:700;margin-right:.5em}.ticket-info span{font-size:.8125em;font-weight:700}.ticket-resolution,.ticket-status,.ticket-type{text-transform:uppercase}.missing{color:var(--text-color-link-disabled)}.ticket-title{border-bottom:1px solid #bbb;margin-top:1em;padding-bottom:.25em;font-weight:700;font-size:1.1875rem}.ticket-dates{color:var(--ticket-date-text-color);font-size:.8125rem}.ticket-dates p{margin:0 0 .5em}.ticket-properties{width:100%;text-align:left;font-size:.65rem;border-top:1px solid var(--ticket-table-border-color);margin:0}.ticket-properties th{font-weight:400;width:20%}.ticket-properties td,.ticket-properties th{padding:.25em .5em;border-bottom:1px dashed var(--ticket-table-border-color)}.ticket-info-bottom{padding:.5em}.ticket-description{font-size:.8125rem;margin-top:.5em}.ticket-description h2,.ticket-description h3,.ticket-description h4,.ticket-description h5,.ticket-description h6{text-transform:uppercase;font-weight:400}.ticket-description h1{font-size:1.1rem}.ticket-description h2{font-size:1rem}.ticket-description h3{font-size:.9rem}.ticket-description h4{font-size:.8rem}.ticket-description h5{font-size:.75rem}.ticket-description h6{font-size:.7rem}.ticket-description-title{color:var(--ticket-description-title-color);font-size:.75rem}details{padding:.5em 0;font-size:.8125rem}summary{color:var(--text-color-link);font-weight:700;font-size:.875rem;text-decoration:underline;cursor:pointer;text-shadow:.04em .04em var(--text-shadow-color)}.ticket-attachments{font-size:.75em}.ticket-comment-body{width:100%;padding-top:.5em}.ticket-change{margin:1em 0;clear:both}.ticket-change-header{font-size:.875rem;font-weight:700;box-shadow:1.4px 2.8px 5.6px 0 var(--ticket-changes-box-shadow)}.ticket-change-link{font-size:.85em}.ticket-change-content{width:100%}.ticket-changes{background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);color:var(--ticket-changes-text-color);font-size:.7rem;float:right;clear:right;margin:2em 0 1em 1.5em}.ticket-changes th{text-align:right;font-weight:400;text-transform:capitalize}.ticket-changes td,.ticket-changes th{padding:.25em;vertical-align:baseline}.ticket-changes .change-field-new{font-weight:700}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+<div class="flex-column" data-pagefind-body="">
+  
+
+  <nav class="content-nav">
+    <ul class="flex-row">
+      
+        <li>
+          <a href="/bugs.jquery.com/ticket/12212/">← Previous Ticket</a>
+        
+      
+      
+        </li><li>
+          <a href="/bugs.jquery.com/ticket/12214/">Next Ticket →</a>
+        </li>
+      
+    </ul>
+  </nav>
+
+
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="." class="ticket-number">#12213</a>
+      <span class="ticket-status">closed</span>
+      <span class="ticket-type">feature</span>
+      <span class="ticket-resolution">(migrated)</span>
+    </h3>
+
+    <div class="ticket-dates">
+      <p>Opened August 07, 2012 04:30PM UTC</p>
+      
+        <p>Closed October 20, 2014 11:50PM UTC</p>
+      
+      
+    </div>
+  </div>
+
+  <h1 class="ticket-title">Add hook to cleanData to allow cleanup</h1>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        T.J. Crowder &lt;tj@crowdersoftware.com&gt;
+      </td>
+      <th>Owned by:</th>
+      <td>gnarf</td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        low
+      </td>
+      
+        <th class="missing">Milestone:</th>
+      
+      <td>
+        <a href="/bugs.jquery.com/milestone/None">None</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>manipulation</td>
+      
+        <th>Version:</th>
+      
+      <td>1.8rc1</td>
+    </tr>
+    <tr>
+      
+        <th>Keywords:</th>
+      
+      <td>1.9-discuss</td>
+      
+        <th class="missing">Cc:</th>
+      
+      <td></td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
+    <div class="ticket-description"><p>Just as jQuery itself needs to know when an element is cleaned up, plug-in code (and perhaps application/page code) sometimes needs this notification as well. The <a href="/bugs.jquery.com/wiki/TinyMCE">TinyMCE</a> jQuery plug-in, for instance, monkey-patches jQuery to hook into <code>empty</code>, <code>remove</code>, etc. so it can clean up after itself. I was just doing a plug-in where each instance needs to respond to window resize, and try as I might, I can't come up with a way to do it that won't leave handler(s) lying around if the programmer using it doesn't call my "destroy" method -- and let's face it, that's pretty easy to fail to do.</p><p>Recommend adding a hook or event that plug-ins (and application/page code) can use, with the clearly-documented caveat that almost ''any'' other option should be used first because of the potential performance implications.</p><p>The performance cost in the normal case (when no one has hooked the event) looks trivially small: Looking at <code>cleanData</code> in the current dev source, it looks like it comes down to one extra property test just after <a href="https://github.com/jquery/jquery/blob/9ecdb2472be7661477564e46bce51432d4a5a84e/src/manipulation.js#L742" class="ext-link"><span class="icon"></span>line 742 in manipulation.js</a> (that line number will rot), e.g.:</p><pre class="wiki">
+742: if ( data && data.events ) {
+New:   if ( data.events.destroy) {
+New:     jQuery(elem).trigger("destroy"); // Or a more efficient way, of course
+New:   }
+</pre><p>...which is pretty cheap. A quick test on my 2.4GHz machine with Firefox on 10,000 elements, 5,000 of which had <code>data.events</code> and one of which had <code>data.events.destroy</code>, the average time to clear the container was 124-126ms both with and without the above. The cost when someone has actually hooked the event, of course, will be higher but largely irrelevant; if they've hooked it, presumably they have a reason.</p><p>This would, of course, be a somewhat unusual event. My off-the-cuff is that it wouldn't bubble, and couldn't be cancelled. But there are other unusual events. :-)</p><p>I'm happy to get into the details of this and submit a pull request (with tests and documentation) if this suggestion has legs.</p></div>
+  </div>
+</div>
+
+<details>
+  <summary class="ticket-details-summary">Attachments (0)</summary>
+
+  <ul class="ticket-attachments">
+    
+  </ul>
+</details>
+
+<details open="">
+  <summary class="ticket-details-summary">Change History (25)</summary>
+  
+    <div class="ticket-change flex-column" id="comment:1">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 07, 2012 04:35PM UTC by <span class="author">scottgonzalez</span></span>
+        <a class="ticket-change-link" href="#comment:1">comment:1</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>We should avoid adding more custom event types to jQuery. Using a callbacks list would be much better. FWIW, duck punching <code>$.cleanData</code> is really easy and we do this in jQuery UI.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:2">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 07, 2012 04:45PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:2">comment:2</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>owner:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ T.J. Crowder &lt;tj@crowdersoftware.com&gt;</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">pending</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>You should be able to achieve the cleanup today with the special events API. If there is an event attached to the element with a teardown handler, that handler would be called by cleanData. This also doesn't bubble, which is good IMO.</p><p><a href="http://jsfiddle.net/WX69j/" class="ext-link"><span class="icon"></span>http://jsfiddle.net/WX69j/</a></p><pre class="wiki">
+$.event.special.sanitation = {
+   teardown: function(){
+      alert("I'm being repressed!");
+   }
+};
+$("span").on("sanitation", $.noop);
+$("div").html("");
+</pre><p>Would that do the trick for this use case?</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:3">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 07, 2012 06:20PM UTC by <span class="author">T.J. Crowder &lt;tj@crowdersoftware.com&gt;</span></span>
+        <a class="ticket-change-link" href="#comment:3">comment:3</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">pending</span> → <span class="change-field-new">new</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:1 scott.gonzalez]:</p><blockquote> We should avoid adding more custom event types to jQuery. Using a callbacks list would be much better.</blockquote><p>I'm happy with it being a callback rather than an event, provided it's easy to hook and gets fired. I'm not seeing any real issue with a "destroy" event, though, provided we make sure it doesn't bubble. But a non-bubbling event with no default action sounds a lot like a callback. :-)</p><blockquote> FWIW, duck punching <code>$.cleanData</code> is really easy and we do this in jQuery UI.</blockquote><p>Yes, but in addition to being overkill (if you want the notification, you have to intercept ''every'' call to several API points), it's just sub-optimal IMV to be modifying the library rather than ''using'' it.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:4">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 07, 2012 06:23PM UTC by <span class="author">scottgonzalez</span></span>
+        <a class="ticket-change-link" href="#comment:4">comment:4</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> I'm not seeing any real issue with a "destroy" event...</blockquote><p>The problem is that it will cause problems if the W3C ever decides to add a destroy event.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:5">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 07, 2012 06:31PM UTC by <span class="author">T.J. Crowder &lt;tj@crowdersoftware.com&gt;</span></span>
+        <a class="ticket-change-link" href="#comment:5">comment:5</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:4 scott.gonzalez]:</p><blockquote> The problem is that it will cause problems if the W3C ever decides to add a destroy event.</blockquote><p><code>destroy</code> was just an example. It can be <code>jqdestroy</code> or <code>jqclean</code> or whatever to avoid conflicts. (Similarly <code>ready</code> really should get renamed at some point...)</p><p>See also below (six lines of code), I lean toward an event but I'd be interested what an equivalent callback mechanism would look like.</p><p>Replying to [comment:2 dmethvin]:</p><blockquote> You should be able to achieve the cleanup today with the special events API.</blockquote><p>First off: That's <strong>way</strong> cool!</p><blockquote> <a href="http://jsfiddle.net/WX69j/" class="ext-link"><span class="icon"></span>http://jsfiddle.net/WX69j/</a>  <pre class="wiki">
+&gt; $.event.special.sanitation = {
+&gt;    teardown: function(){
+&gt;       alert("I'm being repressed!");
+&gt;    }
+&gt; };
+&gt; </pre>  Would that do the trick for this use case?</blockquote><p>It would, but then my plugin has to create its own special event (and it can only have one handler, unless you implement a callback list); jQuery UI has to create their own special event; <a href="/bugs.jquery.com/wiki/TinyMCE">TinyMCE</a> has to implement ''their'' own special event... It just starts getting messy IMV.</p><p>The nice thing about using an event is it causes near-zero bloat, and it uses a familiar and easy paradigm. It inherits namespacing and all sorts of goodness.</p><p>An off-the-cuff, but functionally complete, implementation adds six lines of code (I haven't checked yet if there's a more efficient way to trigger the event): The three I posted earlier:</p><pre class="wiki">
+if ( data.events.destroy ) {
+  jQuery(elem).trigger("destroy");
+}
+</pre><p>...and these when initializing <code>jQuery.event.special</code>:</p><pre class="wiki">
+special: {
+  noBubble: true
+}
+</pre><p>Trivial implementation, virtually no overhead, and a paradigm any jQuery programmer can trivially understand.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:6">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 07, 2012 07:03PM UTC by <span class="author">Jock Murphy &lt;jock@jockmurphy.com&gt;</span></span>
+        <a class="ticket-change-link" href="#comment:6">comment:6</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Allow me to just say "here, here!" and voice my support for this, I have more than once felt the need for such a thing, and wanted a more automatic way to cleanup.  The proposed solution in the message above seems ideal to me.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:7">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 07, 2012 07:29PM UTC by <span class="author">T.J. Crowder &lt;tj@crowdersoftware.com&gt;</span></span>
+        <a class="ticket-change-link" href="#comment:7">comment:7</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="http://pastebin.com/Xb8ZLyDp" class="ext-link"><span class="icon"></span>Here's a copy of 1.8rc1 with the six-line patch above</a> (I'm not saying that implementation is the be-all, end-all), and <a href="http://jsfiddle.net/Lc96M/" class="ext-link"><span class="icon"></span>here's a fiddle</a> that generates 10,000 elements, 5,000 of which we hook the <code>click</code> event on (so that they have something in <code>data.events</code>), and one of which we hook the <code>jqdestroy</code> event on. Then we call <code>html</code> on the container element to destroy them all and time how long it takes, as well as watching to see that we get the <code>jqdestroy</code> event (and that the container ''doesn't''). You can compare that with <a href="http://code.jquery.com/jquery-1.8rc1.js" class="ext-link"><span class="icon"></span>this version</a> using an unmodified version of 1.8rc1, if you want to look at overheads.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:8">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 07, 2012 07:54PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:8">comment:8</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> FWIW, duck punching <code>$.cleanData</code> is really easy and we do this in jQuery UI.</blockquote><p>However, it's not a public interface. I can't imagine that we could refactor to do without it, but then again I thought we'd always be saddled with <code>$.attrFn</code> too. </p><blockquote>  <code>jQuery(elem).trigger("destroy");</code></blockquote><p>We could use <code>.triggerHandler</code> which doesn't bubble. </p><blockquote> The nice thing about using an event is it causes near-zero bloat, and it uses a familiar and easy paradigm. It inherits namespacing and all sorts of goodness.</blockquote><p>It doesn't bloat the code but it's a pretty large hammer if all you need is a non-bubbling callback. Follow the codepath and you'll see what I mean. So much of that code is involved in implementing DOM semantics. I agree that web developers understand those semantics, but they're not really needed here.</p><blockquote> The performance cost in the normal case (when no one has hooked the event) looks trivially small</blockquote><p>Most likely because it's already horribly inefficient right now. :)</p><p>One of the things I wanted to look at in 2.0 was the possibility of eliminating <code>jQuery.cache</code> and attaching data directly to a property of each DOM element. On removal, if the subtree didn't have any special event remove/teardown handlers we could simply throw it away without walking it at all. So any feature that obligates us to walk the entire subtree seems like a bad idea right now until it't proven we can't shortcut that.</p><p>Really, <code>$.cleanData</code> is bad for the same reason that the <code>DOMSubtreeModified</code> event is bad and was abandoned in favor of <code>MutationObserver</code>. Perhaps it would be better to see if we (or a third party) could build the DOM cleanup functionality on top of that with a shim for when it's not available.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:9">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 07, 2012 10:17PM UTC by <span class="author">T.J. Crowder &lt;tj@crowdersoftware.com&gt;</span></span>
+        <a class="ticket-change-link" href="#comment:9">comment:9</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:8 dmethvin]:</p><blockquote> &gt; FWIW, duck punching <code>$.cleanData</code> is really easy and we do this in jQuery UI.  However, it's not a public interface.</blockquote><p>Exactly.</p><blockquote> &gt;  <code>jQuery(elem).trigger("destroy");</code>  We could use <code>.triggerHandler</code> which doesn't bubble.</blockquote><p>Great, we're down to three lines! :-)</p><p>Seriously, I knew there was a more efficient way. There may be even further one could go, although efficiency firing the event is less important IMV than efficiency when ''not'' firing it. Firing it should be the unusual case.</p><blockquote> &gt; The performance cost in the normal case (when no one has hooked the event) looks trivially small  Most likely because it's already horribly inefficient right now. :)</blockquote><p>Perhaps, but mostly it's trivial because in the vast majority of situations, it's not adding any overhead at all; in the sitaution where an element has events hooked on it, it's adding just one "does the property exist" check, which is very, very quick.</p><blockquote> One of the things I wanted to look at in 2.0 was the possibility of eliminating <code>jQuery.cache</code> and attaching data directly to a property of each DOM element. On removal, if the subtree didn't have any special event remove/teardown handlers we could simply throw it away without walking it at all.</blockquote><p>Well, if there are any special events with that behavior, this doesn't change anything; it just joins that list. Again, hooking this event should be rare, so if it's one of those special events, that's fine.</p><blockquote> Really, <code>$.cleanData</code> is bad for the same reason that the <code>DOMSubtreeModified</code> event is bad and was abandoned in favor of <code>MutationObserver</code>. Perhaps it would be better to see if we (or a third party) could build the DOM cleanup functionality on top of that with a shim for when it's not available.</blockquote><p>A quick review indicates that jQuery's been doing a form of <code>cleanData</code> for more than four and a half years, since <a href="http://docs.jquery.com/Release:jQuery_1.2.2" class="ext-link"><span class="icon"></span>v1.2.2</a> when cleanup showed up in <code>remove</code> (which used to be called by <code>empty</code>) starting with line 1,296 of <a href="http://code.google.com/p/jqueryjs/downloads/detail?name=jquery-1.2.2.js" class="ext-link"><span class="icon"></span>jquery-1.2.2.js</a>:</p><pre class="wiki">
+// Prevent memory leaks
+jQuery( "*", this ).add(this).each(function(){
+ jQuery.event.remove(this);
+ jQuery.removeData(this);
+});
+</pre><p>As far as I'm aware, there's been no uproar about it -- and browsers and computers are only getting faster. Until/unless it actually shows up as a real performance problem, worrying about removing it is premature optimization.</p><p><strong>If</strong> jQuery is able at some point to do away with <code>cleanData</code>, that's the time to worry about deprecating this functionality. I don't find it convincing as an argument against in the current reality, particularly not given what people are doing ''today'' to get this functionality. :-)</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:10">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 21, 2012 01:30AM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:10">comment:10</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>component:</th>
+                  <td>
+                    
+                      <span class="change-field-old">unfiled</span> → <span class="change-field-new">manipulation</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>priority:</th>
+                  <td>
+                    
+                      <span class="change-field-old">undecided</span> → <span class="change-field-new">low</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">open</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I'm not convinced we should do anything here but I'll mark the ticket open.</p>
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:11">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed September 07, 2012 10:28AM UTC by <span class="author">oskar.ols@gmail.com</span></span>
+        <a class="ticket-change-link" href="#comment:11">comment:11</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Using a custom event seems like a horribly roundabout way of doing this, when all that is needed to handle it in a very straightforward manner is adding a single trigger.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:12">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed September 07, 2012 09:37PM UTC by <span class="author">Jock Murphy &lt;jock@jockmurphy.com&gt;</span></span>
+        <a class="ticket-change-link" href="#comment:12">comment:12</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I am sorry, but I disagree with both @dmethvin and @oskar.  The problem is that the same code that adds an event (or the like) should have a clean and well defined way to clean itself up.  If you basically require the cleanup to happen manually, or in the onUnload, then it will get missed.</p><p>What @T.J. is proposing IS the straightforward and elegant solution.  I was frankly a bit shocked to learn jQuery didn't have a good solution to this problem.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:13">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed September 08, 2012 02:37PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:13">comment:13</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> The problem is that the same code that adds an event (or the like) should have a clean and well defined way to clean itself up. </blockquote><p>Yes, that is what the special-events interface is for, if the standard cleanup is insufficient. I agree with TJ Crowder about the potential messiness of each event needing its own teardown handler when there are a lot of custom events, so it depends on use case. But the current teardown handler design is very low overhead.</p><p>The "event (or the like)" is what the majority of this discussion is about! Single page applications and MVCs can spend a lot of their time in <code>cleanData</code> already. TJ Crowder's timing test is only showing that the additional *test* is cheap. If someone writes code that depends on an expensively triggered <code>destroy</code> event and makes a popular plugin, we'll start getting reports like <a href="/bugs.jquery.com/ticket/7992">#7992</a> again. So in that aspect I agree with oskar.</p><blockquote> I was frankly a bit shocked </blockquote><p>Sorry to shock, Jock. </p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:14">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed September 09, 2012 01:11AM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:14">comment:14</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>type:</th>
+                  <td>
+                    
+                      <span class="change-field-old">enhancement</span> → <span class="change-field-new">feature</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Bulk change from enhancement to feature.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:15">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed September 17, 2012 06:01PM UTC by <span class="author">gibson042</span></span>
+        <a class="ticket-change-link" href="#comment:15">comment:15</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ 1.9-discuss</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:16">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 14, 2012 10:36PM UTC by <span class="author">mikesherov</span></span>
+        <a class="ticket-change-link" href="#comment:16">comment:16</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+0, Whatever dmethvin thinks.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:17">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 14, 2012 11:36PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:17">comment:17</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>-1</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:18">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 15, 2012 08:56AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:18">comment:18</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:19">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 22, 2012 05:42PM UTC by <span class="author">gnarf</span></span>
+        <a class="ticket-change-link" href="#comment:19">comment:19</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+0, Having found myself wanting something like this, and then figuring out that teardown can actually accomplish it, I'm leaning towards "meh" on this feature.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:20">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 22, 2012 05:51PM UTC by <span class="author">T.J. Crowder &lt;tj@crowdersoftware.com&gt;</span></span>
+        <a class="ticket-change-link" href="#comment:20">comment:20</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:19 gnarf]:</p><blockquote> ...and then figuring out that teardown can actually accomplish it...</blockquote><p>The teardown solution leaves a lot to be desired IMV, not least multiple autonomous handlers, convoluted client code (hooking an event you'll never receive), and of course the completely avoidable duplication (jQuery UI duck punches it, <a href="/bugs.jquery.com/wiki/TinyMCE">TinyMCE</a> monkey-patches it, my stuff adds a teardown, your stuff adds a teardown...).</p><p>jQuery isn't going to stop needing this cleanup any time soon, it just makes sense to open it up to code ''using'' the library as well, esp. with the amazingly trivial cost.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:21">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 29, 2012 05:18PM UTC by <span class="author">mikesherov</span></span>
+        <a class="ticket-change-link" href="#comment:21">comment:21</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>milestone:</th>
+                  <td>
+                    
+                      <span class="change-field-old">None</span> → <span class="change-field-new">1.9</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>owner:</th>
+                  <td>
+                    
+                      <span class="change-field-old">T.J. Crowder &lt;tj@crowdersoftware.com&gt;</span> → <span class="change-field-new">gnarf</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">open</span> → <span class="change-field-new">assigned</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:22">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 14, 2012 07:35AM UTC by <span class="author">jzaefferer</span></span>
+        <a class="ticket-change-link" href="#comment:22">comment:22</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>@dmethvin: what would the cleanData monkey-punching in jQuery UI look like using the special event teardown? See <a href="https://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.widget.js#L15" class="ext-link"><span class="icon"></span>https://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.widget.js#L15</a></p><p>Also, can you elaborate on <a href="/bugs.jquery.com/wiki/MutationObserver">MutationObserver</a> and how that relates to this discussion? The $.cleanData "hook" is synchronous, triggering the destroy event while the node is still in the DOM. <a href="/bugs.jquery.com/wiki/MutationObserver">MutationObserver</a> will collect events and therefore trigger the callback after the node is detached. Could that become a problem in practice?</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:23">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed November 14, 2012 02:04PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:23">comment:23</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> what would the cleanData monkey-punching in jQuery UI look like </blockquote><p>You mean using special events as I proposed above? The cleanData punch could be removed entirely. There would just be a single special event handler in the widget factory for an event like uisanitation:</p><pre class="wiki">
+jQuery.event.special.uisanitation = {
+   teardown: function(){
+      // <code></code> is the DOM element; get the widget ref from that?
+      getWidgetFromElement(this).destroy();
+   }
+};
+</pre><p>Then instead of attaching a "remove" event in the widget create you'd just attach an empty uisanitation event to trigger the teardown and cleanData's own code would take care of the rest:</p><pre class="wiki">
+this._on( true, this.element, {
+  uisanitation: jQuery.noop
+  }
+});
+</pre><blockquote> <a href="/bugs.jquery.com/wiki/MutationObserver">MutationObserver</a> will collect events and therefore trigger the callback after the node is detached. Could that become a problem in practice? </blockquote><p>If the destroyer expected synchronous behavior. What are "remove" events generally used for? They're not part of the public interface for widgets? The stuff done by the default handler looks like it would be safe to do on a detached element and perhaps even better to do that way, since changing an attached element might cause reflows.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:24">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 01, 2013 05:49PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:24">comment:24</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>milestone:</th>
+                  <td>
+                    
+                      <span class="change-field-old">1.9</span> → <span class="change-field-new">None</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:25">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 20, 2014 11:50PM UTC by <span class="author">m_gol</span></span>
+        <a class="ticket-change-link" href="#comment:25">comment:25</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ migrated</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">assigned</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Migrated to <a href="https://github.com/jquery/jquery/issues/1736" class="ext-link"><span class="icon"></span>https://github.com/jquery/jquery/issues/1736</a></p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+</details>
+</div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

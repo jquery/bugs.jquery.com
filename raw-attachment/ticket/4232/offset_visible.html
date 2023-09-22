@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
+    <script>
+      $(function() {
+        var row = $("table tr:first");
+        if (row.is(":visible")) {
+          var tr = row[0];
+          alert("Oops, invisible row is :visible (offsetWidth = " + tr.offsetWidth + "px, offsetHeight = " + tr.offsetHeight + "px)");
+        } else {
+          alert("All is well");
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <table border="1">
+      <tr style="display: none">
+        <td class="name">This row is hidden</td>
+        <td class="addr">Bla bla bla</td>
+      </tr>
+      <tr>
+        <td class="name">This row is visible</td>
+        <td class="addr">Bla bla</td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+Index: test/unit/core.js
+===================================================================
+--- test/unit/core.js	(revision 5830)
++++ test/unit/core.js	(working copy)
+@@ -1388,13 +1388,19 @@
+ });
+ 
+ test("toggleClass(String)", function() {
+-	expect(3);
++	expect(6);
+ 	var e = jQuery("#firstp");
+ 	ok( !e.is(".test"), "Assert class not present" );
+ 	e.toggleClass("test");
+ 	ok( e.is(".test"), "Assert class present" );
+ 	e.toggleClass("test");
+ 	ok( !e.is(".test"), "Assert class not present" );
++	e.toggleClass("test", false);
++	ok( !e.is(".test"), "Assert class not present" );
++	e.toggleClass("test", true);
++	ok( e.is(".test"), "Assert class present" );
++	e.toggleClass("test", false);
++	ok( !e.is(".test"), "Assert class not present" );
+ });
+ 
+ test("removeAttr(String", function() {

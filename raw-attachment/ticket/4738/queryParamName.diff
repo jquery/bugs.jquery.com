@@ -1,0 +1,18 @@
+334,337d333
+< 			var queryParams = {};
+< 			queryParams[options.queryParamName] = lastWord(term);
+< 			queryParams['limit'] = options.max;
+< 
+344c340
+< 
+---
+> 			
+352c348,351
+< 				data: $.extend(queryParams, extraParams),
+---
+> 				data: $.extend({
+> 					q: lastWord(term),
+> 					limit: options.max
+> 				}, extraParams),
+401d399
+<         queryParamName: 'q',

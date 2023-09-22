@@ -1,0 +1,13 @@
+Index: jquery/src/core.js
+===================================================================
+--- jquery/src/core.js	(revision 5759)
++++ jquery/src/core.js	(working copy)
+@@ -1339,7 +1339,7 @@
+ 		// Get window width or height
+ 		return this[0] == window ?
+ 			// Opera reports document.body.client[Width/Height] properly in both quirks and standards
+-			jQuery.browser.opera && document.body[ "client" + name ] ||
++			jQuery.browser.opera  && parseFloat(jQuery.browser.version) < 9.5 && document.body[ "client" + name ] ||
+ 
+ 			// Safari reports inner[Width/Height] just fine (Mozilla and Opera include scroll bar widths)
+ 			jQuery.browser.safari && window[ "inner" + name ] ||

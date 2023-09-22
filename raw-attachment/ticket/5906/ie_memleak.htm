@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
+<meta charset=utf-8 />
+<script>
+$(function() {
+  
+  $('#addlink').click(function(e) {
+    e.preventDefault();
+    var container = $("#container");
+    if (!container.length) {
+        container = $("<div id='container'/>").insertAfter($(this).next());
+    }
+    for(var i =0; i < 4000; i++) {
+      $('<h2>some html...</h2>').appendTo(container).click(function() { 
+        //i think this leads to the leak
+        //nothing needed
+      });
+
+    }
+  });
+  $('#removelink').click(function(e) {
+    e.preventDefault()
+    $('#container').remove();
+  });
+});
+
+</script>
+</head>
+<body>
+  <a href="#" id="addlink">Run...</a>
+  <a href="#" id="removelink">Remove</a>
+  <div id="container"></div>
+</body>
+</html>
+

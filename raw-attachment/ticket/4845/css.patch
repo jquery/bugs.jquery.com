@@ -1,0 +1,21 @@
+Index: css.js
+===================================================================
+--- css.js	(revision 6414)
++++ css.js	(working copy)
+@@ -67,6 +67,16 @@
+ 				// Set the alpha filter to set the opacity
+ 				style.filter = (style.filter || "").replace( /alpha\([^)]*\)/, "" ) +
+ 					(parseInt( value ) + '' == "NaN" ? "" : "alpha(opacity=" + value * 100 + ")");
++
++				// If all we have is 100% opacity, remove the filter attribute to prevent DirectX boggles.
++				if (style.filter=="alpha(opacity=100)")
++				{
++					style.removeAttribute('filter');
++
++					// If there was a class-based opacity assigned, re-set this to 100%.
++					if (elem && elem.currentStyle && elem.currentStyle.filter)
++						style.filter = "alpha(opacity=100)";
++				}
+ 			}
+ 
+ 			return style.filter && style.filter.indexOf("opacity=") >= 0 ?

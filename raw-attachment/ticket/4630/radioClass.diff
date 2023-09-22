@@ -1,0 +1,45 @@
+Index: test/unit/attributes.js
+===================================================================
+--- test/unit/attributes.js	(revision 6340)
++++ test/unit/attributes.js	(working copy)
+@@ -354,3 +354,22 @@
+ 	ok( c.has(x, "hi"), "Check has1" );
+ 	ok( c.has(x, "bar"), "Check has2" );
+ });
++
++test("radioClass(String)", function() {
++	expect(8);
++	var lis = jQuery('#listWithTabIndex li'),
++		li = lis.eq(0).radioClass("test");
++	ok( li.is(".test"), "Check that first li has class" );
++	ok( !lis.not(":eq(0)").is(".test"), "Check that siblings do not have class" );
++	li = lis.eq(1).radioClass("test");
++	ok( li.is(".test"), "Check that first li has class" );
++	ok( !lis.not(":eq(1)").is(".test"), "Check that siblings do not have class" );
++	
++	var els = jQuery('#listWithTabIndex li, #foo p'),
++		first = els.filter(":first-child").radioClass("test"),
++		last = els.filter(":last-child");
++	ok( first.is(".test"), "Check that first-child has class" );
++	ok( !els.not(":first-child").is(".test"), "Check that siblings do not have class" );
++	ok( last.radioClass("test").is(".test"), "Check that last child has class" );
++	ok( !els.not(":last-child").is(".test"), "Check that siblings do not have class" );
++});
+Index: src/attributes.js
+===================================================================
+--- src/attributes.js	(revision 6340)
++++ src/attributes.js	(working copy)
+@@ -148,6 +148,13 @@
+ 			// toggle whole className
+ 			this.className = this.className || classNames === false ? "" : jQuery.data( this, "__className__" ) || "";
+ 		}
++	},
++
++	radioClass: function( classNames ) {
++		jQuery.className.add( this, classNames );
++		jQuery.each( jQuery.sibling( this.parentNode.firstChild, this ), function() {
++			jQuery.className.remove( this, classNames );
++		});
+ 	}
+ }, function(name, fn){
+ 	jQuery.fn[ name ] = function(){

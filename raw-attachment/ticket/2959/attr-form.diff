@@ -1,0 +1,68 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 5709)
++++ core.js	(working copy)
+@@ -1051,34 +1051,38 @@
+ 		// IE elem.getAttribute passes even for style
+ 		if ( elem.tagName ) {
+ 
+-			// These attributes require special treatment
+-			var special = /href|src|style/.test( name );
+-
+-			// Safari mis-reports the default selected property of a hidden option
+-			// Accessing the parent's selectedIndex property fixes it
+-			if ( name == "selected" && jQuery.browser.safari )
+-				elem.parentNode.selectedIndex;
+-
+-			// If applicable, access the attribute via the DOM 0 way
+-			if ( name in elem && notxml && !special ) {
+-				if ( set ){
+-					// We can't allow the type property to be changed (since it causes problems in IE)
+-					if ( name == "type" && jQuery.nodeName( elem, "input" ) && elem.parentNode )
+-						throw "type property can't be changed";
+-
+-					elem[ name ] = value;
++			if( notxml ){
++					
++				// Safari mis-reports the default selected property of a hidden option
++				// Accessing the parent's selectedIndex property fixes it
++				if ( name == "selected" && jQuery.browser.safari )
++					elem.parentNode.selectedIndex;
++	
++				// browsers index elements by id/name on forms, give priority to attributes.
++				if( jQuery.nodeName( elem, 'form' ) && elem.getAttributeNode(name) ){
++					elem = elem.getAttributeNode(name);
++					name = 'nodeValue';
++				}else
++					// These attributes require special treatment
++					var special = /href|src|style/.test( name );
++					
++				// If applicable, access the attribute via the DOM 0 way
++				if ( name in elem && !special ) {
++					if ( set ){
++						// We can't allow the type property to be changed (since it causes problems in IE)
++						if ( name == "type" && jQuery.nodeName( elem, "input" ) && elem.parentNode )
++							throw "type property can't be changed";
++	
++						elem[ name ] = value;
++					}
++	
++					return elem[ name ];
+ 				}
+-
+-				// browsers index elements by id/name on forms, give priority to attributes.
+-				if( jQuery.nodeName( elem, "form" ) && elem.getAttributeNode(name) )
+-					return elem.getAttributeNode( name ).nodeValue;
+-
+-				return elem[ name ];
++	
++				if ( msie && name == "style" )
++					return jQuery.attr( elem.style, "cssText", value );
+ 			}
+ 
+-			if ( msie && notxml &&  name == "style" )
+-				return jQuery.attr( elem.style, "cssText", value );
+-
+ 			if ( set )
+ 				// convert the value to a string (all browsers do this but IE) see #1070
+ 				elem.setAttribute( name, "" + value );

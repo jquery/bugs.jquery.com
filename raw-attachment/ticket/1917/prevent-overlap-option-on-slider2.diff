@@ -1,0 +1,65 @@
+Index: ui/current/ui.slider.js
+===================================================================
+--- ui/current/ui.slider.js	(revision 3944)
++++ ui/current/ui.slider.js	(working copy)
+@@ -102,19 +102,8 @@
+ 		$.data(el, "ui-slider", this);
+ 		o.stepping = parseInt(o.stepping) || (o.steps ? o.maxValue/o.steps : 0);
+ 		o.realValue = (o.maxValue - o.minValue);
+-
+-
++        
+ 		this.handle = options.handle ? $(options.handle, el) : $('.ui-slider-handle', el);
+-		if(this.handle.length == 1) {
+-			this.interaction = new $.ui.mouseInteraction(this.handle[0], options);
+-			this.multipleHandles = false;
+-		} else {
+-			this.interactions = [];
+-			this.handle.each(function() {
+-				self.interactions.push(new $.ui.mouseInteraction(this, options));
+-			});
+-			this.multipleHandles = true;
+-		}
+ 		
+ 		this.element = el;
+ 		$(this.element).addClass("ui-slider");
+@@ -129,6 +118,23 @@
+ 			this.parentSize = $(this.element).outerHeight() - this.handle.outerHeight();
+ 			this.prop = 'top';
+ 		}
++
++		if(this.handle.length == 1) {
++			this.interaction = new $.ui.mouseInteraction(this.handle[0], options);
++			this.multipleHandles = false;
++		} else {
++			this.interactions = [];
++			var _this = this; // self is gone here...
++			this.handle.each(function() {
++			    var mi = new $.ui.mouseInteraction(this, options);
++			    // set initial curValue
++			    var pos = parseInt(this.offsetLeft);
++			    mi.curValue = Math.round((pos/_this.parentSize)*o.realValue);
++			    // add mouse interaction
++				self.interactions.push(mi);
++			});
++			this.multipleHandles = true;
++		}
+ 		
+ 		if(!this.multipleHandles) {
+ 			$(el).bind('click', function(e) { self.click.apply(self, [e]); });
+@@ -157,11 +163,13 @@
+ 			for(var i=0;i<this.interactions.length;i++) {
+ 				if(self == this.interactions[i]) {
+ 					if(this.interactions[i-1]) {
+-						if(this.interactions[i-1].curValue > this.interactions[i].curValue) return this.interactions[i-1].curValue;
++						if(this.interactions[i-1].curValue >= this.interactions[i].curValue)
++						    return this.interactions[i-1].curValue + (self.options.preventOverlap && self.options.stepping ? self.options.stepping : 0);
+ 					}
+ 					
+ 					if(this.interactions[i+1]) {
+-						if(this.interactions[i+1].curValue < this.interactions[i].curValue) return this.interactions[i+1].curValue;
++						if(this.interactions[i+1].curValue <= this.interactions[i].curValue)
++						    return this.interactions[i+1].curValue - (self.options.preventOverlap && self.options.stepping ? self.options.stepping : 0);
+ 					}
+ 				}
+ 			}

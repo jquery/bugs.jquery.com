@@ -1,0 +1,1751 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">#8142 (outerhtml) - jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      :root{--ticket-info-background-color:#ffd;--ticket-info-border-color:#dd9;--ticket-table-border-color:#eed;--ticket-date-text-color:#996;--ticket-description-title-color:#663;--ticket-changes-text-color:#663;--ticket-changes-box-shadow:#f2f2f2}.ticket-info{position:relative;background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);padding:.5em .75em;margin-bottom:.5em}.ticket-number{font-size:1.15rem;font-weight:700;margin-right:.5em}.ticket-info span{font-size:.8125em;font-weight:700}.ticket-resolution,.ticket-status,.ticket-type{text-transform:uppercase}.missing{color:var(--text-color-link-disabled)}.ticket-title{border-bottom:1px solid #bbb;margin-top:1em;padding-bottom:.25em;font-weight:700;font-size:1.1875rem}.ticket-dates{color:var(--ticket-date-text-color);font-size:.8125rem}.ticket-dates p{margin:0 0 .5em}.ticket-properties{width:100%;text-align:left;font-size:.65rem;border-top:1px solid var(--ticket-table-border-color);margin:0}.ticket-properties th{font-weight:400;width:20%}.ticket-properties td,.ticket-properties th{padding:.25em .5em;border-bottom:1px dashed var(--ticket-table-border-color)}.ticket-info-bottom{padding:.5em}.ticket-description{font-size:.8125rem;margin-top:.5em}.ticket-description h2,.ticket-description h3,.ticket-description h4,.ticket-description h5,.ticket-description h6{text-transform:uppercase;font-weight:400}.ticket-description h1{font-size:1.1rem}.ticket-description h2{font-size:1rem}.ticket-description h3{font-size:.9rem}.ticket-description h4{font-size:.8rem}.ticket-description h5{font-size:.75rem}.ticket-description h6{font-size:.7rem}.ticket-description-title{color:var(--ticket-description-title-color);font-size:.75rem}details{padding:.5em 0;font-size:.8125rem}summary{color:var(--text-color-link);font-weight:700;font-size:.875rem;text-decoration:underline;cursor:pointer;text-shadow:.04em .04em var(--text-shadow-color)}.ticket-attachments{font-size:.75em}.ticket-comment-body{width:100%;padding-top:.5em}.ticket-change{margin:1em 0;clear:both}.ticket-change-header{font-size:.875rem;font-weight:700;box-shadow:1.4px 2.8px 5.6px 0 var(--ticket-changes-box-shadow)}.ticket-change-link{font-size:.85em}.ticket-change-content{width:100%}.ticket-changes{background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);color:var(--ticket-changes-text-color);font-size:.7rem;float:right;clear:right;margin:2em 0 1em 1.5em}.ticket-changes th{text-align:right;font-weight:400;text-transform:capitalize}.ticket-changes td,.ticket-changes th{padding:.25em;vertical-align:baseline}.ticket-changes .change-field-new{font-weight:700}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+<div class="flex-column" data-pagefind-body="">
+  
+
+  <nav class="content-nav">
+    <ul class="flex-row">
+      
+        <li>
+          <a href="/bugs.jquery.com/ticket/8141/">← Previous Ticket</a>
+        
+      
+      
+        </li><li>
+          <a href="/bugs.jquery.com/ticket/8143/">Next Ticket →</a>
+        </li>
+      
+    </ul>
+  </nav>
+
+
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="." class="ticket-number">#8142</a>
+      <span class="ticket-status">closed</span>
+      <span class="ticket-type">feature</span>
+      <span class="ticket-resolution">(wontfix)</span>
+    </h3>
+
+    <div class="ticket-dates">
+      <p>Opened February 02, 2011 02:00PM UTC</p>
+      
+        <p>Closed September 22, 2011 02:53PM UTC</p>
+      
+      
+        <p>Last modified February 08, 2013 12:18AM UTC</p>
+      
+    </div>
+  </div>
+
+  <h1 class="ticket-title">outerhtml</h1>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        rasmus@mindplay.dk
+      </td>
+      <th>Owned by:</th>
+      <td>kswedberg</td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        low
+      </td>
+      
+        <th class="missing">Milestone:</th>
+      
+      <td>
+        <a href="/bugs.jquery.com/milestone/1.7">1.7</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>manipulation</td>
+      
+        <th>Version:</th>
+      
+      <td>1.5</td>
+    </tr>
+    <tr>
+      
+        <th class="missing">Keywords:</th>
+      
+      <td></td>
+      
+        <th class="missing">Cc:</th>
+      
+      <td></td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
+    <div class="ticket-description"><p>As pointed out in the thread below, the outerhtml() method seems to be a standard feature expected by many, and it's missing.</p><p><a href="http://stackoverflow.com/questions/2419749/jquery-get-selected-elements-outer-html" class="ext-link"><span class="icon"></span>http://stackoverflow.com/questions/2419749/jquery-get-selected-elements-outer-html</a></p><p>There's a solution for getting the outer HTML with jQuery posted in this thread - I'm not sure if it makes sense to provide a way to ''set'' the outer HTML, or how that would work.</p></div>
+  </div>
+</div>
+
+<details>
+  <summary class="ticket-details-summary">Attachments (0)</summary>
+
+  <ul class="ticket-attachments">
+    
+  </ul>
+</details>
+
+<details open="">
+  <summary class="ticket-details-summary">Change History (45)</summary>
+  
+    <div class="ticket-change flex-column" id="comment:1">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 02, 2011 02:36PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:1">comment:1</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>component:</th>
+                  <td>
+                    
+                      <span class="change-field-old">unfiled</span> → <span class="change-field-new">manipulation</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>owner:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ rwaldron</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>priority:</th>
+                  <td>
+                    
+                      <span class="change-field-old">undecided</span> → <span class="change-field-new">low</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">assigned</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>In the spirit of jQuery.fn.width() having innerWidth and outerWidth variations, I think this is a good addition. </p>
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:2">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 03, 2011 11:20AM UTC by <span class="author">jitter</span></span>
+        <a class="ticket-change-link" href="#comment:2">comment:2</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I'm not convinced of the usefulness of this feature. Can you provide 2 or more use cases where this would be needed in "real life" applications.</p><p>Also the <code>.outerHTML( newcontent )</code> is already available as <code>.replaceWith( newcontent )</code>.</p><p>And you should rarely be needing <code>$(foo).outerHTML()</code>, in most cases your probably want <code>$(foo).clone().....</code> or <code>$(foo).appendTo(...)</code> or something like that.</p><p>Unless there is some really useful use case for this I'm missing, I guess we should stick to <code>$(foo).eq(0).clone(true).wrap("&lt;div&gt;&lt;/div&gt;").html()</code> or maybe provide this as a very small jQuery utility plugin</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:3">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 03, 2011 01:36PM UTC by <span class="author">mindplay</span></span>
+        <a class="ticket-change-link" href="#comment:3">comment:3</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>The use cases of outerhtml() are the same as for html(), only for cases where you want the markup of the container element itself. I'm sure I could provide many "real life" use cases where html() is useful, but I'm pretty sure none of those would be new to anyone.</p><p>One situation where outerhtml() would be preferable to html() is for cases where you need the markup of just one tag - typically end-nodes, like &lt;img&gt; tags for example. There's no direct way to do that at the moment.</p><p>Or in cases where you're dealing with multiple tags, for example a subset of list items, e.g. $('ul#users li.admin') which would include some of the children, but not all of them. In this case you can't simply clone and wrap, since you would be wrapping every individual child node.</p><p>I guess I would say, the value of this function is the same as most of the jQuery functions - most of them don't accomplish anything really fantastic that you couldn't do yourself with a few lines of code; the value is not having to write those few lines of code every time, and/or wondering which approach is most appropriate to accomplish what you want, with what you have.</p><p>In this case, you wouldn't need to worry or care whether you have one element or a list of elements - you just want the outer markup, as a string, without having to make decisions about which approach is best.</p><p>To me, that's the real value of jQuery - less time wasted on micro-management and trivial decision-making, since the jQuery functions handle most of the subtle variations of common tasks.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:4">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 08, 2011 06:48AM UTC by <span class="author">jbasdf</span></span>
+        <a class="ticket-change-link" href="#comment:4">comment:4</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I've needed an outerhtml() several times where the full string of the selected element was required. I've added a obj_to_s method to accomplish this, but it feels like it should be a part of jQuery. I add my vote to the feature.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:5">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 08, 2011 07:23AM UTC by <span class="author">Justin Ball &lt;justinball@gmail.com&gt;</span></span>
+        <a class="ticket-change-link" href="#comment:5">comment:5</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Something else to consider if/when creating an outerhtml() method. The current technique involves using append which results in jQuery parsing out all script tags to have them executed. I have a situation where I don't want the script tags executed. Rather I just want the string that includes the script tags. Below are the relevant comments from this discussion: <a href="http://stackoverflow.com/questions/610995/jquery-cant-append-script-element" class="ext-link"><span class="icon"></span>http://stackoverflow.com/questions/610995/jquery-cant-append-script-element</a></p><p>All of jQuery's insertion methods use a domManip function internally to clean/process elements before and after they are inserted into the DOM. One of the things the domManip function does is pull out any script elements about to be inserted and run them through an "evalScript routine" rather than inject them with the rest of the DOM fragment. It inserts the scripts separately, evaluates them, and then removes them from the DOM.</p><p>I believe that one of the reasons jQuery does this is to avoid "Permission Denied" errors that can occur in Internet Explorer when inserting scripts under certain circumstances. It also avoids repeatedly inserting/evaluating the same script (which could potentially cause problems) if it is within a containing element that you are inserting and then moving around the DOM.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:6">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 08, 2011 09:25PM UTC by <span class="author">Justin Ball &lt;justinball@gmail.com&gt;</span></span>
+        <a class="ticket-change-link" href="#comment:6">comment:6</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>For what it's worth I wrote up my situation here:</p><p><a href="http://www.justinball.com/2011/02/08/converting-a-jquery-object-into-a-string/" class="ext-link"><span class="icon"></span>http://www.justinball.com/2011/02/08/converting-a-jquery-object-into-a-string/</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:7">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 27, 2011 07:06AM UTC by <span class="author">FlipScript</span></span>
+        <a class="ticket-change-link" href="#comment:7">comment:7</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I second (or third) the request for .outerHTML (or similar).</p><p>On my web site, I need to swap out a Flash movie for another.  The &lt;embed&gt; tag has no .html() [meaning, no innerHTML], and even if it did, the Flash movie doesn't update dynamically if the parameter is modified once it is seated.</p><p>However, the movie can be swapped out in all browsers by getting the HTML for the entire tag, changing the movie parameter, and putting the new object back in the original objects place.</p><p>So, this use case would be:</p><p>1. The need for the entire element contents (.outerHTML)</p><p>2. Modifying the elements contents</p><p>3. Doing a .replaceWith() on the original element with the changed contents</p><p>.replaceWith replaces the entire element, but actually getting the contents of the entire element is not entirely intuitive.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:8">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 27, 2011 07:06AM UTC by <span class="author">jboesch</span></span>
+        <a class="ticket-change-link" href="#comment:8">comment:8</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Here's a quick jsfiddle of what outerHTML might look like if it were added to jQuery: <a href="http://jsfiddle.net/jboesch26/3SKsL/1/" class="ext-link"><span class="icon"></span>http://jsfiddle.net/jboesch26/3SKsL/1/</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:9">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed March 27, 2011 05:50PM UTC by <span class="author">ajpiano</span></span>
+        <a class="ticket-change-link" href="#comment:9">comment:9</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">This comes up very regularly in IRC, a lot of people seem to have a need for it and there are several plugins that achieve this end.</span> → <span class="change-field-new">1301248249711453</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>This comes up very regularly in IRC, a lot of people seem to have a need for it and there are several plugins that achieve this end. +1</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:10">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 17, 2011 05:50AM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:10">comment:10</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>owner:</th>
+                  <td>
+                    
+                      <span class="change-field-old strikethrough">rwaldron</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">assigned</span> → <span class="change-field-new">open</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>So while it seems that people expect this, I tend to agree with jitter - the potential for abuse is simply enormous. So many people don't understand the concept of a DOM Element and think that they have to have the HTML to inject an element some place else. If we add outerHTML we're going to see a ton of stuff like: $("ul").append( $("#thing").outerHTML() );</p><p>Let's discuss this in the 1.7 Roadmap meeting.</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:11">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 04, 2011 10:13AM UTC by <span class="author">ddebernardy@yahoo.com</span></span>
+        <a class="ticket-change-link" href="#comment:11">comment:11</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Gets my vote too. I've been bitten by this a few times as well, both with flash and table rows.</p><p>Replying to [comment:10 john]:</p><blockquote> (...) If we add outerHTML we're going to see a ton of stuff like: $("ul").append( $("#thing").outerHTML() );</blockquote><p>Isn't it already possible to do this?</p><pre class="wiki">
+&lt;div id="thing"&gt;
+&lt;li id="in-thing"&gt;blah...&lt;/li&gt;
+&lt;/div&gt;
+... 
+$("ul").append( $("#thing").html() );
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:12">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 04, 2011 02:24PM UTC by <span class="author">timmywil</span></span>
+        <a class="ticket-change-link" href="#comment:12">comment:12</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I'm also with jitter.  In response to the last comment, yes that is possible, but $("ul").append( $("#thing") ) would work just fine without calling outerHTML(), hence the confusion.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:13">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 22, 2011 07:27PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:13">comment:13</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ 1.7-discuss</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Nominating ticket for 1.7 discussion.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:14">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 22, 2011 09:32PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:14">comment:14</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">As pointed out in the thread below, the outerhtml() method seems to be a standard feature expected by many, and it&#39;s missing.&#92;
+&#92;
+http://stackoverflow.com/questions/2419749/jquery-get-selected-elements-outer-html&#92;
+&#92;
+There&#39;s a solution for getting the outer HTML with jQuery posted in this thread - I&#39;m not sure if it makes sense to provide a way to &#39;&#39;set&#39;&#39; the outer HTML, or how that would work.</span> → <span class="change-field-new">As pointed out in the thread below, the outerhtml() method seems to be a standard feature expected by many, and it&#39;s missing.&#92;
+&#92;
+http://stackoverflow.com/questions/2419749/jquery-get-selected-elements-outer-html&#92;
+&#92;
+There&#39;s a solution for getting the outer HTML with jQuery posted in this thread - I&#39;m not sure if it makes sense to provide a way to &#39;&#39;set&#39;&#39; the outer HTML, or how that would work.</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>-1, </p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:15">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 23, 2011 12:27AM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:15">comment:15</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>-1, Official plugin with dom manipulation/selection helpers</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:16">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 23, 2011 04:11AM UTC by <span class="author">timmywil</span></span>
+        <a class="ticket-change-link" href="#comment:16">comment:16</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1, This is done too often.  outerHTML could be used if available and give the user a performance boost over always appending to a disconnected node and calling html.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:17">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 24, 2011 09:12PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:17">comment:17</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">As pointed out in the thread below, the outerhtml() method seems to be a standard feature expected by many, and it&#39;s missing.&#92;
+&#92;
+http://stackoverflow.com/questions/2419749/jquery-get-selected-elements-outer-html&#92;
+&#92;
+There&#39;s a solution for getting the outer HTML with jQuery posted in this thread - I&#39;m not sure if it makes sense to provide a way to &#39;&#39;set&#39;&#39; the outer HTML, or how that would work.</span> → <span class="change-field-new">As pointed out in the thread below, the outerhtml() method seems to be a standard feature expected by many, and it&#39;s missing.&#92;
+&#92;
+http://stackoverflow.com/questions/2419749/jquery-get-selected-elements-outer-html&#92;
+&#92;
+There&#39;s a solution for getting the outer HTML with jQuery posted in this thread - I&#39;m not sure if it makes sense to provide a way to &#39;&#39;set&#39;&#39; the outer HTML, or how that would work.</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+0, Not convinced it's needed, and not sure of the cost/effectiveness of an internal implementation. The clone/wrap seems like it could cause trouble with table component elements</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:18">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 31, 2011 12:05PM UTC by <span class="author">mike@beweb.co.nz</span></span>
+        <a class="ticket-change-link" href="#comment:18">comment:18</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>This would be useful. My use case is I am duplicating a table row and inserting it into a table at a specified row index. I guess I will have to wrap it in a div using clonedRow.wrap("&lt;div&gt;&lt;/div&gt;").html(). Even though I am cloning an element anyway, this is still not an obvious way to get the outerHTML, which is a standard thing you would expect jQuery would provide. </p><p>In some case you don't want to clone the element for perf reasons and it would be good to have a nicely optimised and cross browser way of doing this - exactly where you would hope jQuery would be able to help.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:19">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 03, 2011 01:46PM UTC by <span class="author">john</span></span>
+        <a class="ticket-change-link" href="#comment:19">comment:19</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">As pointed out in the thread below, the outerhtml() method seems to be a standard feature expected by many, and it&#39;s missing.&#92;
+&#92;
+http://stackoverflow.com/questions/2419749/jquery-get-selected-elements-outer-html&#92;
+&#92;
+There&#39;s a solution for getting the outer HTML with jQuery posted in this thread - I&#39;m not sure if it makes sense to provide a way to &#39;&#39;set&#39;&#39; the outer HTML, or how that would work.</span> → <span class="change-field-new">As pointed out in the thread below, the outerhtml() method seems to be a standard feature expected by many, and it&#39;s missing.&#92;
+&#92;
+http://stackoverflow.com/questions/2419749/jquery-get-selected-elements-outer-html&#92;
+&#92;
+There&#39;s a solution for getting the outer HTML with jQuery posted in this thread - I&#39;m not sure if it makes sense to provide a way to &#39;&#39;set&#39;&#39; the outer HTML, or how that would work.</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>-1, I fear that this will be abused by people not understanding what a DOM node is.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:20">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 05, 2011 09:16PM UTC by <span class="author">ajpiano</span></span>
+        <a class="ticket-change-link" href="#comment:20">comment:20</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>description:</th>
+                  <td>
+                    
+                      <span class="change-field-old">As pointed out in the thread below, the outerhtml() method seems to be a standard feature expected by many, and it&#39;s missing.&#92;
+&#92;
+http://stackoverflow.com/questions/2419749/jquery-get-selected-elements-outer-html&#92;
+&#92;
+There&#39;s a solution for getting the outer HTML with jQuery posted in this thread - I&#39;m not sure if it makes sense to provide a way to &#39;&#39;set&#39;&#39; the outer HTML, or how that would work.</span> → <span class="change-field-new">As pointed out in the thread below, the outerhtml() method seems to be a standard feature expected by many, and it&#39;s missing.&#92;
+&#92;
+http://stackoverflow.com/questions/2419749/jquery-get-selected-elements-outer-html&#92;
+&#92;
+There&#39;s a solution for getting the outer HTML with jQuery posted in this thread - I&#39;m not sure if it makes sense to provide a way to &#39;&#39;set&#39;&#39; the outer HTML, or how that would work.</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1, but I think maybe we should make it a getter but not a setter - that seems to be John's main reservation - but I've never seen anyone who's WANTED to use it as a setter...they just want an HTML string.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:21">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 06, 2011 02:35PM UTC by <span class="author">flori</span></span>
+        <a class="ticket-change-link" href="#comment:21">comment:21</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1</p><p>It took me a while to work around this. I ended up with the following workaround:</p><p>$("&lt;div/&gt;").append(select).html()</p><p>"select" was an native HTML select element, I needed it with attributes.</p><p>A clean .outerHtml() would make code a lot more readable.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:22">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 06, 2011 06:47PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:22">comment:22</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-old">1.7-discuss</span> → <span class="change-field-new">needsdocs</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>milestone:</th>
+                  <td>
+                    
+                      <span class="change-field-old">1.next</span> → <span class="change-field-new">1.7</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Will publish a page that explains why outerHTML was not accepted into 1.7</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:23">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 20, 2011 12:49PM UTC by <span class="author">HumanWannabe</span></span>
+        <a class="ticket-change-link" href="#comment:23">comment:23</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I understand that this may actually be an "abuse" case, but I would love an "outerHTML" (only get) for testing purposes. It is common when you have problems in your script to want to check which element causes it. You can of course do this with workarounds (for example add IDs to all your elements and print these) but having the ability to directly print the HTML of the element would be very useful.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:24">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 25, 2011 04:03PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:24">comment:24</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>owner:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ kswedberg</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">open</span> → <span class="change-field-new">assigned</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:25">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 03, 2011 07:21PM UTC by <span class="author">Kyle Adams &lt;kyle@geek.net&gt;</span></span>
+        <a class="ticket-change-link" href="#comment:25">comment:25</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Chalk me up as someone who's run into real life situations where I needed it. I'm also fine with it being a getter only. Here are the two situations I've run into recently on Sourceforge.net:</p><p>Case <a href="/bugs.jquery.com/ticket/1">#1</a>: we log information about various parts of the page - did it load, what loaded, how long did it take to load, etc. We frequently need to do something like $('#dynamic-div a').outerhtml() to capture all the HTML we want to log.</p><p>Case <a href="/bugs.jquery.com/ticket/2">#2</a>: On our download page we initiate a five second countdown before beginning the download. The initial text reads something like &lt;div id="download_text"&gt;Your &lt;a href="/projects/myproject"&gt;My Project&lt;/a&gt; download will begin shortly.". When the countdown begins, we replace the text with "Your {project} download will start in {sn} seconds...". The new string is a template that gets passed into the jQuery countdown plugin we're using. Before we pass it into the plugin we need to plunk $('#download_text a').outerhtml() in place of {project}.</p><p>If there's a non-outerHTML solution and/or if I'm abusing the DOM, I'd love to know.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:26">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed August 11, 2011 03:41PM UTC by <span class="author">tjerk.meesters@gmail.com</span></span>
+        <a class="ticket-change-link" href="#comment:26">comment:26</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Another proposal, without using .clone() and supporting both get and set; i've seen the setter being used in Flash players, such as JW.</p><p>Basically I just enumerate the attributes of the main element in browsers that don't support outerHTML, since I figured that's the least intrusive operation. It does produce a bit more code though :-/</p><p><a href="http://jsfiddle.net/pZHHm/" class="ext-link"><span class="icon"></span>http://jsfiddle.net/pZHHm/</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:27">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed September 22, 2011 02:53PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:27">comment:27</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ wontfix</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">assigned</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Discussed in the 1.7 meeting and voted out due to the issues discussed above. I suppose the docs should add a sentence in the <code>.html()</code> method indicating that operations similar to outerHTML can be done using <code>.wrap()</code> or <code>.replaceWith()</code> for example. </p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:28">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 16, 2012 12:12AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:28">comment:28</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>There are over 25 "likes" on a comment in the documentation for .html() that says:</p><pre class="wiki">
+html() returns the content so whenever I need the whole element, I have to:
+
+wrap("&lt;div&gt;").parent().html()
+
+Isn't it about time we got outerHtml() or something like that?&lt;/div&gt;
+</pre><p>You've got numerous posters in this bug, all requesting an outerHTML.  You have other duplicate bugs, similarly requesting it.</p><p>You have a Stack Overflow post on the issue (<a href="http://stackoverflow.com/questions/2419749/get-selected-elements-outer-html)" class="ext-link"><span class="icon"></span>http://stackoverflow.com/questions/2419749/get-selected-elements-outer-html)</a> with over a hundred upvotes.</p><p>An outerHTML method would be easy to implement (wrap+parent+html) and would make very many jQuery users very happy.  So my question is ... why all the hate on this feature?  Everyone wants it, and the only argument against it amounts to "well if some idiot does something idiotic then he's going to get some idiotic results".</p><p>Idiot devs are going to idiotic things regardless of what jQuery does or doesn't add to its library.  Please, please, stop penalizing every non-idiotic jQuery user for the (purely hypothetical) sins of the idiotic ones ... and add a .outerHtml().</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:29">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 16, 2012 12:33PM UTC by <span class="author">mindplay</span></span>
+        <a class="ticket-change-link" href="#comment:29">comment:29</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Would it make more sense to have the html() method itself support this feature? e.g.:</p><pre class="wiki">
+html() -&gt; inner HTML (existing)
+html(val) -&gt; replace inner HTML (existing)
+html(true) -&gt; outer HTML
+html(val, true) -&gt; replace outer HTML
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:30">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 04, 2012 11:08PM UTC by <span class="author">gcpantazis</span></span>
+        <a class="ticket-change-link" href="#comment:30">comment:30</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Our solution was simply this:</p><p><a href="https://gist.github.com/2871256" class="ext-link"><span class="icon"></span>https://gist.github.com/2871256</a></p><p>But if the concern is simply to prevent inexperienced developers from doing something stupid (as mentioned above), I think what mindplay suggests is a good idea; make outerHTML an optional second parameter of .html(); you'd have to go out of your way (read: want that to happen) to ''make'' it happen.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:31">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 05, 2012 12:33AM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:31">comment:31</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p><a href="/bugs.jquery.com/ticket/11858">#11858</a> is a duplicate of this ticket.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:32">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 13, 2012 05:33AM UTC by <span class="author">gnarf</span></span>
+        <a class="ticket-change-link" href="#comment:32">comment:32</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Replying to [comment:28 anonymous]:&#92;
+&gt; You have a Stack Overflow post on the issue (http://stackoverflow.com/questions/2419749/get-selected-elements-outer-html) with over a hundred upvotes.&#92;
+&gt; &#92;
+&gt; An outerHTML method would be easy to implement (wrap+parent+html) and would make very many jQuery users very happy.  So my question is ... why all the hate on this feature?  Everyone wants it, and the only argument against it amounts to &quot;well if some idiot does something idiotic then he&#39;s going to get some idiotic results&quot;.&#92;
+&gt; &#92;
+&gt; Idiot devs are going to idiotic things regardless of what jQuery does or doesn&#39;t add to its library.  Please, please, stop penalizing every non-idiotic jQuery user for the (purely hypothetical) sins of the idiotic ones ... and add a .outerHtml().&#92;
+&#92;
+And a plugin doesn&#39;t solve this issue, after all it is as simple as:&#92;
+&#92;
+{{{&#92;
+jQuery.fn.outerHTML = function(s) {&#92;
+    return s&#92;
+        ? this.before(s).remove()&#92;
+        : jQuery(&quot;&lt;p&gt;&quot;).append(this.eq(0).clone()).html();&#92;
+};&#92;
+}}}&#92;
+&#92;
+as that 117 vote question from stack overflow gracefully shows.&#92;
+&#92;
+---&#92;
+&#92;
+Personally, I&#39;m +0 on this one, since the implementation is pretty tiny, but I understand the -1 and the +1 view points.&#92;
+&#92;
+-1: .outerHtml is something that isn&#39;t difficult to do without core support, it can easily be implemented in a plugin as shown.  If jQuery Core adds it, we need to start supporting it (and by adding it, we encourage its use)&#92;
+&#92;
++1: Lots of people do want to do this, and most people just expect it to work.&#92;
+</span> → <span class="change-field-new">1339565814629477</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:28 anonymous]:</p><blockquote> You have a Stack Overflow post on the issue (<a href="http://stackoverflow.com/questions/2419749/get-selected-elements-outer-html)" class="ext-link"><span class="icon"></span>http://stackoverflow.com/questions/2419749/get-selected-elements-outer-html)</a> with over a hundred upvotes.  An outerHTML method would be easy to implement (wrap+parent+html) and would make very many jQuery users very happy.  So my question is ... why all the hate on this feature?  Everyone wants it, and the only argument against it amounts to "well if some idiot does something idiotic then he's going to get some idiotic results".  Idiot devs are going to idiotic things regardless of what jQuery does or doesn't add to its library.  Please, please, stop penalizing every non-idiotic jQuery user for the (purely hypothetical) sins of the idiotic ones ... and add a .outerHtml().</blockquote><p>And a plugin can solve this issue, after all it is as simple as:</p><pre class="wiki">
+jQuery.fn.outerHTML = function(s) {
+    return s
+        ? this.before(s).remove()
+        : jQuery("&lt;p&gt;").append(this.eq(0).clone()).html();
+};
+</pre><p>as that 117 vote question from stack overflow gracefully shows.</p><p></p><hr><p></p><p>Personally, I'm +0 on this one, since the implementation is pretty tiny, but I understand the -1 and the +1 view points.</p><p>-1: .outerHtml is something that isn't difficult to do without core support, it can easily be implemented in a plugin as shown.  If jQuery Core adds it, we need to start supporting it (and by adding it, we encourage its use)</p><p>+1: Lots of people do want to do this, and most people just expect it to work.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:33">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 13, 2012 12:40PM UTC by <span class="author">mikesherov</span></span>
+        <a class="ticket-change-link" href="#comment:33">comment:33</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>This is a classic example of "isn't it just as simple as..."? Theoretically, yes. However, jQuery is a public API. When new methods are released, that is a specific endorsement of an idea, and along with that comes support. Support means tests, tests mean bugs, bugs mean edge cases, edge cases mean hours of debug. It's never as simple as it seems.</p><p>Also, the criticism that  the reasons against implementing amount to "well if some idiot does something idiotic then he's going to get some idiotic results" is unfair. Here is a summary of the reasons given, plus one of my own: </p><p>1. easy to implement as a plugin</p><p>2. hazy interactions with tables (which is exactly what a few people are trying to use this for).</p><p>3. similar well-tested API methods do almost the exact same thing</p><p>4. how does this method handle data or events associated with the element being replaced?</p><p>Overall, I'm +0 on this feature. However, I just wanted to point out that the reasons given for not implementing were thoughtfully considered, and the pros and cons weighed. We should continue the discussion, but let's not be reductive here.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:34">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 13, 2012 12:46PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:34">comment:34</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Right on @mikesherov. This is easy to do if we ignore consistency and the details. And if we do that, there will definitely be plenty of tickets arriving here in the tracker to tell us how <code>.outerHTML()</code> is broken for their case. </p><p>If the simple implementation above suits *your* needs, there is no problem at all with you using it. </p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:35">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed June 15, 2012 01:36AM UTC by <span class="author">mindplay</span></span>
+        <a class="ticket-change-link" href="#comment:35">comment:35</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I'm +0 at this point, but I would add this: with apparently hundreds of developers implementing their own version of this, we do have a consistency issue - of these hundreds of different implementations, my guess is maybe 50 of those are going to be largely identical.</p><p>Consistent DOM manipulation - sounds like half the reason jQuery exists in the first place...</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:36">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed July 06, 2012 04:56PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:36">comment:36</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>+1 to adding the outerHTML method. Yes - it can be abused, but avoiding bad development practices can't be helped by limiting the number of options available to the developers.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:37">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed October 15, 2012 08:24PM UTC by <span class="author">mikesherov</span></span>
+        <a class="ticket-change-link" href="#comment:37">comment:37</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>keywords:</th>
+                  <td>
+                    
+                      <span class="change-field-old strikethrough">needsdocs</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:38">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 04, 2012 09:30PM UTC by <span class="author">zuallauz</span></span>
+        <a class="ticket-change-link" href="#comment:38">comment:38</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">We need an outerHtml() function. There&#39;s the $(&#39;#element&#39;).html() function which is essentially an inner HTML function which copies all the html inside the #element tag. But why can&#39;t we copy the whole #element tag including its id, classes, attributes, events and its html contents easily?&#92;
+&#92;
+For example, how do you copy the exact HTML of an img tag including all of its attributes? Ok lets say you go up one level to the parent element then do a .html() on that. Ok that will work for this case. But lets say you have other HTML or img tags inside that parent that you don&#39;t want to copy. What if we just want the entire HTML of one img tag including its id, classes, attributes, events etc?&#92;
+&#92;
+According to [http://stackoverflow.com/questions/2419749/get-selected-elements-outer-html this StackOverflow post] we need to do something like this:&#92;
+&#92;
+{{{&#92;
+$(&#39;#imgElement&#39;).clone().wrap(&#39;&lt;p&gt;&#39;).parent().html();&#92;
+}}}&#92;
+&#92;
+This basically takes a copy of the entire #imgElement into memory, then we wrap it in paragraph tags, then we go up a level to the paragraph tag and get the inner HTML on that to get the entire #element tag&#39;s HTML. It&#39;s a clever solution to the problem, but lets be honest, it&#39;s a kludge. We shouldn&#39;t need to do a big line like that. Everyone needing an outerHtml() function has to do something like this because it&#39;s not a core jQuery function.&#92;
+&#92;
+Now honestly how much extra work is it going to create in bug tickets/support by adding a small utility function to get the outer HTML? Not much if any. All you need is a simple explanation of what .html() does and what .outerHtml() does. For example the HTML:&#92;
+&#92;
+{{{&#92;
+&lt;p class=&quot;person&quot; data-name=&quot;Bob Brown&quot;&gt;&#92;
+   &lt;span&gt;abc 123&lt;/span&gt;&#92;
+&lt;/p&gt;&#92;
+}}}&#92;
+.html() returns:&#92;
+{{{&#92;
+&lt;span&gt;abc 123&lt;/span&gt;&#92;
+}}}&#92;
+.outerHtml() returns:&#92;
+{{{&#92;
+&lt;p class=&quot;person&quot; data-name=&quot;Bob Brown&quot;&gt;&#92;
+   &lt;span&gt;abc 123&lt;/span&gt;&#92;
+&lt;/p&gt;&#92;
+}}}&#92;
+&#92;
+So easy. In short no-one is going to get confused by that and you&#39;re suddenly going to get an influx of bug requests. Also the code to do this is only going to increase the size of jQuery by a few bytes. I dislike the idea of it being a plugin, because then no-one knows about it and something this useful and fundamental should really be a core feature.&#92;
+&#92;
++1 Please re-open this ticket and vote on for jQuery 1.9!</span> → <span class="change-field-new">1354656776824240</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>We need an outerHtml() function. There's the $('#element').html() function which is essentially an inner HTML function which copies all the html inside the #element tag. But why can't we copy the whole #element tag including its id, classes, attributes, events and its html contents easily?</p><p>For example, how do you copy the exact HTML of an img tag including all of its attributes? Ok lets say you go up one level to the parent element then do a .html() on that. Ok that will work for this case. But lets say you have other HTML or img tags inside that parent that you don't want to copy. What if we just want the entire HTML of one img tag including its id, classes, attributes, events etc?</p><p>According to <a href="http://stackoverflow.com/questions/2419749/get-selected-elements-outer-html" class="ext-link"><span class="icon"></span>this <a href="/bugs.jquery.com/wiki/StackOverflow">StackOverflow</a> post</a> we need to do something like this:</p><pre class="wiki">
+$('#imgElement').clone().wrap('&lt;p&gt;').parent().html();
+</pre><p>This basically takes a copy of the entire #imgElement into memory, then we wrap it in paragraph tags, then we go up a level to the paragraph tag and get the inner HTML on that to get the entire #element tag's HTML. It's a clever solution to the problem, but lets be honest, it's a kludge. We shouldn't need to do a big line like that. Everyone needing an outerHtml() function has to do something like this because it's not a core jQuery function.</p><p>Now honestly how much extra work is it going to create in bug tickets/support by adding a small utility function to get the outer HTML? Not much if any. All you need is a simple explanation of what .html() does and what .outerHtml() does. For example the HTML:</p><pre class="wiki">
+&lt;p class="person" data-name="Bob Brown"&gt;
+   &lt;span&gt;abc 123&lt;/span&gt;
+&lt;/p&gt;
+</pre><p>.html() returns:</p><pre class="wiki">
+&lt;span&gt;abc 123&lt;/span&gt;
+</pre><p>.outerHtml() returns:</p><pre class="wiki">
+&lt;p class="person" data-name="Bob Brown"&gt;
+   &lt;span&gt;abc 123&lt;/span&gt;
+&lt;/p&gt;
+</pre><p>So easy. In short no-one is going to get confused by that and you're not suddenly going to get an influx of bug requests. Also the code to do this is only going to increase the size of jQuery by a few bytes. I dislike the idea of it being a plugin, because then no-one knows about it and something this useful and fundamental should really be a core feature.</p><p>+1 Please re-open this ticket and vote on for jQuery 1.9!</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:39">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 04, 2012 09:39PM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:39">comment:39</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> We need an outerHtml() function.</blockquote><p>You just posted one. Use it. That doesn't have to go into jQuery itself for you to use it, just add that line to your own code if it suits your needs and you understand its limitations.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:40">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 05, 2012 09:27PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:40">comment:40</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Isn't the whole <code>.clone().wrap('&lt;p&gt;').parent().html()</code> way less efficient than <code>[0].outerHTML</code>, when <code>outerHTML</code> is available?</p><p>FWIW, +1 from me.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:41">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 27, 2012 09:58PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:41">comment:41</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>What I wanted to do (quite many times) is replace the whole -- outdated -- content of a container element (div) with some new html content, </p><p>like this:</p><pre class="wiki">
+var $container=$('#container');
+var $span = $('&lt;span&gt;').addClass('hot').append('fresh news');
+
+$container.html($span[0].outerHTML);
+</pre><p>what I finally did was:</p><pre class="wiki">
+$container.html('').append($span);
+</pre><p>hope this helps anyone.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:42">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed December 27, 2012 10:04PM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:42">comment:42</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>sorry, just realized there's an .empty() for the .html('') above:</p><pre class="wiki">
+$container.empty().append($span);
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:43">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed January 31, 2013 10:32PM UTC by <span class="author">Bill</span></span>
+        <a class="ticket-change-link" href="#comment:43">comment:43</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>For what it's worth, here's another use case:</p><p>I have a list of links that exist as DOM nodes and I want to render them in a comma delimited list. Essentially, I'd like to do this:</p><pre class="wiki">
+listoflinks.append(link.outerHtml());
+jQuery('&lt;td&gt;').append(listoflinks.join())
+</pre><p>This would be useful for any kind of mixed content manipulation.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:44">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 08, 2013 12:03AM UTC by <span class="author">Tomas Sandven &lt;tomas191191@gmail.com&gt;</span></span>
+        <a class="ticket-change-link" href="#comment:44">comment:44</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <h2>Use case:</h2><p>While developing a <a href="/bugs.jquery.com/wiki/JavaScript">JavaScript</a> application I have my controllers set to reload templates using Ajax and re-render them every 2 seconds or so. I would only like to update the HTML if the template or contents has changed though -something like this would be nice:</p><pre class="wiki">
+var html = template.render('header', {'size': this.size});
+
+if(html != this.el.outerHtml()) {
+    this.el.replace($(html));
+}
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:45">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 08, 2013 12:18AM UTC by <span class="author">dmethvin</span></span>
+        <a class="ticket-change-link" href="#comment:45">comment:45</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I's a pretty wasteful design, sending the entire unchanged data set from the server and re-rendering it, then throwing it away if it turns out you rendered the same thing last time. </p><p>So the lack of <code>.outerHtml()</code> is the least of your worries, but if you really need it: <a href="http://plugins.jquery.com/outerHtml/" class="ext-link"><span class="icon"></span>http://plugins.jquery.com/outerHtml/</a></p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</details>
+</div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

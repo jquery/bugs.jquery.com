@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<script type="text/javascript">
+			Object.prototype.methodExists = function(methodName) {
+				window.defaultStatus+= methodName.target.name + ":methodExists,";
+
+				return (typeof(this[methodName]) == "function");
+			};
+		</script>
+
+		<script type="text/javascript" src="jquery.js"></script>
+	</head>
+
+	<body>
+		<form action="javascript://">
+			<p>
+				abc: <input type="text" name="abc" /><br />
+				xyz: <input type="text" name="xyz" />
+			</p>
+		</form>
+
+		<script type="text/javascript">
+			$(document.forms[0].abc).bind(
+				"focus",
+				function(e) {
+					window.defaultStatus+= e.target.name + ":" + e.type + ",";
+				}
+			);
+		</script>
+	</body>
+</html>

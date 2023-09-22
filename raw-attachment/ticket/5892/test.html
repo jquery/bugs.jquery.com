@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>Test</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+
+<input type="text" name="text1" id="text1" />
+<input type="text" name="text2" id="text2" />
+<button type="button" name="button1" id="button1" />Button</button>
+<p><strong>Steps to reproduce:</strong></p>
+<ol>
+	<li>Type "abc" in the first text input element</li>
+	<li>Hit tab or click elsewhere on the page to trigger the change event - you should see an alert</li>
+	<li>Click the button to set the value of the first text element to ""</li>
+	<li>Type "abc" in the first text input element again</li>
+	<li>Hit tab or click elsewhere on the page to trigger the change event again</li>
+</ol>
+
+<p><strong>Expected:</strong></p>
+
+<p>The alert appears for a second time.</p>
+
+<p><strong>Actual:</strong></p>
+
+<p>The alert does not appear.</p>
+
+<p><strong>Notes:</strong></p>
+
+<p>This only occurs in Internet Explorer 6-8 using jQuery 1.4.0. Previous versions of jQuery do not exhibit this behavior.</p>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('input').change(function() {
+		alert('Change event works');
+	});
+	
+	$('#button1').click(function() {
+		$('input').val('');
+	});
+});
+</script>
+
+</body>
+
+</html>

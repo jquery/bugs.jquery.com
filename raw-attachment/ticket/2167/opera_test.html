@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>jquery</title>
+
+<script type="text/javascript" src="./jquery-1.2.2.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){	
+	for(var i in jQuery.browser) {
+		$("div#a").append(i + ": " + jQuery.browser[i] + '<br>');
+	}
+	
+	$("div#a").append("window.ActiveXObject: " + window.ActiveXObject + '<br>');
+	
+	$.get(location.href, function(data){
+		$("div#a").append($("p", data));
+	});
+});
+</script>
+</head>
+<body>
+<div><p>Test document</p></div>
+<div id="a"></div>
+</body>
+</html>

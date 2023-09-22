@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC
+    "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<script src="http://dev.jquery.com/view/tags/ui/1.5b2/jquery-1.2.4a.js" type="text/javascript"></script>
+<script src="http://dev.jquery.com/view/tags/ui/1.5b2/ui.base.js" type="text/javascript"></script>
+<script src="http://dev.jquery.com/view/tags/ui/1.5b2/ui.sortable.js" type="text/javascript"></script>
+<script language="javascript">
+$(window).bind('load', function(){
+    $("#in").sortable({ connectWith: ['#out'], revert: true, containment: 'document' });
+    $("#out").sortable({ connectWith: ['#in'], revert: true });
+    $("#in-b").sortable({ connectWith: ['#out-b'], revert: true, containment: 'document' });
+    $("#out-b").sortable({ connectWith: ['#in-b'], revert: true });
+});
+</script>
+<style type="text/css">
+ul { list-style-type: none; margin: 0; padding: 0; }
+li { margin: 0; padding: 0; }
+</style>
+</head>
+<body>
+  <p>This page contains two examples of <em>connected</em> jQuery UI sortable lists.<p>
+  <p>On the tested browsers*, example #1 exhibits an undesirable side-effect whereby items dragged from one list to another become invisible until they're dropped.  It seems to be to-do with the CSS "overflow" attribute.  Example #2 shows the desired behaviour by disabling overflow.</p>
+
+  <h3>Example #1</h3>
+  <p style="font-size:small;">Drag "out li 1" across to the "in" list to see <strong>the problem</strong>.  You must be using one of the tested problematic browsers* to see the problem.</p>
+  <div style="width: 130px; float: left;">
+    <ul id="in">
+      <li>#in li 1</li>
+      <li>#in li 2</li>
+      <li>#in li 3</li>
+    </ul>
+  </div>
+  <div style="width: 130px; height: 40px; position: relative; float: left; overflow-y: scroll;">
+    <ul id="out">
+      <li>#out li 1</li>
+      <li>#out li 2</li>
+      <li>#out li 3</li>
+    </ul>
+  </div>
+
+  <br style="clear: both;" />
+
+  <h3>Example #2</h3>
+  <p style="font-size:small;">Drag "out li 1" across to the "in" list to see the <strong>desired behaviour</strong>.</p>
+  <div style="width: 130px; float: left;">
+    <ul id="in-b">
+      <li>#in li 1</li>
+      <li>#in li 2</li>
+      <li>#in li 3</li>
+    </ul>
+  </div>
+  <div style="width: 130px; float: left;">
+    <ul id="out-b">
+      <li>#out li 1</li>
+      <li>#out li 2</li>
+      <li>#out li 3</li>
+    </ul>
+  </div>
+
+  <br style="clear: both;" />
+
+  <p style="font-size: small;">* Tested browsers: IE7 XP; Fx2 XP; Fx3b5 Leopard; Safari 3.1 (5525.13) Leopard</p>
+</body>
+</html>

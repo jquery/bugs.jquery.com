@@ -1,0 +1,38 @@
+Index: ui.slider.js
+===================================================================
+--- ui.slider.js	(révision 5249)
++++ ui.slider.js	(copie de travail)
+@@ -125,6 +125,7 @@
+ 		if (!isNaN(o.startValue))
+ 			this.moveTo(o.startValue, 0, true);
+ 		
++		this.saveSize();
+ 		//If we only have one handle, set the previous handle to this one to allow clicking before selecting the handle
+ 		if(this.handle.length == 1) this.previousHandle = this.handle;
+ 		if(this.handle.length == 2 && o.range) this.createRange();
+@@ -184,6 +185,7 @@
+ 		focus: function(handle,hard) {
+ 			this.currentHandle = $(handle).addClass('ui-slider-handle-active');
+ 			if(hard) this.currentHandle.parent()[0].focus();
++			this.saveSize();
+ 		},
+ 		blur: function(handle) {
+ 			$(handle).removeClass('ui-slider-handle-active');
+@@ -209,9 +211,16 @@
+ 			if(!axis) axis = this.options.axis == "vertical" ? 2 : 1;
+ 			return ((value - this.options.min[axis == 1 ? "x" : "y"]) / this.options.realMax[axis == 1 ? "x" : "y"]) * (this.actualSize[axis == 1 ? "width" : "height"] - this.handleSize(null,axis));
+ 		},
++		saveSize: function() {
++			var self = this;
++			this.handleSavedSize = this.handle.map(function(elt) {
++				var h = $(self.handle[elt]);
++				return {width: h.outerWidth(), height: h.outerHeight()};
++			});
++		},
+ 		handleSize: function(handle,axis) {
+ 			if(!axis) axis = this.options.axis == "vertical" ? 2 : 1;
+-			return $(handle != undefined && handle !== null ? this.handle[handle] : this.currentHandle)[axis == 1 ? "outerWidth" : "outerHeight"]();	
++			return (handle != undefined && handle !== null ? this.handleSavedSize[handle] : this.handleSavedSize[this.handleIndex()])[axis == 1 ? "width" : "height"];
+ 		},
+ 		click: function(e) {
+ 		

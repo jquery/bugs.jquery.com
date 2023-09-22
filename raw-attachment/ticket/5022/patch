@@ -1,0 +1,14 @@
+--- a/jquery-nightly.js	2009-07-27 05:46:41.000000000 -0700
++++ b/jquery-nightly.js	2009-08-06 10:48:55.000000000 -0700
+@@ -2464,7 +2464,10 @@
+ 					[ 0, "", "" ];
+ 
+ 				// Go to html and back, then peel off extra wrappers
+-				div.innerHTML = wrap[1] + elem + wrap[2];
++				if ( jQuery.isXMLDoc(div) )
++					div = new DOMParser().parseFromString('<div>' + wrap[1] + elem + wrap[2] + '</div>', context.contentType).documentElement;
++				else
++					div.innerHTML = wrap[1] + elem + wrap[2];
+ 
+ 				// Move to the right depth
+ 				while ( wrap[0]-- ) {

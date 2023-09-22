@@ -1,0 +1,45 @@
+Index: selector.js
+===================================================================
+--- selector.js	(revisione 2158)
++++ selector.js	(copia locale)
+@@ -317,7 +317,7 @@
+ 		while ( t  && t != last ) {
+ 			last = t;
+ 
+-			var p = jQuery.parse, m;
++			var p = jQuery.parse, m, f;
+ 
+ 			for ( var i = 0; p[i]; i++ ) {
+ 				m = p[i].exec( t );
+@@ -327,9 +327,11 @@
+ 					t = t.substring( m[0].length );
+ 
+ 					// Re-organize the first match
+-					if ( jQuery.expr[ m[1] ]._resort )
+-						m = jQuery.expr[ m[1] ]._resort( m );
+-
++					f = jQuery.expr[ m[1] ];
++          if ( f._resort )
++						m = f._resort( m );
++          f = jQuery.expr[ m[1] ];
++          
+ 					m[2] = m[2].replace(/\\/g, "");
+ 
+ 					break;
+@@ -350,13 +352,13 @@
+ 
+ 			// Otherwise, find the expression to execute
+ 			else {
+-				var f = jQuery.expr[m[1]];
++				var f1 = f;
+ 				if ( typeof f != "string" )
+-					f = jQuery.expr[m[1]][m[2]];
++					f = f[m[2]];
+ 
+ 				// Build a custom macro to enclose it
+ 				eval("f = function(a,i){" +
+-					( jQuery.expr[ m[1] ]._prefix || "" ) +
++					( f1._prefix || "" ) +
+ 					"return " + f + "}");
+ 
+ 				// Execute it against the current filter

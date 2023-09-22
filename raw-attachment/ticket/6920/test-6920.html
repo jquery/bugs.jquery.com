@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>test</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+</head>
+<body>
+
+<select name="venCod" class="prevNext" onChange="alert(this.value)">
+<option value="123">Item 1</option>
+<option value="456">Item 2</option>
+<option value="789">Item 3</option>
+<option value="012">Item 4</option>
+<option value="345" selected>Item 5</option>
+<option value="678">Item 6</option>
+<option value="901">Item 7</option>
+<option value="234">Item 8</option>
+<option value="567">Item 9</option>
+</select>
+
+<script type="text/javascript">
+
+$(function(){
+
+$("select.prevNext")
+  .before("<a href=# class=prev >&lt;</a>")
+  .after("<a href=# class=next >&gt;</a>")
+  .siblings("a.prev,a.next")
+	.click(function(){
+		var $sel = $(this).siblings("select");
+		if ( $(this).hasClass("prev") ) var cod = $sel.children("option[selected]").prev("option").val();
+		else var cod = $sel.children("option[selected]").next("option").val();
+		if ( cod ) $sel.val(cod).change();
+		status = cod + ' = ' + $sel.val();
+	});
+
+});
+
+</script>
+</body>
+</html>

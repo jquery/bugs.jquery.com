@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Clone Test</title>
+
+</head>
+
+<body>
+
+<form id="test" method="post">
+	<textarea id="test_textarea" name="something"></textarea>
+	<input type="button" id="clone" value="Clone"></input>
+</form>
+
+<h2>Cloned</h2>
+<form id="cloned" method="post"></form>
+
+<h2>Cloned(true)</h2>
+<form id="cloned_all" method="post"></form>
+
+<script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#clone").click(function(){
+			var $text = $("#test_textarea");
+			var $clone = $text.clone();
+			var $clone_all = $text.clone(true);
+			
+			$("#cloned").html($clone);
+			$("#cloned_all").html($clone_all);
+		});
+	});
+</script>
+
+</body>
+</html>

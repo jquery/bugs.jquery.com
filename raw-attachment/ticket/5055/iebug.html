@@ -1,0 +1,62 @@
+<head>
+<script src="jquery-1.3.1.js"></script>
+<script>
+/*
+This script demos a problem in IE when a button, when clicked,
+is replaced with an input field. IE ignores calls to set focus to it. 
+
+This is shown for the first button.
+
+There is a workaround for it, which involves setting a timeout on the focus
+request. This works when the button is clicked, as shown on the second button.
+
+However it does not work when the button 'clicks' because it (a) has focus and 
+(b) the user hits <return>. In this case, you need to do two more things. First
+you have to move focus to some other button, and second, the body needs to have 
+a handler for keypress events that refocuses the input field.
+
+Workarounds are unnecessary in FF and Chrome.
+*/
+
+function putinput1() {
+  $('#replace1').html('Focus gone: <input type="text" width=20 id="typeme1" name="typeme"/>');
+  $('#typeme1').focus();
+}
+
+function putinput2() {
+  $('#replace2').html('Focus here: <input type="text" width=20 id="typeme2" name="typeme"/>');
+  setTimeout(function() {$('#typeme2').focus()}, 0)
+}
+
+function putinput3() {
+  $('#replace3').html('Focus here: <input type="text" width=20 id="typeme3" name="typeme"/>');
+  setTimeout(function() {
+       $('#change1').focus(); 
+       $('#typeme3').focus()
+  }, 0)
+}
+
+$(document).ready( function() {
+    $('#change1').click( putinput1 );
+    $('#change2').click( putinput2 );
+    $('#change3').click( putinput3 ).focus();
+    $('body').keypress(function() { 
+    // needed for third button to work
+        setTimeout( function() {$('#typeme3').focus()},0); 
+     }
+  )
+  } 
+);
+
+</script>
+<body>
+<div id='replace1'>
+<button id="change1" >replace me with an input field, but focus lost</button>
+</div>
+<div id='replace2'>
+<button id="change2">replace me with an input field, but focus works</button>
+</div>
+<div id='replace3'>
+<button id="change3">On load, this has focus</button>
+</div>
+</body>

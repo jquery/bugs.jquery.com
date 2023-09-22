@@ -1,0 +1,77 @@
+<html>
+<head>
+	<title>
+		Test Case - clone problem in IE (tables)
+	</title>
+    <script type="text/javascript" src="jquery.js"></script>
+
+	<script>
+
+		
+		var controlcellstring = "<td class='controlcell'>Number of cells in row: <a href='#' class='buttontest'>click here</a></td>";
+		var maincellstring = "<td>content</td>";
+		var mainrowstring = "<tr class='tableconstructrow'></tr>";
+
+		$(document).ready(function() {
+
+			$("#buttonaddrow").click(function() {
+				addrow();
+				return false;
+			});
+
+			var table = $("<table id='tableconstruct' cellspacing='10'></table>");
+			var row = $(mainrowstring).append(controlcellstring).append($(maincellstring)).append($(maincellstring));
+			$("#tablecontructholder").append(table.append(row));
+
+			applyeventhandlers();
+ 		});
+
+
+		function applyeventhandlers(context)
+		{
+			$(".buttontest", context).click(function() {
+				alert($(this).parents(".tableconstructrow").children().length);
+				return false;
+			});
+		}
+
+		function addrow()
+		{
+			var tbody = $("#tableconstruct").children();
+			var newrow = tbody.children(":last").clone(true);
+			//var newrow = tbody.children(":last").clone();
+			//applyeventhandlers(newrow);
+			newrow.appendTo(tbody);
+		}
+
+
+	</script>
+
+	<style type="text/css">
+	
+		td{
+		background-color:#f0f0f0;
+		}
+    	.tableconstructrow, #tableconstruct
+		{
+		background-color:#aaaaff;
+		}
+    
+    </style>
+</head>
+<body>
+
+
+	<div>
+    	<div id='controlpanel'>
+            <a href='#' id='buttonaddrow'>Add Row</a>
+        </div>
+
+		<div id='tablecontructholder'></div>
+
+	</div>
+
+
+
+
+</body>

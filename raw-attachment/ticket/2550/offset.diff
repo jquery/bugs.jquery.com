@@ -1,0 +1,49 @@
+Index: src/offset.js
+===================================================================
+--- src/offset.js	(revision 5084)
++++ src/offset.js	(working copy)
+@@ -2,14 +2,14 @@
+ // Originally By Brandon Aaron, part of the Dimension Plugin
+ // http://jquery.com/plugins/project/dimensions
+ jQuery.fn.offset = function() {
+-	var left = 0, top = 0, elem = this[0], results;
++	var left = 0, top = 0, elem = this[0], results, b = jQuery.browser;
+ 	
+-	if ( elem ) with ( jQuery.browser ) {
++	if ( elem ){
+ 		var parent       = elem.parentNode, 
+ 		    offsetChild  = elem,
+ 		    offsetParent = elem.offsetParent, 
+ 		    doc          = elem.ownerDocument,
+-		    safari2      = safari && parseInt(version) < 522 && !/adobeair/i.test(userAgent),
++		    safari2      = b.safari && parseInt(version) < 522 && !/adobeair/i.test(userAgent),
+ 		    fixed        = jQuery.css(elem, "position") == "fixed";
+ 	
+ 		// Use getBoundingClientRect if available
+@@ -41,7 +41,7 @@
+ 			
+ 				// Mozilla and Safari > 2 does not include the border on offset parents
+ 				// However Mozilla adds the border for table or table cells
+-				if ( mozilla && !/^t(able|d|h)$/i.test(offsetParent.tagName) || safari && !safari2 )
++				if ( b.mozilla && !/^t(able|d|h)$/i.test(offsetParent.tagName) || b.safari && !safari2 )
+ 					border( offsetParent );
+ 					
+ 				// Add the document scroll offsets if position is fixed on any offsetParent
+@@ -62,7 +62,7 @@
+ 					add( -parent.scrollLeft, -parent.scrollTop );
+ 			
+ 				// Mozilla does not add the border for a parent that has overflow != visible
+-				if ( mozilla && jQuery.css(parent, "overflow") != "visible" )
++				if ( b.mozilla && jQuery.css(parent, "overflow") != "visible" )
+ 					border( parent );
+ 			
+ 				// Get next parent
+@@ -72,7 +72,7 @@
+ 			// Safari <= 2 doubles body offsets with a fixed position element/offsetParent or absolutely positioned offsetChild
+ 			// Mozilla doubles body offsets with a non-absolutely positioned offsetChild
+ 			if ( (safari2 && (fixed || jQuery.css(offsetChild, "position") == "absolute")) || 
+-				(mozilla && jQuery.css(offsetChild, "position") != "absolute") )
++				(b.mozilla && jQuery.css(offsetChild, "position") != "absolute") )
+ 					add( -doc.body.offsetLeft, -doc.body.offsetTop );
+ 			
+ 			// Add the document scroll offsets if position is fixed

@@ -1,0 +1,45 @@
+<html>
+   <head>
+      <!--
+           tested in:
+
+           IE 8.0.7600.16385
+           Chrome 4.1.249.1030 beta (40990)
+        -->
+      <style>
+         #red
+         {
+            background-color: #FF0000;
+         }
+
+         #blue
+         {
+            background-color: #0000FF;
+            display:          none;
+            filter:           alpha(opacity=50);
+            opacity:          0.5;
+         }
+
+         #red,
+         #blue
+         {
+            width:            400px;
+            height:           400px;
+         }
+      </style>
+      <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+   </head>
+   <body>
+      <div id="red">
+         <div id="blue">
+         </div>
+      </div>
+
+      <script type="text/javascript">
+         jQuery(document).ready(function()
+         {
+            jQuery('#blue').fadeIn('slow');
+         });
+      </script>
+   </body>
+</html>

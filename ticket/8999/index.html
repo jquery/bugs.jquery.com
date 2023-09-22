@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">#8999 (ajax bug in Opera 11) - jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      :root{--ticket-info-background-color:#ffd;--ticket-info-border-color:#dd9;--ticket-table-border-color:#eed;--ticket-date-text-color:#996;--ticket-description-title-color:#663;--ticket-changes-text-color:#663;--ticket-changes-box-shadow:#f2f2f2}.ticket-info{position:relative;background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);padding:.5em .75em;margin-bottom:.5em}.ticket-number{font-size:1.15rem;font-weight:700;margin-right:.5em}.ticket-info span{font-size:.8125em;font-weight:700}.ticket-resolution,.ticket-status,.ticket-type{text-transform:uppercase}.missing{color:var(--text-color-link-disabled)}.ticket-title{border-bottom:1px solid #bbb;margin-top:1em;padding-bottom:.25em;font-weight:700;font-size:1.1875rem}.ticket-dates{color:var(--ticket-date-text-color);font-size:.8125rem}.ticket-dates p{margin:0 0 .5em}.ticket-properties{width:100%;text-align:left;font-size:.65rem;border-top:1px solid var(--ticket-table-border-color);margin:0}.ticket-properties th{font-weight:400;width:20%}.ticket-properties td,.ticket-properties th{padding:.25em .5em;border-bottom:1px dashed var(--ticket-table-border-color)}.ticket-info-bottom{padding:.5em}.ticket-description{font-size:.8125rem;margin-top:.5em}.ticket-description h2,.ticket-description h3,.ticket-description h4,.ticket-description h5,.ticket-description h6{text-transform:uppercase;font-weight:400}.ticket-description h1{font-size:1.1rem}.ticket-description h2{font-size:1rem}.ticket-description h3{font-size:.9rem}.ticket-description h4{font-size:.8rem}.ticket-description h5{font-size:.75rem}.ticket-description h6{font-size:.7rem}.ticket-description-title{color:var(--ticket-description-title-color);font-size:.75rem}details{padding:.5em 0;font-size:.8125rem}summary{color:var(--text-color-link);font-weight:700;font-size:.875rem;text-decoration:underline;cursor:pointer;text-shadow:.04em .04em var(--text-shadow-color)}.ticket-attachments{font-size:.75em}.ticket-comment-body{width:100%;padding-top:.5em}.ticket-change{margin:1em 0;clear:both}.ticket-change-header{font-size:.875rem;font-weight:700;box-shadow:1.4px 2.8px 5.6px 0 var(--ticket-changes-box-shadow)}.ticket-change-link{font-size:.85em}.ticket-change-content{width:100%}.ticket-changes{background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);color:var(--ticket-changes-text-color);font-size:.7rem;float:right;clear:right;margin:2em 0 1em 1.5em}.ticket-changes th{text-align:right;font-weight:400;text-transform:capitalize}.ticket-changes td,.ticket-changes th{padding:.25em;vertical-align:baseline}.ticket-changes .change-field-new{font-weight:700}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+<div class="flex-column" data-pagefind-body="">
+  
+
+  <nav class="content-nav">
+    <ul class="flex-row">
+      
+        <li>
+          <a href="/bugs.jquery.com/ticket/8998/">← Previous Ticket</a>
+        
+      
+      
+        </li><li>
+          <a href="/bugs.jquery.com/ticket/9000/">Next Ticket →</a>
+        </li>
+      
+    </ul>
+  </nav>
+
+
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="." class="ticket-number">#8999</a>
+      <span class="ticket-status">closed</span>
+      <span class="ticket-type">bug</span>
+      <span class="ticket-resolution">(wontfix)</span>
+    </h3>
+
+    <div class="ticket-dates">
+      <p>Opened April 28, 2011 09:40AM UTC</p>
+      
+        <p>Closed May 04, 2011 02:27PM UTC</p>
+      
+      
+        <p>Last modified March 14, 2012 05:49AM UTC</p>
+      
+    </div>
+  </div>
+
+  <h1 class="ticket-title">ajax bug in Opera 11</h1>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        Gorets
+      </td>
+      <th>Owned by:</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        low
+      </td>
+      
+        <th class="missing">Milestone:</th>
+      
+      <td>
+        <a href="/bugs.jquery.com/milestone/1.next">1.next</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>ajax</td>
+      
+        <th>Version:</th>
+      
+      <td>1.6rc1</td>
+    </tr>
+    <tr>
+      
+        <th class="missing">Keywords:</th>
+      
+      <td></td>
+      
+        <th>Cc:</th>
+      
+      <td>jaubourg</td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
+    <div class="ticket-description"><p><a href="http://katalog.lg.ua/jquery_bug/index.html" class="ext-link"><span class="icon"></span>http://katalog.lg.ua/jquery_bug/index.html</a></p><p>$.post("2.php", { notice: notice } , function( data ){</p><p>$('#send_result').append('&nbsp;' + data );</p><p>});</p><p>2.php</p><p>&lt;?php</p><p>	@header("Content-type: text/plain; charset=windows-1251");</p><p>	$buffer = "&lt;font color=\\"green\\"&gt;THIS HTML TEXT&lt;/font&gt;";</p><p>	echo $buffer;</p><p>?&gt;</p><p>If the response is HTML tag and set header Opera 11 returns [object XMLDocument]</p></div>
+  </div>
+</div>
+
+<details>
+  <summary class="ticket-details-summary">Attachments (0)</summary>
+
+  <ul class="ticket-attachments">
+    
+  </ul>
+</details>
+
+<details open="">
+  <summary class="ticket-details-summary">Change History (12)</summary>
+  
+    <div class="ticket-change flex-column" id="comment:1">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 28, 2011 04:10PM UTC by <span class="author">rwaldron</span></span>
+        <a class="ticket-change-link" href="#comment:1">comment:1</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>cc:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ jaubourg</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+              
+                <tr>
+                  <th>component:</th>
+                  <td>
+                    
+                      <span class="change-field-old">unfiled</span> → <span class="change-field-new">ajax</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>On initial review, it appears that the response is being "detected" as xml. I'm going to cc @jaubourg on this so he can weigh in.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:2">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed April 28, 2011 04:35PM UTC by <span class="author">miketaylr</span></span>
+        <a class="ticket-change-link" href="#comment:2">comment:2</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Funky, going to have one of our engineers check it out.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:3">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 02, 2011 02:30AM UTC by <span class="author">timmywil</span></span>
+        <a class="ticket-change-link" href="#comment:3">comment:3</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>priority:</th>
+                  <td>
+                    
+                      <span class="change-field-old">undecided</span> → <span class="change-field-new">low</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">open</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:4">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 02, 2011 07:19AM UTC by <span class="author">hallvord@opera.com</span></span>
+        <a class="ticket-change-link" href="#comment:4">comment:4</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Opera applies some content sniffing for text/plain responses, thinks this is somewhat parse-able, and since the XML parser can successfully parse it, we expose the resulting document in xhr.responseXML </p><p> jQuery contains some rather convoluted logic for determining how to process XHR responses (see method ajaxHandleResponses()). There is for example this: </p><pre class="wiki">
+ if ( ct ) { 
+ for ( type in contents ) { 
+ if ( contents[ type ] && contents[ type ].test( ct ) ) { 
+ dataTypes.unshift( type ); 
+ break; 
+ } 
+ } 
+ }
+</pre><p> which seems to handle four types jQuery knows by default - html, json, JS and xml (notably not plain text). The script has not given jQuery any "expected" data type or defined any conversion functions. Hence, in this: </p><pre class="wiki">
+if ( !dataTypes[ 0 ] || s.converters[ type + " " + dataTypes[0] ] )
+</pre><p> the !dataTypes[0] part will always be true, and jQuery will randomly default to the first type the "for ( type in responses ) {" enumeration returns, which happens to be 'xml' in our case. This is predictable because of the order in the callback method: </p><pre class="wiki">
+ // Construct response list 
+ if ( xml && xml.documentElement /* #4958 */ ) { 
+ responses.xml = xml; 
+ } 
+ responses.text = xhr.responseText; 
+
+</pre><p> Moving the responses.text line above the xml stuff fixes this bug. </p><p> (Alternative fixes: simplify jQuery's overcomplicated and non-jQueryish AJAX, or Opera avoiding content sniffing for text/plain XHR responses.)</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:5">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 02, 2011 12:50PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:5">comment:5</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:4 hallvord@…]:</p><blockquote> Opera applies some content sniffing for text/plain responses, thinks this is somewhat parse-able, and since the XML parser can successfully parse it, we expose the resulting document in xhr.responseXML</blockquote><p>Thank you for stating the obvious. What is the purpose of this, knowing it's dead-easy for <a href="/bugs.jquery.com/wiki/JavaScript">JavaScript</a> code to parse the document itself if needs be? Also, I guess checking for "&lt;?xml" was too much of a hassle?</p><blockquote>   jQuery contains some rather convoluted logic for determining how to process XHR responses (see method ajaxHandleResponses()). There is for example this:    <pre class="wiki">
+&gt;  if ( ct ) { 
+&gt;  for ( type in contents ) { 
+&gt;  if ( contents[ type ] && contents[ type ].test( ct ) ) { 
+&gt;  dataTypes.unshift( type ); 
+&gt;  break; 
+&gt;  } 
+&gt;  } 
+&gt;  }
+&gt; </pre>     which seems to handle four types jQuery knows by default - html, json, JS and xml (notably not plain text).</blockquote><p>Yes, plain text is the default. If you wanted to add another dataType (like css), in ajaxSettings.contents, you'd be glad not to have to deal with a text dataType tested BEFORE it. Never used a switch statement or heard of the "default" keyword?</p><blockquote> The script has not given jQuery any "expected" data type or defined any conversion functions. Hence, in this:     <pre class="wiki">
+&gt; if ( !dataTypes[ 0 ] || s.converters[ type + " " + dataTypes[0] ] )
+&gt; </pre>     the !dataTypes[0] part will always be true, and jQuery will randomly default to the first type the "for ( type in responses ) {" enumeration returns, which happens to be 'xml' in our case. This is predictable because of the order in the callback method:    <pre class="wiki">
+&gt;  // Construct response list 
+&gt;  if ( xml && xml.documentElement /* #4958 */ ) { 
+&gt;  responses.xml = xml; 
+&gt;  } 
+&gt;  responses.text = xhr.responseText; 
+&gt; 
+&gt; </pre>    Moving the responses.text line above the xml stuff fixes this bug.</blockquote><p>Gotta love the use of "randomly" and "predictable" for the same piece of code.</p><p>You apparently decided to ignore that, sometimes, a Transport cannot provide a Content-Type. This "random", yet "predicatble", behaviour allows a Transport to specify the most "advanced" data structure it can first as a default without specifying a Content-Type (when not able: think local files which are probably the reason why Opera is "sniffing" in the first place... and that would be fine if limited to them).</p><p>So Transports do send back the most "advanced" format available first which is then chosen by default if no dataType is specified upfront in the ajax options and when no recognized Content-Type is provided with the response.</p><p>Interestingly, that's somehow what Opera is trying to do itself by "sniffing" XML... problem is it does so ignoring Content-Type entirely if provided... does Opera at least check the Accept request header? I seriously doubt it.</p><p>Well, I guess headers are irrelevant to Opera now.</p><blockquote>  Alternative fixes: simplify jQuery's overcomplicated and non-jQueryish AJAX</blockquote><p>Yeah, jQuery's AJAX is complex because, you know, we love complexity and pointless features. That's what we do all day long: plot the most insane API possible to confuse the hell out of our users.</p><p>In fact, our primary goal is to make jQuery as non-jQueryish as possible!</p><p>Are you on drugs?</p><blockquote> or Opera avoiding content sniffing for text/plain XHR responses.</blockquote><p>At last! Thank you!</p><p>Key here is that Opera's xhr trying too hard will break any library relying on this very simple principle: text/plain is plain text and MUST NOT be sniffed/parsed.</p><p>This "feature" will break 1.4.x which doesn't contain any of the code you so valiantly "reviewed" here... strange isn't it? I'll be so bold as to guess it'll break any library relying on proper xhr implementation.</p><p>Since you used "we" in your first paragraph, I did some digging and I assume you're Hallvord R. M. Steen from Opera's customer service department: <a href="http://my.opera.com/hallvors/blog/" class="ext-link"><span class="icon"></span>http://my.opera.com/hallvors/blog/</a></p><p>Way to enhance relationships between browser and <a href="/bugs.jquery.com/wiki/JavaScript">JavaScript</a> devs, pal! If I ever had any confidence we could have some kind of decent dialog going on, rest assure I now stand corrected.</p><p>Apparently, you decide to ignore the real issue on Opera's end in favour of a quick and dirty patch in jQuery (which won't solve the issue in earlier versions). Why do I have the feeling this will turn into some nonsensical arm-wrestle?</p><p>So be it and let's not mince words like you failed to do in your comment: this IS a regression in Opera, plain and simple. It breaks jQuery 1.4.x (most probably earlier versions too, not to mention other libs). Blaming jQuery 1.5.x for this is laughable at best, completely misled and rather pointless for sure... but, since it has been rewritten recently (and not to your liking it seems), let's beat the dead horse, shall we?</p><p>Please, review the points made in this post. No, really, READ them, UNDERSTAND them and cut the preconceptions. Thank you.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:6">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 02, 2011 04:05PM UTC by <span class="author">miketaylr</span></span>
+        <a class="ticket-change-link" href="#comment:6">comment:6</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:5 jaubourg]:</p><blockquote> Replying to [comment:4 hallvord@…]:  Since you used "we" in your first paragraph, I did some digging and I assume you're Hallvord R. M. Steen from Opera's customer service department: <a href="http://my.opera.com/hallvors/blog/" class="ext-link"><span class="icon"></span>http://my.opera.com/hallvors/blog/</a>  Way to enhance relationships between browser and <a href="/bugs.jquery.com/wiki/JavaScript">JavaScript</a> devs, pal! If I ever had any confidence we could have some kind of decent dialog going on, rest assure I now stand corrected.</blockquote><p>Jaubourg, I think if you cut the sarcasm a decent dialog _will_ be possible.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:7">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 03, 2011 04:39AM UTC by <span class="author">anonymous</span></span>
+        <a class="ticket-change-link" href="#comment:7">comment:7</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>This problem only in jQuery &gt;= 1.5</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:8">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 03, 2011 02:00PM UTC by <span class="author">hallvord@opera.com</span></span>
+        <a class="ticket-change-link" href="#comment:8">comment:8</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Replying to [comment:5 jaubourg]:&#92;
+Hi jaubourg,&#92;
+it seems some apologies are due. I didn&#39;t realise it would come across as an offensive rant because I stated that I consider this particular method a complicated and non-jQuery-ish part of jQuery. (I believe that the rest of my comment was mostly technical and useful analysis, and that if I had omitted the &quot;non-jQuery-ish&quot; part you might have read it as such - what do you think?) &#92;
+&#92;
+So, I&#39;m honestly sorry for having offended you. I still think this part of the jQuery API is a bit complicated to understand, but I&#39;ll try to get my head around it so we can get that dialogue going ;-) I&#39;ve read http://api.jquery.com/extending-ajax/ but it&#39;s a bit too high-level, so please bear with me for a couple of silly questions below.&#92;
+&#92;
+By the way, while posting the above comment yesterday I also confirmed the corresponding Opera bug report, argued that it should get some priority because we break jQuery, and added tests to check that we drop content-sniffing for text/plain when it is requested by XHR. (That we do sniff is probably merely an accidental side effect of the fact that browsers need to do content-sniffing for text/plain when you try to load a regular page). &#39;&#39;&#39;I shold have made it a lot clearer yesterday that we intend to fix this.&#39;&#39;&#39;&#92;
+&#92;
+Some questions in response to your comment - I hope you won&#39;t mind: &#92;
+&#92;
+1) You say &quot;plain text is the default&quot;, but also &quot;Transports do send back the most &#39;advanced&#39; format available&quot;. We&#39;re looking at a case where the server sent text/plain, but jQuery doesn&#39;t acknowledge that text/plain header (because you actively look for four other types but not text/plain), and prefers returning responseXML if the browser makes it available. I understand by the above statement about &#39;most advanced format&#39; that this is intentional. Right? Then I don&#39;t quite understand what you mean by plain text being the default, but it might not matter.&#92;
+&#92;
+2) Explaining why my suggested fix isn&#39;t usable, you say &quot;sometimes, a Transport cannot provide a Content-Type&quot;. While I&#39;m afraid I still don&#39;t fully understand jQuery&#39;s &quot;Transport&quot; API and terminology, I assume you are talking about the case where the server returns no Content-Type header at all, and the problem is that in this case jQuery still wants to return an XML document (being the &#39;most advanced format&#39;) if the response is, in fact, XML. So in this case you &#39;&#39;&#39;want to&#39;&#39;&#39; rely on the UA&#39;s content sniffing. Correct?&#92;
+&#92;
+3) Given that you don&#39;t want to reverse the .text and .xml assignments, in order to use UA content sniffing for non-labelled XML, is there a simple way you can recognise the text/plain header and return just responseText? If not, I suggest you close this bug and wait for the fix from our side.</span> → <span class="change-field-new">1304431381325840</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:5 jaubourg]:</p><p>Hi jaubourg,</p><p>it seems some apologies are due. I didn't realise it would come across as such an offensive rant because I stated that I consider this particular method a complicated and non-jQuery-ish part of jQuery. (I believe that the rest of my comment was mostly technical and useful analysis, and that if I had omitted the "non-jQuery-ish" part you might have read it as such - what do you think?) </p><p>So, I'm honestly sorry for having offended you. I still think this part of the jQuery API is a bit complicated to understand, but I'll try to get my head around it so we can get that dialogue going ;-) I've read <a href="http://api.jquery.com/extending-ajax/" class="ext-link"><span class="icon"></span>http://api.jquery.com/extending-ajax/</a> but it's a bit too high-level, so please bear with me for a couple of silly questions below.</p><p>By the way, while posting the above comment yesterday I also confirmed the corresponding Opera bug report, argued that it should get some priority because we break jQuery, and added tests to check that we drop content-sniffing for text/plain when it is requested by XHR. (That we do sniff is probably merely an accidental side effect of the fact that browsers need to do content-sniffing for text/plain when you try to load a regular page). <strong>I shold have made it a lot clearer yesterday that we intend to fix this.</strong></p><p>Some questions in response to your comment - I hope you won't mind: </p><p>1) You say "plain text is the default", but also "Transports do send back the most 'advanced' format available". We're looking at a case where the server sent text/plain, but jQuery doesn't acknowledge that text/plain header (because you actively look for four other types but not text/plain), and prefers returning responseXML if the browser makes it available. I understand by the above statement about 'most advanced format' that this is intentional. Right? Then I don't quite understand what you mean by plain text being the default, but it might not matter.</p><p>2) Explaining why my suggested fix isn't usable, you say "sometimes, a Transport cannot provide a Content-Type". While I'm afraid I still don't fully understand jQuery's "Transport" API and terminology, I assume you are talking about the case where the server returns no Content-Type header at all, and the problem is that in this case jQuery still wants to return an XML document (being the 'most advanced format') if the response is, in fact, XML. So in this case you <strong>want to</strong> rely on the UA's content sniffing. Correct?</p><p>3) Given that you don't want to reverse the .text and .xml assignments, in order to use UA content sniffing for non-labelled XML, is there a simple way you can recognise the text/plain header and return just responseText? If not, I suggest you close this bug and wait for the fix from our side.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:9">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 03, 2011 05:29PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:9">comment:9</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Hey Hallvord,</p><p>Well, I think I over-heated a little. It's quite clear you had the best intentions in mind :(</p><p>The fault is definitely mine and mike tried to explain it to me on IRC though, at that time, I wasn't receptive enough. Thing is, I'm getting a bit jaded due to some other browser bugs "discussions" that invariably ended up with devs getting on their high horses (which is what the arm-wrestle reference was all about)... sadly, that's the posture *I* took here, ironically, and I'm sorry about that.</p><p>The non-jQuery-ish reference, together with the random/predictable thingy had me completely ignore the rest of the post. So you're right my own preconceptions derailed this discussion.</p><p>So let's get to your questions. I just hope I'll be clear enough in my answers because, yes, Transports can get a bit involved at times.</p><p>I'll try to give some general context regarding dataType auto-detection in jQuery:</p><p>So, a Transport will return a dataType to data map back to ajax. That way, a Transport can provide several alternative "views" of the response, which is exactly what an XHR implements (text and xml). If no expected dataType was given, ajax will then look at the Content-Type header to try and determine what the actual dataType is, failing that it will rely on the Transport giving the best possible dataType (first one in the response map).</p><p>You're rightfully puzzled as to why ajax does not try and recognize text. So, let's consider if we added { text: /^text/ } at the end of the contents option in ajaxSettings (as a catchall "default"): the problem is solved but at the price of extensibility. I'll explain why.</p><p>Let's say you wanna handle css automagically in ajax. You provide the following (untested and simplified) converter:</p><pre class="wiki">
+$.ajaxSetup({
+    converters: {
+	   "text css": function( text ) {
+           $( "&lt;style/&gt;" ).text( text ).appendTo( $("head") );
+           return text;
+       }
+    }
+});
+</pre><p>You can already do requests as follows:</p><pre class="wiki">
+$.ajax( url, { dataType: "css" } );
+</pre><p>and ajax will create style elements for you under the hood.</p><p>If you want to make it complete, you'll provide a regexp for css in the contents option so that ajax can auto-detect css:</p><pre class="wiki">
+$.ajaxSetup({
+    contents: {
+        css: /css/
+    }
+});
+</pre><p>Problem is, if you have { text: /^text/ } already in there, the css will never be auto-detected... and as far-fetched as the example may seem to a fresh pair of eyes, this is exactly how the script dataType works ( <a href="https://github.com/jquery/jquery/blob/master/src/ajax/script.js#L4" class="ext-link"><span class="icon"></span>https://github.com/jquery/jquery/blob/master/src/ajax/script.js#L4</a> ) and is how ajax will handle dataType auto-detection.</p><p>In all honesty, I would have preferred a tree-like structure to handle dataType detection (to handle sub-dialects like rss feeds and such) but, even if I haven't given up on the idea yet, I thought the overall system was already complex enough as it was. Thing is, auto-detection is made in order and it means a "catch-all" text detection is simply not an option. Note that the auto-detection system is very lightly documented because I do intend to get back to it (but mime-types as consistent as text/javascript and application/javascript make for quite a challenging "tree" structure, especially from an extension point of view).</p><p>So, to answer question 1, if the xhr does not try and parse content when the Content-Type is not XML, the map only contains a text response, ajax does not recognize the Content-Type as XML either, so it will rely on the transport to provide the best possible dataType (the first in the map): here "text". That's why I use the term default for text. If and when an XHR implementation ignores a valid Content-Type and tries and parse it as XML anyway, then the only option for jQuery would be to list all known Content-Type values as a mean to circumvent the problem, with the "non-extensible" caveat above. A tree structure for auto-detection would mitigate the issue, that's for sure.</p><p>As for 2, you're perfectly correct. AFAIK, no existing XHR implementation tries and emulates HTTP over file://, which means you always have a status 0 and no headers (so no Content-Type). I find it puzzling and even a bit counter-intuitive. I'm still under the impression it would be quite easy for a browser to emulate HTTP over file:// with status 200, 404, 50x (for security errors) and 304 (files do have a Last Modified date). The OS is potentially able to "guess" the mimetype of a file so the Content-Type header could be provided too. But anyway, we deal with this (status 0 being the worse of it seeing as, in HTTP requests it means a network error or an abort) but fact is we don't have a Content-Type and we have to (as opposed to want to, really ;)) rely on some XHR content sniffing in that particular instance.</p><p>The rule of thumb would go like this: if a Content-Type header is provided, rely on it and don't sniff, if there is no Content-Type header at all, sniff.</p><p>Why I talk about Transports in general is because you could have, as an example, an image Transport (that uses an Image object to request the image) which would give ajax a response map akin to { img: <a href="/bugs.jquery.com/wiki/ImageObject">ImageObject</a> } with no headers. In that instance, it's quite obvious the default is "img", not "text". The Transport could fake a Content-Type header but the Image object doesn't differentiate between gif, jpeg, png, whatever, so it would be a bit pointless in the end.</p><p>Now to question 3, we could hardcode a check for text/plain after the loop on options.contents. The real issue here is to know if this would be enough. Should we check for /^text/? What if the Content-Type is something different entirely like "my/content"? Will Opera try and parse it as xml and what decision should jQuery take if this was the case?</p><p>Anyway, I hope this (long) answer will make things clearer and thank you for the interest you take in this issue.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:10">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 04, 2011 10:02AM UTC by <span class="author">hallvord@opera.com</span></span>
+        <a class="ticket-change-link" href="#comment:10">comment:10</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:9 jaubourg]:</p><p>Hi jauborg,</p><p>thanks for a long and detailed reply. No further apologies needed. To be honest, it's not my first brush with debugging issues with Transports and websites that perhaps don't configure their Ajax calls perfectly, so perhaps I had some built-up frustrations there.. Thanks to this discussion, I'll probably spend significantly less time debugging this from now ;-).</p><p>Internally, we've decided to fast-track a fix even though we know no real life site being broken at the moment - if we break jQuery's assumptions it's just going to be a matter of time before a major site chokes and goes belly-up in Opera. I don't have a real ETA (as it's not even fixed yet, and discussions surrounding an older bug in the same area indicates it might be harder than you think) but I would be slightly surprised if it didn't make 11.50.</p><p>Because this report is filed for a simple demo and we don't know a broken site, it's not super high pri for us to make you change anything either ;-). Worst case, we could always use browser.js to add a custom hack nullifying responseXML if it becomes an issue on a big site.</p><blockquote> Now to question 3, we could hardcode a check for text/plain after the loop on options.contents. The real issue here is to know if this would be enough. Should we check for /^text/? What if the Content-Type is something different entirely like "my/content"? Will Opera try and parse it as xml and what decision should jQuery take if this was the case?</blockquote><p>Seems Opera tries if it parses as XML no matter what. I would hope that people specifying entirely custom content-types would also specify what they want in the ajax call, and special-casing text/plain would make sense to me personally, but I understand that's it's complicated and you're reluctant to change it.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:11">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 04, 2011 02:27PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:11">comment:11</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">&gt; To be honest, it&#39;s not my first brush with debugging issues with Transports and websites that perhaps don&#39;t configure their Ajax calls perfectly, so perhaps I had some built-up frustrations there..&#92;
+&#92;
+Drop me a mail at j@ubourg.net. I&#39;d love to hear about these problems you encountered and see if there are stuff to be ironed out jQuery side.&#92;
+&#92;
+I&#39;ll close this as won&#39;t fix for now, waiting for the fix your side and thanks again for having looked deeply and quickly into this.</span> → <span class="change-field-new">1304519272246907</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ wontfix</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">open</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <blockquote> To be honest, it's not my first brush with debugging issues with Transports and websites that perhaps don't configure their Ajax calls perfectly, so perhaps I had some built-up frustrations there..</blockquote><p>Drop me a mail. I'd love to hear about these problems you encountered and see if there are stuff to be ironed out jQuery side.</p><p>I'll close this as won't fix for now, waiting for the fix your side and thanks again for having looked deeply and quickly into this.</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:12">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 23, 2012 05:00PM UTC by <span class="author">miketaylr</span></span>
+        <a class="ticket-change-link" href="#comment:12">comment:12</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>This is fixed internally in Opera now.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</details>
+</div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

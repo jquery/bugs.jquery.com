@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>jquery unique bug</title>
+    <script type="text/javascript" src="jquery-1.1.3a_fix1143.js"></script>
+    <script type="text/javascript">
+function bug() {
+    var x = $("div").find("*");
+    var div = document.getElementById('myDiv');
+    alert(div.innerHTML);
+};
+    </script>
+  </head>
+  <body>
+    <div id="myDiv">
+      <p><span>para1</span></p>
+      <p><span>para2</span></p>
+    </div>
+    <a href="javascript:bug()">bug</a>
+  </body>
+</html>
+

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>None</title>
+	<script src='/scripts/jquery-1.3.1.min.js' type='text/javascript'></script>
+</head>
+<body>
+
+<div id="width"></div>
+<div><input type="button" value="Set Width to $(this).width()" id="dummy"></div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		function showWidth()
+		{ $("#width").text("Width: " + $("#dummy").width()); }
+		
+		showWidth();
+		
+		$("#dummy").click(function() {
+			$("#dummy").width($("#dummy").width()); // this makes the button smaller
+			showWidth();
+		});
+	});
+</script>
+
+</body>
+</html>

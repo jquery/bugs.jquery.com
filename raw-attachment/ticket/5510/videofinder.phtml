@@ -1,0 +1,1286 @@
+<?php $this->headScript()->captureStart() ?>
+
+<? 
+	if ($this->item_id) {
+		$videoURL = $this->videoUrl('play',$this->videoType,$this->item_id,Academy_User::loggedIn(),$this->item_title);
+	} else {
+		$videoURL = $this->joinURL;
+	}
+?>
+
+$(document).ready(function(){
+  $.preloadCssImages();
+}); 
+
+jQuery.preloadImages = function() {   
+     for(var i = 0; i<arguments.length; i++)   
+    {
+          jQuery("<img>").attr("src", arguments[i]);   
+    }
+};
+
+$.preloadImages(
+"/images/global/widgets/ftpa-video-finder/arrow_block.png",
+"/images/global/widgets/ftpa-video-finder/arrow-blue.png",
+"/images/global/widgets/ftpa-video-finder/arrow-down.png",
+"/images/global/widgets/ftpa-video-finder/arrow-down-hover.png",
+"/images/global/widgets/ftpa-video-finder/arrow-left.png",
+"/images/global/widgets/ftpa-video-finder/arrow-left-hover.png",
+"/images/global/widgets/ftpa-video-finder/arrow-right-hover.png",
+"/images/global/widgets/ftpa-video-finder/arrow-up.png",
+"/images/global/widgets/ftpa-video-finder/arrow-up-hover.png",
+"/images/global/widgets/ftpa-video-finder/arrow-white.png",
+"/images/global/widgets/ftpa-video-finder/bg-dark-bl.png",
+"/images/global/widgets/ftpa-video-finder/bg-dark-br.png",
+"/images/global/widgets/ftpa-video-finder/bg-dark-tl.png",
+"/images/global/widgets/ftpa-video-finder/bg-dark-tr.png",
+"/images/global/widgets/ftpa-video-finder/books-large.png",
+"/images/global/widgets/ftpa-video-finder/books-small.png",
+"/images/global/widgets/ftpa-video-finder/box-head-tall-c.png",
+"/images/global/widgets/ftpa-video-finder/box-head-tall-l.png",
+"/images/global/widgets/ftpa-video-finder/box-head-tall-r.png",
+"/images/global/widgets/ftpa-video-finder/btn-lft.png",
+"/images/global/widgets/ftpa-video-finder/btn-rt.png",
+"/images/global/widgets/ftpa-video-finder/button-active.png",
+"/images/global/widgets/ftpa-video-finder/button-categories.png",
+"/images/global/widgets/ftpa-video-finder/button-hover.png",
+"/images/global/widgets/ftpa-video-finder/button-normal.png",
+"/images/global/widgets/ftpa-video-finder/button-pros.png",
+"/images/global/widgets/ftpa-video-finder/button-topic-hover.png",
+"/images/global/widgets/ftpa-video-finder/button-topic-normal.png",
+"/images/global/widgets/ftpa-video-finder/challenges-small.png",
+"/images/global/widgets/ftpa-video-finder/finder-bg.png",
+"/images/global/widgets/ftpa-video-finder/gradient-btn-cntr-rt.png",
+"/images/global/widgets/ftpa-video-finder/gradient-btn-left.png",
+"/images/global/widgets/ftpa-video-finder/gradient-button-bg.png",
+"/images/global/widgets/ftpa-video-finder/gradient-button-bg-off.png",
+"/images/global/widgets/ftpa-video-finder/gradient-button-bg-on.png",
+"/images/global/widgets/ftpa-video-finder/gradient-button-bg-selected.png",
+"/images/global/widgets/ftpa-video-finder/mag_arrow.png",
+"/images/global/widgets/ftpa-video-finder/mag_glass.png",
+"/images/global/widgets/ftpa-video-finder/mag-arrow.png",
+"/images/global/widgets/ftpa-video-finder/mag-glass.png",
+"/images/global/widgets/ftpa-video-finder/play.png",
+"/images/global/widgets/ftpa-video-finder/play_hover.png",
+"/images/global/widgets/ftpa-video-finder/podcasts-small.png",
+"/images/global/widgets/ftpa-video-finder/pros-small.png",
+"/images/global/widgets/ftpa-video-finder/recommended_box.png",
+"/images/global/widgets/ftpa-video-finder/red-submit-bg.png",
+"/images/global/widgets/ftpa-video-finder/red-submit-bg-active.png",
+"/images/global/widgets/ftpa-video-finder/red-submit-bg-hover.png",
+"/images/global/widgets/ftpa-video-finder/results-bg-color.png",
+"/images/global/widgets/ftpa-video-finder/results-bg-color-hover.png",
+"/images/global/widgets/ftpa-video-finder/right-bg.png",
+"/images/global/widgets/ftpa-video-finder/search-terms-bg.png",
+"/images/global/widgets/ftpa-video-finder/sessions-small.png",
+"/images/global/widgets/ftpa-video-finder/snl-small.png",
+"/images/global/widgets/ftpa-video-finder/sub_divider.gif",
+"/images/global/widgets/ftpa-video-finder/submit-bg.png",
+"/images/global/widgets/ftpa-video-finder/video-arrow.png"
+);
+
+$(document).ready(function(){ 
+	loadData.init(); 
+//	loadData.searchResults();
+	$('.util-new-search').removeAttr('href');
+	$('#video-search-ftpa-util span a').removeAttr('href');
+});
+
+var loadData = {
+
+	// maintain an array of selected ids for Pros and Categories
+	prosSelectedArray:false,
+	categorySelectedArray:false,
+	
+	// maintain an associative array of id / value for loaded values
+	prosArray:false,
+	categoryArray:false,
+	searchArray:false,
+	
+	prosAdded:false,
+	categoryAdded:false,
+	
+	prosAlsoMsg: '<?= addslashes($this->pro_also_msg) ?>',
+	categoryAlsoMsg: '<?= addslashes($this->category_also_msg) ?>',
+	
+	init: function() {
+		this.prosArray = new Array();
+		this.categoryArray = new Array();
+		
+		this.proName();
+		this.topics();
+	},
+	
+	searchResults: function() {
+		$('.match-results-text').text("");
+		$('.matched-results-items').css("left","0px");
+		$('.matched-results-items').empty();
+		//find all search terms
+		var params = '?start=1';
+		$('.added-search-terms name').each(
+			function(i) {
+				var regexp = /<("[^"]*"|'[^']*'|[^'">])*>/gi;
+				var regexp2 = / \[x\]/gi;
+				var regexp3 = /,/gi;
+				var text = $(this).html();
+
+				text = text.replace(regexp,"");
+				text = text.replace(regexp2,"");
+				text = text.replace(regexp3,"");
+
+				params = params + '&keywords[]=' + escape(text);
+			}
+		);
+	
+		var url = "searchwidget/search/" + params;
+	
+		$.getJSON(url, function(data) {
+																			  
+			/* Parse JSON objects */
+
+			jJSON["search"] = (function() {
+				response = {
+					values: [],
+					count: 0
+				};
+				var $resultMatchDiv;
+				var $formattedDiv;
+				var proName;
+				var videoTitle;
+				var $videoTitleDiv;
+				var $picDiv;
+				var proPic;
+				var bookIcon;
+				var url;
+				var sectionTitle;
+				var bookPic;
+				var numberMatch;
+				var videoTypeIcon;
+				var videoLink;
+				$.each(data, function(i,item){
+					if (item.id != "undefined") {
+						response.count++;
+						response.values[i] = item.id;
+						proName = item.pro_name;
+						videoTitle = item.title;
+						proPic = item.thumb;
+						sectionTitle = item.video_type;
+						sectionTitleEn = item.video_type_en;
+						videoLink = item.link;
+						//alert(sectionTitle);
+					
+						switch(sectionTitleEn) {
+							case 'pros': videoTypeIcon = ('images/global/widgets/ftpa-video-finder/pros-small.png'); break;
+							case 'lessons': videoTypeIcon = ('images/global/widgets/ftpa-video-finder/books-small.png'); break;
+							case 'sitandlearns': videoTypeIcon = ('images/global/widgets/ftpa-video-finder/snl-small.png'); break;
+							case 'challenges': videoTypeIcon = ('images/global/widgets/ftpa-video-finder/challenges-small.png'); break;
+							case 'sessions': videoTypeIcon = ('images/global/widgets/ftpa-video-finder/sessions-small.png'); break;
+							case 'podcasts': videoTypeIcon = ('images/global/widgets/ftpa-video-finder/podcasts-small.png'); break;
+							case 'deanstour': videoTypeIcon = ('images/global/widgets/ftpa-video-finder/pros-small.png'); break;
+							case 'insights': videoTypeIcon = ('images/global/widgets/ftpa-video-finder/podcasts-small.png'); break;
+							case 'announcements': videoTypeIcon = ('images/global/widgets/ftpa-video-finder/pros-small.png'); break;
+							default: videoTypeIcon = ('images/global/widgets/ftpa-video-finder/pros-small.png'); break;
+						};
+					
+						$resultMatchDiv = $('<div class="match-'+i+'" id="video-matched-results" href="'+videoLink+'"></'+'div>');
+						$formattedDiv = $('<div class="formatted-results"><div class="results-inner"><span class="results-name">'+proName+'</'+'span><br/><span class="results-short-blurb">'+videoTitle+'</'+'span></'+'div></'+'div>');
+						$picDiv = $('<div class="results-video-link"><img class="results-pic" src="'+proPic+'" alt="Results Pic" /><img class="book" src="'+videoTypeIcon+'" alt="'+sectionTitle+'" /><a href="'+videoLink+'"><span class="circle-arrow" alt="Play" /></'+'a></'+'div>');
+						$videoTitleDiv = $('<div class="video-section-title">'+sectionTitle+'</'+'div>');
+						$(".matched-results-items").append($resultMatchDiv);
+						if (i > 4) {
+							document.getElementById("scrollbar-results").style.display = 'block';
+						};
+						$resultMatchDiv.append($formattedDiv);
+						$resultMatchDiv.append($picDiv);
+						$resultMatchDiv.append($videoTitleDiv);
+					};
+				});
+				$(".match-results-text").append((response.count++) + " videos");
+				//if (response.count <= 4) {
+					//$('#scrollRight-results').css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right-hover.png) right center no-repeat"});
+				//} else {
+				//	$('#scrollRight-results').css({color:"#ffffff", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right.png) right center no-repeat"});
+				//}
+				scrollResults(response.count);
+				return response;
+			})();
+			/* Return a number of values for a given object */
+
+			//alert( jJSON.getValues("search",null) );
+		});
+	},
+	
+	// Reactivating all the search term links after user clicks new search
+	reactivate_all_links:function(id, display, type) {
+		var proNameLink = '#pro-name-link-'+id;
+		var topicLink = '#topic-results-link-'+id;
+		$('.added-search-terms').empty();
+		$('.pro-name-link').css('color', '#ffffff');
+		switch (type) {
+			case 'pro':
+				$(proNameLink).each(function() {
+				//alert(proNameLink);
+				loadData.reactivate_link(id, display, 'pro');
+				});
+				break;
+			case 'category':
+				loadData.reactivate_link(id, display, 'category');
+				break;
+		}
+	},
+	
+	
+	// Reactivating the search term link after removing from search box
+	reactivate_link:function(id, display, type) {
+		var proNameLink = '#pro-name-link-'+id;
+		var topicLink = '#topic-results-link-'+id;
+		switch (type) {
+			case 'pro':
+				$(proNameLink).bind("click", function() {
+					activateSearch();
+					$(proNameLink).css('color', '#666666');
+					loadData.add_display_item(id, display, 'pro');
+				});
+				break;
+			case 'category':
+				$(topicLink).bind("click", function() {
+					activateSearch();
+					$(topicLink).css('color', '#666666');
+					loadData.add_display_item(id, display, 'category');
+				});
+				break;
+		}
+	},
+	
+	remove_item:function(id, display, type) {
+		var proTagID = '#search-box-pro-'+id;
+		var topicTagID = '#search-box-topic-'+id;
+		var proTextID = "." + type + "-" + id;
+		var topicTextID = "." + type + "-" + id;
+		switch (type) {
+			// Remove search term from search box
+			case 'pro':
+				$(document).ready(function() {
+					$(proTagID).bind("click", function() {
+						$('.pro-'+id).remove();
+						if ($('.added-search-terms').children().length == 0) {
+							deactivateSearch();
+						}
+						$('#pro-name-link-'+id).css('color', '#ffffff');
+						loadData.reactivate_link(id, display, type);
+					});
+				});
+				break;
+			// Remove search term from search box
+			case 'category':
+				$(document).ready(function() {
+					$(topicTagID).bind("click", function() {
+						$(topicTextID).remove();
+						if ($('.added-search-terms').children().length == 0) {
+							deactivateSearch();
+						}
+						$('#topic-results-link-'+id).css('color', '#ffffff');
+						//alert(id);
+						loadData.reactivate_link(id, display, type);
+					});
+				});
+				break;
+		}
+	},
+	
+	add_display_item: function(id, display, type) {
+		var proTagID = 'search-box-pro-'+id;
+		// Add a close button to each search term
+		var removeProText = '<a id="'+proTagID+'" class="remove-search-term">[x]</'+'a>';
+		var displayProText = display + " " + removeProText + ", ";
+		var proTextID = type + "-" + id;
+		var displayProString = '<name class="'+proTextID+'">'+displayProText+'</name>';
+		var topicTagID = 'search-box-topic-'+id;
+		// Add a close button to each search term
+		var removeTopicText = '<a id="'+topicTagID+'" class="remove-search-term">[x]</'+'a>';
+		var displayTopicText = display + " " + removeTopicText + ", ";
+		var topicTextID = type + "-" + id;
+		var displayTopicString = '<name class="'+topicTextID+'">'+displayTopicText+'</name>';
+		switch (type) {
+			case 'pro':
+				// Add search term
+				$('.added-search-terms').append(displayProString);
+				autoScroll();
+				loadData.remove_item(id, display, type);
+				break;
+			case 'category':
+				// Add search term
+				$('.added-search-terms').append(displayTopicString);
+				loadData.remove_item(id, display, type);
+				break;
+		}
+	},
+
+	add_item:function(id, display, type) {
+		var found = false;
+		switch (type) {
+
+			case 'pro':
+				found = jQuery.inArray(id, this.prosArray);
+				if(found == -1) {
+					// This needs to be added to the array and the visual search box.
+					this.prosArray.push(id);
+					loadData.add_display_item(id,display,type);
+				}
+				break;
+			case 'category':
+				found = jQuery.inArray(id, this.categoryArray);
+				if(found == -1) {
+					// This needs to be added to the array and the visual search box.
+					this.categoryArray.push(id);
+					loadData.add_display_item(id,display,type);
+				}
+				break;
+		}		
+	},
+	
+	proName:function(){
+
+		$.getJSON("searchwidget/pros", function(data) {
+
+			/* Parse JSON objects */
+
+			jJSON["pro_name"] = (function() {
+				response = {
+					values: [],
+					count: 0
+				};
+				var $removeText;
+				var $listReference;
+				var $listDiv;
+				var proNameLink;
+				$.each(data, function(i,item){
+					if (item.pro_name != "undefined") {
+						if (i > 24) {
+							document.getElementById("scrollbar-pros").style.display = 'block';
+						} else {
+							document.getElementById("scrollbar-pros").style.display = 'none';
+						};
+						if (i % 5 == 0) {
+							//alert(i);
+						var proNameId = item.pro_id;
+						response.count++;
+						response.values[i] = item.pro_name;
+						// Create a new list for 6 next items
+						$listReference = $('<ul id="pro-name-results-'+proNameId+'" class="pro-names"></'+'ul>');
+						// Create a container div for list
+						$listDiv = $('<div id="scroll_controls_proname_'+proNameId+'" class="hasContentProname"></'+'div>');
+						// append the div and list to the page DOM
+						$listDiv.append($listReference);
+						$('#ajax-returned-proname-content').append($listDiv);
+						};
+						var proNameId = item.pro_id;
+						var proName = item.pro_name;
+						var addProName = proName + ", ";
+						proNameLink = $('<li><a id="pro-name-link-'+proNameId+'" class="pro-name-link">'+proName+'</'+'a></'+'li>');
+						// Append list item to current list
+						/* append li to ul block */
+						$listReference.append(proNameLink);
+						if (i > 24) {
+							document.getElementById("scrollbar-pros").style.display = 'block';
+						} else {
+							document.getElementById("scrollbar-pros").style.display = 'none';
+						};
+						/* disable link after click */
+						proNameLink.bind("click", function() {
+							activateSearch();
+							//alert('here');
+							$(".util-new-search").bind("click", function() {
+							//	loadData.reactivate_all_links(item.pro_id, item.pro_name, 'pro');
+								new_search();
+								$('.pro-name-link').css('color', '#ffffff');
+								$('.util-new-search').unbind('click');
+								$('.video-search span.new-search-text a span').css('color','#666666');
+							});
+							$('.video-search span.new-search-text a span').css('color','#ffffff');
+							$('.video-search span.new-search-text a span').hover(
+								function() {
+									$(this).css("color", "#999999");
+								},
+								function() {
+									$(this).css("color", "#ffffff");
+								}
+							);
+							//$('#pro-name-link-'+i).removeAttr('href');
+							$('#pro-name-link-'+proNameId).css('color', '#666666');
+							$('#pro-name-link-'+proNameId).unbind('click');
+							loadData.add_item(item.pro_id, item.pro_name, 'pro');
+						});
+					};
+				});
+				return response;
+			})();
+
+			/* Return a number of values for a given object */
+
+			//alert( jJSON.getValues("pro_name",null) );
+		});
+	},
+
+	videoTypes:function(){
+
+		$.getJSON("searchwidget/videotypes", function(data) {
+
+			/* Parse JSON objects */
+
+			jJSON["video_types"] = (function() {
+				response = {
+					values: [],
+					count: 0
+				};
+				var $listReference;
+				var $listDiv;
+				var i;
+				var videoTypeLink;
+				$.each(data,function(i,item){
+					if (item != "undefined") {
+	//					alert(response.count);
+						if (response.count % 6 == 0) {
+	//						response.count++;
+	//						response.values[response.count] = item;
+							i = response.count;
+							// Create a new list for 6 next items
+							$listReference = $('<ul id="video-types-results-'+i+'" class="video-types"></'+'ul>');
+							// Create a container div for list
+							$listDiv = $('<div id="scroll_controls_'+i+'" class="hasImage"></'+'div>');
+							// append the div and list to the page DOM
+							$listDiv.append($listReference);
+							$('#ajax-returned-content').append($listDiv);
+						};
+
+						response.count++;
+						response.values[i] = item;
+						var videoTypes = item;
+						var addVideoTypes = videoTypes + ", ";
+						/* append li to ul block */
+						videoTypeLink = $('<li><a class="video-type-link'+i+'" href="#">'+videoTypes+'</'+'a></'+'li>');
+						$listReference.append(videoTypeLink);
+						/* disable link after click */
+						videoTypeLink.bind("click", function() {
+							$('.video-type-link'+i).removeAttr('href');
+							$('.video-type-link'+i).css('color', '#666666');
+							$('.video-type-link'+i).unbind('click');
+							$('.added-search-terms').append(addVideoTypes);
+						}); 
+					}
+				});
+				return response;
+			})();
+
+			/* Return a number of values for a given object */
+
+			//alert( jJSON.getValues("video_types",null) );
+		});
+	},
+
+	topics:function(){
+
+		$.getJSON("searchwidget/topics", function(data) {
+
+			/* Parse JSON objects */
+
+			jJSON["topics"] = (function() {
+				response = {
+					values: [],
+					count: 0
+				};
+				var $listReferenceTopics;
+				var $listDivTopics;
+				var topicResultsLink;
+				
+				$.each(data, function(i,item){
+					if (item.topic != "undefined") {
+					var topicId = item.topic_id;
+						if (i > 12) {
+							document.getElementById("scrollbar-topics").style.display = 'block';
+						} else {
+							document.getElementById("scrollbar-topics").style.display = 'none';
+						};
+						if (i % 5 == 0) {
+							//alert(i);
+							response.count++;
+							response.values[i] = item.topic;
+							// Create a new list for 6 next items
+							$listReferenceTopics = $('<ul id="topics-results-'+topicId+'" class="video-topics"></'+'ul>');
+							// Create a container div for list
+							$listDivTopics = $('<div id="scroll_controls_topics_'+topicId+'" class="hasContentTopics"></'+'div>');
+							// append the div and list to the page DOM
+							$listDivTopics.append($listReferenceTopics);
+							$('#ajax-returned-topics-content').append($listDivTopics);
+						};
+						var topicResults = item.topic;
+						var addTopicResults = topicResults + ", ";
+						// Append list item to current list
+						/* append li to ul block */
+						//alert($listReferenceTopics);
+					//	alert(topicResults);
+						topicResultsLink = $('<li><a id="topic-results-link-'+topicId+'" class="topic-results-link">'+topicResults+'</'+'a></'+'li>');
+					//		alert(topicResultsLink);
+						$listReferenceTopics.append(topicResultsLink);
+						// $('#topics-results-'+i).append(topicResultsLink);
+						/* disable link after click */
+						topicResultsLink.bind("click", function() {
+							activateSearch();
+							$('#topic-results-link-'+topicId).unbind('click');
+							//$('#topic-results-link-'+i).removeAttr('href');
+							$('#topic-results-link-'+topicId).css('color', '#666666');
+							//$('#added-search-terms').append(addTopicResults);
+							loadData.add_item(item.topic_id, item.topic, 'category');
+						});
+					};
+				});
+				return response;
+			})();
+
+			/* Return a number of values for a given object */
+
+			//alert( jJSON.getValues("topics",null) );
+		});
+	}
+
+}
+
+
+var jJSON = {
+	getValues: function(obj,num) {
+		return jJSON[obj]["values"].slice(0,((num == null) ? jJSON[obj]["values"].length : num));
+	},
+    getCount: function(obj) {
+        return jJSON[obj]["count"];
+	}
+};
+
+$(function(){
+    var position = 0;
+
+    // move object right 600 regardless of current position
+    $('#scrollRight-pros').click(function(){
+        // animate regardless
+        // set right side boundaries
+        if (position != -1200){
+        position -= 600;
+        $('.ajax-pros-search-content').animate({'left': position}, 'slow');
+        }
+    });
+    
+    // enable scroll left if position is greater than 0
+    $('#scrollRight-pros').click(function(){
+        if (position != 0){
+        	$('#scrollLeft-pros').css({color:"#ffffff", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left.png) left center no-repeat"});
+			$('#scrollLeft-pros').hover(
+				function() {
+					$(this).css({color:"#999999", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left-hover.png) left center no-repeat"});
+				},
+				function() {
+					$(this).css({color:"#ffffff", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left.png) left center no-repeat"});
+				}
+			);
+        }
+    });
+    
+    // enable scroll left if position is greater than 0
+    $('#scrollRight-pros').click(function(){
+        if (position == -1200){
+        	$('#scrollRight-pros').css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right-hover.png) right center no-repeat"});
+			$('#scrollRight-pros').hover(
+				function() {
+					$(this).css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right-hover.png) right center no-repeat"});
+				},
+				function() {
+					$(this).css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right-hover.png) right center no-repeat"});
+				}
+			);
+		}
+	});
+
+    // move object left 600px if not already at 0
+    $('#scrollLeft-pros').click(function(){
+        if (position != 0){
+            position += 600;
+            $('.ajax-pros-search-content').animate({'left': position}, 'slow');
+        	$('.scroll-arrow-right').css({color:"#ffffff", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right.png) right center no-repeat"});
+			$('.scroll-arrow-right').hover(
+				function() {
+					$(this).css({color:"#999999", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right-hover.png) right center no-repeat"});
+				},
+				function() {
+					$(this).css({color:"#ffffff", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right.png) right center no-repeat"});
+				}
+			);
+        }
+    });
+    
+    // disable scroll left if position is at 0
+    $('#scrollLeft-pros').click(function(){
+        if (position == 0){
+        	$('#scrollLeft-pros').css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left-hover.png) left center no-repeat"});
+			$('#scrollLeft-pros').hover(
+				function() {
+					$(this).css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left-hover.png) left center no-repeat"});
+				},
+				function() {
+					$(this).css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left-hover.png) left center no-repeat"});
+				}
+			);
+        }
+    });
+});
+
+function scrollResults(value) {
+    var position = 0;
+	var total = value - 1;
+    var x = 4;
+    var totalResults = total / x;
+    var divLength = totalResults * 548;
+    var roundedNumber = Math.round(totalResults);
+    var scrollLength = roundedNumber * 548;
+    var correctLength = divLength - 548;
+    var totalLength = -correctLength;
+
+    // move object right 548px regardless of current position
+    $('#scrollRight-results').click(function(){
+        // setting right side bounds as well
+        if (position > totalLength){
+			position -= 548;
+			$('.matched-results-items').animate({'left': position}, 'slow');
+			$('#scrollLeft-results').css({color:"#ffffff", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left.png) left center no-repeat"});
+			$('#scrollLeft-results').hover(
+				function() {
+					$(this).css({color:"#999999", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left-hover.png) left center no-repeat"});
+				},
+				function() {
+					$(this).css({color:"#ffffff", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left.png) left center no-repeat"});
+				}
+			)
+        }
+    });
+    
+    // disable right arrow when reaching end
+	$('#scrollRight-results').click(function(){
+    	if (position <= totalLength){
+			$('#scrollRight-results').css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right-hover.png) right center no-repeat"});
+			$('#scrollRight-results').hover(
+				function() {
+					$(this).css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right-hover.png) right center no-repeat"});
+				},
+				function() {
+					$(this).css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right-hover.png) right center no-repeat"});
+				}
+			)
+		}
+	});
+
+    // move object left 548px if not already at 0
+    $('#scrollLeft-results').click(function(){
+        if (position != 0){
+            position += 548;
+            $('.matched-results-items').animate({'left': position}, 'slow');
+			$('#scrollRight-results').css({color:"#ffffff", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right.png) right center no-repeat"});
+			$('#scrollRight-results').hover(
+				function() {
+					$(this).css({color:"#999999", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right-hover.png) right center no-repeat"});
+				},
+				function() {
+					$(this).css({color:"#ffffff", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right.png) right center no-repeat"});
+				}
+			)
+        }
+    });
+    
+    // disable right arrow when reaching end
+	$('#scrollLeft-results').click(function(){
+    	if (position == 0){
+			$('#scrollLeft-results').css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left-hover.png) left center no-repeat"});
+			$('#scrollLeft-results').hover(
+				function() {
+					$(this).css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left-hover.png) left center no-repeat"});
+				},
+				function() {
+					$(this).css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left-hover.png) left center no-repeat"});
+				}
+			)
+		}
+	});
+};
+
+$(function(){
+    var position = 0;
+
+    // move object right 580px regardless of current position
+    $('#scrollRight-topics').click(function(){
+        // setting right side bounds as well
+		if (position != -1160){
+		position -= 580;
+		$('.ajax-topics-search-content').animate({'left': position}, 'slow');
+		}
+    });
+    
+    // enable scroll left if position is greater than 0
+    $('#scrollRight-topics').click(function(){
+        if (position != 0){
+        	$('#scrollLeft-topics').css({color:"#ffffff", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left.png) left center no-repeat"});
+			$('#scrollLeft-topics').hover(
+				function() {
+					$(this).css({color:"#999999", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left-hover.png) left center no-repeat"});
+				},
+				function() {
+					$(this).css({color:"#ffffff", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left.png) left center no-repeat"});
+				}
+			);
+        }
+    });
+    
+    // enable scroll left if position is greater than 0
+    $('#scrollRight-topics').click(function(){
+        if (position == -580){
+        	$('#scrollRight-topics').css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right-hover.png) right center no-repeat"});
+			$('#scrollRight-topics').hover(
+				function() {
+					$(this).css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right-hover.png) right center no-repeat"});
+				},
+				function() {
+					$(this).css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right-hover.png) right center no-repeat"});
+				}
+			);
+		}
+	});
+
+    // move object left 580px if not already at 0
+    $('#scrollLeft-topics').click(function(){
+        if (position != 0){
+            position += 580;
+            $('.ajax-topics-search-content').animate({'left': position}, 'slow');
+        	$('.scroll-arrow-right').css({color:"#ffffff", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right.png) right center no-repeat"});
+			$('.scroll-arrow-right').hover(
+				function() {
+					$(this).css({color:"#999999", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right-hover.png) right center no-repeat"});
+				},
+				function() {
+					$(this).css({color:"#ffffff", background:"url(/images/global/widgets/ftpa-video-finder/arrow-right.png) right center no-repeat"});
+				}
+			);
+        }
+    });
+    
+    // disable scroll left if position is at 0
+    $('#scrollLeft-topics').click(function(){
+        if (position == 0){
+        	$('#scrollLeft-topics').css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left-hover.png) left center no-repeat"});
+			$('#scrollLeft-topics').hover(
+				function() {
+					$(this).css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left-hover.png) left center no-repeat"});
+				},
+				function() {
+					$(this).css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left-hover.png) left center no-repeat"});
+				}
+			);
+        }
+    });
+});
+
+//var position = 0;
+function autoScroll(){
+//    var height = $("#wn").height();
+//    if (height > 41) {
+//		position -=17;
+//		$('#wn').animate({'top': position}, 'slow');
+//    }
+};
+
+$(function(){
+    var position = 0;
+ 	
+	// move object down 16px regardless of current position
+	$('#scrollDown').click(function(){
+	var cLength = $('.added-search-terms').text().length;
+	var height = $("#wn").height();
+	var winPos = position + height;
+		if (winPos > 41) {
+		// unless you're setting bottom bounds as well
+		position -= 17;
+		$('#wn').animate({'top': position}, 'slow');
+		} else {
+		position -= 0;
+		$('#wn').animate({'top': position}, 'slow');
+		}
+	});
+
+	// move object up 16px if not already at 0
+	$('#scrollUp').click(function(){
+		if (position != 0){
+			position += 17;
+			$('#wn').animate({'top': position}, 'slow');
+		}
+	});
+});
+
+function disableAnchor(obj,disable) {
+	if (disable) {
+		var href = obj.getAttribute("href");
+		if (href && href != "" && href != null) {
+			obj.setAttribute('href_bak', href);
+		}
+		obj.removeAttribute('href');
+		obj.removeAttribute('onclick');
+		obj.style.color = "#ffffff";
+	} else {
+		obj.setAttribute('href', obj.attributes['href_bak'].nodeValue);
+		obj.style.color="#666666";
+	}
+}
+
+function new_search() {
+	$("name").remove();
+	$('.match-results-text').text("");
+	$('.matched-results-items').empty();
+	$('ajax-pros-search-content').empty();
+	$('ajax-topics-search-content').empty();
+	document.getElementById('scrollbar-pros').style.display = 'none';
+	document.getElementById('scrollbar-results').style.display = 'none';
+	document.getElementById('scrollbar-topics').style.display = 'none';
+	//loadData.proName();
+	//loadData.topics();
+	location.reload();
+}
+
+function add_width() {
+	var horiz = document.getElementById("ajax-returned-content");
+	var curr_width = parseInt(horiz.style.width); // removes the "px" at the end
+	horiz.style.width = (curr_width + 145) +"px";
+}
+
+function toggle(id) {
+	var widgetRight = "right-content";
+	var proTerms = "wn2";
+	var videoTypes = "wn3";
+	var topicTerms ="wn4";
+	var keywordTextbox = "wn5";
+	var videoResults = "wn6";
+	var prosButton = "gray-pros-button";
+	var videosButton = "";
+	var topicsButton = "";
+	var keywordsButton = "";
+	var scrollPros = "scrollbar-pros";
+	var scrollResults = "scrollbar-results";
+	var scrollTopics = "scrollbar-topics";
+	var findVideoBtn = "video-search-ftpa-util";
+	
+	$('.video-finder-hide').hide();
+	$('.video-search .split-box-left').css('backgroundImage','none');
+	$('.video-search .search-widget').css('backgroundImage','url(/images/global/widgets/ftpa-video-finder/finder-bg.png)');
+	$('.video-search .search-widget').css('height','271px');
+	$('.video-search .search-widget').css('width','892px');	
+
+	switch (id) {
+
+	case 'pros': 
+				openFinder();
+				document.getElementById(proTerms).style.display = 'block';
+				document.getElementById(scrollPros).style.display = 'block';
+				document.getElementById(findVideoBtn).style.display = 'block';
+				$('.video-search span.pros-finder-button a span').css('background','url(/images/global/widgets/ftpa-video-finder/button-active.png)');
+				$('.video-search span.video-finder-button a span').css('background','url(/images/global/widgets/ftpa-video-finder/button-topic-normal.png)');
+				$('.video-search span.video-finder-button a span').hover(
+					function() {
+						$(this).css('background','url(/images/global/widgets/ftpa-video-finder/button-topic-hover.png)');
+						//$(this).css('color','#ffffff');
+					},
+					function() {
+						$(this).css('background','url(/images/global/widgets/ftpa-video-finder/button-topic-normal.png)');
+						//$(this).css('color','#999999');
+					}
+				);
+				$('.video-search span.pros-finder-button a span').hover(
+					function() {
+						$(this).css('background','url(/images/global/widgets/ftpa-video-finder/button-active.png)');
+					},
+					function() {
+						$(this).css('background','url(/images/global/widgets/ftpa-video-finder/button-active.png)');
+					}
+				);
+        		$('#scrollLeft-pros').css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left-hover.png) left center no-repeat"});
+				break;
+	case 'video_types': 
+				openFinder();
+				document.getElementById(videoTypes).style.display = 'block';
+				break;
+	case 'topics': 
+				openFinder();
+				document.getElementById(topicTerms).style.display = 'block';
+				document.getElementById(scrollTopics).style.display = 'block';
+				document.getElementById(findVideoBtn).style.display = 'block';
+				$('.video-search span.pros-finder-button a span').css('background','url(/images/global/widgets/ftpa-video-finder/button-normal.png)');
+				$('.video-search span.video-finder-button a span').css('background','url(/images/global/widgets/ftpa-video-finder/button-active.png)');
+				$('.video-search span.pros-finder-button a span').hover(
+					function() {
+						$(this).css('background','url(/images/global/widgets/ftpa-video-finder/button-hover.png)');
+						//$(this).css('color','#ffffff');
+					},
+					function() {
+						$(this).css('background','url(/images/global/widgets/ftpa-video-finder/button-normal.png)');
+						//$(this).css('color','#999999');
+					}
+				);
+				$('.video-search span.video-finder-button a span').hover(
+					function() {
+						$(this).css('background','url(/images/global/widgets/ftpa-video-finder/button-active.png)');
+					},
+					function() {
+						$(this).css('background','url(/images/global/widgets/ftpa-video-finder/button-active.png)');
+					}
+				);
+        		$('#scrollLeft-topics').css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left-hover.png) left center no-repeat"});
+				break;
+	case 'key_word': 
+				openFinder();
+				document.getElementById(widgetRight).style.display = 'block';
+				document.getElementById(keywordTextbox).style.display = 'block';
+				break;
+	case 'find_results':
+				if (searchActivated) {
+					openFinder();
+					document.getElementById(videoResults).style.display = 'block';
+					document.getElementById(scrollResults).style.display = 'block';
+					document.getElementById(findVideoBtn).style.display = 'none';
+        			$('#scrollLeft-results').css({color:"#666666", background:"url(/images/global/widgets/ftpa-video-finder/arrow-left-hover.png) left center no-repeat"});
+					$('.video-search span.pros-finder-button a span').css('background','url(/images/global/widgets/ftpa-video-finder/button-normal.png)');
+					$('.video-search span.video-finder-button a span').css('background','url(/images/global/widgets/ftpa-video-finder/button-topic-normal.png)');
+					$('.video-search span.pros-finder-button a span').hover(
+						function() {
+							$(this).css('background','url(/images/global/widgets/ftpa-video-finder/button-hover.png)');
+							//$(this).css('color','#ffffff');
+						},
+						function() {
+							$(this).css('background','url(/images/global/widgets/ftpa-video-finder/button-normal.png)');
+							//$(this).css('color','#999999');
+						}
+					);
+					$('.video-search span.video-finder-button a span').hover(
+						function() {
+							$(this).css('background','url(/images/global/widgets/ftpa-video-finder/button-topic-hover.png)');
+						},
+						function() {
+							$(this).css('background','url(/images/global/widgets/ftpa-video-finder/button-topic-normal.png)');
+						}
+					);
+					loadData.searchResults();
+				}
+				break;
+	}
+}
+
+function openFinder() {
+	var widgetRight = "right-content";
+	var proTerms = "wn2";
+	var videoTypes = "wn3";
+	var topicTerms ="wn4";
+	var keywordTextbox = "wn5";
+	var videoResults = "wn6";
+	var prosButton = "gray-pros-button";
+	var videosButton = "";
+	var topicsButton = "";
+	var keywordsButton = "";
+	var scrollPros = "scrollbar-pros";
+	var scrollResults = "scrollbar-results";
+	var scrollTopics = "scrollbar-topics";
+	
+	$('.video-finder-hide').hide();
+	$('.video-search .split-box-left').css('backgroundImage','none');
+	$('.video-search .search-widget').css('backgroundImage','url(/images/global/widgets/ftpa-video-finder/finder-bg.png)');
+	$('.video-search .search-widget').css('height','271px');
+	$('.video-search .search-widget').css('width','892px');	
+
+	document.getElementById(widgetRight).style.display = 'block';
+	document.getElementById(proTerms).style.display = 'none';
+	document.getElementById(videoTypes).style.display = 'none';
+	document.getElementById(topicTerms).style.display = 'none';
+	document.getElementById(keywordTextbox).style.display = 'none';
+	document.getElementById(videoResults).style.display = 'none';
+	document.getElementById(scrollPros).style.display = 'none';
+	document.getElementById(scrollResults).style.display = 'none';
+	document.getElementById(scrollTopics).style.display = 'none';
+
+}
+
+
+var searchActivated = false;
+function activateSearch() {
+	var searchBtnID = '.submit-button';
+	$(searchBtnID).bind("click", function() {
+		//$("#wn6").remove();
+		//loadData.searchResults();
+		toggle('find_results');
+		$(searchBtnID).unbind('click');
+		$('.video-search span.red-submit a span').css('background','url(/images/global/widgets/ftpa-video-finder/submit-bg.png)');
+		$('.video-search span.red-submit a span').hover(
+			function() {
+				$(this).css('background','url(/images/global/widgets/ftpa-video-finder/submit-bg.png)');
+				$(this).css('color','#999999');
+			},
+			function() {
+				$(this).css('background','url(/images/global/widgets/ftpa-video-finder/submit-bg.png)');
+				$(this).css('color','#999999');
+			}
+		);
+	});
+	$('.video-search span.red-submit a span').css('background','url(/images/global/widgets/ftpa-video-finder/red-submit-bg-active.png)');
+	$('.video-search span.red-submit a span').hover(
+		function() {
+			$(this).css('background','url(/images/global/widgets/ftpa-video-finder/red-submit-bg-hover.png)');
+			$(this).css('color','#ffffff');
+		},
+		function() {
+			$(this).css('background','url(/images/global/widgets/ftpa-video-finder/red-submit-bg-active.png)');
+			$(this).css('color','#999999');
+		}
+	);
+	$('#wn4-instructions').html('You can also add Pros to this search.');
+	$('#wn2-instructions').html('You can also add Topics to this search.');
+	searchActivated = true;
+}
+
+function deactivateSearch() {
+	searchActivated = false;
+	$('.video-search span.red-submit a span').css('background','url(/images/global/widgets/ftpa-video-finder/submit-bg.png)');
+	$('.video-search span.new-search-text a span').css('color','#666666');
+	$('.video-search span.red-submit a span').hover(
+		function() {
+			$(this).css('background','url(/images/global/widgets/ftpa-video-finder/submit-bg.png)');
+			$(this).css('color','#999999');
+		},
+		function() {
+			$(this).css('background','url(/images/global/widgets/ftpa-video-finder/submit-bg.png)');
+			$(this).css('color','#999999');
+		}
+	);
+	$('.video-search span.pros-finder-button a span').hover(
+		function() {
+			$(this).css('background','url(/images/global/widgets/ftpa-video-finder/button-hover.png)');
+		},
+		function() {
+			$(this).css('background','url(/images/global/widgets/ftpa-video-finder/button-normal.png)');
+		}
+	);
+	$('.video-search span.video-finder-button a span').hover(
+		function() {
+			$(this).css('background','url(/images/global/widgets/ftpa-video-finder/button-topic-hover.png)');
+		},
+		function() {
+			$(this).css('background','url(/images/global/widgets/ftpa-video-finder/button-topic-normal.png)');
+		}
+	);
+}
+
+function close_content() {
+	searchActivated = false;
+	//var searchBtnID = '.submit-button';
+	//$(searchBtnID).bind("click", function() {
+	//	$(searchBtnID).unbind('click');
+	//});
+	var rightContent = "right-content";
+	document.getElementById(rightContent).style.display = 'none';
+	deactivateSearch();
+	$('.video-finder-hide').show();
+	$('.video-search .split-box-left').css('backgroundImage','url(/images/global/widgets/ftpa-video-finder/recommended_box.png)');
+	$('.video-search span.pros-finder-button a span').css('background','url(/images/global/widgets/ftpa-video-finder/button-normal.png)');
+	$('.video-search span.video-finder-button a span').css('background','url(/images/global/widgets/ftpa-video-finder/button-topic-normal.png)');
+	$('.video-search .search-widget').css('backgroundImage','none');
+	$('.video-search .search-widget').css('height','271px');
+	$('.video-search .search-widget').css('width','214px');
+	$('.video-search .search-widget').css('margin-right','16px');
+	
+	location.reload();
+}
+
+function getScrollXY() {
+	var scrOfX = 0, scrOfY = 0;
+	if( typeof( window.pageYOffset ) == 'number' ) {
+		scrOfY = window.pageYOffset; scrOfX = window.pageXOffset;
+	} else if( document.body && ( document.body.scrollLeft || document.body.scrollTop ) ) {
+		scrOfY = document.body.scrollTop; scrOfX = document.body.scrollLeft;
+	} else if( document.documentElement && ( document.documentElement.scrollLeft || document.documentElement.scrollTop ) ) {
+		scrOfY = document.documentElement.scrollTop; scrOfX = document.documentElement.scrollLeft;
+	}
+	window.alert( 'Horizontal scrolling = ' + scrOfX + '\nVertical scrolling = ' + scrOfY );
+}
+
+<?php $this->headScript()->captureEnd() ?>
+
+<?php
+	$this->headScript()->appendFile('/js/jquery.scrollTo-min.js');
+	$this->headScript()->appendFile('/js/preloadCssImages.jQuery_v5.js');
+?>
+
+
+<?php $this->headStyle()->captureStart() ?>
+body {
+    background-color: <?php echo $this->bgColor ?>;
+}
+<?php $this->headStyle()->captureEnd() ?>
+
+<div class="video-search">
+  	<div class="search-widget">
+	  	<div class="split-box-left">
+            <div class="text">
+              	<div class="top_header">
+                    <img class="mag-glass" src="images/global/widgets/ftpa-video-finder/mag_arrow.png" alt="Search" />
+                    <div class="header"><?= $this->video_finder ?></div>
+                </div>
+            </div>
+            <div class="text-blurb"><?= $this->search_by ?></div>
+            <ul class="search-add-buttons">
+                <li class="pros-button">
+                    <span id="gray-pros-button" class="pros-finder-button">
+                        <a onclick="toggle('pros'); return false" href="#" title="">
+                            <span class="pros-search-button"><img src="/images/global/widgets/ftpa-video-finder/button-pros.png" alt="Pros" /><?= $this->pros ?></span>
+                        </a>
+                    </span>
+           	  	</li>
+                <li id="vid-add" class="vid-button">
+                    <span class="gray-video-button video-finder-button">
+                        <a onclick="toggle('topics'); return false" href="#" title="">
+                            <span class="vid-type-search-button"><img src="/images/global/widgets/ftpa-video-finder/button-categories.png" alt="Categories" /><?= $this->topics ?></span>
+                        </a>
+                    </span>
+                </li>
+            </ul>
+            <!--<form id="search-query" action="search.php" method="get">
+            <div id="video-search-ftpa-util" class="red-submit-btn">
+                <span class="red-submit">
+                    <a href="#" title="">
+                        <span class="submit-button"><?= $this->find_videos ?></span>
+                    </a>
+                </span>
+            </div>
+            </form>-->
+            <div id="new-search-clear" class="new-search-link">
+            	<span class="new-search-text">
+                    <a href="#" class="util-new-search" title="New Search">
+                        <span class="new-search"><?= $this->clear_search ?></span>
+                    </a>
+                </span>
+            </div>
+		</div>
+
+        <div class="split-box-right" id="right-content">
+        	<div class="added-search-terms-box">
+            	<div class="search-terms">
+					<div class="search-window">
+						<div id="wn">
+						  <div id="lyr" class="content"><span class="search-terms-title"><?= $this->search_terms ?>: <span id="added-search-terms-list" class="added-search-terms">&nbsp;</span></span></div>
+						</div>
+						<div id="scroll_links">
+							<div id="scrollUp">
+								<img src="images/global/widgets/ftpa-video-finder/arrow-up.png" height="7" width="8" alt="Arrow Up" class="search-arrow-up"/>
+							</div>
+							<div id="scrollDown">
+								<img src="images/global/widgets/ftpa-video-finder/arrow-down.png" height="7" width="8" alt="Arrow Down" class="search-arrow-down" />
+							</div>
+						</div>
+					</div>
+                </div>
+            	<div class="close-widget">
+                    <a onclick="close_content(); return false">
+                        <span class="close-right-content">X</span>
+                    </a>
+          		</div>
+  	  	  	</div>
+
+
+            <div id="wn2">
+                <div class="search-instructions-text">
+                    <h1 id="wn2-instructions" class="search-instructions"><?= $this->select_one ?></h1>
+                </div>
+				<div id="lyr2">
+					<div id="ajax-returned-proname-content" class="ajax-pros-search-content">
+
+					</div>
+				</div>
+          	</div>
+            
+            <div id="wn3">
+                <div class="search-instructions-text">
+                    <h1 id="wn3-instructions" class="search-instructions"><?= $this->select_one ?></h1>
+                </div>
+				<div id="lyr3">
+					<div id="ajax-returned-content" class="ajax-video-type-search-content">
+
+					</div>
+				</div>
+          	</div>
+            
+            <div id="wn4">
+                <div class="search-instructions-text">
+                    <h1 id="wn4-instructions" class="search-instructions"><?= $this->select_one ?></h1>
+                </div>
+				<div id="lyr4">
+					<div id="ajax-returned-topics-content" class="ajax-topics-search-content">
+
+					</div>
+				</div>
+          	</div>
+
+            <div id="wn6">
+                <div class="results-search-instructions-text">
+                    <h1 class="results-search-instructions"><?= $this->number_of_matches ?>: <span class="match-results-text"></span></h1>
+                </div>
+                <div id="lyr6" class="ajax-results-content">
+                    <div id="ajax-matched-results" class="matched-results-items">
+
+                    </div>
+                </div>
+            </div>
+            
+			<div id="wn5">
+				<div class="keyword-search-instructions-text">
+					<h1 class="keyword-search-instructions">Write one or more Keywords in the box below or add more search terms using the buttons on the left.</h1>
+				</div>
+				<form id="keyword-form" action="">
+					<div class="keyword-search-box">
+						<input id="keyword" class="keyword-text" type="text" value="" maxlength="50" size="30" />
+					</div>
+					<div class="keyword-add-link">
+						<a href="#" onclick="add_keyword(); return false">
+						<span class="keyword-add">Add to the list</span>
+						</a>
+					</div>
+				</form>
+			</div>
+			
+			<div id="scrollbar-results">
+				<div id="scrollLeft-results" class="scroll-arrow-left"/><span class="scroll-left-text">Previous</span></div>
+				<div id="scroll-separator">|</div>
+				<div id="scrollRight-results" class="scroll-arrow-right"/><span class="scroll-right-text">More Videos</span></div>
+			</div>
+			
+			<div id="scrollbar-pros">
+				<div id="scrollLeft-pros" class="scroll-arrow-left"><span class="scroll-left-text">Previous</span></div>
+				<div id="scroll-separator">|</div>
+				<div id="scrollRight-pros" class="scroll-arrow-right"/><span class="scroll-right-text">More Pros</span></div>
+			</div>
+			
+			<div id="scrollbar-topics">
+				<div id="scrollLeft-topics" class="scroll-arrow-left"><span class="scroll-left-text">Previous</span></div>
+				<div id="scroll-separator">|</div>
+				<div id="scrollRight-topics" class="scroll-arrow-right"/><span class="scroll-right-text">More Topics</span></div>
+			</div>
+			
+            <form id="search-query" action="search.php" method="get">
+            <div id="video-search-ftpa-util" class="red-submit-btn">
+                <span class="red-submit">
+                    <a href="#" title="">
+                        <span class="submit-button"><?= $this->find_videos ?></span>
+                    </a>
+                </span>
+            </div>
+            </form>
+			
+		</div>
+		<div class="both"></div>
+	</div>
+</div>

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      function doIt(t) {
+        $("li").css("background", "");
+        $("li:nth-child" + t).css("background", "yellow");
+      }
+
+      $(function () {
+        $("button").click(function () {
+          doIt($(this).text());
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <button>(even)</button>
+    <button>(odd)</button>
+    <button>(2)</button>
+    <button>(n)</button>
+    <button>(n+0)</button>
+    <button>(1n)</button>
+    <button>(1n+0)</button>
+    <button>(0n+1)</button>
+    <button>(4n)</button>
+    <button>(4n+0)</button>
+    <button>(4n+1)</button>
+    <button>(4n+2)</button>
+    <button>(4n+3)</button>
+    <button>(4n+4)</button>
+    <button>(4n-0)</button>
+    <button>(4n-1)</button>
+    <button>(4n-2)</button>
+    <button>(4n-3)</button>
+    <button>(4n-4)</button>
+    <button>(-n+6)</button>
+    <button>(-2n+6)</button>
+    <button>(0)</button>
+    <ul>
+      <li>First</li>
+      <li>Second</li>
+      <li>Third</li>
+      <li>Fourth</li>
+      <li>Fifth</li>
+      <li>Sixth</li>
+      <li>Seventh</li>
+      <li>Eighth</li>
+      <li>Ninth</li>
+      <li>Tenth</li>
+      <li>Eleventh</li>
+      <li>Twelvth</li>
+    </ul>
+  </body>
+</html>

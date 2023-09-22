@@ -1,0 +1,137 @@
+﻿
+<!-- this is the html table -->
+
+<table id="reqtbl" style="width: 100%; margin-top: 20px;">
+  <tr>
+    <th>Category</th>
+    <th>Sub Category</th>
+    <th>Part number (if known)</th>
+    <th>Condition</th>
+    <th>&nbsp;</th>
+  </tr>
+  
+  <tbody>
+    <tr id="partRow1">
+      <td style="width: 170px;">
+        <select name="c_id[]" id="c_id_1" style="width: 170px;" onchange="clonef.cat(this)">
+          <option value="">Please Select</option>
+          {foreach from=$categories key=c_id item=category}
+          <option value="{$c_id}">{$category.name}</option>
+          {/foreach}
+        </select>
+      </td>
+      <td style="width: 170px;">
+        <select name="sc_id[]" id="sc_id_1" style="width: 170px;" disabled="disabled">
+          <option value="">Please Select</option>
+        </select>
+      </td>
+      <td style="width: 170px;">
+        <input type="text" name="part[]" id="part_1" style="width: 170px;"/>
+      </td>
+      <td style="width: 90px;">
+        <select name="cond[]" id="cond_1" style="width: 90px;">
+          <option value="new">New</option>
+          <option value="used">Used</option>										
+        </select>
+      </td>								
+      <td style="text-align: center;">
+        <a href="javascript:;" class="add-click"><img src="{'add.png'|icon}" alt="Add Part" /></a>
+        <a href="javascript:;" class="del-click"><img src="{'del.png'|icon}" alt="Delete Part" /></a>
+      </td>
+    </tr>
+  </tbody>
+  
+</table>
+
+
+
+<!-- this is the jquery used -->
+
+var clonef =
+{
+	/**
+	 * Variables for Prototype
+	 *
+	 * each variable below is used to temporary or permenantly store
+	 * information about the users requesting parts and the form
+	 * status.
+	 */
+	current:			1,		// current object being used
+	total: 				1,		// total rows added by user
+	max_allowed:	10,		// limit the user to a maximum (false for unlimited)
+	
+	/**
+	 * Add Form Row
+	 * 
+	 * insert a new product request section to the form
+	 * allowing the user to choose category, sub-cat and
+	 * the part they are attempting to get.
+	 */
+	add: function ()
+	{
+		// check limit
+		if ((this.max_allowed !== false) 
+			&& (this.total == this.max_allowed)) {
+			alert('You are only allowed to request ' + this.max_allowed + ' parts at a time.');
+			return;
+		};
+		
+		this.current++;
+		this.total++;
+		
+		// clone previous sibling
+		$('#reqtbl tr:eq(1)').clone().appendTo($('#reqtbl tr:last'));
+		
+		// change ID, enable icon click action parsing jquery obj
+		$('#reqtbl tr:eq(' + clonef.current + ')').attr('id', 'partRow' + clonef.current);
+		$('#reqtbl tr:eq(' + clonef.current + ') .add-click').click(function (){
+			clonef.add();
+		})
+		$('#reqtbl tr:eq(' + clonef.current + ') .del-click').click(function (){
+			clonef.del($(this).parent().parent());
+		});
+		
+		// now we reset all values inside the contents
+	},
+	
+	/**
+	 * Remove Form Row
+	 * 
+	 * removed the chosen child from the form including
+	 * fields and any selected data the user requests,
+	 * but only when the user has confirmed such action.
+	 */
+	del: function (o)
+	{
+		// only delete first row when total shows 2 or more
+		if (this.total == 1) {
+			alert('You cannot delete the first row, unless you have more than 1 part in this request.');
+			return;
+		};
+		
+		// remove element & reduce total
+		o.remove();
+		this.total--;
+	},
+	
+	/**
+	 * Select Category
+	 * 
+	 * fetch all sub-categories for this vehicle for the
+	 * category which has been selected by the user for
+	 * the part they wish to find.
+	 */
+	cat: function (o)
+	{
+	}
+};
+
+// jquery begin initialising clicking
+$(function (){
+	$('#reqtbl tr:eq(1) .add-click').click(function (){
+		clonef.add();
+	});
+	$('#reqtbl tr:eq(1) .del-click').click(function (){
+		clonef.del($(this).parent().parent());
+	});
+});

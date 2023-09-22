@@ -1,0 +1,42 @@
+Index: jquery/src/outro.js
+===================================================================
+--- jquery/src/outro.js	(revision 3609)
++++ jquery/src/outro.js	(working copy)
+@@ -1 +1 @@
+-})();
++}).call(this);
+Index: jquery/src/core.js
+===================================================================
+--- jquery/src/core.js	(revision 3609)
++++ jquery/src/core.js	(working copy)
+@@ -13,7 +13,7 @@
+ if ( typeof jQuery != "undefined" )
+ 	var _jQuery = jQuery;
+ 
+-var jQuery = window.jQuery = function( selector, context ) {
++var jQuery = this.jQuery = function( selector, context ) {
+ 	// If the context is a namespace object, return a new object
+ 	return this instanceof jQuery ?
+ 		this.init( selector, context ) :
+@@ -25,7 +25,7 @@
+ 	var _$ = $;
+ 	
+ // Map the jQuery namespace to the '$' one
+-window.$ = jQuery;
++this.$ = jQuery;
+ 
+ // A simple way to check for HTML strings or ID strings
+ // (both of which we optimize for)
+@@ -542,10 +542,10 @@
+ 
+ jQuery.extend({
+ 	noConflict: function( deep ) {
+-		window.$ = _$;
++		this.$ = _$;
+ 
+ 		if ( deep )
+-			window.jQuery = _jQuery;
++			this.jQuery = _jQuery;
+ 
+ 		return jQuery;
+ 	},

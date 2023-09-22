@@ -1,0 +1,29 @@
+*** jquery-1.2.6.js	2008-07-15 10:39:38.000000000 -0700
+--- jquery-1.2.6.js.debugging	2008-07-15 12:11:43.000000000 -0700
+***************
+*** 302,308 ****
+  
+  		// Copy the events from the original to the clone
+  		if ( events === true )
+! 			this.find("*").andSelf().each(function(i){
+  				if (this.nodeType == 3)
+  					return;
+  				var events = jQuery.data( this, "events" );
+--- 302,308 ----
+  
+  		// Copy the events from the original to the clone
+  		if ( events === true )
+! 			ret.find("*").andSelf().each(function(i){
+  				if (this.nodeType == 3)
+  					return;
+  				var events = jQuery.data( this, "events" );
+***************
+*** 312,317 ****
+--- 312,318 ----
+  						jQuery.event.add( clone[ i ], type, events[ type ][ handler ], events[ type ][ handler ].data );
+  			});
+        
++ 
+  		// Return the cloned set
+  		return ret;
+  	},

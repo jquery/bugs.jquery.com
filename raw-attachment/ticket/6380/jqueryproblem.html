@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>JQuery Problem</title>
+		<script src="jquery-1.4.2.js" type="text/javascript" ></script>
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+			var urli="lildiv.html"; //has no linebreak after DOCTYPE (no fail)
+			var urlo="loldiv.html"; //has linebreak after DOCTYPE (fails)
+			$.get(urli,function(data){ loadPanel(data,"div.i"); })	    
+			$.get(urlo,function(data){ loadPanel(data,"div.o"); })	    
+			function loadPanel(data,point) { $(point).append($(data).html()); }
+		});
+		</script>
+	</head>
+	<body>
+		<div class="i">[i-without break]</div>
+		<div class="o">[o-with break]</div>
+	</body>
+</html>

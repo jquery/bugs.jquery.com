@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+  <link href="qunit.css" rel="stylesheet" type="text/css" />
+  <script src="qunit.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+    (function($) {
+      $.namespace = function() {
+        ///	<summary>
+        ///	Creates namespaces to be used for scoping variables and classes so that they are not global.  Usage:
+        /// <pre><code>
+        /// $.namespace('Company', 'Company.data');
+        /// </code></pre>
+        ///	</summary>
+        ///	<param name="namespace1" type="String">
+        ///	</param>
+        ///	<param name="namespace2" type="String">
+        ///	</param>
+        ///	<param name="etc" type="String">
+        ///	</param>
+        ///	<returns type="" />
+        var a = arguments, o = null, i, j, d, rt;
+        for (i = 0; i < a.length; i = i + 1) {
+          d = a[i].split(".");
+          rt = d[0];
+          eval('if (typeof ' + rt + ' == "undefined"){' + rt + ' = {};} o = ' + rt + ';');
+          for (j = 1; j < d.length; j = j + 1) {
+            o[d[j]] = o[d[j]] || {};
+            o = o[d[j]];
+          }
+        }
+      };
+
+      $.StringFormat = function(text) {
+        //http://just3ws.wordpress.com/2007/04/28/javascript-stringformat-method/
+        //check if there are two arguments in the arguments list
+        if (arguments.length <= 1) {
+          //if there are not 2 or more arguments there’s nothing to replace
+          //just return the original text
+          return text;
+        }
+        //decrement to move to the second argument in the array
+        var tokenCount = arguments.length - 2;
+        for (var token = 0; token <= tokenCount; token = token + 1) {
+          //iterate through the tokens and replace their placeholders from the original text in order
+          text = text.replace(new RegExp("\\{" + token + "\\}", "gi"),
+                                                arguments[token + 1]);
+
+        }
+        return text;
+      };
+
+
+    })(jQuery);
+    $.namespace('MItem');
+    //TODO: this should be in a base class
+    MItem = {
+      DialogSelector: "#ItemSearch",
+      DialogName: "ItemSearch",
+      //
+      ResultList: function() {
+        return $($.StringFormat(".{0}-ResultList", MItem.DialogName), MItem.DialogSelector);
+      },
+      ResultListOptions: function() {
+        return $(".ItemSearch-ResultList option", MItem.DialogSelector);
+      },
+      ResultListSelectedOptions: function() {
+        return $($.StringFormat(".{0}-ResultList option:selected", MItem.DialogName), MItem.DialogSelector);
+      },
+      ResultListOptionsNotEmpty: function() {
+        return $($.StringFormat(".{0}-ResultList option[value!='{1}']", MItem.DialogName, '00000000-0000-0000-0000-000000000000'), MItem.DialogSelector);
+      },
+      Messages: function() {
+        return $(MItem.DialogSelector + " .ItemSearch-Messages");
+      },
+      //
+      Dialog: function() {
+        return $(MItem.DialogSelector);
+      },
+      SubDropDownRows: function() {
+        return $("tr:has(.ItemSearch-Basket),tr:has(.ItemSearch-ItemGroup)", MItem.DialogSelector);
+      },
+      ItemSearchSelection: function() {
+        return $(MItem.DialogSelector + " .ItemSearch-ItemSearchSelection");
+      }
+    };
+    $(function() {
+
+      module("Result list");
+      test("ResultList", function() {
+        equals(MItem.ResultList().length, 1, "ResultList length");
+      });
+      test("ResultListOptions", function() {
+        equals(MItem.ResultListOptions().length, 7, "ResultListOptions length");
+      });
+      test("ResultListSelectedOptions", function() {
+        equals(MItem.ResultListSelectedOptions().length, 1, "ResultListSelectedOptions length");
+      });
+      test("ResultListOptionsNotEmpty", function() {
+        equals(MItem.ResultListOptionsNotEmpty().length, 6, "ResultListOptionsNotEmpty length");
+      });
+      module("Messages");
+      test("Messages", function() {
+        equals(MItem.Messages().length, 1, "Messages length");
+      });
+      module("Dialog");
+      test("Dialog", function() {
+        equals(MItem.Dialog().length, 1, "Dialog length");
+      });
+      module("SubDropDowns");
+      test("SubDropDownRows", function() {
+        equals(MItem.SubDropDownRows().length, 2, "SubDropDownRows length");
+      });
+
+    })
+    //$("#ItemSearch_Messages").html()
+  </script>
+
+</head>
+<body>
+  <h1 id="qunit-header">
+    QUnit test</h1>
+  <h2 id="qunit-banner">
+  </h2>
+  <h2 id="qunit-userAgent">
+  </h2>
+  <ol id="qunit-tests">
+  </ol>
+  <p id="qunit-testresult" class="result">
+  </p>
+  <div id="ItemSearch" title="Urval Varor">
+    <div>
+      <div id="ItemSearch_Messages" class="ItemSearch-Messages">
+      </div>
+      <table cellpadding="0" width="570">
+        <tbody>
+          <tr width="100%">
+            <td width="60">
+              <label class="PageTextClass" style="display: inline-block; width: 100%;" for="ItemSearch_ItemSearchSelection">
+                Urval Varor</label>
+            </td>
+            <td>
+              <select id="ItemSearch_ItemSearchSelection" class="ItemSearch-ItemSearchSelection DropDownListClass"
+                style="width: 100%;">
+                <option selected="selected" value="Item">Varor</option>
+                <option value="ItemGroup">Varugrupp</option>
+                <option value="Basket">Samlingskorg</option>
+              </select>
+            </td>
+          </tr>
+          <tr width="100%">
+            <td width="60">
+              <label class="PageTextClass" style="display: inline-block; width: 100%;" for="ItemSearch_ItemGroup">
+                Varugrupp</label>
+            </td>
+            <td>
+              <select id="ItemSearch_ItemGroup" class="ItemSearch-ItemGroup 
+DropDownListClass" style="width: 100%;">
+                <option selected="selected" value="7f466a0c-ad00-4cc6-a916-9dc8dc7ba280">Alkoholhaltiga
+                  drycker</option>
+                <option value="1">Bullar, skorpor, kex, kakor, konditori</option>
+                <option value="2">Disk&amp;rengöringsmedel</option>
+                <option value="3">Drycker</option>
+                <option value="4">Fisk, skaldjur, rom</option>
+              </select>
+            </td>
+          </tr>
+          <tr width="100%">
+            <td width="60">
+              <label class="PageTextClass" style="display: inline-block; width: 100%;" for="ItemSearch_Basket">
+                Samlingskorg</label>
+            </td>
+            <td>
+              <select id="ItemSearch_Basket" class="ItemSearch-Basket 
+DropDownListClass" style="width: 100%;">
+                <option selected="selected" value="1">Buljonger</option>
+                <option value="2">Buljongkorg</option>
+                <option value="3">Grönsaker</option>
+                <option value="4">Kryddkorg</option>
+                <option value="5">Kryddkorg</option>
+                <option value="6">Puréer</option>
+                <option value="7">Specerier</option>
+                <option value="8">Tillbehör</option>
+              </select>
+            </td>
+          </tr>
+          <tr width="100%">
+            <td width="60">
+              <label class="PageTextClass" style="display: inline-block; width: 100%;" for="ItemSearch_SearchText">
+                Fritext</label>
+            </td>
+            <td>
+              <input id="ItemSearch_SearchText" class="ItemSearch-SearchText 
+TextBoxClass" style="height: 21px; width: 100%;" type="text">
+            </td>
+          </tr>
+          <tr>
+            <td width="60">
+              &nbsp;
+            </td>
+            <td width="110">
+              <input id="ItemSearch_NotConnectedOnly" style="display: inline;" class="ItemSearch-NotConnectedOnly"
+                type="checkbox"><label class="PageTextClass" style="display: inline; width: 100%;"
+                  for="ItemSearch_NotConnectedOnly">Endast ej kopplade varor</label>
+            </td>
+            <td align="right" valign="top" width="50">
+              <input id="ItemSearch_ibSearch" class="ItemSearch-ibSearch 
+ui-state-default ui-corner-all" value="Sök" type="button">
+            </td>
+          </tr>
+          <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+          </tr>
+          <tr width="100%">
+            <td width="60">
+              <label class="PageTextClass" style="display: inline-block; width: 100%;" for="ItemSearch_ResultList">
+                Varor</label>
+            </td>
+            <td>
+              <select id="ItemSearch_ResultList" class="ItemSearch-Resultlist 
+DropDownListClass" style="width: 100%;">
+                <option value="1">Buljongkorg</option>
+                <option value="2">Grönsaker</option>
+                <option value="3">Kryddkorg</option>
+                <option value="4">Kryddkorg</option>
+                <option value="5">Puréer</option>
+                <option value="6">Specerier</option>
+                <option value="7">Tillbehör</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

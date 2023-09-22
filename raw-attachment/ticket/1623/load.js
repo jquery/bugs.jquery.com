@@ -1,0 +1,1 @@
+$("#adiv").text("loaded!");

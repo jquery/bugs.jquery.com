@@ -1,0 +1,57 @@
+--- jquery-1.2.1.js	2007-09-20 17:49:03.000000000 +0200
++++ jquery-full.js	2007-09-20 16:53:54.000000000 +0200
+@@ -399,29 +399,40 @@
+ 
+ 			jQuery.each( a, function(){
+ 				var elem = clone ? this.cloneNode(true) : this;
+-				if ( !evalScript(0, elem) )
+-					fn.call( obj, elem );
++				
++				var script = extractScript(-1, elem);
++				fn.call( obj, elem );
++				if (script !== false)
++				    evalScript(script);
+ 			});
+ 		});
+ 	}
+ };
+ 
+-function evalScript(i, elem){
+-	var script = jQuery.nodeName(elem, "script");
+-
+-	if ( script ) {
+-		if ( elem.src )
+-			jQuery.ajax({ url: elem.src, async: false, dataType: "script" });
+-		else
+-			jQuery.globalEval( elem.text || elem.textContent || elem.innerHTML || "" );
+-	
++function extractScript(i, elem) {
++	if ( jQuery.nodeName(elem, "script") ) {
+ 		if ( elem.parentNode )
+ 			elem.parentNode.removeChild(elem);
+-
++		
++		// Don't need to return a jQuery object if it was a recursive call
++		if (i == -1)
++			return jQuery(elem);
++		else
++		    return;
++	
+ 	} else if ( elem.nodeType == 1 )
+-    jQuery("script", elem).each(evalScript);
++		return jQuery("script", elem).each(extractScript);
++	
++	return false;
++}
+ 
+-	return script;
++function evalScript(script) {
++	script.each(function() {
++		if ( this.src )
++			jQuery.ajax({ url: this.src, async: false, dataType: "script" });
++		else
++			jQuery.globalEval( this.text || this.textContent || this.innerHTML || "" );
++	});
+ }
+ 
+ jQuery.extend = jQuery.fn.extend = function() {

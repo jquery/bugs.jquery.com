@@ -1,0 +1,21 @@
+Index: fx.js
+===================================================================
+--- fx.js	(revision 6168)
++++ fx.js	(working copy)
+@@ -273,7 +273,7 @@
+ 
+ 		t.elem = this.elem;
+ 
+-		if ( t() && jQuery.timers.push(t) == 1 ) {
++		if ( t() && jQuery.timers.push(t) && !timerId) {
+ 			timerId = setInterval(function(){
+ 				var timers = jQuery.timers;
+ 
+@@ -283,6 +283,7 @@
+ 
+ 				if ( !timers.length ) {
+ 					clearInterval( timerId );
++					timerId = undefined;
+ 				}
+ 			}, 13);
+ 		}

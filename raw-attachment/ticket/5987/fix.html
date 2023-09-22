@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<style>
+		body,div {
+			padding:0;
+			margin:0;
+		}
+		div {
+			border:1px solid red;
+			width:20px;
+		}
+	</style>
+	<script src="http://code.jquery.com/jquery-1.4.1.js"></script>
+	<script type="text/javascript">
+		
+		function width() {
+			return  window.innerWidth || 
+					window.document.compatMode === "CSS1Compat" && window.document.documentElement.clientWidth || 
+					window.document.body.clientWidth;
+		}
+		function height() {
+			return  window.innerHeight || 
+					window.document.compatMode === "CSS1Compat" && window.document.documentElement.clientHeight || 
+					window.document.body.clientHeight;
+		}
+		
+		$(function(){
+			$(window)
+				.resize(function(){
+					// subtract border width
+					$('div').css({ width: width() - 2, height: height() - 2 })
+				})
+				.resize();
+		})
+	</script>
+</head>
+<body>
+
+	<div>window.innerWidth are save us!</div>
+
+</body>
+</html>

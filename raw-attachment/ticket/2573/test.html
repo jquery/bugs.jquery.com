@@ -1,0 +1,64 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+  <head>
+    <title>CD Manager</title>
+		<!-- Ajout du CSS -->
+    <link href="../css/css.css" type="text/css" rel="stylesheet" />
+    <link href="../css/style.css" type="text/css" rel="stylesheet" />
+		<!-- Scripts perso Javascript -->
+		<script src="../js/scripts.js"   type="text/javascript"></script>
+		<!-- Script jquery -->
+		<script src="../js/jquery-1.2.3.pack.js"   type="text/javascript"></script>
+		<script src="../js/jquery.tablesorter.min.js"   type="text/javascript"></script>
+		<script src="../js/jquery.tablehover.pack.js"   type="text/javascript"></script>
+		<!-- Script tooltip -->
+		<script src="../js/tooltip.js" type="text/javascript"></script>
+		<!-- Scripts fournis par Scriptaculous -->
+		<script src="../js/prototype.js" type="text/javascript"></script>
+		<script src="../js/effects.js"   type="text/javascript"></script>
+		<script type="text/javascript">
+			<!--
+				$(function() {		
+					$(".tosort").tablesorter({sortList:[[0,0],[1,0],[3,0]]});
+				});
+				$(document).ready(function() {
+					$(".tosort").tableHover();
+				});
+			-->
+		</script>
+  </head>
+  <body id="effect" onload="Element.hide('effect'); new Effect.Appear('effect', { duration: 0.4 });">
+		<div class="conteneur_result titre_modif">Ensemble des CDs que je poss&egrave;de <i>(1)</i></div><div class="conteneur_result"><table class="tosort" class="tablesorter">
+						<thead>
+							<tr>
+								<th>Nom Artiste</th>
+								<th>Prénom Artiste</th>
+								<th>Origine Artiste</th>
+								<th>Titre Album</th>
+								<th>Style Album</th>
+								<th>Possession</th>
+								<th>Date de Sortie</th>
+								<th>Maison de Production</th>
+							</tr>
+
+						</thead>
+						<tbody><tr><td>Hancock</td><td>Herbie</td><td>États-Unis</td><td>Empyrean Isles</td><td>Jazz</td><td>Oui</td><td>1964</td><td>Blue Note Records</td></tr></tbody></table></div><div class="conteneur_result titre_modif">Ensemble des CDs que je ne poss&egrave;de pas <i>(2)</i></div><div class="conteneur_result"><table class="tosort" class="tablesorter">
+						<thead>
+
+							<tr>
+								<th>Nom Artiste</th>
+								<th>Prénom Artiste</th>
+								<th>Origine Artiste</th>
+								<th>Titre Album</th>
+								<th>Style Album</th>
+								<th>Possession</th>
+								<th>Date de Sortie</th>
+								<th>Maison de Production</th>
+							</tr>
+						</thead>
+						<tbody><tr><td>Hancock</td><td>Herbie</td><td>États-Unis</td><td>Takin' Off</td><td>Jazz</td><td>Non</td><td>1962</td><td>Blue Note Records</td></tr><tr><td>Tutu le lapin</td><td>hdfhg</td><td>Canada</td><td>Toto la tortue</td><td>Blues</td><td>Non</td><td>1910</td><td>ZYX Music</td></tr></tbody></table></div><div id="buttons"><input type="button" value="Nouvelle Recherche" onclick="javascript:retour();" /></div><div id="fusion" onmouseover="tooltip.show(this)" onmouseout="tooltip.hide(this)" title="Rassembler les r&eacute;sultats en 2 tableaux"><form method="post" action="" ><input type="hidden" name="split" value="1" /><input type="image" value="submit" src="../images/collapse.png" alt="Fusion" /></form></div>		<div id="tooltip"></div>
+
+  </body>
+</html>
+

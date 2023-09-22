@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>jQuery bug test</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+	<script>
+		$("#demoButton").live ('click', function () {
+			$("#ICE_REPO_9FED7_Documents_5c747bfbc44f40e2bf9130cac46d113e_dc2LbKAoDspn3BGLFdI3NA==").hide();
+			$("#ICE_REPO_9FED7_Documents").hide();
+			document.getElementById("ICE_REPOS_9FED7_Documents_5c747bfbc44f40e2bf9130cac46d113e_dc2LbKAoDspn3BGLFdI3NA==").style.display = "none";
+			/*******************************************************************************************************************************
+			* This works
+			* $(document.getElementById("ICE_REPOS_9FED7_Documents_5c747bfbc44f40e2bf9130cac46d113e_dc2LbKAoDspn3BGLFdI3NA==")).hide();
+			********************************************************************************************************************************/
+		});
+	</script>
+  </head>
+  <body>
+	<div id="ICE_REPO_9FED7_Documents_5c747bfbc44f40e2bf9130cac46d113e_dc2LbKAoDspn3BGLFdI3NA==">Hide with jQuery (Id is long)</div>
+	<div id="ICE_REPO_9FED7_Documents">Hide with jQuery (Id is short)</div>
+	<div id="ICE_REPOS_9FED7_Documents_5c747bfbc44f40e2bf9130cac46d113e_dc2LbKAoDspn3BGLFdI3NA==">Hide with document.getElementById</div>
+	<a href="#" id="demoButton">Click to hide all</a>
+  </body>
+</html>

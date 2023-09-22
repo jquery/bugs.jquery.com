@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('input#test').click(function(){
+					alert('hi!');
+				});
+				
+				$('input#test').data({
+					foo: 'bar',
+					bar: 'foo'
+				});
+				
+				$('input#test').click();
+			});
+		</script>
+	</head>
+	<body>
+		<input type="button" id="test" name="test" value="Click me!" />
+	</body>
+</html>

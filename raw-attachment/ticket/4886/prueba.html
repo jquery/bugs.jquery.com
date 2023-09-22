@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+
+<head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+<script type="text/javascript">
+<!--
+$(document).ready(function() {
+	$("#b").bind("click", function() {
+		$("p span").die("click");
+	});
+});
+
+$("p span").live("mouseover", function() {
+	$(this).addClass("high");
+});
+
+$("p span").live("mouseout", function() {
+	$(this).removeClass("high");
+});
+
+$("p span").live("click", function() {
+	$(this).append(" He. ");
+});
+
+//-->
+</script>
+<style type="text/css">
+.high {
+background:#FF0;
+}
+</style>
+
+</head>
+<body>
+
+<p id="a"><span>This has a over highlight style and event 'click'.</span></p>
+
+<p><a id="b" href="#">Click here to erase the click event in the last paragraph's inner span</a></p>
+
+</body>
+</html>

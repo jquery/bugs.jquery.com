@@ -1,0 +1,13 @@
+Index: src/jquery/jquery.js
+===================================================================
+--- src/jquery/jquery.js	(revision 2008)
++++ src/jquery/jquery.js	(working copy)
+@@ -1141,7 +1141,7 @@
+ 	 */
+ 	html: function( val ) {
+ 		return val == undefined ?
+-			( this.length ? this[0].innerHTML : null ) :
++			( this.length ? this.removeAttr('mergeNum')[0].innerHTML : null ) :
+ 			this.empty().append( val );
+ 	},
+ 	

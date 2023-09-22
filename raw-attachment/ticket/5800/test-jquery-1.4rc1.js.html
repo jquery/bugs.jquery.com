@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HEAD>
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+   
+<TITLE>Test jquery-1.4rc1.js</TITLE>
+</HEAD>
+
+    <script type="text/javascript" src="jquery-1.4rc1.js"></script>
+    <script type="text/javascript">
+	$(document).ready(function () {
+		//This code doesn't fire the change event when clicking in the text inputs
+		//$("input").bind("change", function() {
+		//	alert("changed!!");
+		//	}
+		//});
+		//This code does
+		$("input").each(function() {
+			$(this).bind("change", function() {
+				alert("changed!!");
+			});
+		});
+	});
+	</script>
+	
+<HTML>
+<BODY>
+input 1 <input id="input1" type="text" value="input1" /><br/>
+input 2 <input id="input2" type="text" value="input2" /><br/>
+input 3 <input id="input3" type="text" value="input3" /><br/>
+</BODY>
+</HTML>

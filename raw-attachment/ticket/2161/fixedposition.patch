@@ -1,0 +1,24 @@
+Index: ui.draggable.js
+===================================================================
+--- ui.draggable.js	(revision 4369)
++++ ui.draggable.js	(working copy)
+@@ -94,6 +94,7 @@
+ 			var elementPosition = { left: this.elementOffset.left - this.offsetParentOffset.left, top: this.elementOffset.top - this.offsetParentOffset.top };
+ 			this._pageX = e.pageX; this._pageY = e.pageY;
+ 			this.clickOffset = { left: e.pageX - this.elementOffset.left, top: e.pageY - this.elementOffset.top };
++			this.helperFixed = this.helper.css('position') == 'fixed';
+ 			var r = this.helper.css('position') == 'relative';
+ 
+ 			//Generate the original position
+@@ -148,7 +149,10 @@
+ 		drag: function(e) {
+ 
+ 			//Compute the helpers position
+-			this.position = { top: e.pageY - this.offset.top, left: e.pageX - this.offset.left };
++			this.position = {
++				top: e.pageY - this.offset.top - ( this.helperFixed ? Math.max(document.documentElement.scrollTop, document.body.scrollTop) : 0 ),
++				left: e.pageX - this.offset.left - ( this.helperFixed ? Math.max(document.documentElement.scrollLeft, document.body.scrollLeft) : 0 )
++			};
+ 			this.positionAbs = { left: e.pageX - this.clickOffset.left, top: e.pageY - this.clickOffset.top };
+ 
+ 			//Call plugins and callbacks

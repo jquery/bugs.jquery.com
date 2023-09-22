@@ -1,0 +1,13 @@
+diff --git a/jquery/src/ajax.js b/jquery/src/ajax.js
+index 0f5f805..66eb1d0 100644
+--- a/jquery/src/ajax.js
++++ b/jquery/src/ajax.js
+@@ -27,6 +27,8 @@ jQuery.fn.extend({
+ 			} else if( typeof params === "object" ) {
+ 				params = jQuery.param( params );
+ 				type = "POST";
++			} else if( typeof params === "string" ) {
++				type = "POST";
+ 			}
+ 
+ 		var self = this;

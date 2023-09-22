@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	var t = $('#test');
+	$('#output').append('<h2>case 1, basic css style rule <code>background-color: #000</code></h2>');
+	$('#output').append('<p>background-color returns: '+t.css('background-color')+'</p>');
+	$('#output').append('<p>backgroundColor returns: '+t.css('backgroundColor')+'</p>');
+	t.addClass('test');
+	$('#output').append('<h2>case 2, add class with <code>background-color: #f00</code></h2>');
+	$('#output').append('<p>background-color returns: '+t.css('background-color')+'</p>');
+	$('#output').append('<p>backgroundColor returns: '+t.css('backgroundColor')+'</p>');
+	t.css('backgroundColor', '#0f0');
+	$('#output').append('<h2>case 3, set new color with jquery, camel-cased property<code>.css(&quot;backgroundColor&quot;, &quot;#0f0&quot;)</code></h2>');
+	$('#output').append('<p>background-color returns: '+t.css('background-color')+'</p>');
+	$('#output').append('<p>backgroundColor returns: '+t.css('backgroundColor')+'</p>');
+	t.css('background-color', '#00f');
+	$('#output').append('<h2>case 4, set new color with jquery, hyphened property <code>.css(&quot;background-color&quot;, &quot;#00f&quot;)</code></h2>');
+	$('#output').append('<p>background-color returns: '+t.css('background-color')+'</p>');
+	$('#output').append('<p>backgroundColor returns: '+t.css('backgroundColor')+'</p>');
+	t.addClass('test2');
+	$('#output').append('<h2>case 5, add class with !important rule <code>background-color: #fff !important;</code></h2>');
+	$('#output').append('<p>background-color returns: '+t.css('background-color')+'</p>');
+	$('#output').append('<p>backgroundColor returns: '+t.css('backgroundColor')+'</p>');
+	t.css('backgroundColor', '#0f0');
+	$('#output').append('<h2>case 6, set new color with jquery, camel-cased property<code>.css(&quot;backgroundColor&quot;, &quot;#0f0&quot;)</code></h2>');
+	$('#output').append('<p>background-color returns: '+t.css('background-color')+'</p>');
+	$('#output').append('<p>backgroundColor returns: '+t.css('backgroundColor')+'</p>');
+	t.css('background-color', '#00f');
+	$('#output').append('<h2>case 7, set new color with jquery, hyphened property <code>.css(&quot;background-color&quot;, &quot;#00f&quot;)</code></h2>');
+	$('#output').append('<p>background-color returns: '+t.css('background-color')+'</p>');
+	$('#output').append('<p>backgroundColor returns: '+t.css('backgroundColor')+'</p>');
+
+});
+</script>
+<style type="text/css">
+#test {
+	width: 100px;
+	height: 100px;
+	background-color: #000;
+	border: 2px dotted #000;
+}
+#test.test {
+	background-color: #f00;
+}
+#test.test2 {
+	background-color: #fff !important;
+}
+</style>
+</head>
+
+<body>
+<div id="output">
+</div>
+<div id="test">test area</div>
+</body>
+</html>

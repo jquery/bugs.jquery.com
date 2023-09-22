@@ -1,0 +1,34 @@
+<html>
+<head>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#test").load("jq-ajax-test.html");
+		});
+	</script>
+
+	<script type="not/javascript">
+		alert("not fired"); // but fired from in jq-ajax-test
+	</script>
+
+</head>
+<body class="tundra">
+	<p>You should see: "expected", "should not be executed". if you see "not fired", something else is wrong</p>
+	<div id="test"></div>
+</body>
+</html>
+
+--[snip:jq-ajax-test.html]--
+<div class="bar">
+	<script type="text/javascript">
+		alert('expected');
+	</script>
+	<script type="not/javascript">
+		alert("should not be executed, but is");
+	</script>
+</div>
+
+
+

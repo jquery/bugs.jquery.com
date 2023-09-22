@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html> 
+<html> 
+<head> 
+<title></title> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js" type="text/javascript"></script>  
+	<style type="text/css">
+
+	</style>
+	<script type="text/javascript">
+$(function(){
+
+	(function(){
+		$("h1")
+			.animate({height: "1px"}, 1000)
+			.animate({}, 1000)
+			.animate({height: "50px"}, 1000, arguments.callee);;
+	})();
+	
+});
+	</script>
+    </head>
+    <body>
+
+	<h1>This will show and hide.</h1>
+	
+    </body>
+</html>
+

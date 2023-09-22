@@ -1,0 +1,27 @@
+Index: jquery.treeview.async.js
+===================================================================
+--- jquery.treeview.async.js	(revision 5497)
++++ jquery.treeview.async.js	(working copy)
+@@ -18,7 +18,21 @@
+ function load(settings, root, child, container) {
+ 	$.getJSON(settings.url, {root: root}, function(response) {
+ 		function createNode(parent) {
+-			var current = $("<li/>").attr("id", this.id || "").html("<span>" + this.text + "</span>").appendTo(parent);
++			var current = $("<li/>").attr("id", this.id || "").html("<span></span>");
++			if (this.click || this.href) {
++				current.children("span").html("<a />"); 
++				current.find("a").attr("href", this.href || "#");
++				if (this.click) {
++					var fn = this.click;
++					current.find("a").click(function() {
++						eval(fn);
++					});
++				}
++				current.find("a").html(this.text);
++			} else {
++				current.children("span").html(this.text);
++			}
++			current.appendTo(parent);
+ 			if (this.classes) {
+ 				current.children("span").addClass(this.classes);
+ 			}

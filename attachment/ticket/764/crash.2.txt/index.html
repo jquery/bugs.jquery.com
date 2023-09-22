@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">crash.2.txt on Ticket #764 – Attachment – jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shadow:0 1px #fff;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#b3d4fc}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#b3d4fc}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f2f0}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{color:#9a6e3a;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}pre[class*=language-diff]{--eleventy-code-padding:1.25em;padding-left:var(--eleventy-code-padding);padding-right:var(--eleventy-code-padding)}.token.deleted{background-color:#8e2e2e;color:inherit}.token.inserted{background-color:#44824a;color:inherit}.token.prefix.deleted,.token.prefix.inserted,.token.prefix.unchanged{-webkit-user-select:none;user-select:none;display:inline-flex;align-items:center;justify-content:center;padding-top:2px;padding-bottom:2px}.token.prefix.deleted,.token.prefix.inserted{width:var(--eleventy-code-padding);background-color:rgba(0,0,0,.2)}.token.deleted:not(.prefix),.token.inserted:not(.prefix){display:block;margin-left:calc(-1 * var(--eleventy-code-padding));margin-right:calc(-1 * var(--eleventy-code-padding));text-decoration:none;color:inherit}:root{--attachment-info-bg-color:#f7f7f0;--attachment-info-border-color:#d7d7d7;--attachment-download-link-color:#666}h1,h2,h3,h4,h5,h6{font-weight:700}h3{font-size:.875rem}h6{font-size:.6875rem}.attachment-info{padding:.25em .5em;margin:1em 0;background-color:var(--attachment-info-bg-color);border:1px solid var(--attachment-info-border-color)}.attachment-info h6{font-family:var(--font-family-alternate)}.attachment-download{margin:2em 0;gap:.5em}.attachment-download-link[href],.attachment-download-link[href]:visited{color:var(--attachment-download-link-color)}.attachment img,.attachment picture{display:block;max-width:100%;height:auto}code[class*=language-],pre[class*=language-]{font-size:.75rem}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+
+<div class="flex-column attachment">
+  <nav class="content-nav">
+    <ul class="flex-row">
+      <li>
+        <a href="/bugs.jquery.com/ticket/764">Back to Ticket #764</a>
+      </li>
+    </ul>
+  </nav>
+
+  <h1>
+    <a href="/bugs.jquery.com/ticket/764">Ticket #764</a>: crash.2.txt
+  
+  <hr>
+
+  <div class="attachment-info">
+    <h6>File crash.2.txt, 31.2 KB (added by mathieuma@users.sour, January 08, 2007 07:16PM UTC)</h6>
+    
+      <p>Safari crash report</p>
+    
+  </div>
+
+  
+    <div class="attachment-preview">
+      
+      <pre class="language-txt" tabindex="0"><code class="language-txt">Date/Time:      2007-01-08 20:15:05.232 +0100
+OS Version:     10.4.8 (Build 8L127)
+Report Version: 4
+
+Command: Safari
+Path:    /Applications/Safari.app/Contents/MacOS/Safari
+Parent:  WindowServer [55]
+
+Version:        2.0.4 (419.3)
+Build Version:  1
+Project Name:   WebBrowser
+Source Version: 4190300
+
+PID:    1869
+Thread: 0
+
+Exception:  EXC_BAD_ACCESS (0x0001)
+Codes:      KERN_PROTECTION_FAILURE (0x0002) at 0x0000004d
+
+Thread 0 Crashed:
+0   com.apple.WebCore        	0x9586e83c DOM::operator==(DOM::DOMString const&amp;, DOM::DOMString const&amp;) + 28
+1   &lt;&lt;00000000>> 	0x00000000 0 + 0
+2   com.apple.WebCore        	0x95a0e15c DOM::NodeListImpl::itemById(DOM::DOMString const&amp;) const + 256
+3   com.apple.WebCore        	0x95a83d54 DOM::NodeList::itemById(DOM::DOMString const&amp;) const + 56
+4   com.apple.WebCore        	0x959475b8 KJS::DOMNodeList::tryGet(KJS::ExecState*, KJS::Identifier const&amp;) const + 372
+5   com.apple.WebCore        	0x958b11e0 KJS::DOMObject::get(KJS::ExecState*, KJS::Identifier const&amp;) const + 60
+6   com.apple.JavaScriptCore 	0x957869cc KJS::Reference::getValue(KJS::ExecState*) const + 584
+7   com.apple.JavaScriptCore 	0x957864e8 KJS::AccessorNode2::evaluate(KJS::ExecState*) + 60
+8   com.apple.JavaScriptCore 	0x95790ac4 KJS::IfNode::execute(KJS::ExecState*) + 136
+9   com.apple.JavaScriptCore 	0x957859ac KJS::SourceElementsNode::execute(KJS::ExecState*) + 544
+10  com.apple.JavaScriptCore 	0x9578571c KJS::BlockNode::execute(KJS::ExecState*) + 140
+11  com.apple.JavaScriptCore 	0x95795214 KJS::ForNode::execute(KJS::ExecState*) + 592
+12  com.apple.JavaScriptCore 	0x957859ac KJS::SourceElementsNode::execute(KJS::ExecState*) + 544
+13  com.apple.JavaScriptCore 	0x9578571c KJS::BlockNode::execute(KJS::ExecState*) + 140
+14  com.apple.JavaScriptCore 	0x9579260c KJS::DeclaredFunctionImp::execute(KJS::ExecState*) + 44
+15  com.apple.JavaScriptCore 	0x95791e88 KJS::FunctionImp::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 408
+16  com.apple.JavaScriptCore 	0x95787988 KJS::Object::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 136
+17  com.apple.JavaScriptCore 	0x957862a8 KJS::FunctionCallNode::evaluate(KJS::ExecState*) + 1040
+18  com.apple.JavaScriptCore 	0x95785e80 KJS::AssignExprNode::evaluate(KJS::ExecState*) + 40
+19  com.apple.JavaScriptCore 	0x95785d88 KJS::VarDeclNode::evaluate(KJS::ExecState*) + 100
+20  com.apple.JavaScriptCore 	0x95785cbc KJS::VarDeclListNode::evaluate(KJS::ExecState*) + 72
+21  com.apple.JavaScriptCore 	0x95785b78 KJS::VarStatementNode::execute(KJS::ExecState*) + 120
+22  com.apple.JavaScriptCore 	0x957859ac KJS::SourceElementsNode::execute(KJS::ExecState*) + 544
+23  com.apple.JavaScriptCore 	0x9578571c KJS::BlockNode::execute(KJS::ExecState*) + 140
+24  com.apple.JavaScriptCore 	0x9579260c KJS::DeclaredFunctionImp::execute(KJS::ExecState*) + 44
+25  com.apple.JavaScriptCore 	0x95791e88 KJS::FunctionImp::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 408
+26  com.apple.JavaScriptCore 	0x95787988 KJS::Object::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 136
+27  com.apple.JavaScriptCore 	0x957862a8 KJS::FunctionCallNode::evaluate(KJS::ExecState*) + 1040
+28  com.apple.JavaScriptCore 	0x95793b48 KJS::ReturnNode::execute(KJS::ExecState*) + 156
+29  com.apple.JavaScriptCore 	0x9578585c KJS::SourceElementsNode::execute(KJS::ExecState*) + 208
+30  com.apple.JavaScriptCore 	0x9578571c KJS::BlockNode::execute(KJS::ExecState*) + 140
+31  com.apple.JavaScriptCore 	0x9579260c KJS::DeclaredFunctionImp::execute(KJS::ExecState*) + 44
+32  com.apple.JavaScriptCore 	0x95791e88 KJS::FunctionImp::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 408
+33  com.apple.JavaScriptCore 	0x95787988 KJS::Object::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 136
+34  com.apple.JavaScriptCore 	0x957862a8 KJS::FunctionCallNode::evaluate(KJS::ExecState*) + 1040
+35  com.apple.JavaScriptCore 	0x957933bc KJS::ConditionalNode::evaluate(KJS::ExecState*) + 200
+36  com.apple.JavaScriptCore 	0x95793b48 KJS::ReturnNode::execute(KJS::ExecState*) + 156
+37  com.apple.JavaScriptCore 	0x9578585c KJS::SourceElementsNode::execute(KJS::ExecState*) + 208
+38  com.apple.JavaScriptCore 	0x9578571c KJS::BlockNode::execute(KJS::ExecState*) + 140
+39  com.apple.JavaScriptCore 	0x9579260c KJS::DeclaredFunctionImp::execute(KJS::ExecState*) + 44
+40  com.apple.JavaScriptCore 	0x95791e88 KJS::FunctionImp::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 408
+41  com.apple.JavaScriptCore 	0x95787988 KJS::Object::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 136
+42  com.apple.JavaScriptCore 	0x957862a8 KJS::FunctionCallNode::evaluate(KJS::ExecState*) + 1040
+43  com.apple.JavaScriptCore 	0x9578aeac KJS::ExprStatementNode::execute(KJS::ExecState*) + 120
+44  com.apple.JavaScriptCore 	0x9578585c KJS::SourceElementsNode::execute(KJS::ExecState*) + 208
+45  com.apple.JavaScriptCore 	0x9578571c KJS::BlockNode::execute(KJS::ExecState*) + 140
+46  com.apple.JavaScriptCore 	0x9579260c KJS::DeclaredFunctionImp::execute(KJS::ExecState*) + 44
+47  com.apple.JavaScriptCore 	0x95791e88 KJS::FunctionImp::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 408
+48  com.apple.JavaScriptCore 	0x95787988 KJS::Object::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 136
+49  com.apple.JavaScriptCore 	0x957a22d8 KJS::FunctionProtoFuncImp::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 2556
+50  com.apple.JavaScriptCore 	0x95787988 KJS::Object::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 136
+51  com.apple.JavaScriptCore 	0x957862a8 KJS::FunctionCallNode::evaluate(KJS::ExecState*) + 1040
+52  com.apple.JavaScriptCore 	0x9578b808 KJS::EqualNode::evaluate(KJS::ExecState*) + 60
+53  com.apple.JavaScriptCore 	0x95790ac4 KJS::IfNode::execute(KJS::ExecState*) + 136
+54  com.apple.JavaScriptCore 	0x95795214 KJS::ForNode::execute(KJS::ExecState*) + 592
+55  com.apple.JavaScriptCore 	0x95790bf4 KJS::IfNode::execute(KJS::ExecState*) + 440
+56  com.apple.JavaScriptCore 	0x9578585c KJS::SourceElementsNode::execute(KJS::ExecState*) + 208
+57  com.apple.JavaScriptCore 	0x9578571c KJS::BlockNode::execute(KJS::ExecState*) + 140
+58  com.apple.JavaScriptCore 	0x9579260c KJS::DeclaredFunctionImp::execute(KJS::ExecState*) + 44
+59  com.apple.JavaScriptCore 	0x95791e88 KJS::FunctionImp::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 408
+60  com.apple.JavaScriptCore 	0x95787988 KJS::Object::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 136
+61  com.apple.JavaScriptCore 	0x957862a8 KJS::FunctionCallNode::evaluate(KJS::ExecState*) + 1040
+62  com.apple.JavaScriptCore 	0x95793b48 KJS::ReturnNode::execute(KJS::ExecState*) + 156
+63  com.apple.JavaScriptCore 	0x9578585c KJS::SourceElementsNode::execute(KJS::ExecState*) + 208
+64  com.apple.JavaScriptCore 	0x9578571c KJS::BlockNode::execute(KJS::ExecState*) + 140
+65  com.apple.JavaScriptCore 	0x9579260c KJS::DeclaredFunctionImp::execute(KJS::ExecState*) + 44
+66  com.apple.JavaScriptCore 	0x95791e88 KJS::FunctionImp::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 408
+67  com.apple.JavaScriptCore 	0x95787988 KJS::Object::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 136
+68  com.apple.JavaScriptCore 	0x957862a8 KJS::FunctionCallNode::evaluate(KJS::ExecState*) + 1040
+69  com.apple.JavaScriptCore 	0x9578aeac KJS::ExprStatementNode::execute(KJS::ExecState*) + 120
+70  com.apple.JavaScriptCore 	0x9578585c KJS::SourceElementsNode::execute(KJS::ExecState*) + 208
+71  com.apple.JavaScriptCore 	0x9578571c KJS::BlockNode::execute(KJS::ExecState*) + 140
+72  com.apple.JavaScriptCore 	0x9579260c KJS::DeclaredFunctionImp::execute(KJS::ExecState*) + 44
+73  com.apple.JavaScriptCore 	0x95791e88 KJS::FunctionImp::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 408
+74  com.apple.JavaScriptCore 	0x95787988 KJS::Object::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 136
+75  com.apple.JavaScriptCore 	0x957a22d8 KJS::FunctionProtoFuncImp::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 2556
+76  com.apple.JavaScriptCore 	0x95787988 KJS::Object::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 136
+77  com.apple.JavaScriptCore 	0x957862a8 KJS::FunctionCallNode::evaluate(KJS::ExecState*) + 1040
+78  com.apple.JavaScriptCore 	0x9578aeac KJS::ExprStatementNode::execute(KJS::ExecState*) + 120
+79  com.apple.JavaScriptCore 	0x95795214 KJS::ForNode::execute(KJS::ExecState*) + 592
+80  com.apple.JavaScriptCore 	0x9578585c KJS::SourceElementsNode::execute(KJS::ExecState*) + 208
+81  com.apple.JavaScriptCore 	0x9578571c KJS::BlockNode::execute(KJS::ExecState*) + 140
+82  com.apple.JavaScriptCore 	0x95790bf4 KJS::IfNode::execute(KJS::ExecState*) + 440
+83  com.apple.JavaScriptCore 	0x957859ac KJS::SourceElementsNode::execute(KJS::ExecState*) + 544
+84  com.apple.JavaScriptCore 	0x9578571c KJS::BlockNode::execute(KJS::ExecState*) + 140
+85  com.apple.JavaScriptCore 	0x95790bf4 KJS::IfNode::execute(KJS::ExecState*) + 440
+86  com.apple.JavaScriptCore 	0x9578585c KJS::SourceElementsNode::execute(KJS::ExecState*) + 208
+87  com.apple.JavaScriptCore 	0x9578571c KJS::BlockNode::execute(KJS::ExecState*) + 140
+88  com.apple.JavaScriptCore 	0x9579260c KJS::DeclaredFunctionImp::execute(KJS::ExecState*) + 44
+89  com.apple.JavaScriptCore 	0x95791e88 KJS::FunctionImp::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 408
+90  com.apple.JavaScriptCore 	0x95787988 KJS::Object::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 136
+91  com.apple.JavaScriptCore 	0x957a22d8 KJS::FunctionProtoFuncImp::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 2556
+92  com.apple.JavaScriptCore 	0x95787988 KJS::Object::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 136
+93  com.apple.JavaScriptCore 	0x957862a8 KJS::FunctionCallNode::evaluate(KJS::ExecState*) + 1040
+94  com.apple.JavaScriptCore 	0x9578b808 KJS::EqualNode::evaluate(KJS::ExecState*) + 60
+95  com.apple.JavaScriptCore 	0x95790ac4 KJS::IfNode::execute(KJS::ExecState*) + 136
+96  com.apple.JavaScriptCore 	0x957859ac KJS::SourceElementsNode::execute(KJS::ExecState*) + 544
+97  com.apple.JavaScriptCore 	0x9578571c KJS::BlockNode::execute(KJS::ExecState*) + 140
+98  com.apple.JavaScriptCore 	0x95796ff8 KJS::ForInNode::execute(KJS::ExecState*) + 1572
+99  com.apple.JavaScriptCore 	0x957859ac KJS::SourceElementsNode::execute(KJS::ExecState*) + 544
+100 com.apple.JavaScriptCore 	0x9578571c KJS::BlockNode::execute(KJS::ExecState*) + 140
+101 com.apple.JavaScriptCore 	0x9579260c KJS::DeclaredFunctionImp::execute(KJS::ExecState*) + 44
+102 com.apple.JavaScriptCore 	0x95791e88 KJS::FunctionImp::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 408
+103 com.apple.JavaScriptCore 	0x95787988 KJS::Object::call(KJS::ExecState*, KJS::Object&amp;, KJS::List const&amp;) + 136
+104 com.apple.WebCore        	0x959cdf8c KJS::JSAbstractEventListener::handleEvent(DOM::Event&amp;, bool) + 492
+105 com.apple.WebCore        	0x95a08c64 DOM::DocumentImpl::handleWindowEvent(DOM::EventImpl*, bool) + 212
+106 com.apple.WebCore        	0x959077a4 DOM::NodeImpl::dispatchWindowEvent(int, bool, bool) + 200
+107 com.apple.WebCore        	0x95a0789c DOM::DocumentImpl::implicitClose() + 392
+108 com.apple.WebCore        	0x958f9fac KHTMLPart::checkEmitLoadEvent() + 524
+109 com.apple.WebCore        	0x959b31dc KHTMLPart::checkCompleted() + 212
+110 com.apple.WebCore        	0x95897108 KWQSignal::call(khtml::DocLoader*, khtml::CachedObject*) const + 136
+111 com.apple.WebCore        	0x958a2198 khtml::Loader::slotFinished(KIO::Job*, NSData*) + 476
+112 com.apple.WebCore        	0x95a1ba88 KWQSignal::callWithData(KIO::Job*, NSData*) const + 136
+113 com.apple.WebCore        	0x958a1f5c -[KWQResourceLoader finishJobAndHandle:] + 80
+114 com.apple.WebKit         	0x9569f494 -[WebSubresourceClient didFinishLoading] + 72
+115 com.apple.WebKit         	0x9569e71c -[WebBaseResourceHandleDelegate connectionDidFinishLoading:] + 48
+116 com.apple.Foundation     	0x9299184c -[NSURLConnection(NSURLConnectionInternal) _sendDidFinishLoadingCallback] + 188
+117 com.apple.Foundation     	0x9298fab8 -[NSURLConnection(NSURLConnectionInternal) _sendCallbacks] + 556
+118 com.apple.Foundation     	0x9298f810 _sendCallbacks + 156
+119 com.apple.CoreFoundation 	0x907dd584 __CFRunLoopDoSources0 + 568
+120 com.apple.CoreFoundation 	0x907dc9fc __CFRunLoopRun + 452
+121 com.apple.CoreFoundation 	0x907dc47c CFRunLoopRunSpecific + 268
+122 com.apple.HIToolbox      	0x93205740 RunCurrentEventLoopInMode + 264
+123 com.apple.HIToolbox      	0x93204d4c ReceiveNextEventCommon + 244
+124 com.apple.HIToolbox      	0x93204c40 BlockUntilNextEventMatchingListInMode + 96
+125 com.apple.AppKit         	0x936e7ae4 _DPSNextEvent + 384
+126 com.apple.AppKit         	0x936e77a8 -[NSApplication nextEventMatchingMask:untilDate:inMode:dequeue:] + 116
+127 com.apple.Safari         	0x00006740 0x1000 + 22336
+128 com.apple.AppKit         	0x936e3cec -[NSApplication run] + 472
+129 com.apple.AppKit         	0x937d487c NSApplicationMain + 452
+130 com.apple.Safari         	0x0005c77c 0x1000 + 374652
+131 com.apple.Safari         	0x0005c624 0x1000 + 374308
+
+Thread 1:
+0   libSystem.B.dylib        	0x9000ab48 mach_msg_trap + 8
+1   libSystem.B.dylib        	0x9000aa9c mach_msg + 60
+2   com.apple.CoreFoundation 	0x907dcb78 __CFRunLoopRun + 832
+3   com.apple.CoreFoundation 	0x907dc47c CFRunLoopRunSpecific + 268
+4   com.apple.Foundation     	0x9296e164 -[NSRunLoop runMode:beforeDate:] + 172
+5   com.apple.Foundation     	0x9296e09c -[NSRunLoop run] + 76
+6   com.apple.WebKit         	0x95688ef0 +[WebFileDatabase _syncLoop:] + 176
+7   com.apple.Foundation     	0x9295f194 forkThreadForFunction + 108
+8   libSystem.B.dylib        	0x9002b508 _pthread_body + 96
+
+Thread 2:
+0   libSystem.B.dylib        	0x9000ab48 mach_msg_trap + 8
+1   libSystem.B.dylib        	0x9000aa9c mach_msg + 60
+2   com.apple.CoreFoundation 	0x907dcb78 __CFRunLoopRun + 832
+3   com.apple.CoreFoundation 	0x907dc47c CFRunLoopRunSpecific + 268
+4   com.apple.Foundation     	0x9298669c +[NSURLConnection(NSURLConnectionInternal) _resourceLoadLoop:] + 264
+5   com.apple.Foundation     	0x9295f194 forkThreadForFunction + 108
+6   libSystem.B.dylib        	0x9002b508 _pthread_body + 96
+
+Thread 3:
+0   libSystem.B.dylib        	0x9000ab48 mach_msg_trap + 8
+1   libSystem.B.dylib        	0x9000aa9c mach_msg + 60
+2   com.apple.CoreFoundation 	0x907dcb78 __CFRunLoopRun + 832
+3   com.apple.CoreFoundation 	0x907dc47c CFRunLoopRunSpecific + 268
+4   com.apple.Foundation     	0x929877dc +[NSURLCache _diskCacheSyncLoop:] + 152
+5   com.apple.Foundation     	0x9295f194 forkThreadForFunction + 108
+6   libSystem.B.dylib        	0x9002b508 _pthread_body + 96
+
+Thread 4:
+0   libSystem.B.dylib        	0x9002bbc8 semaphore_wait_signal_trap + 8
+1   libSystem.B.dylib        	0x900306ac pthread_cond_wait + 480
+2   com.apple.Foundation     	0x92966300 -[NSConditionLock lockWhenCondition:] + 68
+3   com.apple.Syndication    	0x9a4dc42c -[AsyncDB _run:] + 192
+4   com.apple.Foundation     	0x9295f194 forkThreadForFunction + 108
+5   libSystem.B.dylib        	0x9002b508 _pthread_body + 96
+
+Thread 5:
+0   libSystem.B.dylib        	0x9001f08c select + 12
+1   com.apple.CoreFoundation 	0x907ef40c __CFSocketManager + 472
+2   libSystem.B.dylib        	0x9002b508 _pthread_body + 96
+
+Thread 6:
+0   libSystem.B.dylib        	0x9002bbc8 semaphore_wait_signal_trap + 8
+1   libSystem.B.dylib        	0x900306ac pthread_cond_wait + 480
+2   com.apple.Foundation     	0x92966300 -[NSConditionLock lockWhenCondition:] + 68
+3   com.apple.AppKit         	0x93784708 -[NSUIHeartBeat _heartBeatThread:] + 324
+4   com.apple.Foundation     	0x9295f194 forkThreadForFunction + 108
+5   libSystem.B.dylib        	0x9002b508 _pthread_body + 96
+
+Thread 7:
+0   libSystem.B.dylib        	0x9000ab48 mach_msg_trap + 8
+1   libSystem.B.dylib        	0x9000aa9c mach_msg + 60
+2   com.apple.CoreFoundation 	0x907dcb78 __CFRunLoopRun + 832
+3   com.apple.CoreFoundation 	0x907dc47c CFRunLoopRunSpecific + 268
+4   com.apple.Foundation     	0x9296e164 -[NSRunLoop runMode:beforeDate:] + 172
+5   com.apple.Foundation     	0x9296e09c -[NSRunLoop run] + 76
+6   com.apple.Safari         	0x0003d5f0 0x1000 + 247280
+7   com.apple.Foundation     	0x9295f194 forkThreadForFunction + 108
+8   libSystem.B.dylib        	0x9002b508 _pthread_body + 96
+
+Thread 0 crashed with PPC Thread State 64:
+  srr0: 0x000000009586e83c srr1: 0x000000000000f030                        vrsave: 0x0000000000000000
+    cr: 0x44002284          xer: 0x0000000000000007   lr: 0x0000000095a0e15c  ctr: 0x0000000095890754
+    r0: 0x0000000095a0e15c   r1: 0x00000000bfffa3d0   r2: 0x0000000000000039   r3: 0x000000000000004d
+    r4: 0x00000000bfffa540   r5: 0x00000000bfffa540   r6: 0x00000000006e006f   r7: 0x0000000000640065
+    r8: 0x0000000000540079   r9: 0x0000000000000001  r10: 0x00000000958a8d34  r11: 0x0000000022002284
+   r12: 0x0000000095890754  r13: 0x0000000000000000  r14: 0x0000000000000001  r15: 0x0000000000000000
+   r16: 0x0000000000000001  r17: 0x00000000bffff2a0  r18: 0x0000000000000000  r19: 0x00000000004b08b0
+   r20: 0x00000000bfffe230  r21: 0x00000000a57869e0  r22: 0x00000000bfffac70  r23: 0x00000000bfffaba0
+   r24: 0x00000000bfffad00  r25: 0x00000000bfffaba0  r26: 0x00000000bfffa540  r27: 0x0000000000000002
+   r28: 0x0000000000000000  r29: 0x000000000000004d  r30: 0x00000000bfffa540  r31: 0x000000009594744c
+
+Binary Images Description:
+    0x1000 -    0xdcfff com.apple.Safari 2.0.4 (419.3)	/Applications/Safari.app/Contents/MacOS/Safari
+ 0x4dfa000 -  0x4dfcfff com.apple.textencoding.unicode 2.0	/System/Library/TextEncodings/Unicode Encodings.bundle/Contents/MacOS/Unicode Encodings
+0x8fe00000 - 0x8fe51fff dyld 45.3	/usr/lib/dyld
+0x90000000 - 0x901bcfff libSystem.B.dylib 	/usr/lib/libSystem.B.dylib
+0x90214000 - 0x90219fff libmathCommon.A.dylib 	/usr/lib/system/libmathCommon.A.dylib
+0x9021b000 - 0x90268fff com.apple.CoreText 1.0.2 (???)	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreText.framework/Versions/A/CoreText
+0x90293000 - 0x90344fff ATS 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS
+0x90373000 - 0x9072dfff com.apple.CoreGraphics 1.258.38 (???)	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics
+0x907ba000 - 0x90893fff com.apple.CoreFoundation 6.4.6 (368.27)	/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+0x908dc000 - 0x908dcfff com.apple.CoreServices 10.4 (???)	/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices
+0x908de000 - 0x909e0fff libicucore.A.dylib 	/usr/lib/libicucore.A.dylib
+0x90a3a000 - 0x90abefff libobjc.A.dylib 	/usr/lib/libobjc.A.dylib
+0x90ae8000 - 0x90b5afff com.apple.framework.IOKit 1.4 (???)	/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+0x90b70000 - 0x90b82fff libauto.dylib 	/usr/lib/libauto.dylib
+0x90b89000 - 0x90e60fff com.apple.CoreServices.CarbonCore 681.7	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore
+0x90ec6000 - 0x90f46fff com.apple.CoreServices.OSServices 4.1	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices
+0x90f90000 - 0x90fd1fff com.apple.CFNetwork 4.0 (129.19)	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CFNetwork.framework/Versions/A/CFNetwork
+0x90fe6000 - 0x90ffefff com.apple.WebServices 1.1.2 (1.1.0)	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/WebServicesCore.framework/Versions/A/WebServicesCore
+0x9100e000 - 0x9108ffff com.apple.SearchKit 1.0.5	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit
+0x910d5000 - 0x910fefff com.apple.Metadata 10.4.4 (121.36)	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata
+0x9110f000 - 0x9111dfff libz.1.dylib 	/usr/lib/libz.1.dylib
+0x91120000 - 0x912dbfff com.apple.security 4.6 (29770)	/System/Library/Frameworks/Security.framework/Versions/A/Security
+0x913da000 - 0x913e3fff com.apple.DiskArbitration 2.1	/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration
+0x913ea000 - 0x91412fff com.apple.SystemConfiguration 1.8.3	/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration
+0x91425000 - 0x91430fff libgcc_s.1.dylib 	/usr/lib/libgcc_s.1.dylib
+0x91435000 - 0x9143dfff libbsm.dylib 	/usr/lib/libbsm.dylib
+0x91441000 - 0x914bcfff com.apple.audio.CoreAudio 3.0.4	/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio
+0x914f9000 - 0x914f9fff com.apple.ApplicationServices 10.4 (???)	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices
+0x914fb000 - 0x91533fff com.apple.AE 1.5 (297)	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE
+0x9154e000 - 0x9161bfff com.apple.ColorSync 4.4.4	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSync.framework/Versions/A/ColorSync
+0x91670000 - 0x91701fff com.apple.print.framework.PrintCore 4.6 (177.13)	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore
+0x91748000 - 0x917fffff com.apple.QD 3.10.21 (???)	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD
+0x9183c000 - 0x9189afff com.apple.HIServices 1.5.3 (???)	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices
+0x918c9000 - 0x918eafff com.apple.LangAnalysis 1.6.1	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/LangAnalysis.framework/Versions/A/LangAnalysis
+0x918fe000 - 0x91923fff com.apple.FindByContent 1.5	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/FindByContent.framework/Versions/A/FindByContent
+0x91936000 - 0x91978fff com.apple.LaunchServices 181	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices
+0x91994000 - 0x919a8fff com.apple.speech.synthesis.framework 3.3	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis
+0x919b6000 - 0x919f8fff com.apple.ImageIO.framework 1.5.0	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A/ImageIO
+0x91a0e000 - 0x91ad5fff libcrypto.0.9.7.dylib 	/usr/lib/libcrypto.0.9.7.dylib
+0x91b23000 - 0x91b38fff libcups.2.dylib 	/usr/lib/libcups.2.dylib
+0x91b3d000 - 0x91b5bfff libJPEG.dylib 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A/Resources/libJPEG.dylib
+0x91b61000 - 0x91bd0fff libJP2.dylib 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A/Resources/libJP2.dylib
+0x91be7000 - 0x91bebfff libGIF.dylib 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A/Resources/libGIF.dylib
+0x91bed000 - 0x91c4cfff libRaw.dylib 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A/Resources/libRaw.dylib
+0x91c51000 - 0x91c8efff libTIFF.dylib 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A/Resources/libTIFF.dylib
+0x91c95000 - 0x91caefff libPng.dylib 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A/Resources/libPng.dylib
+0x91cb3000 - 0x91cb6fff libRadiance.dylib 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A/Resources/libRadiance.dylib
+0x91cb8000 - 0x91cb8fff com.apple.Accelerate 1.2.2 (Accelerate 1.2.2)	/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate
+0x91cba000 - 0x91d9ffff com.apple.vImage 2.4	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage
+0x91da7000 - 0x91dc6fff com.apple.Accelerate.vecLib 3.2.2 (vecLib 3.2.2)	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/vecLib
+0x91e32000 - 0x91ea0fff libvMisc.dylib 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib
+0x91eab000 - 0x91f40fff libvDSP.dylib 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvDSP.dylib
+0x91f5a000 - 0x924e2fff libBLAS.dylib 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib
+0x92515000 - 0x92840fff libLAPACK.dylib 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib
+0x92870000 - 0x928f8fff com.apple.DesktopServices 1.3.5	/System/Library/PrivateFrameworks/DesktopServicesPriv.framework/Versions/A/DesktopServicesPriv
+0x92939000 - 0x92b64fff com.apple.Foundation 6.4.6 (567.27)	/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation
+0x92c82000 - 0x92d60fff libxml2.2.dylib 	/usr/lib/libxml2.2.dylib
+0x92d80000 - 0x92e6efff libiconv.2.dylib 	/usr/lib/libiconv.2.dylib
+0x92e80000 - 0x92e9efff libGL.dylib 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib
+0x92ea9000 - 0x92f03fff libGLU.dylib 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLU.dylib
+0x92f21000 - 0x92f21fff com.apple.Carbon 10.4 (???)	/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon
+0x92f23000 - 0x92f37fff com.apple.ImageCapture 3.0	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/ImageCapture.framework/Versions/A/ImageCapture
+0x92f4f000 - 0x92f5ffff com.apple.speech.recognition.framework 3.4	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition
+0x92f6b000 - 0x92f80fff com.apple.securityhi 2.0 (203)	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SecurityHI.framework/Versions/A/SecurityHI
+0x92f92000 - 0x93019fff com.apple.ink.framework 101.2 (69)	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Ink.framework/Versions/A/Ink
+0x9302d000 - 0x93038fff com.apple.help 1.0.3 (32)	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Help.framework/Versions/A/Help
+0x93042000 - 0x9306ffff com.apple.openscripting 1.2.5 (???)	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/OpenScripting.framework/Versions/A/OpenScripting
+0x93089000 - 0x93098fff com.apple.print.framework.Print 5.2 (192.4)	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Print.framework/Versions/A/Print
+0x930a4000 - 0x9310afff com.apple.htmlrendering 1.1.2	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HTMLRendering.framework/Versions/A/HTMLRendering
+0x9313b000 - 0x9318afff com.apple.NavigationServices 3.4.4 (3.4.3)	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/NavigationServices.framework/Versions/A/NavigationServices
+0x931b8000 - 0x931d5fff com.apple.audio.SoundManager 3.9	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/CarbonSound.framework/Versions/A/CarbonSound
+0x931e7000 - 0x931f4fff com.apple.CommonPanels 1.2.2 (73)	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/CommonPanels.framework/Versions/A/CommonPanels
+0x931fd000 - 0x9350afff com.apple.HIToolbox 1.4.8 (???)	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox
+0x93659000 - 0x93665fff com.apple.opengl 1.4.7	/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL
+0x9366a000 - 0x9368afff com.apple.DirectoryService.Framework 3.1	/System/Library/Frameworks/DirectoryService.framework/Versions/A/DirectoryService
+0x936dd000 - 0x936ddfff com.apple.Cocoa 6.4 (???)	/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa
+0x936df000 - 0x93d12fff com.apple.AppKit 6.4.7 (824.41)	/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit
+0x9409f000 - 0x9410ffff com.apple.CoreData 80	/System/Library/Frameworks/CoreData.framework/Versions/A/CoreData
+0x94148000 - 0x9420bfff com.apple.audio.toolbox.AudioToolbox 1.4.3	/System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox
+0x9425d000 - 0x9425dfff com.apple.audio.units.AudioUnit 1.4	/System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit
+0x9425f000 - 0x94432fff com.apple.QuartzCore 1.4.9	/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore
+0x94488000 - 0x944c5fff libsqlite3.0.dylib 	/usr/lib/libsqlite3.0.dylib
+0x944cd000 - 0x9451dfff libGLImage.dylib 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLImage.dylib
+0x945ae000 - 0x945e6fff com.apple.vmutils 4.0.0 (85)	/System/Library/PrivateFrameworks/vmutils.framework/Versions/A/vmutils
+0x94629000 - 0x94645fff com.apple.securityfoundation 2.2 (27710)	/System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation
+0x94659000 - 0x9469dfff com.apple.securityinterface 2.2 (27692)	/System/Library/Frameworks/SecurityInterface.framework/Versions/A/SecurityInterface
+0x946c1000 - 0x946d0fff libCGATS.A.dylib 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreGraphics.framework/Versions/A/Resources/libCGATS.A.dylib
+0x946d8000 - 0x946e5fff libCSync.A.dylib 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreGraphics.framework/Versions/A/Resources/libCSync.A.dylib
+0x9472b000 - 0x94744fff libRIP.A.dylib 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreGraphics.framework/Versions/A/Resources/libRIP.A.dylib
+0x94ce9000 - 0x94e19fff com.apple.AddressBook.framework 4.0.4 (485.1)	/System/Library/Frameworks/AddressBook.framework/Versions/A/AddressBook
+0x94eab000 - 0x94ebafff com.apple.DSObjCWrappers.Framework 1.1	/System/Library/PrivateFrameworks/DSObjCWrappers.framework/Versions/A/DSObjCWrappers
+0x94ec2000 - 0x94eeffff com.apple.LDAPFramework 1.4.1 (69.0.1)	/System/Library/Frameworks/LDAP.framework/Versions/A/LDAP
+0x94ef6000 - 0x94f06fff libsasl2.2.dylib 	/usr/lib/libsasl2.2.dylib
+0x94f0a000 - 0x94f39fff libssl.0.9.7.dylib 	/usr/lib/libssl.0.9.7.dylib
+0x94f49000 - 0x94f66fff libresolv.9.dylib 	/usr/lib/libresolv.9.dylib
+0x95686000 - 0x95714fff com.apple.WebKit 418.9.1	/System/Library/Frameworks/WebKit.framework/Versions/A/WebKit
+0x95770000 - 0x95806fff com.apple.JavaScriptCore 418.3	/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/JavaScriptCore.framework/Versions/A/JavaScriptCore
+0x95843000 - 0x95b4ffff com.apple.WebCore 418.21	/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebCore.framework/Versions/A/WebCore
+0x95cd8000 - 0x95d01fff libxslt.1.dylib 	/usr/lib/libxslt.1.dylib
+0x9a4d9000 - 0x9a50ffff com.apple.Syndication 1.0.6 (54)	/System/Library/PrivateFrameworks/Syndication.framework/Versions/A/Syndication
+0x9a52c000 - 0x9a53efff com.apple.SyndicationUI 1.0.6 (54)	/System/Library/PrivateFrameworks/SyndicationUI.framework/Versions/A/SyndicationUI
+
+Model: PowerBook6,1, BootROM 4.5.5f4, 1 processors, PowerPC G4  (3.3), 867 MHz, 640 MB
+Graphics: NVIDIA GeForce4 MX, GeForce4 MX, AGP, 32 MB
+Memory Module: DIMM0/BUILT-IN, 128 MB, built-in, built-in
+Memory Module: DIMM1/J31, 512 MB, DDR SDRAM, PC2100U-25330
+AirPort: AirPort Extreme, 405.1 (3.90.34.0.p18)
+Modem: MicroDash, Euro, V.92, 1.0F, APPLE VERSION 2.6.6
+Bluetooth: Version 1.7.8f2, 2 service, 0 devices, 1 incoming serial ports
+Network Service: AirPort, AirPort, en1
+Parallel ATA Device: MATSHITADVD-R   UJ-815, 
+Parallel ATA Device: TOSHIBA MK6021GAS, 55.89 GB
+USB Device: Bluetooth HCI, , Up to 12 Mb/sec, 500 mA</code></pre>
+    </div>
+  
+
+  <div class="attachment-download flex-column flex-center">
+    <h3>Download in other formats:</h3>
+    <a class="attachment-download-link" download="" href="/bugs.jquery.com/raw-attachment/ticket/764/crash.2.txt">Original Format</a>
+  </div>
+</h1></div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+Index: test/unit/fx.js
+===================================================================
+--- test/unit/fx.js	(revision 3541)
++++ test/unit/fx.js	(working copy)
+@@ -232,7 +232,7 @@
+ var check = ['opacity','height','width','display','overflow'];
+ 
+ jQuery.fn.saveState = function(){
+-	expect(check.length);
++	expect(check.length * this.length);
+ 	stop();
+ 	return this.each(function(){
+ 		var self = this;
+@@ -288,6 +288,15 @@
+ 	$('#slidetoggleout div').saveState().slideToggle('fast').slideToggle('fast',checkState);
+ });
+ 
++test("Multiple/opposite slideToggle()", function() {
++	var x = $("#ap,#foo");
++	x.filter("#foo").hide();
++	x.saveState().slideToggle('fast').slideToggle('fast', function () {
++				checkState.call(this);
++				x.filter("#foo").show();
++			});
++});
++
+ function makeTest( text ){
+ 	var elem = $("<div></div>")
+ 		.attr("id", "test" + makeTest.id++)

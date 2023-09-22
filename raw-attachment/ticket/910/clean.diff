@@ -1,0 +1,17 @@
+Index: jquery/src/jquery/jquery.js
+===================================================================
+--- jquery/src/jquery/jquery.js	(revision 1410)
++++ jquery/src/jquery/jquery.js	(working copy)
+@@ -1469,10 +1469,10 @@
+ 				arg = div.childNodes;
+ 			}
+ 
+-			if ( arg.length === 0 )
++			if ( arg.length === 0 && !jQuery.nodeName(arg, "form") )
+ 				return;
+ 			
+-			if ( arg[0] == undefined )
++			if ( arg[0] == undefined || jQuery.nodeName(arg, "form") )
+ 				r.push( arg );
+ 			else
+ 				r = jQuery.merge( r, arg );

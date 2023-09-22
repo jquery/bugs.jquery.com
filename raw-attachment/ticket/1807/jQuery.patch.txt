@@ -1,0 +1,29 @@
+--- C:/mydocs/projects/javascript libraries/jquery/jquery-1.2.1.js	Fri Oct 12 14:48:30 2007
++++ C:/mydocs/projects/javascript libraries/jquery/jquery-1.2.1.jwr1.js	Fri Oct 12 16:20:18 2007
+@@ -15,6 +15,9 @@
+ 	var _jQuery = jQuery;
+ 
+ var jQuery = window.jQuery = function(selector, context) {
++    if (!arguments.length) selector = document; // Make sure $() returns [ document ]
++    context = context || document;  // If no context is specified then default to document
++
+ 	// If the context is a namespace object, return a new object
+ 	return this instanceof jQuery ?
+ 		this.init(selector, context) :
+@@ -32,11 +35,12 @@
+ 
+ jQuery.fn = jQuery.prototype = {
+ 	init: function(selector, context) {
+-		// Make sure that a selection was provided
+-		selector = selector || document;
+-
++        // Undefined selectors should return an empty set
++		if ( typeof selector === "undefined" ) {
++		    selector = [];
++		}
+ 		// Handle HTML strings
+-		if ( typeof selector  == "string" ) {
++		else if ( typeof selector  == "string" ) {
+ 			var m = quickExpr.exec(selector);
+ 			if ( m && (m[1] || !context) ) {
+ 				// HANDLE: $(html) -> $(array)

@@ -1,0 +1,13 @@
+--- jquery.orig.js	2007-02-24 02:56:40.000000000 -0500
++++ jquery.js	2007-02-24 02:53:02.000000000 -0500
+@@ -1600,6 +1600,10 @@
+ 
+ 			if ( this.queue[type].length == 1 )
+ 				fn.apply(this);
++
++		    // Remove the item from the queue once it has been executed.
++		    else if ( this.queue[type].length > 1 )
++        	   this.queue[type].pop();
+ 		});
+ 	}
+ 

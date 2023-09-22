@@ -1,0 +1,83 @@
+<!-- first line puts IE6 + IE7 in quirks mode (but not IE8) -->
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+
+<title>Box Model Test</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<!-- this forces IE8 to strict mode-->
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+
+<style type="text/css">
+html, body {
+	margin: 0;
+	padding: 0;
+}
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+</style>
+
+<script type="text/javascript" src="scripts/jquery-1.3.2.min.js"></script>
+
+</head>
+
+<body>
+
+<div style="height: 600px; background: pink; border: 100px solid green;">
+spacer<br/>
+<script type="text/javascript">
+document.write("doc mode: "+document.documentMode+"<br/>");
+</script>
+jQuery boxModel: <span id="boxModel"></span>
+</div>
+
+first line ... 
+
+<div style="position: relative;">
+
+<div style="height: 200px; background: pink; border: 20px solid green; padding: 20px;">
+spacer 2
+</div>
+
+<form>
+	<input type="text" id="textInput" name="input" />
+</form>
+
+offsetTop: <span id="offsetTop"></span><br/>
+offsetLeft: <span id="offsetLeft"></span><br/>
+offsetParentTop: <span id="offsetParentTop"></span><br/>
+offsetParentLeft: <span id="offsetParentLeft"></span><br/>
+
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	// write jQuery boxModel info
+	if ($.support.boxModel) {
+		$('#boxModel').html('content-box');
+	} else {
+		$('#boxModel').html('border-box');
+	}
+	
+	//
+	$('#textInput').hover(
+		function(event) {
+			$('#offsetTop').html($('#textInput').offset().top);
+			$('#offsetLeft').html($('#textInput').offset().left);
+
+			$('#offsetParentTop').html($('#textInput').offsetParent().offset().top);
+			$('#offsetParentLeft').html($('#textInput').offsetParent().offset().left);
+		}
+	);
+});
+</script>
+
+</body>
+</html>

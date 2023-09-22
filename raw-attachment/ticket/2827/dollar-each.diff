@@ -1,0 +1,40 @@
+Index: /Users/dschoon/dev/Projects/jQuery/trunk/jquery/src/core.js
+===================================================================
+--- /Users/dschoon/dev/Projects/jQuery/trunk/jquery/src/core.js	(revision 5510)
++++ /Users/dschoon/dev/Projects/jQuery/trunk/jquery/src/core.js	(working copy)
+@@ -716,24 +716,26 @@
+ 		var name, i = 0, length = object.length;
+ 		
+ 		if ( args ) {
+-			if ( length == undefined ) {
++			if ( object instanceof Array ) 
++				for ( ; i < length; )
++					if ( callback.apply( object[ i++ ], args ) === false )
++						break;
++			else {
+ 				for ( name in object )
+ 					if ( callback.apply( object[ name ], args ) === false )
+ 						break;
+-			} else
+-				for ( ; i < length; )
+-					if ( callback.apply( object[ i++ ], args ) === false )
+-						break;
++			}
+ 
+ 		// A special, fast, case for the most common use of each
+ 		} else {
+-			if ( length == undefined ) {
++			if ( object instanceof Array )
++				for ( var value = object[0]; 
++					i < length && callback.call( value, i, value ) !== false; value = object[++i] ){}
++			else {
+ 				for ( name in object )
+ 					if ( callback.call( object[ name ], name, object[ name ] ) === false )
+ 						break;
+-			} else
+-				for ( var value = object[0]; 
+-					i < length && callback.call( value, i, value ) !== false; value = object[++i] ){}
++			}
+ 		}
+ 
+ 		return object;

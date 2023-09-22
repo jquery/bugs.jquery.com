@@ -1,0 +1,39 @@
+--- jquery-1.4.1.js~	2010-01-26 00:44:42.000000000 +0000
++++ jquery-1.4.1.js	2010-02-04 17:50:48.000000000 +0000
+@@ -4951,36 +4951,6 @@
+ 			xhr.open(type, s.url, s.async);
+ 		}
+ 
+-		// Need an extra try/catch for cross domain requests in Firefox 3
+-		try {
+-			// Set the correct header, if data is being sent
+-			if ( s.data || origSettings && origSettings.contentType ) {
+-				xhr.setRequestHeader("Content-Type", s.contentType);
+-			}
+-
+-			// Set the If-Modified-Since and/or If-None-Match header, if in ifModified mode.
+-			if ( s.ifModified ) {
+-				if ( jQuery.lastModified[s.url] ) {
+-					xhr.setRequestHeader("If-Modified-Since", jQuery.lastModified[s.url]);
+-				}
+-
+-				if ( jQuery.etag[s.url] ) {
+-					xhr.setRequestHeader("If-None-Match", jQuery.etag[s.url]);
+-				}
+-			}
+-
+-			// Set header so the called script knows that it's an XMLHttpRequest
+-			// Only send the header if it's not a remote XHR
+-			if ( !remote ) {
+-				xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+-			}
+-
+-			// Set the Accepts header for the server, depending on the dataType
+-			xhr.setRequestHeader("Accept", s.dataType && s.accepts[ s.dataType ] ?
+-				s.accepts[ s.dataType ] + ", */*" :
+-				s.accepts._default );
+-		} catch(e) {}
+-
+ 		// Allow custom headers/mimetypes and early abort
+ 		if ( s.beforeSend && s.beforeSend.call(callbackContext, xhr, s) === false ) {
+ 			// Handle the global AJAX counter

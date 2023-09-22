@@ -1,0 +1,70 @@
+Index: test/unit/event.js
+===================================================================
+--- test/unit/event.js	(revision 4206)
++++ test/unit/event.js	(working copy)
+@@ -1,5 +1,16 @@
+ module("event");
+ 
++test("jQuery(function($) {})", function() {
++	expect(1);
++
++	stop();
++	// ready doesn't provide an event object, instead it provides a reference to the jQuery function, see http://docs.jquery.com/Events/ready#fn
++	jQuery(function($) {
++		ok(jQuery == $, "Check the ready function parameter is the jQuery object");
++		start();
++	});
++});
++
+ test("bind()", function() {
+ 	expect(18);
+ 
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 4206)
++++ src/event.js	(working copy)
+@@ -62,6 +62,10 @@
+ 				type = parts[0];
+ 				handler.type = parts[1];
+ 
++				if ( type == "ready" && jQuery.isReady ) {
++					handler.call(elem, jQuery);
++					return;
++				}
+ 				// Get the current list of functions bound to this event
+ 				var handlers = events[type];
+ 
+@@ -242,7 +246,10 @@
+ 
+ 			// Filter the functions by class
+ 			if ( !parts[1] || handler.type == parts[1] ) {
+-				var ret = handler.apply( this, args );
++				// Special case the "ready" type to remove the event and pass only the jQuery object
++				var ret = ( event.type == "ready" ) ? 
++					handler.apply( this, Array.prototype.slice.call(args, 1) ) : 
++					handler.apply( this, args );
+ 
+ 				if ( val !== false )
+ 					val = ret;
+@@ -351,14 +358,19 @@
+ 				jQuery.event.add( window, "load", handler );
+ 			},
+ 			
+-			teardown: function() {return;},
++			teardown: function() {
++				var handler = jQuery.event.special.ready.handler;
++				if ( document.removeEventListener )
++					document.removeEventListener( "DOMContentLoaded", handler, false );
++				jQuery.event.remove( window, "load", handler );
++			},
+ 			
+ 			handler: function() {
+ 				// Make sure that the DOM is not already loaded
+ 				if ( !jQuery.isReady ) {
+ 					// Remember that the DOM is ready
+ 					jQuery.isReady = true;
+-					jQuery(document).triggerHandler("ready");
++					jQuery(document).triggerHandler("ready", [ jQuery ]);
+ 					jQuery(document).unbind("ready");
+ 				}
+ 			}

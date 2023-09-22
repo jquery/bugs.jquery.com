@@ -1,0 +1,68 @@
+Index: testrunner.js
+===================================================================
+--- testrunner.js	(revision 5903)
++++ testrunner.js	(working copy)
+@@ -399,7 +399,7 @@
+     var args = Array.prototype.slice.apply(arguments);
+     var eq = true; // equivalent until we can explicitely say it's not!
+     var a, b; // compares a and b (1st and 2nd argument)
+-    var len; // for iterating array's length memoization
++    var i, len; // for iterating over objects convenience and for iterating array's length memoization 
+ 
+     if (args.length < 2) {
+         return true; // nothing to compare together
+@@ -428,8 +428,8 @@
+             if (len !== b.length) { // safe and faster
+                 return false;
+             }
+-            for (var i = 0; i < len; i++) {
+-                eq = eq && equiv(a[i], b[i]);
++            for (i = 0; i < len && eq; i++) {
++                eq = equiv(a[i], b[i]);
+             }
+             return eq;
+         }
+@@ -443,23 +443,26 @@
+         }
+ 
+         if (typeof a === "object") {
+-            // Verify properties equivalence in both ways:
+-
+-            // Everything in a should be in b and equivalent and ...
+-            for (var i in a) {
+-                if (a.hasOwnProperty(i)) {
+-                    eq = eq && equiv(a[i], b[i]);
+-                }
+-            }
+-
+-            // ... everything in b should be in a and equivalent
+-            for (var i in b) {
+-                if (b.hasOwnProperty(i)) {
+-                    eq = eq && equiv(b[i], a[i]);
+-                }
+-            }
+-
+-            return eq;
++            // With Markus Staab's help
++            // see http://groups.google.com/group/jquery-dev/browse_thread/thread/9447a950b40574f
++ 
++            // Verify a's properties with b's properties equivalence 
++            for (i in a) { 
++                if (a.hasOwnProperty(i)) { 
++                    if (!b.hasOwnProperty(i) || !equiv(a[i], b[i])) { 
++                        return false; 
++                    } 
++                } 
++            } 
++ 
++            // Need only to verify that b's property are also a's property 
++            for (i in b) { 
++                if (b.hasOwnProperty(i) && !a.hasOwnProperty(i)) { 
++                    return false; 
++                } 
++            } 
++ 
++            return true; 
+         }
+ 
+         if (typeof a === "function") {

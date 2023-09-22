@@ -1,0 +1,33 @@
+Index: jquery.validate-1.2.1.js
+===================================================================
+RCS file: jquery.validate-1.2.1.js,v
+retrieving revision 1.1
+diff -u -r1.1 jquery.validate-1.2.1.js
+--- jquery.validate-1.2.1.js	24 Feb 2008 16:40:29 -0000	1.1
++++ jquery.validate-1.2.1.js	7 Mar 2008 17:01:52 -0000
+@@ -407,12 +407,14 @@
+ 			element = this.clean( element );
+ 			this.settings.unhighlight && this.settings.unhighlight.call( this, element, this.settings.errorClass );
+ 			var rules = jQuery(element).rules();
++			var containsDependencyMismatch = false;
+ 			for( var i = 0; rules[i]; i++) {
+ 				var rule = rules[i];
+ 				try {
+ 					var result = jQuery.validator.methods[rule.method].call( this, jQuery.trim(element.value), element, rule.parameters );
+-					if ( result == "dependency-mismatch" )
+-						return;
++					if ( result == "dependency-mismatch" ) {
++						containsDependencyMismatch = true;
++					}
+ 					if ( result == "pending" ) {
+ 						this.toHide = this.toHide.not( this.errorsFor(element) );
+ 						return;
+@@ -427,6 +429,8 @@
+ 					throw e;
+ 				}
+ 			}
++			if ( containsDependencyMismatch ) 
++				return;
+ 			if ( rules.length )
+ 				this.successList.push(element);
+ 			return true;

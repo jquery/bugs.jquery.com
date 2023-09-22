@@ -1,0 +1,38 @@
+        <input type="button" value="otherTrigger" onclick="otherTrigger()" />
+        <input type="button" value="jqueryTrigger" onclick="jqueryTrigger()" />
+        <input type="text" id="input1" />
+    <script type="text/javascript">
+    if (document.attachEvent)
+    {
+        document.getElementById("input1").attachEvent("onkeydown", test);
+    }
+    else
+    {
+        document.getElementById("input1").addEventListener("keydown", test, false);
+    }
+    //$('#input1').keydown(test);
+    
+	function test()
+        {
+            alert('aaa');
+        }
+        
+        function otherTrigger()
+        {
+            var inputElement = document.getElementById("input1");
+		    if (!document.attachEvent)
+		    {
+			    var evObj = document.createEvent("UIEvents");
+			    evObj.initEvent( 'keydown', true, true);
+			    inputElement.dispatchEvent(evObj);
+		    }
+		    else
+		    {
+			    inputElement.fireEvent("onkeydown");
+		    }
+        }
+        function jqueryTrigger()
+        {
+            $('#input1').trigger('keydown');
+        }
+    </script>

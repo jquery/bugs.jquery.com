@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>2747 Test Case</title>
+<script type="text/javascript" src="jquery-1.2.6.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var testlink = document.getElementById('testlink');
+	document.getElementById('current_get').innerHTML = testlink.getAttribute('href');
+	document.getElementById('current_href').innerHTML = testlink.href;
+
+	$('#jquery').html($('#testlink').attr('href'));
+});
+</script>
+
+<style type="text/css">
+body> dl > dt { font-weight: bold; }
+</style>
+</head>
+
+<body>
+	<dl>
+		<dt>FF3:</dt>
+			<dd>
+				<dl>
+					<dt>getAttribute('href'):</dt>
+						<dd>123</dd>
+					<dt>.href:</dt>
+						<dd>http://localhost/testcases/123</dd>
+				</dl>
+			</dd>
+		<dt>IE6:</dt>
+			<dd>
+				<dl>
+					<dt>getAttribute('href'):</dt>
+						<dd>http://localhost/testcases/123</dd>
+					<dt>.href:</dt>
+						<dd>http://localhost/testcases/123</dd>
+				</dl>
+			</dd>
+		<dt>IE7:</dt>
+			<dd>
+				<dl>
+					<dt>getAttribute('href'):</dt>
+						<dd>http://localhost/testcases/123</dd>
+					<dt>.href:</dt>
+						<dd>http://localhost/testcases/123</dd>
+				</dl>
+			</dd>
+		<dt>IE8:</dt>
+			<dd>
+				<dl>
+					<dt>getAttribute('href'):</dt>
+						<dd>123</dd>
+					<dt>.href:</dt>
+						<dd>http://localhost/testcases/123</dd>
+				</dl>
+			</dd>
+		<dt>Safari 3 Win:</dt>
+			<dd>
+				<dl>
+					<dt>getAttribute('href'):</dt>
+						<dd>123</dd>
+					<dt>.href:</dt>
+						<dd>http://localhost/testcases/123</dd>
+				</dl>
+			</dd>
+		<dt>Current Browser:</dt>
+			<dd>
+				<dl>
+					<dt>Element.getAttribute('href')</dt>
+						<dd id="current_get"></dd>
+					<dt>Element.href:</dt>
+						<dd id="current_href"></dd>
+				</dl>
+			</dd>
+		<dt>jQuery:</dt>
+			<dd id="jquery"></dd>
+	</dl>
+	<a id="testlink" href="123">Test Link</a>
+</body>
+
+</html>

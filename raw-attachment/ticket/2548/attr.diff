@@ -1,0 +1,105 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 5084)
++++ src/core.js	(working copy)
+@@ -174,7 +174,7 @@
+ 		// Look for the case where we're accessing a style value
+ 		if ( name.constructor == String )
+ 			if ( value == undefined )
+-				return this.length && jQuery[ type || "attr" ]( this[0], name ) || undefined;
++				return this[0] && jQuery[ type || "attr" ]( this[0], name );
+ 
+ 			else {
+ 				options = {};
+@@ -1042,11 +1042,13 @@
+ 	attr: function( elem, name, value ) {
+ 		// don't set attributes on text and comment nodes
+ 		if (!elem || elem.nodeType == 3 || elem.nodeType == 8)
+-			return undefined;
++			return;
+ 
+ 		var fix = jQuery.isXMLDoc( elem ) ?
+ 			{} :
+-			jQuery.props;
++			jQuery.props,
++			get = value != undefined,//whether we are getting (or setting)
++			special = /href|src/.test( name );//these attributes need special treatment
+ 
+ 		// Safari mis-reports the default selected property of a hidden option
+ 		// Accessing the parent's selectedIndex property fixes it
+@@ -1054,22 +1056,22 @@
+ 			elem.parentNode.selectedIndex;
+ 		
+ 		// Certain attributes only work when accessed via the old DOM 0 way
+-		if ( fix[ name ] ) {
+-			if ( value != undefined )
+-				elem[ fix[ name ] ] = value;
++		if ( !special && ( fix[ name ] || name in elem ) ) {
++			if ( get )
++				elem[ fix[ name ] || name ] = value;
+ 
+-			return elem[ fix[ name ] ];
++			return elem[ fix[ name ] || name ];
+ 
+ 		} else if ( jQuery.browser.msie && name == "style" )
+ 			return jQuery.attr( elem.style, "cssText", value );
+ 
+-		else if ( value == undefined && jQuery.browser.msie && jQuery.nodeName( elem, "form" ) && (name == "action" || name == "method") )
++		else if ( get && jQuery.browser.msie && jQuery.nodeName( elem, "form" ) && (name == "action" || name == "method") )
+ 			return elem.getAttributeNode( name ).nodeValue;
+ 
+ 		// IE elem.getAttribute passes even for style
+ 		else if ( elem.tagName ) {
+ 
+-			if ( value != undefined ) {
++			if ( get ) {
+ 				// We can't allow the type property to be changed (since it causes problems in IE)
+ 				if ( name == "type" && jQuery.nodeName( elem, "input" ) && elem.parentNode )
+ 					throw "type property can't be changed";
+@@ -1078,7 +1080,7 @@
+ 				elem.setAttribute( name, "" + value );
+ 			}
+ 
+-			if ( jQuery.browser.msie && /href|src/.test( name ) && !jQuery.isXMLDoc( elem ) ) 
++			if ( jQuery.browser.msie && special && !jQuery.isXMLDoc( elem ) ) 
+ 				return elem.getAttribute( name, 2 );
+ 
+ 			return elem.getAttribute( name );
+@@ -1087,7 +1089,7 @@
+ 		} else {
+ 			// IE actually uses filters for opacity
+ 			if ( name == "opacity" && jQuery.browser.msie ) {
+-				if ( value != undefined ) {
++				if ( get ) {
+ 					// IE has trouble with opacity if it does not have layout
+ 					// Force it by setting the zoom level
+ 					elem.zoom = 1; 
+@@ -1106,7 +1108,7 @@
+ 				return letter.toUpperCase();
+ 			});
+ 
+-			if ( value != undefined )
++			if ( get )
+ 				elem[ name ] = value;
+ 
+ 			return elem[ name ];
+@@ -1234,18 +1236,8 @@
+ 		"float": styleFloat,
+ 		cssFloat: styleFloat,
+ 		styleFloat: styleFloat,
+-		innerHTML: "innerHTML",
+-		className: "className",
+-		value: "value",
+-		disabled: "disabled",
+-		checked: "checked",
+ 		readonly: "readOnly",
+-		selected: "selected",
+-		maxlength: "maxLength",
+-		selectedIndex: "selectedIndex",
+-		defaultValue: "defaultValue",
+-		tagName: "tagName",
+-		nodeName: "nodeName"
++		maxlength: "maxLength"
+ 	}
+ });
+ 

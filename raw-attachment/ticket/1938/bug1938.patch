@@ -1,0 +1,80 @@
+Index: ui.slider.js
+===================================================================
+--- ui.slider.js	(revision 3798)
++++ ui.slider.js	(working copy)
+@@ -253,39 +253,45 @@
+ 			return false;
+ 			
+ 		},
+-		moveTo: function(value,scale,changeslide,p) {	// renamed from goto to moveTo as goto is reserved javascript word
++		moveTo: function(value, scale, changeslide, p, which) {	
++			// renamed from goto to moveTo as goto is reserved javascript word
++			var self = this;
++			if(this.multipleHandles) {
++				moveSlider(this.interactions[which || 0]);
++			} else {
++				moveSlider(this.interaction);
++			}
+ 			
+-			if(this.multipleHandles) return false; //TODO: Multiple handle moveTo function
+-			
+-			var o = this.interaction.options;
+-			var offset = $(this.interaction.element).offsetParent().offset({ border: false });
+-			this.interaction.pickValue = this.interaction.curValue;
+-			value = value-o.minValue;
+-			
+-			var modifier = scale || o.realValue;
+-			
+-			if(!p) var p = this.parentSize;
+-			var prop = this.prop;
+-			
+-			var m = Math.round(((value)/modifier) * p);
++			function moveSlider(interaction) {
++				var o = interaction.options;
++				var offset = $(interaction.element).offsetParent().offset({ border: false });
++				interaction.pickValue = interaction.curValue;
++				value = value-o.minValue;
++				
++				var modifier = scale || o.realValue;
++				
++				if(!p) var p = self.parentSize;
++				var prop = self.prop;
++				
++				var m = Math.round(((value)/modifier) * p);
+ 
+-			if(m < 0) m = 0;
+-			if(m > p) m = p;
+-			
+-			this.interaction.curValue = (Math.round((m/p)*o.realValue));
+-			if(o.stepping) {
+-				this.interaction.curValue = Math.round(this.interaction.curValue/o.stepping)*o.stepping;
+-				m = ((this.interaction.curValue)/o.realValue) * p;
++				if(m < 0) m = 0;
++				if(m > p) m = p;
++				
++				interaction.curValue = (Math.round((m/p)*o.realValue));
++				if(o.stepping) {
++					interaction.curValue = Math.round(interaction.curValue/o.stepping)*o.stepping;
++					m = ((interaction.curValue)/o.realValue) * p;
++				}
++
++				$(interaction.element).css(prop, m+'px');
++				
++				if(!changeslide && interaction.pickValue != interaction.curValue && !p)
++					$(self.element).triggerHandler("slidechange", [null, self.prepareCallbackObj(interaction)], o.change);
++				
++				if(changeslide)
++					$(self.element).triggerHandler("slide", [null, self.prepareCallbackObj(interaction)], o.slide);
+ 			}
+-
+-			$(this.interaction.element).css(prop, m+'px');
+-			
+-			if(!changeslide && this.interaction.pickValue != this.interaction.curValue && !p)
+-				$(this.element).triggerHandler("slidechange", [null, this.prepareCallbackObj(this.interaction)], o.change);
+-			
+-			if(changeslide)
+-				$(this.element).triggerHandler("slide", [null, this.prepareCallbackObj(this.interaction)], o.slide);
+-
+ 		}
+ 	});
+ 

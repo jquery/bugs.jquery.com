@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">battleship.js on Ticket #1914 – Attachment – jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shadow:0 1px #fff;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#b3d4fc}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#b3d4fc}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f2f0}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{color:#9a6e3a;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}pre[class*=language-diff]{--eleventy-code-padding:1.25em;padding-left:var(--eleventy-code-padding);padding-right:var(--eleventy-code-padding)}.token.deleted{background-color:#8e2e2e;color:inherit}.token.inserted{background-color:#44824a;color:inherit}.token.prefix.deleted,.token.prefix.inserted,.token.prefix.unchanged{-webkit-user-select:none;user-select:none;display:inline-flex;align-items:center;justify-content:center;padding-top:2px;padding-bottom:2px}.token.prefix.deleted,.token.prefix.inserted{width:var(--eleventy-code-padding);background-color:rgba(0,0,0,.2)}.token.deleted:not(.prefix),.token.inserted:not(.prefix){display:block;margin-left:calc(-1 * var(--eleventy-code-padding));margin-right:calc(-1 * var(--eleventy-code-padding));text-decoration:none;color:inherit}:root{--attachment-info-bg-color:#f7f7f0;--attachment-info-border-color:#d7d7d7;--attachment-download-link-color:#666}h1,h2,h3,h4,h5,h6{font-weight:700}h3{font-size:.875rem}h6{font-size:.6875rem}.attachment-info{padding:.25em .5em;margin:1em 0;background-color:var(--attachment-info-bg-color);border:1px solid var(--attachment-info-border-color)}.attachment-info h6{font-family:var(--font-family-alternate)}.attachment-download{margin:2em 0;gap:.5em}.attachment-download-link[href],.attachment-download-link[href]:visited{color:var(--attachment-download-link-color)}.attachment img,.attachment picture{display:block;max-width:100%;height:auto}code[class*=language-],pre[class*=language-]{font-size:.75rem}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+
+<div class="flex-column attachment">
+  <nav class="content-nav">
+    <ul class="flex-row">
+      <li>
+        <a href="/bugs.jquery.com/ticket/1914">Back to Ticket #1914</a>
+      </li>
+    </ul>
+  </nav>
+
+  <h1>
+    <a href="/bugs.jquery.com/ticket/1914">Ticket #1914</a>: battleship.js
+  
+  <hr>
+
+  <div class="attachment-info">
+    <h6>File battleship.js, 7.1 KB (added by Digi, November 12, 2007 04:40AM UTC)</h6>
+    
+      <p>main javascript file for program operation</p>
+    
+  </div>
+
+  
+    <div class="attachment-preview">
+      
+      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token comment">/*	Original:  Kevin Peno (kevin@metalaxe.com)
+	Web Site:  http://metalaxe.com
+
+	Version: 1.0 alpha
+	Date: 10/30/2007 @ 21:28 PST (-8 GMT)
+	Requirements: jQuery, jQuery.ui.draggable
+*/</span>
+
+<span class="token keyword">function</span> <span class="token function">Battleship</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token comment">/**
+	*	self storage for jquery cooperation
+	**/</span>
+	<span class="token keyword">var</span> self <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+
+	<span class="token comment">/*
+		Store ths OS window ID
+	*/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>window <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+	
+	<span class="token comment">/*
+		Dragged ship is rotated
+	*/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>rotated <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+	
+	<span class="token comment">/*
+		Store ths OS window name
+	*/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'Battleship'</span><span class="token punctuation">;</span>
+	
+	<span class="token comment">/**
+	*	Path to prgram
+	**/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>program_dir <span class="token operator">=</span> <span class="token string">'programs/battleship/'</span><span class="token punctuation">;</span>
+
+	<span class="token comment">/*
+	*	Game State (nothing/setup/battle)
+	*/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>gameState <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+	<span class="token comment">/*
+		Information used to describe ships
+	*/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>shiptypes <span class="token operator">=</span> <span class="token punctuation">{</span>
+		<span class="token literal-property property">cv</span> <span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token string">"Aircraft Carrier"</span><span class="token punctuation">,</span>	<span class="token number">5</span><span class="token punctuation">,</span>	<span class="token string">'carrier'</span>	<span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token literal-property property">bb</span> <span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token string">"Battleship"</span><span class="token punctuation">,</span>		<span class="token number">4</span><span class="token punctuation">,</span>	<span class="token string">'battleship'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token literal-property property">ss</span> <span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token string">"Submarine"</span><span class="token punctuation">,</span>			<span class="token number">3</span><span class="token punctuation">,</span>	<span class="token string">'sub'</span>		<span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token literal-property property">dd</span> <span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token string">"Destroyer"</span><span class="token punctuation">,</span>			<span class="token number">3</span><span class="token punctuation">,</span>	<span class="token string">'destroyer'</span>	<span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token literal-property property">pt</span> <span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token string">"Patrol Boat"</span><span class="token punctuation">,</span>		<span class="token number">2</span><span class="token punctuation">,</span>	<span class="token string">'patrol'</span>	<span class="token punctuation">]</span>
+	<span class="token punctuation">}</span><span class="token punctuation">;</span>
+	
+	<span class="token comment">/**
+	*	Example player object
+	*
+	*	this.player = {
+	*					shipcall (ie. CV) :
+	*						[
+	*							X pos	(ie. 1)
+	*							Y pos	(ie. A [numeric of] )
+	*							direction	(true/false) (aka horizontal/vertical)
+	*						]
+	*				};
+	**/</span>
+
+		
+	<span class="token comment">/*
+		Player Elements
+	*/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>player <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+	<span class="token comment">/*
+		Computer Elements
+	*/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>enemy <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+	
+	<span class="token comment">/*
+	Start the game!
+	*/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">Init</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">window_id<span class="token punctuation">,</span> params</span> <span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>window <span class="token operator">=</span> window_id<span class="token punctuation">;</span>
+
+		<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">".ships"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">draggable</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+			<span class="token literal-property property">cursorAt</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token literal-property property">bottom</span><span class="token operator">:</span><span class="token number">13</span><span class="token punctuation">,</span><span class="token literal-property property">left</span><span class="token operator">:</span> <span class="token number">13</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+			<span class="token literal-property property">cursor</span><span class="token operator">:</span> <span class="token string">'move'</span><span class="token punctuation">,</span>
+			<span class="token function-variable function">start</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+			<span class="token punctuation">{</span>
+				<span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">keypress</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>rotateImage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span><span class="token punctuation">,</span>
+			<span class="token function-variable function">stop</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+			<span class="token punctuation">{</span>
+				<span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unbind</span><span class="token punctuation">(</span><span class="token string">'keypress'</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>rotateImage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span>
+		<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#shipselect'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#player table tr td:not(.non-field)'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">droppable</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+			<span class="token literal-property property">accept</span> <span class="token operator">:</span> <span class="token string">'img'</span><span class="token punctuation">,</span>
+			<span class="token literal-property property">tolerance</span><span class="token operator">:</span> <span class="token string">'pointer'</span><span class="token punctuation">,</span>
+			<span class="token literal-property property">drop</span> <span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>placeShip
+		<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#player'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#computer'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token string">"click"</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>gridClick<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		<span class="token comment">// Change game state to setup</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>gameState <span class="token operator">=</span> <span class="token string">'setup'</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token comment">/*
+	*	Start the actual fighting
+	*/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">start</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token comment">//Set up player zone</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setupPlayer</span><span class="token punctuation">(</span> <span class="token boolean">false</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">//Build the NPC</span>
+		<span class="token comment">//this.setupPlayer( true );</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token comment">/*
+		Function to place the ships in the grid
+	*/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">setupPlayer</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">ispc</span> <span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+	<span class="token punctuation">}</span>
+	
+	<span class="token comment">/**
+	*	Place Ship on grid during setup
+	*	must use 'self' for 'this' due to jquery callback
+	**/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">placeShip</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">e<span class="token punctuation">,</span> jquery_ui</span> <span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token comment">// Find our stuffs</span>
+		<span class="token keyword">var</span> target <span class="token operator">=</span> self<span class="token punctuation">.</span><span class="token function">findCell</span><span class="token punctuation">(</span> e<span class="token punctuation">,</span> jquery_ui <span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">var</span> direction <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#shipselect ul:eq(0) li input:checked'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">var</span> ship <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span>jquery_ui<span class="token punctuation">.</span>draggable<span class="token punctuation">.</span>element<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">var</span> ship_key <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span>ship<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		<span class="token comment">// If we haven't picked a ship this does nothing</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token operator">!</span>ship <span class="token punctuation">)</span>
+		<span class="token punctuation">{</span>
+			<span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+
+		<span class="token comment">// Make sure we have a proper target</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span> target <span class="token operator">==</span> <span class="token boolean">false</span> <span class="token punctuation">)</span>
+		<span class="token punctuation">{</span>
+			<span class="token function">alert</span><span class="token punctuation">(</span> <span class="token string">'Please place the '</span> <span class="token operator">+</span> self<span class="token punctuation">.</span>shiptypes<span class="token punctuation">[</span> ship_key <span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">' to where all sides are within the ocean grid and not touching any other ships'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">$</span><span class="token punctuation">(</span>ship<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string-property property">'position'</span> <span class="token operator">:</span> <span class="token string">'relative'</span><span class="token punctuation">,</span> <span class="token string-property property">'top'</span><span class="token operator">:</span> <span class="token string">'0'</span><span class="token punctuation">,</span> <span class="token string-property property">'left'</span> <span class="token operator">:</span> <span class="token string">'0'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+
+		<span class="token keyword">var</span> x <span class="token operator">=</span> self<span class="token punctuation">.</span><span class="token function">getCellIndex</span><span class="token punctuation">(</span> target <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Prevents Safari returning this as 0...</span>
+		<span class="token keyword">var</span> y <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">parent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>rowIndex<span class="token punctuation">;</span>
+
+		<span class="token comment">// Get the room available</span>
+		<span class="token keyword">var</span> check_distance <span class="token operator">=</span> direction <span class="token operator">==</span> <span class="token string">'horizontal'</span> <span class="token operator">?</span> <span class="token punctuation">(</span> <span class="token function">$</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token comment">/*Vertical*/</span> <span class="token punctuation">(</span> <span class="token function">$</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">parent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		<span class="token comment">// Check for enough room</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span> check_distance <span class="token operator">&lt;</span> self<span class="token punctuation">.</span>shiptypes<span class="token punctuation">[</span> ship_key <span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token punctuation">)</span>
+		<span class="token punctuation">{</span>
+			<span class="token function">alert</span><span class="token punctuation">(</span> <span class="token string">'Please place the '</span> <span class="token operator">+</span> self<span class="token punctuation">.</span>shiptypes<span class="token punctuation">[</span> ship_key <span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">' to where all sides are within the ocean grid and not touching any other ships'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">$</span><span class="token punctuation">(</span>ship<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string-property property">'position'</span> <span class="token operator">:</span> <span class="token string">'relative'</span><span class="token punctuation">,</span> <span class="token string-property property">'top'</span><span class="token operator">:</span> <span class="token string">'0'</span><span class="token punctuation">,</span> <span class="token string-property property">'left'</span> <span class="token operator">:</span> <span class="token string">'0'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+		<span class="token keyword">else</span>
+		<span class="token punctuation">{</span>
+			<span class="token comment">// Move the ship image to the grid where selected</span>
+			<span class="token function">$</span><span class="token punctuation">(</span>ship<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+				<span class="token string-property property">'top'</span><span class="token operator">:</span> <span class="token function">$</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">offset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>top<span class="token punctuation">,</span>
+				<span class="token string-property property">'left'</span> <span class="token operator">:</span> <span class="token function">$</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">offset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>left<span class="token punctuation">,</span>
+				<span class="token string-property property">'cursor'</span> <span class="token operator">:</span> <span class="token string">'default'</span>
+			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			
+			<span class="token comment">//Update the player node</span>
+			self<span class="token punctuation">.</span>player<span class="token punctuation">[</span> ship_key <span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span> x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> direction <span class="token punctuation">]</span><span class="token punctuation">;</span>
+	
+			<span class="token comment">// Remove draggability</span>
+			<span class="token comment">//$(ship).draggableInstance().disable();</span>
+
+			<span class="token comment">//Remove droppability</span>
+			<span class="token keyword">for</span><span class="token punctuation">(</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> self<span class="token punctuation">.</span>shiptypes<span class="token punctuation">[</span> ship_key <span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">)</span>
+			<span class="token punctuation">{</span>
+				<span class="token function">$</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">droppableInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+				target <span class="token operator">=</span> direction <span class="token operator">==</span> <span class="token string">'horizontal'</span> <span class="token operator">?</span> <span class="token function">$</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">$</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">parent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span>
+			<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token comment">/**
+	*	Find the true targeted cell
+	*	Used during ship placement
+	**/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">findCell</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">e<span class="token punctuation">,</span> jquery_ui</span> <span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token keyword">var</span> draggable <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span>jquery_ui<span class="token punctuation">.</span>draggable<span class="token punctuation">.</span>element<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">var</span> droppable <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span>jquery_ui<span class="token punctuation">.</span>draggable<span class="token punctuation">.</span>currentTarget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">var</span> found <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+		<span class="token keyword">while</span><span class="token punctuation">(</span> <span class="token operator">!</span>found <span class="token punctuation">)</span>
+		<span class="token punctuation">{</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token function">$</span><span class="token punctuation">(</span>draggable<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">offset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>left <span class="token operator">-</span> <span class="token function">$</span><span class="token punctuation">(</span>droppable<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">offset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>left<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">26</span>  <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span> <span class="token function">$</span><span class="token punctuation">(</span>draggable<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">offset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>left <span class="token operator">-</span> <span class="token function">$</span><span class="token punctuation">(</span>droppable<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">offset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>left<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token operator">-</span><span class="token number">10</span> <span class="token punctuation">)</span>
+			<span class="token punctuation">{</span>
+				<span class="token keyword">return</span> droppable<span class="token punctuation">;</span>
+			<span class="token punctuation">}</span>
+			<span class="token keyword">else</span>
+			<span class="token punctuation">{</span>
+				<span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token function">$</span><span class="token punctuation">(</span>draggable<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">offset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>left <span class="token operator">-</span> <span class="token function">$</span><span class="token punctuation">(</span>droppable<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">offset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>left<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">26</span> <span class="token punctuation">)</span>
+				<span class="token punctuation">{</span>
+					<span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">$</span><span class="token punctuation">(</span>droppable<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">is</span><span class="token punctuation">(</span><span class="token string">'.ui-droppable:not(.ui-droppable-disabled)'</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+						droppable <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span>droppable<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+					<span class="token keyword">else</span>
+						<span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+				<span class="token punctuation">}</span>
+				<span class="token keyword">else</span>
+				<span class="token punctuation">{</span>
+					<span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">$</span><span class="token punctuation">(</span>droppable<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">prev</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">is</span><span class="token punctuation">(</span><span class="token string">'.ui-droppable:not(.ui-droppable-disabled)'</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+						droppable <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span>droppable<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">prev</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+					<span class="token keyword">else</span>
+						<span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+				<span class="token punctuation">}</span>
+			<span class="token punctuation">}</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token comment">/*
+	*	Handler for clicking on the grid
+	*	This is called by jquery and must use "self"
+	*	for this class object rather than "this"
+	*/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">gridClick</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">e</span> <span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token keyword">var</span> target <span class="token operator">=</span> self<span class="token punctuation">.</span><span class="token function">getTarget</span><span class="token punctuation">(</span> e <span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">var</span> cell <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">var</span> x <span class="token operator">=</span> self<span class="token punctuation">.</span><span class="token function">getCellIndex</span><span class="token punctuation">(</span> target <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Prevents Safari not returning this...</span>
+		<span class="token keyword">var</span> y <span class="token operator">=</span> cell<span class="token punctuation">.</span><span class="token function">parent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>rowIndex<span class="token punctuation">;</span>
+
+		<span class="token comment">// Do attack</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span> self<span class="token punctuation">.</span>gameState <span class="token operator">==</span> <span class="token string">'battle'</span> <span class="token punctuation">)</span>
+			self<span class="token punctuation">.</span><span class="token function">fireShot</span><span class="token punctuation">(</span> cell<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y <span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token comment">/**
+	*	Fire a shot at the enemy!
+	**/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">fireShot</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">cell<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y</span> <span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>	
+	<span class="token punctuation">}</span>
+
+	<span class="token comment">/**
+	*	Function to change an image shown on a grid
+	*/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">setImage</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">y<span class="token punctuation">,</span> x<span class="token punctuation">,</span> id<span class="token punctuation">,</span> ispc</span> <span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+	<span class="token punctuation">}</span>
+	
+	<span class="token comment">/*
+		Function to make the computers move. Note that the computer does not cheat, oh no!
+	*/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">computerMove</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+	<span class="token punctuation">}</span>
+	
+	<span class="token comment">/*
+		When whole ship is hit, show it using changed graphics
+	*/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">sinkShip</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">grid<span class="token punctuation">,</span> shipno<span class="token punctuation">,</span> ispc</span> <span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+	<span class="token punctuation">}</span>
+	
+	<span class="token comment">/*
+		Show location of all the enemy ships - when game is over
+	*/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">knowYourEnemy</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token comment">/**
+	*	Safari returns 0 always for cellIndex
+	*	Loop to see what the index is, else return
+	*	in non-borked browsers
+	**/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">getCellIndex</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span> <span class="token parameter">obj</span> <span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+	  <span class="token keyword">var</span> isSafari <span class="token operator">=</span> <span class="token punctuation">(</span>navigator<span class="token punctuation">.</span>userAgent<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">"Safari"</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+	  <span class="token keyword">var</span> ci <span class="token operator">=</span> <span class="token punctuation">(</span> isSafari <span class="token operator">&amp;&amp;</span> obj<span class="token punctuation">.</span>cellIndex <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">:</span> obj<span class="token punctuation">.</span>cellIndex <span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	  <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> ci <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span> x <span class="token operator">&lt;</span> obj<span class="token punctuation">.</span>parentElement<span class="token punctuation">.</span>cells<span class="token punctuation">.</span>length<span class="token punctuation">;</span> x<span class="token operator">++</span> <span class="token punctuation">)</span>
+	  <span class="token punctuation">{</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span> obj <span class="token operator">===</span> obj<span class="token punctuation">.</span>parentElement<span class="token punctuation">.</span>cells<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		  ci <span class="token operator">=</span> x<span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+	  <span class="token punctuation">}</span>
+	  <span class="token keyword">return</span> ci<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token comment">/**
+	*	gets a valid grid target
+	**/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">getTarget</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">e</span> <span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token keyword">var</span> target<span class="token punctuation">;</span>
+		<span class="token comment">//W3C</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>e<span class="token punctuation">.</span>target<span class="token punctuation">)</span> target <span class="token operator">=</span> e<span class="token punctuation">.</span>target<span class="token punctuation">;</span>
+		<span class="token comment">//MS</span>
+		<span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>e<span class="token punctuation">.</span>srcElement<span class="token punctuation">)</span> target <span class="token operator">=</span> e<span class="token punctuation">.</span>srcElement<span class="token punctuation">;</span>
+
+		<span class="token comment">// defeat Safari bug</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>target<span class="token punctuation">.</span>nodeType <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span>
+		<span class="token punctuation">{</span>
+			target <span class="token operator">=</span> target<span class="token punctuation">.</span>parentNode<span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+
+		<span class="token keyword">return</span> target<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token comment">/**
+	*	Used to change a ship from horizontal to vertical
+	*	during drag operation
+	*	must use 'self' instead of 'this'
+	**/</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">rotateImage</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">e</span> <span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'keydown'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> e<span class="token punctuation">.</span>which <span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> e<span class="token punctuation">;</span>	
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+    </div>
+  
+
+  <div class="attachment-download flex-column flex-center">
+    <h3>Download in other formats:</h3>
+    <a class="attachment-download-link" download="" href="/bugs.jquery.com/raw-attachment/ticket/1914/battleship.js">Original Format</a>
+  </div>
+</h1></div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+Index: ui/ui.slider.js
+===================================================================
+--- ui/ui.slider.js	(revision 4895)
++++ ui/ui.slider.js	(working copy)
+@@ -237,8 +237,17 @@
+ 			if(handle == undefined && !this.currentHandle && this.handle.length != 1) return false; //If no handle has been passed, no current handle is available and we have multiple handles, return false
+ 			if(handle == undefined && !this.currentHandle) handle = 0; //If only one handle is available, use it
+ 			if(handle != undefined) this.currentHandle = this.previousHandle = $(this.handle[handle] || handle);
+-
+-			if(value.constructor == String) value = /\-\=/.test(value) ? this.value() - parseInt(value.replace('-=', ''),10) : this.value() + parseInt(value.replace('+=', ''),10);
++	
++			if(value.constructor == String) {
++				if (/^\-\=/.test(value) ) {
++					value = this.value() - parseInt(value.replace('-=', ''), 10)
++				} else if (/^\+\=/.test(value) ) {
++					value = this.value() + parseInt(value.replace('+=', ''), 10)
++				} else {
++					value = parseInt(value, 10);
++				}
++			}
++			
+ 			if(o.stepping) value = Math.round(value / o.stepping) * o.stepping;
+ 			value = this.translateValue(value);
+ 

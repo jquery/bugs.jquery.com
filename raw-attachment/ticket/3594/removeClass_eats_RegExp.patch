@@ -1,0 +1,38 @@
+Index: jquery/test/unit/core.js
+===================================================================
+--- jquery/test/unit/core.js	(revision 5939)
++++ jquery/test/unit/core.js	(working copy)
+@@ -1360,7 +1360,7 @@
+ });
+ 
+ test("removeClass(String) - simple", function() {
+-	expect(4);
++	expect(5);
+ 	
+ 	var $divs = jQuery('div');
+ 	
+@@ -1384,6 +1384,12 @@
+ 	var j = jQuery("#nonnodes").contents();
+ 	j.removeClass("asdf");
+ 	ok( !j.hasClass("asdf"), "Check node,textnode,comment for removeClass" );
++	
++	reset();
++	
++	$divs.eq(0).addClass("first state-one state-two test last-state last").removeClass(/state/);
++	ok( $divs.eq(0).is('.first.test.last'), "RegExp passed to removeClass" );
++	
+ });
+ 
+ test("toggleClass(String)", function() {
+Index: jquery/src/core.js
+===================================================================
+--- jquery/src/core.js	(revision 5939)
++++ jquery/src/core.js	(working copy)
+@@ -787,6 +787,7 @@
+ 
+ 		// internal only, use hasClass("class")
+ 		has: function( elem, className ) {
++			if (elem instanceof RegExp) return elem.test(className);
+ 			return jQuery.inArray( className, (elem.className || elem).toString().split(/\s+/) ) > -1;
+ 		}
+ 	},

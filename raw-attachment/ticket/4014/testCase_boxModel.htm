@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>boxModel test</title>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #container {
+            min-height: 100%;
+            background: #ccc;
+            position: relative;
+        }
+        #footer {
+            position: absolute;
+            bottom: 0;
+        }
+		
+    </style>
+    <!--[if IE]>
+        <style type="text/css">
+            #container {
+                height: 100%;
+            }
+        </style>
+    <![endif]-->
+	<script type="text/javascript">
+	var jQuery = { support: {} };
+	
+	function boxModel_current(){
+		var div = document.createElement("div");
+		div.style.width = "1px";
+		div.style.paddingLeft = "1px";
+
+		document.body.appendChild( div );
+		jQuery.boxModel = jQuery.support.boxModel = div.offsetWidth === 2;
+		document.body.removeChild( div );
+	};
+	
+	function boxModel_patch(){
+        var div = document.createElement("div");
+        div.style.width = div.style.paddingLeft = "1px";
+
+        document.body.appendChild( div );
+        jQuery.boxModel = jQuery.support.boxModel = div.offsetWidth === 2;
+        document.body.removeChild( div ).style.display = 'none';
+    };
+	
+	</script>
+</head>
+<body>
+    <div id="container">
+        <div>
+			<span>#container</span><br />
+			<input type="button" value="Check as of rev 6169" onclick="boxModel_current()" /><br />
+			<input type="button" value="Patch (display:none)" onclick="boxModel_patch()" /><br />
+		</div>
+        <div id="footer">
+            #footer
+        </div>
+    </div>
+</body>
+</html>

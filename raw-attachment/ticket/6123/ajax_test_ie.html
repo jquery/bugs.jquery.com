@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>$.ajax IE Test</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<!-- script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<!-- script type="text/javascript" src="http://code.jquery.com/jquery-nightly.min.js"></script -->
+	<script type="text/javascript">
+		function test() {
+			
+			// inside jquery, hitting the native xhr.send(...) method will cause xhr to become null
+
+			// fails with all types of ajax calls
+			var xhr = $.ajax();
+			//var xhr = $.get("ajax_test_ie.html");
+			//var xhr = $.getJSON("file.json");
+			//var xhr = $.post("ajax_test_ie.html");
+			
+			alert(xhr);
+
+			// in firefox you will get nice alert message "[object XMLHttpRequest]"
+			// in internet explorer 7 you will get message "null"
+		}
+	</script>
+</head>
+<body>
+	<input type="button" onclick="test();" value="Test" />
+	<div id="container"></div>
+</body>
+</html>

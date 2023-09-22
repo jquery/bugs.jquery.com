@@ -1,0 +1,13 @@
+Index: fx.highlight.js
+===================================================================
+--- fx.highlight.js	(revision 5345)
++++ fx.highlight.js	(working copy)
+@@ -23,6 +23,8 @@
+       el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
+         if(mode == "hide") el.hide();
+         $.ec.restore(el, props);
++		if (mode == "show" && jQuery.browser.msie)
++               this.style.removeAttribute('filter');
+         if(o.callback) o.callback.apply(this, arguments);
+         el.dequeue();
+       }});

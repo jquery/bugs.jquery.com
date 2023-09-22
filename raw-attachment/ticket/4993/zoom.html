@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+<title>Zoom this page!</title>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+function update() {
+	$('#js').text(  document.getElementById('x').offsetLeft  );
+	$('#jq-offset').text(  $('#x').offset().left  );
+	$('#jq-pos').text(  $('#x').position().left  );
+}
+
+setInterval(update, 200);
+
+</script>
+</head>
+
+<body>
+<h3>Zoom this page!</h3>
+<p>Where is that red  .........  <span id="x" style="color: red">X</span>?</p>
+<br/>
+<p>javascript .offsetLeft says: <span id="js"></span></p>
+<p>.offset().left says: <span id="jq-offset"></span></p>
+<p>.position().left says: <span id="jq-pos"></span></p>
+</body>
+</html>

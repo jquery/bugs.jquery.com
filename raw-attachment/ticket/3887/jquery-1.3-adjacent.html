@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>jQuery 1.3 Adjacent Selector Bug</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $('span.foo + a').css('background', 'green');
+      });    
+    </script>
+	</head>
+	<body>
+	  <h1>jQuery 1.3 Adjacent Selector Bug</h1>
+    <ul>
+      <li><a href="#">Link</a> <span>Regular Span</span> <a href="#">Link</a></li>
+            
+      <li><span>Regular Span</span> <a href="#">Link</a></li>
+      <li><span>Regular Span</span> <a href="#">Link</a></li>
+      <li><span>Regular Span</span> <a href="#">Link</a></li>
+    </ul>
+    
+    <p>This test runs <tt>$('span.foo + a').css('background', 'green');</tt>, which should turn none of the links
+    green, since none of the spans have a class. In jQuery 1.3 (Sizzle v0.9.1) it highlights all the links that
+    appear after a span, but only once a span is proceeded by a link!</p>
+    
+    <p><a href="./">Back to Browser Bugs</a></p>
+	</body>
+</html>

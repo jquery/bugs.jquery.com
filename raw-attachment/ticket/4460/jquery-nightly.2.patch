@@ -1,0 +1,11 @@
+--- includes/javascript/jquery-nightly.js	2009-04-02 11:39:58.000000000 +0200
++++ includes/javascript/jquery.js	2009-04-02 11:42:32.000000000 +0200
+@@ -3212,7 +3212,7 @@
+ 		});
+ 
+ 		if ( set )
+-			style[ name ] = value;
++			try {style[ name ] = value;} catch(e) {jQuery.log('invalid style: ' + name + '=' + value);}
+ 
+ 		return style[ name ];
+ 	},

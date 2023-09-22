@@ -1,0 +1,37 @@
+<html>
+    <head>
+         <script src="jquery.min.js" type="text/javascript"></script>
+         <script type="text/javascript">
+              function OnRadioCheck(){
+                var checkedRadios = $("input[type='radio'][checked]");
+                if (checkedRadios.length > 0){
+                    alert(checkedRadios[0].id);    
+                }
+                var radios = $("input[type='radio']");
+                if (radios.length > 0){
+                    alert(radios[0].id);    
+                }
+                var checkedRadio = FindCheckedRadio(radios);
+                if (checkedRadio){
+                    alert(checkedRadio.id);
+                }
+              }
+              function FindCheckedRadio(radios)
+              {
+                for (i = 0; i < radios.length; i++){
+                    if (radios[i].checked){
+                        return radios[i];
+                    }
+                }
+                return null;
+              }
+         </script>   
+    </head>
+    <body>
+         <input id="radio1" type='radio' name='rgTest' /><br/>
+         <input id="radio2" type='radio' name='rgTest' /><br/>
+         <input id="radio3" type='radio' name='rgTest' /><br/>
+         <input id="radio4" type='radio' name='rgTest' /><br/>
+        <input id="buttonCheck" type='submit' onclick='OnRadioCheck()' />
+    </body>
+</html>

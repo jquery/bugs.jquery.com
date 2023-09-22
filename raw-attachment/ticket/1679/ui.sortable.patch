@@ -1,0 +1,12 @@
+Index: plugins/ui/current/ui.sortable.js
+===================================================================
+--- plugins/ui/current/ui.sortable.js	(Revision 3610)
++++ plugins/ui/current/ui.sortable.js	(Arbeitskopie)
+@@ -86,6 +86,7 @@
+ 		currentTarget: null,
+ 		lastTarget: null,
+ 		prepareCallbackObj: function(self, that) {
++		  	if (!self.pos) self.pos = [0, 0];
+ 			return {
+ 				helper: self.helper,
+ 				position: { left: self.pos[0], top: self.pos[1] },

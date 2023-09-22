@@ -1,0 +1,19 @@
+Index: css.js
+===================================================================
+--- css.js	(revision 6368)
++++ css.js	(working copy)
+@@ -65,8 +65,12 @@
+ 				style.zoom = 1;
+ 
+ 				// Set the alpha filter to set the opacity
+-				style.filter = (style.filter || "").replace( /alpha\([^)]*\)/, "" ) +
+-					(parseInt( value ) + '' == "NaN" ? "" : "alpha(opacity=" + value * 100 + ")");
++				var opacity = (parseInt( value ) + '' == "NaN" ? "" : "alpha(opacity=" + value * 100 + ")"),
++					filter = (style.filter || jQuery.curCSS( elem, 'filter' ) || "");
++				
++				style.filter = /alpha\([^)]*\)/.test(filter) ?
++					filter.replace( /alpha\([^)]*\)/, opacity) :
++					opacity;
+ 			}
+ 
+ 			return style.filter && style.filter.indexOf("opacity=") >= 0 ?

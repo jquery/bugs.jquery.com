@@ -1,0 +1,35 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 5772)
++++ src/core.js	(working copy)
+@@ -614,8 +614,28 @@
+ 
+ 	// See test/unit/core.js for details concerning this function.
+ 	isFunction: function( fn ) {
+-		return !!fn && typeof fn != "string" && !fn.nodeName &&
+-			fn.constructor != Array && /^[\s[]?function/.test( fn + "" );
++		return !!fn && ( !jQuery.browser.msie ? fn instanceof Function : 
++			(function(fn){
++				// IE specific test
++				if ( fn instanceof Function ) 
++					return true;
++				if ( typeof fn === "string" || fn instanceof String
++				 	|| fn.constructor === Array )
++					return false;
++				// Remove toString() and valueOf() overriden methods
++				// and dump the function as string
++				var s = "toString",
++					v = "valueOf",
++					t = typeof fn[s] === "function" && fn[s],
++					o = typeof fn[v] === "function" && fn[v],
++					r;
++				if ( t ) delete fn[s];
++				if ( o ) delete fn[v];
++				r = /^[\s[]?function/.test(fn + "");
++				if ( t ) fn[s] = t;
++				if ( o ) fn[v] = o;
++				return r;
++			})(fn) );
+ 	},
+ 
+ 	// check if an element is in a (or is an) XML document

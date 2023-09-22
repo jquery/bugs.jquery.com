@@ -1,0 +1,22 @@
+Index: event.js
+===================================================================
+--- event.js	(revision 6308)
++++ event.js	(working copy)
+@@ -548,7 +548,7 @@
+ 		var proxy = jQuery.event.proxy( fn );
+ 		proxy.guid += this.selector + type;
+ 
+-		jQuery( this.context ).bind( liveConvert(type, this.selector), this.selector, proxy );
++		jQuery( this.context ).bind( liveConvert(type, this.selector), [this.selector, this.context], proxy );
+ 
+ 		return this;
+ 	},
+@@ -566,7 +566,7 @@
+ 
+ 	jQuery.each(jQuery.data(this, "events").live || [], function(i, fn){
+ 		if ( check.test(fn.type) ) {
+-			var elem = jQuery(event.target).closest(fn.data)[0];
++			var elem = jQuery(event.target).closest(fn.data[0], fn.data[1])[0];
+ 			if ( elem )
+ 				elems.push({ elem: elem, fn: fn });
+ 		}

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { border:1px solid blue; width:400px; height:400px; 
+                   /* background:url(pizza.jpg); cursor: url(mycursor.cur); */
+                   color:yellow; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        $("button:first").click(function () {
+              var s = "set background!";
+              $("#adiv").text(s);
+
+              $("#container").css("background", "url(pizza.jpg)");
+            });
+        $("button:last").click(function () {
+              var s = "set mouse!";
+              $("#adiv").text(s);
+
+              $("#container").css("cursor", "url(mycursor.cur)");
+            });
+      });
+    </script>
+  </head>
+  <body>
+    <button>Set Background Image to URL</button>
+    <button>Set Mouse Cursor to URL</button>
+    <div id="container">
+      Hi
+    </div>
+    <div id="adiv"></div>
+  </body>
+</html>

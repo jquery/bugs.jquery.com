@@ -1,0 +1,17 @@
+<html>
+	<head>
+		<script type="text/javascript" src="jquery.js"></script>
+	</head>
+
+	<body>
+		<a href="javascript://">aaaa</a>
+	</body>
+</html>
+
+<script type="text/javascript">
+$("a").click( function (event, a, b) {
+  alert(a + "." + b);
+  // when a normal click fires, a and b are undefined
+  // for a trigger like below a refers too "foo" and b refers to "bar"
+} ).trigger("click", "foo", "bar");
+</script>

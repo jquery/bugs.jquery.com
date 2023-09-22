@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>jquerybug</title>
+  <script src="jquery-1.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <style type="text/css" media="screen">
+    div {
+      border: 1px solid red;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+   <div>
+     Containing div needed to reproduce bug in first case.
+     
+      <div class="className">
+        Div.className 1.
+      </div>
+
+      <div class="className">
+        Div.className 2.
+      </div>
+    </div>
+<script type="text/javascript" charset="utf-8">
+ document.write('<p>1. "div.className:not(:first).length" should equal 1; actual value: ' + $("div.className:not(:first)").length);
+ document.write('<p>2. ".className:not(:first).length" should equal 1; actual value: ' + $(".className:not(:first)").length);
+</script>
+</body>
+</html>

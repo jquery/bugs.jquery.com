@@ -1,0 +1,1391 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">#8177 (Browser inconsistencies with ajax, ifmodified, notmodified and ApplicationCache) - jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      :root{--ticket-info-background-color:#ffd;--ticket-info-border-color:#dd9;--ticket-table-border-color:#eed;--ticket-date-text-color:#996;--ticket-description-title-color:#663;--ticket-changes-text-color:#663;--ticket-changes-box-shadow:#f2f2f2}.ticket-info{position:relative;background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);padding:.5em .75em;margin-bottom:.5em}.ticket-number{font-size:1.15rem;font-weight:700;margin-right:.5em}.ticket-info span{font-size:.8125em;font-weight:700}.ticket-resolution,.ticket-status,.ticket-type{text-transform:uppercase}.missing{color:var(--text-color-link-disabled)}.ticket-title{border-bottom:1px solid #bbb;margin-top:1em;padding-bottom:.25em;font-weight:700;font-size:1.1875rem}.ticket-dates{color:var(--ticket-date-text-color);font-size:.8125rem}.ticket-dates p{margin:0 0 .5em}.ticket-properties{width:100%;text-align:left;font-size:.65rem;border-top:1px solid var(--ticket-table-border-color);margin:0}.ticket-properties th{font-weight:400;width:20%}.ticket-properties td,.ticket-properties th{padding:.25em .5em;border-bottom:1px dashed var(--ticket-table-border-color)}.ticket-info-bottom{padding:.5em}.ticket-description{font-size:.8125rem;margin-top:.5em}.ticket-description h2,.ticket-description h3,.ticket-description h4,.ticket-description h5,.ticket-description h6{text-transform:uppercase;font-weight:400}.ticket-description h1{font-size:1.1rem}.ticket-description h2{font-size:1rem}.ticket-description h3{font-size:.9rem}.ticket-description h4{font-size:.8rem}.ticket-description h5{font-size:.75rem}.ticket-description h6{font-size:.7rem}.ticket-description-title{color:var(--ticket-description-title-color);font-size:.75rem}details{padding:.5em 0;font-size:.8125rem}summary{color:var(--text-color-link);font-weight:700;font-size:.875rem;text-decoration:underline;cursor:pointer;text-shadow:.04em .04em var(--text-shadow-color)}.ticket-attachments{font-size:.75em}.ticket-comment-body{width:100%;padding-top:.5em}.ticket-change{margin:1em 0;clear:both}.ticket-change-header{font-size:.875rem;font-weight:700;box-shadow:1.4px 2.8px 5.6px 0 var(--ticket-changes-box-shadow)}.ticket-change-link{font-size:.85em}.ticket-change-content{width:100%}.ticket-changes{background-color:var(--ticket-info-background-color);border:1px solid var(--ticket-info-border-color);border-radius:var(--border-radius);color:var(--ticket-changes-text-color);font-size:.7rem;float:right;clear:right;margin:2em 0 1em 1.5em}.ticket-changes th{text-align:right;font-weight:400;text-transform:capitalize}.ticket-changes td,.ticket-changes th{padding:.25em;vertical-align:baseline}.ticket-changes .change-field-new{font-weight:700}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+<div class="flex-column" data-pagefind-body="">
+  
+
+  <nav class="content-nav">
+    <ul class="flex-row">
+      
+        <li>
+          <a href="/bugs.jquery.com/ticket/8176/">← Previous Ticket</a>
+        
+      
+      
+        </li><li>
+          <a href="/bugs.jquery.com/ticket/8181/">Next Ticket →</a>
+        </li>
+      
+    </ul>
+  </nav>
+
+
+<div class="ticket-info">
+  <div class="flex-row flex-between-start">
+    <h3>
+      <a href="." class="ticket-number">#8177</a>
+      <span class="ticket-status">closed</span>
+      <span class="ticket-type">bug</span>
+      <span class="ticket-resolution">(patchwelcome)</span>
+    </h3>
+
+    <div class="ticket-dates">
+      <p>Opened February 04, 2011 02:58PM UTC</p>
+      
+        <p>Closed February 11, 2011 11:25PM UTC</p>
+      
+      
+        <p>Last modified March 13, 2012 02:38PM UTC</p>
+      
+    </div>
+  </div>
+
+  <h1 class="ticket-title">Browser inconsistencies with ajax, ifmodified, notmodified and ApplicationCache</h1>
+
+  <table class="ticket-properties">
+    <tr>
+      <th>Reported by:</th>
+      <td>
+        blabber
+      </td>
+      <th>Owned by:</th>
+      <td>blabber</td>
+    </tr>
+    <tr>
+      <th>
+        Priority:
+      </th>
+      <td>
+        low
+      </td>
+      
+        <th class="missing">Milestone:</th>
+      
+      <td>
+        <a href="/bugs.jquery.com/milestone/1.next">1.next</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Component:</th>
+      <td>ajax</td>
+      
+        <th>Version:</th>
+      
+      <td>1.5</td>
+    </tr>
+    <tr>
+      
+        <th class="missing">Keywords:</th>
+      
+      <td></td>
+      
+        <th>Cc:</th>
+      
+      <td>jaubourg</td>
+    </tr>
+    <tr>
+      <th class="missing">
+        Blocked by:
+      </th>
+      <td></td>
+      <th class="missing">
+        Blocking:
+      </th>
+      <td></td>
+    </tr>
+  </table>
+  <div class="ticket-info-bottom">
+    <h5 class="ticket-description-title">Description</h5>
+    <div class="ticket-description"><p>jQuery.ajax does not return consistent results for requests on files from the <a href="/bugs.jquery.com/wiki/ApplicationCache">ApplicationCache</a>, online files and when setting ifModified to true or false.</p><p>I have done a number of test on different browsers / operating systems. A test consists of 4 different requests, each is executed two times in a row:</p><p>1. Read file from application cache, ifModified = false.</p><p>2. Read file from network,           ifModified = false.</p><p>3. Read file from application cache, ifModified = true.</p><p>4. Read file from network,           ifModified = true.</p><p>The results below show 6 different results. I discovered the problem because of the problems with Android 2.2 and Safari 5.0 returning no data and 'notmodified' status for normal request. This problem only occures, if the browser is closed with the application cache filled with the test case!</p><p>The fix this, ifModified can be checked before setting the textStatus to 'notmodified'. Otherwise jQuery can just return the responseText otherwise.</p><p>The patch would be to change:</p><p>if ( status === 304 ) {</p><p>to</p><p>if ( s.ifModified && status === 304 ) {</p><p>I have not further investigated the problems with ifModified set to true and I am not even sure, what the correct result should be. I would guess the first result block is ok.</p><p>Firefox 4.0b, Safari, Chrome and newer androud versions seem to have some bugs?</p><pre class="wiki">
+Firefox 3.6.13 Ubuntu 10.10, Firefox 3.6.12 Windows XP, IE 8.0.7600.16385 Windows 7,
+IE 9.0.7930.16406 Windows 7, Android 1.6 Browser
+
+cached1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+cached1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+cached2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+cached2.txt  ifModified: true    success   data: -      jqXHR.responseText: -      textStatus: notmodified
+online2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+online2.txt  ifModified: true    success   data: -      jqXHR.responseText: -      textStatus: notmodified
+
+
+Firefox 4.0b10 Windows 7
+
+cached1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+cached1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+cached2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+cached2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+online2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+online2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+
+
+Google Chrome 8.0.552.237 Windows XP, Google Chrome 9.0.597.84 beta Ubuntu 10.10,
+Android Browser 2.2 (? Samsung Tab)
+
+cached1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+cached1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+cached2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+cached2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+online2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+online2.txt  ifModified: true    success   data: -      jqXHR.responseText: -      textStatus: notmodified
+
+
+Android Browser 2.2 (? Samsung Tab)
+
+ApplicationCache loaded before browser start
+cached1.txt  ifModified: false   success   data: -      jqXHR.responseText: ok     textStatus: notmodified
+cached1.txt  ifModified: false   success   data: -      jqXHR.responseText: ok     textStatus: notmodified
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+cached2.txt  ifModified: true    success   data: -      jqXHR.responseText: ok     textStatus: notmodified
+cached2.txt  ifModified: true    success   data: -      jqXHR.responseText: ok     textStatus: notmodified
+online2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+online2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+
+
+Safari 5.0 (7533.16) Windows XP, Safari 5.03 (6533.19.4) MacOSX
+
+ApplicationCache loaded in same browser session
+cached1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+cached1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+cached2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+cached2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+online2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+online2.txt  ifModified: true    success   data: -      jqXHR.responseText: -      textStatus: notmodified
+
+ApplicationCache loaded before browser start
+cached1.txt  ifModified: false   success   data: -      jqXHR.responseText: ok     textStatus: notmodified
+cached1.txt  ifModified: false   success   data: -      jqXHR.responseText: ok     textStatus: notmodified
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+cached2.txt  ifModified: true    success   data: -      jqXHR.responseText: ok     textStatus: notmodified
+cached2.txt  ifModified: true    success   data: -      jqXHR.responseText: ok     textStatus: notmodified
+online2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+online2.txt  ifModified: true    success   data: -      jqXHR.responseText: -      textStatus: notmodified
+</pre></div>
+  </div>
+</div>
+
+<details>
+  <summary class="ticket-details-summary">Attachments (0)</summary>
+
+  <ul class="ticket-attachments">
+    
+  </ul>
+</details>
+
+<details open="">
+  <summary class="ticket-details-summary">Change History (16)</summary>
+  
+    <div class="ticket-change flex-column" id="comment:1">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 04, 2011 03:14PM UTC by <span class="author">jitter</span></span>
+        <a class="ticket-change-link" href="#comment:1">comment:1</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Thanks for taking the time to contribute to the jQuery project by writing a bug report.&#92;
+&#92;
+It would be nice if you could provide more information so that we are able to reproduce your tests by:&#92;
+&#92;
+- (if possible) recreating the tests as reduced test cases on http://jsfiddle.net&#92;
+- providing links to the &quot;live tests&quot; on some homepage&#92;
+- providing a link where we can download your &quot;test suite&quot; (consisting of all files need to reproduce your tests)&#92;
+&#92;
+and by including/posting detailed instructions on what steps need to be taken (opening which page, refreshing, steps in which order, emptying cache, ....) to reproduce your results.&#92;
+&#92;
+That would allow us to investigate this issue further, as it&#39;s difficult to tell by your description and the &quot;output of your tests&quot; what exactly is going on. Also make sure to read the link given below, in order to provide a most useful bug report.&#92;
+&#92;
+-----&#92;
+[http://docs.jquery.com/How_to_Report_Bugs How to report bugs]</span> → <span class="change-field-new">1296832511891854</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>cc:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ jaubourg</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+              
+                <tr>
+                  <th>component:</th>
+                  <td>
+                    
+                      <span class="change-field-old">unfiled</span> → <span class="change-field-new">ajax</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>owner:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ blabber</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>priority:</th>
+                  <td>
+                    
+                      <span class="change-field-old">undecided</span> → <span class="change-field-new">low</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">pending</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>Thanks for taking the time to contribute to the jQuery project by writing a bug report.</p><p>It would be nice if you could provide more information so that we are able to reproduce your tests by:</p><ul><li>(if possible) recreating the tests as reduced test cases on <a href="http://jsfiddle.net" class="ext-link"><span class="icon"></span>http://jsfiddle.net</a></li><li>providing links to the "live tests" on some homepage</li><li>providing a link where we can download your "test suite" (consisting of all files need to reproduce your tests)</li></ul><p>and by including/posting detailed instructions on what steps need to be taken (opening which page, refreshing, steps in which order, emptying cache, ....) to reproduce your results and at the same time describing what are the expected results for your different tests.</p><p>That would allow us to investigate this issue further, as it's difficult to tell by your description and the "output of your tests" what exactly is going on. Also make sure to read the link given below, in order to provide a most useful bug report.</p><p></p><hr><p></p><p><a href="http://docs.jquery.com/How_to_Report_Bugs" class="ext-link"><span class="icon"></span>How to report bugs</a></p>
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:2">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 04, 2011 03:26PM UTC by <span class="author">blabber</span></span>
+        <a class="ticket-change-link" href="#comment:2">comment:2</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Replying to [comment:1 jitter]:&#92;
+&#92;
+I may have time to setup a running test case on a public server on monday. But I think I can also just post the code inline, as it is not too complicated or long:&#92;
+&#92;
+index.html:&#92;
+{{{&#92;
+&lt;html manifest=&quot;cache.manifest&quot;&gt;&#92;
+&#92;
+&lt;head&gt;&#92;
+	&lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;&#92;
+&lt;/head&gt;&#92;
+&#92;
+&lt;body&gt;&#92;
+&lt;pre id=&quot;log&quot;&gt;&lt;/pre&gt;&#92;
+&#92;
+&lt;script&gt;&#92;
+function log(text) { $(&#39;#log&#39;).append(text + &#39;&lt;br&gt;&#39;); };&#92;
+&#92;
+var i = 0;&#92;
+var urls = [&#39;cached1.txt&#39;, &#39;online1.txt&#39;, &#39;cached2.txt&#39;, &#39;online2.txt&#39;];&#92;
+function test() {&#92;
+	if (i &gt; 7)&#92;
+		return;&#92;
+&#92;
+	load(urls[Math.floor(i / 2)], i &lt; 4 ? false : true);&#92;
+	++i;&#92;
+};&#92;
+&#92;
+function load(url, ifModified) {&#92;
+	$.ajax({&#92;
+		dataType: &#39;text&#39;,&#92;
+		ifModified: ifModified,&#92;
+		url: url&#92;
+	}).success(function(data, textStatus, jqXHR) {&#92;
+		log(url + &#39;  ifModified: &#39; + (ifModified ? &#39;true &#39; : &#39;false&#39;) + &#39;   success &#39; +&#92;
+			&#39;  data: &#39; + (data === url + &#39;x&#39; ? &#39;ok   &#39; : (!data ? &#39;-    &#39; : &#39;error&#39;)) +&#92;
+			&#39;  jqXHR.responseText: &#39; + (jqXHR.responseText === url + &#39;x&#39; ? &#39;ok   &#39; : (!jqXHR.responseText ? &#39;-    &#39; : &#39;error&#39;)) +&#92;
+			&#39;  textStatus: &#39; + textStatus);&#92;
+		if (jqXHR.responseText &amp;&amp; jqXHR.responseText !== url + &#39;x&#39;)&#92;
+			log(&#39;responseText: &#39; + jqXHR.responseText);&#92;
+	}).error(function(jqXHR, textStatus, errorThrown) {&#92;
+		log(url + &#39;  ifModified: &#39; + (ifModified ? &#39;true &#39; : &#39;false&#39;) + &#39;   error   &#39; +&#92;
+			&#39;  data: -    &#39; +&#92;
+			&#39;  jqXHR.responseText: &#39; + (jqXHR.responseText === url + &#39;x&#39; ? &#39;ok   &#39; : ((!jqXHR.responseText) ? &#39;-    &#39; : &#39;error&#39;)) +&#92;
+			&#39;  textStatus: &#39; + textStatus);&#92;
+		if (jqXHR.responseText &amp;&amp; jqXHR.responseText !== url + &#39;x&#39;)&#92;
+			log(&#39;responseText: &#39; + jqXHR.responseText);&#92;
+	}).complete(function () {&#92;
+		test();&#92;
+	});&#92;
+};&#92;
+&#92;
+$(document).ready(function() {&#92;
+	window.setTimeout(test, 2000);&#92;
+});&#92;
+&#92;
+&lt;/script&gt;&#92;
+&#92;
+&lt;/body&gt;&#92;
+&lt;/html&gt;&#92;
+}}}&#92;
+&#92;
+cache.manifest:&#92;
+{{{&#92;
+CACHE MANIFEST&#92;
+#v1&#92;
+&#92;
+NETWORK:&#92;
+online1.txt&#92;
+online2.txt&#92;
+&#92;
+CACHE:&#92;
+index.html&#92;
+jquery.js&#92;
+cached1.txt&#92;
+cached2.txt&#92;
+}}}&#92;
+&#92;
+cached1.txt, cached2.txt, online1.txt, online2.txt&#92;
+Content is filename + &#39;x&#39;, e.g.:&#92;
+{{{&#92;
+cached1.txtx&#92;
+}}}&#92;
+&#92;
+and obviously you will need jquery.js in the folder.</span> → <span class="change-field-new">1296833260692439</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">pending</span> → <span class="change-field-new">new</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:1 jitter]:</p><p>I may have time to setup a running test case on a public server on monday. But I think I can also just post the code inline, as it is not too complicated or long.</p><p>Just create all files in a folder and access index.html. For Android and Safari it may change the results, if you close the browser and open it again with the application cache filled.</p><p>index.html:</p><pre class="wiki">
+&lt;html manifest="cache.manifest"&gt;
+
+&lt;head&gt;
+	&lt;script src="jquery.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;pre id="log"&gt;&lt;/pre&gt;
+
+&lt;script&gt;
+function log(text) { $('#log').append(text + '&lt;br&gt;'); };
+
+var i = 0;
+var urls = ['cached1.txt', 'online1.txt', 'cached2.txt', 'online2.txt'];
+function test() {
+	if (i &gt; 7)
+		return;
+
+	load(urls[Math.floor(i / 2)], i &lt; 4 ? false : true);
+	++i;
+};
+
+function load(url, ifModified) {
+	$.ajax({
+		dataType: 'text',
+		ifModified: ifModified,
+		url: url
+	}).success(function(data, textStatus, jqXHR) {
+		log(url + '  ifModified: ' + (ifModified ? 'true ' : 'false') + '   success ' +
+			'  data: ' + (data === url + 'x' ? 'ok   ' : (!data ? '-    ' : 'error')) +
+			'  jqXHR.responseText: ' + (jqXHR.responseText === url + 'x' ? 'ok   ' : (!jqXHR.responseText ? '-    ' : 'error')) +
+			'  textStatus: ' + textStatus);
+		if (jqXHR.responseText && jqXHR.responseText !== url + 'x')
+			log('responseText: ' + jqXHR.responseText);
+	}).error(function(jqXHR, textStatus, errorThrown) {
+		log(url + '  ifModified: ' + (ifModified ? 'true ' : 'false') + '   error   ' +
+			'  data: -    ' +
+			'  jqXHR.responseText: ' + (jqXHR.responseText === url + 'x' ? 'ok   ' : ((!jqXHR.responseText) ? '-    ' : 'error')) +
+			'  textStatus: ' + textStatus);
+		if (jqXHR.responseText && jqXHR.responseText !== url + 'x')
+			log('responseText: ' + jqXHR.responseText);
+	}).complete(function () {
+		test();
+	});
+};
+
+$(document).ready(function() {
+	window.setTimeout(test, 2000);
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>cache.manifest:</p><pre class="wiki">
+CACHE MANIFEST
+#v1
+
+NETWORK:
+online1.txt
+online2.txt
+
+CACHE:
+index.html
+jquery.js
+cached1.txt
+cached2.txt
+</pre><p>cached1.txt, cached2.txt, online1.txt, online2.txt</p><p>Content is filename + 'x', e.g.:</p><pre class="wiki">
+cached1.txtx
+</pre><p>and obviously you will need jquery.js in the folder.</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:3">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 05, 2011 02:09AM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:3">comment:3</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ fixed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">new</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Fixes <a href="/bugs.jquery.com/ticket/8177">#8177</a>. XHR transport now considers 304 Not Modified responses as 200 OK if no conditional request header was provided (as per the XMLHttpRequest specification). </p><p> Changeset: d6fbbe1080fdcaf8eb22753eddf000aeb7d99545</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:4">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 05, 2011 02:10AM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:4">comment:4</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>milestone:</th>
+                  <td>
+                    
+                      <span class="change-field-old">1.next</span> → <span class="change-field-new">1.5.1</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>blabber, can you confirm this fixes your issue?</p>
+            </div>
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:5">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 07, 2011 09:15AM UTC by <span class="author">blabber</span></span>
+        <a class="ticket-change-link" href="#comment:5">comment:5</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">That was fast. :-)[[BR]]&#92;
+The patch fixes the browser differences for the cases with ifModified=false. The differences found with ifModified=true remain as above.&#92;
+&#92;
+Replying to [comment:4 jaubourg]:&#92;
+&gt; blabber, can you confirm this fixes your issue?&#92;
+</span> → <span class="change-field-new">1297072677221123</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>_comment1:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Edit:&#92;
+Tested the wrong version, with the fix I mentioned above. Sorry. The current git-Version does not fix the bug, but seems to give empty data and textStatus:&#92;
+&#92;
+{{{&#92;
+Safari (page loaded, Safari closed, Safari opened, page loaded again):&#92;
+&#92;
+cached1.txt  ifModified: false   error     data: -      jqXHR.responseText: ok     textStatus: &#92;
+cached1.txt  ifModified: false   error     data: -      jqXHR.responseText: ok     textStatus: &#92;
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success&#92;
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success&#92;
+cached2.txt  ifModified: true    error     data: -      jqXHR.responseText: ok     textStatus: &#92;
+cached2.txt  ifModified: true    error     data: -      jqXHR.responseText: ok     textStatus: &#92;
+online2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success&#92;
+online2.txt  ifModified: true    success   data: -      jqXHR.responseText: -      textStatus: notmodified&#92;
+}}}&#92;
+&#92;
+That was fast. :-)[[BR]]&#92;
+The patch fixes the browser differences for the cases with ifModified=false. The differences found with ifModified=true remain as above.&#92;
+&#92;
+Replying to [comment:4 jaubourg]:&#92;
+&gt; blabber, can you confirm this fixes your issue?&#92;
+</span> → <span class="change-field-new">1297153503714846</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>_comment2:</th>
+                  <td>
+                    
+                      <span class="change-field-old">Edit:&#92;
+Tested the wrong version, with the fix I mentioned above. Sorry. The current git-Version does not fix the bug, but seems to give empty data and textStatus:&#92;
+&#92;
+{{{&#92;
+Safari (page loaded, Safari closed, Safari opened, page loaded again):&#92;
+&#92;
+cached1.txt  ifModified: false   error     data: -      jqXHR.responseText: ok     textStatus: &#92;
+cached1.txt  ifModified: false   error     data: -      jqXHR.responseText: ok     textStatus: &#92;
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success&#92;
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success&#92;
+cached2.txt  ifModified: true    error     data: -      jqXHR.responseText: ok     textStatus: &#92;
+cached2.txt  ifModified: true    error     data: -      jqXHR.responseText: ok     textStatus: &#92;
+online2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success&#92;
+online2.txt  ifModified: true    success   data: -      jqXHR.responseText: -      textStatus: notmodified&#92;
+}}}&#92;
+&#92;
+(Edit: removed)&#92;
+&#92;
+Replying to [comment:4 jaubourg]:&#92;
+&gt; blabber, can you confirm this fixes your issue?&#92;
+</span> → <span class="change-field-new">1297153526613306</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>Edit:</p><p>Tested the wrong version, with the fix I mentioned above. Sorry. The current git-Version does not fix the bug, but seems to give empty data and textStatus:</p><pre class="wiki">
+Safari (page loaded, Safari closed, Safari opened, page loaded again):
+
+cached1.txt  ifModified: false   error     data: -      jqXHR.responseText: ok     textStatus: 
+cached1.txt  ifModified: false   error     data: -      jqXHR.responseText: ok     textStatus: 
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+cached2.txt  ifModified: true    error     data: -      jqXHR.responseText: ok     textStatus: 
+cached2.txt  ifModified: true    error     data: -      jqXHR.responseText: ok     textStatus: 
+online2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+online2.txt  ifModified: true    success   data: -      jqXHR.responseText: -      textStatus: notmodified
+</pre><p>(Edit: removed old content)</p><p>Replying to [comment:4 jaubourg]:</p><blockquote> blabber, can you confirm this fixes your issue?</blockquote>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:6">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 07, 2011 01:25PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:6">comment:6</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-old strikethrough">fixed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">closed</span> → <span class="change-field-new">reopened</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:7">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 07, 2011 01:25PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:7">comment:7</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>owner:</th>
+                  <td>
+                    
+                      <span class="change-field-old">blabber</span> → <span class="change-field-new">jaubourg</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">reopened</span> → <span class="change-field-new">assigned</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:8">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 07, 2011 03:55PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:8">comment:8</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:5 blabber]:</p><blockquote> Edit: Tested the wrong version, with the fix I mentioned above. Sorry. The current git-Version does not fix the bug, but seems to give empty data and textStatus:  <pre class="wiki">
+&gt; Safari (page loaded, Safari closed, Safari opened, page loaded again):
+&gt; 
+&gt; cached1.txt  ifModified: false   error     data: -      jqXHR.responseText: ok     textStatus: 
+&gt; cached1.txt  ifModified: false   error     data: -      jqXHR.responseText: ok     textStatus: 
+&gt; online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+&gt; online1.txt  ifModified: false   success   data: ok     jqXHR.responseText: ok     textStatus: success
+&gt; cached2.txt  ifModified: true    error     data: -      jqXHR.responseText: ok     textStatus: 
+&gt; cached2.txt  ifModified: true    error     data: -      jqXHR.responseText: ok     textStatus: 
+&gt; online2.txt  ifModified: true    success   data: ok     jqXHR.responseText: ok     textStatus: success
+&gt; online2.txt  ifModified: true    success   data: -      jqXHR.responseText: -      textStatus: notmodified
+&gt; </pre>  That was fast. :-) The patch fixes the browser differences for the cases with ifModified=false. The differences found with ifModified=true remain as above.  Replying to [comment:4 jaubourg]: &gt; blabber, can you confirm this fixes your issue?</blockquote><p>I'm confused as to what you say here. What is fixed? What isn't fixed?</p><p>Would also help a bunch if your log lines were a bit more compact and featured the status code and error message. For instance:</p><pre class="wiki">
+cached1.text(true/false): statusCode, status (thirdParameterOfErrorCallbackIfError), data, jqXHR.responseText
+</pre><p>This would definitely help me tackle this while not having to duplicate your effort.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:9">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 08, 2011 10:08AM UTC by <span class="author">blabber</span></span>
+        <a class="ticket-change-link" href="#comment:9">comment:9</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>This bug probably collects a number of differences in the way that browsers react to ajax request on files from the <a href="/bugs.jquery.com/wiki/ApplicationCache">ApplicationCache</a> and files from the network. The list in the original bug report gives the complete picture across a number of browser.</p><p>At least the different browser reactions to request with ifModified == true should be fixable, because the browsers provide all necessary information. I have provided a simple patch in the original bug report. I have no idea, if it is correct, but it works for my current project (giving success for all cases where ifModified == false).</p><p>There are more different cases, when ifModified == false, but I do not even know for sure, how jQuery should react in these cases.</p><p>Here are my current test results, Run 1 is identical for the current trunk and jQuery 1.5.</p><pre class="wiki">
+Run 1: Safari startet __without__ test page in ApplicationCache:
+
+   File         ifMod  callback  status  data  respTxt  textStatus   errorThrown
+1  cached1.txt  false  success   200     ok    ok       success
+2  cached1.txt  false  success   200     ok    ok       success
+3  online1.txt  false  success   200     ok    ok       success
+4  online1.txt  false  success   200     ok    ok       success
+5  cached2.txt  true   success   200     ok    ok       success
+6  cached2.txt  true   success   200     ok    ok       success
+7  online2.txt  true   success   200     ok    ok       success
+8  online2.txt  true   success   304     -     -        notmodified
+
+
+Run 2: Safari startet __with__ test page in ApplicationCache:
+
+jQuery Trunk 534dbd660eaefbbc5827b1b61ba384e768562086
+   File         ifMod  callback  status  data  respTxt  textStatus   errorThrown
+1  cached1.txt  false  error     0       -     ok               
+2  cached1.txt  false  error     0       -     ok               
+3  online1.txt  false  success   200     ok    ok       success
+4  online1.txt  false  success   200     ok    ok       success
+5  cached2.txt  true   error     0       -     ok               
+6  cached2.txt  true   error     0       -     ok               
+7  online2.txt  true   success   200     ok    ok       success
+8  online2.txt  true   success   304     -     -        notmodified
+
+jQuery 1.5
+   File         ifMod  callback  status  data  respTxt  textStatus   errorThrown
+1  cached1.txt  false  success   304     -     ok       notmodified
+2  cached1.txt  false  success   304     -     ok       notmodified
+3  online1.txt  false  success   200     ok    ok       success
+4  online1.txt  false  success   200     ok    ok       success
+5  cached2.txt  true   success   304     -     ok       notmodified
+6  cached2.txt  true   success   304     -     ok       notmodified
+7  online2.txt  true   success   200     ok    ok       success
+8  online2.txt  true   success   304     -     -        notmodified
+</pre><p>index.html, other files as described above:</p><pre class="wiki">
+&lt;html manifest="cache.manifest"&gt;
+
+&lt;head&gt;
+	&lt;script src="jquery.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;pre id="log"&gt;
+   File         ifMod  callback  status  data  respTxt  textStatus   errorThrown
+&lt;/pre&gt;
+
+&lt;script&gt;
+function log(text) { $('#log').append(text + '&lt;br&gt;'); };
+
+var i = 0;
+var urls = ['cached1.txt', 'online1.txt', 'cached2.txt', 'online2.txt'];
+function test() {
+	if (i &gt; 7)
+		return;
+
+	load(urls[Math.floor(i / 2)], i &lt; 4 ? false : true);
+	++i;
+};
+
+function load(url, ifModified) {
+	$.ajax({
+		dataType: 'text',
+		ifModified: ifModified,
+		url: url
+	}).success(function(data, textStatus, jqXHR) {
+		log(i + '  ' + url + '  ' + (ifModified ? 'true  ' : 'false ') + ' success   ' + jqXHR.status +
+			'     ' + (data === url + 'x' ? 'ok ' : (!data ? '-  ' : 'err')) +
+			'   ' + (jqXHR.responseText === url + 'x' ? 'ok ' : (!jqXHR.responseText ? '-  ' : 'err')) +
+			'      ' + textStatus);
+		if (jqXHR.responseText && jqXHR.responseText !== url + 'x')
+			log('responseText: ' + jqXHR.responseText);
+	}).error(function(jqXHR, textStatus, errorThrown) {
+		log(i + '  ' + url + '  ' + (ifModified ? 'true  ' : 'false ') + ' error     ' + jqXHR.status +
+			'       -  ' +
+			'   ' + (jqXHR.responseText === url + 'x' ? 'ok ' : (!jqXHR.responseText ? '-  ' : 'err')) +
+			'      ' + textStatus + '        ' + errorThrown);
+		if (jqXHR.responseText && jqXHR.responseText !== url + 'x')
+			log('responseText: ' + jqXHR.responseText);
+	}).complete(function () {
+		test();
+	});
+};
+
+$(document).ready(function() {
+	window.setTimeout(test, 1000);
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:10">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 11, 2011 06:13AM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:10">comment:10</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>blabber, status for local files should always be 200 now. Be aware that empty files will trigger an error (that's due to some serious limitations in native xhr implementations). Waiting for your confirmation/infirmation.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:11">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 11, 2011 12:11PM UTC by <span class="author">blabber</span></span>
+        <a class="ticket-change-link" href="#comment:11">comment:11</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:10 jaubourg]:</p><blockquote> blabber, status for local files should always be 200 now. Be aware that empty files will trigger an error (that's due to some serious limitations in native xhr implementations). Waiting for your confirmation/infirmation.</blockquote><p>Unfortunately that did not work. I have written a new patch for the current trunk, that tries to handle some of the cases in xhr.js. The patch does not change as much, as it seems to change, but mostly restores old tests and combines them in a slightly different way.</p><p>With the patch most browsers seem to work with ifModified = false. Case 6 still differs between browsers or even between access to localhost or access to ip address (for Firefox 3.6.13). Opera also acts chaotic (success with ip, error with localhost, error with ip from virtual machine...). Perhaps all this are just <a href="/bugs.jquery.com/wiki/ApplicationCache">ApplicationCache</a> problems. After all my tests I do not really trust any browser in this regard... ;-)</p><p>I will use my patched version of the trunk for now and give further feedback, if I run into any obvious problems, but do not have the time at the moment to do more extensive cross-browser ... tests. :-/</p><pre class="wiki">
+diff --git a/src/ajax/xhr.js b/src/ajax/xhr.js
+index 9c8790a..0bad811 100644
+--- a/src/ajax/xhr.js
++++ b/src/ajax/xhr.js
+@@ -166,14 +166,30 @@ if ( jQuery.support.ajax ) {
+ 									}
+ 
+ 									// Filter status for non standard behaviors
+-									status =
+-										// If the request is local and we have data: assume a success
+-										// (success with no data won't get notified, that's the best we
+-										// can do given current implementations)
+-										!status && s.isLocal && !s.crossDomain ?
+-										( responses.text ? 200 : 404 ) :
+-										// IE - #1450: sometimes returns 1223 when it should be 204
+-										( status === 1223 ? 204 : status );
++
++									// IE - #1450: sometimes returns 1223 when it should be 204
++									if ( status === 1223 ) {
++										status = 204;
++									// If the request is local and we have data: assume a success
++									// (success with no data won't get notified, that's the best we
++									// can do given current implementations)
++									} else if ( !status ) {
++										// Webkit, Firefox: filter out faulty cross-domain requests
++										if ( !s.crossDomain || statusText ) {
++											// Opera: filter out real aborts #6060
++											if (responseHeaders || xml) {
++												status =
++													!headers[ "if-modified-since" ] && !headers[ "if-none-match" ] ?
++														200
++														: 304;
++											} else {
++												status = 0;
++											}
++										// We assume 302 but could be anything cross-domain related
++										} else {
++											status = 302;
++										}
++									}
+ 								}
+ 							}
+ 						} catch( firefoxAccessException ) {
+</pre>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:12">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 11, 2011 11:25PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:12">comment:12</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+                <tr>
+                  <th>_comment0:</th>
+                  <td>
+                    
+                      <span class="change-field-old">blabber, with current Trunk, you&#39;ll always get 200 OK for local files as long as they are not empty. This ii because browser&#39;s xhr implementations are completely uninformative when it comes to the file system (no headers, no meaningful status code -- always 0 --, etc).&#92;
+&#92;
+As of today, there is no mean to differentiate between all the different cases encompassed by a zeroed status code without breaking something, elsewhere, for another browser (and in the case of Opera, for the same browser).&#92;
+&#92;
+I&#39;ll close this as patchwelcome but I don&#39;t expect one until browsers fix their many xhr inconsistencies.&#92;
+</span> → <span class="change-field-new">1297466739934998</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+            
+              
+                <tr>
+                  <th>milestone:</th>
+                  <td>
+                    
+                      <span class="change-field-old">1.5.1</span> → <span class="change-field-new">1.next</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>owner:</th>
+                  <td>
+                    
+                      <span class="change-field-old">jaubourg</span> → <span class="change-field-new">blabber</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+        
+          
+            <div class="ticket-comment-body">
+              <p>blabber, with current Trunk, you'll always get 200 OK for local files as long as they are not empty. This is because browser's xhr implementations are completely uninformative when it comes to the file system (no headers, no meaningful status code -- always 0 --, etc).</p><p>As of today, there is no mean to differentiate between all the different cases encompassed by a zeroed status code without breaking something, elsewhere, for another browser (and in the case of Opera, for the same browser).</p><p>I'll close this as patchwelcome but I don't expect one until browsers fix their many xhr inconsistencies.</p>
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:13">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 11, 2011 11:25PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:13">comment:13</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+              
+                <tr>
+                  <th>resolution:</th>
+                  <td>
+                    
+                      <span class="change-field-new">→ patchwelcome</span>
+                    
+                  </td>
+                </tr>
+              
+            
+              
+                <tr>
+                  <th>status:</th>
+                  <td>
+                    
+                      <span class="change-field-old">assigned</span> → <span class="change-field-new">closed</span>
+                    
+                  </td>
+                </tr>
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              
+            </div>
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:14">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 14, 2011 01:49PM UTC by <span class="author">blabber</span></span>
+        <a class="ticket-change-link" href="#comment:14">comment:14</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>Replying to [comment:12 jaubourg]:</p><blockquote> blabber, with current Trunk, you'll always get 200 OK for local files as long as they are not empty. </blockquote><p>I am not talking about local files, but about the <a href="/bugs.jquery.com/wiki/ApplicationCache">ApplicationCache</a>. That may be local, but is probably not handled the same way as local files. Have you changed the trunk again, to really return 200 Ok for all files from the application cache? If not, my test results from above are probably still valid. The last time I checked the trunk, the results where worse than in 1.5, because the request returned an error instead of success.</p><blockquote> I'll close this as patchwelcome but I don't expect one until browsers fix their many xhr inconsistencies.</blockquote><p>I have provided 2 patches, one for the trunk and one for 1.5, that let the browsers return 200 Ok for files from the application cache. Did you use the information from these patches, to fix the problems? Did you setup the test case? If not: How can I help? What is wrong with my fixes? Did I miss any important points?</p><p>I am really trying to help...</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:15">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed February 21, 2011 04:42PM UTC by <span class="author">jaubourg</span></span>
+        <a class="ticket-change-link" href="#comment:15">comment:15</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>@blabber,</p><p>I'm all for fixing bugs, believe me, but your patch worked only because of a very serious bug in 1.5 that made any failing ajax request from the local filesystem (and apparently Application Cache) issue a 304.</p><p>The situation with the native xhr status set to 0 with no mean to determine if it is a success or an error makes it impossible to lay out any kind of consistant logic that wouldn't break something elsewhere.</p><p>If the Application Cache issues a 0 status-code in a non local filesystem environment then we just can't assume it is a 200 OK: this would basically break every other environment.</p><p>Like I said, it's patch-welcome but I'm sorry to say it's probably up to the browsers' developpers at this point... and from what I've seen the last few months, I don't believe adding consistency to their xhr implementations to be a priority... which incidently happens to turn my life into a nightmare.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+    <div class="ticket-change flex-column" id="comment:16">
+      <h3 class="flex-row flex-between-start ticket-change-header">
+        <span>Changed May 02, 2011 08:50PM UTC by <span class="author">chrelad@gmail.com</span></span>
+        <a class="ticket-change-link" href="#comment:16">comment:16</a>
+      </h3>
+
+      <div class="ticket-change-content">
+        <table class="ticket-changes">
+          <tbody>
+            
+              
+            
+          </tbody>
+        </table>
+        
+          
+            <div class="ticket-comment-body">
+              <p>I am also seeing this problem. When I make a request for a resource that is in the <a href="/bugs.jquery.com/wiki/ApplicationCache">ApplicationCache</a>, I receive "success" the first time with the data being passed to the "success" callback. It even works if I hit refresh a bunch of times, but when I close the browser (android) and start it again; I get "notmodified" as the status text and "undefined" as the data.</p>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</details>
+</div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

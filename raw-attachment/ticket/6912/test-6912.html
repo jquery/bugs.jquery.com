@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html> 
+<html> 
+<head> 
+<title></title> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js" type="text/javascript"></script>
+<script type="text/javascript"> 
+$(function(){
+
+var x = $("#test").add("#chooser");
+
+alert("add selector: "+ (x.length==2? "pass" : "fail"));
+
+var y = $("#test").add(document.getElementById("chooser"));
+
+alert("add DOMElement: "+ (y.length==2? "pass" : "fail"));
+
+});
+</script> 
+</head> 
+<body> 
+
+<div id="test"> this is all there is to see </div>
+<select id="chooser">
+ <option> unless   </option>
+ <option> there is </option>
+ <option> a bug    </option>
+</select>
+
+</body> 
+</html> 

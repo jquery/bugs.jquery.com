@@ -1,0 +1,38 @@
+Index: jquery/test/unit/core.js
+===================================================================
+--- jquery/test/unit/core.js	(revision 5830)
++++ jquery/test/unit/core.js	(working copy)
+@@ -217,6 +217,16 @@
+ 	ok( !jQuery("<option>test</option>")[0].selected, "Make sure that options are auto-selected #2050" );
+ });
+ 
++test("jQuery(selector, 'html')", function() {
++	expect(2);
++	var teststring = '';
++	for (var i = 0; i < 10000; i++) { teststring += '22222222'; }
++	var htmlcode = '<div><div id="one">one</div><div id="two">' + teststring + '</div></div>';
++
++	equals(jQuery('#one', htmlcode).length, 1, "Verify that a selector matching against an HTML blob matches the correct number of times, #3178");
++	equals(jQuery('#one', htmlcode).html(), 'one', "Verify that a selector matching against an HTML blob reads correctly, #3178");
++});
++
+ test("jQuery('html', context)", function() {
+ 	expect(1);
+ 
+Index: jquery/src/core.js
+===================================================================
+--- jquery/src/core.js	(revision 5830)
++++ jquery/src/core.js	(working copy)
+@@ -42,8 +42,10 @@
+ 		}
+ 		// Handle HTML strings
+ 		if ( typeof selector == "string" ) {
+-			// Are we dealing with HTML string or an ID?
+-			var match = quickExpr.exec( selector );
++			// Are we dealing with an HTML string or an ID?
++			// If selector.length is > 49996, Safari chokes (#3178).
++			// Assume that anything near that length is HTML.
++			var match = selector.length > 40000 ? { 1: selector } : quickExpr.exec( selector );
+ 
+ 			// Verify a match, and that no context was specified for #id
+ 			if ( match && (match[1] || !context) ) {

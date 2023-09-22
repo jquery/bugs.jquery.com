@@ -1,0 +1,15 @@
+Index: /home/lrbabe/workspace/jQuery/jquery/src/core.js
+===================================================================
+--- /home/lrbabe/workspace/jQuery/jquery/src/core.js	(revision 5962)
++++ /home/lrbabe/workspace/jQuery/jquery/src/core.js	(working copy)
+@@ -1357,8 +1357,8 @@
+ 			this[0] == document ?
+ 				// Either scroll[Width/Height] or offset[Width/Height], whichever is greater
+ 				Math.max(
+-					Math.max(document.body["scroll" + name], document.documentElement["scroll" + name]),
+-					Math.max(document.body["offset" + name], document.documentElement["offset" + name])
++					document.body["scroll" + name], document.documentElement["scroll" + name],
++					document.body["offset" + name], document.documentElement["offset" + name]
+ 				) :
+ 
+ 				// Get or set width or height on the element

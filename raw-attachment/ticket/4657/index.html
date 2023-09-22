@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<script type="text/javascript" src="jquery-1.3.2.js"></script>
+		<script type="text/javascript">
+		//<![CDATA[
+			var DataUtilities = (function() {
+				var self = {
+					"processXML": function(xml) {
+						if (!jQuery.support.htmlSerialize) {
+							//If IE 6+
+							var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+							xmlDoc.loadXML(xml);
+							xml = xmlDoc;
+						}
+						return xml;
+					}
+				};
+				return self;
+			})();
+			
+			var foo = '<forms><section id="foo1"><form></form></section><section id="foo2"><form></form></section></forms>';
+			var bar = '<forms><section id="bar1"></section><section id="bar2"></section></forms>';
+			
+			$(document).ready(function() {
+				foo = DataUtilities.processXML(foo); //fix for IE
+				bar = DataUtilities.processXML(bar); //fix for IE
+				$(foo).find("section").each(function() {
+					$("#content").append($(this).attr("id") + "<br/>");
+				});
+				$(bar).find("section").each(function() {
+					$("#content").append($(this).attr("id") + "<br/>");
+				});
+			});
+		//]]>
+		</script>
+		
+		<title>Test</title>
+	</head>
+
+	<body id="content">
+	</body>
+</html>

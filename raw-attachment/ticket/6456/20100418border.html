@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="zh-tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
+<title>Title</title>
+<style type="text/css">
+	div {
+		height: 2000px;
+		border: solid 1px red;
+		/* If you remove the border settings will be moved to the right place */
+	}
+</style>
+<script type="text/javascript">
+	$(function(){
+		$("a").click(function(){
+			//move to h5's location
+			//but....
+			$("html, body").scrollTop($("h5").offset().top);
+			
+			/* If you remove the border settings will be moved to the right place */
+
+			return false;
+		});
+	});
+</script>
+</head>
+
+<body>
+	<h4>H4</h4>
+	<h5>H5</h5>
+	<div></div>
+	<a href="#">Click</a>
+</body>
+</html>

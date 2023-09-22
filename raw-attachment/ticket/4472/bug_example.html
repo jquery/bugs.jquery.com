@@ -1,0 +1,34 @@
+Example 1:
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+<div id="test"><a href="#" class="expand" onclick="onclick2();">Change 1</a></div>
+<script type="text/javascript">
+function onclick1() {
+	$( '#test .expand' ).attr({
+		onclick: 'onclick2();'
+	});
+	$( '#test .expand' ).html( 'Change 1' );
+}
+
+function onclick2() {
+	$( '#test .expand' ).attr({
+		onclick: 'onclick1();'
+	});
+	$( '#test .expand' ).html( 'Change 2' );
+}
+</script>
+
+
+------------------------
+Example 2:
+
+<div id="test2"><a href="#" class="expand" onclick="onclick3();">Change 3</a></div>
+<script type="text/javascript">
+function onclick3() {
+	$( '#test2 .expand' ).attr( 'onclick', 'onclick4();' ).html( 'Change 4' );
+}
+
+function onclick4() {
+	$( '#test2 .expand' ).attr( 'onclick', 'onclick3();' ).html( 'Change 3' );
+}
+</script>

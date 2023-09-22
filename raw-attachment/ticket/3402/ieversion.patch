@@ -1,0 +1,10 @@
+1232a1233,1241
+> // Ensure that we are reporting the highest IE version present in userAgent string
+> if (jQuery.browser.msie) {
+> 	jQuery.browser.version =
+> 		( userAgent.match( /ie (8([\d.]*))/ ) || [] )[1] ||
+> 		( userAgent.match( /ie (7([\d.]*))/ ) || [] )[1] ||
+> 		( userAgent.match( /ie (6([\d.]*))/ ) || [] )[1] ||
+> 		jQuery.browser.version;
+> }
+> 

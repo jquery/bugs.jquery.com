@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<script src="jquery.js"></script>
+<body>
+<div id="test">
+</div>
+<p id="result"></p>
+<script>
+    $(function(){
+        var test_html = '<p class="\
+        hello\
+        world\
+        ">hello world</p>';
+        $('#test')[0].innerHTML=test_html;
+        var r1 = $('.hello').length > 0;
+        var r2 = $('.world').length > 0;
+        if(r1 && r2)
+            $("#result").html('PASS')
+        else
+            $("#result").html('FAIL')
+    });
+</script>

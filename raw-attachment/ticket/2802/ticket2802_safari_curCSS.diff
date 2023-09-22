@@ -1,0 +1,22 @@
+diff --git a/src/core.js b/src/core.js
+index 0871cb8..3ab976f 100644
+--- a/src/core.js
++++ b/src/core.js
+@@ -830,7 +830,7 @@ jQuery.extend({
+ 				return false;
+ 			
+ 			// getComputedStyle is cached
+-			var ret = getComputedStyle( elem, null );
++			var ret = document.defaultView.getComputedStyle( elem, null );
+ 			return !ret || ret.getPropertyValue("color") == "";
+ 		}
+ 
+@@ -864,7 +864,7 @@ jQuery.extend({
+ 
+ 			name = name.replace( /([A-Z])/g, "-$1" ).toLowerCase();
+ 
+-			var computedStyle = getComputedStyle( elem, null );
++			var computedStyle = document.defaultView.getComputedStyle( elem, null );
+ 
+ 			if ( computedStyle && !color( elem ) )
+ 				ret = computedStyle.getPropertyValue( name );

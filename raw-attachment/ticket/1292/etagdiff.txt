@@ -1,0 +1,52 @@
+--- jquery-1.1.3a.js	Wed Jun 13 15:02:50 2007
++++ jquery.js	Wed Jun 13 15:23:36 2007
+@@ -4228,6 +4228,8 @@
+ 	
+ 	// Last-Modified header cache for next request
+ 	lastModified: {},
++	// Etag header cache for next request
++	eTag: {},
+ 
+ 	/**
+ 	 * Load a remote page using an HTTP request.
+@@ -4386,10 +4388,20 @@
+ 		if ( s.data )
+ 			xml.setRequestHeader("Content-Type", s.contentType);
+ 
+-		// Set the If-Modified-Since header, if ifModified mode.
+-		if ( s.ifModified )
+-			xml.setRequestHeader("If-Modified-Since",
+-				jQuery.lastModified[s.url] || "Thu, 01 Jan 1970 00:00:00 GMT" );
++		// Set the If-Modified-Since and If-None-Match headers, if ifModified mode.
++		if ( s.ifModified ) {
++			if (jQuery.eTag[s.url]) {
++				xml.setRequestHeader("If-None-Match", jQuery.eTag[s.url]);
++
++				// 1-1-1970 should NOT be sent if there is an eTag available
++				if (jQuery.lastModified[s.url]) {
++					xml.setRequestHeader("If-Modified-Since", jQuery.lastModified[s.url]);
++				}
++			} else {
++				xml.setRequestHeader("If-Modified-Since",
++					jQuery.lastModified[s.url] || "Thu, 01 Jan 1970 00:00:00 GMT" );
++			}
++		}
+ 
+ 		// Set header so the called script knows that it's an XMLHttpRequest
+ 		xml.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+@@ -4427,6 +4439,15 @@
+ 	
+ 						if ( s.ifModified && modRes )
+ 							jQuery.lastModified[s.url] = modRes;
++
++						// Cache Etag header, if ifModified mode.
++						var etagRes;
++						try {
++							etagRes = xml.getResponseHeader("Etag");
++						} catch(e) {} // swallow exception thrown by FF if header is not available
++
++						if ( s.ifModified && etagRes )
++							jQuery.eTag[s.url] = etagRes;
+ 	
+ 						// process the data (runs the xml through httpData regardless of callback)
+ 						var data = jQuery.httpData( xml, s.dataType );

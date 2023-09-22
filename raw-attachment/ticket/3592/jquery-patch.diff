@@ -1,0 +1,13 @@
+
+--- jquery-1.2.6.js	2008-11-02 22:15:42.000000000 -0500
++++ jquery.patch-1.2.6.js	2008-11-02 22:25:49.000000000 -0500
+@@ -508,7 +508,8 @@
+ 					this;
+ 
+ 				// execute all scripts after the elements have been injected
+-				if ( jQuery.nodeName( elem, "script" ) )
++				if ( jQuery.nodeName( elem, "script" ) &&
++				    ( !elem.type || elem.type == "text/javascript" || elem.type == "application/javascript"))
+ 					scripts = scripts.add( elem );
+ 				else {
+ 					// Remove any inner scripts for later evaluation

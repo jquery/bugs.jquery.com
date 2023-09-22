@@ -1,0 +1,75 @@
+<html>
+<title>jQuery Message Demo</title>
+<script type="text/javascript" src="jquery-1.2.6.pack.js"></script>
+<script type="text/javascript" src="jquery.blockUI.min.js"></script>
+<script>
+
+    $(document).ready(function() {
+        rowToClone = $('#mytable tr:last').remove();
+        insertRow("1", "one");
+        insertRow("2", "two");
+        insertRow("3", "three");
+        $("#cancelRead").click(function() {
+            document.readMyForm.reset();
+            $.unblockUI();
+        });
+    });
+
+    function doubleClick() {
+        document.readMyForm.foo.value = $(this).foo;
+        var readRow = $('#readRow');
+        $.blockUI(readRow, {width:'540px', height:'300px'});
+    }
+
+    function insertRow(id, foo) {
+        var newRow = rowToClone.clone();
+        newRow.attr("id", id);
+        $('td[class*=class1]', newRow).html(foo);
+        newRow.dblclick(doubleClick);
+        $('#mytable').append(newRow);
+    }
+
+</script>
+<body>
+
+<center>
+
+    <div style="position:relative;">
+
+        <form name="myForm" id="myForm">
+
+            <table id=mytable cellpadding=0 cellspacing=0>
+                <thead>
+                    <tr class=header>
+                        <th width=100%>Double click on these in turn:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="myRow" id="1">
+                        <td class="class1">PLACEHOLDER</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </form>
+    </div>
+
+</center>
+
+<div id=readRow style="display:none;cursor:default;">
+
+    <h2>Read Foo</h2>
+
+    <form id=readMyForm name=readMyForm>
+        <table width=100% class="content_table">
+            <tr>
+                <td class=right>Foo</td>
+                <td class=left_offset><input class="textfield" type=text id=foo name=foo></td>
+            </tr>
+        </table>
+        <input class=iButton type=button id=cancelRead value="Cancel">
+    </form>
+</div>
+
+</body>
+</html>

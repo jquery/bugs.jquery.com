@@ -1,0 +1,38 @@
+276,308c276,278
+< 		
+< 		// a helper method for retrieving a working xmlhttp request
+< 		function getXMLHTTPRequest() {
+< 			var requester = false;
+<  			// Create the request object; Microsoft failed to properly
+< 			// implement the XMLHttpRequest in IE7, so we use the ActiveXObject when it is available
+< 			if (window.ActiveXObject) {
+< 				var aVersions = [	"Microsoft.XMLHTTP",
+< 									"MSXML2.XMLHttp.6.0",
+< 									"MSXML2.XMLHttp.5.0", 
+< 									"MSXML2.XMLHttp.4.0", 
+< 									"MSXML2.XMLHttp.3.0", 
+< 									"MSXML2.XMLHttp"];
+< 				for(var i = 0; i< aVersions.length;i++){
+< 		 			try {
+< 		   				requester = new ActiveXObject(aVersions[i]);
+< 		   				return requester;
+< 					}
+< 		 			catch (error) {
+< 						continue;
+< 		 			}
+< 				}
+< 			} else if (window.XMLHttpRequest) {
+< 			// Firefox, Opera 8.0+, Safari
+< 				requester = new XMLHttpRequest();
+< 				return requester;
+< 			}
+< 			
+< 			throw new Error("XMLHttp object could not be created.");
+< 		}
+< 		
+< 		
+< 		var xhr = getXMLHTTPRequest();
+---
+> 		// Create the request object; Microsoft failed to properly
+> 		// implement the XMLHttpRequest in IE7, so we use the ActiveXObject when it is available
+> 		var xhr = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();

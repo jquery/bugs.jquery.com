@@ -1,0 +1,33 @@
+Index: jquery.js
+===================================================================
+--- jquery.js	(revision 3037)
++++ jquery.js	(working copy)
+@@ -1227,13 +1227,21 @@
+ 				obj = this.getElementsByTagName("tbody")[0] || this.appendChild(document.createElement("tbody"));
+ 
+ 			jQuery.each( a, function(){
+-				if ( jQuery.nodeName(this, "script") ) {
+-					if ( this.src )
+-						jQuery.ajax({ url: this.src, async: false, dataType: "script" });
+-					else
+-						jQuery.globalEval( this.text || this.textContent || this.innerHTML || "" );
+-				} else
+-					fn.apply( obj, [ clone ? this.cloneNode(true) : this ] );
++				switch(this.nodeName.toUpperCase()){
++					case "SCRIPT":
++						if ( this.src ){
++							if ( !/^http/.test(this.src) || /https?:\/\/([^\/]+)/.exec(this.src)[1] == window.location.host ){
++								jQuery.ajax({ url: this.src, async: false, dataType: "script" });
++								break;
++							}
++						}
++						else{
++							jQuery.globalEval( this.text || this.textContent || this.innerHTML || "" );
++							break;
++						}
++					default:
++						fn.apply( obj, [ clone ? this.cloneNode(true) : this ] );
++				}
+ 			});
+ 		});
+ 	}

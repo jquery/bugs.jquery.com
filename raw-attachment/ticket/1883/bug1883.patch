@@ -1,0 +1,74 @@
+Index: ui.slider.js
+===================================================================
+--- ui.slider.js	(revision 3786)
++++ ui.slider.js	(working copy)
+@@ -79,18 +79,18 @@
+ 		o = o || {};
+ 		$.extend(options, o);
+ 		$.extend(options, {
+-			axis: o.axis || (el.offsetWidth < el.offsetHeight ? 'vertical' : 'horizontal'),
+ 			maxValue: parseInt(o.maxValue) || 100,
+ 			minValue: parseInt(o.minValue) || 0,
+ 			startValue: parseInt(o.startValue) || 0,
+ 			_start: function(h, p, c, t, e) {
++				calcDimensions(t.options);
+ 				self.start.apply(t, [self, e]); // Trigger the start callback				
+ 			},
+ 			_beforeStop: function(h, p, c, t, e) {
+-				self.stop.apply(t, [self, e]); // Trigger the start callback
++				self.stop.apply(t, [self, e]); // Trigger the stop callback
+ 			},
+ 			_drag: function(h, p, c, t, e) {
+-				self.drag.apply(t, [self, e]); // Trigger the start callback
++				self.drag.apply(t, [self, e, p]); // Trigger the drag callback
+ 			},
+ 			startCondition: function() {
+ 				return !self.disabled;
+@@ -103,7 +103,20 @@
+ 		o.stepping = parseInt(o.stepping) || (o.steps ? o.maxValue/o.steps : 0);
+ 		o.realValue = (o.maxValue - o.minValue);
+ 
++		function calcDimensions(opt) {
++			opt.axis = options.axis || (el.offsetWidth < el.offsetHeight ? 'vertical' : 'horizontal');
++			if(opt.axis == 'horizontal') {
++				self.parentSize = $(self.element).outerWidth() - self.handle.outerWidth();
++				self.prop = 'left';
++			}
++			
++			if(opt.axis == 'vertical') {
++				self.parentSize = $(self.element).outerHeight() - self.handle.outerHeight();
++				self.prop = 'top';
++			}
++		}
+ 
++
+ 		this.handle = options.handle ? $(options.handle, el) : $('.ui-slider-handle', el);
+ 		if(this.handle.length == 1) {
+ 			this.interaction = new $.ui.mouseInteraction(this.handle[0], options);
+@@ -119,17 +132,8 @@
+ 		this.element = el;
+ 		$(this.element).addClass("ui-slider");
+ 		
++		calcDimensions(o);
+ 		
+-		if(o.axis == 'horizontal') {
+-			this.parentSize = $(this.element).outerWidth() - this.handle.outerWidth();
+-			this.prop = 'left';
+-		}
+-		
+-		if(o.axis == 'vertical') {
+-			this.parentSize = $(this.element).outerHeight() - this.handle.outerHeight();
+-			this.prop = 'top';
+-		}
+-		
+ 		if(!this.multipleHandles) {
+ 			$(el).bind('click', function(e) { self.click.apply(self, [e]); });
+ 			if(!isNaN(o.startValue)) this.moveTo(o.startValue,options.realValue, null, false);
+@@ -258,7 +262,6 @@
+ 			if(this.multipleHandles) return false; //TODO: Multiple handle moveTo function
+ 			
+ 			var o = this.interaction.options;
+-			var offset = $(this.interaction.element).offsetParent().offset({ border: false });
+ 			this.interaction.pickValue = this.interaction.curValue;
+ 			value = value-o.minValue;
+ 			

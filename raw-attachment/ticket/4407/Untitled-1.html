@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
+<script>
+function test1(){
+	console.time("test1")
+	$('#selectje1').empty();
+	console.timeEnd("test1")
+}
+function test2(){
+	console.time("test2")
+	document.getElementById('selectje2').options.length = 0;
+	console.timeEnd("test2")
+}
+function test3(){
+	console.time("test3")
+	var test3 = document.getElementById('selectje3');
+	while ( test3.firstChild ) {
+			test3.removeChild( test3.firstChild );
+	}
+	console.timeEnd("test3")
+}
+</script>
+</head>
+
+<body>
+<select id="selectje1">
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+</select>
+<input type="button" value="empty()" onClick="test1()" />
+
+<hr />
+
+<select id="selectje2">
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+</select>
+<input type="button" value="options.length=0" onClick="test2()" />
+
+<hr />
+
+<select id="selectje3">
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+<option>sdfsd</option>
+</select>
+<input type="button" value="while removechild" onClick="test3()" />
+</body>
+
+</html>

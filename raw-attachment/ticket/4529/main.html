@@ -1,0 +1,24 @@
+<html>
+   <head>
+      <script type="text/javascript" src="jquery-nightly.js"></script>
+      <script type="text/javascript">
+         $(document).ready(function() {
+            $.ajax({url: "test.xml", async: false, cache: false,success: function(d) {
+               function listEntries(target) {
+                  $("data entry", d).each(function() {
+                     $("#entries").append("<p>"+$(this).attr("class")+"</p>");
+                  });
+               }
+               $("data", d).append("<entry class='c' />");    //doesn't work
+               $("data", d).append($("<entry class='d' />")); //works
+               listEntries();
+            }});
+         });
+      </script>
+   </head>
+   <body>
+      <h1>ENTRIES:</h1>
+      <div id="entries">
+      </div>
+   </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>JQuery attr() Bug</title>
+	<script type="text/javascript" src="modu/modu/assets/jquery/jquery-1.2.6.js"></script>
+	<script type="text/javascript">
+		function configure(){
+			var frm = $('#process-form');
+			var onsubmit = frm.attr('onsubmit');
+			onsubmit = onsubmit.replace('verified', 'imported');
+			frm.attr('onsubmit', onsubmit);
+			var newsubmit = frm.attr('onsubmit');
+			if(newsubmit != onsubmit){
+				alert("attr didn't work");
+			}
+		}
+	</script>
+</head>
+<body>
+	
+	<form id="process-form" onsubmit="preprocess('verified')">
+		<input type="submit" name="submit" value="submit" />
+	</form>
+	
+	<input type="button" name="configure" value="configure" onclick="configure();" />
+</body>
+</html>

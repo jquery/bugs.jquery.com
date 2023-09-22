@@ -1,0 +1,13 @@
+Index: jquery/src/core.js
+===================================================================
+--- jquery/src/core.js	(revision 4556)
++++ jquery/src/core.js	(working copy)
+@@ -436,7 +436,7 @@
+ 					[ value ];
+ 
+ 				jQuery( "option", this ).each(function(){
+-					this.selected = (jQuery.inArray( this.value, values ) >= 0 ||
++					this.setAttribute('selected', jQuery.inArray( this.value, values ) >= 0 ||
+ 						jQuery.inArray( this.text, values ) >= 0);
+ 				});
+ 

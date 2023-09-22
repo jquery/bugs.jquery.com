@@ -1,0 +1,29 @@
+### Eclipse Workspace Patch 1.0
+#P edealInv
+Index: src/war/js/jquery/plugins/jquery.autocomplete.js
+===================================================================
+--- src/war/js/jquery/plugins/jquery.autocomplete.js	(revision 36869)
++++ src/war/js/jquery/plugins/jquery.autocomplete.js	(working copy)
+@@ -47,6 +47,10 @@
+ 	},
+ 	unautocomplete: function() {
+ 		return this.trigger("unautocomplete");
++	},
++	// 20090402: Christoph Rueger: new function for always showing the complete list.
++	showAllValues: function() {
++		return this.trigger("showAllValues");
+ 	}
+ });
+ 
+@@ -195,6 +199,11 @@
+ 		select.unbind();
+ 		$input.unbind();
+ 		$(input.form).unbind(".autocomplete");
++	}).bind("showAllValues", function() { 
++		// 20090402: Christoph Rueger: new function for always showing the complete list.
++		// call request with an empty string as  the query. (same behavior as if the input field would be empty)
++		$input.keydown().focus(); // hacky! I didn't find another way to show the dropdown.
++		request("", receiveData, hideResultsNow); 
+ 	});
+ 	
+ 	

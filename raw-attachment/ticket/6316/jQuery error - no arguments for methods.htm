@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<!--
+
+  Created using http://jsbin.com
+  Source can be edited via http://jsbin.com/eriva/edit
+
+-->
+
+<head>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<meta charset=utf-8 />
+<title>JS Bin</title>
+<!--[if IE]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<style>
+  article, aside, figure, footer, header, hgroup, 
+  menu, nav, section { display: block; }
+</style>
+</head>
+<body>
+  <p id="message"></p>
+  <p id="hello">Error with testing.</p>
+<script>/*
+Date: 03/18/2010
+Programmer: Larry Battle
+Library: jQuery 1.4.2
+Purpose: To show which method calls (with no arguments) from jQuery will produce an error.
+Example: If $( '#hello' ).css() is called, then the whole script will end with an error.
+Possible Fix: Check if needed variables exist before use.
+*/
+$(function(){
+
+  var mList = [], errorMethods = [], i = 0, method = '', message = '';
+  //Collect methods from jQuery namespace.
+  //All methods are given but different errors occur when $.prototype is used.
+  for( var methods in $ ){
+    if( $.prototype.hasOwnProperty( methods ) ){
+      mList.push( methods );
+    }
+  }
+  
+  mList = mList.sort();
+  //Test out method calls with no arguments.
+  i = mList.length;
+  while( i-- ){
+     method = mList[ i ];
+    try{
+        $.prototype[ method ]();
+    }
+    catch(err){
+      errorMethods.unshift( '<b>$.prototype.' + method + '()</b> FAILED. Error: ' + err);
+    }
+    if( method == 'error' ){ continue; } //An $(el).error() call will end the script.
+    try{
+        $('#hello')[ method ]();
+    }
+    catch(err2){
+      errorMethods.unshift( '<b>$( el ).' + method + '()</b> FAILED. Error: ' + err2 );
+    }
+  }
+  message = '<h1>-----Testing $.prototype.method() and $(el).method()------</h1>';
+  message += '<br/>Going through methods: ' + mList.sort().join(', ') + "<br/>----<br/>";
+  message += errorMethods.join( '<br/>' );
+ 
+  $('#message').html( message );
+  $( '#hello' ).text( "Testing is Complete!" );
+});</script><script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-1656750-13");
+pageTracker._trackPageview();
+</script><script src="/js/render/edit.js"></script>
+</body>
+</html>

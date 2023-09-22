@@ -1,0 +1,63 @@
+--- jquery-old.js	2009-04-03 10:55:43.000000000 +1100
++++ jquery.js	2009-04-03 10:25:10.000000000 +1100
+@@ -3285,6 +3285,19 @@
+ 			// We should always get a number back from opacity
+ 			if ( name == "opacity" && ret == "" )
+ 				ret = "1";
++			// For sake of consistency with MS style of return values for margin and padding
++			if ( prop == "padding" ) {
++				ret =	computedStyle.getPropertyValue("padding-top") + " " +
++						computedStyle.getPropertyValue("padding-right") + " " +
++						computedStyle.getPropertyValue("padding-bottom") + " " +
++						computedStyle.getPropertyValue("padding-left");
++			} else if ( prop == "margin" ) {
++				ret =	computedStyle.getPropertyValue("margin-top") + " " +
++						computedStyle.getPropertyValue("margin-right") + " " +
++						computedStyle.getPropertyValue("margin-bottom") + " " +
++						computedStyle.getPropertyValue("margin-left");
++			}
++            
+ 
+ 		} else if ( elem.currentStyle ) {
+ 			var camelCase = name.replace(/\-(\w)/g, function(all, letter){
+@@ -3298,19 +3311,28 @@
+ 
+ 			// If we're not dealing with a regular pixel number
+ 			// but a number that has a weird ending, we need to convert it to pixels
+-			if ( !/^\d+(px)?$/i.test( ret ) && /^\d/.test( ret ) ) {
+-				// Remember the original values
+-				var left = style.left, rsLeft = elem.runtimeStyle.left;
+-
+-				// Put in the new values to get a computed value out
+-				elem.runtimeStyle.left = elem.currentStyle.left;
+-				style.left = ret || 0;
+-				ret = style.pixelLeft + "px";
+-
+-				// Revert the changed values
+-				style.left = left;
+-				elem.runtimeStyle.left = rsLeft;
++			ret = ( ret + "" ).split( " " );
++			for (var i = ret.length; i--;) {
++				if ( ( ret[i] != +ret[i] || propCC == "lineHeight" ) && ( /^[\d\.]+(?!px)(\D\D?)?$/ ).test( ret[i] ) ) {
++					// Remember the original values
++					var left = style.left, rsLeft = elem.runtimeStyle.left;
++
++					// Knowing font size is the same as knowing what is 1em for the given element
++					camelCase == "fontSize" && ( ret[i] = "1em" );
++					// if "line-height" is just a number then it should be in "em"
++					camelCase == "lineHeight" && !RegExp.$1 && ( ret[i] += "em" );
++
++					// Put in the new values to get a computed value out
++					elem.runtimeStyle.left = elem.currentStyle.left;
++					style.left = ret[i] || 0;
++					ret[i] = style.pixelLeft + "px";
++
++					// Revert the changed values
++					style.left = left;
++					elem.runtimeStyle.left = rsLeft;
++				}
+ 			}
++			ret = ret.join(" ");
+ 		}
+ 
+ 		return ret;

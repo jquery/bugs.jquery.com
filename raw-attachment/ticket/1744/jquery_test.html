@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      function doIt() {
+        $.ajax({
+                  type: "GET",
+                  url: "json.js",
+                  dataType: "json",
+                  success: function (json) {
+                             alert(json.data);
+                           }
+              });
+      }
+
+      $(function () {
+        $("#doit").click(doIt);
+      });
+    </script>
+  </head>
+  <body>
+    <button id="doit">Do It</button>
+    <div id="container">
+      Hi
+    </div>
+    <div id="adiv"></div>
+  </body>
+</html>

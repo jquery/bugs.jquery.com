@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>Test</title>
+<script src="/js/jquery/jquery-nightly.js"></script>
+
+
+<script language="JavaScript">
+	function submitit()
+	{
+		alert('TestCase2: You should receive a \'Submit Success\' alert after you see this alert. ');
+		$('#testForm').submit();
+	}
+</script> 
+
+</head>
+	<body>
+		<form id="testForm"" action="javascript:alert('Submit Success');" method="POST">
+			<input type="submit" name="test" value="Control - Submit Button">
+			<div onClick="alert('TestCase1: You should receive a \'Submit Success\' alert after you see this alert. ');$('#testForm').submit();" style="width:150px;cursor:pointer;border:solid thin black;cursor:hand;">TestCase1: Submit Form by clicking on this div</div>
+			<input type="button" name="TestCase2" value="testcase2: Button With OnClick to Function" onClick="submitit()">
+		</form>
+	</body>
+</html>

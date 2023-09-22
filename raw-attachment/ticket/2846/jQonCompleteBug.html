@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Testing jQuery's animation onComplete</title>
+<script src="/fr/new/js/jquery-1.2.1.min.js"></script>
+<script>
+ jQuery(function($){
+	divHeight = $("div").height();
+	numberOfTries = 5;
+	 $("#animator").one('click', function(){
+		$("div").css({
+			overflow: 'hidden',
+			height: '0px',
+			visibility: 'visible'
+		}).animate(
+			{height:divHeight},
+			1500,
+			(function() {
+				alert(numberOfTries--);
+				if(numberOfTries) {
+					badFunc();
+				}
+			})
+		);
+	});
+});
+</script>
+</head>
+<body>
+<a id="animator" style="text-decoration: underline; color: blue; cursor: pointer;">I SHOW YOU SECRETS</a>
+<p>secret stuff below</p>
+<div style="visibility: hidden;">I am the secret information<br />you are dying to get your hands on!<br />using Firefox? you may have to restart your browser now<br />look at the code to see why--badFunc() is being repeatedly called! <br />the alert() is needed to keep your CPU utilization down!</div>
+</body>
+</html>

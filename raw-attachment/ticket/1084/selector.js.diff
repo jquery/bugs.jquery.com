@@ -1,0 +1,31 @@
+Index: src/selector/selector.js
+===================================================================
+--- src/selector/selector.js	(revision 1603)
++++ src/selector/selector.js	(working copy)
+@@ -77,7 +77,7 @@
+ 
+ 		// Match: :even, :last-chlid, #id, .class
+ 		new RegExp("^([:.#]*)(" + 
+-			( jQuery.chars = "(?:[\\w\u0128-\uFFFF*-]|\\\\.)" ) + "+)")
++			( jQuery.chars = "(?:[\\w\u0128-\uFFFF*_-]|\\\\.)" ) + "+)")
+ 	],
+ 
+ 	token: [
+@@ -149,7 +149,7 @@
+ 
+ 			// An attempt at speeding up child selectors that
+ 			// point to a specific element tag
+-			var re = /^[\/>]\s*([\w*-]+)/;
++			var re = new RegExp("^[/>]\\s*(" + jQuery.chars + "+)");
+ 			var m = re.exec(t);
+ 
+ 			if ( m ) {
+@@ -204,7 +204,7 @@
+ 
+ 				} else {
+ 					// Optomize for the case nodeName#idName
+-					var re2 = new RegExp("^(\\w+)(#)(" + jQuery.chars + "+)");
++					var re2 = new RegExp("^(" + jQuery.chars + "+)(#)(" + jQuery.chars + "+)");
+ 					var m = re2.exec(t);
+ 					
+ 					// Re-organize the results, so that they're consistent

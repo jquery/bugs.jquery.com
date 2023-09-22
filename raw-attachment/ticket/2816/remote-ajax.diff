@@ -1,0 +1,14 @@
+Index: ajax.js
+===================================================================
+--- ajax.js	(revision 5577)
++++ ajax.js	(working copy)
+@@ -235,7 +235,8 @@
+ 
+ 		// If we're requesting a remote document
+ 		// and trying to load JSON or Script with a GET
+-		if ( (!s.url.indexOf("http") || !s.url.indexOf("//")) && s.dataType == "script" && s.type.toLowerCase() == "get" ) {
++		if ( (!s.url.indexOf("http") || !s.url.indexOf("/")) && s.url.indexOf("/"+location.host) == -1
++				&& s.dataType == "script" && s.type.toLowerCase() == "get" ) {
+ 			var head = document.getElementsByTagName("head")[0];
+ 			var script = document.createElement("script");
+ 			script.src = s.url;

@@ -1,0 +1,65 @@
+--- jquery-1.2.1.js	2007-10-12 11:44:43.000000000 +0200
++++ jquery-modified.js	2007-10-12 17:38:26.000000000 +0200
+@@ -397,32 +397,45 @@
+ 			if ( table && jQuery.nodeName(this, "table") && jQuery.nodeName(a[0], "tr") )
+ 				obj = this.getElementsByTagName("tbody")[0] || this.appendChild(document.createElement("tbody"));
+ 
+-			jQuery.each( a, function(){
+-				var elem = clone ? this.cloneNode(true) : this;
+-				if ( !evalScript(0, elem) )
+-					fn.call( obj, elem );
++			jQuery.each(a, function() {
++				var elem = clone ? jQuery.extractScript(this.cloneNode(true)) : jQuery.extractScript(this);
++				if (elem[1])
++					fn.call(obj, elem[1]);
++				if (elem[0])
++					jQuery.evalScript(elem[0]);
+ 			});
+ 		});
+ 	}
+ };
+ 
+-function evalScript(i, elem){
+-	var script = jQuery.nodeName(elem, "script");
+-
+-	if ( script ) {
+-		if ( elem.src )
+-			jQuery.ajax({ url: elem.src, async: false, dataType: "script" });
+-		else
+-			jQuery.globalEval( elem.text || elem.textContent || elem.innerHTML || "" );
+-	
++// This function should be called with a single argument: the DOM elements in jQuery format.
++// Returns an array containing at key 0 the extracted script elements and at key 1 the remaining DOM elements.
++jQuery.extractScript = function() {
++	var r = !arguments[1],
++		elem = r ? arguments[0] : arguments[1];
++	if ( jQuery.nodeName(elem, "script") ) {
+ 		if ( elem.parentNode )
+ 			elem.parentNode.removeChild(elem);
+-
++		if ( r )
++			return [elem, null];
+ 	} else if ( elem.nodeType == 1 )
+-    jQuery("script", elem).each(evalScript);
++		return [jQuery("script", elem).each(jQuery.extractScript), elem];
++	else
++		return [null, elem];
++};
+ 
+-	return script;
+-}
++// This function should be called with a single argument: the script element alone or in a jQuery list.
++jQuery.evalScript = function() {
++	var scr = arguments[1] ? arguments[1] : arguments[0];
++	if ( scr.each ) {
++	    scr.each(jQuery.evalScript);
++	} else {
++		if ( scr.src )
++			jQuery.ajax({ url: scr.src, async: false, dataType: "script" });
++		else
++			jQuery.globalEval( scr.text || scr.textContent || scr.innerHTML || "" );
++	}
++};
+ 
+ jQuery.extend = jQuery.fn.extend = function() {
+ 	// copy reference to target object

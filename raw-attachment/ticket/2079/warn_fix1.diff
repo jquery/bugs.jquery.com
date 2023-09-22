@@ -1,0 +1,29 @@
+--- jquery-1.2.2b.js.1	2007-12-17 03:29:58.000000000 +0100
++++ jquery-1.2.2b.js	2007-12-21 20:59:27.000000000 +0100
+@@ -653,7 +653,7 @@
+ 			jQuery.cache[ id ] = {};
+ 		
+ 		// Prevent overriding the named cache with undefined values
+-		if ( data != undefined )
++		if ( data != undefined || !jQuery.cache[ id ][ name ] )
+ 			jQuery.cache[ id ][ name ] = data;
+ 		
+ 		// Return the named cache data, or the ID for the element	
+@@ -992,7 +992,7 @@
+ 				elem = jQuery.makeArray( div.childNodes );
+ 			}
+ 
+-			if ( elem.length === 0 && (!jQuery.nodeName( elem, "form" ) && !jQuery.nodeName( elem, "select" )) )
++			if ( (elem.length && elem.length === 0) && (!jQuery.nodeName( elem, "form" ) && !jQuery.nodeName( elem, "select" )) )
+ 				return;
+ 
+ 			if ( elem[0] == undefined || jQuery.nodeName( elem, "form" ) || elem.options )
+@@ -1790,7 +1790,7 @@
+ 	// Bind an event to an element
+ 	// Original by Dean Edwards
+ 	add: function(elem, types, handler, data) {
+-		if ( elem.nodeType == 3 || elem.nodeType == 8 )
++		if ( elem.nodeType && (elem.nodeType == 3 || elem.nodeType == 8 ))
+ 			return;
+ 
+ 		// For whatever reason, IE has trouble passing the window object

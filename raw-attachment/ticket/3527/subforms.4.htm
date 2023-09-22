@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>Sub-forms</title>
+    <style type="text/css">
+        body{background-color:#fff}
+        form{margin:0}
+        form p,form ul{padding:5px 100px;margin:0;min-width:400px}
+        form li{margin:0;padding:0;border-top:solid 1px #eee;list-style-type:none}
+        form li>span{display:inline-block;width:90%;padding:5px;cursor:pointer}
+        form li>input{margin:5px 0 5px 5px;}
+        form label{float:left;width:90px;margin-left:-98px;padding:2px;text-align:right}
+        form label.error{display:inline-block;float:none;width:auto;margin:0 -98px 0 auto;color:#900;text-align:left}
+        .hover{background-color:#eef3ff;}
+    </style>
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!--<script type="text/javascript" src="jquery.js"></script>-->
+    <script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/validate/jquery.validate.js"></script>
+    
+    <script type="text/javascript">
+        /*  Patch
+            =========================== */
+
+        // get the elements in the form, fixes selection for nested forms in IE
+        function getElements(form) {
+            if ($.browser.msie) {
+                return $(form).find(":input")
+		            .not($(form).find("form :input"))
+		            .not(":reset, [disabled]");
+            } else { return $(form.elements); }
+        }
+
+        // only select elements within the form, exclude nested ones, IE problem only
+        $.validator.prototype.elements = function() {
+            var validator = this,
+				rulesCache = {};
+
+            // select all valid inputs inside the form
+            return getElements(this.currentForm)
+	            .not(":submit, :image")
+	            .not(this.settings.ignore)
+	            .filter(function() {
+	                !this.name && validator.settings.debug && window.console && console.error("%o has no name assigned", this);
+
+	                // select only the first element for each name, and only those with rules specified
+	                if (this.name in rulesCache || !validator.objectLength($(this).rules()))
+	                    return false;
+
+	                rulesCache[this.name] = true;
+	                return true;
+    	        });
+		}
+
+		$.fn.serializeArray = function() {
+		    return this.map(function() {
+		        return jQuery.nodeName(this, "form") ?
+				    jQuery.makeArray(getElements(this)) : this;
+		    })
+		    .filter(function() {
+		        return this.name && !this.disabled &&
+				    (this.checked || /select|textarea/i.test(this.nodeName) ||
+					    /text|hidden|password/i.test(this.type));
+		    })
+		    .map(function(i, elem) {
+		        var val = jQuery(this).val();
+		        return val == null ? null :
+				    val.constructor == Array ?
+					    jQuery.map(val, function(val, i) {
+					        return { name: elem.name, value: val };
+					    }) :
+					    { name: elem.name, value: val };
+		    }).get();
+		}
+
+	    $.validator.prototype.clearErrors = function() {
+	        this.submitted = {};
+	        this.prepareForm();
+	        this.hideErrors();
+	        this.elements().removeClass(this.settings.errorClass);
+	    }
+	    
+        // allow adding a validator to multiple forms at once
+	    $.fn.validate = function(options) {
+
+	        // if nothing is selected, return nothing; can't chain anyway
+	        if (!this.length) {
+	            options && options.debug && window.console && console.warn("nothing selected, can't validate, returning nothing");
+	            return;
+	        }
+
+	        this.each(function() {
+	            var $this = $(this);
+
+	            // check if a validator for this form was already created
+	            var validator = $.data($this, 'validator');
+	            if (validator) { return; }
+
+	            validator = new $.validator(options, this);
+	            $.data(this, 'validator', validator);
+
+	            if (validator.settings.onsubmit) {
+
+	                // allow suppresing validation by adding a cancel class to the submit button
+	                $this.find("input, button").filter(".cancel").click(function() {
+	                    validator.cancelSubmit = true;
+	                });
+
+	                // validate the form on submit
+	                $this.submit(function(event) {
+	                    if (validator.settings.debug)
+	                    // prevent form submit to be able to see console output
+	                        event.preventDefault();
+
+	                    function handle() {
+	                        if (validator.settings.submitHandler) {
+	                            validator.settings.submitHandler.call(validator, validator.currentForm);
+	                            return false;
+	                        }
+	                        return true;
+	                    }
+
+	                    // prevent submit for invalid forms or custom submit handlers
+	                    if (validator.cancelSubmit) {
+	                        validator.cancelSubmit = false;
+	                        return handle();
+	                    }
+	                    if (validator.form()) {
+	                        if (validator.pendingRequest) {
+	                            validator.formSubmitted = true;
+	                            return false;
+	                        }
+	                        return handle();
+	                    } else {
+	                        validator.focusInvalid();
+	                        return false;
+	                    }
+	                });
+	            }
+	        });
+
+	        return this;
+	    }
+
+        /*  =========================== */
+
+	    $(document).ready(function() {
+	        var $list = $("#List"),
+                $detail = $("#Detail"),
+                $detailName = $detail.find("#Name"),
+                $detailDescription = $detail.find("#Description");
+
+	        $list.add($detail)
+                .validate({
+                    submitHandler: function(form) {
+                        var $form = $(form);
+
+                        alert(form.id.concat("\n", $form.serialize()));
+
+                        if (form.id == "Detail") { $form.hide("fast"); }
+                        return false;
+                    }
+                });
+
+	        $detail.hide();
+	        $list.find("li span")
+	            .mouseover(function() { $(this).addClass("hover") })
+	            .mouseout(function() { $(this).removeClass("hover") })
+	            .click(function() {
+	                var $title = $(this),
+                    $listItem = $title.parent();
+
+	                $detail.hide("fast",
+                    $detail.css("display") == "none" || $listItem.find("form").length == 0
+                    ? function() {
+                        $detailName
+                            .unbind("change")
+                            .change(function() { $title.text(this.value) })
+                            .val($title.text());
+                        $detailDescription
+                            .unbind("change")
+                            .change(function() { $listItem.data("description", this.value) })
+                            .val($listItem.data("description") || "");
+
+                        $listItem.append($detail);
+
+                        $detail.data("validator").clearErrors();
+                        $detail.show("slow");
+                    }
+                    : "");
+	            });
+	    });
+    </script>
+</head>
+<body>
+    <form id="List">
+        <ul>
+            <li><input name="active_1" type="checkbox" checked="checked" /><span>Item 1</span></li>
+            <li><input name="active_2" type="checkbox" checked="checked" /><span>Item 2</span></li>
+            <li><input name="active_3" type="checkbox" checked="checked" /><span>Item 3</span></li>
+        </ul>
+        <p>Click on an item in the list to view its details</p>
+        <p><input name="submit" type="submit" value="submit list form" /></p>
+    </form>
+    
+    <form id="Detail">
+        <p>
+            <label for="Name">Name</label>
+            <input id="Name" name="Name" class="required" />
+        </p>
+        <p>
+            <label for="Description">Description</label>
+            <textarea id="Description" name="Description" class="required"></textarea>
+        </p>
+        <p>
+            <label for="Type">Type</label>
+            <select id="Type" name="Type">
+                <option>one</option>
+                <option>two</option>
+                <option>three</option>
+            </select>
+        </p>
+        <p><input name="submit" type="submit" value="submit detail form" /></p>
+    </form>
+</body>
+</html>

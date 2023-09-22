@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; left:200px; position:absolute; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+
+      var intervalsRunning = 0;
+      var realSetInterval = window.setInterval;
+      var realClearInterval = window.clearInterval;
+      window.setInterval = function () { 
+        intervalsRunning++;
+        return realSetInterval.apply(this, arguments);
+      };
+      window.clearInterval = function () { 
+        intervalsRunning--;
+        return realClearInterval.apply(this, arguments);
+      };
+
+      function doIt() {
+        $("#container").stop();
+        $("#adiv").text("Intervals running = " + intervalsRunning);
+      }
+
+      $(function () {
+
+        $("#doit").click(doIt);
+
+        for (var i = 0; i < 200; i++) {
+          $("#container").animate({left: (((i % 2) == 0) ? '+' : '-') + "=100px"}, 2000); 
+        }
+        $("#adiv").text("Intervals running = " + intervalsRunning);
+      });
+    </script>
+  </head>
+  <body>
+    <button id="doit">Do It</button>
+    <div id="container">
+      Hi
+    </div>
+    <div id="adiv"></div>
+  </body>
+</html>

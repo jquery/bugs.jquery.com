@@ -1,0 +1,39 @@
+Index: /webapp/trunk/public_html/js/jquery/jquery.js
+===================================================================
+--- /webapp/trunk/public_html/js/jquery/jquery.js (revision 2104)
++++ /webapp/trunk/public_html/js/jquery/jquery.js (revision 2113)
+@@ -306,8 +306,30 @@
+ 				var clone = this.cloneNode(true),
+ 					container = document.createElement("div"),
+-					container2 = document.createElement("div");
+-				container.appendChild(clone);
+-				container2.innerHTML = container.innerHTML;
+-				return container2.firstChild;
++					container2 = document.createElement("div"),
++					n = this.nodeName.toLowerCase();
++
++				if ( n=="tr"||n=="tbody"||n=="thead"||n=="tfoot"||n=="td" ) {
++					var t = document.createElement("table");
++					if ( n == "td" ) {
++						var tr = document.createElement("tr");
++						tr.appendChild(clone);
++						t.appendChild(tr);
++					} else
++						t.appendChild(clone);
++					container.appendChild(t);
++					container2.innerHTML = container.innerHTML;
++					with ( container2.firstChild ) switch ( n ) {
++						case "tr":
++							return firstChild.firstChild;
++						case "td":
++							return firstChild.firstChild.firstChild;
++						default:
++							return firstChild;
++					}
++				} else {
++					container.appendChild(clone);
++					container2.innerHTML = container.innerHTML;
++					return container2.firstChild;
++				}
+ 			} else
+ 				return this.cloneNode(true);

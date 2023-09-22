@@ -1,0 +1,18 @@
+Index: src/event/event.js
+===================================================================
+--- src/event/event.js	(revision 1423)
++++ src/event/event.js	(working copy)
+@@ -910,7 +910,12 @@
+ 		}, 10); 
+ 
+ 	// A fallback to window.onload, that will always work
+-	jQuery.event.add( window, "load", jQuery.ready );
++	window.oldLoad = window.oldLoad;
++	window.onload = function(event) {
++		jQuery.ready();
++		window.oldLoad(event);
++		window.oldLoad = null;
++	}
+ 	
+ };
+ 

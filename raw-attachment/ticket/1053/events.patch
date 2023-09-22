@@ -1,0 +1,44 @@
+--- D:/Work/WebSite1/jquery-latest.js	Fri Mar 16 13:37:14 2007
++++ D:/Work/WebSite1/jquery.js	Fri Mar 16 13:04:56 2007
+@@ -1199,11 +1199,14 @@
+ 
+ 		// Add the function to the element's handler list
+ 		handlers[handler.guid] = handler;
+ 
+ 		// And bind the global event handler to the element
+-		element["on" + type] = this.handle;
++		element.$event = this.handle;
++		element["on" + type] = function(event) {
++			this.$event(event, type);
++		};
+ 
+ 		// Remember the function in a global list (for triggering)
+ 		if (!this.global[type])
+ 			this.global[type] = [];
+ 		this.global[type].push( element );
+@@ -1275,22 +1278,23 @@
+ 
+ 			this.triggered = false;
+ 		}
+ 	},
+ 
+-	handle: function(event) {
++	handle: function(event, type) {
+ 		// Handle the second event of a trigger and when
+ 		// an event is called after a page has unloaded
+ 		if ( typeof jQuery == "undefined" || jQuery.event.triggered ) return;
+ 
+ 		// Empty object is for triggered events with no data
+ 		event = jQuery.event.fix( event || window.event || {} ); 
+ 
+ 		// returned undefined or false
+ 		var returnValue;
+ 
+-		var c = this.$events[event.type];
++		var type = type || event.type;
++		var c = this.$events[type];
+ 
+ 		var args = [].slice.call( arguments, 1 );
+ 		args.unshift( event );
+ 
+ 		for ( var j in c ) {

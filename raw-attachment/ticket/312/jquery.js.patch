@@ -1,0 +1,161 @@
+Index: jquery.js
+===================================================================
+--- jquery.js	(revision 475)
++++ jquery.js	(working copy)
+@@ -1637,8 +1637,24 @@
+ 			"^=": "z && !z.indexOf(m[4])",
+ 			"$=": "z && z.substr(z.length - m[4].length,m[4].length)==m[4]",
+ 			"*=": "z && z.indexOf(m[4])>=0",
+-			"": "z"
++			"": "z",
++			_resort: true,
++			_prefix: "z=jQuery.curCSS(a,m[3]);"
+ 		},
++		"&": {
++  		"=": "z==m[4]",
++  		"!=": "z!=m[4]",
++  		"^=": "z && !z.indexOf(m[4])",
++  		"$=": "z && z.substr(z.length - m[4].length,m[4].length)==m[4]",
++  		"*=": "z && z.indexOf(m[4])>=0",
++      ">": "parseInt(z)>parseInt(m[4])",
++      "<": "parseInt(z)<parseInt(m[4])",
++      ">=": "parseInt(z)>=parseInt(m[4])",
++      "<=": "parseInt(z)<=parseInt(m[4])",
++  		"": "z",
++      _resort: true,
++      _prefix: "z=jQuery.curCSS(a,m[3]);"
++    },
+ 		"[": "jQuery.find(m[2],a).length"
+ 	},
+ 
+@@ -1917,7 +1933,10 @@
+ 	},
+ 
+ 	// The regular expressions that power the parsing engine
+-	parse: [
++	parse: [	
++  	// Match: [&value='test'], [&foo]
++  	"\\[ *(&)S *([!*$^=<>]*) *('?\"?)(.*?)\\4 *\\]",
++	
+ 		// Match: [@value='test'], [@foo]
+ 		"\\[ *(@)S *([!*$^=]*) *('?\"?)(.*?)\\4 *\\]",
+ 
+@@ -1931,62 +1950,62 @@
+ 		"([:.#]*)S"
+ 	],
+ 
+-	filter: function(t,r,not) {
+-		// Figure out if we're doing regular, or inverse, filtering
+-		var g = not !== false ? jQuery.grep :
+-			function(a,f) {return jQuery.grep(a,f,true);};
+-
+-		while ( t && /^[a-z[({<*:.#]/i.test(t) ) {
+-
+-			var p = jQuery.parse;
+-
+-			for ( var i = 0; i < p.length; i++ ) {
+-		
+-				// Look for, and replace, string-like sequences
+-				// and finally build a regexp out of it
+-				var re = new RegExp(
+-					"^" + p[i].replace("S", "([a-z*_-][a-z0-9_-]*)"), "i" );
+-
+-				var m = re.exec( t );
+-
+-				if ( m ) {
+-					// Re-organize the first match
+-					if ( !i )
+-						m = ["",m[1], m[3], m[2], m[5]];
+-
+-					// Remove what we just matched
+-					t = t.replace( re, "" );
+-
+-					break;
+-				}
+-			}
+-
+-			// :not() is a special case that can be optimized by
+-			// keeping it out of the expression list
+-			if ( m[1] == ":" && m[2] == "not" )
+-				r = jQuery.filter(m[3],r,false).r;
+-
+-			// Otherwise, find the expression to execute
+-			else {
+-				var f = jQuery.expr[m[1]];
+-				if ( f.constructor != String )
+-					f = jQuery.expr[m[1]][m[2]];
+-
+-				// Build a custom macro to enclose it
+-				eval("f = function(a,i){" +
+-					( m[1] == "@" ? "z=jQuery.attr(a,m[3]);" : "" ) +
+-					"return " + f + "}");
+-
+-				// Execute it against the current filter
+-				r = g( r, f );
+-			}
+-		}
+-
+-		// Return an array of filtered elements (r)
+-		// and the modified expression string (t)
+-		return { r: r, t: t };
+-	},
+-
++  filter: function(t,r,not) {
++  	// Figure out if we're doing regular, or inverse, filtering
++  	var g = not !== false ? jQuery.grep :
++  		function(a,f) {return jQuery.grep(a,f,true);};
++  
++  	while ( t && /^[a-z[({<*:.#]/i.test(t) ) {
++  
++  		var p = jQuery.parse;
++  
++  		for ( var i = 0; i < p.length; i++ ) {
++  	
++  			// Look for, and replace, string-like sequences
++  			// and finally build a regexp out of it
++  			var re = new RegExp(
++  				"^" + p[i].replace("S", "([a-z*_-][a-z0-9_-]*)"), "i" );
++  
++  			var m = re.exec( t );
++  
++  			if ( m ) {
++  				// Re-organize the first match
++  				if ( jQuery.expr[m[1]]["_resort"] )
++  					m = ["",m[1], m[3], m[2], m[5]];
++  
++  				// Remove what we just matched
++  				t = t.replace( re, "" );
++  
++  				break;
++  			}
++  		}
++  
++  		// :not() is a special case that can be optimized by
++  		// keeping it out of the expression list
++  		if ( m[1] == ":" && m[2] == "not" )
++  			r = jQuery.filter(m[3],r,false).r;
++  
++  		// Otherwise, find the expression to execute
++  		else {
++  			var f = jQuery.expr[m[1]];
++  			if ( f.constructor != String )
++  				f = jQuery.expr[m[1]][m[2]];
++  
++  			// Build a custom macro to enclose it
++  			eval("f = function(a,i){" +
++  				(jQuery.expr[m[1]]["_prefix"] || "") +
++  				"return " + f + "}");
++  
++  			// Execute it against the current filter
++  			r = g( r, f );
++  		}
++  	}
++  
++  	// Return an array of filtered elements (r)
++  	// and the modified expression string (t)
++  	return { r: r, t: t };
++  },
++  
+ 	/**
+ 	 * Remove the whitespace from the beginning and end of a string.
+ 	 *

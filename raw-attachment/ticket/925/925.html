@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>925 Test Case</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+	function append() {
+		var htmlized = $('<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab#version=6,0,2,0" height="800" width="800" ID="Qtactivexplugin1"><param name="src" value="http://malsup.com/jquery/media/simpsons.mov"/><embed src="http://malsup.com/jquery/media/simpsons.mov" pluginspage="http://www.apple.com/quicktime/download/" height="800" width="800" /></object>').get(0);
+		document.getElementById('movie').appendChild(htmlized);
+	}
+
+	function useInner() {
+		var mystring = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab#version=6,0,2,0" height="800" width="800" ID="Qtactivexplugin1"><param name="src" value="http://malsup.com/jquery/media/simpsons.mov"/><embed src="http://malsup.com/jquery/media/simpsons.mov" pluginspage="http://www.apple.com/quicktime/download/" height="800" width="800" /></object>';
+		document.getElementById('movie').innerHTML = mystring;
+	}
+</script>
+
+</head>
+
+<body>
+	    <div id="movie" style="width: 800px; height: 800px; border: 1px solid red; position: absolute; left: 50%; top: 50%; margin: -400px 0 0 -400px;"></div>
+	    <ul>
+			<li><a href="#" onclick="append(); return false;">.appendChild(elems)</a></li>
+			<li><a href="#" onclick="useInner(); return false;">.innerHTML = string</a></li>
+		</ul>
+</body>
+
+</html>

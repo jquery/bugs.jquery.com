@@ -1,0 +1,27 @@
+﻿<html>
+<head>
+    <title></title>
+    <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+</head>
+<body>
+	<button id="btnHideGroupRows">Toggle</button>
+    <table border="1" cellspacing="0">
+    <tr class="type1"><td>asdf</td><td>asdf</td><td>asdf</td></tr>
+    <tr class="type1"><td>asdf</td><td>asdf</td><td>asdf</td></tr>
+    <tr class="type2"><td>asdf</td><td>asdf</td><td>asdf</td></tr>
+    <tr class="type2"><td>asdf</td><td>asdf</td><td>asdf</td></tr>
+    <tr class="type2"><td>asdf</td><td>asdf</td><td>asdf</td></tr>
+    </table>
+    
+    
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		$("#btnHideGroupRows").click(function() {
+    			$(".type2").each(function(index, row) {
+    				$(row).toggle("slow");
+    			});
+    		});
+    	});
+</script>
+</body>
+</html>

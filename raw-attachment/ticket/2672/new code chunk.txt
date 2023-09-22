@@ -1,0 +1,7 @@
+$.datepicker = new Datepicker(); // singleton instance
+
+/* Initialise the date picker. */
+$(document).ready(function() {
+	$(document.body).append($.datepicker._datepickerDiv)
+		.mousedown($.datepicker._checkExternalClick);
+});

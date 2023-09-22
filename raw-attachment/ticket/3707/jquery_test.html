@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tester</title>
+    <style type="text/css">
+      #container { background:yellow; width:200px; }
+    </style>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        $("button:first").click(function () {
+              if ($("#container").is(":visible")) {
+                var s = "hiding now";
+                $("#container").hide(1000);
+              } else {
+                var s = "showing now";
+                $("#container").show(1000);
+              }
+              $("#adiv").text(s);
+            });
+      });
+    </script>
+  </head>
+  <body>
+    <button>Do It</button>
+    <div id="container">
+      <script type="text/javascript" src="alert.js"></script>
+      Hi
+    </div>
+    <div id="adiv"></div>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript">
+    
+    function ajaxCall() {
+ 
+            $.ajax({
+                type: 'GET',
+                url: '/TestPossibleFixjQueryImplementation.html',
+                success: function(data, textStatus, XMLHttpRequest) {
+                },
+                xhr: /*@cc_on false && @*/window.XMLHttpRequest ?
+                        function() {
+                            return new window.XMLHttpRequest();
+                        } :
+                        function() {
+                            try {
+                                return new window.ActiveXObject("Microsoft.XMLHTTP");
+                            } catch(e) {}
+                        }
+            })
+    }
+    
+    setInterval(ajaxCall, 1);
+    </script>
+</head>
+<body>
+</body>
+</html>

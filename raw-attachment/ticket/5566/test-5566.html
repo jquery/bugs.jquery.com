@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>jQuery 1.3 Adjacent Selector Bug</title>
+    <script type="text/javascript" src="jquery-1.4a1.js"></script>
+    <script type="text/javascript">
+      $(function() {
+     
+        $('li').append($("<button/>")
+          .text("click me")
+          .click(function() {
+            alert("Good job!");
+          })
+		);
+		  
+      });    
+    </script>
+	</head>
+	<body>
+	  <h1>jQuery 1.3 loses event handlers when appending to multiple elements</h1>
+    
+    <h2>Demo:</h2>
+    <ul>
+      <li>Hello</li>
+      <li>Hello</li>
+      <li>Hello</li>
+    </ul>
+    
+    <h2>Code:</h2>
+    <pre>$(function() {
+  $('li').append($("&lt;button/&gt;")
+    .text("click me")
+    .click(function() {
+      alert("Good job!");
+    })
+  );
+});</pre> 
+    
+    <h2>Problem:</h2>
+    <p>In jQuery 1.2.6, all three buttons would cause an alert box to be shown. In 1.3.1, 
+    only the first does - the click handler does not appear to get copied to the other buttons. This was filed as bug <a href="http://dev.jquery.com/ticket/4161">#3966</a>, 
+    (and <a href="http://dev.jquery.com/ticket/4161">ticket #4161</a>) and was supposedly fixed in 1.3.2.</p>
+    <p>However, in jQuery 1.3.2, none of the buttons have a click handler!</p>
+    <p><a href="./">Back to Browser Bugs</a></p>
+	</body>
+</html>

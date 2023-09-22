@@ -1,0 +1,402 @@
+Index: test/unit/core.js
+===================================================================
+--- test/unit/core.js	(revision 4059)
++++ test/unit/core.js	(working copy)
+@@ -141,11 +141,11 @@
+ 
+ 		ok( jQuery.isFunction(fn), "Recursive Function Call" );
+ 
+-    	fn({ some: "data" });
++		fn({ some: "data" });
+ 	};
+ 
+ 	callme(function(){
+-    	callme(function(){});
++		callme(function(){});
+ 	});
+ });
+ 
+@@ -168,6 +168,76 @@
+ 	reset();
+ });
+ 
++test("$() returning text and comment nodes", function() {
++	expect(23);
++
++	// the next set of tests is to see how jquery handles non node nodes (like text and comment nodes)
++	var j = $("<span>hi</span> there <!-- mon ami -->");
++	ok( j.length >= 2, "Check node,textnode,comment creation (some browsers delete comments)" );
++	// using contents will get comments even in IE
++	j = $("#nonnodes").contents();
++	j.addClass("asdf");
++	ok( j.hasClass("asdf"), "Check node,textnode,comment for addClass" );
++	j.removeClass("asdf");
++	ok( !j.hasClass("asdf"), "Check node,textnode,comment for removeClass" );
++
++	j.attr("name", "attrvalue");
++	equals( j.attr("name"), "attrvalue", "Check node,textnode,comment for attr" );
++	j.removeAttr("name")
++
++	equals( j.find("div").length, 0, "Check node,textnode,comment to find zero divs" );
++	equals( j.filter("span").length, 1, "Check node,textnode,comment to filter the one span" );
++	equals( j.filter("[name]").length, 0, "Check node,textnode,comment to filter the one span" );
++
++	j.html("<b>bold</b>");
++	equals( j.html().toLowerCase(), "<b>bold</b>", "Check node,textnode,comment with html()" );
++
++	j.text("hi!");
++	equals( $(j[0]).text(), "hi!", "Check node,textnode,comment with text()" );
++	equals( j[1].nodeValue, " there ", "Check node,textnode,comment with text()" );
++	equals( j[2].nodeType, 8, "Check node,textnode,comment with text()" );
++
++	j.val("asdf");
++	equals( j.val(), "asdf", "Check node,textnode,comment with val()" );
++	j.removeAttr("value");
++
++	var c = j.contents();
++	equals( c[0].nodeValue, j.text(), "Check node,textnode,comment contents is just the one from span" );
++
++	var cl = j.clone();
++	ok( cl.length >= 2, "Check node,textnode,comment clone works (some browsers delete comments on clone)" );
++
++	var d = $("<div/>").appendTo("#nonnodes").append(cl);
++	var dc = d.contents();
++	ok( dc.length >= 2, "Check node,textnode,comment append works" );
++
++	dc.empty();
++	equals( $(dc[0]).html(), "", "Check node,textnode,comment empty works" );
++
++	dc.remove();
++	equals( d.contents().length, 0, "Check node,textnode,comment remove works" );
++	d.remove();
++
++	j.css("padding-left", "1px");
++	equals( j.css("padding-left"), "1px", "Check node,textnode,comment css works" );
++
++	j.bind("tester", function () {
++		equals(this.nodeType, 1, "Check node,textnode,comment bind just does real nodes" );
++	});
++	j.trigger("tester");
++
++	j.wrap("<i></i>");
++	equals( c[0].nodeValue, j.text(), "Check node,textnode,comment wraps doesn't hurt text" );
++	equals( $("#nonnodes > i").length, 3, "Check node,textnode,comment wraps ok" );
++
++	stop();
++	j.animate({paddingLeft:"5px"}, 100, function () {
++		equals(this.nodeType, 1, "Check node,textnode,comment animate just does real nodes" );
++		equals($(this).css("paddingLeft"), "5px", "Check node,textnode,comment animate just does real nodes" );
++		start();
++	});
++});
++
+ test("$('html', context)", function() {
+ 	expect(1);
+ 
+@@ -232,7 +302,7 @@
+ 	div.each(function(){this.foo = 'zoo';});
+ 	var pass = true;
+ 	for ( var i = 0; i < div.size(); i++ ) {
+-	  if ( div.get(i).foo != "zoo" ) pass = false;
++		if ( div.get(i).foo != "zoo" ) pass = false;
+ 	}
+ 	ok( pass, "Execute a function, Relative" );
+ });
+@@ -277,15 +347,15 @@
+ });
+ 
+ if ( !isLocal ) {
+-    test("attr(String) in XML Files", function() {
+-        expect(2);
+-        stop();
+-        $.get("data/dashboard.xml", function(xml) {
+-            ok( $("locations", xml).attr("class") == "foo", "Check class attribute in XML document" );
+-            ok( $("location", xml).attr("for") == "bar", "Check for attribute in XML document" );
+-            start();
+-        });
+-    });
++	test("attr(String) in XML Files", function() {
++		expect(2);
++		stop();
++		$.get("data/dashboard.xml", function(xml) {
++			ok( $("locations", xml).attr("class") == "foo", "Check class attribute in XML document" );
++			ok( $("location", xml).attr("for") == "bar", "Check for attribute in XML document" );
++			start();
++		});
++	});
+ }
+ 
+ test("attr(String, Function)", function() {
+@@ -298,7 +368,7 @@
+ 	expect(1);
+ 	var pass = true;
+ 	$("div").attr({foo: 'baz', zoo: 'ping'}).each(function(){
+-	  if ( this.getAttribute('foo') != "baz" && this.getAttribute('zoo') != "ping" ) pass = false;
++		if ( this.getAttribute('foo') != "baz" && this.getAttribute('zoo') != "ping" ) pass = false;
+ 	});
+ 	ok( pass, "Set Multiple Attributes" );
+ });
+@@ -309,7 +379,7 @@
+ 	div.attr("foo", "bar");
+ 	var pass = true;
+ 	for ( var i = 0; i < div.size(); i++ ) {
+-	  if ( div.get(i).getAttribute('foo') != "bar" ) pass = false;
++		if ( div.get(i).getAttribute('foo') != "bar" ) pass = false;
+ 	}
+ 	ok( pass, "Set Attribute" );
+ 
+@@ -362,19 +432,19 @@
+ });
+ 
+ if ( !isLocal ) {
+-    test("attr(String, Object) - Loaded via XML document", function() {
+-        expect(2);
+-        stop();
+-        $.get('data/dashboard.xml', function(xml) { 
+-              var titles = [];
+-              $('tab', xml).each(function() {
+-                    titles.push($(this).attr('title'));
+-              });
+-              equals( titles[0], 'Location', 'attr() in XML context: Check first title' );
+-              equals( titles[1], 'Users', 'attr() in XML context: Check second title' );
+-              start();
+-        });
+-    });
++	test("attr(String, Object) - Loaded via XML document", function() {
++		expect(2);
++		stop();
++		$.get('data/dashboard.xml', function(xml) { 
++			var titles = [];
++			$('tab', xml).each(function() {
++				titles.push($(this).attr('title'));
++			});
++			equals( titles[0], 'Location', 'attr() in XML context: Check first title' );
++			equals( titles[1], 'Users', 'attr() in XML context: Check second title' );
++			start();
++		});
++	});
+ }
+ 
+ test("css(String|Hash)", function() {
+@@ -561,7 +631,7 @@
+ 	
+ 	reset();
+ 	$("#sap").append(document.getElementById('form'));
+-	ok( $("#sap>form").size() == 1, "Check for appending a form" );  // Bug #910
++	ok( $("#sap>form").size() == 1, "Check for appending a form" ); // Bug #910
+ 
+ 	reset();
+ 	var pass = true;
+@@ -873,7 +943,7 @@
+ 	expect(17);
+ 
+ 	var settings = { xnumber1: 5, xnumber2: 7, xstring1: "peter", xstring2: "pan" },
+-		options =     { xnumber2: 1, xstring2: "x", xxx: "newstring" },
++		options = { xnumber2: 1, xstring2: "x", xxx: "newstring" },
+ 		optionsCopy = { xnumber2: 1, xstring2: "x", xxx: "newstring" },
+ 		merged = { xnumber1: 5, xnumber2: 1, xstring1: "peter", xstring2: "x", xxx: "newstring" },
+ 		deep1 = { foo: { bar: true } },
+@@ -919,9 +989,9 @@
+ 
+ 	var defaults = { xnumber1: 5, xnumber2: 7, xstring1: "peter", xstring2: "pan" },
+ 		defaultsCopy = { xnumber1: 5, xnumber2: 7, xstring1: "peter", xstring2: "pan" },
+-		options1 =     { xnumber2: 1, xstring2: "x" },
++		options1 = { xnumber2: 1, xstring2: "x" },
+ 		options1Copy = { xnumber2: 1, xstring2: "x" },
+-		options2 =     { xstring2: "xx", xxx: "newstringx" },
++		options2 = { xstring2: "xx", xxx: "newstringx" },
+ 		options2Copy = { xstring2: "xx", xxx: "newstringx" },
+ 		merged2 = { xnumber1: 5, xnumber2: 1, xstring1: "peter", xstring2: "xx", xxx: "newstringx" };
+ 
+@@ -1055,7 +1125,7 @@
+ 	expect(1);
+ 	var pass = true, div = $("div");
+ 	div.show().each(function(){
+-	  if ( this.style.display == "none" ) pass = false;
++		if ( this.style.display == "none" ) pass = false;
+ 	});
+ 	ok( pass, "Show" );
+ });
+Index: test/index.html
+===================================================================
+--- test/index.html	(revision 4059)
++++ test/index.html	(working copy)
+@@ -171,6 +171,7 @@
+ 					<input type="checkbox" name="checkedtestcheckboxes" />
+ 				</div>
+ 			</form>
++			<div id="nonnodes"><span>hi</span> there <!-- mon ami --></div>
+ 		</div>
+ 	</div>
+ 	</dl>
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 4059)
++++ src/core.js	(working copy)
+@@ -251,13 +251,15 @@
+ 
+ 	append: function() {
+ 		return this.domManip(arguments, true, false, function(elem){
+-			this.appendChild( elem );
++			if (this.nodeType == 1)
++				this.appendChild( elem );
+ 		});
+ 	},
+ 
+ 	prepend: function() {
+ 		return this.domManip(arguments, true, true, function(elem){
+-			this.insertBefore( elem, this.firstChild );
++			if (this.nodeType == 1)
++				this.insertBefore( elem, this.firstChild );
+ 		});
+ 	},
+ 	
+@@ -402,6 +404,9 @@
+ 
+ 		} else
+ 			return this.each(function(){
++				if ( this.nodeType != 1 )
++					return;
++
+ 				if ( value.constructor == Array && /radio|checkbox/.test( this.type ) )
+ 					this.checked = (jQuery.inArray(this.value, value) >= 0 ||
+ 						jQuery.inArray(this.name, value) >= 0);
+@@ -722,18 +727,19 @@
+ 		// internal only, use addClass("class")
+ 		add: function( elem, classNames ) {
+ 			jQuery.each((classNames || "").split(/\s+/), function(i, className){
+-				if ( !jQuery.className.has( elem.className, className ) )
++				if ( elem.nodeType == 1 && !jQuery.className.has( elem.className, className ) )
+ 					elem.className += (elem.className ? " " : "") + className;
+ 			});
+ 		},
+ 
+ 		// internal only, use removeClass("class")
+ 		remove: function( elem, classNames ) {
+-			elem.className = classNames != undefined ?
+-				jQuery.grep(elem.className.split(/\s+/), function(className){
+-					return !jQuery.className.has( classNames, className );	
+-				}).join(" ") :
+-				"";
++			if (elem.nodeType == 1)
++				elem.className = classNames != undefined ?
++					jQuery.grep(elem.className.split(/\s+/), function(className){
++						return !jQuery.className.has( classNames, className );	
++					}).join(" ") :
++					"";
+ 		},
+ 
+ 		// internal only, use is(".class")
+@@ -1014,6 +1020,9 @@
+ 	},
+ 	
+ 	attr: function( elem, name, value ) {
++		if (!elem || elem.nodeType == 3 || elem.nodeType == 8)
++			return undefined;
++
+ 		var fix = jQuery.isXMLDoc( elem ) ?
+ 			{} :
+ 			jQuery.props;
+@@ -1267,7 +1276,8 @@
+ jQuery.each({
+ 	removeAttr: function( name ) {
+ 		jQuery.attr( this, name, "" );
+-		this.removeAttribute( name );
++		if (this.nodeType == 1) 
++			this.removeAttribute( name );
+ 	},
+ 
+ 	addClass: function( classNames ) {
+Index: src/fx.js
+===================================================================
+--- src/fx.js	(revision 4059)
++++ src/fx.js	(working copy)
+@@ -69,6 +69,9 @@
+ 		var optall = jQuery.speed(speed, easing, callback);
+ 
+ 		return this[ optall.queue === false ? "each" : "queue" ](function(){
++			if ( this.nodeType != 1)
++				return false;
++
+ 			var opt = jQuery.extend({}, optall);
+ 			var hidden = jQuery(this).is(":hidden"), self = this;
+ 			
+@@ -135,6 +138,9 @@
+ 			return queue( this[0], type );
+ 
+ 		return this.each(function(){
++			if ( this.nodeType != 1)
++				return;
++
+ 			if ( fn.constructor == Array )
+ 				queue(this, type, fn);
+ 			else {
+Index: src/selector.js
+===================================================================
+--- src/selector.js	(revision 4059)
++++ src/selector.js	(working copy)
+@@ -96,9 +96,9 @@
+ 		if ( typeof t != "string" )
+ 			return [ t ];
+ 
+-		// Make sure that the context is a DOM Element
+-		if ( context && !context.nodeType )
+-			context = null;
++		// check to make sure context is a DOM element or a document
++		if ( context && context.nodeType != 1 && context.nodeType != 9)
++			return [ ];
+ 
+ 		// Set the correct context (if none is provided)
+ 		context = context || document;
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 4059)
++++ src/event.js	(working copy)
+@@ -8,6 +8,9 @@
+ 	// Bind an event to an element
+ 	// Original by Dean Edwards
+ 	add: function(element, type, handler, data) {
++		if ( element.nodeType == 3 || element.nodeType == 8 )
++			return;
++
+ 		// For whatever reason, IE has trouble passing the window object
+ 		// around, causing it to be cloned in the process
+ 		if ( jQuery.browser.msie && element.setInterval != undefined )
+@@ -83,6 +86,9 @@
+ 
+ 	// Detach an event or set of events from an element
+ 	remove: function(element, type, handler) {
++		if ( element.nodeType == 3 || element.nodeType == 8 )
++			return;
++
+ 		var events = jQuery.data(element, "events"), ret, index;
+ 
+ 		// Namespaced event handlers
+@@ -147,6 +153,9 @@
+ 
+ 		// Handle triggering a single element
+ 		} else {
++			if ( element.nodeType == 3 || element.nodeType == 8 )
++				return;
++
+ 			var val, ret, fn = jQuery.isFunction( element[ type ] || null ),
+ 				// Check to see if we need to provide a fake event, or not
+ 				event = !data[0] || !data[0].preventDefault;
+@@ -273,7 +282,7 @@
+ 		if ( event.pageX == null && event.clientX != null ) {
+ 			var doc = document.documentElement, body = document.body;
+ 			event.pageX = event.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc.clientLeft || 0);
+-			event.pageY = event.clientY + (doc && doc.scrollTop  || body && body.scrollTop  || 0) - (doc.clientLeft || 0);
++			event.pageY = event.clientY + (doc && doc.scrollTop || body && body.scrollTop || 0) - (doc.clientLeft || 0);
+ 		}
+ 			
+ 		// Add which for key events
+@@ -437,7 +446,7 @@
+ 	
+ 	// If Safari or IE is used
+ 	// Continually check to see if the document is ready
+-	if  (jQuery.browser.msie || jQuery.browser.safari ) (function(){
++	if (jQuery.browser.msie || jQuery.browser.safari ) (function(){
+ 		try {
+ 			// If IE is used, use the trick by Diego Perini
+ 			// http://javascript.nwbox.com/IEContentLoaded/

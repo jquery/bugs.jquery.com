@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+	<meta name="author" content="TPLog">
+	<script type="text/javascript" src="scripts/jquery.js"></script>
+	
+	<script>
+	$(document).ready(function()  
+	{
+			multiselect=true;
+			$("#elementview .gridRow").click(function(){
+				if (!multiselect ) {
+					$("#elementview .selected").removeClass("selected");
+					$(this).addClass("selected");	
+				}
+				else {
+					if ($(this).hasClass('selected')) {
+						$(this).removeClass("selected");
+					} else 	{	
+						$(this).addClass("selected");
+					}	
+				}		
+				nb=$("#elementview .selected").size()-1;
+				var idelem= $("#elementview .selected").eq(nb).attr("id");
+				alert(idelem);
+				// second version showing incorrect id (Always the first one!)
+				idelem= $("#elementview .selected:last").attr("id");
+				alert(idelem);
+	
+			});		 
+	});
+	</script>
+	<style>
+	.selected {
+		background-color: #CCF;
+	}
+	</style>
+
+</head>
+
+<body>
+
+<div id="elementview" style="overflow: auto; width: 320px; height: 460px;">
+	<div id="671" class="gridRow">
+		<span>AAAAAAAAAAAAAAAAAAAA</span>
+	</div>
+	<div id="1" class="gridRow">
+		<span>BBBBBBBBBBBBBBBBBBB</span>
+	</div>
+	<div id="866" class="gridRow">
+		<span>CCCCCCCCCCCCCCCCCCC</span>
+	</div>
+	<div id="2" class="gridRow" style="">
+		<span>DDDDDDDDDDDDDDDDDDDDDDDD</span>
+	</div>
+	<div id="3" class="gridRow" style="">
+		<span>EEEEEEEEEEEEEEEEEEEEEEEEE</span>
+	</div>
+</div>
+</body>
+</html>

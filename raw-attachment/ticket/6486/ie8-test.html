@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>ie8 test</title>
+    </head>
+    <body>
+        <form action="#">
+            <div id="my-div">
+                <input type="checkbox" value="1" id="ie8-test" />
+               This box will clone itself after 5 seconds. Please check the box.
+            </div>
+        </form>
+        <script src="http://code.jquery.com/jquery-1.4.2.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            setTimeout(function () {
+                $('#my-div').append('<br />Cloning ....<br />');
+                var jInput = $('#ie8-test');
+                var jClone = jInput.clone().appendTo('#my-div');
+                $('#my-div').append(' Now try again in IE7 mode using the developer toolbar.')
+            }, 5000);
+        </script>
+    </body>
+</html>

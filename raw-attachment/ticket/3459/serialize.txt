@@ -1,0 +1,72 @@
+    var draggable_isBeingDragged;
+    var current_draggable_id = null;
+    var drag_event_object = null;
+    var serial = null;
+	var totalDraggables = 0;
+    function initSortables() {
+        draggable_isBeingDragged = false;
+        drag_event_object = $(".drag_base").hover(            
+            function() {
+                if(draggable_isBeingDragged==true || current_draggable_id == $(this).attr("id")) return;
+                current_draggable_id = $(this).attr("id");
+                $(this).Sortable({
+                    accept:         'drag_widget',
+                    helperclass :     'sorthelper',
+                    activeclass :     'sortableactive',
+                    hoverclass :     'sortablehover',
+                    opacity:         0.4,
+                    fx:                20,
+                    axis:            'vertically',
+                    revert:            false,
+                    containment:    $(this),
+                    onStart:        function() {draggable_isBeingDragged = true;},
+                    onStop:            function() {draggable_isBeingDragged = false;serialize(current_draggable_id)},
+                    insideParent:    true
+                })
+            },
+            function() {
+                if(draggable_isBeingDragged==true) return;
+                if(current_draggable_id) {
+					serialize(current_draggable_id);
+                }
+            }
+        );
+    }
+
+
+
+   function serialize(id) {
+	
+        serial = $.SortSerialize(id);
+		serialArr = serial.hash.split("&");
+		var workingArr = null;
+		var finalStr = "";
+
+		if (document.getElementById('edit_portlet_layout')) {
+			var pageType = id.split('_')[2];
+			var displayOrder = id.split('_')[3];
+			
+			for (var i=0; i<serialArr.length; i++) {
+				if (finalStr != '')	finalStr += ",";
+				finalStr += serialArr[i].split("_")[6];			
+			}
+			$("#hiddenInput_"+pageType+"_"+displayOrder).val(finalStr);			
+		} else {
+			for (var i=0; i<serialArr.length; i++) {
+				workingArr = serialArr[i].split("_");
+				for (var j=0; j<workingArr.length; j++) {
+					if (!isNaN(workingArr[j])) {
+						if (finalStr != "") {	finalStr += ",";	}
+						finalStr += workingArr[j];
+					} 
+				}
+			}		
+			if (document.getElementById('links_sortables_string')) {
+				$("#links_sortables_string").val(finalStr);
+			}
+		}
+		
+		$("#"+current_draggable_id).SortableDestroy();
+		current_draggable_id = null;
+		drag_event_object = null;
+    }

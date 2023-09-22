@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>iframe window test</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="jquery-1.3.2.js"></script>
+		<script type="text/javascript">
+		
+			$( function() {
+			
+				var iframeWindow = $("iframe")[0].contentWindow;
+				iframeWindow.name = "iframeWindow";
+				window.name = "window";
+			
+				$([ iframeWindow, window ]).each( function() {
+					var name = this.name;
+					$( this ).resize( function() {
+						$("<p/>")
+							.text( "This should be appended to " + name )
+							.appendTo( this.document.body );
+					})
+				})
+			})
+		
+		</script>
+	</head>
+	<body>
+		<p>Resize this window to test.</p>
+		<iframe style='width: 100%'></iframe>
+	</body>
+</html>

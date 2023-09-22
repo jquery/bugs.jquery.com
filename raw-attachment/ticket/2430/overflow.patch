@@ -1,0 +1,25 @@
+Index: src/fx.js
+===================================================================
+--- src/fx.js	(revision 4843)
++++ src/fx.js	(working copy)
+@@ -69,8 +69,10 @@
+ 		return this.animate({opacity: to}, speed, callback);
+ 	},
+ 	
+-	animate: function( prop, speed, easing, callback ) {
++	animate: function( prop, speed, easing, callback, changeOverflow ) {
+ 		var optall = jQuery.speed(speed, easing, callback);
++		// default value of change overflow is true
++		changeOverflow = typeof(changeOverflow) == "undefined" ?  true : changeOverflow;
+ 
+ 		return this[ optall.queue === false ? "each" : "queue" ](function(){
+ 			if ( this.nodeType != 1)
+@@ -92,7 +94,7 @@
+ 				}
+ 			}
+ 
+-			if ( opt.overflow != null )
++			if ( changeOverflow && opt.overflow != null )
+ 				this.style.overflow = "hidden";
+ 
+ 			opt.curAnim = jQuery.extend({}, prop);

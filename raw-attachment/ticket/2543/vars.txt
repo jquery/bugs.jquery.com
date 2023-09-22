@@ -1,0 +1,323 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 5084)
++++ src/core.js	(working copy)
+@@ -729,24 +729,25 @@
+ 
+ 	// args is for internal usage only
+ 	each: function( object, callback, args ) {
++		var i = 0, name, length = object.length;
+ 		if ( args ) {
+-			if ( object.length == undefined ) {
+-				for ( var name in object )
++			if ( length == undefined ) {
++				for ( name in object )
+ 					if ( callback.apply( object[ name ], args ) === false )
+ 						break;
+ 			} else
+-				for ( var i = 0, length = object.length; i < length; i++ )
++				for ( ; i < length; i++ )
+ 					if ( callback.apply( object[ i ], args ) === false )
+ 						break;
+ 
+ 		// A special, fast, case for the most common use of each
+ 		} else {
+-			if ( object.length == undefined ) {
+-				for ( var name in object )
++			if ( length == undefined ) {
++				for ( name in object )
+ 					if ( callback.call( object[ name ], name, object[ name ] ) === false )
+ 						break;
+ 			} else
+-				for ( var i = 0, length = object.length, value = object[0]; 
++				for ( var value = object[0]; 
+ 					i < length && callback.call( value, i, value ) !== false; value = object[++i] ){}
+ 		}
+ 
+@@ -791,9 +792,9 @@
+ 
+ 	// A method for quickly swapping in/out CSS properties to get correct calculations
+ 	swap: function( elem, options, callback ) {
+-		var old = {};
++		var old = {}, name;
+ 		// Remember the old values, and insert the new ones
+-		for ( var name in options ) {
++		for ( name in options ) {
+ 			old[ name ] = elem.style[ name ];
+ 			elem.style[ name ] = options[ name ];
+ 		}
+@@ -801,7 +802,7 @@
+ 		callback.call( elem );
+ 
+ 		// Revert the old values
+-		for ( var name in options )
++		for ( name in options )
+ 			elem.style[ name ] = old[ name ];
+ 	},
+ 
+@@ -831,7 +832,7 @@
+ 	},
+ 
+ 	curCSS: function( elem, name, force ) {
+-		var ret;
++		var ret, estyle = elem.style;
+ 
+ 		// A helper method for determining if an element's values are broken
+ 		function color( elem ) {
+@@ -844,7 +845,7 @@
+ 
+ 		// We need to handle opacity special in IE
+ 		if ( name == "opacity" && jQuery.browser.msie ) {
+-			ret = jQuery.attr( elem.style, "opacity" );
++			ret = jQuery.attr( estyle, "opacity" );
+ 
+ 			return ret == "" ?
+ 				"1" :
+@@ -852,17 +853,17 @@
+ 		}
+ 		// Opera sometimes will give the wrong display answer, this fixes it, see #2037
+ 		if ( jQuery.browser.opera && name == "display" ) {
+-			var save = elem.style.outline;
+-			elem.style.outline = "0 solid black";
+-			elem.style.outline = save;
++			var save = estyle.outline;
++			estyle.outline = "0 solid black";
++			estyle.outline = save;
+ 		}
+ 		
+ 		// Make sure we're using the right name for getting the float value
+ 		if ( name.match( /float/i ) )
+ 			name = styleFloat;
+ 
+-		if ( !force && elem.style && elem.style[ name ] )
+-			ret = elem.style[ name ];
++		if ( !force && estyle && estyle[ name ] )
++			ret = style[ name ];
+ 
+ 		else if ( document.defaultView && document.defaultView.getComputedStyle ) {
+ 
+@@ -880,7 +881,7 @@
+ 			// If the element isn't reporting its values properly in Safari
+ 			// then some display: none elements are involved
+ 			else {
+-				var swap = [], stack = [];
++				var swap = [], stack = [], i = 0;
+ 
+ 				// Locate all of the parent display: none elements
+ 				for ( var a = elem; a && color(a); a = a.parentNode )
+@@ -888,7 +889,7 @@
+ 
+ 				// Go through and make them visible, but in reverse
+ 				// (It would be better if we knew the exact display type that they had)
+-				for ( var i = 0; i < stack.length; i++ )
++				for ( ; i < stack.length; i++ )
+ 					if ( color( stack[ i ] ) ) {
+ 						swap[ i ] = stack[ i ].style.display;
+ 						stack[ i ].style.display = "block";
+@@ -901,7 +902,7 @@
+ 					( getComputedStyle && getComputedStyle.getPropertyValue( name ) ) || "";
+ 
+ 				// Finally, revert the display styles back
+-				for ( var i = 0; i < swap.length; i++ )
++				for ( ; i < swap.length; i++ )
+ 					if ( swap[ i ] != null )
+ 						stack[ i ].style.display = swap[ i ];
+ 			}
+@@ -924,15 +925,15 @@
+ 			// but a number that has a weird ending, we need to convert it to pixels
+ 			if ( !/^\d+(px)?$/i.test( ret ) && /^\d/.test( ret ) ) {
+ 				// Remember the original values
+-				var style = elem.style.left, runtimeStyle = elem.runtimeStyle.left;
++				var style = estyle.left, runtimeStyle = elem.runtimeStyle.left;
+ 
+ 				// Put in the new values to get a computed value out
+ 				elem.runtimeStyle.left = elem.currentStyle.left;
+-				elem.style.left = ret || 0;
+-				ret = elem.style.pixelLeft + "px";
++				estyle.left = ret || 0;
++				ret = estyle.pixelLeft + "px";
+ 
+ 				// Revert the changed values
+-				elem.style.left = style;
++				estyle.left = style;
+ 				elem.runtimeStyle.left = runtimeStyle;
+ 			}
+ 		}
+@@ -1144,13 +1145,14 @@
+ 
+ 		// Also, we need to make sure that the correct elements are being returned
+ 		// (IE returns comment nodes in a '*' query)
++		var i = 0;
+ 		if ( jQuery.browser.msie ) {
+-			for ( var i = 0; second[ i ]; i++ )
++			for (; second[ i ]; i++ )
+ 				if ( second[ i ].nodeType != 8 )
+ 					first.push( second[ i ] );
+ 
+ 		} else
+-			for ( var i = 0; second[ i ]; i++ )
++			for (; second[ i ]; i++ )
+ 				first.push( second[ i ] );
+ 
+ 		return first;
+Index: src/fx.js
+===================================================================
+--- src/fx.js	(revision 5084)
++++ src/fx.js	(working copy)
+@@ -76,8 +76,8 @@
+ 			if ( this.nodeType != 1)
+ 				return false;
+ 
+-			var opt = jQuery.extend({}, optall);
+-			var hidden = jQuery(this).is(":hidden"), self = this;
++			var opt = jQuery.extend({}, optall),
++				hidden = jQuery(this).is(":hidden"), self = this;
+ 			
+ 			for ( var p in prop ) {
+ 				if ( prop[p] == "hide" && hidden || prop[p] == "show" && !hidden )
+Index: src/selector.js
+===================================================================
+--- src/selector.js	(revision 5084)
++++ src/selector.js	(working copy)
+@@ -114,12 +114,12 @@
+ 
+ 			t = jQuery.trim(t);
+ 
+-			var foundToken = false;
++			var foundToken = false,
+ 
+ 			// An attempt at speeding up child selectors that
+ 			// point to a specific element tag
+-			var re = quickChild;
+-			var m = re.exec(t);
++				re = quickChild,
++				m = re.exec(t);
+ 
+ 			if ( m ) {
+ 				nodeName = m[1].toUpperCase();
+@@ -188,8 +188,8 @@
+ 
+ 				} else {
+ 					// Optimize for the case nodeName#idName
+-					var re2 = quickID;
+-					var m = re2.exec(t);
++					re2 = quickID;
++					m = re2.exec(t);
+ 					
+ 					// Re-organize the results, so that they're consistent
+ 					if ( m ) {
+@@ -222,7 +222,7 @@
+ 						ret = r = oid && (!m[3] || jQuery.nodeName(oid, m[3])) ? [oid] : [];
+ 					} else {
+ 						// We need to find all descendant elements
+-						for ( var i = 0; ret[i]; i++ ) {
++						for ( i = 0; ret[i]; i++ ) {
+ 							// Grab the tag name being searched for
+ 							var tag = m[1] == "#" && m[3] ? m[3] : m[1] != "" || m[0] == "" ? "*" : m[2];
+ 
+@@ -242,7 +242,7 @@
+ 							var tmp = [];
+ 
+ 							// Try to find the element with the ID
+-							for ( var i = 0; r[i]; i++ )
++							for ( i = 0; r[i]; i++ )
+ 								if ( r[i].getAttribute("id") == m[2] ) {
+ 									tmp = [ r[i] ];
+ 									break;
+@@ -301,9 +301,9 @@
+ 		while ( t && t != last ) {
+ 			last = t;
+ 
+-			var p = jQuery.parse, m;
++			var p = jQuery.parse, m, i = 0, tmp = [];
+ 
+-			for ( var i = 0; p[i]; i++ ) {
++			for ( ; p[i]; i++ ) {
+ 				m = p[i].exec( t );
+ 
+ 				if ( m ) {
+@@ -331,9 +331,9 @@
+ 				r = jQuery.classFilter(r, m[2], not);
+ 
+ 			else if ( m[1] == "[" ) {
+-				var tmp = [], type = m[3];
++				var type = m[3], i = 0, rl = r.length;
+ 				
+-				for ( var i = 0, rl = r.length; i < rl; i++ ) {
++				for ( ; i < rl; i++ ) {
+ 					var a = r[i], z = a[ jQuery.props[m[2]] || m[2] ];
+ 					
+ 					if ( z == null || /href|src|selected/.test(m[2]) )
+@@ -352,16 +352,17 @@
+ 
+ 			// We can get a speed boost by handling nth-child here
+ 			} else if ( m[1] == ":" && m[2] == "nth-child" ) {
+-				var merge = {}, tmp = [],
++				var merge = {},
+ 					// parse equations like 'even', 'odd', '5', '2n', '3n+2', '4n-1', '-n+6'
+ 					test = /(-?)(\d*)n((?:\+|-)?\d*)/.exec(
+ 						m[3] == "even" && "2n" || m[3] == "odd" && "2n+1" ||
+ 						!/\D/.test(m[3]) && "0n+" + m[3] || m[3]),
+ 					// calculate the numbers (first)n+(last) including if they are negative
+-					first = (test[1] + (test[2] || 1)) - 0, last = test[3] - 0;
++					first = (test[1] + (test[2] || 1)) - 0;
++				last = test[3] - 0;
+  
+ 				// loop through all the elements left in the jQuery object
+-				for ( var i = 0, rl = r.length; i < rl; i++ ) {
++				for ( i = 0, rl = r.length; i < rl; i++ ) {
+ 					var node = r[i], parentNode = node.parentNode, id = jQuery.data(parentNode);
+ 
+ 					if ( !merge[id] ) {
+@@ -410,8 +411,8 @@
+ 	},
+ 
+ 	dir: function( elem, dir ){
+-		var matched = [];
+-		var cur = elem[dir];
++		var matched = [],
++			cur = elem[dir];
+ 		while ( cur && cur != document ) {
+ 			if ( cur.nodeType == 1 )
+ 				matched.push( cur );
+Index: src/event.js
+===================================================================
+--- src/event.js	(revision 5084)
++++ src/event.js	(working copy)
+@@ -105,7 +105,7 @@
+ 		if ( elem.nodeType == 3 || elem.nodeType == 8 )
+ 			return;
+ 
+-		var events = jQuery.data(elem, "events"), ret, index;
++		var events = jQuery.data(elem, "events"), ret;
+ 
+ 		if ( events ) {
+ 			// Unbind all events for the element
+Index: src/ajax.js
+===================================================================
+--- src/ajax.js	(revision 5084)
++++ src/ajax.js	(working copy)
+@@ -233,8 +233,8 @@
+ 		// If we're requesting a remote document
+ 		// and trying to load JSON or Script with a GET
+ 		if ( (!s.url.indexOf("http") || !s.url.indexOf("//")) && s.dataType == "script" && s.type.toLowerCase() == "get" ) {
+-			var head = document.getElementsByTagName("head")[0];
+-			var script = document.createElement("script");
++			var head = document.getElementsByTagName("head")[0],
++				script = document.createElement("script");
+ 			script.src = s.url;
+ 			if (s.scriptCharset)
+ 				script.charset = s.scriptCharset;
+@@ -443,9 +443,9 @@
+ 	},
+ 
+ 	httpData: function( r, type ) {
+-		var ct = r.getResponseHeader("content-type");
+-		var xml = type == "xml" || !type && ct && ct.indexOf("xml") >= 0;
+-		var data = xml ? r.responseXML : r.responseText;
++		var ct = r.getResponseHeader("content-type"),
++			xml = type == "xml" || !type && ct && ct.indexOf("xml") >= 0,
++			data = xml ? r.responseXML : r.responseText;
+ 
+ 		if ( xml && data.documentElement.tagName == "parsererror" )
+ 			throw "parsererror";

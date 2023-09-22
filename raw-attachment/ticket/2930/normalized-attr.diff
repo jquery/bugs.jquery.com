@@ -1,0 +1,70 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 5679)
++++ src/core.js	(working copy)
+@@ -1057,7 +1057,7 @@
+ 				elem.parentNode.selectedIndex;
+ 
+ 			// If applicable, access the attribute via the DOM 0 way
+-			if ( notxml && !special && name in elem ) {
++			if ( name in elem && notxml && !special ) {
+ 				if ( set ){
+ 					// We can't allow the type property to be changed (since it causes problems in IE)
+ 					if ( name == "type" && jQuery.nodeName( elem, "input" ) && elem.parentNode )
+@@ -1080,10 +1080,13 @@
+ 				// convert the value to a string (all browsers do this but IE) see #1070
+ 				elem.setAttribute( name, "" + value );
+ 
+-			if ( msie && special && notxml )
+-				return elem.getAttribute( name, 2 );
++			var attr = msie && notxml && special
++					// Some attributes require a special call on IE
++					? elem.getAttribute( name, 2 )
++					: elem.getAttribute( name );
+ 
+-			return elem.getAttribute( name );
++			// Non-existent attributes return null, we normalize to undefined
++			return attr === null ? undefined : attr;
+ 
+ 		}
+ 
+Index: test/unit/core.js
+===================================================================
+--- test/unit/core.js	(revision 5679)
++++ test/unit/core.js	(working copy)
+@@ -320,7 +320,7 @@
+ });
+ 
+ test("attr(String)", function() {
+-	expect(20);
++	expect(26);
+ 	equals( $('#text1').attr('value'), "Test", 'Check for value attribute' );
+ 	equals( $('#text1').attr('value', "Test2").attr('defaultValue'), "Test", 'Check for defaultValue attribute' );
+ 	equals( $('#text1').attr('type'), "text", 'Check for type attribute' );
+@@ -343,6 +343,26 @@
+ 	
+ 	$('<a id="tAnchor5"></a>').attr('href', '#5').appendTo('#main'); // using innerHTML in IE causes href attribute to be serialized to the full path
+ 	equals( $('#tAnchor5').attr('href'), "#5", 'Check for non-absolute href (an anchor)' );
++	
++	// Enabled since [5574]
++	var body = document.body, $body = $(body);
++	
++	ok( $body.attr('foo') === undefined, 'Make sure that a non existent attribute returns undefined' );
++	ok( $body.attr('nextSibling') === null, 'Make sure a null expando returns null' );
++	
++	body.setAttribute('foo', 'baz');	
++	equals( $body.attr('foo'), 'baz', 'Make sure the dom attribute is retrieved when no expando is found' );
++	
++	body.foo = 'bar';
++	equals( $body.attr('foo'), 'bar', 'Make sure the expando is preferred over the dom attribute' );
++	
++	$body.attr('foo','cool');
++	equals( $body.attr('foo'), 'cool', 'Make sure that setting works well when both expando and dom attribute are available' );
++	
++	body.foo = undefined;
++	ok( $body.attr('foo') === undefined, 'Make sure the expando is preferred over the dom attribute, even if undefined' );
++	
++	body.removeAttribute('foo'); // Cleanup
+ });
+ 
+ if ( !isLocal ) {

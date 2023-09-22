@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>Test animate of tbody</title>
+<script src="jquery-1.3.2.js"></script>
+<script type="text/javascript">
+jQuery( function($) {
+  var anim_speed = 250;
+  var target = $('#middle');
+  $('#hm').click( function() {
+    target.slideUp(anim_speed);
+    return false;
+  });
+  $('#sm').click( function() {
+    target.slideDown(anim_speed);
+    return false;
+  });
+  
+});
+</script>
+</head>
+<body>
+<ul>
+  <li><a href="#" id="hm">Hide middle</a></li>
+  <li><a href="#" id="sm">Show middle</a></li>
+</ul>
+<table>
+<tbody><tr><td>First row</td></tr></tbody>
+<tbody id="middle" style="display: table-row-group"><tr><td>Middle row</td></tr></tbody>
+<tbody><tr><td>Last row</td></tr></tbody>
+</table>
+</body>
+</html>

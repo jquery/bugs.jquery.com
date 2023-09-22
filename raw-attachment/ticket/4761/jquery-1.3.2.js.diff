@@ -1,0 +1,12 @@
+diff U3 C:/Users/PiBiK/Documents/My Dropbox/jsdoc-toolkit/magnet.other/jquery-1.3.2.js C:/Users/PiBiK/Documents/My Dropbox/jsdoc-toolkit/magnet.other/jquery/jquery-1.3.2.js
+--- C:/Users/PiBiK/Documents/My Dropbox/jsdoc-toolkit/magnet.other/jquery-1.3.2.js	Sun Jun 14 14:16:36 2009
++++ C:/Users/PiBiK/Documents/My Dropbox/jsdoc-toolkit/magnet.other/jquery/jquery-1.3.2.js	Sun Jun 14 14:16:12 2009
+@@ -1779,7 +1779,7 @@
+ 
+ 			for ( var i = 0, elem; (elem = curLoop[i]) != null; i++ ) {
+ 				if ( elem ) {
+-					if ( not ^ (elem.className && (" " + elem.className + " ").indexOf(match) >= 0) ) {
++					if ( not ^ (elem.className && (" " + elem.className.replace(/\r\n/g, " ") + " ").indexOf(match) >= 0) ) {
+ 						if ( !inplace )
+ 							result.push( elem );
+ 					} else if ( inplace ) {

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Test Calendar</title>
+    <script type="text/javascript" src="/billing/js/jquery.ui-1.5.2/jquery-1.2.6.js"></script>
+    <script type="text/javascript" src="/billing/js/jquery.dimensions.js"></script>
+    <script type="text/javascript" src="/billing/js/jquery.ui-1.5.2/ui/ui.datepicker.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#inline").datepicker({
+                'onSelect': function(date) { 
+                    alert("The chosen date is " + date);
+                }
+            }); 
+        });
+    </script>
+</head>
+<body>
+    <div id="inline"></div>
+</body>
+</html>

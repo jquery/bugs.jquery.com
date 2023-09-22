@@ -1,0 +1,48 @@
+<html>
+<head>
+<script type="text/javascript" src="jquery.pack.js">/* jQuery core */</script>
+<script type='text/javascript'>
+
+ $(document).ready(function(){
+	$('#DoubleClickTest').dblclick(function(){
+		alert("Double-click handler called.");
+	});
+});
+</script>
+</head>
+<body>
+<div id='DoubleClickTest'>double-clicking this field should pop up an alert()</div>
+
+<!--
+Hiya!
+
+It would seem that adding a .dblclick() handler is useless in konqueror 3.5.7 (don't know about other versions). A .click() handler works fine, but a .dblclick() handler is never called (same code works in Firefox 2.0.0.4, though).
+
+i've tried both 1.1.3.1 and the latest CVS code (as of 02:00 GMT+1, 10th July 2007).
+
+A test case is attached, but you must replace the internal jquery.pack.js URL with your own.
+
+Err.... creating the ticket with attachment FAILED due to lack of space on the target drive. So i'm pasting in the test case code here:
+
+
+{{{
+<script type='text/javascript'>
+
+ $(document).ready(function(){
+	$('#DoubleClickTest').dblclick(function(){
+		alert("Double-click handler called.");
+	});
+});
+</script>
+
+<div id='DoubleClickTest'>double-clicking this field should pop up an alert()</div>
+}}}
+
+
+
+In Firefox 2.0.0.4 that calls alert() on a dblclick, but in konqi the handler is never called.
+
+-->
+
+
+</body></html>

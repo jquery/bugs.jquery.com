@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<title>A Tree</title>
+		<script src='jQuery.js'> </script>
+		<script>
+			var mustHide = false;
+
+			function showHide(element)
+			{
+				if(mustHide) {
+						$(element).next().hide();
+				} else {
+						$(element).next().show();
+				}
+
+				mustHide = ! mustHide;
+			}
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li>Een</li>
+			<li onclick='showHide(this)'>Twee</li>
+			<ul>
+				<li>A</li>
+				<li>B</li>
+				<li>C</li>
+			</ul>
+			<li>Drie</li>
+			<ul>
+				<li>D</li>
+				<li>E</li>
+			</ul>
+		</ul>
+	</body>
+</html>
+			

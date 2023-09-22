@@ -1,0 +1,29 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 5790)
++++ core.js	(working copy)
+@@ -274,7 +274,7 @@
+ 	clone: function( events ) {
+ 		// Do the clone
+ 		var ret = this.map(function(){
+-			if ( jQuery.browser.msie && !jQuery.isXMLDoc(this) ) {
++			return jQuery.browser.msie && !jQuery.isXMLDoc(this) ?
+ 				// IE copies events bound via attachEvent when
+ 				// using cloneNode. Calling detachEvent on the
+ 				// clone will also remove the events from the orignal
+@@ -283,12 +283,9 @@
+ 				// attributes in IE that are actually only stored
+ 				// as properties will not be copied (such as the
+ 				// the name attribute on an input).
+-				var clone = this.cloneNode(true),
+-					container = document.createElement("div");
+-				container.appendChild(clone);
+-				return jQuery.clean([container.innerHTML])[0];
+-			} else
+-				return this.cloneNode(true);
++				jQuery.clean([this.outerHTML], this)[0] :
++				// W3C
++				this.cloneNode(true);
+ 		});
+ 
+ 		// Need to set the expando to null on the cloned set if it exists

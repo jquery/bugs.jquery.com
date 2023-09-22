@@ -1,0 +1,67 @@
+Index: jquery.fastTrigger.js
+===================================================================
+--- jquery.fastTrigger.js	(revision 5641)
++++ jquery.fastTrigger.js	(working copy)
+@@ -10,33 +10,38 @@
+  * @version 1.0.0
+  */
+ ;(function( $ ){
+-	
+-	//this is a fake event object, will stay with us all along, don't break it
+-	var event = {
+-		//no need for real data, what data would you expect from a programmatic trigger
+-		pageX:0,
+-		pageY:0,
+-		which:0,
+-		button:0,
+-		metaKey:false,
+-		ctrlKey:false,
+-		charCode:' ',
+-		keyCode:0,
+-		//no need for real functions
+-		preventDefault:function(){},
+-		stopPropagation:function(){}
+-	};
++	function makeEvent() {
++		//this is a fake event object, will stay with us all along, don't break it
++		var event = {
++			//no need for real data, what data would you expect from a programatic trigger
++			pageX:0,
++			pageY:0,
++			which:0,
++			button:0,
++			metaKey:false,
++			ctrlKey:false,
++			charCode:' ',
++			keyCode:0,
++			//no need for real functions
++			preventDefault:function(){},
++			stopPropagation:function(){}
++		};
++		
++		return event;
++	}
+ 
+ 	$.fn.fastTrigger = function( type, args ){
+-		var e = event,
+-			ns, any = true;//any is the same as "not-exclusive"
++		var e, ns, any = true;//any is the same as "not-exclusive"
+ 		
+-		if( !args || !args.length )//what if args is a string ? args CAN'T be a string (docs.jquery.com).
+-			args = null;//args must be an array, or nothing
+-		else if( args[0].preventDefault )
+-			e = args[0];		
+-		else
+-			args.unshift( e );
++		if( !args || !args.length ) {//what if args is a string ? args CAN'T be a string (docs.jquery.com).
++			args = null;//args must be an array, or nothing
++			e = makeEvent();
++		} else if( args[0].preventDefault ) {
++			e = args[0];
++		} else {
++			e = makeEvent();
++			args.unshift( e );
++		}
+ 		
+ 		if( type.indexOf('!') != -1 ){
+ 			any = false;//exclusive

@@ -1,0 +1,269 @@
+--- event.js.orig	2008-03-26 18:52:33.000000000 +0100
++++ event.js	2008-03-26 23:22:57.000000000 +0100
+@@ -236,21 +236,24 @@
+ 	},
+ 
+ 	handle: function(event) {
+-		// returned undefined or false
+-		var val;
++		// val is returned undefined or false
++		var j, args, events, handler, handlers, parts, ret, val;
+ 
+ 		// Empty object is for triggered events with no data
+ 		event = jQuery.event.fix( event || window.event || {} ); 
+ 
+ 		// Namespaced event handlers
+-		var parts = event.type.split(".");
+-		event.type = parts[0];
+-
+-		var handlers = jQuery.data(this, "events") && jQuery.data(this, "events")[event.type], args = Array.prototype.slice.call( arguments, 1 );
++		parts = event.type.split(".");
++		if (event.type != parts[0])
++			event.type = parts[0];
++
++		events = jQuery.data(this, "events");
++		handlers = events && events[event.type];
++		args = Array.prototype.slice.call( arguments, 1 );
+ 		args.unshift( event );
+ 
+-		for ( var j in handlers ) {
+-			var handler = handlers[j];
++		for ( j in handlers ) {
++			handler = handlers[j];
+ 			// Pass in a reference to the handler function itself
+ 			// So that we can later remove it
+ 			args[0].handler = handler;
+@@ -258,7 +261,7 @@
+ 
+ 			// Filter the functions by class
+ 			if ( !parts[1] && !event.exclusive || handler.type == parts[1] ) {
+-				var ret = handler.apply( this, args );
++				ret = handler.apply( this, args );
+ 
+ 				if ( val !== false )
+ 					val = ret;
+@@ -278,64 +278,166 @@
+ 		return val;
+ 	},
+ 
+-	fix: function(event) {
+-		// store a copy of the original event object 
+-		// and clone to set read-only properties
+-		var originalEvent = event;
+-		event = jQuery.extend({}, originalEvent);
+-		
+-		// add preventDefault and stopPropagation since 
+-		// they will not work on the clone
+-		event.preventDefault = function() {
+-			// if preventDefault exists run it on the original event
+-			if (originalEvent.preventDefault)
+-				originalEvent.preventDefault();
+-			// otherwise set the returnValue property of the original event to false (IE)
+-			originalEvent.returnValue = false;
+-		};
+-		event.stopPropagation = function() {
+-			// if stopPropagation exists run it on the original event
+-			if (originalEvent.stopPropagation)
+-				originalEvent.stopPropagation();
+-			// otherwise set the cancelBubble property of the original event to true (IE)
+-			originalEvent.cancelBubble = true;
+-		};
+-		
+-		// Fix target property, if necessary
+-		if ( !event.target )
+-			event.target = event.srcElement || document; // Fixes #1925 where srcElement might not be defined either
+-				
+-		// check if target is a textnode (safari)
+-		if ( event.target.nodeType == 3 )
+-			event.target = originalEvent.target.parentNode;
+-
+-		// Add relatedTarget, if necessary
+-		if ( !event.relatedTarget && event.fromElement )
+-			event.relatedTarget = event.fromElement == event.target ? event.toElement : event.fromElement;
+-
+-		// Calculate pageX/Y if missing and clientX/Y available
+-		if ( event.pageX == null && event.clientX != null ) {
+-			var doc = document.documentElement, body = document.body;
+-			event.pageX = event.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc.clientLeft || 0);
+-			event.pageY = event.clientY + (doc && doc.scrollTop || body && body.scrollTop || 0) - (doc.clientTop || 0);
+-		}
+-			
+-		// Add which for key events
+-		if ( !event.which && ((event.charCode || event.charCode === 0) ? event.charCode : event.keyCode) )
+-			event.which = event.charCode || event.keyCode;
+-		
+-		// Add metaKey to non-Mac browsers (use ctrl for PC's and Meta for Macs)
+-		if ( !event.metaKey && event.ctrlKey )
+-			event.metaKey = event.ctrlKey;
+-
+-		// Add which for click: 1 == left; 2 == middle; 3 == right
+-		// Note: button is not normalized, so don't use it
+-		if ( !event.which && event.button )
+-			event.which = (event.button & 1 ? 1 : ( event.button & 2 ? 3 : ( event.button & 4 ? 2 : 0 ) ));
+-			
+-		return event;
+-	},
+-	
++	// create a new event object to be able to set
++	// properties that normally are just read-only
++	create: function(e, target, source) {
++
++		// need to set defult values
++		return e.originalEvent ? e : {
++
++			type: e.type,
++
++			pageX: e.pageX || 0,
++			pageY: e.pageY || 0,
++
++			clientX: e.clientX || 0,
++			clientY: e.clientY || 0,
++
++			screenX: e.screenX || 0,
++			screenY: e.screenY || 0,
++
++			// target is a parameter
++			target: target || window,
++
++			altKey: e.altKey || false,
++			button: e.button || false,
++			ctrlKey: e.ctrlKey || false,
++			metaKey: e.metaKey || false,
++			shiftKey: e.shiftKey || false,
++
++			details: e.details || null,
++			wheelDelta: e.wheelDelta || 0,
++
++			bubbles: e.bubbles || true,
++			cancelable: e.cancelable || true,
++
++			eventPhase: e.eventPhase || 0,
++			timeStamp: e.timeStamp || (new Date()).getTime(),
++
++			// target and source are parameters
++			relatedTarget: e.relatedTarget || target || null,
++			currentTarget: e.currentTarget || source || null,
++
++			view: e.view || window,
++
++			relatedNode: e.relatedNode || null,
++
++			prevValue: e.prevValue || null,
++			newValue: e.newValue || null,
++
++			attrName: e.attrName || '',
++			attrChange: e.attrChange || false,
++
++			data: e.data || null,
++			handler: e.handler || null,
++			exclusive: e.exclusive || false,
++
++			// reference to the original event
++			originalEvent: e
++
++ 		};
++
++	},
++
++	fix: function(e, o) {
++
++		// cache this
++		var root = document.documentElement, body = document.body;
++
++		// optimized using lazy function definition
++		// and recreating a new event object template
++
++		if ( document.createEventObject ) {
++
++			jQuery.event.fix = function(e, o) {
++
++				var ev = e;
++
++				ev.target = ev.target || ev.srcElement || window;
++
++				// prevent the execution of the default action
++				ev.preventDefault = ev.preventDefault || function() {
++					// set the returnValue property of
++					// the original event to false (IE)
++					e.returnValue = false;
++				};
++
++				// stop the event bubbling up to other elements
++				ev.stopPropagation = ev.stopPropagation || function() {
++					// set the cancelBubble property of
++					// the original event to true (IE)
++					e.cancelBubble = true;
++				};
++
++				// check if target is a textnode (safari)
++				if ( ev.target.nodeType == 3 ) {
++					ev.target = ev.target.parentNode;
++				}
++
++				// Add relatedTarget, if necessary
++				ev.relatedTarget = ev.relatedTarget || (ev.fromElement == ev.target ? ev.toElement : ev.fromElement);
++
++				// Calculate pageX/Y if missing and clientX/Y available
++				ev.pageX = ev.pageX || (ev.clientX + (root && root.scrollLeft || body && body.scrollLeft || 0) - (root.clientLeft || 0));
++				ev.pageY = ev.pageY || (ev.clientY + (root && root.scrollTop || body && body.scrollTop || 0) - (root.clientTop || 0));
++
++				// Add which for key events
++				ev.which = ev.which || ev.charCode || ev.keyCode;
++
++				// Add metaKey to non-Mac browsers (use ctrl for PC's and Meta for Macs)
++				ev.metaKey = ev.metaKey || ev.ctrlKey;
++
++				// Add which for click: 1 == left; 2 == middle; 3 == right
++				// Note: button is not normalized, so don't use it
++				ev.which = ev.which || (ev.button & 1 ? 1 : ( ev.button & 2 ? 3 : ( ev.button & 4 ? 2 : 0 ) ));
++
++				// return the writable cloned event
++				return ev;
++			}
++
++		} else {
++
++			jQuery.event.fix = function(e, o) {
++
++				var ev = e;
++
++				// is it a custom event
++				if ( !ev.initEvent ) {
++
++					// create a mirror event
++					ev = jQuery.event.create(e, e.target, o);
++
++					// add preventDefault and stopPropagation since
++					// they will not work on the clone event object
++
++					// prevent the execution of the default action
++					ev.preventDefault = ev.preventDefault || function() {
++						// if preventDefault exists run it on the original event
++						if (e.preventDefault)
++							e.preventDefault();
++					};
++
++					// stop the event bubbling up to other elements
++					ev.stopPropagation = ev.stopPropagation || function() {
++						// if stopPropagation exists run it on the original event
++						if (e.stopPropagation)
++							e.stopPropagation();
++					};
++
++					// check if target is a textnode
++					if ( ev.target.nodeType == 3 ) {
++						ev.target = ev.target.parentNode;
++					}
++
++				}
++
++				return ev;
++			}
++		}
++
++		return jQuery.event.fix(e, o);
++	},
++
+ 	special: {
+ 		ready: {
+ 			setup: function() {

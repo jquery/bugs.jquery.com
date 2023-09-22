@@ -1,0 +1,18 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 5998)
++++ core.js	(working copy)
+@@ -1295,6 +1295,13 @@
+ 				this.parentNode.removeChild( this );
+ 		}
+ 	},
++	
++	removeThis: function() {
++		while ( this.firstChild ) {
++			this.parentNode.insertBefore( this.firstChild, this );
++		}
++		jQuery( this ).remove();
++	},
+ 
+ 	empty: function() {
+ 		// Remove element nodes and prevent memory leaks

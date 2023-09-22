@@ -1,0 +1,32 @@
+Index: test/unit/core.js
+===================================================================
+--- test/unit/core.js	(r‚vision 5772)
++++ test/unit/core.js	(copie de travail)
+@@ -107,7 +107,7 @@
+ });
+ 
+ test("isFunction", function() {
+-	expect(21);
++	expect(25);
+ 
+ 	// Make sure that false values return false
+ 	ok( !jQuery.isFunction(), "No Value" );
+@@ -139,6 +139,18 @@
+ 	var fn = function(){};
+ 	ok( jQuery.isFunction(fn), "Normal Function" );
+ 
++	// Function with toString() overridden (bug #3134)
++	var fnWithToString = function(){};
++	fnWithToString.toString = function(){ return "Test"; };
++	ok( jQuery.isFunction(fnWithToString), "Normal Function with toString() overridden" );
++
++	// Object with toString() function (bug #3134)
++	ok( !jQuery.isFunction({ toString: function(){ return "function"; } }), "Object with toString() function" );
++	
++	// Native functions in IE
++	ok( jQuery.isFunction( window.alert ), "alert()" );
++	ok( jQuery.isFunction( window.prompt ), "prompt()" );
++
+ 	var obj = document.createElement("object");
+ 
+ 	// Firefox says this is a function

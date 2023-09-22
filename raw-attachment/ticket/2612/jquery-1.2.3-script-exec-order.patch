@@ -1,0 +1,86 @@
+Index: jquery-1.2.3.js
+===================================================================
+--- jquery-1.2.3.js	(revision 15040)
++++ jquery-1.2.3.js	(working copy)
+@@ -520,7 +520,7 @@
+ 			if ( table && jQuery.nodeName( this, "table" ) && jQuery.nodeName( elems[0], "tr" ) )
+ 				obj = this.getElementsByTagName("tbody")[0] || this.appendChild( this.ownerDocument.createElement("tbody") );
+ 
+-			var scripts = jQuery( [] );
++			var scripts = [];
+ 
+ 			jQuery.each(elems, function(){
+ 				var elem = clone ?
+@@ -529,18 +529,18 @@
+ 
+ 				// execute all scripts after the elements have been injected
+ 				if ( jQuery.nodeName( elem, "script" ) ) {
+-					scripts = scripts.add( elem );
++					scripts.push( elem );
+ 				} else {
+ 					// Remove any inner scripts for later evaluation
+ 					if ( elem.nodeType == 1 )
+-						scripts = scripts.add( jQuery( "script", elem ).remove() );
++						scripts.push( jQuery( "script", elem ).remove() );
+ 
+ 					// Inject the elements into the document
+ 					callback.call( obj, elem );
+ 				}
+ 			});
+ 
+-			scripts.each( evalScript );
++			jQuery.evalScript(scripts);
+ 		});
+ 	}
+ };
+@@ -548,21 +548,7 @@
+ // Give the init function the jQuery prototype for later instantiation
+ jQuery.prototype.init.prototype = jQuery.prototype;
+ 
+-function evalScript( i, elem ) {
+-	if ( elem.src )
+-		jQuery.ajax({
+-			url: elem.src,
+-			async: false,
+-			dataType: "script"
+-		});
+ 
+-	else
+-		jQuery.globalEval( elem.text || elem.textContent || elem.innerHTML || "" );
+-
+-	if ( elem.parentNode )
+-		elem.parentNode.removeChild( elem );
+-}
+-
+ jQuery.extend = jQuery.fn.extend = function() {
+ 	// copy reference to target object
+ 	var target = arguments[0] || {}, i = 1, length = arguments.length, deep = false, options;
+@@ -1207,7 +1193,28 @@
+ 		}
+ 
+ 		return ret;
++	},
++    
++	evalScript: function(scripts) {
++		if (!scripts.length) return;
++		var script = scripts.shift();
++		if ( script.src ) {
++			var src = script.src;
++			if ( script.parentNode )
++				script.parentNode.removeChild( script );
++			jQuery.getScript(src, function() {
++				jQuery.evalScript(scripts);
++			});
++		} else {
++			jQuery.globalEval( script.text || script.textContent || script.innerHTML || "" );
++			if ( script.parentNode )
++				script.parentNode.removeChild( script );
++			jQuery.evalScript(scripts);
++		}
+ 	}
++    
++    
++    
+ });
+ 
+ var userAgent = navigator.userAgent.toLowerCase();

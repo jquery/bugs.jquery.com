@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>Sub-forms</title>
+    <style type="text/css">
+    </style>
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/validate/jquery.validate.js"></script>
+    <!--<script type="text/javascript" src="W:\Projects\3.5\Antix.CV.Web\Content\Scripts\jquery.validate.js"></script>-->
+    
+    <script type="text/javascript">
+        /*  Patch
+            =========================== */
+
+        // get the elements in the form, fixes selection for nested forms in IE
+        function getElements(form) {
+            if ($.browser.msie) {
+                return $(form).find(":input")
+		            .not($(form).find("form :input"))
+		            .not(":reset, [disabled]");
+            } else { return $(form.elements); }
+        }
+
+        // only select elements within the form, exclude nested ones, IE problem only
+        $.validator.prototype.elements = function() {
+            var validator = this,
+				rulesCache = {};
+
+            // select all valid inputs inside the form
+            return getElements(this.currentForm)
+	            .not(":submit, :image")
+	            .not(this.settings.ignore)
+	            .filter(function() {
+	                !this.name && validator.settings.debug && window.console && console.error("%o has no name assigned", this);
+
+	                // select only the first element for each name, and only those with rules specified
+	                if (this.name in rulesCache || !validator.objectLength($(this).rules()))
+	                    return false;
+
+	                rulesCache[this.name] = true;
+	                return true;
+    	        });
+		}
+
+	    $.fn.serializeArray = function() {
+	        return this.map(function() {
+	            return jQuery.nodeName(this, "form") ?
+				    jQuery.makeArray(getElements(this)) : this;
+	        })
+	    }
+	    
+        // allow adding a validator to multiple forms at once
+	    $.fn.validate = function(options) {
+
+	        // if nothing is selected, return nothing; can't chain anyway
+	        if (!this.length) {
+	            options && options.debug && window.console && console.warn("nothing selected, can't validate, returning nothing");
+	            return;
+	        }
+
+	        this.each(function() {
+	            var $this = $(this);
+
+	            // check if a validator for this form was already created
+	            var validator = $.data($this, 'validator');
+	            if (validator) { return; }
+
+	            validator = new $.validator(options, this);
+	            $.data(this, 'validator', validator);
+
+	            if (validator.settings.onsubmit) {
+
+	                // allow suppresing validation by adding a cancel class to the submit button
+	                $this.find("input, button").filter(".cancel").click(function() {
+	                    validator.cancelSubmit = true;
+	                });
+
+	                // validate the form on submit
+	                $this.submit(function(event) {
+	                    if (validator.settings.debug)
+	                    // prevent form submit to be able to see console output
+	                        event.preventDefault();
+
+	                    function handle() {
+	                        if (validator.settings.submitHandler) {
+	                            validator.settings.submitHandler.call(validator, validator.currentForm);
+	                            return false;
+	                        }
+	                        return true;
+	                    }
+
+	                    // prevent submit for invalid forms or custom submit handlers
+	                    if (validator.cancelSubmit) {
+	                        validator.cancelSubmit = false;
+	                        return handle();
+	                    }
+	                    if (validator.form()) {
+	                        if (validator.pendingRequest) {
+	                            validator.formSubmitted = true;
+	                            return false;
+	                        }
+	                        return handle();
+	                    } else {
+	                        validator.focusInvalid();
+	                        return false;
+	                    }
+	                });
+	            }
+	        });
+
+	        return this;
+	    }
+
+        /*  =========================== */
+
+        $(document).ready(function() {
+            var $list = $("#List"),
+                $detail = $("#Detail"),
+                $detailName = $detail.find("#Name"),
+                $detailDescription = $detail.find("#Description");
+
+            $list.add($detail)
+                .click(function(e) { e.stopPropagation() })
+                .validate({
+                    submitHandler: function(form) {
+                        var $form = $(form);
+
+                        alert(form.id.concat("\n", $form.serialize()));
+
+                        if (form.id == "Detail") { $form.hide("fast"); }
+                        return false;
+                    }
+                });
+
+            $detail.hide();
+            $list.find("li").click(function() {
+                var $this = $(this),
+                    $title = $this.find("span");
+
+                $detail.hide("fast",
+                    $detail.css("display") == "none" || $this.find("form").length == 0
+                    ? function() {
+                        $detailName
+                            .unbind("change")
+                            .change(function() { $title.text(this.value) })
+                            .val($title.text());
+                        $detailDescription
+                            .unbind("change")
+                            .change(function() { $this.data("description", this.value) })
+                            .val($this.data("description") || "");
+
+                        $this.append($detail);
+                        $detail.show("slow");
+                    }
+                    : "");
+            });
+        });
+    </script>
+</head>
+<body>
+    <form id="List">
+        <ul>
+            <li><input name="active_1" type="checkbox" checked="checked" /><span>Item 1</span></li>
+            <li><input name="active_2" type="checkbox" checked="checked" /><span>Item 2</span></li>
+            <li><input name="active_3" type="checkbox" checked="checked" /><span>Item 3</span></li>
+        </ul>
+        <p><input name="submit" type="submit" value="submit detail form" /></p>
+    </form>
+    
+    <form id="Detail">
+        <p>
+            <label for="Name">Name</label>
+            <input id="Name" name="Name" class="required" />
+        </p>
+        <p>
+            <label for="Description">Description</label>
+            <textarea id="Description" name="Description" class="required"></textarea>
+        </p>
+        <p><input name="submit" type="submit" value="submit list form" /></p>
+    </form>
+</body>
+</html>

@@ -1,0 +1,52 @@
+Index: jquery/test/unit/ajax.js
+===================================================================
+--- jquery/test/unit/ajax.js	(revision 6287)
++++ jquery/test/unit/ajax.js	(working copy)
+@@ -424,6 +424,18 @@
+ 	});
+ });
+ 
++test("jQuery.get/post - type arg is shifted if data is ommitted", function() {
++	expect(2);
++	var funcs = [jQuery.get, jQuery.post];
++	jQuery.each(funcs, function () {
++		stop();
++		this(url('data/json.php'), function(json) {
++			equals( typeof json, 'object', 'Check that type="json" was honored');
++			start();
++		}, 'json');
++	});
++});
++
+ test("jQuery.getScript(String, Function) - with callback", function() {
+ 	expect(2);
+ 	stop();
+Index: jquery/src/ajax.js
+===================================================================
+--- jquery/src/ajax.js	(revision 6287)
++++ jquery/src/ajax.js	(working copy)
+@@ -97,10 +97,9 @@
+ jQuery.extend({
+   
+ 	get: function( url, data, callback, type ) {
+-		// shift arguments if data argument was ommited
++		// shift arguments if data argument was omitted
+ 		if ( jQuery.isFunction( data ) ) {
+-			callback = data;
+-			data = null;
++			return jQuery.get( url, null, data, callback );
+ 		}
+ 
+ 		return jQuery.ajax({
+@@ -121,9 +120,9 @@
+ 	},
+ 
+ 	post: function( url, data, callback, type ) {
++		// shift arguments if data argument was omitted
+ 		if ( jQuery.isFunction( data ) ) {
+-			callback = data;
+-			data = {};
++			return jQuery.post( url, {}, data, callback );
+ 		}
+ 
+ 		return jQuery.ajax({

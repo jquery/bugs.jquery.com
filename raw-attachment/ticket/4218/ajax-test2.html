@@ -1,0 +1,104 @@
+<!-- Modified from http://dev.jquery.com/attachment/ticket/4218/ajax-test.html -->
+<html>
+<head>
+    <!-- jQuery 1.2.6 works for SOME selectors after dom replacement, but still misses some -->
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>-->
+
+    <!-- Using jQuery 1.3.x shows the problem: SEVERAL selectors no longer work in FF after certain DOM manipulation. -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
+    
+    <!-- Test with stephen.friedrich's patched version, which still misses some -->
+    <!--<script type="text/javascript" src="http://dev.jquery.com/raw-attachment/ticket/4218/jquery-1.3.2.js"></script>-->
+    
+    <!-- Are we there yet? ;] -->
+    <!--<script type="text/javascript" src="http://code.jquery.com/nightlies/jquery-nightly.js"></script>-->
+</head>
+<body>
+    <!-- NOTE: here I capitalize one child DIV tag, leaving the others as lowercase -->
+    <div id="test" class="testClass">parent (id="test" class="testClass")<div>one</div><div>two</div><DIV>THREE</DIV></div>
+    
+    <ol id="before"><strong>Before</strong> DOM replacement:</ol>
+    <ol id="after"><strong>After</strong> DOM replacement:</ol>
+
+    <script type="text/javascript"><!--
+    /**
+     * Simulates an Ajax4JSF request by parsing XML and using it to replace a DOM element in the original document.
+     */
+    function simulateA4j() {
+        // This is faked. A real a4j request would read the document from XMLHttpRequest.responseXML
+        if (!$.browser.mozilla &&
+            !$.browser.opera) {
+            alert("These tests are for Firefox and may not run properly in this browser!");
+            //return false;
+        }
+        var parser = new DOMParser();
+                    // specifying xmlns only so parser works; not necessary in original document
+        var markup = '<html xmlns="http://www.w3.org/1999/xhtml"><body>'
+            + '<div id="test" class="testClass">parent (id="test" class="testClass")<div>one</div><div>two</div><DIV>THREE</DIV></div>'
+            + '</body></html>';
+        var doc = parser.parseFromString(markup, "text/xml");
+        var body = $('body')[0];
+        var newNode = doc.childNodes[0].childNodes[0].childNodes[0]; // html -> body -> div
+        var oldNode = $('#test')[0];
+
+        // This is how a4j actually does the replacement on FF (on IE outerHtml is used)
+        body.replaceChild(newNode, oldNode);
+
+        // this would work:
+        //oldNode = newNode;
+    }
+    
+    // spits out test results to HTML lists
+    function writeCounts( jResults, idSuffix) {
+        for (var i=0;i<jResults.length;i++) {
+            $('<li/>')
+            .attr('id','#selectorTest'+idSuffix+i)
+            .text("'"+jResults[i].selector+"': "+
+                    (jResults[i].length?
+                    "found "+jResults[i].length+" "+jResults[i].get(0).tagName+"s":
+                    "NO RESULT!"))
+            .appendTo('#'+idSuffix.toLowerCase());
+        }
+    }
+
+    // returns some tests using different kinds of selectors
+    function testSelections() {
+        var testSelections =
+            [   // "after" numbers based on results in FF 3.0.x/2.x; I'm told it's different in 3.5 (see also Opera)?
+
+            // select ALL                   // expected: 4
+            $('div'),                       // after DOM replacement: 3
+            $('DIV'),                       // after DOM replacement: 3
+            
+            // select the parent ONLY       // expected: 1
+            $('#test'),                     // after DOM replacement: 1
+            $('.testClass'),                // after DOM replacement: 1
+            $('div#test'),                  // after DOM replacement: NO RESULT! (or 1, using patch)
+            $('div.testClass'),             // after DOM replacement: NO RESULT! (or 1, using patch OR in FF 2.0.x)
+            $('div[id=test]'),              // after DOM replacement: 1
+            $('div[class=testClass]'),      // after DOM replacement: 1
+            
+            // select the children ONLY     // expected: 3
+            $('div div'),                   // after DOM replacement: NO RESULT! (or 2, using patch)
+            $('div DIV'),                   // after DOM replacement: NO RESULT! (or 2, using patch)
+            $('div').find('div'),           // after DOM replacement: 2
+            $('div').find('DIV'),           // after DOM replacement: 1 (notice tagName case matches after replacement)
+            $('#test div'),                 // after DOM replacement: 2
+            $('.testClass div'),            // after DOM replacement: 2
+            $('div[id!=test]'),             // after DOM replacement: 2
+            $('div[class!=testClass]'),     // after DOM replacement: 2
+            $('div[id=test] div'),          // after DOM replacement: NO RESULT! (or 2, using patch)
+            $('div[class=testClass] div')   // after DOM replacement: NO RESULT! (or 2, using patch)
+            ];
+        return testSelections;
+    }
+    
+    // runs the tests when the doc is ready
+    $( function () {
+            writeCounts(testSelections(),'Before');
+            simulateA4j();
+            writeCounts(testSelections(),'After');
+        });
+    --></script>
+</body>
+</html>

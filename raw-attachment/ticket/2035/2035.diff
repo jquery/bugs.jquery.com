@@ -1,0 +1,13 @@
+diff --git a/src/core.js b/src/core.js
+index de82d77..a99efd2 100644
+--- a/src/core.js
++++ b/src/core.js
+@@ -957,7 +957,7 @@ jQuery.extend({
+ 			// Convert html string into DOM nodes
+ 			if ( typeof elem == "string" ) {
+ 				// Fix "XHTML"-style tags in all browsers
+-				elem = elem.replace(/(<(\w+)[^>]*?)\/>/g, function(all, front, tag){
++				elem = elem.replace(new RegExp("/(<(\w+)[^>]*?)\/>", "g"), function(all, front, tag){
+ 					return tag.match(/^(abbr|br|col|img|input|link|meta|param|hr|area|embed)$/i) ?
+ 						all :
+ 						front + "></" + tag + ">";

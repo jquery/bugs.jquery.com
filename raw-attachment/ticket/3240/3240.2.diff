@@ -1,0 +1,115 @@
+Index: jquery/test/unit/core.js
+===================================================================
+--- jquery/test/unit/core.js	(revision 5830)
++++ jquery/test/unit/core.js	(working copy)
+@@ -1247,10 +1247,10 @@
+ 	isSet( jQuery("p").not("#ap, #sndp, .result").get(), q("firstp", "en", "sap", "first"), "not('selector, selector')" );
+ 	isSet( jQuery("p").not(jQuery("#ap, #sndp, .result")).get(), q("firstp", "en", "sap", "first"), "not(jQuery)" );
+ 	equals( jQuery("p").not(document.getElementsByTagName("p")).length, 0, "not(Array-like DOM collection)" );
+-	isSet( jQuery("#form option").not("option.emptyopt:contains('Nothing'),[selected],[value='1']").get(), q("option1c", "option1d", "option2c", "option3d", "option3e" ), "not('complex selector')");
++	isSet( jQuery("#form option").not("option.emptyopt:contains('Nothing'),[selected],[value='1']").get(), q("option1c", "option1d", "option2c", "option3d", "option3e", "option4e", "option5e" ), "not('complex selector')");
+ 
+ 	var selects = jQuery("#form select");
+-	isSet( selects.not( selects[1] ), q("select1", "select3"), "filter out DOM element");
++	isSet( selects.not( selects[1] ), q("select1", "select3", "select4", "select5"), "filter out DOM element");
+ });
+ 
+ test("andSelf()", function() {
+Index: jquery/test/unit/selector.js
+===================================================================
+--- jquery/test/unit/selector.js	(revision 5830)
++++ jquery/test/unit/selector.js	(working copy)
+@@ -177,8 +177,8 @@
+ 	t( "Grouped Form Elements", "input[name='foo[bar]']", ["hidden2"] );
+ 	
+ 	t( ":not() Existing attribute", "#form select:not([multiple])", ["select1", "select2"]);
+-	t( ":not() Equals attribute", "#form select:not([name=select1])", ["select2", "select3"]);
+-	t( ":not() Equals quoted attribute", "#form select:not([name='select1'])", ["select2", "select3"]);
++	t( ":not() Equals attribute", "#form select:not([name=select1])", ["select2", "select3", "select4", "select5"]);
++	t( ":not() Equals quoted attribute", "#form select:not([name='select1'])", ["select2", "select3", "select4", "select5"]);
+ });
+ 
+ test("pseudo (:) selectors", function() {
+@@ -190,12 +190,12 @@
+ 	t( "Enabled UI Element", "#form input:enabled", ["text1","radio1","radio2","check1","check2","hidden1","hidden2","name"] );
+ 	t( "Disabled UI Element", "#form input:disabled", ["text2"] );
+ 	t( "Checked UI Element", "#form input:checked", ["radio2","check1"] );
+-	t( "Selected Option Element", "#form option:selected", ["option1a","option2d","option3b","option3c"] );
++	t( "Selected Option Element", "#form option:selected", ["option1a","option2d","option3b","option3c","option4b", "option4c", "option4d", "option5b", "option5c", "option5d"] );
+ 	t( "Text Contains", "a:contains('Google')", ["google","groups"] );
+ 	t( "Text Contains", "a:contains('Google Groups')", ["groups"] );
+ 	t( "Element Preceded By", "p ~ div", ["foo","fx-queue","fx-tests", "moretests"] );
+ 	t( "Not", "a.blog:not(.link)", ["mark"] );
+-	t( "Not - multiple", "#form option:not(:contains('Nothing'),#option1b,:selected)", ["option1c", "option1d", "option2b", "option2c", "option3d", "option3e"] );
++	t( "Not - multiple", "#form option:not(:contains('Nothing'),#option1b,:selected)", ["option1c", "option1d", "option2b", "option2c", "option3d", "option3e", "option4e", "option5e"] );
+ 	t( "Not - complex", "#form option:not([id^='opt']:gt(0):nth-child(-n+3))", [ "option1a", "option1d", "option2d", "option3d", "option3e"] );
+ 	t( "Not - recursive", "#form option:not(:not(:selected))[id^='option3']", [ "option3b", "option3c"] );
+ 	
+@@ -211,7 +211,7 @@
+ 	t( "Is Visible", "#form input:visible", ["text1","text2","radio1","radio2","check1","check2","name"] );
+ 	t( "Is Hidden", "#form input:hidden", ["hidden1","hidden2"] );
+ 	
+-	t( "Form element :input", "#form :input", ["text1", "text2", "radio1", "radio2", "check1", "check2", "hidden1", "hidden2", "name", "button", "area1", "select1", "select2", "select3"] );
++	t( "Form element :input", "#form :input", ["text1", "text2", "radio1", "radio2", "check1", "check2", "hidden1", "hidden2", "name", "button", "area1", "select1", "select2", "select3", "select4", "select5"] );
+ 	t( "Form element :radio", "#form :radio", ["radio1", "radio2"] );
+ 	t( "Form element :checkbox", "#form :checkbox", ["check1", "check2"] );
+ 	t( "Form element :text", "#form :text", ["text1", "text2", "hidden2", "name"] );
+Index: jquery/test/unit/event.js
+===================================================================
+--- jquery/test/unit/event.js	(revision 5830)
++++ jquery/test/unit/event.js	(working copy)
+@@ -59,7 +59,7 @@
+ });
+ 
+ test("bind(), trigger change on select", function() {
+-	expect(3);
++	expect(5);
+ 	var counter = 0;
+ 	function selectOnChange(event) {
+ 		equals( event.data, counter++, "Event.data is not a global event object" );
+Index: jquery/test/index.html
+===================================================================
+--- jquery/test/index.html	(revision 5830)
++++ jquery/test/index.html	(working copy)
+@@ -89,7 +89,25 @@
+ 				<option id="option3d" value="3">3</option>
+ 				<option id="option3e">no value</option>
+ 			</select>
+-			
++			<select name="select4" id="select4" multiple="multiple">
++				<optgroup disabled="disabled">
++					<option id="option4a" class="emptyopt" value="">Nothing</option>
++					<option id="option4b" selected="selected" value="1">1</option>
++					<option id="option4c" selected="selected" value="2">2</option>
++				</optgroup>
++				<option selected="selected" disabled="disabled" id="option4d" value="3">3</option>
++				<option id="option4e">no value</option>
++			</select>
++			<select name="select5" id="select5" multiple="multiple" disabled="disabled">
++				<optgroup>
++					<option id="option5a" class="emptyopt" value="">Nothing</option>
++					<option id="option5b" selected="selected" value="1">1</option>
++					<option id="option5c" selected="selected" value="2">2</option>
++				</optgroup>
++				<option selected="selected" id="option5d" value="3">3</option>
++				<option id="option5e">no value</option>
++			</select>
++
+ 			<object id="object1" codebase="stupid">
+ 				<param name="p1" value="x1" />
+ 				<param name="p2" value="x2" />
+Index: jquery/src/core.js
+===================================================================
+--- jquery/src/core.js	(revision 5830)
++++ jquery/src/core.js	(working copy)
+@@ -376,8 +376,8 @@
+ 					for ( var i = one ? index : 0, max = one ? index + 1 : options.length; i < max; i++ ) {
+ 						var option = options[ i ];
+ 
+-						if ( option.selected ) {
+-							// Get the specifc value for the option
++						if ( option.selected && !option.disabled && !option.parentNode.disabled ) {
++							// Get the specific value for the option
+ 							value = jQuery(option).val();
+ 
+ 							// We don't need an array for one selects

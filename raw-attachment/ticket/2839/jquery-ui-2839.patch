@@ -1,0 +1,28 @@
+diff --git a/jquery.ui-1.5b4/ui.tabs.js b/jquery.ui-1.5b4/ui.tabs.js
+index 626ae36..b7d8470 100644
+--- a/jquery.ui-1.5b4/ui.tabs.js
++++ b/jquery.ui-1.5b4/ui.tabs.js
+@@ -137,12 +137,13 @@
+ 					}; 
+ 
+                     // load if remote tab
++    				    if (this.$tabs.length > 0) {
+     				if ($.data(this.$tabs[o.selected], 'load.tabs'))
+     					this.load(o.selected, onShow);
+     				// just trigger show event
+     				else
+     				    onShow();
+-    					
++                                    }
+ 				}
+ 
+ 				// Take disabling tabs via class attribute from HTML
+@@ -354,7 +355,7 @@
+ 				$panel.removeClass(o.hideClass);
+ 				var href = $.data(this.$tabs[0], 'load.tabs');
+ 				if (href)
+-					this.load(index, href);
++				    this.load(index);
+ 			}
+ 
+ 			// callback

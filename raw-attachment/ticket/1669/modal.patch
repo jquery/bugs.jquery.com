@@ -1,0 +1,92 @@
+Index: ui.dialog.js
+===================================================================
+--- ui.dialog.js	(revision 4649)
++++ ui.dialog.js	(working copy)
+@@ -1,5 +1,43 @@
+ (function($) {
+-
++	
++	var overlay = {
++		$el: null,
++		events: $.map('mousedown,mouseup,keydown,keypress,click'.split(','),
++			function(e) { return e + '.ui-dialog-overlay'; }).join(' '),
++		
++		show: function(dialog, css) {
++			if (this.$el) return;
++			
++			this.selects = this.ie6 && $('select:visible').css('visibility', 'hidden');
++			this.$el = $('<div/>').appendTo(document.body)
++				.addClass('ui-dialog-overlay').css($.extend({
++					borderWidth: 0, margin: 0, padding: 0,
++					position: 'absolute', top: 0, left: 0,
++					width: $(document).width(), // TODO: fix
++					height: $(document).height() // TODO: fix
++				}, css));
++			
++			$('a, :input').bind(this.events, function() {
++				return $(this).parents('.ui-dialog').length == 0;
++			});
++			$(document).bind('keypress.ui-dialog-overlay', function(e) {
++				e.keyCode && e.keyCode == 27 && dialog.close(); 
++			});
++			$(dialog.element).focus();
++		},
++		
++		hide: function() {
++			$('a, :input').add(document).unbind('.ui-dialog-overlay');
++			this.ie6 && this.selects.css('visibility', 'visible');
++			this.$el = null;
++			$('.ui-dialog-overlay').remove();
++		},
++		
++		// IE 6 compatibility
++		ie6: $.browser.msie && $.browser.version < 7,
++		selects: null
++	};
++	
+ 	//If the UI scope is not available, add it
+ 	$.ui = $.ui || {};
+ 
+@@ -31,9 +69,11 @@
+ 			position: 'center',
+ 			buttons: [],
+ 			draggable: true,
+-			resizable: true
++			resizable: true,
++			modal: false
+ 		};
+-		options = $.extend({}, defaults, options); //Extend and copy options
++		var defaultOverrides = options.modal ? {resizable: false} : {};
++		options = $.extend({}, defaults, defaultOverrides, options); //Extend and copy options
+ 		this.element = el;
+ 		var self = this; //Do bindings
+ 
+@@ -121,6 +161,7 @@
+ 		});
+ 	
+ 		this.open = function() {
++			options.modal && overlay.show(this, options.modal);
+ 			uiDialog.appendTo('body');
+ 			var wnd = $(window), doc = $(document), top = doc.scrollTop(), left = doc.scrollLeft();
+ 			if (options.position.constructor == Array) {
+@@ -169,15 +210,16 @@
+ 		};
+ 
+ 		this.activate = function() {
+-			var maxZ = curZ = 0;
++			var maxZ = 0;
+ 			$('.ui-dialog:visible').each(function() {
+-				var z = parseInt($(this).css("z-index"));
+-				maxZ = z > maxZ ? z : maxZ;
++				maxZ = Math.max(maxZ, parseInt($(this).css("z-index")));
+ 			});
+-			uiDialog.css("z-index", maxZ + 1);
++			overlay.$el && overlay.$el.css('z-index', ++maxZ);
++			uiDialog.css("z-index", ++maxZ);
+ 		};
+ 
+ 		this.close = function() {
++			options.modal && overlay.hide();
+ 			uiDialog.hide();
+ 
+ 			// CALLBACK: close

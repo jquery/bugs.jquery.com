@@ -1,0 +1,43 @@
+Index: ui.dialog.js
+===================================================================
+--- ui.dialog.js        (revision 5588)
++++ ui.dialog.js        (working copy)
+@@ -177,7 +177,7 @@
+                },
+ 
+                position: function(pos) {
+-                       var wnd = $(window), doc = $(document), top = doc.scrollTop(), left = doc.scrollLeft(), minTop = top;
++                       var wnd = $(window), doc = $(document), wtop = doc.scrollTop(), left = doc.scrollLeft(), minTop = top;
+                        if ($.inArray(pos, ['center','top','right','bottom','left']) >= 0) {
+                                pos = [pos == 'right' || pos == 'left' ? pos : 'center', pos == 'top' || pos == 'bottom' ? pos : 'middle'];
+                        }
+@@ -200,22 +200,22 @@
+                                }
+                        }
+                        if (pos[1].constructor == Number) {
+-                               top += pos[1];
++                               wtop += pos[1];
+                        } else {
+                                switch (pos[1]) {
+                                        case 'top':
+-                                               top += 0;
++                                               wtop += 0;
+                                                break;
+                                        case 'bottom':
+-                                               top += (wnd.height()) - (this.uiDialog.height());
++                                               wtop += (wnd.height()) - (this.uiDialog.height());
+                                                break;
+                                        case 'middle':
+                                        default:
+-                                               top += (wnd.height() / 2) - (this.uiDialog.height() / 2);
++                                               wtop += (wnd.height() / 2) - (this.uiDialog.height() / 2);
+                                }
+                        }
+-                       top = top < minTop ? minTop : top;
+-                       this.uiDialog.css({top: top, left: left});
++                       wtop = wtop < minTop ? minTop : wtop;
++                       this.uiDialog.css({top: wtop, left: left});
+                },
+ 
+                open: function() {
+

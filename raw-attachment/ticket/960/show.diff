@@ -1,0 +1,22 @@
+Index: src/fx/fx.js
+===================================================================
+--- src/fx/fx.js	(revision 1562)
++++ src/fx/fx.js	(working copy)
+@@ -38,11 +38,14 @@
+ 			hidden.animate({
+ 				height: "show", width: "show", opacity: "show"
+ 			}, speed, callback) :
+-			
++
+ 			hidden.each(function(){
+ 				this.style.display = this.oldblock ? this.oldblock : "";
+-				if ( jQuery.css(this,"display") == "none" )
+-					this.style.display = "block";
++				if ( jQuery.css(this,"display") == "none" ) {
++					var elem = jQuery("<"+this.tagName.toLowerCase()+">").appendTo("body");
++					this.style.display = elem.css("display");
++					elem.remove();
++				}
+ 			});
+ 		return this;
+ 	},

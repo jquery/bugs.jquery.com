@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-pagefind-meta="title">Tutorials How_jQuery_Works-dmethvin.htm on Ticket #6849 – Attachment – jQuery - Bug Tracker</title>
+    <meta name="description" content="Static archive of the old bugs.jquery.com Trac site.">
+    
+<link rel="icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/bugs.jquery.com/favicon.svg">
+<link rel="apple-touch-icon" href="/bugs.jquery.com/apple-touch-icon.png">
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shadow:0 1px #fff;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#b3d4fc}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#b3d4fc}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f2f0}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{color:#9a6e3a;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}pre[class*=language-diff]{--eleventy-code-padding:1.25em;padding-left:var(--eleventy-code-padding);padding-right:var(--eleventy-code-padding)}.token.deleted{background-color:#8e2e2e;color:inherit}.token.inserted{background-color:#44824a;color:inherit}.token.prefix.deleted,.token.prefix.inserted,.token.prefix.unchanged{-webkit-user-select:none;user-select:none;display:inline-flex;align-items:center;justify-content:center;padding-top:2px;padding-bottom:2px}.token.prefix.deleted,.token.prefix.inserted{width:var(--eleventy-code-padding);background-color:rgba(0,0,0,.2)}.token.deleted:not(.prefix),.token.inserted:not(.prefix){display:block;margin-left:calc(-1 * var(--eleventy-code-padding));margin-right:calc(-1 * var(--eleventy-code-padding));text-decoration:none;color:inherit}:root{--attachment-info-bg-color:#f7f7f0;--attachment-info-border-color:#d7d7d7;--attachment-download-link-color:#666}h1,h2,h3,h4,h5,h6{font-weight:700}h3{font-size:.875rem}h6{font-size:.6875rem}.attachment-info{padding:.25em .5em;margin:1em 0;background-color:var(--attachment-info-bg-color);border:1px solid var(--attachment-info-border-color)}.attachment-info h6{font-family:var(--font-family-alternate)}.attachment-download{margin:2em 0;gap:.5em}.attachment-download-link[href],.attachment-download-link[href]:visited{color:var(--attachment-download-link-color)}.attachment img,.attachment picture{display:block;max-width:100%;height:auto}code[class*=language-],pre[class*=language-]{font-size:.75rem}:root{--font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;--font-family-header:var(--font-family);--font-family-alternate:Verdana,Arial,'Bitstream Vera Sans',Helvetica,sans-serif;--font-family-monospace:Monaco,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Courier New,Courier,monospace}:root{--primary-color:#192839;--secondary-color:#0f67a1;--text-color:#222;--text-color-dark-bg:#fff;--text-color-link:var(--secondary-color);--text-color-link-hover:#0e3a58;--text-color-link-active:#1695e9;--text-color-link-visited:var(--secondary-color);--text-color-link-disabled:#998;--main-link-hover-bg-color:#eee;--text-shadow-color:#fcfcfc;--button-color:var(--secondary-color);--button-hover-color:var(--text-color-link-hover);--button-text-color:#fff;--footer-text-color-link:#5db0e6;--background-color:#39414a;--nav-background-color:var(--primary-color);--secondary-nav-background-color:var(--secondary-color);--main-background-start-color:#000000;--main-background-end-color:#181c21;--content-background-color:#fafafa;--sidenav-header-background-color:#ddd;--banner-background-color:var(--primary-color);--footer-background-start-color:var(--primary-color);--footer-background-end-color:#0f1923;--nav-text-link-color:white;--nav-hover-link-color:rgba(0, 0, 0, 0.2);--nav-active-link-color:#176092;--border-color:#e4e4e4;--border-radius:4px;--input-border-color:white;--blockquote-border-color:#b44;--pre-color:#333;--pre-background-color:#fff;--code-color:#600;--code-background-color:var(--content-background-color);--syntax-tab-size:2}*{box-sizing:border-box}body,html{padding:0;margin:0 auto;font-family:var(--font-family);font-size:100%;color:var(--text-color);background-color:var(--background-color);line-height:1.4}html{overflow-y:auto}body{background-repeat:repeat-x;background-position:50% 80px}.banner{width:100%;height:80px;background-color:var(--banner-background-color);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);text-align:center;font-size:.875rem;padding:0 .25em}.banner a[href],.banner a[href]:visited{color:#5cb5f0}.banner a[href]:hover{color:var(--text-color-link-hover)}.banner a[href]:active{color:var(--text-color-link-active)}th,tr{font-family:var(--font-family-alternate)}.container{width:100%;max-width:910px;margin:0 auto;overflow:hidden}h1,h2,h3,h4,h5,h6{font-family:var(--font-family-header);font-weight:400;margin:0;padding:0;letter-spacing:0}h1{font-size:1.25rem;font-weight:700}.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}p{line-height:1.5;margin:.5em 0 1em}p:last-child{margin-bottom:0}ul{margin:0}li{line-height:1.5}hr{width:100%}blockquote{margin:-.3em 0 0 0;border-style:solid;border-width:0 0 0 2px;padding-left:.4em;border-color:var(--blockquote-border-color)}a[href]{color:var(--text-color-link)}a[href]:visited{color:var(--text-color-link-visited)}a[href]:hover,footer a[href]:hover{color:var(--text-color-link-hover)}a[href]:active,footer a[href]:hover{color:var(--text-color-link-active)}a[aria-disabled=true]{color:var(--text-color-link-disabled)}main{padding:1rem}table{margin:1em 0}table td,table th{padding-right:1em}code,pre{font-family:var(--font-family-monospace)}pre:not([class*=language-]){margin:.5em 0;-moz-tab-size:var(--syntax-tab-size);-o-tab-size:var(--syntax-tab-size);tab-size:var(--syntax-tab-size);-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;width:100%;padding:.25em;font-size:.6875rem;border-radius:var(--border-radius);overflow-x:auto;background:var(--pre-background-color);color:var(--pre-color);border:1px solid #000;text-align:left}code{color:var(--code-color);border:1px solid var(--border-color);border-radius:.25em;padding:0 .3em;background:var(--code-background-color);word-break:break-all}pre[class*=language-] code{color:unset;border:none;border-radius:0;padding:0;background:0 0;word-break:normal}.strikethrough{text-decoration:line-through}header{position:relative;height:186px;display:flex;flex-wrap:wrap;padding:0 1.5rem}header h1{text-transform:uppercase}.nav{display:flex;flex-direction:column;padding:0;list-style:none}.nav a{display:flex;align-items:center;height:35px;font-size:.75rem;padding:0 1em;text-decoration:none;border-bottom:1px dotted var(--nav-text-link-color);white-space:nowrap;width:100%}.nav li:not(.active) a:active,.nav li:not(.active) a:hover{background-color:var(--nav-hover-link-color)}.nav a,.nav a:active,.nav a:hover,.nav a:visited{color:var(--nav-text-link-color)}.nav .active a{border-bottom:2px solid var(--nav-active-link-color)}#jq-siteLogo{margin-top:1em}#jq-primaryNavigation{padding:0 .5em;background-color:var(--nav-background-color)}#jq-secondaryNavigation{padding:0 .5em;background-color:var(--secondary-nav-background-color)}#jq-secondaryNavigation a{font-size:.8125rem}#bug-tracker-form{position:relative;width:100%;gap:16px;margin-top:25px;color:var(--text-color-dark-bg)}.content-nav{font-size:.8125rem;margin:1.2em 0;align-self:flex-end}.content-nav ul{list-style:none}.content-nav li{padding:0 .75em}.content-nav li:not(:last-of-type){border-right:1px solid var(--border-color)}.hamburger-lines{position:relative;width:18px;height:14px;align-self:center}.hamburger-line{width:100%;height:2px;background-color:#fff;transition:opacity .2s ease-in-out,transform .2s ease-in-out}.hamburger-toggle:checked+.hamburger-lines span:first-of-type{transform:rotateZ(45deg) translate(4px,4.5px) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:nth-of-type(2){transform:rotateZ(135deg) scaleX(1.2)}.hamburger-toggle:checked+.hamburger-lines span:last-of-type{transform:translateY(-8px) scale(0);opacity:0}.hamburger-toggle:checked~#jq-menus{transform:none;opacity:1}form{gap:.5em}label{font-style:italic;font-size:.8125rem;font-weight:700}input{border:1px solid var(--input-border-color);border-radius:var(--border-radius);height:25px;padding:0 .5em;color:var(--text-color)}button{display:block;border:0;padding:5px 10px;border-radius:var(--border-radius);background:var(--button-color);color:var(--button-text-color);font-size:.875rem;cursor:pointer}button:active,button:hover{background-color:var(--button-hover-color)}button:active{box-shadow:inset 0 0 5px #000}main{padding:20px;background:linear-gradient(to bottom,var(--main-background-start-color),var(--main-background-end-color));gap:1em}main a[href]:active,main a[href]:hover{background-color:var(--main-link-hover-bg-color)}#jq-content{position:relative;padding:1em}#jq-sidenav{padding:2em 1em}#jq-sidenav a{font-size:.75rem;display:block;padding:.35em .625em;text-decoration:none;border-bottom:1px solid var(--border-color)}.sidenav-header{font-size:.75rem;font-weight:700;color:var(--primary-color);text-transform:uppercase;background-color:var(--sidenav-header-background-color);padding:.225em .625em;margin-bottom:.5em}footer{background-color:var(--nav-background-color);background:var(--nav-background-color) linear-gradient(to bottom,var(--footer-background-start-color),var(--footer-background-end-color));padding:2.5em;margin-bottom:2em;border-top:2px solid #000;border-bottom:2px solid #000;color:var(--text-color-dark-bg)}footer a[href],footer a[href]:visited{color:var(--footer-text-color-link)}.flex-row{display:flex;flex-direction:row}.flex-column{display:flex;flex-direction:column}.flex-between-start{justify-content:space-between;align-items:flex-start}.flex-between-center{justify-content:space-between;align-items:center}.flex-start-center{justify-content:flex-start;align-items:center}.flex-center{display:flex;justify-content:center;align-items:center}.items-start{align-items:start}.white-box{background-color:var(--content-background-color);border-radius:var(--border-radius);border:1px solid var(--border-color)}a.ext-link .icon{padding-left:15px}@media (max-width:919px){#jq-menus{position:absolute;top:80px;height:calc(100vh - 80px);left:0;right:0;background-color:var(--nav-background-color);z-index:5;transition:transform .2s ease-in-out,opacity .2s ease-in-out;transform:translateX(100%);opacity:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}}@media (min-width:920px){body{background-position-y:60px}.banner{height:60px;font-size:1rem}header{padding:0 2.5rem}.nav{flex-direction:row}.nav a{width:auto}#jq-primaryNavigation a{height:27px}#jq-secondaryNavigation{border-radius:var(--border-radius);margin-top:2em}#jq-siteLogo{margin-top:59px}#bug-tracker-form{flex-direction:row;gap:0;position:absolute;bottom:15px;left:0;right:0;padding:0 40px 0 60px}.hamburger-lines{display:none}main.flex-column{padding:2.5em;display:flex;flex-direction:row}#jq-sidenav{width:196px;flex-shrink:0}.content-nav{margin-top:.4em}#jq-content{flex-grow:1;max-width:622px;min-height:520px;font-size:.875rem}}:root{--pagefind-ui-background-color:#fff}#search{position:relative;width:calc(100% - 85px - 22px - 1rem);margin-right:22px;align-self:flex-end}#search:before{content:'Search Tickets';position:absolute;right:100%;top:50%;transform:translate(-10px,-50%);color:#fff;font-size:.8125rem;font-style:italic;white-space:nowrap}#search:after{content:'';display:block;position:absolute;right:-22px;top:-4px;width:35px;height:35px;z-index:2}.pagefind-ui__search-input{width:100%}.pagefind-ui__search-clear{display:inline-block;position:absolute;width:25px;height:25px;right:15px;top:0;padding:0 0 0 25px;overflow:hidden;background-color:transparent;z-index:1}.pagefind-ui__search-clear:active,.pagefind-ui__search-clear:hover{background-color:rgba(0,0,0,.2)}.pagefind-ui__search-clear:after{content:'×';position:absolute;top:0;left:0;right:0;bottom:0;font-weight:700;font-size:1.5rem;line-height:26px;text-align:center;color:var(--text-color);opacity:1}.pagefind-ui__hidden{display:none}.pagefind-ui__suppressed{display:none}.pagefind-ui__drawer{position:absolute;top:100%;left:0;right:0;height:350px;background-color:var(--pagefind-ui-background-color);border:1px solid var(--border-color);border-top:0;border-radius:0 0 var(--border-radius) var(--border-radius);box-shadow:0 2px 4px rgba(0,0,0,.2);padding:10px;color:var(--text-color);font-size:.875rem;overflow-y:auto;word-break:break-word;z-index:1}.pagefind-ui__results-area{width:100%}.pagefind-ui__results{padding-left:20px}.pagefind-ui__result{margin-bottom:10px;vertical-align:top}.pagefind-ui__result-thumb{display:flex;flex-direction:column}.pagefind-ui__result-thumb .pagefind-ui__result-image{max-width:150px}.pagefind-ui__message{font-weight:700;text-transform:uppercase;font-size:1rem}.pagefind-ui__button{width:100%;padding:10px;margin-top:2em}@media(min-width:920px){#search{width:auto}.pagefind-ui__search-input{width:300px}.pagefind-ui__search-clear{right:auto;left:270px}.pagefind-ui__drawer{left:-200px;height:500px;padding:15px}}body{background-image:url(/bugs.jquery.com/img/bg-interior-tile-drk.jpg)}a.ext-link .icon{background:url(/bugs.jquery.com/img/extlink.png) 0 50% no-repeat}#search:after{background:url(/bugs.jquery.com/img/icon-search.png) 0 0 no-repeat}
+    </style>
+    
+  </head>
+  <body>
+    <div class="banner flex-center">
+      <span>jQuery issues have moved to <a href="https://github.com/jquery/jquery/issues">GitHub</a>. This site is now a static archive of the old <a href="https://trac.edgewall.org/">Trac</a> bugs site. Some functions and pages are no longer available.</span>
+    </div>
+    <div class="container">
+      <a href="#skip" class="visually-hidden">Skip to main content</a>
+      <header class="flex-column">
+        <div class="flex-row flex-between-start">
+          <a id="jq-siteLogo" href="/bugs.jquery.com/" title="jQuery Home">
+            <img src="/bugs.jquery.com/img/logo.svg" width="215" alt="jQuery: Write Less, Do More.">
+          </a>
+          <input class="hamburger-toggle visually-hidden" id="jq-menutoggle" type="checkbox">
+          <label aria-label="Toggle Menu" for="jq-menutoggle" class="hamburger-lines flex-column flex-between-center">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </label>
+          <div id="jq-menus">
+            <nav id="jq-primaryNavigation">
+              <h2 class="visually-hidden">jQuery sites navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-jquery active">
+                  <a href="https://jquery.com/" title="jQuery Home">jQuery</a>
+                </li>
+                <li class="jq-plugins">
+                  <a href="https://plugins.jquery.com/" title="jQuery Plugins">Plugins</a>
+                </li>
+                <li class="jq-ui">
+                  <a href="https://jqueryui.com/" title="jQuery UI">UI</a>
+                </li>
+                <li class="jq-meetup">
+                  <a href="https://meetups.jquery.com/" title="jQuery Meetups">Meetups</a>
+                </li>
+                <li class="jq-forum">
+                  <a href="https://forum.jquery.com/" title="jQuery Forum">Forum</a>
+                </li>
+                <li class="jq-blog">
+                  <a href="https://blog.jquery.com/" title="jQuery Blog">Blog</a>
+                </li>
+                <li class="jq-about">
+                  <a href="https://openjsf.org" title="About jQuery and OpenJS">About</a>
+                </li>
+                <li class="jq-donate">
+                  <a href="https://openjsf.org/about/project-funding-opportunities/" title="Donate to OpenJS">Donate</a>
+                </li>
+              </ul>
+            </nav>
+            <nav id="jq-secondaryNavigation">
+              <h2 class="visually-hidden">jQuery Core navigation menu</h2>
+              <ul class="nav">
+                <li class="jq-download">
+                  <a href="https://jquery.com/download/">
+                    Download
+                  </a>
+                </li>
+                <li class="jq-documentation">
+                  <a href="https://api.jquery.com/">
+                    Documentation
+                  </a>
+                </li>
+                <li class="jq-tutorials">
+                  <a href="https://learn.jquery.com/">
+                    Tutorials
+                  </a>
+                </li>
+                <li class="jq-bugTracker">
+                  <a href="https://github.com/jquery/jquery/issues">
+                    Bug Tracker
+                  </a>
+                </li>
+                <li class="jq-discussion">
+                  <a href="https://forum.jquery.com/">
+                    Discussion
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div id="bug-tracker-form" class="flex-column flex-between-center">
+          <h1>Bug Tracker</h1>
+          <div id="search"></div>
+          
+        </div>
+      </header>
+      <main id="skip" class="flex-column">
+        <h2 class="visually-hidden">Side navigation</h2>
+        <nav id="jq-sidenav" class="flex-column white-box">
+          <h5 class="sidenav-header">Bug Tracker</h5>
+          <a href="/bugs.jquery.com/newticket">New Ticket</a>
+          <a href="/bugs.jquery.com/report">View Tickets</a>
+          <a href="/bugs.jquery.com/ticketgraph">Ticket Graph</a>
+          <a href="/bugs.jquery.com/roadmap">Roadmap</a>
+          <a href="/bugs.jquery.com/timeline">Recent Changes</a>
+        </nav>
+        <div id="jq-content" class="white-box">
+          
+
+
+<div class="flex-column attachment">
+  <nav class="content-nav">
+    <ul class="flex-row">
+      <li>
+        <a href="/bugs.jquery.com/ticket/6849">Back to Ticket #6849</a>
+      </li>
+    </ul>
+  </nav>
+
+  <h1>
+    <a href="/bugs.jquery.com/ticket/6849">Ticket #6849</a>: Tutorials How_jQuery_Works-dmethvin.htm
+  
+  <hr>
+
+  <div class="attachment-info">
+    <h6>File Tutorials How_jQuery_Works-dmethvin.htm, 28.3 KB (added by dmethvin, August 22, 2010 05:10PM UTC)</h6>
+    
+  </div>
+
+  
+    <div class="attachment-preview">
+      
+      <pre class="language-htm" tabindex="0"><code class="language-htm"><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<meta name="keywords" content="Tutorials:How jQuery Works,Ajax,Attributes/addClass,Attributes/removeClass,Downloading jQuery,Effects,Events,Main Page,CSS,Effects,Events">
+<link rel="shortcut icon" href="/bugs.jquery.com/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="/bugs.jquery.com/opensearch_desc.php" title="jQuery JavaScript Library (English)">
+		<title>Tutorials:How jQuery Works - jQuery JavaScript Library</title>
+		<link rel="stylesheet" href="http://static.jquery.com/files/rocker/css/reset.css" type="text/css">
+		<link rel="stylesheet" href="http://static.jquery.com/files/rocker/css/screen.css" type="text/css">
+		<style type="text/css" media="screen,projection">/*<![CDATA[*/ @import "http://docs.jquery.com/skins/monobook/main.css?9"; /*]]>*/</style>
+
+		<link rel="stylesheet" type="text/css" href="http://jquery.com/files/social/jquery.tabs.css">
+		<!--[if lte IE 7]>
+		<link rel="stylesheet" href="http://jquery.com/files/social/jquery.tabs-ie.css" type="text/css" media="projection, screen"/>
+		<![endif]-->
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+		<script src="http://jquery.com/files/social/js/jquery.tabs.js"></script>
+
+		<script>$(function(){
+			$("div[id=examples]").each(function(){
+				$(this).siblings("div:first").find("div.desc").after(
+					$(this).find("div.example:has(#demo):first").remove().clone());
+
+				if ( !$("div.example", this).length )
+					$(this).remove();
+			});
+
+			$("div.entry")
+				.children("p").remove().end()
+				.find("ul:first li").each(function(){
+					if ( !$(this).parent().siblings( $("a",this).attr("href") ).length )
+						$(this).remove();
+				}).end()
+				.not(".ui")
+				.tabs();
+
+			$("div.args > br").remove();
+
+			$("div.example")
+				.children("p").remove().end()
+				.tabs();
+
+			var keywords = "String,Number,Object,Options,Array,Function,Callback,Selector,Event,Element,Integer,Float,Boolean".split(",");
+
+			$("td.default span, td.type").each(function(){
+				var html = this.innerHTML;
+				jQuery.each(keywords, function(i,key){
+					html = html.replace(new RegExp(key, "ig"), "<a href='/Types#" + key + "'>" + key + "</a>");
+				});
+				this.innerHTML = html;
+			});
+
+			$("div[id=source]").each(function(){
+				var source = $("pre", this).html()
+					.replace(/<\/?a.*?>/ig, "")
+					.replace(/<\/?strong.*?>/ig, "")
+					.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
+
+				//var items = [];
+				//source = source.replace(/\s*<(link|script).*?>\s\*/g, function(m){
+					//items.push(m);
+					//return "";
+				//}).replace("</head>", items.join("") + "</head>")
+				//*/
+
+				var iframe = document.createElement("iframe");
+				iframe.src = "/index-blank.html";
+				iframe.width = "100%";
+				iframe.height = $(this).prev().attr("rel") || "125";
+				iframe.style.border = "none";
+				$(this).prev().append(iframe);
+
+
+				$(window).load(function(){
+					var doc = iframe.contentDocument || iframe.contentWindow.document;
+					  source = source
+					          .replace(/<script>([^<])/g,"<script>window.onload = (function(){\ntry{$1")
+					          .replace(/([^>])<\/sc/g,  '$1\n}catch(e){}});</sc');
+
+					    source = source
+					            .replace("</head>", "<style>html,body{border:0; margin:0; padding:0;}</style></head>");
+
+					doc.open();
+					doc.write( source );
+					doc.close();
+				});
+
+			});
+		});</script>
+		<script type="text/javascript" src="http://static.jquery.com/files/rocker/scripts/custom.js"></script>
+		<link rel="shortcut icon" href="http://static.jquery.com/favicon.ico" type="image/x-icon">
+		<style type="text/css" media="screen,projection">/*<![CDATA[*/ @import "/skins/monobook/main.css?9"; /*]]>*/</style>
+		<link rel="stylesheet" type="text/css" media="print" href="/bugs.jquery.com/skins/common/commonPrint.css">
+		<!--[if lt IE 5.5000]><style type="text/css">@import "/skins/monobook/IE50Fixes.css";</style><![endif]-->
+		<!--[if IE 5.5000]><style type="text/css">@import "/skins/monobook/IE55Fixes.css";</style><![endif]-->
+		<!--[if IE 6]><style type="text/css">@import "/skins/monobook/IE60Fixes.css";</style><![endif]-->
+		<!--[if IE 7]><style type="text/css">@import "/skins/monobook/IE70Fixes.css?1";</style><![endif]-->
+		<!--[if lt IE 7]><script type="text/javascript" src="/skins/common/IEFixes.js"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+		
+		<!-- Head Scripts -->
+			</head>
+	<body id="jq-interior" class="mediawiki ns-0 ltr">
+
+	<div id="jq-siteContain">
+			<div id="jq-header">
+				<a id="jq-siteLogo" href="http://jquery.com/" title="jQuery Home"><img src="http://static.jquery.com/files/rocker/images/logo_jquery_215x53.gif" width="215" height="53" alt="jQuery: Write Less, Do More."></a>
+
+				<div id="jq-primaryNavigation">
+
+					<ul>
+<li class="jq-jquery jq-current"><a href="http://jquery.com/" title="jQuery Home">jQuery</a></li>
+<li class="jq-plugins"><a href="http://plugins.jquery.com/" title="jQuery Plugins">Plugins</a></li>
+<li class="jq-ui"><a href="http://jqueryui.com/" title="jQuery UI">UI</a></li>
+<li class="jq-meetup"><a href="http://meetups.jquery.com/" title="jQuery Meetups">Meetups</a></li>
+<li class="jq-forum"><a href="http://forum.jquery.com/" title="jQuery Forum">Forum</a></li>
+<li class="jq-blog"><a href="http://blog.jquery.com/" title="jQuery Blog">Blog</a></li>
+<li class="jq-about"><a href="http://jquery.org/about" title="About jQuery">About</a></li>
+<li class="jq-donate"><a href="http://jquery.org/donate" title="Donate to jQuery">Donate</a></li>
+					</ul>
+				</div><!-- /#primaryNavigation -->
+
+				<div id="jq-secondaryNavigation">
+					<ul>
+						<li class="jq-download jq-first"><a href="http://docs.jquery.com/Downloading_jQuery">Download</a></li>
+						<li class="jq-documentation jq-current"><a href="http://docs.jquery.com/">Documentation</a></li>
+						<li class="jq-tutorials"><a href="http://docs.jquery.com/Tutorials">Tutorials</a></li>
+
+						<li class="jq-bugTracker"><a href="http://dev.jquery.com/">Bug Tracker</a></li>
+						<li class="jq-discussion jq-last"><a href="http://docs.jquery.com/Discussion">Discussion</a></li>
+					</ul>
+				</div><!-- /#secondaryNavigation -->
+
+				
+
+				<h1>Documentation</h1>
+
+				<form id="jq-primarySearchForm" action="/bugs.jquery.com/Special:Search">
+
+					<div>
+						<input type="hidden" value="1" name="ns0">
+						<label for="primarySearch">Search <span class="jq-jquery">jQuery</span></label>
+						<input type="text" value="" accesskey="f" title="Search jQuery" name="search" id="jq-primarySearch">
+						<button type="submit" name="go" id="jq-searchGoButton"><span>Go</span></button>
+					</div>
+
+				</form>
+
+			</div><!-- /#header -->
+
+			<div id="jq-content" class="jq-clearfix">
+
+				<div id="jq-interiorNavigation">
+					<div class="jq-portlet" id="jq-p-Getting-Started">
+						<h5>Getting Started</h5>
+						<div class="jq-pBody">
+
+							<ul>
+
+								<li id="jq-n-Main-Page"><a href="/bugs.jquery.com/Main_Page">Main Page</a></li>
+								<li id="jq-n-Downloading-jQuery"><a href="/bugs.jquery.com/Downloading_jQuery">Downloading jQuery</a></li>
+				
+								<li id="jq-n-How-jQuery-Works"><a href="/bugs.jquery.com/How_jQuery_Works">How jQuery Works</a></li>
+								<li id="jq-n-FAQ"><a href="/bugs.jquery.com/Frequently_Asked_Questions">FAQ</a></li>
+								<li id="jq-n-Tutorials"><a href="/bugs.jquery.com/Tutorials">Tutorials</a></li>
+
+								<li id="jq-n-Using-jQuery-with-Other-Libraries"><a href="/bugs.jquery.com/Using_jQuery_with_Other_Libraries">Using jQuery with Other Libraries</a></li>
+
+								<li id="jq-n-Variable-Types"><a href="/bugs.jquery.com/Types">Variable Types</a></li>
+							</ul>
+				
+						</div>
+					</div>
+						<div class="jq-portlet" id="jq-p-API-Reference">
+						<h5>API Reference</h5>
+
+						<div class="jq-pBody">
+
+							<ul>
+								<li id="jq-n-jQuery-Core"><a href="/bugs.jquery.com/Core">jQuery Core</a></li>
+								<li id="jq-n-Selectors"><a href="/bugs.jquery.com/Selectors">Selectors</a></li>
+				
+								<li id="jq-n-Attributes"><a href="/bugs.jquery.com/Attributes">Attributes</a></li>
+								<li id="jq-n-Traversing"><a href="/bugs.jquery.com/Traversing">Traversing</a></li>
+								<li id="jq-n-Manipulation"><a href="/bugs.jquery.com/Manipulation">Manipulation</a></li>
+
+								<li id="jq-n-CSS"><a href="/bugs.jquery.com/CSS">CSS</a></li>
+								<li id="jq-n-Events"><a href="/bugs.jquery.com/Events">Events</a></li>
+								<li id="jq-n-Effects"><a href="/bugs.jquery.com/Effects">Effects</a></li>
+				
+								<li id="jq-n-Ajax"><a href="/bugs.jquery.com/Ajax">Ajax</a></li>
+								<li id="jq-n-Utilities"><a href="/bugs.jquery.com/Utilities">Utilities</a></li>
+								<li id="jq-n-jQuery-UI"><a href="/bugs.jquery.com/UI">jQuery UI</a></li>
+
+							</ul>
+						</div>
+					</div>
+						<div class="jq-portlet" id="jq-p-Plugins">
+				
+						<h5>Plugins</h5>
+						<div class="jq-pBody">
+							<ul>
+								<li id="jq-n-Plugin-Repository"><a href="http://jquery.com/plugins/">Plugin Repository</a></li>
+
+								<li id="jq-n-Authoring"><a href="/bugs.jquery.com/Plugins/Authoring">Authoring</a></li>
+							</ul>
+						</div>
+				
+					</div>
+						<div class="jq-portlet" id="jq-p-Support">
+						<h5>Support</h5>
+						<div class="jq-pBody">
+
+							<ul>
+
+								<li id="jq-n-Mailing-List-and-Chat"><a href="/bugs.jquery.com/Discussion">Mailing List and Chat</a></li>
+								<li id="jq-n-Submit-New-Bug"><a href="http://jquery.com/dev/bugs/new/">Submit New Bug</a></li>
+								<li id="jq-n-Commercial-Support"><a href="/bugs.jquery.com/Commercial_Support">Commercial Support</a></li>
+				
+							</ul>
+						</div>
+					</div>
+						<div class="jq-portlet" id="jq-p-About-jQuery">
+
+						<h5>About jQuery</h5>
+
+						<div class="jq-pBody">
+							<ul>
+								<li id="jq-n-Contributors"><a href="/bugs.jquery.com/Contributors">Contributors</a></li>
+				
+								<li id="jq-n-History-of-jQuery"><a href="/bugs.jquery.com/History_of_jQuery">History of jQuery</a></li>
+								<li id="jq-n-Sites-Using-jQuery"><a href="/bugs.jquery.com/Sites_Using_jQuery">Sites Using jQuery</a></li>
+
+								<li id="jq-n-Browser-Compatibility"><a href="/bugs.jquery.com/Browser_Compatibility">Browser Compatibility</a></li>
+								<li id="jq-n-License"><a href="/bugs.jquery.com/Licensing">Licensing</a></li>
+
+								<li id="jq-n-Donate"><a href="/bugs.jquery.com/Donate">Donate</a></li>
+							</ul>
+				
+						</div>
+					</div>
+						
+	<div class="jq-portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="jq-pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="/bugs.jquery.com/index.php?title=Special:Whatlinkshere&amp;target=Tutorials%3AHow_jQuery_Works">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="/bugs.jquery.com/index.php?title=Special:Recentchangeslinked&amp;target=Tutorials%3AHow_jQuery_Works">Related changes</a></li>
+<li id="t-upload"><a href="/bugs.jquery.com/Special:Upload">Upload file</a></li>
+<li id="t-specialpages"><a href="/bugs.jquery.com/Special:Specialpages">Special pages</a></li>
+				<li id="t-print"><a href="/bugs.jquery.com/action/render/Tutorials:How_jQuery_Works">Printable version</a></li>				<li id="t-permalink"><a href="/bugs.jquery.com/index.php?title=Tutorials:How_jQuery_Works&amp;oldid=20221">Permanent link</a></li>			</ul>
+		</div>
+	</div>
+
+	<div id="jq-p-cactions" class="jq-portlet">
+		<h5>Views</h5>
+		<div class="jq-pBody">
+		<ul>
+				 <li id="jq-ca-nstab-main" class="selected"><a href="/bugs.jquery.com/Tutorials:How_jQuery_Works">Article</a></li>
+				 <li id="jq-ca-talk"><a href="/bugs.jquery.com/Talk:Tutorials:How_jQuery_Works">Discussion</a></li>
+				 <li id="jq-ca-edit"><a href="/bugs.jquery.com/action/edit/Tutorials:How_jQuery_Works">Edit</a></li>
+				 <li id="jq-ca-history"><a href="/bugs.jquery.com/action/history/Tutorials:How_jQuery_Works">History</a></li>
+		</ul>
+		</div>
+	</div>
+	<div class="jq-portlet" id="jq-p-personal">
+		<h5>Personal tools</h5>
+		<div class="jq-pBody">
+			<ul>
+				<li id="jq-pt-login"><a href="/bugs.jquery.com/index.php?title=Special:Userlogin&amp;returnto=Tutorials:How_jQuery_Works">Log in / create account</a></li>
+			</ul>
+		</div>
+	</div>
+
+					
+				</div><!-- /#interiorNavigation -->
+
+
+
+
+
+				<div id="jq-primaryContent">
+		<div id="column-content">
+	<div id="docs-content">
+		<a name="top" id="top"></a>
+				<!--<div style="background:#efefff; border:#9f9fff 1px solid; padding: 10px;"><strong>UPDATE:</strong> The jQuery API documentation has been completely rewritten and moved to <a href="http://api.jquery.com/">api.jquery.com</a>. More details <a href="http://jquery14.com/pre-release-1/new-jquery-api-site">can be found on the jQuery blog</a>.</div>-->
+		<h1 class="firstHeading">Tutorials:How jQuery Works</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">From jQuery JavaScript Library</h3>
+			<div id="contentSub"></div>
+									<div id="jump-to-nav">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>			<!-- start content -->
+			<div style="padding:10px;margin:10px;background:#F5F5F5;border:1px solid #DDD;">
+<p><big>A basic introduction to jQuery and the concepts that you need to know to use it.</big>
+</p><p><b>Original:</b> <a href="http://docs.jquery.com/Tutorials:How_jQuery_Works" class="external free" title="http://docs.jquery.com/Tutorials:How_jQuery_Works">http://docs.jquery.com/Tutorials:How_jQuery_Works</a><br>
+<b>Author:</b> <a href="http://ejohn.org/" class="external text" title="http://ejohn.org/">John Resig.</a>
+</p>
+Similar Tutorials:&nbsp;<a href="/bugs.jquery.com/Category:JQuery_Core" title="Category:JQuery Core">jQuery Core</a>,&nbsp;<a href="/bugs.jquery.com/Category:Selectors" title="Category:Selectors">Selectors</a>,&nbsp;<a href="/bugs.jquery.com/Category:CSS" title="Category:CSS">CSS</a>,&nbsp;<a href="/bugs.jquery.com/Category:Traversing" title="Category:Traversing">Traversing</a>,&nbsp;<a href="/bugs.jquery.com/Category:Manipulation" title="Category:Manipulation">Manipulation</a>,&nbsp;<a href="/bugs.jquery.com/Category:Events" title="Category:Events">Events</a>,&nbsp;<a href="/bugs.jquery.com/Category:Effects" title="Category:Effects">Effects</a></div>
+<table id="toc" class="toc" summary="Contents"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1"><a href="#jQuery:_The_Basics"><span class="tocnumber">1</span> <span class="toctext">jQuery: The Basics</span></a></li>
+<li class="toclevel-1"><a href="#Launching_Code_on_Document_Ready"><span class="tocnumber">2</span> <span class="toctext">Launching Code on Document Ready</span></a></li>
+<li class="toclevel-1"><a href="#Complete_Example"><span class="tocnumber">3</span> <span class="toctext">Complete Example</span></a></li>
+<li class="toclevel-1"><a href="#Adding_and_Removing_an_HTML_Class"><span class="tocnumber">4</span> <span class="toctext">Adding and Removing an HTML Class</span></a></li>
+<li class="toclevel-1"><a href="#Special_Effects"><span class="tocnumber">5</span> <span class="toctext">Special Effects</span></a></li>
+<li class="toclevel-1"><a href="#Callback_and_Functions"><span class="tocnumber">6</span> <span class="toctext">Callback and Functions</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Callback_without_arguments"><span class="tocnumber">6.1</span> <span class="toctext">Callback without arguments</span></a></li>
+<li class="toclevel-2"><a href="#Callback_with_arguments"><span class="tocnumber">6.2</span> <span class="toctext">Callback with arguments</span></a>
+<ul>
+<li class="toclevel-3"><a href="#Wrong"><span class="tocnumber">6.2.1</span> <span class="toctext">Wrong</span></a></li>
+<li class="toclevel-3"><a href="#Right"><span class="tocnumber">6.2.2</span> <span class="toctext">Right</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#More_Reading"><span class="tocnumber">7</span> <span class="toctext">More Reading</span></a></li>
+</ul>
+</td></tr></table><script type="text/javascript"> if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/bugs.jquery.com/action/edit/Tutorials:How_jQuery_Works?section=1" title="Edit section: jQuery: The Basics">edit</a>]</div><a name="jQuery:_The_Basics"></a><h3> jQuery: The Basics </h3>
+<p>This is a basic tutorial, designed to help you get started using jQuery. If you don't have a test page setup yet, start by creating a new HTML page with the following contents:
+</p>
+<pre>&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery.js&quot;&gt;&lt;/script&gt;
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;a href=&quot;http://jquery.com/&quot;&gt;jQuery&lt;/a&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Edit the <code>src</code> attribute in the script tag to point to your copy of jquery.js.
+For example, if jquery.js is in the same directory as your HTML file, you
+can use:
+</p>
+<pre> &lt;script type=&quot;text/javascript&quot; src=&quot;jquery.js&quot;&gt;&lt;/script&gt;
+</pre>
+<p>You can download your own copy of jQuery from the <a href="/bugs.jquery.com/Downloading_jQuery" title="Downloading jQuery">Downloading jQuery</a> page
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/bugs.jquery.com/action/edit/Tutorials:How_jQuery_Works?section=2" title="Edit section: Launching Code on Document Ready">edit</a>]</div><a name="Launching_Code_on_Document_Ready"></a><h3> Launching Code on Document Ready </h3>
+<p>The first thing that most Javascript programmers end up doing is adding some code to their program, similar to this:
+</p>
+<pre> window.onload = function(){ alert("welcome"); }
+</pre>
+<p>Inside of which is the code that you want to run right when the page is loaded. Problematically, however, the Javascript code isn't run until all images are finished downloading (this includes banner ads). The reason for using window.onload in the first place is that the HTML 'document' isn't finished loading yet, when you first try to run your code.
+</p><p>To circumvent both problems, jQuery has a simple statement that checks the <code>document</code> and waits until it's ready to be manipulated, known as the <a href="/bugs.jquery.com/Events#ready.28_fn_.29" title="Events">ready event</a>:
+</p>
+<pre> $(document).ready(function(){
+   // Your code here
+ });
+</pre>
+<p>Inside the ready event, add a click handler to the link:
+</p>
+<pre> $(document).ready(function(){
+   <b>$("a").click(function(event){
+     alert("Thanks for visiting!");
+   });</b>
+ });
+</pre>
+<p>Save your HTML file and reload the test page in your browser. Clicking the link on the page should make a browser's alert pop-up, before leaving to go to the main jQuery page.
+</p><p>For click and most other <a href="/bugs.jquery.com/Events" title="Events">events</a>, you can prevent the default behaviour - here, following the link to jquery.com - by calling event.preventDefault() in the event handler:
+</p>
+<pre> $(document).ready(function(){
+   $("a").click(function(<b>event</b>){
+     alert("As you can see, the link no longer took you to jquery.com");
+     <b>event.preventDefault();</b>
+   });
+ });
+</pre>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/bugs.jquery.com/action/edit/Tutorials:How_jQuery_Works?section=3" title="Edit section: Complete Example">edit</a>]</div><a name="Complete_Example"></a><h3> Complete Example </h3>
+<p>The following is an example of what the complete HTML file might look like if you were to use the script in your own file. Note that it links to Google's <a href="http://code.google.com/apis/libraries/" class="external text" title="http://code.google.com/apis/libraries/">CDN</a> to load the jQuery core file. Also, while the custom script is included in the &lt;head&gt;, it is generally preferable to place it in a separate file and refer that file with the script element's src attribute
+</p>
+<pre> &lt;!DOCTYPE html&gt;
+ &lt;html lang="en"&gt;
+ &lt;head&gt;
+   &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"&gt;
+   &lt;script src="<a href="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" class="external free" title="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js">http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js</a>" type="text/javascript"&gt;&lt;/script&gt;
+   &lt;script type="text/javascript"&gt;
+     $(document).ready(function(){
+       $("a").click(function(event){
+         alert("As you can see, the link no longer took you to jquery.com");
+         event.preventDefault();
+       });
+     });
+     
+   &lt;/script&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+   &lt;a href=&quot;<a href="http://jquery.com/" class="external free" title="http://jquery.com/">http://jquery.com/</a>"&gt;jQuery&lt;/a&gt;
+ &lt;/body&gt;
+ &lt;/html&gt;
+</pre>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/bugs.jquery.com/action/edit/Tutorials:How_jQuery_Works?section=4" title="Edit section: Adding and Removing an HTML Class">edit</a>]</div><a name="Adding_and_Removing_an_HTML_Class"></a><h3> Adding and Removing an HTML Class </h3>
+<p><strong>Important:</strong> <em>The remaining jQuery examples will need to be placed inside the ready event so that they are executed when the document is ready to be worked on. See <a href="#Launching_Code_on_Document_Ready" title="">Launching Code on Document Ready</a> above for details.</em>
+</p><p>Another common task is adding (or removing) a <code>class</code>. 
+</p><p>First, add some style information into the &lt;head&gt; of your document, like this:
+</p>
+<pre> &lt;style type="text/css"&gt;
+    a.test { font-weight: bold; }
+ &lt;/style&gt;
+</pre>
+<p>Next, add the <a href="/bugs.jquery.com/Attributes/addClass" title="Attributes/addClass">addClass</a> call to your script: 
+</p>
+<pre>  $("a").addClass("test");
+</pre>
+<p>All your <code>a</code> elements will now be bold.
+</p><p>To remove the <code>class</code>, use <a href="/bugs.jquery.com/Attributes/removeClass" title="Attributes/removeClass">removeClass</a>
+</p>
+<pre> $("a").removeClass("test");
+</pre>
+<ul><li>(HTML allows multiple classes to be added to an element.)
+</li></ul>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/bugs.jquery.com/action/edit/Tutorials:How_jQuery_Works?section=5" title="Edit section: Special Effects">edit</a>]</div><a name="Special_Effects"></a><h3> Special Effects </h3>
+<p>In jQuery, a couple of handy <a href="/bugs.jquery.com/Effects" title="Effects">effects</a> are provided, to really make your web site stand out. To put this to the test, change the click that you added earlier to this:
+</p>
+<pre> $("a").click(function(event){
+   event.preventDefault();
+   $(this).hide("slow");
+ });
+</pre>
+<p>Now, if you click any link, it should make itself slowly disappear.
+</p><p><br>
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/bugs.jquery.com/action/edit/Tutorials:How_jQuery_Works?section=6" title="Edit section: Callback and Functions">edit</a>]</div><a name="Callback_and_Functions"></a><h2> Callback and Functions </h2>
+<p>A callback is a function that is passed as an argument to another function and is executed after its parent function has completed. The special thing about a callback is that functions that appear after the "parent" can execute before the callback executes.
+Another important thing to know is how to properly pass the callback. This is where I have often forgotten the proper syntax.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/bugs.jquery.com/action/edit/Tutorials:How_jQuery_Works?section=7" title="Edit section: Callback without arguments">edit</a>]</div><a name="Callback_without_arguments"></a><h3> Callback <em>without</em> arguments </h3>
+<p>For a callback with no arguments you pass it like this:
+</p>
+<pre> $.get('myhtmlpage.html', myCallBack);
+</pre>
+<p><b>Note</b> that the second parameter here is simply the function name (but <i>not</i> as a string and without parentheses). Functions in Javascript are 'First class citizens' and so can be passed around like variable references and executed at a later time.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/bugs.jquery.com/action/edit/Tutorials:How_jQuery_Works?section=8" title="Edit section: Callback with arguments">edit</a>]</div><a name="Callback_with_arguments"></a><h3> Callback <em>with</em> arguments </h3>
+<p>"What do you do if you have arguments that you want to pass?", you might ask yourself. 
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/bugs.jquery.com/action/edit/Tutorials:How_jQuery_Works?section=9" title="Edit section: Wrong">edit</a>]</div><a name="Wrong"></a><h4> Wrong </h4>
+<p>The Wrong Way (will <b>not</b> work!)
+</p>
+<pre> $.get('myhtmlpage.html', myCallBack(param1, param2));
+</pre>
+<p><br>
+This will not work because it calls
+</p>
+<pre>myCallBack(param1, param2)
+</pre>
+<p>and then passes the return value as the second parameter to <code><a href="/bugs.jquery.com/Ajax" title="Ajax">$.get()</a></code>
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/bugs.jquery.com/action/edit/Tutorials:How_jQuery_Works?section=10" title="Edit section: Right">edit</a>]</div><a name="Right"></a><h4> Right </h4>
+<p>The problem with the above example is that myCallBack(param1, param2) is evaluated before being passed as a function. Javascript and by extension jQuery expects a function pointer in cases like these. I.E. setTimeout function.
+</p><p>In the below usage, an anonymous function is created (just a block of statements) and is registered as the callback function.  Note the use of 'function(){'.  The anonymous function does exactly one thing:  calls myCallBack, with the values of param1 and param2 in the outer scope.
+</p>
+<pre>$.get('myhtmlpage.html', function(){
+  myCallBack(param1, param2);
+});
+</pre>
+<p>param1 and param2 are evaluated as a callback when the '$.get' is done getting the page.
+</p><p><br>
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/bugs.jquery.com/action/edit/Tutorials:How_jQuery_Works?section=11" title="Edit section: More Reading">edit</a>]</div><a name="More_Reading"></a><h2> More Reading </h2>
+<p>From here, you should probably begin looking at the rest of the <a href="/bugs.jquery.com/Main_Page" title="Main Page">Documentation</a> - it's very comprehensive and covers all aspects of jQuery. If you have any questions, please feel free to send a message to the jQuery Forums 
+</p><!-- 
+Pre-expand include size: 3869 bytes
+Post-expand include size: 2761 bytes
+Template argument size: 1192 bytes
+Maximum: 2097152 bytes
+-->
+
+<!-- Saved in parser cache with key jqdocs_docs:pcache:idhash:1498-0!1!0!!en!2 and timestamp 20100822135550 -->
+<div class="printfooter">
+Retrieved from "<a href="http://docs.jquery.com/Tutorials:How_jQuery_Works">http://docs.jquery.com/Tutorials:How_jQuery_Works</a>"</div>
+			<div id="catlinks"><p class="catlinks"><a href="/bugs.jquery.com/index.php?title=Special:Categories&amp;article=Tutorials%3AHow_jQuery_Works" title="Special:Categories">Categories</a>: <span dir="ltr"><a href="/bugs.jquery.com/Category:JQuery_Core" title="Category:JQuery Core">JQuery Core</a></span> | <span dir="ltr"><a href="/bugs.jquery.com/Category:Selectors" title="Category:Selectors">Selectors</a></span> | <span dir="ltr"><a href="/bugs.jquery.com/Category:CSS" title="Category:CSS">CSS</a></span> | <span dir="ltr"><a href="/bugs.jquery.com/Category:Traversing" title="Category:Traversing">Traversing</a></span> | <span dir="ltr"><a href="/bugs.jquery.com/Category:Manipulation" title="Category:Manipulation">Manipulation</a></span> | <span dir="ltr"><a href="/bugs.jquery.com/Category:Events" title="Category:Events">Events</a></span> | <span dir="ltr"><a href="/bugs.jquery.com/Category:Effects" title="Category:Effects">Effects</a></span> | <span dir="ltr"><a href="/bugs.jquery.com/Category:Tutorials" title="Category:Tutorials">Tutorials</a></span></p></div>			<!-- end content -->
+			<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+
+				</div><!-- /#primaryContent -->
+
+				
+				
+				
+			</div><!-- /#content -->
+
+
+			<div id="jq-footer" class="jq-clearfix">
+
+				<div id="jq-credits">
+				<p id="jq-copyright">&copy; 2010 <a href="http://jquery.org/">The jQuery Project</a></p>
+				<p id="jq-hosting">Sponsored by <a href="http://mediatemple.net" class="jq-mediaTemple">Media Temple</a> and <a href="http://jquery.org/sponsors">others</a>.</p>
+				</div>
+
+				<div id="jq-footerNavigation">
+					<ul>
+						<li class="jq-download jq-first"><a href="http://docs.jquery.com/Downloading_jQuery">Download</a></li>
+						<li class="jq-documentation jq-current"><a href="http://docs.jquery.com/">Documentation</a></li>
+						<li class="jq-tutorials"><a href="http://docs.jquery.com/Tutorials">Tutorials</a></li>
+						<li class="jq-bugTracker"><a href="http://dev.jquery.com/">Bug Tracker</a></li>
+						<li class="jq-discussion jq-last"><a href="http://docs.jquery.com/Discussion">Discussion</a></li>
+					</ul>
+				</div><!-- /#secondaryNavigation -->
+				
+			</div><!-- /#footer -->
+
+
+	</div><!-- /#siteContain -->
+
+<script type="text/javascript">
+var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-1076265-1']); _gaq.push(['_trackPageview']); _gaq.push(['_setDomainName', '.jquery.com']);
+(function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);})();
+</script>
+	</body>
+<!-- Cached 20100822135551 -->
+</html></code></pre>
+    </div>
+  
+
+  <div class="attachment-download flex-column flex-center">
+    <h3>Download in other formats:</h3>
+    <a class="attachment-download-link" download="" href="/bugs.jquery.com/raw-attachment/ticket/6849/Tutorials How_jQuery_Works-dmethvin.htm">Original Format</a>
+  </div>
+</h1></div>
+        </div>
+      </main>
+      <footer>
+        Copyright &copy; 2023
+        <a href="https://openjsf.org">The OpenJS Foundation</a>
+      </footer>
+    </div>
+    <script src="/bugs.jquery.com/pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          translations: {
+            placeholder: '',
+            zero_results: 'No matches found.'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

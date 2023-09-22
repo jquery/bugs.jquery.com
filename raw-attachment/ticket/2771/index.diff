@@ -1,0 +1,17 @@
+Index: core.js
+===================================================================
+--- core.js	(revision 5470)
++++ core.js	(working copy)
+@@ -146,8 +146,11 @@
+ 
+ 		// Locate the position of the desired element
+ 		this.each(function(i){
+-			if ( this == elem )
++			// use === because on IE, window == document
++			if( elem.jquery ? elem.index(this) != -1 : this === elem ){
+ 				ret = i;
++				return false;
++			}
+ 		});
+ 
+ 		return ret;

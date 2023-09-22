@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>JavaScript jQuery Chrome Bug</title>
+  <meta name="author" content="Maximilian Schulz">
+  <script src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+    jQuery(function($) {
+      
+      $('a[data-confirm]').live('click', function(event) {
+        return confirm($(this).attr('data-confirm'));
+      });
+
+      // Unobtrusive javascript for htttp delete links
+      // Uses the new live method in jQuery 1.3+
+      $('a[data-http-method=delete]').live('click', function(event) {
+        alert('Deleted');
+      });
+      
+    });
+  </script>
+</head>
+<body>
+  <a href="http://google.com/" data-confirm="Are you sure you want to be redirected?" data-http-method="delete">Click me!</a>
+</body>
+</html>

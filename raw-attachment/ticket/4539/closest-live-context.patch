@@ -1,0 +1,22 @@
+Index: traversing.js
+===================================================================
+--- traversing.js	(revision 6308)
++++ traversing.js	(working copy)
+@@ -34,13 +34,14 @@
+ 			}) ), "filter", selector );
+ 	},
+ 
+-	closest: function( selector ) {
++	closest: function( selector, context ) {
+ 		var pos = jQuery.expr.match.POS.test( selector ) ? jQuery(selector) : null,
+-			closer = 0;
++			closer = 0,
++			stopElement = ( context && context.parentNode ) ? context.parentNode : false;;
+ 
+ 		return this.map(function(){
+ 			var cur = this;
+-			while ( cur && cur.ownerDocument ) {
++			while ( cur && cur.ownerDocument && stopElement !== cur) {
+ 				if ( pos ? pos.index(cur) > -1 : jQuery(cur).is(selector) ) {
+ 					jQuery.data(cur, "closest", closer);
+ 					return cur;

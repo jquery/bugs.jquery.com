@@ -1,0 +1,34 @@
+Index: src/core.js
+===================================================================
+--- src/core.js	(revision 5713)
++++ src/core.js	(working copy)
+@@ -293,11 +293,27 @@
+ 
+ 		// Need to set the expando to null on the cloned set if it exists
+ 		// removeData doesn't work here, IE removes it from the original as well
+-		// this is primarily for IE but the data expando shouldn't be copied over in any browser
+-		var clone = ret.find("*").andSelf().each(function(){
++		// this is primarily for IE but the data expando shouldn't be copied over in any browser.
++		
++		// Because andSelf() calls add() which uses unique(), which will then
++		// potentially strip out some elements because of our unclean expandos,
++		// we have to clean the expandos separately instead of using one call
++		/*var clone = ret.find("*").andSelf().each(function(){
+ 			if ( this[ expando ] != undefined )
+ 				this[ expando ] = null;
++		});*/
++		
++		ret.find('*').each(function(){
++			if ( this[ expando ] != undefined )
++				this[ expando ] = null;
+ 		});
++		
++		ret.each(function(){
++			if ( this[ expando ] != undefined )
++				this[ expando ] = null;
++		});
++		
++		var clone = ret.find('*').andSelf();
+ 
+ 		// Copy the events from the original to the clone
+ 		if ( events === true )

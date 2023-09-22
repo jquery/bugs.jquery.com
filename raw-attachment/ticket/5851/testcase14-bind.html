@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<title>jQuery 1.4 Bind Change event works in all browsers</title>
+	</head>
+	<body>
+		<form>
+			<input type="text" value="Type here and tab away..." size="40" /><br/><br/>
+			<textarea>Type here and tab away...</textarea><br/><br/>
+			<input type="checkbox" /><br/><br/>
+			<input type="radio" name="rad" value="1"/><input type="radio" name="rad" value="2"/><br/><br/>
+			<select>
+				<option>Test 1</option>
+				<option>Test 2</option>
+			</select><br/><br/>
+			<select multiple="multiple">
+				<option>Test 1</option>
+				<option>Test 2</option>
+			</select>
+		</form>
+        	<hr/>
+	<pre>
+$().ready(function() {
+       	$(":input").bind("change", function() {
+       		$("form").after("&lt;p&gt;Called change!&lt;/p&gt;");      
+       	});  
+});
+	</pre>
+        <p>This will add a "Called change!" paragraph in all browsers</p>	   
+	    
+	    <!--script src="http://code.jquery.com/jquery-1.4rc1.js" type="text/javascript"></script-->
+	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js" type="text/javascript"></script>
+	    <script type="text/javascript">
+	        $().ready(function() {
+                	$(":input").bind("change", function() {
+                    		$("form").after("<p>Called change!</p>");      
+                	});  
+            	});
+	    </script>
+	</body>
+</html>

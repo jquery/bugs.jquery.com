@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Opera HTML5 and JS getElementsByTagName test...</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="content-language" content="en-US" />
+	</head>
+	<body>
+		<nav id="nav">
+			<ul>
+				<li><a href="#content">Home</a></li>
+				<li><a href="#portfolio">Portfolio</a></li>
+				<li><a href="#about">About</a></li>
+				<li><a href="#contact">Contact</a></li>
+				<li><br style="clear: both" /></li>
+			</ul>
+		</nav>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			$('#nav > ul > li').css('background', '#0f0'); // green
+			document.getElementsByTagName('nav')[0].getElementsByTagName('ul')[0].getElementsByTagName('li')[0].style.background = "#0ff"; //teal?
+			$('nav > ul > li').css('background', '#f00'); //red
+
+			$('nav').append("<h1>" + $('nav').length + "</h1>")
+			$('nav').append("<h1>" + $('nav > ul').length + "</h1>")
+		</script>
+	</body>
+</html>
