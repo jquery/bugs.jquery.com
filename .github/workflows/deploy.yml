@@ -10,8 +10,8 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
+  actions: write
   contents: read
-  pages: write
   id-token: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
@@ -28,8 +28,6 @@ defaults:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      actions: write
     env:
       DEPLOY_DIR: _site/
       DEPLOY_BRANCH: gh-pages
