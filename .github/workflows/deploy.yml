@@ -26,9 +26,10 @@ defaults:
     shell: bash
 
 jobs:
-  # Build job
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
     env:
       DEPLOY_DIR: _site/
       DEPLOY_BRANCH: gh-pages
