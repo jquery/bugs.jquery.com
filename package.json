@@ -7,10 +7,11 @@
     "build": "npx @11ty/eleventy",
     "postbuild": "npm run searchindex",
     "start": "npm run clean && cross-env NODE_ENV=development npx @11ty/eleventy --serve --quiet",
-    "debug": "npm run clean && DEBUG=Eleventy* npx @11ty/eleventy",
-    "debugstart": "npm run clean && DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
-    "benchmark": "npm run clean && DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
-    "searchindex": "pagefind"
+    "debug": "npm run clean && cross-env NODE_ENV=development DEBUG=Eleventy* npx @11ty/eleventy",
+    "debugstart": "npm run clean && cross-env NODE_ENV=development DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
+    "benchmark": "npm run clean && cross-env NODE_ENV=development DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
+    "searchindex": "pagefind",
+    "testbuild": "npm run clean && cross-env NODE_ENV=development npx @11ty/eleventy && npm run searchindex"
   },
   "repository": {
     "type": "git",
@@ -37,7 +38,7 @@
   "homepage": "https://github.com/jquery/bugs.jquery.com#readme",
   "devDependencies": {
     "@11ty/eleventy": "github:11ty/eleventy",
-    "@11ty/eleventy-img": "^3.1.0",
+    "@11ty/eleventy-img": "^3.1.1",
     "@11ty/eleventy-navigation": "^0.3.5",
     "@11ty/eleventy-plugin-bundle": "^1.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
@@ -47,7 +48,7 @@
     "luxon": "^3.4.3",
     "pagefind": "^1.0.3",
     "prettier": "^3.0.3",
-    "rimraf": "^5.0.1"
+    "rimraf": "^5.0.5"
   },
   "overrides": {
     "sharp": "^0.32.1"
