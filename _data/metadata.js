@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   title: 'jQuery - Bug Tracker',
   url: 'https://bugs.jquery.com/',
   language: 'en',
