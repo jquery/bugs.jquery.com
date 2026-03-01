@@ -142,55 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ui/tests/sortable.html
-===================================================================
-<span class="token coord">--- ui/tests/sortable.html	(revision 4909)</span>
-<span class="token coord">+++ ui/tests/sortable.html	(working copy)</span>
-<span class="token coord">@@ -70,6 +70,18 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> position: relative;
-</span><span class="token prefix unchanged"> </span><span class="token line">}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">#with_overflow {
-</span><span class="token prefix inserted">+</span><span class="token line">	width: 100px;
-</span><span class="token prefix inserted">+</span><span class="token line">	height: 100px;
-</span><span class="token prefix inserted">+</span><span class="token line">	overflow-y: scroll;
-</span><span class="token prefix inserted">+</span><span class="token line">}
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">#with_overflow DIV.item {
-</span><span class="token prefix inserted">+</span><span class="token line">	height: 10px;
-</span><span class="token prefix inserted">+</span><span class="token line">	border: 1px solid #999;
-</span><span class="token prefix inserted">+</span><span class="token line">	margin: 5px; padding: 10px;
-</span><span class="token prefix inserted">+</span><span class="token line">}
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">.hover {
-</span><span class="token prefix unchanged"> </span><span class="token line">	background: #eee;	
-</span><span class="token prefix unchanged"> </span><span class="token line">}
-</span></span><span class="token coord">@@ -116,6 +128,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	&lt;br style='clear: both;' />
-</span><span class="token prefix unchanged"> </span><span class="token line">	&lt;br />
-</span><span class="token prefix unchanged"> </span><span class="token line">	
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	&lt;div id="with_overflow">&lt;/div>
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	&lt;ul id='myul'>
-</span><span class="token prefix unchanged"> </span><span class="token line">	    &lt;li>Item 1&lt;/li>
-</span><span class="token prefix unchanged"> </span><span class="token line">	    &lt;li>Item 2&lt;/li>
-</span></span><span class="token coord">@@ -171,6 +185,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		animated: true
-</span><span class="token prefix unchanged"> </span><span class="token line">	});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	var wo = $('#with_overflow')
-</span><span class="token prefix inserted">+</span><span class="token line">	for(var i=0; i&lt;100; i++) { wo.append( '&lt;div class="item">Item ' + i + '&lt;/div>' ); }
-</span><span class="token prefix inserted">+</span><span class="token line">	wo.sortable({ items: 'div.item' });
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">&lt;/script>
-</span><span class="token prefix unchanged"> </span><span class="token line">&lt;/body></span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1680/draggable_overflow_test.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1680/draggable_overflow_test.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,26 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ajax.js
-===================================================================
-<span class="token coord">--- ajax.js	(revision 5577)</span>
-<span class="token coord">+++ ajax.js	(working copy)</span>
-<span class="token coord">@@ -235,7 +235,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// If we're requesting a remote document
-</span><span class="token prefix unchanged"> </span><span class="token line">		// and trying to load JSON or Script with a GET
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( (!s.url.indexOf("http") || !s.url.indexOf("//")) &amp;&amp; s.dataType == "script" &amp;&amp; s.type.toLowerCase() == "get" ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( (!s.url.indexOf("http") || !s.url.indexOf("/")) &amp;&amp; s.url.indexOf("/"+location.host) == -1
-</span><span class="token prefix inserted">+</span><span class="token line">				&amp;&amp; s.dataType == "script" &amp;&amp; s.type.toLowerCase() == "get" ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			var head = document.getElementsByTagName("head")[0];
-</span><span class="token prefix unchanged"> </span><span class="token line">			var script = document.createElement("script");
-</span><span class="token prefix unchanged"> </span><span class="token line">			script.src = s.url;</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2816/remote-ajax.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2816/remote-ajax.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

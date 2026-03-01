@@ -142,70 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ui.accordion.js
-===================================================================
-<span class="token coord">--- ui.accordion.js	(revision 4906)</span>
-<span class="token coord">+++ ui.accordion.js	(working copy)</span>
-<span class="token coord">@@ -70,7 +70,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		options.headers.next().each(function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">			maxPadding = Math.max(maxPadding, $(this).innerHeight() - $(this).height());
-</span><span class="token prefix unchanged"> </span><span class="token line">		}).height(maxHeight - maxPadding);
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	} else if ( options.autoheight ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	} else if ( options.autoHeight ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		var maxHeight = 0;
-</span><span class="token prefix unchanged"> </span><span class="token line">		options.headers.next().each(function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">			maxHeight = Math.max(maxHeight, $(this).outerHeight());
-</span></span><span class="token coord">@@ -103,7 +103,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">	destroy: function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">		this.options.headers.next().css("display", "");
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( this.options.fillSpace || this.options.autoheight ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( this.options.fillSpace || this.options.autoHeight ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			this.options.headers.next().css("height", "");
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">		$.removeData(this.element, "ui-accordion");
-</span></span><span class="token coord">@@ -152,7 +152,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				toHide: toHide,
-</span><span class="token prefix unchanged"> </span><span class="token line">				complete: complete,
-</span><span class="token prefix unchanged"> </span><span class="token line">				down: down,
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				autoheight: options.autoheight
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				autoHeight: options.autoHeight
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			});
-</span><span class="token prefix unchanged"> </span><span class="token line">		} else {
-</span><span class="token prefix unchanged"> </span><span class="token line">			$.ui.accordion.animations[options.animated]({
-</span></span><span class="token coord">@@ -160,7 +160,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				toHide: toHide,
-</span><span class="token prefix unchanged"> </span><span class="token line">				complete: complete,
-</span><span class="token prefix unchanged"> </span><span class="token line">				down: down,
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				autoheight: options.autoheight
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				autoHeight: options.autoHeight
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			});
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">	} else {
-</span></span><span class="token coord">@@ -255,7 +255,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		animated: 'slide',
-</span><span class="token prefix unchanged"> </span><span class="token line">		event: "click",
-</span><span class="token prefix unchanged"> </span><span class="token line">		header: "a",
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		autoheight: true,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		autoHeight: true,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		running: 0,
-</span><span class="token prefix unchanged"> </span><span class="token line">		navigationFilter: function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">			return this.href.toLowerCase() == location.href.toLowerCase();
-</span></span><span class="token coord">@@ -286,7 +286,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				duration: options.duration,
-</span><span class="token prefix unchanged"> </span><span class="token line">				easing: options.easing,
-</span><span class="token prefix unchanged"> </span><span class="token line">				complete: function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					if ( !options.autoheight ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					if ( !options.autoHeight ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">						options.toShow.css("height", "auto");
-</span><span class="token prefix unchanged"> </span><span class="token line">					}
-</span><span class="token prefix unchanged"> </span><span class="token line">					options.complete();</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2512/ui.accordion_autoHeight.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2512/ui.accordion_autoHeight.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

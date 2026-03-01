@@ -142,71 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">$</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-	$<span class="token punctuation">.</span>fn<span class="token punctuation">.</span><span class="token function-variable function">tooltip</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token keyword">var</span> settings <span class="token operator">=</span> $<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> $<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>tooltip<span class="token punctuation">.</span>defaults<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
-		$<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>tooltip<span class="token punctuation">.</span><span class="token function">checkDIV</span><span class="token punctuation">(</span>settings<span class="token punctuation">.</span>id<span class="token punctuation">,</span> settings<span class="token punctuation">.</span>class<span class="token punctuation">)</span><span class="token punctuation">;</span>
-		
-		<span class="token keyword">switch</span><span class="token punctuation">(</span>settings<span class="token punctuation">.</span>attribute<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			<span class="token keyword">case</span> <span class="token string">'alt'</span><span class="token operator">:</span>
-				settings<span class="token punctuation">.</span>tip <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'alt'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token keyword">break</span><span class="token punctuation">;</span>
-			<span class="token keyword">case</span> <span class="token string">'title'</span><span class="token operator">:</span>
-				settings<span class="token punctuation">.</span>tip <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'title'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token keyword">break</span><span class="token punctuation">;</span>
-			<span class="token keyword">case</span> <span class="token string">'custom'</span><span class="token operator">:</span>
-				<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>settings<span class="token punctuation">.</span>tip<span class="token punctuation">)</span>
-					<span class="token comment">// tip must me set when attribute is set to custom</span>
-					<span class="token keyword">throw</span> <span class="token function">Error</span><span class="token punctuation">(</span><span class="token string">'tooltip(): tip must me set when attribute is set to custom.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token keyword">break</span><span class="token punctuation">;</span>
-		<span class="token punctuation">}</span>
-		
-		<span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			<span class="token keyword">var</span> $<span class="token keyword">this</span> <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token keyword">var</span> $div <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#'</span> <span class="token operator">+</span> settings<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token keyword">var</span> tip <span class="token operator">=</span> settings<span class="token punctuation">.</span>tip<span class="token punctuation">;</span>
-			
-			$<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">mouseover</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-				$div<span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string-property property">'left'</span><span class="token operator">:</span> $<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">position</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>left<span class="token punctuation">,</span> <span class="token string-property property">'top'</span><span class="token operator">:</span> $<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">position</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>top<span class="token punctuation">}</span><span class="token punctuation">)</span>
-					<span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span>tip<span class="token punctuation">)</span>
-					<span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">mouseout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-				$div<span class="token punctuation">.</span><span class="token function">hide</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-					<span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">)</span>
-		<span class="token punctuation">}</span><span class="token punctuation">)</span>
-	<span class="token punctuation">}</span><span class="token punctuation">;</span>
-	
-	$<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>tooltip<span class="token punctuation">.</span><span class="token function-variable function">checkDIV</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">divId<span class="token punctuation">,</span> divClass</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token keyword">var</span> $div <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#'</span> <span class="token operator">+</span> divId<span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token keyword">var</span> $body <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'body'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	
-		<span class="token keyword">if</span><span class="token punctuation">(</span>$div<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			$div
-				<span class="token punctuation">.</span><span class="token function">hide</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-				<span class="token punctuation">.</span><span class="token function">addClass</span><span class="token punctuation">(</span>divClass<span class="token punctuation">)</span>
-		<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-			<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'&lt;div />'</span><span class="token punctuation">)</span>
-				<span class="token punctuation">.</span><span class="token function">hide</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-				<span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">,</span> divId<span class="token punctuation">)</span>
-				<span class="token punctuation">.</span><span class="token function">addClass</span><span class="token punctuation">(</span>divClass<span class="token punctuation">)</span>
-				<span class="token punctuation">.</span><span class="token function">appendTo</span><span class="token punctuation">(</span>$body<span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token punctuation">}</span>
-	<span class="token punctuation">}</span>
-	
-	$<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>tooltip<span class="token punctuation">.</span>defaults <span class="token operator">=</span> <span class="token punctuation">{</span>
-		<span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token string">'tooltip'</span><span class="token punctuation">,</span>
-		<span class="token literal-property property">tip</span><span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
-		<span class="token keyword">class</span><span class="token operator">:</span> <span class="token string">'tooltip'</span><span class="token punctuation">,</span>
-		<span class="token literal-property property">attribute</span><span class="token operator">:</span> <span class="token string">'alt'</span>
-	<span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>jQuery<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4259/jquery.tooltip-0.2.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4259/jquery.tooltip-0.2.js">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,93 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token comment">///////////////////</span>
-<span class="token comment">// XML prototyping</span>
-
-<span class="token comment">// These should be ported into jQuery in some way...</span>
-
-<span class="token keyword">function</span> <span class="token function">createXML</span> <span class="token punctuation">(</span><span class="token parameter">rName</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-   <span class="token keyword">if</span> <span class="token punctuation">(</span>document<span class="token punctuation">.</span>implementation <span class="token operator">&amp;&amp;</span> document<span class="token punctuation">.</span>implementation<span class="token punctuation">.</span>createDocument<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token comment">// Gecko-based browsers: Firefox, Safari, Opera, etc.</span>
-      xmlDoc <span class="token operator">=</span> document<span class="token punctuation">.</span>implementation<span class="token punctuation">.</span><span class="token function">createDocument</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span>rName<span class="token punctuation">,</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      xmlDoc<span class="token punctuation">.</span>async <span class="token operator">=</span> <span class="token string">'false'</span><span class="token punctuation">;</span>
-      <span class="token keyword">return</span> xmlDoc<span class="token punctuation">;</span>
-   <span class="token punctuation">}</span>
-   <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>ActiveXObject<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token comment">// Internet Explorer</span>
-      xmlDoc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ActiveXObject</span><span class="token punctuation">(</span><span class="token string">"Microsoft.XMLDOM"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      xmlDoc<span class="token punctuation">.</span>async <span class="token operator">=</span> <span class="token string">"false"</span><span class="token punctuation">;</span>
-      <span class="token keyword">var</span> root <span class="token operator">=</span> xmlDoc<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span>rName<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      xmlDoc<span class="token punctuation">.</span>documentElement <span class="token operator">=</span> root<span class="token punctuation">;</span>
-      <span class="token keyword">return</span> xmlDoc<span class="token punctuation">;</span>
-   <span class="token punctuation">}</span>
-   <span class="token keyword">else</span> <span class="token punctuation">{</span>
-      <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"Browser incompatibility: createXML"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-   <span class="token punctuation">}</span>
-   <span class="token keyword">return</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">parseXML</span> <span class="token punctuation">(</span><span class="token parameter">xmlStr</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-   <span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>DOMParser<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token comment">// Gecko-based browsers: Firefox, Safari, Opera, etc.</span>
-      xmlDoc <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">DOMParser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">parseFromString</span><span class="token punctuation">(</span>xmlStr<span class="token punctuation">,</span> <span class="token string">"text/xml"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token keyword">return</span> xmlDoc<span class="token punctuation">;</span>
-   <span class="token punctuation">}</span>
-   <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>ActiveXObject<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token comment">// Internet Explorer</span>
-      xmlDoc <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createXML</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      xmlDoc<span class="token punctuation">.</span><span class="token function">loadXML</span><span class="token punctuation">(</span>xmlStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token keyword">return</span> xmlDoc<span class="token punctuation">;</span>
-   <span class="token punctuation">}</span>
-   <span class="token keyword">else</span> <span class="token punctuation">{</span>
-      <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"Browser incompatibility: parseXML"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-   <span class="token punctuation">}</span>
-   <span class="token keyword">return</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">serializeXML</span> <span class="token punctuation">(</span><span class="token parameter">xmlDoc</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-   <span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>XMLSerializer<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token comment">// Gecko-based browsers: Firefox, Safari, Opera, etc.</span>
-      <span class="token keyword">try</span> <span class="token punctuation">{</span>  <span class="token comment">// might get tripped up on ?xml tags</span>
-         <span class="token keyword">return</span> <span class="token constant">XML</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">XMLSerializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">serializeToString</span><span class="token punctuation">(</span>xmlDoc<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toXMLString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-      <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-         <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">XMLSerializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">serializeToString</span><span class="token punctuation">(</span>xmlDoc<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-   <span class="token punctuation">}</span>
-   <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>xmlDoc<span class="token punctuation">.</span>xml<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token comment">// Internet Explorer</span>
-      <span class="token keyword">try</span> <span class="token punctuation">{</span>  <span class="token comment">// in case the ActiveX Objects don't exist</span>
-         <span class="token keyword">var</span> reader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ActiveXObject</span><span class="token punctuation">(</span><span class="token string">"Msxml2.SAXXMLReader.4.0"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-         <span class="token keyword">var</span> writer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ActiveXObject</span><span class="token punctuation">(</span><span class="token string">"Msxml2.MXXMLWriter.4.0"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-         writer<span class="token punctuation">.</span>indent <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-         writer<span class="token punctuation">.</span>standalone <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-         reader<span class="token punctuation">.</span>contentHandler <span class="token operator">=</span> writer<span class="token punctuation">;</span>
-         reader<span class="token punctuation">.</span><span class="token function">putProperty</span><span class="token punctuation">(</span><span class="token string">"http://xml.org/sax/properties/lexical-handler"</span><span class="token punctuation">,</span> writer<span class="token punctuation">)</span><span class="token punctuation">;</span>
-         reader<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>xmlDoc<span class="token punctuation">)</span><span class="token punctuation">;</span>
-         <span class="token keyword">return</span> writer<span class="token punctuation">.</span>output<span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-      <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-         <span class="token keyword">return</span> xmlDoc<span class="token punctuation">.</span>xml<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">>(?=&lt;\/?\w+)</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">">\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-   <span class="token punctuation">}</span>
-   <span class="token keyword">else</span> <span class="token punctuation">{</span>
-      <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"Browser incompatibility: serializeXML"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-   <span class="token punctuation">}</span>
-   <span class="token keyword">return</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment">// Quick fix for creating nodes</span>
-<span class="token comment">// (there should be a way of being able to do this without the</span>
-<span class="token comment">// 2nd parameter, the XML main element)</span>
-
-jQuery<span class="token punctuation">.</span><span class="token function-variable function">cXML</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">n<span class="token punctuation">,</span> x</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token function">jQuery</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3811/xml.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3811/xml.js">Original Format</a>
   </div>
 </h1></div>
         </div>

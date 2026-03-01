@@ -142,25 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">Index: src/event/event.js
-===================================================================
---- src/event/event.js	(revision 1957)
-+++ src/event/event.js	(working copy)
-@@ -298,7 +298,7 @@
- 	 * @cat Events
- 	 */
- 	bind: function( type, data, fn ) {
--		return this.each(function(){
-+		return type == "unload" ? this.one(type, data, fn) : this.each(function(){
- 			jQuery.event.add( this, type, fn || data, fn &amp;&amp; data );
- 		});
- 	},</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1242/patch-unload2one.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1242/patch-unload2one.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

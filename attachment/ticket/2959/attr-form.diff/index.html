@@ -140,80 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: core.js
-===================================================================
-<span class="token coord">--- core.js	(revision 5709)</span>
-<span class="token coord">+++ core.js	(working copy)</span>
-<span class="token coord">@@ -1051,34 +1051,38 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// IE elem.getAttribute passes even for style
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( elem.tagName ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			// These attributes require special treatment
-</span><span class="token prefix deleted">-</span><span class="token line">			var special = /href|src|style/.test( name );
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">			// Safari mis-reports the default selected property of a hidden option
-</span><span class="token prefix deleted">-</span><span class="token line">			// Accessing the parent's selectedIndex property fixes it
-</span><span class="token prefix deleted">-</span><span class="token line">			if ( name == "selected" &amp;&amp; jQuery.browser.safari )
-</span><span class="token prefix deleted">-</span><span class="token line">				elem.parentNode.selectedIndex;
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">			// If applicable, access the attribute via the DOM 0 way
-</span><span class="token prefix deleted">-</span><span class="token line">			if ( name in elem &amp;&amp; notxml &amp;&amp; !special ) {
-</span><span class="token prefix deleted">-</span><span class="token line">				if ( set ){
-</span><span class="token prefix deleted">-</span><span class="token line">					// We can't allow the type property to be changed (since it causes problems in IE)
-</span><span class="token prefix deleted">-</span><span class="token line">					if ( name == "type" &amp;&amp; jQuery.nodeName( elem, "input" ) &amp;&amp; elem.parentNode )
-</span><span class="token prefix deleted">-</span><span class="token line">						throw "type property can't be changed";
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">					elem[ name ] = value;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if( notxml ){
-</span><span class="token prefix inserted">+</span><span class="token line">					
-</span><span class="token prefix inserted">+</span><span class="token line">				// Safari mis-reports the default selected property of a hidden option
-</span><span class="token prefix inserted">+</span><span class="token line">				// Accessing the parent's selectedIndex property fixes it
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( name == "selected" &amp;&amp; jQuery.browser.safari )
-</span><span class="token prefix inserted">+</span><span class="token line">					elem.parentNode.selectedIndex;
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">				// browsers index elements by id/name on forms, give priority to attributes.
-</span><span class="token prefix inserted">+</span><span class="token line">				if( jQuery.nodeName( elem, 'form' ) &amp;&amp; elem.getAttributeNode(name) ){
-</span><span class="token prefix inserted">+</span><span class="token line">					elem = elem.getAttributeNode(name);
-</span><span class="token prefix inserted">+</span><span class="token line">					name = 'nodeValue';
-</span><span class="token prefix inserted">+</span><span class="token line">				}else
-</span><span class="token prefix inserted">+</span><span class="token line">					// These attributes require special treatment
-</span><span class="token prefix inserted">+</span><span class="token line">					var special = /href|src|style/.test( name );
-</span><span class="token prefix inserted">+</span><span class="token line">					
-</span><span class="token prefix inserted">+</span><span class="token line">				// If applicable, access the attribute via the DOM 0 way
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( name in elem &amp;&amp; !special ) {
-</span><span class="token prefix inserted">+</span><span class="token line">					if ( set ){
-</span><span class="token prefix inserted">+</span><span class="token line">						// We can't allow the type property to be changed (since it causes problems in IE)
-</span><span class="token prefix inserted">+</span><span class="token line">						if ( name == "type" &amp;&amp; jQuery.nodeName( elem, "input" ) &amp;&amp; elem.parentNode )
-</span><span class="token prefix inserted">+</span><span class="token line">							throw "type property can't be changed";
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">						elem[ name ] = value;
-</span><span class="token prefix inserted">+</span><span class="token line">					}
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">					return elem[ name ];
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				}
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">				// browsers index elements by id/name on forms, give priority to attributes.
-</span><span class="token prefix deleted">-</span><span class="token line">				if( jQuery.nodeName( elem, "form" ) &amp;&amp; elem.getAttributeNode(name) )
-</span><span class="token prefix deleted">-</span><span class="token line">					return elem.getAttributeNode( name ).nodeValue;
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">				return elem[ name ];
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( msie &amp;&amp; name == "style" )
-</span><span class="token prefix inserted">+</span><span class="token line">					return jQuery.attr( elem.style, "cssText", value );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( msie &amp;&amp; notxml &amp;&amp;  name == "style" )
-</span><span class="token prefix deleted">-</span><span class="token line">				return jQuery.attr( elem.style, "cssText", value );
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			if ( set )
-</span><span class="token prefix unchanged"> </span><span class="token line">				// convert the value to a string (all browsers do this but IE) see #1070
-</span><span class="token prefix unchanged"> </span><span class="token line">				elem.setAttribute( name, "" + value );</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2959/attr-form.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2959/attr-form.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,42 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: selector.js
-===================================================================
-<span class="token coord">--- selector.js	(r�vision 5962)</span>
-<span class="token coord">+++ selector.js	(copie de travail)</span>
-<span class="token coord">@@ -68,7 +68,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	// The regular expressions that power the parsing engine
-</span><span class="token prefix unchanged"> </span><span class="token line">	parse: [
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Match: [@value='test'], [@foo]
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		/^(\[) *@?([\w:-]+) *([!*$^~=]*) *('?"?)(.*?)\4 *\]/,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		/^(\[) *@?([\w:-]+) *([!*$^~=]*) *('?"?)(\/?)(.*?)\5([ig]*)\4 *\]/,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Match: :contains('foo')
-</span><span class="token prefix unchanged"> </span><span class="token line">		/^(:)([\w-]+)\("?'?(.*?(\(.*?\))?[^(]*?)"?'?\)/,
-</span></span><span class="token coord">@@ -340,11 +340,12 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">						z = jQuery.attr(a,m[2]) || '';
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">					if ( (type == "" &amp;&amp; !!z ||
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">						 type == "=" &amp;&amp; z == m[5] ||
-</span><span class="token prefix deleted">-</span><span class="token line">						 type == "!=" &amp;&amp; z != m[5] ||
-</span><span class="token prefix deleted">-</span><span class="token line">						 type == "^=" &amp;&amp; z &amp;&amp; !z.indexOf(m[5]) ||
-</span><span class="token prefix deleted">-</span><span class="token line">						 type == "$=" &amp;&amp; z.substr(z.length - m[5].length) == m[5] ||
-</span><span class="token prefix deleted">-</span><span class="token line">						 (type == "*=" || type == "~=") &amp;&amp; z.indexOf(m[5]) >= 0) ^ not )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">						 type == "=" &amp;&amp; z == m[6] ||
-</span><span class="token prefix inserted">+</span><span class="token line">						 type == "!=" &amp;&amp; z != m[6] ||
-</span><span class="token prefix inserted">+</span><span class="token line">						 type == "^=" &amp;&amp; z &amp;&amp; !z.indexOf(m[6]) ||
-</span><span class="token prefix inserted">+</span><span class="token line">						 type == "$=" &amp;&amp; z.substr(z.length - m[6].length) == m[6] ||
-</span><span class="token prefix inserted">+</span><span class="token line">						 type == "*=" &amp;&amp; z.indexOf(m[6]) >= 0 ||
-</span><span class="token prefix inserted">+</span><span class="token line">						 type == "~=" &amp;&amp; !!z.match(new RegExp(m[6], m[7])) )^ not )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">							tmp.push( a );
-</span><span class="token prefix unchanged"> </span><span class="token line">				}</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3698/selector.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3698/selector.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

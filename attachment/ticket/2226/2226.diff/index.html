@@ -142,49 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 4527)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -494,19 +494,26 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			if ( table &amp;&amp; jQuery.nodeName( this, "table" ) &amp;&amp; jQuery.nodeName( elems[0], "tr" ) )
-</span><span class="token prefix unchanged"> </span><span class="token line">				obj = this.getElementsByTagName("tbody")[0] || this.appendChild( this.ownerDocument.createElement("tbody") );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			var scripts = jQuery( [] );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			function inDom(elem) {
-</span><span class="token prefix inserted">+</span><span class="token line">				while (elem.parentNode &amp;&amp; elem.parentNode != document)
-</span><span class="token prefix inserted">+</span><span class="token line">					elem = elem.parentNode;
-</span><span class="token prefix inserted">+</span><span class="token line">				return elem.parentNode;
-</span><span class="token prefix inserted">+</span><span class="token line">			}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			var scripts = jQuery( [] ),
-</span><span class="token prefix inserted">+</span><span class="token line">				targetInDom = inDom( obj );
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			jQuery.each(elems, function(){
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				var elem = clone ?
-</span><span class="token prefix deleted">-</span><span class="token line">					jQuery( this ).clone( true )[0] :
-</span><span class="token prefix deleted">-</span><span class="token line">					this;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				var elem = clone ? jQuery( this ).clone( true )[0] : this, 
-</span><span class="token prefix inserted">+</span><span class="token line">					// eval scripts only if they are outside the dom being placed in it
-</span><span class="token prefix inserted">+</span><span class="token line">					addScripts = targetInDom &amp;&amp; !inDom( elem );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				// execute all scripts after the elements have been injected
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( jQuery.nodeName( elem, "script" ) ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( addScripts &amp;&amp; jQuery.nodeName( elem, "script" ) ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					scripts = scripts.add( elem );
-</span><span class="token prefix unchanged"> </span><span class="token line">				} else {
-</span><span class="token prefix unchanged"> </span><span class="token line">					// Remove any inner scripts for later evaluation
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					if ( elem.nodeType == 1 )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					if ( addScripts &amp;&amp; elem.nodeType == 1 )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">						scripts = scripts.add( jQuery( "script", elem ).remove() );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">					// Inject the elements into the document</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2226/2226.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2226/2226.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

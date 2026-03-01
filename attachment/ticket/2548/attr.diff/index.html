@@ -142,116 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 5084)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -174,7 +174,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// Look for the case where we're accessing a style value
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( name.constructor == String )
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( value == undefined )
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				return this.length &amp;&amp; jQuery[ type || "attr" ]( this[0], name ) || undefined;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				return this[0] &amp;&amp; jQuery[ type || "attr" ]( this[0], name );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			else {
-</span><span class="token prefix unchanged"> </span><span class="token line">				options = {};
-</span></span><span class="token coord">@@ -1042,11 +1042,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	attr: function( elem, name, value ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		// don't set attributes on text and comment nodes
-</span><span class="token prefix unchanged"> </span><span class="token line">		if (!elem || elem.nodeType == 3 || elem.nodeType == 8)
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			return undefined;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			return;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		var fix = jQuery.isXMLDoc( elem ) ?
-</span><span class="token prefix unchanged"> </span><span class="token line">			{} :
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			jQuery.props;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			jQuery.props,
-</span><span class="token prefix inserted">+</span><span class="token line">			get = value != undefined,//whether we are getting (or setting)
-</span><span class="token prefix inserted">+</span><span class="token line">			special = /href|src/.test( name );//these attributes need special treatment
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Safari mis-reports the default selected property of a hidden option
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Accessing the parent's selectedIndex property fixes it
-</span></span><span class="token coord">@@ -1054,22 +1056,22 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			elem.parentNode.selectedIndex;
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Certain attributes only work when accessed via the old DOM 0 way
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( fix[ name ] ) {
-</span><span class="token prefix deleted">-</span><span class="token line">			if ( value != undefined )
-</span><span class="token prefix deleted">-</span><span class="token line">				elem[ fix[ name ] ] = value;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( !special &amp;&amp; ( fix[ name ] || name in elem ) ) {
-</span><span class="token prefix inserted">+</span><span class="token line">			if ( get )
-</span><span class="token prefix inserted">+</span><span class="token line">				elem[ fix[ name ] || name ] = value;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			return elem[ fix[ name ] ];
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			return elem[ fix[ name ] || name ];
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		} else if ( jQuery.browser.msie &amp;&amp; name == "style" )
-</span><span class="token prefix unchanged"> </span><span class="token line">			return jQuery.attr( elem.style, "cssText", value );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		else if ( value == undefined &amp;&amp; jQuery.browser.msie &amp;&amp; jQuery.nodeName( elem, "form" ) &amp;&amp; (name == "action" || name == "method") )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		else if ( get &amp;&amp; jQuery.browser.msie &amp;&amp; jQuery.nodeName( elem, "form" ) &amp;&amp; (name == "action" || name == "method") )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			return elem.getAttributeNode( name ).nodeValue;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// IE elem.getAttribute passes even for style
-</span><span class="token prefix unchanged"> </span><span class="token line">		else if ( elem.tagName ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( value != undefined ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( get ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// We can't allow the type property to be changed (since it causes problems in IE)
-</span><span class="token prefix unchanged"> </span><span class="token line">				if ( name == "type" &amp;&amp; jQuery.nodeName( elem, "input" ) &amp;&amp; elem.parentNode )
-</span><span class="token prefix unchanged"> </span><span class="token line">					throw "type property can't be changed";
-</span></span><span class="token coord">@@ -1078,7 +1080,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				elem.setAttribute( name, "" + value );
-</span><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( jQuery.browser.msie &amp;&amp; /href|src/.test( name ) &amp;&amp; !jQuery.isXMLDoc( elem ) ) 
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( jQuery.browser.msie &amp;&amp; special &amp;&amp; !jQuery.isXMLDoc( elem ) ) 
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				return elem.getAttribute( name, 2 );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			return elem.getAttribute( name );
-</span></span><span class="token coord">@@ -1087,7 +1089,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		} else {
-</span><span class="token prefix unchanged"> </span><span class="token line">			// IE actually uses filters for opacity
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( name == "opacity" &amp;&amp; jQuery.browser.msie ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( value != undefined ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( get ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					// IE has trouble with opacity if it does not have layout
-</span><span class="token prefix unchanged"> </span><span class="token line">					// Force it by setting the zoom level
-</span><span class="token prefix unchanged"> </span><span class="token line">					elem.zoom = 1; 
-</span></span><span class="token coord">@@ -1106,7 +1108,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				return letter.toUpperCase();
-</span><span class="token prefix unchanged"> </span><span class="token line">			});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( value != undefined )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( get )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				elem[ name ] = value;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			return elem[ name ];
-</span></span><span class="token coord">@@ -1234,18 +1236,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		"float": styleFloat,
-</span><span class="token prefix unchanged"> </span><span class="token line">		cssFloat: styleFloat,
-</span><span class="token prefix unchanged"> </span><span class="token line">		styleFloat: styleFloat,
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		innerHTML: "innerHTML",
-</span><span class="token prefix deleted">-</span><span class="token line">		className: "className",
-</span><span class="token prefix deleted">-</span><span class="token line">		value: "value",
-</span><span class="token prefix deleted">-</span><span class="token line">		disabled: "disabled",
-</span><span class="token prefix deleted">-</span><span class="token line">		checked: "checked",
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		readonly: "readOnly",
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		selected: "selected",
-</span><span class="token prefix deleted">-</span><span class="token line">		maxlength: "maxLength",
-</span><span class="token prefix deleted">-</span><span class="token line">		selectedIndex: "selectedIndex",
-</span><span class="token prefix deleted">-</span><span class="token line">		defaultValue: "defaultValue",
-</span><span class="token prefix deleted">-</span><span class="token line">		tagName: "tagName",
-</span><span class="token prefix deleted">-</span><span class="token line">		nodeName: "nodeName"
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		maxlength: "maxLength"
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	}
-</span><span class="token prefix unchanged"> </span><span class="token line">});</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2548/attr.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2548/attr.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

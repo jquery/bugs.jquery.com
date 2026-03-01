@@ -142,35 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">97c97,99
-< 				cookieId: "treeview"
----
-> 				cookieId: "treeview",
-> 				cookiePath: "/",
-> 				cookieExpires: 0
-99a102,106
-> 			var cookieOptions = $.extend({
-> 			  expires: settings.cookieExpires,
-> 			  path: settings.cookiePath
-> 			});
-> 			
-172c179
-< 				$.cookie(settings.cookieId, data.join("") );
----
-> 				$.cookie(settings.cookieId, data.join(""), cookieOptions );
-180c187,190
-< 						$(e).find(">ul")[ parseInt(data[i]) ? "show" : "hide" ]();
----
->             if (!$(e).hasClass("open") && !$(e).hasClass("closed"))
->             {
-> 						  $(e).find(">ul")[ parseInt(data[i]) ? "show" : "hide" ]();
->             }</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3122/alec.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3122/alec.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

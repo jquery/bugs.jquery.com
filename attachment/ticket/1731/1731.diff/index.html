@@ -142,54 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event.js
-===================================================================
-<span class="token coord">--- src/event.js	(revision 3498)</span>
-<span class="token coord">+++ src/event.js	(working copy)</span>
-<span class="token coord">@@ -43,7 +43,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// Init the element's event structure
-</span><span class="token prefix unchanged"> </span><span class="token line">		var events = jQuery.data(element, "events") || jQuery.data(element, "events", {});
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var handle = jQuery.data(element, "handle", function(){
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var handle = jQuery.data(element, "handle") || jQuery.data(element, "handle", function(){
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// returned undefined or false
-</span><span class="token prefix unchanged"> </span><span class="token line">			var val;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -69,6 +69,9 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				element.addEventListener(type, handle, false);
-</span><span class="token prefix unchanged"> </span><span class="token line">			else
-</span><span class="token prefix unchanged"> </span><span class="token line">				element.attachEvent("on" + type, handle);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			
-</span><span class="token prefix inserted">+</span><span class="token line">			// Add element to the event cache
-</span><span class="token prefix inserted">+</span><span class="token line">			this.cache.push(element);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Add the function to the element's handler list
-</span></span><span class="token coord">@@ -80,6 +83,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	guid: 1,
-</span><span class="token prefix unchanged"> </span><span class="token line">	global: {},
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	cache: [],
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Detach an event or set of events from an element
-</span><span class="token prefix unchanged"> </span><span class="token line">	remove: function(element, type, handler) {
-</span></span><span class="token coord">@@ -448,3 +452,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	// A fallback to window.onload, that will always work
-</span><span class="token prefix unchanged"> </span><span class="token line">	jQuery.event.add( window, "load", jQuery.ready );
-</span><span class="token prefix unchanged"> </span><span class="token line">}
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">// Remove events on window unload for IE to prevent memory leaks
-</span><span class="token prefix inserted">+</span><span class="token line">if ( jQuery.browser.msie )
-</span><span class="token prefix inserted">+</span><span class="token line">	jQuery(window).unload( function() {
-</span><span class="token prefix inserted">+</span><span class="token line">		jQuery( jQuery.event.cache ).unbind();
-</span><span class="token prefix inserted">+</span><span class="token line">	});</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1731/1731.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1731/1731.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

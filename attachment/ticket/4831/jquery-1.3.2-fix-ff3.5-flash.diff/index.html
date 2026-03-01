@@ -142,48 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/fx.js
-===================================================================
-<span class="token coord">--- src/fx.js	(revision 6414)</span>
-<span class="token coord">+++ src/fx.js	(working copy)</span>
-<span class="token coord">@@ -22,6 +22,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		if ( speed ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			return this.animate( genFx("show", 3), speed, callback);
-</span><span class="token prefix unchanged"> </span><span class="token line">		} else {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			var tmpDiv;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			for ( var i = 0, l = this.length; i &lt; l; i++ ){
-</span><span class="token prefix unchanged"> </span><span class="token line">				var old = jQuery.data(this[i], "olddisplay");
-</span><span class="token prefix unchanged"> </span><span class="token line">				
-</span></span><span class="token coord">@@ -33,8 +34,11 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					if ( elemdisplay[ tagName ] ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">						display = elemdisplay[ tagName ];
-</span><span class="token prefix unchanged"> </span><span class="token line">					} else {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">						var elem = jQuery("&lt;" + tagName + " />").appendTo("body");
-</span><span class="token prefix deleted">-</span><span class="token line">						
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">						if ( !tmpDiv ) {
-</span><span class="token prefix inserted">+</span><span class="token line">							tmpDiv = jQuery("&lt;div/>").appendTo("body");
-</span><span class="token prefix inserted">+</span><span class="token line">						}
-</span><span class="token prefix inserted">+</span><span class="token line">						var elem = jQuery("&lt;" + tagName + " />").appendTo(tmpDiv);
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">						display = elem.css("display");
-</span><span class="token prefix unchanged"> </span><span class="token line">						if ( display === "none" )
-</span><span class="token prefix unchanged"> </span><span class="token line">							display = "block";
-</span></span><span class="token coord">@@ -47,6 +51,9 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					jQuery.data(this[i], "olddisplay", display);
-</span><span class="token prefix unchanged"> </span><span class="token line">				}
-</span><span class="token prefix unchanged"> </span><span class="token line">			}
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( tmpDiv ) {
-</span><span class="token prefix inserted">+</span><span class="token line">				tmpDiv.remove();
-</span><span class="token prefix inserted">+</span><span class="token line">			}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Set the display of the elements in a second loop
-</span><span class="token prefix unchanged"> </span><span class="token line">			// to avoid the constant reflow</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4831/jquery-1.3.2-fix-ff3.5-flash.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4831/jquery-1.3.2-fix-ff3.5-flash.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

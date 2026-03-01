@@ -142,50 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">276,308c276,278</span>
-<span class="token deleted-arrow deleted"><span class="token prefix deleted">&lt;</span><span class="token line"> 		
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 		// a helper method for retrieving a working xmlhttp request
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 		function getXMLHTTPRequest() {
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 			var requester = false;
-</span><span class="token prefix deleted">&lt;</span><span class="token line">  			// Create the request object; Microsoft failed to properly
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 			// implement the XMLHttpRequest in IE7, so we use the ActiveXObject when it is available
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 			if (window.ActiveXObject) {
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 				var aVersions = [	"Microsoft.XMLHTTP",
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 									"MSXML2.XMLHttp.6.0",
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 									"MSXML2.XMLHttp.5.0", 
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 									"MSXML2.XMLHttp.4.0", 
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 									"MSXML2.XMLHttp.3.0", 
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 									"MSXML2.XMLHttp"];
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 				for(var i = 0; i&lt; aVersions.length;i++){
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 		 			try {
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 		   				requester = new ActiveXObject(aVersions[i]);
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 		   				return requester;
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 					}
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 		 			catch (error) {
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 						continue;
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 		 			}
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 				}
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 			} else if (window.XMLHttpRequest) {
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 			// Firefox, Opera 8.0+, Safari
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 				requester = new XMLHttpRequest();
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 				return requester;
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 			}
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 			
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 			throw new Error("XMLHttp object could not be created.");
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 		}
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 		
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 		
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 		var xhr = getXMLHTTPRequest();
-</span></span><span class="token coord">---</span>
-<span class="token inserted-arrow inserted"><span class="token prefix inserted">></span><span class="token line"> 		// Create the request object; Microsoft failed to properly
-</span><span class="token prefix inserted">></span><span class="token line"> 		// implement the XMLHttpRequest in IE7, so we use the ActiveXObject when it is available
-</span><span class="token prefix inserted">></span><span class="token line"> 		var xhr = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2128/ajax.js.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2128/ajax.js.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

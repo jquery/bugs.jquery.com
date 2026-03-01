@@ -142,24 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">*** jquery-1.4.1.js	Fri Feb  5 10:43:33 2010
---- jquery-141-patched.js	Fri Feb  5 09:17:59 2010
-***************
-*** 930,935 ****
---- 930,936 ----
-  	// http://thinkweb2.com/projects/prototype/detecting-event-support-without-browser-sniffing/
-  	var eventSupported = function( eventName ) { 
-  		var el = document.createElement("div"); 
-+                 el = el.wrappedJSObject || el;
-  		eventName = "on" + eventName; 
-  
-  		var isSupported = (eventName in el);</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/5833/jquery-1.4.1.js-event_detection.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/5833/jquery-1.4.1.js-event_detection.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

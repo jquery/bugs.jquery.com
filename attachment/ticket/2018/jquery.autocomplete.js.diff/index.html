@@ -142,25 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery.autocomplete.js
-===================================================================
-<span class="token coord">--- jquery.autocomplete.js	(revision 959)</span>
-<span class="token coord">+++ jquery.autocomplete.js	(revision 960)</span>
-<span class="token coord">@@ -507,7 +507,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	multiple: false,
-</span><span class="token prefix unchanged"> </span><span class="token line">	multipleSeparator: ", ",
-</span><span class="token prefix unchanged"> </span><span class="token line">	highlight: function(value, term) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		return value.replace(new RegExp("(?![^&amp;;]+;)(?!&lt;[^&lt;>]*)(" + term + ")(?![^&lt;>]*>)(?![^&amp;;]+;)", "gi"), "&lt;strong>$1&lt;/strong>");
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		return value.replace(new RegExp("(?![^&amp;;]+;)(?!&lt;[^&lt;>]*)(" + term.replace(new RegExp("([()[\\]\\\\{}?.+*|^$])","gi"),"\\$1") + ")(?![^&lt;>]*>)(?![^&amp;;]+;)", "gi"), "&lt;strong>$1&lt;/strong>");
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">    scroll: true,
-</span><span class="token prefix unchanged"> </span><span class="token line">    scrollHeight: 180,</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2018/jquery.autocomplete.js.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2018/jquery.autocomplete.js.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

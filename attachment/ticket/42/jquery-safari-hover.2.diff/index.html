@@ -142,26 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery-1.0a.js	2006-07-01 07:15:52.000000000 -0700</span>
-<span class="token coord">+++ jquery-1.0a-fixed.js	2006-07-08 18:23:16.000000000 -0700</span>
-<span class="token coord">@@ -878,7 +878,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	// A private function for haandling mouse 'hovering'
-</span><span class="token prefix unchanged"> </span><span class="token line">	function handleHover(e) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Check if mouse(over|out) are still within the same parent element
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var p = e.fromElement || e.toElement || e.relatedTarget;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if (e.type == "mouseover")
-</span><span class="token prefix inserted">+</span><span class="token line">		    var p = e.fromElement || e.relatedTarget;
-</span><span class="token prefix inserted">+</span><span class="token line">		else
-</span><span class="token prefix inserted">+</span><span class="token line">		    var p = e.toElement || e.relatedTarget;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		while ( p &amp;&amp; p != this ) p = p.parentNode;
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		// If we actually just moused on to a sub-element, ignore it</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/42/jquery-safari-hover.2.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/42/jquery-safari-hover.2.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

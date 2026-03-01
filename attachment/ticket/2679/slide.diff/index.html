@@ -142,49 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ui.slider.js
-===================================================================
-<span class="token coord">--- ui.slider.js	(révision 5249)</span>
-<span class="token coord">+++ ui.slider.js	(copie de travail)</span>
-<span class="token coord">@@ -125,6 +125,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		if (!isNaN(o.startValue))
-</span><span class="token prefix unchanged"> </span><span class="token line">			this.moveTo(o.startValue, 0, true);
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		this.saveSize();
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		//If we only have one handle, set the previous handle to this one to allow clicking before selecting the handle
-</span><span class="token prefix unchanged"> </span><span class="token line">		if(this.handle.length == 1) this.previousHandle = this.handle;
-</span><span class="token prefix unchanged"> </span><span class="token line">		if(this.handle.length == 2 &amp;&amp; o.range) this.createRange();
-</span></span><span class="token coord">@@ -184,6 +185,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		focus: function(handle,hard) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			this.currentHandle = $(handle).addClass('ui-slider-handle-active');
-</span><span class="token prefix unchanged"> </span><span class="token line">			if(hard) this.currentHandle.parent()[0].focus();
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			this.saveSize();
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		},
-</span><span class="token prefix unchanged"> </span><span class="token line">		blur: function(handle) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			$(handle).removeClass('ui-slider-handle-active');
-</span></span><span class="token coord">@@ -209,9 +211,16 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			if(!axis) axis = this.options.axis == "vertical" ? 2 : 1;
-</span><span class="token prefix unchanged"> </span><span class="token line">			return ((value - this.options.min[axis == 1 ? "x" : "y"]) / this.options.realMax[axis == 1 ? "x" : "y"]) * (this.actualSize[axis == 1 ? "width" : "height"] - this.handleSize(null,axis));
-</span><span class="token prefix unchanged"> </span><span class="token line">		},
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		saveSize: function() {
-</span><span class="token prefix inserted">+</span><span class="token line">			var self = this;
-</span><span class="token prefix inserted">+</span><span class="token line">			this.handleSavedSize = this.handle.map(function(elt) {
-</span><span class="token prefix inserted">+</span><span class="token line">				var h = $(self.handle[elt]);
-</span><span class="token prefix inserted">+</span><span class="token line">				return {width: h.outerWidth(), height: h.outerHeight()};
-</span><span class="token prefix inserted">+</span><span class="token line">			});
-</span><span class="token prefix inserted">+</span><span class="token line">		},
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		handleSize: function(handle,axis) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			if(!axis) axis = this.options.axis == "vertical" ? 2 : 1;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			return $(handle != undefined &amp;&amp; handle !== null ? this.handle[handle] : this.currentHandle)[axis == 1 ? "outerWidth" : "outerHeight"]();	
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			return (handle != undefined &amp;&amp; handle !== null ? this.handleSavedSize[handle] : this.handleSavedSize[this.handleIndex()])[axis == 1 ? "width" : "height"];
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		},
-</span><span class="token prefix unchanged"> </span><span class="token line">		click: function(e) {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2679/slide.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2679/slide.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

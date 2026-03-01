@@ -142,84 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery.color.js
-===================================================================
-<span class="token coord">--- jquery.color.js	(revision 4747)</span>
-<span class="token coord">+++ jquery.color.js	(working copy)</span>
-<span class="token coord">@@ -12,13 +12,19 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">            if ( fx.state == 0 ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">                fx.start = getColor( fx.elem, attr );
-</span><span class="token prefix unchanged"> </span><span class="token line">                fx.end = getRGB( fx.end );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">                if ( fx.start[3] || fx.end[3] ) { // if one is rgba, make sure both are
-</span><span class="token prefix inserted">+</span><span class="token line">                    fx.start[3] = fx.start[3] || 1;
-</span><span class="token prefix inserted">+</span><span class="token line">                    fx.end[3] = fx.end[3] || 1;
-</span><span class="token prefix inserted">+</span><span class="token line">                }
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">            }
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">            fx.elem.style[attr] = "rgb(" + [
-</span><span class="token prefix deleted">-</span><span class="token line">                Math.max(Math.min( parseInt((fx.pos * (fx.end[0] - fx.start[0])) + fx.start[0]), 255), 0),
-</span><span class="token prefix deleted">-</span><span class="token line">                Math.max(Math.min( parseInt((fx.pos * (fx.end[1] - fx.start[1])) + fx.start[1]), 255), 0),
-</span><span class="token prefix deleted">-</span><span class="token line">                Math.max(Math.min( parseInt((fx.pos * (fx.end[2] - fx.start[2])) + fx.start[2]), 255), 0)
-</span><span class="token prefix deleted">-</span><span class="token line">            ].join(",") + ")";
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">            fx.elem.style[attr] = ( fx.end[3] ? 'rgba(' : 'rgb(' ) +
-</span><span class="token prefix inserted">+</span><span class="token line">                Math.max(Math.min( parseInt((fx.pos * (fx.end[0] - fx.start[0])) + fx.start[0]), 255), 0) + ',' +
-</span><span class="token prefix inserted">+</span><span class="token line">                Math.max(Math.min( parseInt((fx.pos * (fx.end[1] - fx.start[1])) + fx.start[1]), 255), 0) + ',' +
-</span><span class="token prefix inserted">+</span><span class="token line">                Math.max(Math.min( parseInt((fx.pos * (fx.end[2] - fx.start[2])) + fx.start[2]), 255), 0) +
-</span><span class="token prefix inserted">+</span><span class="token line">                ( fx.end[3] ? ',' +
-</span><span class="token prefix inserted">+</span><span class="token line">                Math.max(Math.min( parseFloat((fx.pos * (fx.end[3] - fx.start[3])) + fx.start[3]), 1), 0) : '') +
-</span><span class="token prefix inserted">+</span><span class="token line">		')';
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">        }
-</span><span class="token prefix unchanged"> </span><span class="token line">    });
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -50,22 +56,27 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">        if (result = /#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(color))
-</span><span class="token prefix unchanged"> </span><span class="token line">            return [parseInt(result[1]+result[1],16), parseInt(result[2]+result[2],16), parseInt(result[3]+result[3],16)];
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">        // Look for rgba(0, 0, 0, 0) == transparent in Safari 3
-</span><span class="token prefix deleted">-</span><span class="token line">        if (result = /rgba\(0, 0, 0, 0\)/.exec(color))
-</span><span class="token prefix deleted">-</span><span class="token line">            return colors['transparent']
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">        // Look for rgba(num,num,num,alpha)
-</span><span class="token prefix inserted">+</span><span class="token line">        if (result = /rgba\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([01]*(?:\.[0-9]+)?)\s*\)/.exec(color))
-</span><span class="token prefix inserted">+</span><span class="token line">            return [parseInt(result[1]), parseInt(result[2]), parseInt(result[3]), parseFloat(result[4])];
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">        // Look for rgba(num%,num%,num%,alpha)
-</span><span class="token prefix inserted">+</span><span class="token line">        if (result = /rgba\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([01]*(?:\.[0-9]+)?)\s*\)/.exec(color))
-</span><span class="token prefix inserted">+</span><span class="token line">            return [parseFloat(result[1])*2.55, parseFloat(result[2])*2.55, parseFloat(result[3])*2.55, parseFloat(result[4])];
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">        // Otherwise, we're most likely dealing with a named color
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">        return colors[jQuery.trim(color).toLowerCase()];
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">        return colors[jQuery.trim(color).toLowerCase()] || [255,255,255];
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">    }
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">    function getColor(elem, attr) {
-</span><span class="token prefix unchanged"> </span><span class="token line">        var color;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">        var rgba = /rgba\(\s*0,\s*0,\s*0,\s*0\s*\)/; // transparent
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">        do {
-</span><span class="token prefix unchanged"> </span><span class="token line">            color = jQuery.curCSS(elem, attr);
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">            // Keep going until we find an element that has color, or we hit the body
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">            if ( color != '' &amp;&amp; color != 'transparent' || jQuery.nodeName(elem, "body") )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">            if ( color != '' &amp;&amp; color != 'transparent' &amp;&amp; !color.match(rgba) || jQuery.nodeName(elem, "body") )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">                break;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">            attr = "backgroundColor";
-</span></span><span class="token coord">@@ -121,8 +132,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">        red:[255,0,0],
-</span><span class="token prefix unchanged"> </span><span class="token line">        silver:[192,192,192],
-</span><span class="token prefix unchanged"> </span><span class="token line">        white:[255,255,255],
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">        yellow:[255,255,0],
-</span><span class="token prefix deleted">-</span><span class="token line">        transparent: [255,255,255]
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">        yellow:[255,255,0]
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">    };
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">})(jQuery);</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2281/rgba.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2281/rgba.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

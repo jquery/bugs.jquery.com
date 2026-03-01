@@ -140,50 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery/test/unit/core.js
-===================================================================
---- jquery/test/unit/core.js	(revision 5939)
-+++ jquery/test/unit/core.js	(working copy)
-@@ -1360,7 +1360,7 @@
- });
- 
- test("removeClass(String) - simple", function() {
--	expect(4);
-+	expect(5);
- 	
- 	var $divs = jQuery('div');
- 	
-@@ -1384,6 +1384,12 @@
- 	var j = jQuery("#nonnodes").contents();
- 	j.removeClass("asdf");
- 	ok( !j.hasClass("asdf"), "Check node,textnode,comment for removeClass" );
-+	
-+	reset();
-+	
-+	$divs.eq(0).addClass("first state-one state-two test last-state last").removeClass(/state/);
-+	ok( $divs.eq(0).is('.first.test.last'), "RegExp passed to removeClass" );
-+	
- });
- 
- test("toggleClass(String)", function() {
-Index: jquery/src/core.js
-===================================================================
---- jquery/src/core.js	(revision 5939)
-+++ jquery/src/core.js	(working copy)
-@@ -787,6 +787,7 @@
- 
- 		// internal only, use hasClass("class")
- 		has: function( elem, className ) {
-+			if (elem instanceof RegExp) return elem.test(className);
- 			return jQuery.inArray( className, (elem.className || elem).toString().split(/\s+/) ) > -1;
- 		}
- 	},</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3594/removeClass_eats_RegExp.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3594/removeClass_eats_RegExp.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

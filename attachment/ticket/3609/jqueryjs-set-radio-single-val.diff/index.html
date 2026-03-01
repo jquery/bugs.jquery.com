@@ -142,33 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/core.js
-===================================================================
-<span class="token coord">--- jquery/src/core.js	(revision 5945)</span>
-<span class="token coord">+++ jquery/src/core.js	(working copy)</span>
-<span class="token coord">@@ -407,9 +407,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			if ( this.nodeType != 1 )
-</span><span class="token prefix unchanged"> </span><span class="token line">				return;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( jQuery.isArray(value) &amp;&amp; /radio|checkbox/.test( this.type ) )
-</span><span class="token prefix deleted">-</span><span class="token line">				this.checked = (jQuery.inArray(this.value, value) >= 0 ||
-</span><span class="token prefix deleted">-</span><span class="token line">					jQuery.inArray(this.name, value) >= 0);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( /radio|checkbox/.test( this.type ) ) {
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( jQuery.isArray(value) )
-</span><span class="token prefix inserted">+</span><span class="token line">					this.checked = (jQuery.inArray(this.value, value) >= 0 ||
-</span><span class="token prefix inserted">+</span><span class="token line">						jQuery.inArray(this.name, value) >= 0);
-</span><span class="token prefix inserted">+</span><span class="token line">				else
-</span><span class="token prefix inserted">+</span><span class="token line">					this.checked = (this.value == value || this.name == value);
-</span><span class="token prefix inserted">+</span><span class="token line">			}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			else if ( jQuery.nodeName( this, "select" ) ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">				var values = jQuery.makeArray(value);</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3609/jqueryjs-set-radio-single-val.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3609/jqueryjs-set-radio-single-val.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

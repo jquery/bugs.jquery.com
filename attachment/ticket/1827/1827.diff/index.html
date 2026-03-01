@@ -142,47 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/fx.js
-===================================================================
-<span class="token coord">--- src/fx.js	(revision 3694)</span>
-<span class="token coord">+++ src/fx.js	(working copy)</span>
-<span class="token coord">@@ -219,6 +219,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">	timers: [],
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	timerId: null,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	fx: function( elem, options, prop ){
-</span><span class="token prefix unchanged"> </span><span class="token line">		this.options = options;
-</span></span><span class="token coord">@@ -273,16 +274,18 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		jQuery.timers.push(t);
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( jQuery.timers.length == 1 ) {
-</span><span class="token prefix deleted">-</span><span class="token line">			var timer = setInterval(function(){
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( jQuery.timerId == null ) {
-</span><span class="token prefix inserted">+</span><span class="token line">			jQuery.timerId = setInterval(function(){
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				var timers = jQuery.timers;
-</span><span class="token prefix unchanged"> </span><span class="token line">				
-</span><span class="token prefix unchanged"> </span><span class="token line">				for ( var i = 0; i &lt; timers.length; i++ )
-</span><span class="token prefix unchanged"> </span><span class="token line">					if ( !timers[i]() )
-</span><span class="token prefix unchanged"> </span><span class="token line">						timers.splice(i--, 1);
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( !timers.length )
-</span><span class="token prefix deleted">-</span><span class="token line">					clearInterval( timer );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( !timers.length ) {
-</span><span class="token prefix inserted">+</span><span class="token line">					clearInterval( jQuery.timerId );
-</span><span class="token prefix inserted">+</span><span class="token line">					jQuery.timerId = null;
-</span><span class="token prefix inserted">+</span><span class="token line">				}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			}, 13);
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">	},</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1827/1827.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1827/1827.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

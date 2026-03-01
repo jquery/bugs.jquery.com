@@ -140,34 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: core.js
-===================================================================
-<span class="token coord">--- core.js	(revision 5481)</span>
-<span class="token coord">+++ core.js	(working copy)</span>
-<span class="token coord">@@ -339,12 +339,12 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	add: function( selector ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		return !selector ? this : this.pushStack( jQuery.merge( 
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		return this.pushStack( jQuery.unique( jQuery.merge( 
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			this.get(),
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			selector.constructor == String ? 
-</span><span class="token prefix deleted">-</span><span class="token line">				jQuery( selector ).get() :
-</span><span class="token prefix deleted">-</span><span class="token line">				selector.length != undefined &amp;&amp; (!selector.nodeName || jQuery.nodeName(selector, "form")) ?
-</span><span class="token prefix deleted">-</span><span class="token line">					selector : [selector] ) );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			typeof selector == 'string' ? 
-</span><span class="token prefix inserted">+</span><span class="token line">				jQuery( selector ) :
-</span><span class="token prefix inserted">+</span><span class="token line">				jQuery.makeArray( selector )
-</span><span class="token prefix inserted">+</span><span class="token line">		)));
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	is: function( selector ) {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2811/add.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2811/add.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

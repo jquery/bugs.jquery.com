@@ -140,76 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/selector.js
-===================================================================
-<span class="token coord">--- src/selector.js	(revision 6266)</span>
-<span class="token coord">+++ src/selector.js	(working copy)</span>
-<span class="token coord">@@ -6,7 +6,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> */
-</span><span class="token prefix unchanged"> </span><span class="token line">(function(){
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^[\]]*\]|['"][^'"]*['"]|[^[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?/g,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^[\]]*\]|['"][^'"]*['"]|[^[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	done = 0,
-</span><span class="token prefix unchanged"> </span><span class="token line">	toString = Object.prototype.toString,
-</span><span class="token prefix unchanged"> </span><span class="token line">	arraySplice = Array.prototype.splice,
-</span></span><span class="token coord">@@ -25,16 +25,17 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return results;
-</span><span class="token prefix unchanged"> </span><span class="token line">	}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	var parts = [], m, set, checkSet, check, mode, extra, prune = true, contextXML = isXML(context);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	var parts = [], m, set, checkSet, check, mode, extra, prune = true, contextXML = isXML(context),
-</span><span class="token prefix inserted">+</span><span class="token line">		soFar = selector;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Reset the position of the chunker regexp (start from head)
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	chunker.lastIndex = 0;
-</span><span class="token prefix deleted">-</span><span class="token line">	
-</span><span class="token prefix deleted">-</span><span class="token line">	while ( (m = chunker.exec(selector)) !== null ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	while ( (chunker.exec(""), m = chunker.exec(soFar)) !== null ) {
-</span><span class="token prefix inserted">+</span><span class="token line">		soFar = m[3];
-</span><span class="token prefix inserted">+</span><span class="token line">		
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		parts.push( m[1] );
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( m[2] ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			extra = RegExp.rightContext;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			extra = m[3];
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			break;
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">	}
-</span></span><span class="token coord">@@ -162,8 +163,9 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	for ( var i = 0, l = Expr.order.length; i &lt; l; i++ ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		var type = Expr.order[i], match;
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( (match = Expr.match[ type ].exec( expr )) ) {
-</span><span class="token prefix deleted">-</span><span class="token line">			var left = RegExp.leftContext;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( (match = Expr.leftMatch[ type ].exec( expr )) ) {
-</span><span class="token prefix inserted">+</span><span class="token line">			var left = match[1];
-</span><span class="token prefix inserted">+</span><span class="token line">			match.splice(1,1);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( left.substr( left.length - 1 ) !== "\\" ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">				match[1] = (match[1] || "").replace(/\\/g, "");
-</span></span><span class="token coord">@@ -270,6 +272,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		POS: /:(nth|eq|gt|lt|first|last|even|odd)(?:\((\d*)\))?(?=[^-]|$)/,
-</span><span class="token prefix unchanged"> </span><span class="token line">		PSEUDO: /:((?:[\w\u00c0-\uFFFF_-]|\\.)+)(?:\((['"]*)((?:\([^\)]+\)|[^\2\(\)]*)+)\2\))?/
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	leftMatch: {},
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	attrMap: {
-</span><span class="token prefix unchanged"> </span><span class="token line">		"class": "className",
-</span><span class="token prefix unchanged"> </span><span class="token line">		"for": "htmlFor"
-</span></span><span class="token coord">@@ -660,6 +663,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">for ( var type in Expr.match ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">	Expr.match[ type ] = new RegExp( Expr.match[ type ].source + /(?![^\[]*\])(?![^\(]*\))/.source );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	Expr.leftMatch[ type ] = new RegExp( /(^(?:.|\r|\n)*?)/.source + Expr.match[ type ].source );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">var makeArray = function(array, results) {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4270/sizzle.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4270/sizzle.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

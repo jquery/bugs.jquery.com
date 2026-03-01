@@ -142,39 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token function">$</span><span class="token punctuation">(</span>schedule<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">var</span> attempt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> limit <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
-
-<span class="token keyword">function</span> <span class="token function">runTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-	
-	<span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">500</span><span class="token punctuation">,</span>
-		$e <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#target'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-		name <span class="token operator">=</span> <span class="token string">'offset(500 times) - attempt '</span><span class="token operator">+</span>attempt<span class="token punctuation">;</span>
-		
-	<span class="token keyword">if</span><span class="token punctuation">(</span> attempt <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">)</span>
-		console<span class="token punctuation">.</span><span class="token function">profile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		
-	console<span class="token punctuation">.</span><span class="token function">time</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">while</span><span class="token punctuation">(</span> i<span class="token operator">--</span> <span class="token punctuation">)</span>
-		$e<span class="token punctuation">.</span><span class="token function">offset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	console<span class="token punctuation">.</span><span class="token function">timeEnd</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	
-	<span class="token keyword">if</span><span class="token punctuation">(</span> attempt <span class="token operator">!=</span> limit <span class="token punctuation">)</span>
-		<span class="token function">schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	<span class="token keyword">else</span>
-		console<span class="token punctuation">.</span><span class="token function">profileEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">function</span> <span class="token function">schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-	attempt<span class="token operator">++</span><span class="token punctuation">;</span>
-	<span class="token function">setTimeout</span><span class="token punctuation">(</span>runTest<span class="token punctuation">,</span> <span class="token number">1500</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2550/test.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2550/test.js">Original Format</a>
   </div>
 </h1></div>
         </div>

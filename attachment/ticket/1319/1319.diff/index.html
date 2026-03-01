@@ -142,60 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event.js
-===================================================================
-<span class="token coord">--- src/event.js	(revision 4241)</span>
-<span class="token coord">+++ src/event.js	(working copy)</span>
-<span class="token coord">@@ -496,20 +496,38 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">	// If Safari or IE is used
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Continually check to see if the document is ready
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	if (jQuery.browser.msie || jQuery.browser.safari ) (function(){
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	if ( jQuery.browser.msie ) (function(){
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		try {
-</span><span class="token prefix unchanged"> </span><span class="token line">			// If IE is used, use the trick by Diego Perini
-</span><span class="token prefix unchanged"> </span><span class="token line">			// http://javascript.nwbox.com/IEContentLoaded/
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( jQuery.browser.msie || document.readyState != "loaded" &amp;&amp; document.readyState != "complete" )
-</span><span class="token prefix deleted">-</span><span class="token line">				document.documentElement.doScroll("left");
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			document.documentElement.doScroll("left");
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		} catch( error ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			return setTimeout( arguments.callee, 0 );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			setTimeout( arguments.callee, 0 );
-</span><span class="token prefix inserted">+</span><span class="token line">			return;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// and execute any waiting functions
-</span><span class="token prefix unchanged"> </span><span class="token line">		jQuery.ready();
-</span><span class="token prefix unchanged"> </span><span class="token line">	})();
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	if ( jQuery.browser.safari ) {
-</span><span class="token prefix inserted">+</span><span class="token line">		var numStyles;
-</span><span class="token prefix inserted">+</span><span class="token line">		(function(){
-</span><span class="token prefix inserted">+</span><span class="token line">			 if ( document.readyState != "loaded" &amp;&amp; document.readyState != "complete" ) {
-</span><span class="token prefix inserted">+</span><span class="token line">				setTimeout( arguments.callee, 0 );
-</span><span class="token prefix inserted">+</span><span class="token line">				return;
-</span><span class="token prefix inserted">+</span><span class="token line">			}
-</span><span class="token prefix inserted">+</span><span class="token line">			if ( numStyles === undefined )
-</span><span class="token prefix inserted">+</span><span class="token line">				numStyles = jQuery("style, link[rel=stylesheet]").length;
-</span><span class="token prefix inserted">+</span><span class="token line">			if ( document.styleSheets.length != numStyles ) {
-</span><span class="token prefix inserted">+</span><span class="token line">				setTimeout( arguments.callee, 0 );
-</span><span class="token prefix inserted">+</span><span class="token line">				return;
-</span><span class="token prefix inserted">+</span><span class="token line">			}
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">			// and execute any waiting functions
-</span><span class="token prefix inserted">+</span><span class="token line">			jQuery.ready();
-</span><span class="token prefix inserted">+</span><span class="token line">		})();
-</span><span class="token prefix inserted">+</span><span class="token line">	}
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	// A fallback to window.onload, that will always work
-</span><span class="token prefix unchanged"> </span><span class="token line">	jQuery.event.add( window, "load", jQuery.ready );
-</span><span class="token prefix unchanged"> </span><span class="token line">}</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1319/1319.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1319/1319.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

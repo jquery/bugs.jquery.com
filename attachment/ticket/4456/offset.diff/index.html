@@ -142,74 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">diff U3 offset.js offset.js
-<span class="token coord">--- offset.js	Mon Mar 30 22:31:00 2009</span>
-<span class="token coord">+++ offset.js	Mon Mar 30 22:52:10 2009</span>
-<span class="token coord">@@ -5,8 +5,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		if ( elem === elem.ownerDocument.body ) return jQuery.offset.bodyOffset( elem );
-</span><span class="token prefix unchanged"> </span><span class="token line">		var box = elem.getBoundingClientRect(), doc = elem.ownerDocument, body = doc.body, docElem = doc.documentElement,
-</span><span class="token prefix unchanged"> </span><span class="token line">			clientTop = docElem.clientTop || body.clientTop || 0, clientLeft = docElem.clientLeft || body.clientLeft || 0,
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			top  = box.top  + (self.pageYOffset || jQuery.boxModel &amp;&amp; docElem.scrollTop  || body.scrollTop ) - clientTop,
-</span><span class="token prefix deleted">-</span><span class="token line">			left = box.left + (self.pageXOffset || jQuery.boxModel &amp;&amp; docElem.scrollLeft || body.scrollLeft) - clientLeft;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			top  = box.top  + (self.pageYOffset || jQuery.support.boxModel &amp;&amp; docElem.scrollTop  || body.scrollTop ) - clientTop,
-</span><span class="token prefix inserted">+</span><span class="token line">			left = box.left + (self.pageXOffset || jQuery.support.boxModel &amp;&amp; docElem.scrollLeft || body.scrollLeft) - clientLeft;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return { top: top, left: left };
-</span><span class="token prefix unchanged"> </span><span class="token line">	};
-</span><span class="token prefix unchanged"> </span><span class="token line">else
-</span></span><span class="token coord">@@ -52,7 +52,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">jQuery.offset = {
-</span><span class="token prefix unchanged"> </span><span class="token line">	initialize: function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var body = document.body, container = document.createElement('div'), innerDiv, checkDiv, table, td, prop, bodyMarginTop = parseFloat(jQuery.curCSS(body, 'marginTop', true), 10) || 0,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var body = document.body, container = document.createElement('div'), innerDiv, checkDiv, table, td, bodyMarginTop = parseFloat(jQuery.curCSS(body, 'marginTop', true), 10) || 0,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			html = '&lt;div style="position:absolute;top:0;left:0;margin:0;border:5px solid #000;padding:0;width:1px;height:1px;">&lt;div>&lt;/div>&lt;/div>&lt;table style="position:absolute;top:0;left:0;margin:0;border:5px solid #000;padding:0;width:1px;height:1px;" cellpadding="0" cellspacing="0">&lt;tr>&lt;td>&lt;/td>&lt;/tr>&lt;/table>';
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		jQuery.extend( container.style, { position: 'absolute', top: 0, left: 0, margin: 0, border: 0, width: '1px', height: '1px', visibility: 'hidden' } );
-</span></span><span class="token coord">@@ -92,7 +92,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	position: function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( !this[0] ) return null;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var elem = this[0], left = 0, top = 0, results,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var elem = this[0], results,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Get *real* offsetParent
-</span><span class="token prefix unchanged"> </span><span class="token line">		offsetParent = this.offsetParent(),
-</span></span><span class="token coord">@@ -122,7 +122,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	offsetParent: function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">		var offsetParent = this[0].offsetParent || document.body;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		while ( offsetParent &amp;&amp; (!/^body|html$/i.test(offsetParent.tagName) &amp;&amp; jQuery.css(offsetParent, 'position') == 'static') )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		while ( offsetParent &amp;&amp; (!/^body|html$/i.test(offsetParent.tagName) &amp;&amp; jQuery.css(offsetParent, 'position') === 'static') )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			offsetParent = offsetParent.offsetParent;
-</span><span class="token prefix unchanged"> </span><span class="token line">		return jQuery(offsetParent);
-</span><span class="token prefix unchanged"> </span><span class="token line">	}
-</span></span><span class="token coord">@@ -140,7 +140,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Set the scroll offset
-</span><span class="token prefix unchanged"> </span><span class="token line">			this.each(function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				this == window || this == document ?
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				this === window || this === document ?
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					window.scrollTo(
-</span><span class="token prefix unchanged"> </span><span class="token line">						!i ? val : jQuery(window).scrollLeft(),
-</span><span class="token prefix unchanged"> </span><span class="token line">						 i ? val : jQuery(window).scrollTop()
-</span></span><span class="token coord">@@ -149,9 +149,9 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			}) :
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Return the scroll offset
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			this[0] == window || this[0] == document ?
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			this[0] === window || this[0] === document ?
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				self[ i ? 'pageYOffset' : 'pageXOffset' ] ||
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					jQuery.boxModel &amp;&amp; document.documentElement[ method ] ||
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					jQuery.support.boxModel &amp;&amp; document.documentElement[ method ] ||
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					document.body[ method ] :
-</span><span class="token prefix unchanged"> </span><span class="token line">				this[0][ method ];
-</span><span class="token prefix unchanged"> </span><span class="token line">	};</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4456/offset.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4456/offset.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

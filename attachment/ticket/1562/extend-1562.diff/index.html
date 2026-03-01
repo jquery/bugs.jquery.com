@@ -140,30 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: core.js
-===================================================================
-<span class="token coord">--- core.js	(revision 5588)</span>
-<span class="token coord">+++ core.js	(working copy)</span>
-<span class="token coord">@@ -579,8 +579,11 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					continue;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				// Recurse if we're merging object values
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( deep &amp;&amp; copy &amp;&amp; typeof copy == "object" &amp;&amp; src &amp;&amp; !copy.nodeType )
-</span><span class="token prefix deleted">-</span><span class="token line">					target[ name ] = jQuery.extend( deep, src, copy );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( deep &amp;&amp; copy &amp;&amp; typeof copy == "object" &amp;&amp; !copy.nodeType )
-</span><span class="token prefix inserted">+</span><span class="token line">					target[ name ] = jQuery.extend( deep, 
-</span><span class="token prefix inserted">+</span><span class="token line">						// Never move original objects, clone them
-</span><span class="token prefix inserted">+</span><span class="token line">						src || copy.length !== undefined ? [ ] : { }
-</span><span class="token prefix inserted">+</span><span class="token line">					, copy );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				// Don't bring in undefined values
-</span><span class="token prefix unchanged"> </span><span class="token line">				else if ( copy !== undefined )</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1562/extend-1562.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1562/extend-1562.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

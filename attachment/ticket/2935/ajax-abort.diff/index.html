@@ -140,51 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax.js
-===================================================================
-<span class="token coord">--- src/ajax.js	(revision 5709)</span>
-<span class="token coord">+++ src/ajax.js	(working copy)</span>
-<span class="token coord">@@ -303,10 +303,11 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				s.accepts._default );
-</span><span class="token prefix unchanged"> </span><span class="token line">		} catch(e){}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		// Allow custom headers/mimetypes
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		// Allow custom headers/mimetypes and early abort
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		if ( s.beforeSend &amp;&amp; s.beforeSend(xhr, s) === false ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			// cleanup active request counter
-</span><span class="token prefix deleted">-</span><span class="token line">			s.global &amp;&amp; jQuery.active--;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			// Handle the global AJAX counter
-</span><span class="token prefix inserted">+</span><span class="token line">			if ( s.global &amp;&amp; ! --jQuery.active )
-</span><span class="token prefix inserted">+</span><span class="token line">				jQuery.event.trigger( "ajaxStop" );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// close opended socket
-</span><span class="token prefix unchanged"> </span><span class="token line">			xhr.abort();
-</span><span class="token prefix unchanged"> </span><span class="token line">			return false;
-</span></span><span class="token coord">@@ -317,8 +318,18 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Wait for a response to come back
-</span><span class="token prefix unchanged"> </span><span class="token line">		var onreadystatechange = function(isTimeout){
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			// The request was aborted, clear the interval and decrement jQuery.active
-</span><span class="token prefix inserted">+</span><span class="token line">			if (xhr.readyState == 0) {
-</span><span class="token prefix inserted">+</span><span class="token line">				if (ival) {
-</span><span class="token prefix inserted">+</span><span class="token line">					// clear poll interval
-</span><span class="token prefix inserted">+</span><span class="token line">					clearInterval(ival);
-</span><span class="token prefix inserted">+</span><span class="token line">					ival = null;
-</span><span class="token prefix inserted">+</span><span class="token line">					// Handle the global AJAX counter
-</span><span class="token prefix inserted">+</span><span class="token line">					if ( s.global &amp;&amp; ! --jQuery.active )
-</span><span class="token prefix inserted">+</span><span class="token line">						jQuery.event.trigger( "ajaxStop" );
-</span><span class="token prefix inserted">+</span><span class="token line">				}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// The transfer is complete and the data is available, or the request timed out
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( !requestDone &amp;&amp; xhr &amp;&amp; (xhr.readyState == 4 || isTimeout == "timeout") ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			} else if ( !requestDone &amp;&amp; xhr &amp;&amp; (xhr.readyState == 4 || isTimeout == "timeout") ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				requestDone = true;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				// clear poll interval</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2935/ajax-abort.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2935/ajax-abort.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

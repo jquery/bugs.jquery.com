@@ -142,25 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery/src/css.js
-===================================================================
---- jquery/src/css.js	(Revision 6533)
-+++ jquery/src/css.js	(Working copy)
-@@ -201,7 +201,7 @@
- 
- 				// Put in the new values to get a computed value out
- 				elem.runtimeStyle.left = elem.currentStyle.left;
--				style.left = ret || 0;
-+				style.left = (camelCase == "fontSize") ? "1em" : (ret || 0);
- 				ret = style.pixelLeft + "px";
- 
- 				// Revert the changed values</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/760/jquery-css-fontsize-ie.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/760/jquery-css-fontsize-ie.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

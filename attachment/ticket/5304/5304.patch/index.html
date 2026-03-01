@@ -142,37 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- selector.js	2009-09-28 14:02:12.000000000 -0700
-+++ selector-ie.js	2009-09-28 14:00:13.000000000 -0700
-@@ -860,8 +860,8 @@
- 	div = null; // release memory in IE
- })();
-
--if ( document.getElementsByClassName && document.documentElement.getElementsByClassName ) (function(){
--	var div = document.createElement("div");
-+var div = document.createElement("div");
-+if ( div.getElementsByClassName ) (function(){
- 	div.innerHTML = "<div class="test e"></div><div class="test"></div>";
-
- 	// Opera can't find a second classname (in 9.6)
-@@ -880,9 +880,9 @@
- 			return context.getElementsByClassName(match[1]);
- 		}
- 	};
--
--	div = null; // release memory in IE
- })();
-+div = null; // release memory in IE
-+
-
- function dirNodeCheck( dir, cur, doneName, checkSet, nodeCheck, isXML ) {
- 	var sibDir = dir == "previousSibling" && !isXML;</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/5304/5304.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/5304/5304.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

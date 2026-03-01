@@ -140,37 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js">$<span class="token punctuation">.</span>fn<span class="token punctuation">.</span><span class="token function-variable function">contents</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">selector</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-        <span class="token keyword">var</span> context <span class="token operator">=</span> jQuery<span class="token punctuation">;</span>
-
-        <span class="token keyword">var</span> ret <span class="token operator">=</span> jQuery<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-                <span class="token keyword">if</span><span class="token punctuation">(</span>elem<span class="token punctuation">.</span>contentWindow <span class="token operator">&amp;&amp;</span> elem<span class="token punctuation">.</span>contentWindow<span class="token punctuation">.</span>jQuery <span class="token operator">&amp;&amp;</span> context<span class="token punctuation">.</span><span class="token function">nodeName</span><span class="token punctuation">(</span>elem<span class="token punctuation">,</span> <span class="token string">"iframe"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                <span class="token punctuation">{</span>
-                        context <span class="token operator">=</span> elem<span class="token punctuation">.</span>contentWindow<span class="token punctuation">.</span>jQuery<span class="token punctuation">;</span>
-                        <span class="token keyword">return</span> elem<span class="token punctuation">.</span>contentDocument <span class="token operator">||</span> elem<span class="token punctuation">.</span>contentWindow<span class="token punctuation">.</span>document<span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-                <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">nodeName</span><span class="token punctuation">(</span>elem<span class="token punctuation">,</span> <span class="token string">"iframe"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                        <span class="token keyword">return</span> elem<span class="token punctuation">.</span>contentDocument <span class="token operator">||</span> elem<span class="token punctuation">.</span>contentWindow<span class="token punctuation">.</span>document<span class="token punctuation">;</span>
-
-                <span class="token keyword">return</span> jQuery<span class="token punctuation">.</span><span class="token function">makeArray</span><span class="token punctuation">(</span>elem<span class="token punctuation">.</span>childNodes<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">if</span><span class="token punctuation">(</span> selector <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> selector <span class="token operator">==</span> <span class="token string">"string"</span><span class="token punctuation">)</span>
-                ret <span class="token operator">=</span> jQuery<span class="token punctuation">.</span><span class="token function">multiFilter</span><span class="token punctuation">(</span> selector<span class="token punctuation">,</span> ret <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">if</span><span class="token punctuation">(</span>context <span class="token operator">==</span> jQuery<span class="token punctuation">)</span>
-                <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">pushStack</span><span class="token punctuation">(</span> jQuery<span class="token punctuation">.</span><span class="token function">unique</span><span class="token punctuation">(</span> ret <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">return</span> <span class="token function">context</span><span class="token punctuation">(</span>jQuery<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> elem <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">pushStack</span><span class="token punctuation">(</span> context<span class="token punctuation">.</span><span class="token function">unique</span><span class="token punctuation">(</span> ret <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2707/jquery.contextswitch.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2707/jquery.contextswitch.js">Original Format</a>
   </div>
 </h1></div>
         </div>

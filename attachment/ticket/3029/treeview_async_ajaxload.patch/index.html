@@ -140,40 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- u/temp/jquery-treeview/jquery.treeview.async.js 
-+++ home/mb/wdev/cheiron/cryo/Cryo/root/static/c/treeview/jquery.treeview.async.js 
-@@ -42,6 +42,8 @@
- 		}
- 		$.each(response, createNode, [child]);
-         $(container).treeview({add: child});
-+
-+        if (settings.ajaxload) settings.ajaxload();
-     });
- }
- 
-@@ -50,8 +52,16 @@
- 	if (!settings.url) {
- 		return proxied.apply(this, arguments);
- 	}
-+
-+    if ( settings.ajaxload ) {
-+        var callback = settings.ajaxload;
-+        settings.ajaxload = function() {
-+            return callback.apply($(this).parent()[0], arguments);
-+        };
-+    }
-+	
- 	var container = this;
-	load(settings, "source", this, container);
- 	var userToggle = settings.toggle;
- 	return proxied.call(this, $.extend({}, settings, {
- 		collapsed: true,</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3029/treeview_async_ajaxload.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3029/treeview_async_ajaxload.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

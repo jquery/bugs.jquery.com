@@ -142,39 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery.treeview.async.js
-===================================================================
---- jquery.treeview.async.js	(revision 5497)
-+++ jquery.treeview.async.js	(working copy)
-@@ -18,7 +18,21 @@
- function load(settings, root, child, container) {
- 	$.getJSON(settings.url, {root: root}, function(response) {
- 		function createNode(parent) {
--			var current = $("<li>").attr("id", this.id || "").html("<span>" + this.text + "</span>").appendTo(parent);
-+			var current = $("</li><li>").attr("id", this.id || "").html("<span></span>");
-+			if (this.click || this.href) {
-+				current.children("span").html("<a>"); 
-+				current.find("a").attr("href", this.href || "#");
-+				if (this.click) {
-+					var fn = this.click;
-+					current.find("a").click(function() {
-+						eval(fn);
-+					});
-+				}
-+				current.find("a").html(this.text);
-+			} else {
-+				current.children("span").html(this.text);
-+			}
-+			current.appendTo(parent);
- 			if (this.classes) {
- 				current.children("span").addClass(this.classes);
- 			}</a></li></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2830/treeview_click_href.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2830/treeview_click_href.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

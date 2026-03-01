@@ -142,73 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-php" tabindex="0"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token comment">/*
-**	@desc:		PHP ajax login form using jQuery
-**	@author:	programmer@chazzuka.com
-**	@url:		http://www.chazzuka.com/blog
-**	@date:		15 August 2008
-**	@license:	Free!, but i'll be glad if i my name listed in the credits'
-*/</span>
-
-<span class="token comment">// @ error reporting setting  (  modify as needed )</span>
-<span class="token function">ini_set</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"display_errors"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">error_reporting</span> <span class="token punctuation">(</span><span class="token constant">E_ALL</span> <span class="token operator">^</span> <span class="token constant">E_NOTICE</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">//@ explicity start session just if not automatically started at php.ini</span>
-<span class="token function">session_start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">//@ validate inclusion</span>
-<span class="token function">define</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'VALID_ACL_'</span><span class="token punctuation">,</span> <span class="token constant boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">//@ load dependency files</span>
-<span class="token keyword">require</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'login.config.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">require</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'login.lang.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">require</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'login.class.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">//@ new acl instance</span>
-<span class="token variable">$acl</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Authorization</span><span class="token punctuation">;</span>
-
-<span class="token comment">//@check session status</span>
-<span class="token variable">$status</span> <span class="token operator">=</span> <span class="token variable">$acl</span><span class="token operator">-></span><span class="token function">check_status</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$status</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// @ session already active</span>
-    <span class="token keyword">echo</span> <span class="token string double-quoted-string">"{'status':true, 'message':'&lt;div class=\"welcome\">Welcome, &lt;b>"</span><span class="token operator">.</span><span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'exp_user'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'username'</span><span class="token punctuation">]</span><span class="token operator">.</span><span class="token string double-quoted-string">"!&lt;/div> &amp;nbsp;&lt;div class=\"logout\">&lt;img src=\"http://images.acelogisticsllc.com/layout/user-48.png\" alt=\"Ace Logistics\" class=\"avatar\"/> &lt;a href=\"php/index.php?logoff=1\">Logout&lt;/a>&lt;/b>&amp;nbsp;|&amp;nbsp;&lt;b>&lt;a id=\"changeP\" href=\"#change\">Change password&lt;/a>&lt;/b>&lt;/div>'}"</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-    <span class="token comment">//@ session not active</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'REQUEST_METHOD'</span><span class="token punctuation">]</span><span class="token operator">==</span><span class="token string single-quoted-string">'GET'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment">//@ first load</span>
-        <span class="token keyword">echo</span> <span class="token string double-quoted-string">"{'status':false,'message':'"</span><span class="token operator">.</span><span class="token variable">$acl</span><span class="token operator">-></span><span class="token function">form</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token string double-quoted-string">"'}"</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-        <span class="token comment">//@ form submission</span>
-        <span class="token variable">$u</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">empty</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'u'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'u'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token class-name return-type">false</span><span class="token punctuation">;</span>
-        <span class="token comment">// retrive user var</span>
-        <span class="token variable">$p</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">empty</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'p'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'p'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token class-name return-type">false</span><span class="token punctuation">;</span>
-        <span class="token comment">// retrive password var</span>
-        
-        <span class="token comment">// @ try to signin</span>
-        <span class="token variable">$is_auth</span> <span class="token operator">=</span> <span class="token variable">$acl</span><span class="token operator">-></span><span class="token function">signin</span><span class="token punctuation">(</span><span class="token variable">$u</span><span class="token punctuation">,</span><span class="token variable">$p</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token variable">$acl</span><span class="token operator">-></span><span class="token function">loginTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$is_auth</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token comment">//@ success           </span>
-		    <span class="token keyword">echo</span> <span class="token string double-quoted-string">"{'status':true, 'message':'Welcome, &lt;b>"</span><span class="token operator">.</span><span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'exp_user'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'username'</span><span class="token punctuation">]</span><span class="token operator">.</span><span class="token string double-quoted-string">"!&lt;/b>', 'url':'"</span><span class="token operator">.</span><span class="token constant">SUCCESS_URL</span><span class="token operator">.</span><span class="token string double-quoted-string">"'}"</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-            <span class="token comment">//@ failed            </span>
-			<span class="token keyword">echo</span> <span class="token string double-quoted-string">"{'status': false,'message':'&lt;span class=\"warning\"> &lt;b>*Your "</span><span class="token operator">.</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token constant">LOGIN_METHOD</span><span class="token operator">==</span><span class="token string single-quoted-string">'user'</span><span class="token operator">||</span><span class="token class-name">LOGIN_METHOD</span><span class="token operator">==</span><span class="token string single-quoted-string">'both'</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token string single-quoted-string">'username'</span><span class="token punctuation">:</span><span class="token string single-quoted-string">''</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token string double-quoted-string">"  or password was entered incorrectly.&lt;/b>&lt;/span>'}"</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment">//@ destroy instance</span>
-<span class="token keyword">unset</span><span class="token punctuation">(</span><span class="token variable">$acl</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></code></pre>
+      <pre class="language-php" tabindex="0"><code class="language-php"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/6142/login.post.php">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/6142/login.post.php">Original Format</a>
   </div>
 </h1></div>
         </div>

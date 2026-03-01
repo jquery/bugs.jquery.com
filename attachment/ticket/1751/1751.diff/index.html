@@ -140,30 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/fx.js
-===================================================================
-<span class="token coord">--- src/fx.js	(revision 3501)</span>
-<span class="token coord">+++ src/fx.js	(working copy)</span>
-<span class="token coord">@@ -66,10 +66,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">	animate: function( prop, speed, easing, callback ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var opt = jQuery.speed(speed, easing, callback);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var optall = jQuery.speed(speed, easing, callback);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		return this[ opt.queue === false ? "each" : "queue" ](function(){
-</span><span class="token prefix deleted">-</span><span class="token line">			opt = jQuery.extend({}, opt);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		return this[ optall.queue === false ? "each" : "queue" ](function(){
-</span><span class="token prefix inserted">+</span><span class="token line">			var opt = jQuery.extend({}, optall);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			var hidden = jQuery(this).is(":hidden"), self = this;
-</span><span class="token prefix unchanged"> </span><span class="token line">			
-</span><span class="token prefix unchanged"> </span><span class="token line">			for ( var p in prop ) {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1751/1751.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1751/1751.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

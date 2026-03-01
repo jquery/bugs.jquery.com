@@ -142,51 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/fx/fx.js
-===================================================================
-<span class="token coord">--- src/fx/fx.js	(revision 1295)</span>
-<span class="token coord">+++ src/fx/fx.js	(working copy)</span>
-<span class="token coord">@@ -301,7 +301,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	 * @example $("p").animate({
-</span><span class="token prefix unchanged"> </span><span class="token line">	 *   opacity: 'show'
-</span><span class="token prefix unchanged"> </span><span class="token line">	 * }, "slow", "easein");
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	 * @desc An example of using an 'easing' function to provide a different style of animation. This will only work if you have a plugin that provides this easing function (Only 'linear' is provided by default, with jQuery).
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	 * @desc An example of using an 'easing' function to provide a different style of animation. This will only work if you have a plugin that provides this easing function (Only 'swing' and 'linear' are provided by default, with jQuery).
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	 *
-</span><span class="token prefix unchanged"> </span><span class="token line">	 * @name animate
-</span><span class="token prefix unchanged"> </span><span class="token line">	 * @type jQuery
-</span></span><span class="token coord">@@ -379,7 +379,14 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return opt;
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">	
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	easing: {},
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	easing: {
-</span><span class="token prefix inserted">+</span><span class="token line">		linear: function(percentage_elapsed, time_elapsed, value_start, value_difference, time_duration) {
-</span><span class="token prefix inserted">+</span><span class="token line">			return value_start + value_difference * percentage_elapsed;
-</span><span class="token prefix inserted">+</span><span class="token line">		}
-</span><span class="token prefix inserted">+</span><span class="token line">		swing: function(percentage_elapsed, time_elapsed, value_start, value_difference, time_duration) {
-</span><span class="token prefix inserted">+</span><span class="token line">			return value_start + value_difference * ((- Math.cos(percentage_elapsed * Math.PI) / 2) + 0.5);
-</span><span class="token prefix inserted">+</span><span class="token line">		}
-</span><span class="token prefix inserted">+</span><span class="token line">	},
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">	queue: {},
-</span><span class="token prefix unchanged"> </span><span class="token line">	
-</span></span><span class="token coord">@@ -558,8 +565,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// If the easing function exists, then use it 
-</span><span class="token prefix unchanged"> </span><span class="token line">				z.now = options.easing &amp;&amp; jQuery.easing[options.easing] ?
-</span><span class="token prefix unchanged"> </span><span class="token line">					jQuery.easing[options.easing](p, n,  firstNum, (lastNum-firstNum), options.duration) :
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					// else use default linear easing
-</span><span class="token prefix deleted">-</span><span class="token line">					((-Math.cos(p*Math.PI)/2) + 0.5) * (lastNum-firstNum) + firstNum;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					jQuery.easing["swing"](p, n,  firstNum, (lastNum-firstNum), options.duration);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				// Perform the next step of the animation
-</span><span class="token prefix unchanged"> </span><span class="token line">				z.a();</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/928/jquery.easing.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/928/jquery.easing.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

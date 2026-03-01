@@ -142,83 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event.js
-===================================================================
-<span class="token coord">--- src/event.js	(revision 4664)</span>
-<span class="token coord">+++ src/event.js	(working copy)</span>
-<span class="token coord">@@ -175,10 +175,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Handle a global trigger
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( !elem ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( typeof elem != "object" ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// Only trigger if we've ever bound an event for it
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( this.global[type] )
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				jQuery("*").add([window, document]).trigger(type, data);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				jQuery(typeof elem == "string" ? elem : "*").add([window, document]).trigger(type, data);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Handle triggering a single element
-</span><span class="token prefix unchanged"> </span><span class="token line">		} else {
-</span></span>Index: src/ajax.js
-===================================================================
-<span class="token coord">--- src/ajax.js	(revision 4664)</span>
-<span class="token coord">+++ src/ajax.js	(working copy)</span>
-<span class="token coord">@@ -228,7 +228,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Watch for a new set of requests
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( s.global &amp;&amp; ! jQuery.active++ )
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			jQuery.event.trigger( "ajaxStart" );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			jQuery.event.trigger( "ajaxStart", null, s.global );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// If we're requesting a remote document
-</span><span class="token prefix unchanged"> </span><span class="token line">		// and trying to load JSON or Script with a GET
-</span></span><span class="token coord">@@ -295,7 +295,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			s.beforeSend(xml);
-</span><span class="token prefix unchanged"> </span><span class="token line">			
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( s.global )
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			jQuery.event.trigger("ajaxSend", [xml, s]);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			jQuery.event.trigger("ajaxSend", [xml, s], s.global);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Wait for a response to come back
-</span><span class="token prefix unchanged"> </span><span class="token line">		var onreadystatechange = function(isTimeout){
-</span></span><span class="token coord">@@ -386,7 +386,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Fire the global callback
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( s.global )
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				jQuery.event.trigger( "ajaxSuccess", [xml, s] );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				jQuery.event.trigger( "ajaxSuccess", [xml, s], s.global );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		function complete(){
-</span></span><span class="token coord">@@ -396,11 +396,11 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// The request was completed
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( s.global )
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				jQuery.event.trigger( "ajaxComplete", [xml, s] );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				jQuery.event.trigger( "ajaxComplete", [xml, s], s.global );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Handle the global AJAX counter
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( s.global &amp;&amp; ! --jQuery.active )
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				jQuery.event.trigger( "ajaxStop" );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				jQuery.event.trigger( "ajaxStop", null, s.global );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		// return XMLHttpRequest to allow aborting the request etc.
-</span></span><span class="token coord">@@ -413,7 +413,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Fire the global callback
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( s.global )
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			jQuery.event.trigger( "ajaxError", [xml, s, e] );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			jQuery.event.trigger( "ajaxError", [xml, s, e], s.global );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Counter for holding the number of active queries</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2298/2298.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2298/2298.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

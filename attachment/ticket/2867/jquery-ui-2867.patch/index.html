@@ -142,25 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">diff --git a/jquery.ui-1.5b4/ui.tabs.js b/jquery.ui-1.5b4/ui.tabs.js
-index aefad9a..25c6b65 100644
---- a/jquery.ui-1.5b4/ui.tabs.js
-+++ b/jquery.ui-1.5b4/ui.tabs.js
-@@ -325,7 +325,7 @@
- 				index = this.$tabs.length; // append by default
- 
- 			var o = this.options;
--			var $li = $(o.tabTemplate.replace(/#\{href\}/, url).replace(/#\{label\}/, label));
-+			var $li = $(o.tabTemplate.replace(/#\{href\}/g, url).replace(/#\{label\}/g, label));
- 			$li.data('destroy.tabs', true);
- 
- 			var id = url.indexOf('#') == 0 ? url.replace('#', '') : this.tabId( $('a:first-child', $li)[0] );</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2867/jquery-ui-2867.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2867/jquery-ui-2867.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,25 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- jquery-nightly.js.orig	2010-09-18 13:00:21.009602454 +0400
-+++ jquery-nightly.js	2010-09-18 13:02:11.887574789 +0400
-@@ -360,9 +360,9 @@
- 
- jQuery.extend({
- 	noConflict: function( deep ) {
--		window.$ = _$;
-+		if ( window.$ === jQuery ) window.$ = _$;
- 
--		if ( deep ) {
-+		if ( deep && window.jQuery === jQuery ) {
- 			window.jQuery = _jQuery;
- 		}</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/7049/jquery.js.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/7049/jquery.js.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,24 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery.ui/ui.dialog.js
-===================================================================
---- jquery.ui/ui.dialog.js 
-+++ jquery.ui/ui.dialog.js 
-
-@@ -178,5 +178,5 @@
- 		
- 		position: function(pos) {
--			var wnd = $(window), doc = $(document), minTop = top = doc.scrollTop(), left = doc.scrollLeft();
-+			var wnd = $(window), doc = document.body, minTop = top = doc.scrollTop, left = doc.scrollLeft;
- 			if ($.inArray(pos, ['center','top','right','bottom','left']) >= 0) {
- 				pos = [pos == 'right' || pos == 'left' ? pos : 'center', pos == 'top' || pos == 'bottom' ? pos : 'middle'];</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2826/ui.dialog.js.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2826/ui.dialog.js.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

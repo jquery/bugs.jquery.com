@@ -142,46 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- /Users/keith/Sites/sonomagrapevine.org/misc/jquery-1.1.2-uncompressed.js	2007-06-20 10:00:16.000000000 -0700</span>
-<span class="token coord">+++ /Users/keith/Sites/sonomagrapevine.org/misc/jquery.js	2007-06-20 10:00:20.000000000 -0700</span>
-<span class="token coord">@@ -330,10 +330,11 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	className: {
-</span><span class="token prefix unchanged"> </span><span class="token line">		// internal only, use addClass("class")
-</span><span class="token prefix unchanged"> </span><span class="token line">		add: function( elem, c ){
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			jQuery.each( c.split(/\s+/), function(i, cur){
-</span><span class="token prefix deleted">-</span><span class="token line">				if ( !jQuery.className.has( elem.className, cur ) )
-</span><span class="token prefix deleted">-</span><span class="token line">					elem.className += ( elem.className ? " " : "" ) + cur;
-</span><span class="token prefix deleted">-</span><span class="token line">			});
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		    if ( c.split )
-</span><span class="token prefix inserted">+</span><span class="token line">    			jQuery.each( c.split(/\s+/), function(i, cur){
-</span><span class="token prefix inserted">+</span><span class="token line">    				if ( !jQuery.className.has( elem.className, cur ) )
-</span><span class="token prefix inserted">+</span><span class="token line">    					elem.className += ( elem.className ? " " : "" ) + cur;
-</span><span class="token prefix inserted">+</span><span class="token line">    			});
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// internal only, use removeClass("class")
-</span></span><span class="token coord">@@ -348,8 +349,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		has: function( t, c ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			t = t.className || t;
-</span><span class="token prefix unchanged"> </span><span class="token line">			// escape regex characters
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			c = c.replace(/([\.\\\+\*\?\[\^\]\$\(\)\{\}\=\!\&lt;\>\|\:])/g, "\\$1");
-</span><span class="token prefix deleted">-</span><span class="token line">			return t &amp;&amp; new RegExp("(^|\\s)" + c + "(\\s|$)").test( t );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( c.replace ) {
-</span><span class="token prefix inserted">+</span><span class="token line">			    c = c.replace(/([\.\\\+\*\?\[\^\]\$\(\)\{\}\=\!\&lt;\>\|\:])/g, "\\$1");
-</span><span class="token prefix inserted">+</span><span class="token line">			    return t &amp;&amp; new RegExp("(^|\\s)" + c + "(\\s|$)").test( t );
-</span><span class="token prefix inserted">+</span><span class="token line">		    }
-</span><span class="token prefix inserted">+</span><span class="token line">		    else {
-</span><span class="token prefix inserted">+</span><span class="token line">		        return false;
-</span><span class="token prefix inserted">+</span><span class="token line">		    }
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">	swap: function(e,o,f) {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1309/jquery.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1309/jquery.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

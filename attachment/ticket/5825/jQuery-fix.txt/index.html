@@ -142,58 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">Line 408
-
-// Catch cases where $(document).ready() is called after the
-// browser event has already occurred.
-if ( document.readyState === "complete" ) {
-	return jQuery.ready();
-}
-
-to
-
-// Catch cases where $(document).ready() is called after the
-// browser event has already occurred.
-if ( document.hasOwnProperty("readyState") &amp;&amp; document.readyState === "complete" ) {
-	return jQuery.ready();
-}
-
-------------------------------------------------------------------------
-
-
-Line 1003
-
-return typeof name === "string" ? thisCache[ name ] : thisCache;
-
-to
-
-return typeof name === "string" &amp;&amp; thisCache.hasOwnProperty(name) ? thisCache[ name ] : thisCache;
-
-
-------------------------------------------------------------------------
-
-
-Line 1776
-
-// Trigger the event, it is assumed that "handle" is a function
-var handle = jQuery.data( elem, "handle" );
-if ( handle ) {
-	handle.apply( elem, data );
-}
-
-to
-
-// Trigger the event, it is assumed that "handle" is a function
-var handle = jQuery.data( elem, "handle" );
-if ( handle &amp;&amp; handle.hasOwnProperty('apply') ) {
-	handle.apply( elem, data );
-}</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/5825/jQuery-fix.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/5825/jQuery-fix.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,41 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token comment">/*
- * Translated default messages for the jQuery validation plugin.
- * Language: PL
- */</span>
-jQuery<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span>jQuery<span class="token punctuation">.</span>validator<span class="token punctuation">.</span>messages<span class="token punctuation">,</span> <span class="token punctuation">{</span>
-	<span class="token literal-property property">required</span><span class="token operator">:</span> <span class="token string">"Tento údaj je povinný."</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">remote</span><span class="token operator">:</span> <span class="token string">"Prosím, opravte tento údaj."</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">email</span><span class="token operator">:</span> <span class="token string">"Prosím, zadejte platný e-mail."</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"Prosím, zadejte platné URL."</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">date</span><span class="token operator">:</span> <span class="token string">"Prosím, zadejte platné datum."</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">dateISO</span><span class="token operator">:</span> <span class="token string">"Prosím, zadejte platné datum (ISO)."</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">number</span><span class="token operator">:</span> <span class="token string">"Prosím, zadejte číslo."</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">digits</span><span class="token operator">:</span> <span class="token string">"Prosím, zadávejte pouze číslice."</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">creditcard</span><span class="token operator">:</span> <span class="token string">"Prosím, zadejte číslo kreditní karty."</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">equalTo</span><span class="token operator">:</span> <span class="token string">"Prosím, zadejte znovu stejnou hodnotu."</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">accept</span><span class="token operator">:</span> <span class="token string">"Prosím, zadejte soubor se správnou příponou."</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">maxlength</span><span class="token operator">:</span> jQuery<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"Prosím, zadejte nejvíce {0} znaků."</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">maxLength</span><span class="token operator">:</span> jQuery<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"Prosím, zadejte nejvíce {0} znaků."</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">minlength</span><span class="token operator">:</span> jQuery<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"Prosím, zadejte nejméně {0} znaků."</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">minLength</span><span class="token operator">:</span> jQuery<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"Prosím, zadejte nejméně {0} znaků."</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">rangelength</span><span class="token operator">:</span> jQuery<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"Prosím, zadejte od {0} do {1} znaků."</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">rangeLength</span><span class="token operator">:</span> jQuery<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"Prosím, zadejte od {0} do {1} znaků."</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">rangeValue</span><span class="token operator">:</span> jQuery<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"Prosím, zadejte hodnotu od {0} do {1}."</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">range</span><span class="token operator">:</span> jQuery<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"Prosím, zadejte hodnotu od {0} do {1}."</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">maxValue</span><span class="token operator">:</span> jQuery<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"Prosím, zadejte hodnotu menší nebo rovnu {0}."</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">max</span><span class="token operator">:</span> jQuery<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"Prosím, zadejte hodnotu menší nebo rovnu {0}."</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">minValue</span><span class="token operator">:</span> jQuery<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"Prosím, zadejte hodnotu větší nebo rovnu {0}."</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token literal-property property">min</span><span class="token operator">:</span> jQuery<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"Prosím, zadejte hodnotu větší nebo rovnu {0}."</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3072/messages_cs.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3072/messages_cs.js">Original Format</a>
   </div>
 </h1></div>
         </div>

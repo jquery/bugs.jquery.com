@@ -142,34 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery.autocomplete.js</span>
-<span class="token coord">+++ (clipboard)</span>
-<span class="token coord">@@ -218,6 +218,11 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		var currentValue = $input.val();
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if (options.allowedChars != ''){
-</span><span class="token prefix inserted">+</span><span class="token line">			var reg = new RegExp('[^' + options.allowedChars + ']', 'g');
-</span><span class="token prefix inserted">+</span><span class="token line">			currentValue = currentValue.replace(reg, '');
-</span><span class="token prefix inserted">+</span><span class="token line">		}
-</span><span class="token prefix inserted">+</span><span class="token line">		
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		if ( !skipPrevCheck &amp;&amp; currentValue == previousValue )
-</span><span class="token prefix unchanged"> </span><span class="token line">			return;
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span></span><span class="token coord">@@ -382,6 +398,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	formatMatch: null,
-</span><span class="token prefix unchanged"> </span><span class="token line">	autoFill: false,
-</span><span class="token prefix unchanged"> </span><span class="token line">	width: 0,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	allowedChars: '',
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	multiple: false,
-</span><span class="token prefix unchanged"> </span><span class="token line">	multipleSeparator: ", ",
-</span><span class="token prefix unchanged"> </span><span class="token line">	highlight: function(value, term) {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2836/jquery.autocomplete.js.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2836/jquery.autocomplete.js.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

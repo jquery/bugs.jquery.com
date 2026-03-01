@@ -140,54 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/core.js
-===================================================================
-<span class="token coord">--- jquery/src/core.js	(revision 5824)</span>
-<span class="token coord">+++ jquery/src/core.js	(working copy)</span>
-<span class="token coord">@@ -1125,13 +1125,14 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return (text || "").replace( /^\s+|\s+$/g, "" );
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	// Supports ANYTHING but functions
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	makeArray: function( array ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		var ret = [];
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		if( array != null ){
-</span><span class="token prefix unchanged"> </span><span class="token line">			var i = array.length;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			//the window, strings and functions also have 'length'
-</span><span class="token prefix deleted">-</span><span class="token line">			if( i == null || array.split || array.setInterval || array.call )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			// The window, strings (and functions) also have 'length'
-</span><span class="token prefix inserted">+</span><span class="token line">			if( i == null || array.split || array.setInterval )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				ret[0] = array;
-</span><span class="token prefix unchanged"> </span><span class="token line">			else
-</span><span class="token prefix unchanged"> </span><span class="token line">				while( i )
-</span></span>Index: jquery/test/unit/core.js
-===================================================================
-<span class="token coord">--- jquery/test/unit/core.js	(revision 5824)</span>
-<span class="token coord">+++ jquery/test/unit/core.js	(working copy)</span>
-<span class="token coord">@@ -1684,7 +1684,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("jQuery.makeArray", function(){
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	expect(15);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	expect(14);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	equals( jQuery.makeArray(jQuery('html>*'))[0].nodeName, "HEAD", "Pass makeArray a jQuery object" );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -1709,7 +1709,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	ok( !!jQuery.makeArray( document.documentElement.childNodes ).slice(0,1)[0].nodeName, "Pass makeArray a childNodes array" );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	//function, is tricky as it has length
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	equals( jQuery.makeArray( function(){ return 1;} )[0](), 1, "Pass makeArray a function" );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	//equals( jQuery.makeArray( function(){ return 1;} )[0](), 1, "Pass makeArray a function" );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	//window, also has length
-</span><span class="token prefix unchanged"> </span><span class="token line">	equals( jQuery.makeArray(window)[0], window, "Pass makeArray the window" );</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3248/makeArray[5824].diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3248/makeArray[5824].diff">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,43 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: coreTest.js
-===================================================================
-<span class="token coord">--- coreTest.js	(revisione 1258)</span>
-<span class="token coord">+++ coreTest.js	(copia locale)</span>
-<span class="token coord">@@ -204,7 +204,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("append(String|Element|Array&amp;lt;Element&amp;gt;|jQuery)", function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	expect(9);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	expect(10);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	var defaultText = 'Try them out:'
-</span><span class="token prefix unchanged"> </span><span class="token line">	var result = $('#first').append('&lt;b>buga&lt;/b>');
-</span><span class="token prefix unchanged"> </span><span class="token line">	ok( result.text() == defaultText + 'buga', 'Check if text appending works' );
-</span></span><span class="token coord">@@ -233,6 +233,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	ok( $("#sap").append([]), "Check for appending an empty array." );
-</span><span class="token prefix unchanged"> </span><span class="token line">	ok( $("#sap").append(""), "Check for appending an empty string." );
-</span><span class="token prefix unchanged"> </span><span class="token line">	ok( $("#sap").append(document.getElementsByTagName("foo")), "Check for appending an empty nodelist." );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	reset();
-</span><span class="token prefix inserted">+</span><span class="token line">	$("#sap").append(document.getElementById('form'));
-</span><span class="token prefix inserted">+</span><span class="token line">	ok( $("#sap>form").size() == 1, "Check for appending a form" )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("appendTo(String|Element|Array&amp;lt;Element&amp;gt;|jQuery)", function() {
-</span></span><span class="token coord">@@ -678,4 +682,4 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	    //console.log( close[0]); // it's the &lt;a> and not a &lt;span> element
-</span><span class="token prefix unchanged"> </span><span class="token line">	    return false;
-</span><span class="token prefix unchanged"> </span><span class="token line">	}).click();
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">});
-</span></span>\ Nessun a-capo alla fine del file
-<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">});</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/910/new_test.3.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/910/new_test.3.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

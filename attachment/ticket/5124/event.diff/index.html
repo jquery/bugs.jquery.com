@@ -140,56 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- C:\Documents and Settings\mhelgeson\Desktop\CODE\jquery\src\event.js	Tue Aug 25 13:18:56 2009</span>
-<span class="token coord">+++ C:\Temp\event.js	Tue Aug 25 13:16:43 2009</span>
-<span class="token coord">@@ -247,24 +247,32 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			handle.apply( elem, data );
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var nativeFn, nativeHandler;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var aclick = ( jQuery.nodeName(elem, 'a') &amp;&amp; type === "click" ),
-</span><span class="token prefix inserted">+</span><span class="token line">		nativeFn, nativeHandler = function(){
-</span><span class="token prefix inserted">+</span><span class="token line">			try {
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( elem[ "on" + type ] )
-</span><span class="token prefix inserted">+</span><span class="token line">					return elem[ "on" + type ].apply( elem, data );
-</span><span class="token prefix inserted">+</span><span class="token line">				}
-</span><span class="token prefix inserted">+</span><span class="token line">			// catch some IE issues	
-</span><span class="token prefix inserted">+</span><span class="token line">			catch( ex ){ }
-</span><span class="token prefix inserted">+</span><span class="token line">			};
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		try {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			nativeFn = elem[ type ];
-</span><span class="token prefix deleted">-</span><span class="token line">			nativeHandler = elem[ "on" + type ];
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			nativeFn = !!elem[ type ] ? function(){ 
-</span><span class="token prefix inserted">+</span><span class="token line">				try {
-</span><span class="token prefix inserted">+</span><span class="token line">					elem[ type ]();
-</span><span class="token prefix inserted">+</span><span class="token line">				} catch(e) {}
-</span><span class="token prefix inserted">+</span><span class="token line">			} : null;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// prevent IE from throwing an error for some elements with some event types, see #3533
-</span><span class="token prefix unchanged"> </span><span class="token line">		} catch (e) {}
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Handle triggering native .onfoo handlers (and on links since we don't call .click() for links)
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( (!nativeFn || (jQuery.nodeName(elem, 'a') &amp;&amp; type === "click")) &amp;&amp; nativeHandler &amp;&amp; nativeHandler.apply( elem, data ) === false ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( (!nativeFn || aclick) &amp;&amp; nativeHandler() === false ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			event.result = false;
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Trigger the native events (except for clicks on links)
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( !bubbling &amp;&amp; nativeFn &amp;&amp; !event.isDefaultPrevented() &amp;&amp; !(jQuery.nodeName(elem, 'a') &amp;&amp; type === "click") ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( !bubbling &amp;&amp; nativeFn &amp;&amp; !event.isDefaultPrevented() &amp;&amp; !aclick ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			this.triggered = true;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			try {
-</span><span class="token prefix deleted">-</span><span class="token line">				nativeFn();
-</span><span class="token prefix deleted">-</span><span class="token line">			// prevent IE from throwing an error for some hidden elements
-</span><span class="token prefix deleted">-</span><span class="token line">			} catch (e) {}
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			nativeFn();
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		this.triggered = false;</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/5124/event.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/5124/event.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

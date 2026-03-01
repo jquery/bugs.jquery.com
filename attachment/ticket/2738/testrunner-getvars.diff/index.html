@@ -140,51 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: data/testrunner.js
-===================================================================
-<span class="token coord">--- data/testrunner.js	(revision 5282)</span>
-<span class="token coord">+++ data/testrunner.js	(working copy)</span>
-<span class="token coord">@@ -13,6 +13,9 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	asyncTimeout: 2 // seconds for async timeout
-</span><span class="token prefix unchanged"> </span><span class="token line">};
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">_config.restrictions = 	location.search.length &lt; 2 ? [ ] : //restrict modules/tests by get parameters
-</span><span class="token prefix inserted">+</span><span class="token line">		$.map( location.search.slice(1).split('&amp;'), decodeURIComponent );
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">var isLocal = !!(window.location.protocol == 'file:');
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">$(function() {
-</span></span><span class="token coord">@@ -72,9 +75,22 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">function test(name, callback, nowait) {
-</span><span class="token prefix unchanged"> </span><span class="token line">	if(_config.currentModule)
-</span><span class="token prefix unchanged"> </span><span class="token line">		name = _config.currentModule + " module: " + name;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	var i = _config.restrictions.length, pass = !i;
-</span><span class="token prefix inserted">+</span><span class="token line">	while( i-- ){
-</span><span class="token prefix inserted">+</span><span class="token line">		var r = _config.restrictions[i],
-</span><span class="token prefix inserted">+</span><span class="token line">			not = r.charAt(0) == '!';
-</span><span class="token prefix inserted">+</span><span class="token line">			
-</span><span class="token prefix inserted">+</span><span class="token line">		if( not ) 
-</span><span class="token prefix inserted">+</span><span class="token line">			r = r.slice(1);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	var filter = location.search.slice(1);
-</span><span class="token prefix deleted">-</span><span class="token line">	if ( filter &amp;&amp; encodeURIComponent(name).indexOf(filter) == -1 )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if( name.indexOf(r) != -1 ){
-</span><span class="token prefix inserted">+</span><span class="token line">			pass = !not;
-</span><span class="token prefix inserted">+</span><span class="token line">			break;
-</span><span class="token prefix inserted">+</span><span class="token line">		}else if( not )
-</span><span class="token prefix inserted">+</span><span class="token line">			pass = true;
-</span><span class="token prefix inserted">+</span><span class="token line">	}
-</span><span class="token prefix inserted">+</span><span class="token line">	if( !pass ) 
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return;
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">	synchronize(function() {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2738/testrunner-getvars.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2738/testrunner-getvars.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

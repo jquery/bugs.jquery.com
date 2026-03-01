@@ -142,98 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax.js
-===================================================================
-<span class="token coord">--- src/ajax.js	(revision 4156)</span>
-<span class="token coord">+++ src/ajax.js	(working copy)</span>
-<span class="token coord">@@ -184,14 +184,18 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// that a JSONP style response is executed properly
-</span><span class="token prefix unchanged"> </span><span class="token line">			s.dataType = "script";
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			function jsonpEnd() {
-</span><span class="token prefix inserted">+</span><span class="token line">				// Garbage collect
-</span><span class="token prefix inserted">+</span><span class="token line">				window[ jsonp ] = undefined;
-</span><span class="token prefix inserted">+</span><span class="token line">				try{ delete window[ jsonp ]; } catch(e){}
-</span><span class="token prefix inserted">+</span><span class="token line">			}
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// Handle JSONP-style loading
-</span><span class="token prefix unchanged"> </span><span class="token line">			window[ jsonp ] = function(tmp){
-</span><span class="token prefix unchanged"> </span><span class="token line">				data = tmp;
-</span><span class="token prefix unchanged"> </span><span class="token line">				success();
-</span><span class="token prefix unchanged"> </span><span class="token line">				complete();
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				// Garbage collect
-</span><span class="token prefix deleted">-</span><span class="token line">				window[ jsonp ] = undefined;
-</span><span class="token prefix deleted">-</span><span class="token line">				try{ delete window[ jsonp ]; } catch(e){}
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				jsonpEnd();
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			};
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -221,26 +225,45 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// If we're requesting a remote document
-</span><span class="token prefix unchanged"> </span><span class="token line">		// and trying to load JSON or Script with a GET
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( (!s.url.indexOf("http") || !s.url.indexOf("//")) &amp;&amp; ( s.dataType == "script" || s.dataType =="json" ) &amp;&amp; s.type.toLowerCase() == "get" ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			var head = document.getElementsByTagName("head")[0];
-</span><span class="token prefix deleted">-</span><span class="token line">			var script = document.createElement("script");
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			var head = document.getElementsByTagName("head")[0],
-</span><span class="token prefix inserted">+</span><span class="token line">				script = document.createElement("script"),
-</span><span class="token prefix inserted">+</span><span class="token line">				done = false;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			script.src = s.url;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			// Handle Script loading
-</span><span class="token prefix deleted">-</span><span class="token line">			if ( !jsonp ) {
-</span><span class="token prefix deleted">-</span><span class="token line">				var done = false;
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">				// Attach handlers for all browsers
-</span><span class="token prefix deleted">-</span><span class="token line">				script.onload = script.onreadystatechange = function(){
-</span><span class="token prefix deleted">-</span><span class="token line">					if ( !done &amp;&amp; (!this.readyState || 
-</span><span class="token prefix deleted">-</span><span class="token line">							this.readyState == "loaded" || this.readyState == "complete") ) {
-</span><span class="token prefix deleted">-</span><span class="token line">						done = true;
-</span><span class="token prefix deleted">-</span><span class="token line">						success();
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			function scriptTagEnd(how) {
-</span><span class="token prefix inserted">+</span><span class="token line">				if (!done) {
-</span><span class="token prefix inserted">+</span><span class="token line">					done = true;
-</span><span class="token prefix inserted">+</span><span class="token line">					status = how;
-</span><span class="token prefix inserted">+</span><span class="token line">					// don't do success/complete calls on jsonp success
-</span><span class="token prefix inserted">+</span><span class="token line">					if (!jsonp || status != "success") {
-</span><span class="token prefix inserted">+</span><span class="token line">						if (status == "success")
-</span><span class="token prefix inserted">+</span><span class="token line">							success();
-</span><span class="token prefix inserted">+</span><span class="token line">						else {
-</span><span class="token prefix inserted">+</span><span class="token line">							jQuery.handleError(s, null, status);
-</span><span class="token prefix inserted">+</span><span class="token line">							if (jsonp)
-</span><span class="token prefix inserted">+</span><span class="token line">								jsonpEnd();
-</span><span class="token prefix inserted">+</span><span class="token line">						}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">						complete();
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">						head.removeChild( script );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					}
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				};
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">					head.removeChild( script );
-</span><span class="token prefix inserted">+</span><span class="token line">				}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			// Attach handlers for all browsers
-</span><span class="token prefix inserted">+</span><span class="token line">			script.onload = script.onreadystatechange = function(){
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( !done &amp;&amp; (!this.readyState || 
-</span><span class="token prefix inserted">+</span><span class="token line">						this.readyState == "loaded" || this.readyState == "complete") )
-</span><span class="token prefix inserted">+</span><span class="token line">					// opera sets the .text value so we can test that, the other browsers don't so have assume success
-</span><span class="token prefix inserted">+</span><span class="token line">					scriptTagEnd(this.text || !jQuery.browser.opera ? "success" : "error");
-</span><span class="token prefix inserted">+</span><span class="token line">			};
-</span><span class="token prefix inserted">+</span><span class="token line">			script.onerror = function(){
-</span><span class="token prefix inserted">+</span><span class="token line">				scriptTagEnd("error");
-</span><span class="token prefix inserted">+</span><span class="token line">			};
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">			if (s.timeout)
-</span><span class="token prefix inserted">+</span><span class="token line">				setTimeout(function(){ scriptTagEnd("timeout"); }, s.timeout);
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			head.appendChild(script);
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// We handle everything using the script element injection</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1768/1768.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1768/1768.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

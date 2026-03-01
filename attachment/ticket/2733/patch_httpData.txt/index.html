@@ -142,30 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">Index: src/ajax.js
-===================================================================
---- src/ajax.js	(revision 5709)
-+++ src/ajax.js	(working copy)
-@@ -473,11 +473,11 @@
- 			data = filter( data, type );
- 
- 		// If the type is "script", eval it in global context
--		if ( type == "script" )
-+		if ( type == "script" || (ct &amp;&amp; ct.indexOf("javascript") >= 0 ))
- 			jQuery.globalEval( data );
- 
- 		// Get the JavaScript object, if JSON is used.
--		if ( type == "json" )
-+		if ( type == "json"  || (ct &amp;&amp; ct.indexOf("json") >= 0 ))
- 			data = eval("(" + data + ")");
- 
- 		return data;</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2733/patch_httpData.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2733/patch_httpData.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

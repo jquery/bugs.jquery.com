@@ -142,33 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- /home/he54189/tmp/jquery-validate/jquery.validate.js	2008-08-07 15:17:42.000000000 +0800
-+++ jquery.validate.js	2008-09-23 09:31:57.000000000 +0800
-@@ -197,6 +197,7 @@
- 		errorContainer: $( [] ),
- 		errorLabelContainer: $( [] ),
- 		onsubmit: true,
-+        validateHidden: true,
- 		ignore: [],
- 		onfocusin: function(element) {
- 			this.lastActive = element;
-@@ -305,7 +306,9 @@
- 		checkForm: function() {
- 			this.prepareForm();
- 			for ( var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++ ) {
--				this.check( elements[i] );
-+                if (this.settings.validateHidden || $(elements[i]).parents().filter(':hidden').length == 0) {
-+    				this.check( elements[i] );
-+                }
- 			}
- 			return this.valid(); 
- 		},</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3394/jquery.validate.hidden.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3394/jquery.validate.hidden.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,40 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">From 915e3233d1ac0c6b3069ca279b09b4428d24dc3a Mon Sep 17 00:00:00 2001
-From: Jesse Hallett <jesse.hallett@jivesoftware.com>
-Date: Mon, 13 Sep 2010 16:36:04 -0700
-Subject: [PATCH] Workaround for lack of call() method in IE
-
----
- src/ajax.js |    6 +++++-
- 1 files changed, 5 insertions(+), 1 deletions(-)
-
-diff --git a/src/ajax.js b/src/ajax.js
-index 78d9b24..a662f65 100644
---- a/src/ajax.js
-+++ b/src/ajax.js
-@@ -467,7 +467,11 @@ jQuery.extend({
- 			var oldAbort = xhr.abort;
- 			xhr.abort = function() {
- 				if ( xhr ) {
--					oldAbort.call( xhr );
-+					if (oldAbort.call) {
-+						oldAbort.call( xhr );
-+					} else {
-+						Function.prototype.call.call(oldAbort, xhr);
-+					}
- 				}
- 
- 				onreadystatechange( "abort" );
--- 
-1.7.1</jesse.hallett@jivesoftware.com></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/6498/0001-Workaround-for-lack-of-call-method-in-IE.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/6498/0001-Workaround-for-lack-of-call-method-in-IE.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

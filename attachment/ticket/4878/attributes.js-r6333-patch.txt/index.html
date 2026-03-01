@@ -142,25 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">101c101,103
-&lt; 				var values = jQuery.makeArray(value);
----
-> 				var values = jQuery.makeArray(value),
-> 					one = this.type == "select-one",
-> 					canSelect = true;
-104c106
-&lt; 					this.selected = (jQuery.inArray( this.value, values ) >= 0 ||
----
-> 					this.selected = canSelect &amp;&amp; (jQuery.inArray( this.value, values ) >= 0 ||
-105a108,109
-> 					if (this.selected &amp;&amp; one)
-> 						canSelect = false;</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4878/attributes.js-r6333-patch.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4878/attributes.js-r6333-patch.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

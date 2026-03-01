@@ -142,23 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- iautocompleter.js	2006-10-11 21:42:38.000000000 -0800
-+++ iautocompleter-fixed.js	2006-10-13 10:42:00.000000000 -0800
-@@ -81,7 +81,7 @@
- 					data: $.param(data),
- 					success: function(xml)
- 					{
--						subject.autoCFG.lastSuggestion = $('item',xml);
-+						subject.autoCFG.lastSuggestion = $('item',xml.responseXML);
- 						size = subject.autoCFG.lastSuggestion.size();
- 						if (size > 0) {
- 							var toWrite = '';</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/275/iautocompleter.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/275/iautocompleter.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -117,7 +117,7 @@
         <div id="jq-content" class="white-box">
           
 
-<div class="flex-column" data-pagefind-body="">
+<div class="flex-column" data-pagefind-body>
   
 
   <nav class="content-nav">
@@ -224,7 +224,7 @@
   </ul>
 </details>
 
-<details open="">
+<details open>
   <summary class="ticket-details-summary">Change History (8)</summary>
   
     <div class="ticket-change flex-column" id="comment:1">
@@ -588,7 +588,7 @@ By tomorrow Morning Indian Standard Time I will provide my Fiddler information. 
         
           
             <div class="ticket-comment-body">
-              <p>The link that I have provided do have fiddler information also. </p><p>But for reference I am again providing it here.</p><p>When I have this code</p><p>$.ajax({</p><p>    type: 'POST',</p><p>    //contentType: "application/json",</p><p>    url: 'http://localhost:16329/Hello', </p><p>    data: { name: 'norm' },</p><p>    dataType: 'json'</p><p>});</p><p>in Fiddler I can see following raw request</p><p>POST <a href="http://localhost:16329/Hello" class="ext-link"><span class="icon"></span>http://localhost:16329/Hello</a> HTTP/1.1</p><p>Host: localhost:16329</p><p>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:10.0.2) Gecko/20100101</p><p>Firefox/10.0.2</p><p>Accept: application/json, text/javascript, */*; q=0.01</p><p>Accept-Language: ru-ru,ru;q=0.8,en-us;q=0.5,en;q=0.3</p><p>Accept-Encoding: gzip, deflate</p><p>Connection: keep-alive</p><p>Content-Type: application/x-www-form-urlencoded; charset=UTF-8</p><p>Referer: <a href="http://localhost:14693/WebSite1/index.html</p><p>Content-Length: 9</p><p>Origin: <a href=" http:="" localhost:14693<="" p=""><p>Pragma: no-cache</p><p>Cache-Control: no-cache</p><p>name=Kiran</p><p>But what I'm trying is to set content-type from application/x-www-form-urlencoded to application/json. But this code</p><p>$.ajax({</p><p>    type: "POST",</p><p>    contentType: "application/json",</p><p>    url: 'http://localhost:16329/Hello',</p><p>    data: { name: 'norm' },</p><p>    dataType: "json"</p><p>});</p><p>Generates strange request (which I can see in Fiddler)</p><p>OPTIONS <a href="http://localhost:16329/Hello" class="ext-link"><span class="icon"></span>http://localhost:16329/Hello</a> HTTP/1.1</p><p>Host: localhost:16329</p><p>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:10.0.2) Gecko/20100101 Firefox/10.0.2</p><p>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</p><p>Accept-Language: ru-ru,ru;q=0.8,en-us;q=0.5,en;q=0.3</p><p>Accept-Encoding: gzip, deflate</p><p>Connection: keep-alive</p><p>Origin: <a href="http://localhost:14693</p><p>Access-Control-Request-Method: POST</p><p>Access-Control-Request-Headers: content-type</p><p>Pragma: no-cache</p><p>Cache-Control: no-cache</p><p>In the first inputs If I get Content-Type: application/json; charset=UTF-8 instead of Content-Type: application/x-www-form-urlencoded; charset=UTF-8</p><p>Then every thing will work properly.</p><p>By tomorrow Morning Indian Standard Time I will provide my Fiddler information. </p>
+              <p>The link that I have provided do have fiddler information also. </p><p>But for reference I am again providing it here.</p><p>When I have this code</p><p>$.ajax({</p><p>    type: 'POST',</p><p>    //contentType: "application/json",</p><p>    url: 'http://localhost:16329/Hello', </p><p>    data: { name: 'norm' },</p><p>    dataType: 'json'</p><p>});</p><p>in Fiddler I can see following raw request</p><p>POST <a href="http://localhost:16329/Hello" class="ext-link"><span class="icon"></span>http://localhost:16329/Hello</a> HTTP/1.1</p><p>Host: localhost:16329</p><p>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:10.0.2) Gecko/20100101</p><p>Firefox/10.0.2</p><p>Accept: application/json, text/javascript, */*; q=0.01</p><p>Accept-Language: ru-ru,ru;q=0.8,en-us;q=0.5,en;q=0.3</p><p>Accept-Encoding: gzip, deflate</p><p>Connection: keep-alive</p><p>Content-Type: application/x-www-form-urlencoded; charset=UTF-8</p><p>Referer: <a href="http://localhost:14693/WebSite1/index.html</p><p>Content-Length: 9</p><p>Origin: <a href=" http: localhost:14693< p><p>Pragma: no-cache</p><p>Cache-Control: no-cache</p><p>name=Kiran</p><p>But what I'm trying is to set content-type from application/x-www-form-urlencoded to application/json. But this code</p><p>$.ajax({</p><p>    type: "POST",</p><p>    contentType: "application/json",</p><p>    url: 'http://localhost:16329/Hello',</p><p>    data: { name: 'norm' },</p><p>    dataType: "json"</p><p>});</p><p>Generates strange request (which I can see in Fiddler)</p><p>OPTIONS <a href="http://localhost:16329/Hello" class="ext-link"><span class="icon"></span>http://localhost:16329/Hello</a> HTTP/1.1</p><p>Host: localhost:16329</p><p>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:10.0.2) Gecko/20100101 Firefox/10.0.2</p><p>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</p><p>Accept-Language: ru-ru,ru;q=0.8,en-us;q=0.5,en;q=0.3</p><p>Accept-Encoding: gzip, deflate</p><p>Connection: keep-alive</p><p>Origin: <a href="http://localhost:14693</p><p>Access-Control-Request-Method: POST</p><p>Access-Control-Request-Headers: content-type</p><p>Pragma: no-cache</p><p>Cache-Control: no-cache</p><p>In the first inputs If I get Content-Type: application/json; charset=UTF-8 instead of Content-Type: application/x-www-form-urlencoded; charset=UTF-8</p><p>Then every thing will work properly.</p><p>By tomorrow Morning Indian Standard Time I will provide my Fiddler information. </p>
             </div>
           
         
@@ -597,7 +597,7 @@ By tomorrow Morning Indian Standard Time I will provide my Fiddler information. 
       </div>
     </div>
   
-    <div class=" ticket-change="" flex-column"="" id="comment:4">
+    <div class=" ticket-change flex-column" id="comment:4">
       <h3 class="flex-row flex-between-start ticket-change-header">
         <span>Changed April 09, 2013 05:06PM UTC by <span class="author">dmethvin</span></span>
         <a class="ticket-change-link" href="#comment:4">comment:4</a>
@@ -719,7 +719,7 @@ By tomorrow Morning Indian Standard Time I will provide my Fiddler information. 
       </div>
     </div>
   
-    <div class=" ticket-change="" flex-column"="" id="comment:8">
+    <div class=" ticket-change flex-column" id="comment:8">
       <h3 class="flex-row flex-between-start ticket-change-header">
         <span>Changed April 09, 2013 05:22PM UTC by <span class="author">KiranKumarT</span></span>
         <a class="ticket-change-link" href="#comment:8">comment:8</a>

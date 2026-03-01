@@ -140,39 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: D:/workspace/jQuery/ui/ui.tabs.js
-===================================================================
---- D:/workspace/jQuery/ui/ui.tabs.js	(revision 4815)
-+++ D:/workspace/jQuery/ui/ui.tabs.js	(working copy)
-@@ -169,7 +169,11 @@
-                             return false; // break
-                         }
-                     } else if (o.cookie) {
--                        var index = parseInt($.cookie('ui-tabs' + $.data(self.element)),10);
-+                        if(o.cookie.cookieName)
-+                          var index = parseInt($.cookie('ui-tabs-' + o.cookie.cookieName),10);
-+                        else
-+                          var index = parseInt($.cookie('ui-tabs' + $.data(self.element)),10);
-+                          
-                         if (index && self.$tabs[index]) {
-                             o.selected = index;
-                             return false; // break
-@@ -296,6 +300,9 @@
-                 }
- 
-                 if (o.cookie)
-+                  if(o.cookie.cookieName)
-+                    $.cookie('ui-tabs-' + o.cookie.cookieName, self.options.selected, o.cookie);
-+                  else
-                     $.cookie('ui-tabs' + $.data(self.element), self.options.selected, o.cookie);
- 
-                 // stop possibly running animations</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2393/ui.tabs_cookie_name.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2393/ui.tabs_cookie_name.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,56 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/ajax.js
-===================================================================
-<span class="token coord">--- test/unit/ajax.js	(revision 4191)</span>
-<span class="token coord">+++ test/unit/ajax.js	(working copy)</span>
-<span class="token coord">@@ -449,7 +449,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	$.ajax({
-</span><span class="token prefix unchanged"> </span><span class="token line">		url: "data/jsonp.php",
-</span><span class="token prefix unchanged"> </span><span class="token line">		dataType: "jsonp",
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		data: { callback: "?" },
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		jsonp: "callback",
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		success: function(data){
-</span><span class="token prefix unchanged"> </span><span class="token line">			ok( data.data, "JSON results returned (GET, data obj callback)" );
-</span><span class="token prefix unchanged"> </span><span class="token line">			plus();
-</span></span><span class="token coord">@@ -492,7 +492,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	$.ajax({
-</span><span class="token prefix unchanged"> </span><span class="token line">		type: "POST",
-</span><span class="token prefix unchanged"> </span><span class="token line">		url: "data/jsonp.php",
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		data: { callback: "?" },
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		jsonp: "callback",
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		dataType: "jsonp",
-</span><span class="token prefix unchanged"> </span><span class="token line">		success: function(data){
-</span><span class="token prefix unchanged"> </span><span class="token line">			ok( data.data, "JSON results returned (POST, data obj callback)" );
-</span></span><span class="token coord">@@ -558,7 +558,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	$.ajax({
-</span><span class="token prefix unchanged"> </span><span class="token line">		url: base + "data/jsonp.php",
-</span><span class="token prefix unchanged"> </span><span class="token line">		dataType: "jsonp",
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		data: { callback: "?" },
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		jsonp: "callback",
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		success: function(data){
-</span><span class="token prefix unchanged"> </span><span class="token line">			ok( data.data, "JSON results returned (GET, data obj callback)" );
-</span><span class="token prefix unchanged"> </span><span class="token line">			plus();
-</span></span>Index: src/ajax.js
-===================================================================
-<span class="token coord">--- src/ajax.js	(revision 4191)</span>
-<span class="token coord">+++ src/ajax.js	(working copy)</span>
-<span class="token coord">@@ -151,7 +151,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	lastModified: {},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	ajax: function( s ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var jsonp, jsre = /=(\?|%3F)/g, status, data;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var jsonp, jsre = /=\?/g, status, data;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Extend the settings, but re-extend 's' so that it can be
-</span><span class="token prefix unchanged"> </span><span class="token line">		// checked again later (in the test suite, specifically)</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2020/2020-2.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2020/2020-2.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

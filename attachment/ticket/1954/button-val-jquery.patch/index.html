@@ -142,26 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: core.js
-===================================================================
---- core.js	(revision 5949)
-+++ core.js	(working copy)
-@@ -391,6 +391,9 @@
- 
- 					return values;				
- 				}
-+				
-+				if ( jQuery.browser.msie && jQuery.nodeName( elem, 'button' ) )
-+					return elem.getAttributeNode('value').value;
- 
- 				// Everything else, we just grab the value
- 				return (elem.value || "").replace(/\r/g, "");</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1954/button-val-jquery.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1954/button-val-jquery.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,46 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 5713)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -293,11 +293,27 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Need to set the expando to null on the cloned set if it exists
-</span><span class="token prefix unchanged"> </span><span class="token line">		// removeData doesn't work here, IE removes it from the original as well
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		// this is primarily for IE but the data expando shouldn't be copied over in any browser
-</span><span class="token prefix deleted">-</span><span class="token line">		var clone = ret.find("*").andSelf().each(function(){
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		// this is primarily for IE but the data expando shouldn't be copied over in any browser.
-</span><span class="token prefix inserted">+</span><span class="token line">		
-</span><span class="token prefix inserted">+</span><span class="token line">		// Because andSelf() calls add() which uses unique(), which will then
-</span><span class="token prefix inserted">+</span><span class="token line">		// potentially strip out some elements because of our unclean expandos,
-</span><span class="token prefix inserted">+</span><span class="token line">		// we have to clean the expandos separately instead of using one call
-</span><span class="token prefix inserted">+</span><span class="token line">		/*var clone = ret.find("*").andSelf().each(function(){
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			if ( this[ expando ] != undefined )
-</span><span class="token prefix unchanged"> </span><span class="token line">				this[ expando ] = null;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		});*/
-</span><span class="token prefix inserted">+</span><span class="token line">		
-</span><span class="token prefix inserted">+</span><span class="token line">		ret.find('*').each(function(){
-</span><span class="token prefix inserted">+</span><span class="token line">			if ( this[ expando ] != undefined )
-</span><span class="token prefix inserted">+</span><span class="token line">				this[ expando ] = null;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		});
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		
-</span><span class="token prefix inserted">+</span><span class="token line">		ret.each(function(){
-</span><span class="token prefix inserted">+</span><span class="token line">			if ( this[ expando ] != undefined )
-</span><span class="token prefix inserted">+</span><span class="token line">				this[ expando ] = null;
-</span><span class="token prefix inserted">+</span><span class="token line">		});
-</span><span class="token prefix inserted">+</span><span class="token line">		
-</span><span class="token prefix inserted">+</span><span class="token line">		var clone = ret.find('*').andSelf();
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Copy the events from the original to the clone
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( events === true )</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2973/ie6-clone-events-patch.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2973/ie6-clone-events-patch.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

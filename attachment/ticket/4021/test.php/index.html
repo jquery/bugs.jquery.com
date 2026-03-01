@@ -140,72 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-php" tabindex="0"><code class="language-php"><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token constant">DOCTYPE</span> html <span class="token keyword">PUBLIC</span> <span class="token string double-quoted-string">"-//W3C//DTD XHTML 1.0 Strict//EN"</span>
-    <span class="token string double-quoted-string">"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"</span><span class="token operator">></span>
-
-
-
-<span class="token operator">&lt;</span>html xmlns<span class="token operator">=</span><span class="token string double-quoted-string">"http://www.w3.org/1999/xhtml"</span><span class="token operator">></span>
-
-<span class="token operator">&lt;</span>head<span class="token operator">></span>
-  <span class="token operator">&lt;</span>title<span class="token operator">></span>test<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">></span>
-  <span class="token operator">&lt;</span>script src<span class="token operator">=</span><span class="token string double-quoted-string">"jquery-1-2-6.js"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
-  <span class="token operator">&lt;</span>script<span class="token operator">></span>
-    <span class="token function">jQuery</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token operator">.</span><span class="token function">ready</span><span class="token punctuation">(</span>
-   <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-   <span class="token punctuation">{</span>
-     <span class="token function">jQuery</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'#disablebtn'</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token function">click</span><span class="token punctuation">(</span>
-         <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-         <span class="token punctuation">{</span>
-            <span class="token function">jQuery</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'#mytable input[@type=radio]'</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"disabled"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">"disabled"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
-         <span class="token punctuation">}</span>
-     <span class="token punctuation">)</span><span class="token comment">/*click*/</span>
-   <span class="token punctuation">}</span><span class="token comment">/*function*/</span>
-<span class="token punctuation">)</span><span class="token comment">/*ready*/</span>
-
-<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">></span>
-
-<span class="token operator">&lt;</span>body<span class="token operator">></span>
-
-
-
- <span class="token operator">&lt;</span>form<span class="token operator">></span>
-    <span class="token operator">&lt;</span>table border<span class="token operator">=</span><span class="token string double-quoted-string">"1"</span> id <span class="token operator">=</span> <span class="token string double-quoted-string">"mytable"</span><span class="token operator">></span>
-    <span class="token operator">&lt;</span>tbody<span class="token operator">></span>
-
-      <span class="token operator">&lt;</span>tr<span class="token operator">></span>
-        <span class="token operator">&lt;</span>td<span class="token operator">></span><span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string double-quoted-string">"radio"</span> id<span class="token operator">=</span><span class="token string double-quoted-string">"item"</span> <span class="token operator">/</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">></span>
-        <span class="token operator">&lt;</span>td<span class="token operator">></span><span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string double-quoted-string">"text"</span> id<span class="token operator">=</span><span class="token string double-quoted-string">"text11"</span> value<span class="token operator">=</span><span class="token string double-quoted-string">"text11"</span> <span class="token operator">/</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">></span>
-        <span class="token operator">&lt;</span>td<span class="token operator">></span><span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string double-quoted-string">"text"</span> id<span class="token operator">=</span><span class="token string double-quoted-string">"text12"</span> value<span class="token operator">=</span><span class="token string double-quoted-string">"text12"</span> <span class="token operator">/</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">></span>
-      <span class="token operator">&lt;</span><span class="token operator">/</span>tr<span class="token operator">></span>
-
-      <span class="token operator">&lt;</span>tr<span class="token operator">></span>
-        <span class="token operator">&lt;</span>td<span class="token operator">></span><span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string double-quoted-string">"radio"</span> id<span class="token operator">=</span><span class="token string double-quoted-string">"item"</span> <span class="token operator">/</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">></span>
-        <span class="token operator">&lt;</span>td<span class="token operator">></span><span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string double-quoted-string">"text"</span> id<span class="token operator">=</span><span class="token string double-quoted-string">"text21"</span> value<span class="token operator">=</span><span class="token string double-quoted-string">"text21"</span> <span class="token operator">/</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">></span>
-        <span class="token operator">&lt;</span>td<span class="token operator">></span><span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string double-quoted-string">"text"</span> id<span class="token operator">=</span><span class="token string double-quoted-string">"text22"</span> value<span class="token operator">=</span><span class="token string double-quoted-string">"text22"</span> <span class="token operator">/</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">></span>
-      <span class="token operator">&lt;</span><span class="token operator">/</span>tr<span class="token operator">></span>
-
-      <span class="token operator">&lt;</span>tr<span class="token operator">></span>
-        <span class="token operator">&lt;</span>td<span class="token operator">></span><span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string double-quoted-string">"radio"</span> id<span class="token operator">=</span><span class="token string double-quoted-string">"item"</span> <span class="token operator">/</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">></span>
-        <span class="token operator">&lt;</span>td<span class="token operator">></span><span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string double-quoted-string">"text"</span> id<span class="token operator">=</span><span class="token string double-quoted-string">"text31"</span> value<span class="token operator">=</span><span class="token string double-quoted-string">"text31"</span> <span class="token operator">/</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">></span>
-        <span class="token operator">&lt;</span>td<span class="token operator">></span><span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string double-quoted-string">"text"</span> id<span class="token operator">=</span><span class="token string double-quoted-string">"text32"</span> value<span class="token operator">=</span><span class="token string double-quoted-string">"text32"</span> <span class="token operator">/</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">></span>
-      <span class="token operator">&lt;</span><span class="token operator">/</span>tr<span class="token operator">></span>
-
-    <span class="token operator">&lt;</span><span class="token operator">/</span>tbody<span class="token operator">></span>
-    <span class="token operator">&lt;</span><span class="token operator">/</span>table<span class="token operator">></span>
-    <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string double-quoted-string">"button"</span> id<span class="token operator">=</span><span class="token string double-quoted-string">"disablebtn"</span> value<span class="token operator">=</span><span class="token string double-quoted-string">"Disable"</span> <span class="token operator">/</span><span class="token operator">></span>
- <span class="token operator">&lt;</span><span class="token operator">/</span>form<span class="token operator">></span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">></span>
-
-<span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">></span></code></pre>
+      <pre class="language-php" tabindex="0"><code class="language-php"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4021/test.php">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4021/test.php">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -140,69 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: test/unit/event.js
-===================================================================
---- test/unit/event.js	(revision 5753)
-+++ test/unit/event.js	(working copy)
-@@ -182,7 +182,7 @@
- });
- 
- test("trigger(event, [data], [fn])", function() {
--	expect(67);
-+	expect(72);
- 
- 	var handler = function(event, a, b, c) {
- 		equals( event.type, "click", "check passed data" );
-@@ -192,14 +192,16 @@
- 		return "test";
- 	};
- 
--	var handler2 = function(a, b, c) {
-+	var handler2 = function(event, a, b, c) {
-+		equals( event.type, "click", "check passed data" );
- 		equals( a, 1, "check passed data" );
- 		equals( b, "2", "check passed data" );
- 		equals( c, "abc", "check passed data" );
- 		return false;
- 	};
- 
--	var handler3 = function(a, b, c, v) {
-+	var handler3 = function(event, a, b, c, v) {
-+		equals( event.type, "click", "check passed data" );
- 		equals( a, 1, "check passed data" );
- 		equals( b, "2", "check passed data" );
- 		equals( c, "abc", "check passed data" );
-@@ -207,7 +209,8 @@
- 		return "newVal";
- 	};
- 
--	var handler4 = function(a, b, c, v) {
-+	var handler4 = function(event, a, b, c, v) {
-+		equals( event.type, "click", "check passed data" );
- 		equals( a, 1, "check passed data" );
- 		equals( b, "2", "check passed data" );
- 		equals( c, "abc", "check passed data" );
-Index: src/event.js
-===================================================================
---- src/event.js	(revision 5753)
-+++ src/event.js	(working copy)
-@@ -206,10 +206,6 @@
- 			if ( (!fn || (jQuery.nodeName(elem, 'a') && type == "click")) && elem["on"+type] && elem["on"+type].apply( elem, data ) === false )
- 				val = false;
- 
--			// Extra functions don't get the custom event object
--			if ( event )
--				data.shift();
--
- 			// Handle triggering of extra function
- 			if ( extra && jQuery.isFunction( extra ) ) {
- 				// call the extra function and tack the current return value on the end for possible inspection</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3096/event-extra.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3096/event-extra.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

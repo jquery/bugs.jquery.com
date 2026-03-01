@@ -142,32 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- core.js	2009-06-17 15:39:15.000000000 -0700</span>
-<span class="token coord">+++ core.js	2009-06-17 15:38:14.000000000 -0700</span>
-<span class="token coord">@@ -659,7 +659,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		var name, i = 0, length = object.length;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( args ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( length === undefined ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( length === undefined || object.constructor == Function ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				for ( name in object )
-</span><span class="token prefix unchanged"> </span><span class="token line">					if ( callback.apply( object[ name ], args ) === false )
-</span><span class="token prefix unchanged"> </span><span class="token line">						break;
-</span></span><span class="token coord">@@ -670,7 +670,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// A special, fast, case for the most common use of each
-</span><span class="token prefix unchanged"> </span><span class="token line">		} else {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( length === undefined ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( length === undefined || object.constructor == Function ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				for ( name in object )
-</span><span class="token prefix unchanged"> </span><span class="token line">					if ( callback.call( object[ name ], name, object[ name ] ) === false )
-</span><span class="token prefix unchanged"> </span><span class="token line">						break;</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2827/t2827.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2827/t2827.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

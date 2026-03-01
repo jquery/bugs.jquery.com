@@ -142,13 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event/event.js===================================================================<span class="token coord">--- File src/event/event.js (revision 1560)</span><span class="token coord">+++ File src/event/event.js (working copy)</span><span class="token coord">@@ -530,6, +530,9 @@</span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">             // Remove event lisenter to avoid memory leak </span><span class="token prefix unchanged"> </span><span class="token line">             if ( jQuery.browser.mozilla || jQuery.browser.opera ) </span><span class="token prefix unchanged"> </span><span class="token line">                 document.removeEventListener( "DOMContentLoaded", jQuery.ready, false ); </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">              </span><span class="token prefix inserted">+</span><span class="token line">             // Remove script element used by IE hack </span><span class="token prefix inserted">+</span><span class="token line">             jQuery(window).load(function(){ jQuery("#__ie_init").remove(); }); </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">         } </span><span class="token prefix unchanged"> </span><span class="token line">     } </span><span class="token prefix unchanged"> </span><span class="token line"> }); </span></span><span class="token coord">@@ -907,7, +910,6 @@</span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">         if ( script )  </span><span class="token prefix unchanged"> </span><span class="token line">             script.onreadystatechange = function() { </span><span class="token prefix unchanged"> </span><span class="token line">                 if ( this.readyState != "complete" ) return; </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">                 this.parentNode.removeChild( this ); </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">                 jQuery.ready(); </span><span class="token prefix unchanged"> </span><span class="token line">             };</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1061/event.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1061/event.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

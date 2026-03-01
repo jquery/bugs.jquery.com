@@ -142,27 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: src/event.js
-===================================================================
---- src/event.js	(revision 5143)
-+++ src/event.js	(working copy)
-@@ -316,8 +316,8 @@
- 		// Calculate pageX/Y if missing and clientX/Y available
- 		if ( event.pageX == null && event.clientX != null ) {
- 			var doc = document.documentElement, body = document.body;
--			event.pageX = event.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc.clientLeft || 0);
--			event.pageY = event.clientY + (doc && doc.scrollTop || body && body.scrollTop || 0) - (doc.clientTop || 0);
-+			event.pageX = event.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc && doc.clientLeft || 0);
-+			event.pageY = event.clientY + (doc && doc.scrollTop || body && body.scrollTop || 0) - (doc && doc.clientTop || 0);
- 		}
- 			
- 		// Add which for key events</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2620/event-2620.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2620/event-2620.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

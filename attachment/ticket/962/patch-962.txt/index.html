@@ -142,56 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">Index: src/jquery/coreTest.js
-===================================================================
---- src/jquery/coreTest.js	(revision 1434)
-+++ src/jquery/coreTest.js	(working copy)
-@@ -213,7 +213,7 @@
- });
- 
- test("append(String|Element|Array&amp;lt;Element&amp;gt;|jQuery)", function() {
--	expect(10);
-+	expect(11);
- 	var defaultText = 'Try them out:'
- 	var result = $('#first').append('&lt;b>buga&lt;/b>');
- 	ok( result.text() == defaultText + 'buga', 'Check if text appending works' );
-@@ -239,6 +239,10 @@
- 	ok( $("#sap")[0].innerHTML.match( /5$/ ), "Check for appending a number" );
- 
- 	reset();
-+	$("#sap").append( " text with spaces " );
-+	ok( $("#sap")[0].innerHTML.match(/ text with spaces $/), "Check for appending text with spaces" );
-+
-+	reset();
- 	ok( $("#sap").append([]), "Check for appending an empty array." );
- 	ok( $("#sap").append(""), "Check for appending an empty string." );
- 	ok( $("#sap").append(document.getElementsByTagName("foo")), "Check for appending an empty nodelist." );
-@@ -698,4 +702,4 @@
- 	    //console.log( close[0]); // it's the &lt;a> and not a &lt;span> element
- 	    return false;
- 	}).click();
--});
-\ No newline at end of file
-+});
-Index: src/jquery/jquery.js
-===================================================================
---- src/jquery/jquery.js	(revision 1434)
-+++ src/jquery/jquery.js	(working copy)
-@@ -1445,7 +1445,7 @@
- 					[0,"",""];
- 
- 				// Go to html and back, then peel off extra wrappers
--				div.innerHTML = wrap[1] + s + wrap[2];
-+				div.innerHTML = wrap[1] + arg + wrap[2];
- 				
- 				// Move to the right depth
- 				while ( wrap[0]-- )</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/962/patch-962.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/962/patch-962.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

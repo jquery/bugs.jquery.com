@@ -140,25 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery/src/ajax.js
-===================================================================
---- jquery/src/ajax.js	(revision 5914)
-+++ jquery/src/ajax.js	(working copy)
-@@ -446,7 +446,7 @@
- 	httpSuccess: function( xhr ) {
- 		try {
- 			// IE error sometimes returns 1223 when it should be 204 so treat it as success, see #1450
--			return !xhr.status && location.protocol == "file:" ||
-+			return !xhr.status && location.protocol !== "http:" && location.protocol !== "https:" ||
- 				( xhr.status >= 200 && xhr.status < 300 ) || xhr.status == 304 || xhr.status == 1223 ||
- 				jQuery.browser.safari && xhr.status == undefined;
- 		} catch(e){}</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3537/jquery-ajax.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3537/jquery-ajax.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

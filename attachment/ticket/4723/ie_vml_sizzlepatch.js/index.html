@@ -142,80 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">$</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
-	<span class="token keyword">var</span> isJQuery13 <span class="token operator">=</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">1\.3</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>$<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>jquery<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	
-	<span class="token keyword">if</span> <span class="token punctuation">(</span>isJQuery13 <span class="token operator">&amp;&amp;</span> $<span class="token punctuation">.</span>browser<span class="token punctuation">.</span>msie<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
-		<span class="token comment">// IE VML elements throw an error error instead of returning "undefined"</span>
-		<span class="token comment">// if non-existing attributes are accessed.</span>
-		<span class="token comment">// So we need to avoid direct attribute access by using "attributes" property.</span>
-
-		<span class="token comment">// IE document.getElementsByTagName(*) has the annoying habit to return comment elements</span>
-		<span class="token comment">// that lack the existence of "attributes" attribute.</span>
-		<span class="token comment">// So we need to assure that it really exists.</span>
-		
-		<span class="token keyword">var</span> Sizzle <span class="token operator">=</span> $<span class="token punctuation">.</span>find<span class="token punctuation">;</span>
-
-		<span class="token keyword">var</span> <span class="token function-variable function">attr</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem<span class="token punctuation">,</span> att_name</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			<span class="token keyword">return</span> <span class="token punctuation">(</span>elem<span class="token punctuation">.</span>attributes <span class="token operator">?</span> elem<span class="token punctuation">.</span>attributes<span class="token punctuation">[</span>att_name<span class="token punctuation">]</span> <span class="token operator">:</span> elem<span class="token punctuation">[</span>att_name<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token punctuation">}</span><span class="token punctuation">;</span>
-		
-		$<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span>Sizzle<span class="token punctuation">.</span>selectors<span class="token punctuation">.</span>filters<span class="token punctuation">,</span> <span class="token punctuation">{</span>
-		
-			<span class="token function-variable function">enabled</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-				<span class="token keyword">return</span> <span class="token boolean">false</span> <span class="token operator">===</span> <span class="token function">attr</span><span class="token punctuation">(</span>elem<span class="token punctuation">,</span> <span class="token string">"disabled"</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token string">"hidden"</span> <span class="token operator">!==</span> <span class="token function">attr</span><span class="token punctuation">(</span>elem<span class="token punctuation">,</span> <span class="token string">"type"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-			<span class="token function-variable function">disabled</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-				<span class="token keyword">return</span> <span class="token boolean">true</span> <span class="token operator">===</span> <span class="token function">attr</span><span class="token punctuation">(</span>elem<span class="token punctuation">,</span> <span class="token string">"disabled"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-			<span class="token function-variable function">checked</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-				<span class="token keyword">return</span> <span class="token boolean">true</span> <span class="token operator">===</span> <span class="token function">attr</span><span class="token punctuation">(</span>elem<span class="token punctuation">,</span> <span class="token string">"checked"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-			<span class="token function-variable function">selected</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-				<span class="token comment">// Accessing this property makes selected-by-default</span>
-				<span class="token comment">// options in Safari work properly</span>
-				elem<span class="token punctuation">.</span>parentNode<span class="token punctuation">.</span>selectedIndex<span class="token punctuation">;</span>
-				<span class="token keyword">return</span> <span class="token boolean">true</span> <span class="token operator">===</span> <span class="token function">attr</span><span class="token punctuation">(</span>elem<span class="token punctuation">,</span> <span class="token string">"selected"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-			<span class="token function-variable function">text</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-				<span class="token keyword">return</span> <span class="token string">"text"</span> <span class="token operator">===</span> <span class="token function">attr</span><span class="token punctuation">(</span>elem<span class="token punctuation">,</span> <span class="token string">"type"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-			<span class="token function-variable function">radio</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-				<span class="token keyword">return</span> <span class="token string">"radio"</span> <span class="token operator">===</span> <span class="token function">attr</span><span class="token punctuation">(</span>elem<span class="token punctuation">,</span> <span class="token string">"type"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-			<span class="token function-variable function">checkbox</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-				<span class="token keyword">return</span> <span class="token string">"checkbox"</span> <span class="token operator">===</span> <span class="token function">attr</span><span class="token punctuation">(</span>elem<span class="token punctuation">,</span> <span class="token string">"type"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-			<span class="token function-variable function">file</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-				<span class="token keyword">return</span> <span class="token string">"file"</span> <span class="token operator">===</span> <span class="token function">attr</span><span class="token punctuation">(</span>elem<span class="token punctuation">,</span> <span class="token string">"type"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-			<span class="token function-variable function">password</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-				<span class="token keyword">return</span> <span class="token string">"password"</span> <span class="token operator">===</span> <span class="token function">attr</span><span class="token punctuation">(</span>elem<span class="token punctuation">,</span> <span class="token string">"type"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-			<span class="token function-variable function">submit</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-				<span class="token keyword">return</span> <span class="token string">"submit"</span> <span class="token operator">===</span> <span class="token function">attr</span><span class="token punctuation">(</span>elem<span class="token punctuation">,</span> <span class="token string">"type"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-			<span class="token function-variable function">image</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-				<span class="token keyword">return</span> <span class="token string">"image"</span> <span class="token operator">===</span> <span class="token function">attr</span><span class="token punctuation">(</span>elem<span class="token punctuation">,</span> <span class="token string">"type"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-			<span class="token function-variable function">reset</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-				<span class="token keyword">return</span> <span class="token string">"reset"</span> <span class="token operator">===</span> <span class="token function">attr</span><span class="token punctuation">(</span>elem<span class="token punctuation">,</span> <span class="token string">"type"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-			<span class="token function-variable function">button</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-				<span class="token keyword">return</span> <span class="token string">"button"</span> <span class="token operator">===</span> <span class="token function">attr</span><span class="token punctuation">(</span>elem<span class="token punctuation">,</span> <span class="token string">"type"</span><span class="token punctuation">)</span> <span class="token operator">||</span> elem<span class="token punctuation">.</span>nodeName<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">"BUTTON"</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span>
-			
-		<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>jQuery<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4723/ie_vml_sizzlepatch.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4723/ie_vml_sizzlepatch.js">Original Format</a>
   </div>
 </h1></div>
         </div>

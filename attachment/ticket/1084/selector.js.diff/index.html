@@ -142,43 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/selector/selector.js
-===================================================================
-<span class="token coord">--- src/selector/selector.js	(revision 1603)</span>
-<span class="token coord">+++ src/selector/selector.js	(working copy)</span>
-<span class="token coord">@@ -77,7 +77,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Match: :even, :last-chlid, #id, .class
-</span><span class="token prefix unchanged"> </span><span class="token line">		new RegExp("^([:.#]*)(" + 
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			( jQuery.chars = "(?:[\\w\u0128-\uFFFF*-]|\\\\.)" ) + "+)")
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			( jQuery.chars = "(?:[\\w\u0128-\uFFFF*_-]|\\\\.)" ) + "+)")
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	],
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	token: [
-</span></span><span class="token coord">@@ -149,7 +149,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// An attempt at speeding up child selectors that
-</span><span class="token prefix unchanged"> </span><span class="token line">			// point to a specific element tag
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			var re = /^[\/>]\s*([\w*-]+)/;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			var re = new RegExp("^[/>]\\s*(" + jQuery.chars + "+)");
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			var m = re.exec(t);
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( m ) {
-</span></span><span class="token coord">@@ -204,7 +204,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				} else {
-</span><span class="token prefix unchanged"> </span><span class="token line">					// Optomize for the case nodeName#idName
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					var re2 = new RegExp("^(\\w+)(#)(" + jQuery.chars + "+)");
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					var re2 = new RegExp("^(" + jQuery.chars + "+)(#)(" + jQuery.chars + "+)");
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					var m = re2.exec(t);
-</span><span class="token prefix unchanged"> </span><span class="token line">					
-</span><span class="token prefix unchanged"> </span><span class="token line">					// Re-organize the results, so that they're consistent</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1084/selector.js.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1084/selector.js.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

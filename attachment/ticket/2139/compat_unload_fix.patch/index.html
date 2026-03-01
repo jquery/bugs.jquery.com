@@ -142,25 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: compat-1.0.js
-===================================================================
---- compat-1.0.js	(revision 403)
-+++ compat-1.0.js	(working copy)
-@@ -32,7 +32,7 @@
-   var o = e[i];
-     
-   // Handle event unbinding
--  jQuery.fn["un"+o] = function(f){ return this.unbind(o, f); };
-+  jQuery.fn["un"+o] = jQuery.fn["un"+o] || function(f){ return this.unbind(o, f); };
-     
-   // Finally, handle events that only fire once
-   jQuery.fn["one"+o] = function(f){</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2139/compat_unload_fix.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2139/compat_unload_fix.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

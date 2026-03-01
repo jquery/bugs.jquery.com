@@ -142,39 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 5084)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -692,12 +692,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			windowData :
-</span><span class="token prefix unchanged"> </span><span class="token line">			elem;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var id = elem[ expando ];
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var id = elem[ expando ], ret;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// If we want to remove a specific section of the element's data
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( name ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( jQuery.cache[ id ] ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">				// Remove the section of cache data
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				ret = jQuery.cache[ id ][ name ];
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				delete jQuery.cache[ id ][ name ];
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				// If we've removed all the data, remove the element's cache
-</span></span><span class="token coord">@@ -725,6 +726,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// Completely remove the data cache
-</span><span class="token prefix unchanged"> </span><span class="token line">			delete jQuery.cache[ id ];
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		return ret;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// args is for internal usage only</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2411/removeData.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2411/removeData.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

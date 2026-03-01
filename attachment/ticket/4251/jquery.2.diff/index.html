@@ -142,69 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event.js
-===================================================================
-<span class="token coord">--- src/event.js	(revision 6262)</span>
-<span class="token coord">+++ src/event.js	(working copy)</span>
-<span class="token coord">@@ -34,11 +34,11 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Init the element's event structure
-</span><span class="token prefix unchanged"> </span><span class="token line">		var events = jQuery.data(elem, "events") || jQuery.data(elem, "events", {}),
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			handle = jQuery.data(elem, "handle") || jQuery.data(elem, "handle", function(){
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			handle = jQuery.data(elem, "handle") || jQuery.data(elem, "handle", function anon(){
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// Handle the second event of a trigger and when
-</span><span class="token prefix unchanged"> </span><span class="token line">				// an event is called after a page has unloaded
-</span><span class="token prefix unchanged"> </span><span class="token line">				return typeof jQuery !== "undefined" &amp;&amp; !jQuery.event.triggered ?
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					jQuery.event.handle.apply(arguments.callee.elem, arguments) :
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					jQuery.event.handle.apply(anon.elem, arguments) :
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					undefined;
-</span><span class="token prefix unchanged"> </span><span class="token line">			});
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Add elem as a property of the handle function
-</span></span><span class="token coord">@@ -625,8 +625,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	// Mozilla, Opera and webkit nightlies currently support this event
-</span><span class="token prefix unchanged"> </span><span class="token line">	if ( document.addEventListener ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Use the handy event callback
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		document.addEventListener( "DOMContentLoaded", function(){
-</span><span class="token prefix deleted">-</span><span class="token line">			document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		document.addEventListener( "DOMContentLoaded", function anon(){
-</span><span class="token prefix inserted">+</span><span class="token line">			document.removeEventListener( "DOMContentLoaded", anon, false );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			jQuery.ready();
-</span><span class="token prefix unchanged"> </span><span class="token line">		}, false );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -634,16 +634,16 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	} else if ( document.attachEvent ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		// ensure firing before onload,
-</span><span class="token prefix unchanged"> </span><span class="token line">		// maybe late but safe also for iframes
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		document.attachEvent("onreadystatechange", function(){
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		document.attachEvent("onreadystatechange", function anon(){
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			if ( document.readyState === "complete" ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				document.detachEvent( "onreadystatechange", arguments.callee );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				document.detachEvent( "onreadystatechange", anon );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				jQuery.ready();
-</span><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">		});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// If IE and not an iframe
-</span><span class="token prefix unchanged"> </span><span class="token line">		// continually check to see if the document is ready
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( document.documentElement.doScroll &amp;&amp; window == window.top ) (function(){
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( document.documentElement.doScroll &amp;&amp; window == window.top ) (function anon(){
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			if ( jQuery.isReady ) return;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			try {
-</span></span><span class="token coord">@@ -651,7 +651,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// http://javascript.nwbox.com/IEContentLoaded/
-</span><span class="token prefix unchanged"> </span><span class="token line">				document.documentElement.doScroll("left");
-</span><span class="token prefix unchanged"> </span><span class="token line">			} catch( error ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				setTimeout( arguments.callee, 0 );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				setTimeout( anon, 0 );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				return;
-</span><span class="token prefix unchanged"> </span><span class="token line">			}</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4251/jquery.2.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4251/jquery.2.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

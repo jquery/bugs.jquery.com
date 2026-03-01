@@ -142,25 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: src/fx.js
-===================================================================
---- src/fx.js	(revision 5946)
-+++ src/fx.js	(working copy)
-@@ -205,7 +205,7 @@
- 			complete: fn || !fn && easing ||
- 				jQuery.isFunction( speed ) && speed,
- 			duration: speed,
--			easing: fn && easing || easing && easing.constructor != Function && easing
-+			easing: fn && easing || easing && easing.constructor.toString() != Function.toString() && easing
- 		};
- 
- 		opt.duration = jQuery.fx.off ? 0 : typeof opt.duration == 'number' ? opt.duration :</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3601/Ticket #3601.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3601/Ticket #3601.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

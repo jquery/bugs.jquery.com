@@ -140,33 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery.autocomplete.js
-===================================================================
-<span class="token coord">--- jquery.autocomplete.js	(revision 5742)</span>
-<span class="token coord">+++ jquery.autocomplete.js	(working copy)</span>
-<span class="token coord">@@ -418,6 +418,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	var length = 0;
-</span><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">	function matchSubset(s, sub) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if (s.constructor === Function)	return false;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		if (!options.matchCase) 
-</span><span class="token prefix unchanged"> </span><span class="token line">			s = s.toLowerCase();
-</span><span class="token prefix unchanged"> </span><span class="token line">		var i = s.indexOf(sub);
-</span></span><span class="token coord">@@ -640,7 +641,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		list.empty();
-</span><span class="token prefix unchanged"> </span><span class="token line">		var max = limitNumberOfItems(data.length);
-</span><span class="token prefix unchanged"> </span><span class="token line">		for (var i=0; i &lt; max; i++) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if (!data[i])
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if (!data[i] || (data[i].value.constructor === Function))
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				continue;
-</span><span class="token prefix unchanged"> </span><span class="token line">			var formatted = options.formatItem(data[i].data, i+1, max, data[i].value, term);
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( formatted === false )</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3080/jquery.autocomplete.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3080/jquery.autocomplete.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

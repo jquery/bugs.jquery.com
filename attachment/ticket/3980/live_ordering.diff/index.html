@@ -142,116 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/event.js
-===================================================================
-<span class="token coord">--- test/unit/event.js	(revision 6162)</span>
-<span class="token coord">+++ test/unit/event.js	(working copy)</span>
-<span class="token coord">@@ -474,7 +474,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test(".live()/.die()", function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	expect(42);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	expect(46);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	var submit = 0, div = 0, livea = 0, liveb = 0;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -611,6 +611,29 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Cleanup
-</span><span class="token prefix unchanged"> </span><span class="token line">	jQuery("#nothiddendivchild").die("click");
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">	// Verify that .live() ocurs and cancel buble in the same order as
-</span><span class="token prefix inserted">+</span><span class="token line">	// we would expect .bind() and .click() without delegation
-</span><span class="token prefix inserted">+</span><span class="token line">	var lived = 0, livee = 0;
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	// bind one pair in one order
-</span><span class="token prefix inserted">+</span><span class="token line">	jQuery('span#liveSpan1 a').live('click', function(){ lived++; return false; });
-</span><span class="token prefix inserted">+</span><span class="token line">	jQuery('span#liveSpan1').live('click', function(){	livee++; });
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">	jQuery('span#liveSpan1 a').click();
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( lived, 1, "Verify that only one first handler occurred." );
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( livee, 0, "Verify that second handler don't." );
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">	// and one pair in inverse
-</span><span class="token prefix inserted">+</span><span class="token line">	jQuery('#liveHandlerOrder span#liveSpan2').live('click', function(){	livee++; });
-</span><span class="token prefix inserted">+</span><span class="token line">	jQuery('#liveHandlerOrder span#liveSpan2 a').live('click', function(){ lived++; return false; });
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">	jQuery('span#liveSpan2 a').click();
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( lived, 2, "Verify that only one first handler occurred." );
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( livee, 0, "Verify that second handler don't." );
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	// Cleanup
-</span><span class="token prefix inserted">+</span><span class="token line">	jQuery("span#liveSpan1 a, span#liveSpan1, span#liveSpan2 a, span#liveSpan2").die("click");
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">/*
-</span></span>Index: test/index.html
-===================================================================
-<span class="token coord">--- test/index.html	(revision 6162)</span>
-<span class="token coord">+++ test/index.html	(working copy)</span>
-<span class="token coord">@@ -213,6 +213,11 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			&lt;span>...&lt;/span>&lt;a id="linkWithNoHrefWithTabIndex" tabindex="1">Eat some funyuns&lt;/a>&lt;span>...&lt;/span>
-</span><span class="token prefix unchanged"> </span><span class="token line">			&lt;span>...&lt;/span>&lt;a id="linkWithNoHrefWithNegativeTabIndex" tabindex="-1">Eat some funyuns&lt;/a>&lt;span>...&lt;/span>
-</span><span class="token prefix unchanged"> </span><span class="token line">		&lt;/div>
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		
-</span><span class="token prefix inserted">+</span><span class="token line">		&lt;div id="liveHandlerOrder">
-</span><span class="token prefix inserted">+</span><span class="token line">			&lt;span id="liveSpan1">&lt;a href="#">&lt;/a>&lt;/span>
-</span><span class="token prefix inserted">+</span><span class="token line">			&lt;span id="liveSpan2">&lt;a href="#">&lt;/a>&lt;/span>
-</span><span class="token prefix inserted">+</span><span class="token line">		&lt;/div>
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	&lt;/div>
-</span><span class="token prefix unchanged"> </span><span class="token line">	&lt;/dl>
-</span><span class="token prefix unchanged"> </span><span class="token line">	
-</span></span>Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 6162)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -342,14 +342,17 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	closest: function( selector ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var pos = jQuery.expr.match.POS.test( selector ) ? jQuery(selector) : null;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var closer = 0, pos = jQuery.expr.match.POS.test( selector ) ? jQuery(selector) : null;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		return this.map(function(){
-</span><span class="token prefix unchanged"> </span><span class="token line">			var cur = this;
-</span><span class="token prefix unchanged"> </span><span class="token line">			while ( cur &amp;&amp; cur.ownerDocument ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( pos ? pos.index(cur) > -1 : jQuery(cur).is(selector) )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( pos ? pos.index(cur) > -1 : jQuery(cur).is(selector) ) {
-</span><span class="token prefix inserted">+</span><span class="token line">					jQuery(cur).data('howClose',closer);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					return cur;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				cur = cur.parentNode;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				closer++;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">		});
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span></span>Index: src/event.js
-===================================================================
-<span class="token coord">--- src/event.js	(revision 6162)</span>
-<span class="token coord">+++ src/event.js	(working copy)</span>
-<span class="token coord">@@ -571,9 +571,14 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">	});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	elems.sort(function(a,b) {
-</span><span class="token prefix inserted">+</span><span class="token line">		return jQuery(a.elem).data('howClose') - jQuery(b.elem).data('howClose');
-</span><span class="token prefix inserted">+</span><span class="token line">	});
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	jQuery.each(elems, function(){
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( this.fn.call(this.elem, event, this.fn.data) === false )
-</span><span class="token prefix deleted">-</span><span class="token line">			stop = false;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( this.fn.call(this.elem, event, this.fn.data) === false ) {
-</span><span class="token prefix inserted">+</span><span class="token line">			return stop = false;;
-</span><span class="token prefix inserted">+</span><span class="token line">		}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	return stop;</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3980/live_ordering.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3980/live_ordering.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

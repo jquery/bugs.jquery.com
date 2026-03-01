@@ -117,7 +117,7 @@
         <div id="jq-content" class="white-box">
           
 
-<div class="flex-column" data-pagefind-body="">
+<div class="flex-column" data-pagefind-body>
   
 
   <nav class="content-nav">
@@ -224,7 +224,7 @@
   </ul>
 </details>
 
-<details open="">
+<details open>
   <summary class="ticket-details-summary">Change History (10)</summary>
   
     <div class="ticket-change flex-column" id="comment:1">
@@ -506,7 +506,7 @@ jqXHR.abort( "timeout" );
         
           
             <div class="ticket-comment-body">
-              <p>Replying to [comment:7 scott.gonzalez]:</p><p>Thanks dmethvin and scott for your valid suggestions.</p><p>Hi dmethvin,</p><p>After removing the code lines where it was modifying the object it was not owning, I started getting the following error:</p><p>"Message: Object doesn't support this property or method</p><p>Line: 975</p><p>Char: 9</p><p>Code: 0</p><p>URI: <a href="http://199.63.213.60/lib/jquery/jquery-1.5.2.js" "="" class="ext-link"><span class="icon"></span>http://199.63.213.60/lib/jquery/jquery-1.5.2.js"</a></p><p>Which clearly indicated that we are getting close to the problematic part of the code. The error in line 975 is related to Defferred Objects section in the file jquery-1.5.2. </p><p>In my code I call the $.ajax (to send the next request), in either "success" callback or in the "error" callback in a specific case. Sometimes in a ajax request cycle (interval of 1.5 sec), I have to send ~3 requests in sequence. My doubt here was, the next request might have been sent before the previous was "complete". Could this be a problem? Can't the "success" or "error" callbacks or the ajax object be queued in jquery?</p><p>Now I have changed the implementation: In each request cycle I have implemented a loop, using <a href="/wiki/SetTimeout">SetTimeout</a> (async delay) to check whether the previous request is "complete" and if compelete it sends the next request.</p><p>I have implemented "beforeSend" and "complete" callback to check the status of the request using a flag say, "ajax-in-progress"(var).</p><p>Do you think calling the ajax in chain is a problem? Though it was called only after the event "success" or "error". Can you please clarify.</p><p>Thanks a lot!</p><p>Best regards,</p><p>Sabapathy K</p>
+              <p>Replying to [comment:7 scott.gonzalez]:</p><p>Thanks dmethvin and scott for your valid suggestions.</p><p>Hi dmethvin,</p><p>After removing the code lines where it was modifying the object it was not owning, I started getting the following error:</p><p>"Message: Object doesn't support this property or method</p><p>Line: 975</p><p>Char: 9</p><p>Code: 0</p><p>URI: <a href="http://199.63.213.60/lib/jquery/jquery-1.5.2.js" " class="ext-link"><span class="icon"></span>http://199.63.213.60/lib/jquery/jquery-1.5.2.js"</a></p><p>Which clearly indicated that we are getting close to the problematic part of the code. The error in line 975 is related to Defferred Objects section in the file jquery-1.5.2. </p><p>In my code I call the $.ajax (to send the next request), in either "success" callback or in the "error" callback in a specific case. Sometimes in a ajax request cycle (interval of 1.5 sec), I have to send ~3 requests in sequence. My doubt here was, the next request might have been sent before the previous was "complete". Could this be a problem? Can't the "success" or "error" callbacks or the ajax object be queued in jquery?</p><p>Now I have changed the implementation: In each request cycle I have implemented a loop, using <a href="/wiki/SetTimeout">SetTimeout</a> (async delay) to check whether the previous request is "complete" and if compelete it sends the next request.</p><p>I have implemented "beforeSend" and "complete" callback to check the status of the request using a flag say, "ajax-in-progress"(var).</p><p>Do you think calling the ajax in chain is a problem? Though it was called only after the event "success" or "error". Can you please clarify.</p><p>Thanks a lot!</p><p>Best regards,</p><p>Sabapathy K</p>
             </div>
           
         

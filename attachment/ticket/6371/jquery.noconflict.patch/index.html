@@ -142,24 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- jquery-1.4.1.js 
-+++ jquery-1.4.1.js 
-@@ -355,7 +355,8 @@
- 
- jQuery.extend({
- 	noConflict: function( deep ) {
--		window.$ = _$;
-+		if (window.$ === jQuery)
-+			window.$ = _$;
- 
- 		if ( deep ) {
- 			window.jQuery = _jQuery;</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/6371/jquery.noconflict.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/6371/jquery.noconflict.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

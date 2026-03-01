@@ -142,63 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax.js
-===================================================================
-<span class="token coord">--- src/ajax.js	(revision 5600)</span>
-<span class="token coord">+++ src/ajax.js	(working copy)</span>
-<span class="token coord">@@ -479,25 +479,39 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	param: function( a ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		var s = [];
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		function add( key, value ){
-</span><span class="token prefix inserted">+</span><span class="token line">			s[s.length] = key + "=" + encodeURIComponent( value );
-</span><span class="token prefix inserted">+</span><span class="token line">		};
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// If an array was passed in, assume that it is an array
-</span><span class="token prefix unchanged"> </span><span class="token line">		// of form elements
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( a.constructor == Array || a.jquery )
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Serialize the form elements
-</span><span class="token prefix unchanged"> </span><span class="token line">			jQuery.each( a, function(){
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				s.push( encodeURIComponent(this.name) + "=" + encodeURIComponent( this.value ) );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				add( encodeURIComponent(this.name), this.value );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Otherwise, assume that it's an object of key/value pairs
-</span><span class="token prefix unchanged"> </span><span class="token line">		else
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Serialize the key/values
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			for ( var j in a )
-</span><span class="token prefix deleted">-</span><span class="token line">				// If the value is an array then the key names need to be repeated
-</span><span class="token prefix deleted">-</span><span class="token line">				if ( a[j] &amp;&amp; a[j].constructor == Array )
-</span><span class="token prefix deleted">-</span><span class="token line">					jQuery.each( a[j], function(){
-</span><span class="token prefix deleted">-</span><span class="token line">						s.push( encodeURIComponent(j) + "=" + encodeURIComponent( this ) );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			for ( var j in a ){
-</span><span class="token prefix inserted">+</span><span class="token line">				var obj = a[j];
-</span><span class="token prefix inserted">+</span><span class="token line">				
-</span><span class="token prefix inserted">+</span><span class="token line">				// Encode it, but don't encode the squared brackets afterwards
-</span><span class="token prefix inserted">+</span><span class="token line">				j = encodeURIComponent(j);
-</span><span class="token prefix inserted">+</span><span class="token line">				
-</span><span class="token prefix inserted">+</span><span class="token line">				// If the value is an array or a map, generate name[key]=value
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( obj &amp;&amp; typeof obj == 'object' )
-</span><span class="token prefix inserted">+</span><span class="token line">					jQuery.each( obj, function( key, v ){
-</span><span class="token prefix inserted">+</span><span class="token line">						var name = j;
-</span><span class="token prefix inserted">+</span><span class="token line">						// Don't break name[]=v1&amp;name[]=v2 ...
-</span><span class="token prefix inserted">+</span><span class="token line">						if( j.indexOf('[]') == -1 )
-</span><span class="token prefix inserted">+</span><span class="token line">							name += '['+k+']';
-</span><span class="token prefix inserted">+</span><span class="token line">						add( name , v );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					});
-</span><span class="token prefix unchanged"> </span><span class="token line">				else
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					s.push( encodeURIComponent(j) + "=" + encodeURIComponent( jQuery.isFunction(a[j]) ? a[j]() : a[j] ) );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					add( j, jQuery.isFunction(obj) ? obj() : obj );
-</span><span class="token prefix inserted">+</span><span class="token line">			}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Return the resulting serialization
-</span><span class="token prefix unchanged"> </span><span class="token line">		return s.join("&amp;").replace(/%20/g, "+");</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2726/param.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2726/param.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

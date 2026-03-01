@@ -142,36 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery-1.3.1.js	2009-02-01 02:54:55.000000000 -0500</span>
-<span class="token coord">+++ jquery-1.3.1-a.js	2009-02-01 02:57:30.000000000 -0500</span>
-<span class="token coord">@@ -636,9 +636,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Evalulates a script in a global context
-</span><span class="token prefix unchanged"> </span><span class="token line">	globalEval: function( data ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		data = jQuery.trim( data );
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">		if ( data ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( !jQuery.blank( data ) ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// Inspired by code by Andrea Giammarchi
-</span><span class="token prefix unchanged"> </span><span class="token line">			// http://webreflection.blogspot.com/2007/08/global-scope-evaluation-and-dom.html
-</span><span class="token prefix unchanged"> </span><span class="token line">			var head = document.getElementsByTagName("head")[0] || document.documentElement,
-</span></span><span class="token coord">@@ -1050,6 +1048,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return elem[ name ];
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	blank: function( text ) {
-</span><span class="token prefix inserted">+</span><span class="token line">		return !text ||  /^\s*$/.test(text);
-</span><span class="token prefix inserted">+</span><span class="token line">	},
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	trim: function( text ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		return (text || "").replace( /^\s+|\s+$/g, "" );
-</span><span class="token prefix unchanged"> </span><span class="token line">	},</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4036/blank.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4036/blank.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

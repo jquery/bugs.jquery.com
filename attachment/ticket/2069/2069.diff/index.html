@@ -142,82 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/event.js
-===================================================================
-<span class="token coord">--- test/unit/event.js	(revision 4206)</span>
-<span class="token coord">+++ test/unit/event.js	(working copy)</span>
-<span class="token coord">@@ -1,5 +1,16 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module("event");
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">test("jQuery(function($) {})", function() {
-</span><span class="token prefix inserted">+</span><span class="token line">	expect(1);
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">	stop();
-</span><span class="token prefix inserted">+</span><span class="token line">	// ready doesn't provide an event object, instead it provides a reference to the jQuery function, see http://docs.jquery.com/Events/ready#fn
-</span><span class="token prefix inserted">+</span><span class="token line">	jQuery(function($) {
-</span><span class="token prefix inserted">+</span><span class="token line">		ok(jQuery == $, "Check the ready function parameter is the jQuery object");
-</span><span class="token prefix inserted">+</span><span class="token line">		start();
-</span><span class="token prefix inserted">+</span><span class="token line">	});
-</span><span class="token prefix inserted">+</span><span class="token line">});
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">test("bind()", function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">	expect(18);
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span>Index: src/event.js
-===================================================================
-<span class="token coord">--- src/event.js	(revision 4206)</span>
-<span class="token coord">+++ src/event.js	(working copy)</span>
-<span class="token coord">@@ -62,6 +62,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				type = parts[0];
-</span><span class="token prefix unchanged"> </span><span class="token line">				handler.type = parts[1];
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( type == "ready" &amp;&amp; jQuery.isReady ) {
-</span><span class="token prefix inserted">+</span><span class="token line">					handler.call(elem, jQuery);
-</span><span class="token prefix inserted">+</span><span class="token line">					return;
-</span><span class="token prefix inserted">+</span><span class="token line">				}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// Get the current list of functions bound to this event
-</span><span class="token prefix unchanged"> </span><span class="token line">				var handlers = events[type];
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -242,7 +246,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Filter the functions by class
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( !parts[1] || handler.type == parts[1] ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				var ret = handler.apply( this, args );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				// Special case the "ready" type to remove the event and pass only the jQuery object
-</span><span class="token prefix inserted">+</span><span class="token line">				var ret = ( event.type == "ready" ) ? 
-</span><span class="token prefix inserted">+</span><span class="token line">					handler.apply( this, Array.prototype.slice.call(args, 1) ) : 
-</span><span class="token prefix inserted">+</span><span class="token line">					handler.apply( this, args );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				if ( val !== false )
-</span><span class="token prefix unchanged"> </span><span class="token line">					val = ret;
-</span></span><span class="token coord">@@ -351,14 +358,19 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				jQuery.event.add( window, "load", handler );
-</span><span class="token prefix unchanged"> </span><span class="token line">			},
-</span><span class="token prefix unchanged"> </span><span class="token line">			
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			teardown: function() {return;},
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			teardown: function() {
-</span><span class="token prefix inserted">+</span><span class="token line">				var handler = jQuery.event.special.ready.handler;
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( document.removeEventListener )
-</span><span class="token prefix inserted">+</span><span class="token line">					document.removeEventListener( "DOMContentLoaded", handler, false );
-</span><span class="token prefix inserted">+</span><span class="token line">				jQuery.event.remove( window, "load", handler );
-</span><span class="token prefix inserted">+</span><span class="token line">			},
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			
-</span><span class="token prefix unchanged"> </span><span class="token line">			handler: function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">				// Make sure that the DOM is not already loaded
-</span><span class="token prefix unchanged"> </span><span class="token line">				if ( !jQuery.isReady ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">					// Remember that the DOM is ready
-</span><span class="token prefix unchanged"> </span><span class="token line">					jQuery.isReady = true;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					jQuery(document).triggerHandler("ready");
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					jQuery(document).triggerHandler("ready", [ jQuery ]);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					jQuery(document).unbind("ready");
-</span><span class="token prefix unchanged"> </span><span class="token line">				}
-</span><span class="token prefix unchanged"> </span><span class="token line">			}</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2069/2069.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2069/2069.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

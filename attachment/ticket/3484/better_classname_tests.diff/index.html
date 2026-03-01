@@ -140,33 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/core.js
-===================================================================
-<span class="token coord">--- test/unit/core.js	(revision 5872)</span>
-<span class="token coord">+++ test/unit/core.js	(working copy)</span>
-<span class="token coord">@@ -1364,7 +1364,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	var div = jQuery("div").addClass("test").removeClass("test"),
-</span><span class="token prefix unchanged"> </span><span class="token line">		pass = true;
-</span><span class="token prefix unchanged"> </span><span class="token line">	for ( var i = 0; i &lt; div.size(); i++ ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( div.get(i).className.indexOf("test") != -1 ) pass = false;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( div.get(i).className.search(/(^|\s)test(\s|$)/) != -1 ) pass = false;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	}
-</span><span class="token prefix unchanged"> </span><span class="token line">	ok( pass, "Remove Class" );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -1373,7 +1373,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	div.removeClass("test").removeClass("bar").removeClass("foo");
-</span><span class="token prefix unchanged"> </span><span class="token line">	var pass = true;
-</span><span class="token prefix unchanged"> </span><span class="token line">	for ( var i = 0; i &lt; div.size(); i++ ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	 if ( div.get(i).className.match(/test|bar|foo/) ) pass = false;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	 if ( div.get(i).className.search(/(^|\s)(test|bar|foo)(\s|$)/) != -1 ) pass = false;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	}
-</span><span class="token prefix unchanged"> </span><span class="token line">	ok( pass, "Remove multiple classes" );</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3484/better_classname_tests.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3484/better_classname_tests.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

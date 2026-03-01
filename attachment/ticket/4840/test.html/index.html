@@ -142,71 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-html" tabindex="0"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Memory Leak<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Content-Type<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/html; charset=iso-8859-1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/js/jquery/jquery.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">language</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>javascript<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-
-		<span class="token keyword">var</span> secs <span class="token operator">=</span> <span class="token number">15</span><span class="token punctuation">;</span>
-		<span class="token keyword">var</span> appInterval <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
-		<span class="token keyword">var</span> timerRunning <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-		<span class="token keyword">var</span> timerID <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-		<span class="token keyword">var</span> delay <span class="token operator">=</span> <span class="token number">1000</span><span class="token punctuation">;</span>
-
-		<span class="token keyword">function</span> <span class="token function">initQueue</span><span class="token punctuation">(</span> <span class="token parameter">interval</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			appInterval <span class="token operator">=</span> interval<span class="token punctuation">;</span>
-			secs <span class="token operator">=</span> appInterval<span class="token punctuation">;</span>
-			<span class="token function">StopTheTimer</span><span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token function">StartTheTimer</span><span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token punctuation">}</span>
-
-		<span class="token keyword">function</span> <span class="token function">StopTheTimer</span><span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			<span class="token keyword">if</span> <span class="token punctuation">(</span> timerRunning <span class="token punctuation">)</span>
-				<span class="token function">clearTimeout</span><span class="token punctuation">(</span> timerID <span class="token punctuation">)</span><span class="token punctuation">;</span>
-			timerRunning <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-		<span class="token punctuation">}</span>
-		<span class="token keyword">function</span> <span class="token function">StartTheTimer</span><span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			<span class="token keyword">if</span> <span class="token punctuation">(</span> secs <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span>
-			<span class="token punctuation">{</span>
-				<span class="token function">StopTheTimer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				$<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span> <span class="token punctuation">{</span>
-					<span class="token literal-property property">url</span> <span class="token operator">:</span> <span class="token string">'/ipsum2.htm'</span><span class="token punctuation">,</span>
-					<span class="token literal-property property">type</span> <span class="token operator">:</span> <span class="token string">'get'</span><span class="token punctuation">,</span>
-					<span class="token function-variable function">success</span> <span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span> <span class="token parameter">message</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			<span class="token comment">// No Memory leak vvvvv</span>
-			<span class="token comment">//			var x = document.getElementById("queue");</span>
-			<span class="token comment">//			x.innerHTML = message;</span>
-			<span class="token comment">// Has Memory leak vvvvv</span>
-			<span class="token comment">//			$('#queue').empty();  // with or with out this, it does the same thing.</span>
-						<span class="token function">$</span><span class="token punctuation">(</span> <span class="token string">'#queue'</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span> message <span class="token punctuation">)</span><span class="token punctuation">;</span>
-					<span class="token punctuation">}</span>
-				<span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-				secs <span class="token operator">=</span> appInterval<span class="token punctuation">;</span>
-			<span class="token punctuation">}</span>
-
-			window<span class="token punctuation">.</span>status <span class="token operator">=</span> <span class="token string">"Updating  status in "</span> <span class="token operator">+</span> secs <span class="token operator">+</span> <span class="token string">"s."</span><span class="token punctuation">;</span>
-			secs <span class="token operator">=</span> secs <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
-			timerRunning <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-			timerID <span class="token operator">=</span> self<span class="token punctuation">.</span><span class="token function">setTimeout</span><span class="token punctuation">(</span> <span class="token string">"StartTheTimer();"</span><span class="token punctuation">,</span> delay <span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token punctuation">}</span>
-	</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>BODY</span> <span class="token special-attr"><span class="token attr-name">onLoad</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript"><span class="token literal-property property">javascript</span><span class="token operator">:</span> <span class="token function">initQueue</span><span class="token punctuation">(</span> <span class="token number">20</span> <span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
-
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>queue<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>here
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>BODY</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>HTML</span><span class="token punctuation">></span></span></code></pre>
+      <pre class="language-html" tabindex="0"><code class="language-html"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4840/test.html">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4840/test.html">Original Format</a>
   </div>
 </h1></div>
         </div>

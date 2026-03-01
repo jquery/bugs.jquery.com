@@ -142,43 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery-1.4.2.js	2010-02-14 03:35:05.000000000 +0000</span>
-<span class="token coord">+++ jquery-1.4.2-gm.js	2010-05-26 22:20:50.000000000 +0100</span>
-<span class="token coord">@@ -950,18 +950,21 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Technique from Juriy Zaytsev
-</span><span class="token prefix unchanged"> </span><span class="token line">	// http://thinkweb2.com/projects/prototype/detecting-event-support-without-browser-sniffing/
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	// Test doesn't work in Greasemonkey due to security sandbox
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	var eventSupported = function( eventName ) { 
-</span><span class="token prefix unchanged"> </span><span class="token line">		var el = document.createElement("div"); 
-</span><span class="token prefix unchanged"> </span><span class="token line">		eventName = "on" + eventName; 
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var isSupported = (eventName in el); 
-</span><span class="token prefix deleted">-</span><span class="token line">		if ( !isSupported ) { 
-</span><span class="token prefix deleted">-</span><span class="token line">			el.setAttribute(eventName, "return;"); 
-</span><span class="token prefix deleted">-</span><span class="token line">			isSupported = typeof el[eventName] === "function"; 
-</span><span class="token prefix deleted">-</span><span class="token line">		} 
-</span><span class="token prefix deleted">-</span><span class="token line">		el = null; 
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    try{
-</span><span class="token prefix inserted">+</span><span class="token line">  		var isSupported = (eventName in el); 
-</span><span class="token prefix inserted">+</span><span class="token line">  		if ( !isSupported ) { 
-</span><span class="token prefix inserted">+</span><span class="token line">  			el.setAttribute(eventName, "return;"); 
-</span><span class="token prefix inserted">+</span><span class="token line">  			isSupported = typeof el[eventName] === "function"; 
-</span><span class="token prefix inserted">+</span><span class="token line">  		} 
-</span><span class="token prefix inserted">+</span><span class="token line">  		el = null; 
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		return isSupported; 
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  		return isSupported; 
-</span><span class="token prefix inserted">+</span><span class="token line">	  } catch(Exception) {}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	};
-</span><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">	jQuery.support.submitBubbles = eventSupported("submit");</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/6603/jquery-1.4.2-gm-support.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/6603/jquery-1.4.2-gm-support.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

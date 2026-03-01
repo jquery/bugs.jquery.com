@@ -142,44 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/test/index.html
-===================================================================
-<span class="token coord">--- jquery/test/index.html	(revision 5830)</span>
-<span class="token coord">+++ jquery/test/index.html	(working copy)</span>
-<span class="token coord">@@ -89,6 +89,15 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				&lt;option id="option3d" value="3">3&lt;/option>
-</span><span class="token prefix unchanged"> </span><span class="token line">				&lt;option id="option3e">no value&lt;/option>
-</span><span class="token prefix unchanged"> </span><span class="token line">			&lt;/select>
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			&lt;select name="select4" id="select4" multiple="multiple">
-</span><span class="token prefix inserted">+</span><span class="token line">				&lt;optgroup disabled="disabled">
-</span><span class="token prefix inserted">+</span><span class="token line">					&lt;option id="option4a" class="emptyopt" value="">Nothing&lt;/option>
-</span><span class="token prefix inserted">+</span><span class="token line">					&lt;option id="option4b" selected="selected" value="1">1&lt;/option>
-</span><span class="token prefix inserted">+</span><span class="token line">					&lt;option id="option4c" selected="selected" value="2">2&lt;/option>
-</span><span class="token prefix inserted">+</span><span class="token line">				&lt;/optgroup>
-</span><span class="token prefix inserted">+</span><span class="token line">				&lt;option selected="selected" disabled="disabled" id="option4d" value="3">3&lt;/option>
-</span><span class="token prefix inserted">+</span><span class="token line">				&lt;option id="option4e">no value&lt;/option>
-</span><span class="token prefix inserted">+</span><span class="token line">			&lt;/select>
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			
-</span><span class="token prefix unchanged"> </span><span class="token line">			&lt;object id="object1" codebase="stupid">
-</span><span class="token prefix unchanged"> </span><span class="token line">				&lt;param name="p1" value="x1" />
-</span></span>Index: jquery/src/core.js
-===================================================================
-<span class="token coord">--- jquery/src/core.js	(revision 5830)</span>
-<span class="token coord">+++ jquery/src/core.js	(working copy)</span>
-<span class="token coord">@@ -376,7 +376,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					for ( var i = one ? index : 0, max = one ? index + 1 : options.length; i &lt; max; i++ ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">						var option = options[ i ];
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">						if ( option.selected ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">						if ( option.selected &amp;&amp; !option.disabled &amp;&amp; !option.parentNode.disabled ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">							// Get the specifc value for the option
-</span><span class="token prefix unchanged"> </span><span class="token line">							value = jQuery(option).val();</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3240/3240.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3240/3240.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,83 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/event/event.js
-===================================================================
-<span class="token coord">--- jquery/src/event/event.js	(revision 1408)</span>
-<span class="token coord">+++ jquery/src/event/event.js	(working copy)</span>
-<span class="token coord">@@ -55,18 +55,36 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Detach an event or set of events from an element
-</span><span class="token prefix unchanged"> </span><span class="token line">	remove: function(element, type, handler) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if (element.$events)
-</span><span class="token prefix deleted">-</span><span class="token line">			if ( type &amp;&amp; type.type )
-</span><span class="token prefix deleted">-</span><span class="token line">				delete element.$events[ type.type ][ type.handler.guid ];
-</span><span class="token prefix deleted">-</span><span class="token line">			else if (type &amp;&amp; element.$events[type])
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if (element.$events) {
-</span><span class="token prefix inserted">+</span><span class="token line">			var i,j,k;
-</span><span class="token prefix inserted">+</span><span class="token line">			if ( type &amp;&amp; type.type ) { // type is actually an event object here
-</span><span class="token prefix inserted">+</span><span class="token line">				handler = type.handler;
-</span><span class="token prefix inserted">+</span><span class="token line">				type    = type.type;
-</span><span class="token prefix inserted">+</span><span class="token line">			}
-</span><span class="token prefix inserted">+</span><span class="token line">			
-</span><span class="token prefix inserted">+</span><span class="token line">			if (type &amp;&amp; element.$events[type])
-</span><span class="token prefix inserted">+</span><span class="token line">				// remove the given handler for the given type
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				if ( handler )
-</span><span class="token prefix unchanged"> </span><span class="token line">					delete element.$events[type][handler.guid];
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					
-</span><span class="token prefix inserted">+</span><span class="token line">				// remove all handlers for the given type
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				else
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					for ( var i in element.$events[type] )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					for ( i in element.$events[type] )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">						delete element.$events[type][i];
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">						
-</span><span class="token prefix inserted">+</span><span class="token line">			// remove all handlers		
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			else
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				for ( var j in element.$events )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				for ( j in element.$events )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					this.remove( element, j );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			
-</span><span class="token prefix inserted">+</span><span class="token line">			// remove event handler if no more handlers exist
-</span><span class="token prefix inserted">+</span><span class="token line">			for ( k in element.$events[type] )
-</span><span class="token prefix inserted">+</span><span class="token line">				if (k) {
-</span><span class="token prefix inserted">+</span><span class="token line">					k = true;
-</span><span class="token prefix inserted">+</span><span class="token line">					break;
-</span><span class="token prefix inserted">+</span><span class="token line">				}
-</span><span class="token prefix inserted">+</span><span class="token line">			if (!k) element["on" + type] = null;
-</span><span class="token prefix inserted">+</span><span class="token line">		}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	trigger: function(type, data, element) {
-</span></span>Index: jquery/src/event/eventTest.js
-===================================================================
-<span class="token coord">--- jquery/src/event/eventTest.js	(revision 1408)</span>
-<span class="token coord">+++ jquery/src/event/eventTest.js	(working copy)</span>
-<span class="token coord">@@ -15,7 +15,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("unbind(event)", function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	expect(3);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	expect(4);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	var el = $("#firstp");
-</span><span class="token prefix unchanged"> </span><span class="token line">	el.click(function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">		ok( true, "Fake normal bind" );
-</span></span><span class="token coord">@@ -25,6 +25,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		ok( true, "Fake onebind" );
-</span><span class="token prefix unchanged"> </span><span class="token line">	});
-</span><span class="token prefix unchanged"> </span><span class="token line">	el.click().click();
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	el.click(function() { return; });
-</span><span class="token prefix inserted">+</span><span class="token line">	el.unbind('click');
-</span><span class="token prefix inserted">+</span><span class="token line">	ok( !el[0].onclick, "Handler is removed" ); // Bug #964
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("trigger(event, [data]", function() {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/964/event.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/964/event.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,30 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/selector.js
-===================================================================
-<span class="token coord">--- jquery/src/selector.js	(revision 5829)</span>
-<span class="token coord">+++ jquery/src/selector.js	(working copy)</span>
-<span class="token coord">@@ -21,7 +21,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			odd: function(a,i){return i%2;},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Child Checks
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			"first-child": function(a){return a.parentNode.getElementsByTagName("*")[0]==a;},
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			"first-child": function(a){
-</span><span class="token prefix inserted">+</span><span class="token line">				var children = a.parentNode.getElementsByTagName("*");
-</span><span class="token prefix inserted">+</span><span class="token line">				for ( var i = 0 ; i &lt; children.length; i++ ) {
-</span><span class="token prefix inserted">+</span><span class="token line">					if ( children[i].nodeType != 8 ) return children[i] == a;
-</span><span class="token prefix inserted">+</span><span class="token line">				}
-</span><span class="token prefix inserted">+</span><span class="token line">				return children[0] == a;
-</span><span class="token prefix inserted">+</span><span class="token line">			},
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			"last-child": function(a){return jQuery.nth(a.parentNode.lastChild,1,"previousSibling")==a;},
-</span><span class="token prefix unchanged"> </span><span class="token line">			"only-child": function(a){return !jQuery.nth(a.parentNode.lastChild,2,"previousSibling");},</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2847/2847.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2847/2847.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -140,75 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 4213)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -352,9 +352,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			else
-</span><span class="token prefix unchanged"> </span><span class="token line">				selector = jQuery.multiFilter( selector, this );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var isArrayLike = selector.length &amp;&amp; selector[selector.length - 1] !== undefined &amp;&amp; !selector.nodeType;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return this.filter(function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			return isArrayLike ? jQuery.inArray( this, selector ) &lt; 0 : this != selector;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			return jQuery.inArray( this, selector ) &lt; 0;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		});
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -764,9 +763,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// A method for quickly swapping in/out CSS properties to get correct calculations
-</span><span class="token prefix unchanged"> </span><span class="token line">	swap: function( elem, options, callback ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var old = {};
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// Remember the old values, and insert the new ones
-</span><span class="token prefix unchanged"> </span><span class="token line">		for ( var name in options ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			elem.style[ "old" + name ] = elem.style[ name ];
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			old[ name ] = elem.style[ name ];
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			elem.style[ name ] = options[ name ];
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -774,24 +774,29 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Revert the old values
-</span><span class="token prefix unchanged"> </span><span class="token line">		for ( var name in options )
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			elem.style[ name ] = elem.style[ "old" + name ];
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			elem.style[ name ] = old[ name ];
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	css: function( elem, name, force ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( name == "width" || name == "height" ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			var width, height, props = { position: "absolute", visibility: "hidden", display:"block" };
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			var val, props = { position: "absolute", visibility: "hidden", display:"block" }, which = name == "width" ? [ "Left", "Right" ] : [ "Top", "Bottom" ];
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">			function getWH() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				width = elem.clientWidth;
-</span><span class="token prefix deleted">-</span><span class="token line">				height = elem.clientHeight;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				val = name == "width" ? elem.offsetWidth : elem.offsetHeight;
-</span><span class="token prefix inserted">+</span><span class="token line">				var padding = 0, border = 0;
-</span><span class="token prefix inserted">+</span><span class="token line">				jQuery.each( which, function() {
-</span><span class="token prefix inserted">+</span><span class="token line">					padding += parseFloat(jQuery.curCSS( elem, "padding" + this, true)) || 0;
-</span><span class="token prefix inserted">+</span><span class="token line">					border += parseFloat(jQuery.curCSS( elem, "border" + this + "Width", true)) || 0;
-</span><span class="token prefix inserted">+</span><span class="token line">				});
-</span><span class="token prefix inserted">+</span><span class="token line">				val -= Math.round(padding + border);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( jQuery(elem).is(":visible") )
-</span><span class="token prefix unchanged"> </span><span class="token line">				getWH();
-</span><span class="token prefix unchanged"> </span><span class="token line">			else
-</span><span class="token prefix unchanged"> </span><span class="token line">				jQuery.swap( elem, props, getWH );
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">			return name == "width" ? width : height;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			
-</span><span class="token prefix inserted">+</span><span class="token line">			return val;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		return jQuery.curCSS( elem, name, force );</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2071/css.2.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2071/css.2.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

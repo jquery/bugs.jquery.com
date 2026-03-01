@@ -140,44 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- ui.selectable.js.old	2008-03-07 20:35:01.000000000 +0100</span>
-<span class="token coord">+++ ui.selectable.js	2008-03-07 20:03:31.000000000 +0100</span>
-<span class="token coord">@@ -5,6 +5,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	$.fn.extend({
-</span><span class="token prefix unchanged"> </span><span class="token line">		selectable: function(options) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			var args = Array.prototype.slice.call(arguments, 1);
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			return this.each(function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">				if (typeof options == "string") {
-</span><span class="token prefix unchanged"> </span><span class="token line">					var select = $.data(this, "ui-selectable");
-</span></span><span class="token coord">@@ -20,8 +22,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		var instance = this;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		this.element = $(element);
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">		$.data(this.element, "ui-selectable", this);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		$.data(element, "ui-selectable", this);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		this.element.addClass("ui-selectable");
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		this.options = $.extend({
-</span></span><span class="token coord">@@ -91,8 +92,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			this.element
-</span><span class="token prefix unchanged"> </span><span class="token line">				.removeClass("ui-selectable ui-selectable-disabled")
-</span><span class="token prefix unchanged"> </span><span class="token line">				.removeData("ui-selectable")
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				.unbind(".selectable");
-</span><span class="token prefix deleted">-</span><span class="token line">			this.removeMouseInteraction();
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				.unbind(".selectable")
-</span><span class="token prefix inserted">+</span><span class="token line">				.removeMouseInteraction();
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		},
-</span><span class="token prefix unchanged"> </span><span class="token line">		enable: function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">			this.element.removeClass("ui-selectable-disabled");</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2474/selectable.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2474/selectable.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

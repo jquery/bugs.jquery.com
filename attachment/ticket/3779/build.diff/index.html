@@ -140,47 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: build.xml
-===================================================================
-<span class="token coord">--- build.xml	���汾 6027��</span>
-<span class="token coord">+++ build.xml	������������</span>
-<span class="token coord">@@ -18,6 +18,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">    &lt;property description="Source Folder" name="SRC_DIR" value="src"  />
-</span><span class="token prefix unchanged"> </span><span class="token line">    &lt;property description="Files for parsing etc." name="BUILD_DIR" value="build" />
-</span><span class="token prefix unchanged"> </span><span class="token line">    &lt;property description="Rhino JS Engine" name="JAR" value="${BUILD_DIR}/js.jar" />
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    &lt;property description="YUICompressor" name="YUICompressor" value="${BUILD_DIR}/yuicompressor-2.4.2.jar" />
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">    &lt;property description="Folder for jquery, min, lite and packed target" name="DIST_DIR" value="./dist" />
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -54,11 +55,18 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">    &lt;target name="min" depends="jquery" description="Remove all comments and whitespace, no compression, great in combination with GZip">
-</span><span class="token prefix unchanged"> </span><span class="token line">        &lt;echo message="Building ${JQ_MIN}" />
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">        &lt;java jar="${JAR}" fork="true">
-</span><span class="token prefix deleted">-</span><span class="token line">            &lt;arg value="${BUILD_DIR}/build/min.js" />
-</span><span class="token prefix deleted">-</span><span class="token line">            &lt;arg value="${JQ}" />
-</span><span class="token prefix deleted">-</span><span class="token line">            &lt;arg value="${JQ_MIN}" />
-</span><span class="token prefix deleted">-</span><span class="token line">        &lt;/java>
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		&lt;apply executable="java" parallel="false" verbose="true" dest="${DIST_DIR}">
-</span><span class="token prefix inserted">+</span><span class="token line">			&lt;fileset dir="${DIST_DIR}">
-</span><span class="token prefix inserted">+</span><span class="token line">				&lt;include name="jquery.js" />
-</span><span class="token prefix inserted">+</span><span class="token line">			&lt;/fileset>
-</span><span class="token prefix inserted">+</span><span class="token line">			&lt;arg line="-jar" />
-</span><span class="token prefix inserted">+</span><span class="token line">			&lt;arg path="${YUICompressor}" />
-</span><span class="token prefix inserted">+</span><span class="token line">			&lt;arg value="--charset" />
-</span><span class="token prefix inserted">+</span><span class="token line">			&lt;arg value="ANSI" />
-</span><span class="token prefix inserted">+</span><span class="token line">			&lt;arg value="-o" />
-</span><span class="token prefix inserted">+</span><span class="token line">			&lt;targetfile />
-</span><span class="token prefix inserted">+</span><span class="token line">			&lt;mapper type="glob" from="jquery.js" to="jquery.min.js" />
-</span><span class="token prefix inserted">+</span><span class="token line">		&lt;/apply>
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">        &lt;echo message="${JQ_MIN} built." />
-</span><span class="token prefix unchanged"> </span><span class="token line">    &lt;/target></span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3779/build.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3779/build.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

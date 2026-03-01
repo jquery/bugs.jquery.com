@@ -142,50 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/test/unit/core.js
-===================================================================
-<span class="token coord">--- jquery/test/unit/core.js	(revision 5830)</span>
-<span class="token coord">+++ jquery/test/unit/core.js	(working copy)</span>
-<span class="token coord">@@ -217,6 +217,16 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	ok( !jQuery("&lt;option>test&lt;/option>")[0].selected, "Make sure that options are auto-selected #2050" );
-</span><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">test("jQuery(selector, 'html')", function() {
-</span><span class="token prefix inserted">+</span><span class="token line">	expect(2);
-</span><span class="token prefix inserted">+</span><span class="token line">	var teststring = '';
-</span><span class="token prefix inserted">+</span><span class="token line">	for (var i = 0; i &lt; 10000; i++) { teststring += '22222222'; }
-</span><span class="token prefix inserted">+</span><span class="token line">	var htmlcode = '&lt;div>&lt;div id="one">one&lt;/div>&lt;div id="two">' + teststring + '&lt;/div>&lt;/div>';
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">	equals(jQuery('#one', htmlcode).length, 1, "Verify that a selector matching against an HTML blob matches the correct number of times, #3178");
-</span><span class="token prefix inserted">+</span><span class="token line">	equals(jQuery('#one', htmlcode).html(), 'one', "Verify that a selector matching against an HTML blob reads correctly, #3178");
-</span><span class="token prefix inserted">+</span><span class="token line">});
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">test("jQuery('html', context)", function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">	expect(1);
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span>Index: jquery/src/core.js
-===================================================================
-<span class="token coord">--- jquery/src/core.js	(revision 5830)</span>
-<span class="token coord">+++ jquery/src/core.js	(working copy)</span>
-<span class="token coord">@@ -42,8 +42,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Handle HTML strings
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( typeof selector == "string" ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			// Are we dealing with HTML string or an ID?
-</span><span class="token prefix deleted">-</span><span class="token line">			var match = quickExpr.exec( selector );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			// Are we dealing with an HTML string or an ID?
-</span><span class="token prefix inserted">+</span><span class="token line">			// If selector.length is > 49996, Safari chokes (#3178).
-</span><span class="token prefix inserted">+</span><span class="token line">			// Assume that anything near that length is HTML.
-</span><span class="token prefix inserted">+</span><span class="token line">			var match = selector.length > 40000 ? { 1: selector } : quickExpr.exec( selector );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Verify a match, and that no context was specified for #id
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( match &amp;&amp; (match[1] || !context) ) {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3178/3178.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3178/3178.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

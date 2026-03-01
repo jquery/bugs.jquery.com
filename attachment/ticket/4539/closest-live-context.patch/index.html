@@ -140,34 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: traversing.js
-===================================================================
---- traversing.js	(revision 6308)
-+++ traversing.js	(working copy)
-@@ -34,13 +34,14 @@
- 			}) ), "filter", selector );
- 	},
- 
--	closest: function( selector ) {
-+	closest: function( selector, context ) {
- 		var pos = jQuery.expr.match.POS.test( selector ) ? jQuery(selector) : null,
--			closer = 0;
-+			closer = 0,
-+			stopElement = ( context && context.parentNode ) ? context.parentNode : false;;
- 
- 		return this.map(function(){
- 			var cur = this;
--			while ( cur && cur.ownerDocument ) {
-+			while ( cur && cur.ownerDocument && stopElement !== cur) {
- 				if ( pos ? pos.index(cur) > -1 : jQuery(cur).is(selector) ) {
- 					jQuery.data(cur, "closest", closer);
- 					return cur;</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4539/closest-live-context.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4539/closest-live-context.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

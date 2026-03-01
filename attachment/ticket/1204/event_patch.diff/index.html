@@ -142,54 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: /Users/yehudakatz/Documents/workspace/jquery/trunk/jquery/src/event/event.js
-===================================================================
-<span class="token coord">--- /Users/yehudakatz/Documents/workspace/jquery/trunk/jquery/src/event/event.js	(revision 1912)</span>
-<span class="token coord">+++ /Users/yehudakatz/Documents/workspace/jquery/trunk/jquery/src/event/event.js	(working copy)</span>
-<span class="token coord">@@ -186,8 +186,21 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		if ( !event.target &amp;&amp; event.srcElement )
-</span><span class="token prefix unchanged"> </span><span class="token line">			event.target = event.srcElement;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    // Add relatedTarget, if necessary
-</span><span class="token prefix inserted">+</span><span class="token line">    if ( event.relatedTarget == null &amp;&amp; event.fromElement != null )
-</span><span class="token prefix inserted">+</span><span class="token line">      event.relatedTarget = (event.fromElement == event.target) ? event.toElement : event.fromElement;
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">    // Add metaKey to non-Mac browsers (use ctrl for PC's and Meta for Macs)
-</span><span class="token prefix inserted">+</span><span class="token line">    if ( event.metaKey == null &amp;&amp; event.ctrlKey != null )
-</span><span class="token prefix inserted">+</span><span class="token line">      event.metaKey = event.ctrlKey;
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">    // Add which for click: 1 == left; 2 == middle; 3 == right
-</span><span class="token prefix inserted">+</span><span class="token line">    // Note: button is not normalized, so don't use it
-</span><span class="token prefix inserted">+</span><span class="token line">    if ( event.which == null &amp;&amp; event.button != null )
-</span><span class="token prefix inserted">+</span><span class="token line">      event.which = (event.button &amp; 1 ? 1 : ( event.button &amp; 2 ? 3 : ( event.button &amp; 4 ? 2 : 0 ) ));
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// Calculate pageX/Y if missing and clientX/Y available
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( event.pageX == undefined &amp;&amp; event.clientX != undefined ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( event.pageX == null &amp;&amp; event.clientX != null ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			var e = document.documentElement || document.body;
-</span><span class="token prefix unchanged"> </span><span class="token line">			event.pageX = event.clientX + e.scrollLeft;
-</span><span class="token prefix unchanged"> </span><span class="token line">			event.pageY = event.clientY + e.scrollTop;
-</span></span><span class="token coord">@@ -192,6 +205,14 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			event.pageX = event.clientX + e.scrollLeft;
-</span><span class="token prefix unchanged"> </span><span class="token line">			event.pageY = event.clientY + e.scrollTop;
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">    // Add which for keypresses: keyCode
-</span><span class="token prefix inserted">+</span><span class="token line">    if ( (event.which == null || event.type == "keypress") &amp;&amp; event.keyCode != null )
-</span><span class="token prefix inserted">+</span><span class="token line">      event.which = event.keyCode;    
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">    // If it's a keypress event, add charCode to IE
-</span><span class="token prefix inserted">+</span><span class="token line">    if ( event.charCode == null &amp;&amp; event.type == "keypress" )
-</span><span class="token prefix inserted">+</span><span class="token line">      event.charCode = event.keyCode;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				
-</span><span class="token prefix unchanged"> </span><span class="token line">		// check if target is a textnode (safari)
-</span><span class="token prefix unchanged"> </span><span class="token line">		if (jQuery.browser.safari &amp;&amp; event.target.nodeType == 3) {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1204/event_patch.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1204/event_patch.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

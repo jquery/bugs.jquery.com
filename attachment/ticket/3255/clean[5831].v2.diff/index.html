@@ -142,48 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 5831)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -936,12 +936,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	clean: function( elems, context ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var ret = [];
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		context = context || document;
-</span><span class="token prefix unchanged"> </span><span class="token line">		// !context.createElement fails in IE with an error but returns typeof 'object'
-</span><span class="token prefix unchanged"> </span><span class="token line">		if (typeof context.createElement == 'undefined')
-</span><span class="token prefix unchanged"> </span><span class="token line">			context = context.ownerDocument || context[0] &amp;&amp; context[0].ownerDocument || document;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var ret = [], div = context.createElement("div");
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		jQuery.each(elems, function(i, elem){
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( typeof elem == 'number' )
-</span><span class="token prefix unchanged"> </span><span class="token line">				elem += '';
-</span></span><span class="token coord">@@ -959,7 +960,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				// Trim whitespace, otherwise indexOf won't work as expected
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				var tags = jQuery.trim( elem ).toLowerCase(), div = context.createElement("div");
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				var tags = jQuery.trim( elem ).toLowerCase();
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				var wrap =
-</span><span class="token prefix unchanged"> </span><span class="token line">					// option or optgroup
-</span></span><span class="token coord">@@ -1031,6 +1032,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		// Remove the elements from the temporary div (#3255) 
-</span><span class="token prefix inserted">+</span><span class="token line">		div.innerHTML = '';
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return ret;
-</span><span class="token prefix unchanged"> </span><span class="token line">	},</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3255/clean[5831].v2.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3255/clean[5831].v2.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

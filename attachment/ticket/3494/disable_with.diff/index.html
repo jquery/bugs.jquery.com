@@ -142,30 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery.form.js
-===================================================================
-<span class="token coord">--- jquery.form.js	(revision 5889)</span>
-<span class="token coord">+++ jquery.form.js	(working copy)</span>
-<span class="token coord">@@ -105,6 +105,14 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">        options.data = q; // data is the query string for 'post'
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">    var $form = this, callbacks = [];
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    if (options.disableWith) {
-</span><span class="token prefix inserted">+</span><span class="token line">      var submitButton = this.find('input[@type=submit]');
-</span><span class="token prefix inserted">+</span><span class="token line">      var submitButtonOldValue = submitButton.attr('value');
-</span><span class="token prefix inserted">+</span><span class="token line">      options.complete = function() {
-</span><span class="token prefix inserted">+</span><span class="token line">        submitButton.attr('value',submitButtonOldValue).attr('disabled',false);
-</span><span class="token prefix inserted">+</span><span class="token line">      }
-</span><span class="token prefix inserted">+</span><span class="token line">      submitButton.attr('value',options.disableWith).attr('disabled',true).blur();
-</span><span class="token prefix inserted">+</span><span class="token line">    }
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">    if (options.resetForm) callbacks.push(function() { $form.resetForm(); });
-</span><span class="token prefix unchanged"> </span><span class="token line">    if (options.clearForm) callbacks.push(function() { $form.clearForm(); });</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3494/disable_with.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3494/disable_with.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

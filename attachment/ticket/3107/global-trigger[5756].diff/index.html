@@ -140,28 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/event.js
-===================================================================
-<span class="token coord">--- jquery/src/event.js	(revision 5754)</span>
-<span class="token coord">+++ jquery/src/event.js	(working copy)</span>
-<span class="token coord">@@ -168,7 +168,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		if ( !elem ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Only trigger if we've ever bound an event for it
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( this.global[type] )
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				jQuery("*").add([window, document]).trigger(type, data);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				jQuery.each( jQuery.cache, function(){
-</span><span class="token prefix inserted">+</span><span class="token line">					if ( this.events &amp;&amp; this.events[type] )
-</span><span class="token prefix inserted">+</span><span class="token line">						jQuery.event.trigger( type, data, this.handle.elem );
-</span><span class="token prefix inserted">+</span><span class="token line">				});
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Handle triggering a single element
-</span><span class="token prefix unchanged"> </span><span class="token line">		} else {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3107/global-trigger[5756].diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3107/global-trigger[5756].diff">Original Format</a>
   </div>
 </h1></div>
         </div>

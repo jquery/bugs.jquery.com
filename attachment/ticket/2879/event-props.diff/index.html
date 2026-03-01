@@ -140,34 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: event.js
-===================================================================
-<span class="token coord">--- event.js	(revision 5615)</span>
-<span class="token coord">+++ event.js	(working copy)</span>
-<span class="token coord">@@ -274,15 +274,16 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return val;
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	props: "altKey attrChange attrName bubbles button cancelable charCode clientX clientY ctrlKey currentTarget data detail eventPhase fromElement handler keyCode metaKey newValue originalTarget pageX pageY prevValue relatedNode relatedTarget screenX screenY shiftKey srcElement target timeStamp toElement type view wheelDelta which".split(" "),
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	fix: function(event) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( event[expando] == true )
-</span><span class="token prefix unchanged"> </span><span class="token line">			return event;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// store a copy of the original event object
-</span><span class="token prefix unchanged"> </span><span class="token line">		// and "clone" to set read-only properties
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var originalEvent = event;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var originalEvent = event, props = this.props;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		event = { originalEvent: originalEvent };
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var props = "altKey attrChange attrName bubbles button cancelable charCode clientX clientY ctrlKey currentTarget data detail eventPhase fromElement handler keyCode metaKey newValue originalTarget pageX pageY prevValue relatedNode relatedTarget screenX screenY shiftKey srcElement target timeStamp toElement type view wheelDelta which".split(" ");
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		for ( var i=props.length; i; i-- )
-</span><span class="token prefix unchanged"> </span><span class="token line">			event[ props[i] ] = originalEvent[ props[i] ];</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2879/event-props.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2879/event-props.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

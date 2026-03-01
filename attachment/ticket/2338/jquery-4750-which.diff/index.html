@@ -140,27 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: event.js
-===================================================================
-<span class="token coord">--- event.js	(revision 4750)</span>
-<span class="token coord">+++ event.js	(working copy)</span>
-<span class="token coord">@@ -321,8 +321,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">			
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Add which for key events
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( !event.which &amp;&amp; ((event.charCode || event.charCode === 0) ? event.charCode : event.keyCode) )
-</span><span class="token prefix deleted">-</span><span class="token line">			event.which = event.charCode || event.keyCode;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( typeof event.which == "undefined" &amp;&amp; (typeof event.charCode != "undefined" || typeof event.keyCode != "undefined") )
-</span><span class="token prefix inserted">+</span><span class="token line">			event.which = typeof event.charCode != "undefined" ? event.charCode : event.keyCode;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Add metaKey to non-Mac browsers (use ctrl for PC's and Meta for Macs)
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( !event.metaKey &amp;&amp; event.ctrlKey )</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2338/jquery-4750-which.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2338/jquery-4750-which.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

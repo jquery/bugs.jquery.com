@@ -142,46 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/core.js
-===================================================================
-<span class="token coord">--- test/unit/core.js	(revision 5772)</span>
-<span class="token coord">+++ test/unit/core.js	(working copy)</span>
-<span class="token coord">@@ -107,7 +107,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("isFunction", function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	expect(21);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	expect(27);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Make sure that false values return false
-</span><span class="token prefix unchanged"> </span><span class="token line">	ok( !jQuery.isFunction(), "No Value" );
-</span></span><span class="token coord">@@ -138,7 +138,20 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	// Make sure normal functions still work
-</span><span class="token prefix unchanged"> </span><span class="token line">	var fn = function(){};
-</span><span class="token prefix unchanged"> </span><span class="token line">	ok( jQuery.isFunction(fn), "Normal Function" );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	// Edge cases (bug #2968 #3134)
-</span><span class="token prefix inserted">+</span><span class="token line">	var fnWithToString = function(){};
-</span><span class="token prefix inserted">+</span><span class="token line">	fnWithToString.toString = function(){ return "Test"; };
-</span><span class="token prefix inserted">+</span><span class="token line">	fnWithToString.valueOf = function(){ return "Test"; };
-</span><span class="token prefix inserted">+</span><span class="token line">	ok( jQuery.isFunction(fnWithToString), "Normal Function with toString() and valueOf() overridden" );
-</span><span class="token prefix inserted">+</span><span class="token line">	ok( !jQuery.isFunction(new String("function")), 'new String("function")' );
-</span><span class="token prefix inserted">+</span><span class="token line">	ok( !jQuery.isFunction({toString:function(){return "function"}}), 'Object with toString()' );
-</span><span class="token prefix inserted">+</span><span class="token line">	ok( !jQuery.isFunction({valueOf:function(){return "function"}}), "Object with valueOf()" );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	// Native functions in IE
-</span><span class="token prefix inserted">+</span><span class="token line">	ok( jQuery.isFunction( window.alert ), "alert()" );
-</span><span class="token prefix inserted">+</span><span class="token line">	ok( jQuery.isFunction( window.prompt ), "prompt()" );	
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	var obj = document.createElement("object");
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Firefox says this is a function</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2968/2968.test.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2968/2968.test.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

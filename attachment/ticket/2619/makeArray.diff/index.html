@@ -140,36 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 5143)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -1120,12 +1120,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	makeArray: function( array ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		var ret = [];
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		// Need to use typeof to fight Safari childNodes crashes
-</span><span class="token prefix deleted">-</span><span class="token line">		if ( array.constructor != Array )
-</span><span class="token prefix deleted">-</span><span class="token line">			for ( var i = 0, length = array.length; i &lt; length; i++ )
-</span><span class="token prefix deleted">-</span><span class="token line">				ret.push( array[ i ] );
-</span><span class="token prefix deleted">-</span><span class="token line">		else
-</span><span class="token prefix deleted">-</span><span class="token line">			ret = array.slice( 0 );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if( array != undefined )
-</span><span class="token prefix inserted">+</span><span class="token line">			//strings and functions also have 'length'
-</span><span class="token prefix inserted">+</span><span class="token line">			if( array.length != undefined &amp;&amp; !array.split &amp;&amp; !array.call )
-</span><span class="token prefix inserted">+</span><span class="token line">				for( var i = array.length; i; )
-</span><span class="token prefix inserted">+</span><span class="token line">					ret[--i] = array[i];
-</span><span class="token prefix inserted">+</span><span class="token line">			else
-</span><span class="token prefix inserted">+</span><span class="token line">				ret[0] = array;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		return ret;
-</span><span class="token prefix unchanged"> </span><span class="token line">	},</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2619/makeArray.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2619/makeArray.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

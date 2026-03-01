@@ -142,50 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-htm" tabindex="0"><code class="language-htm"><input type="button" value="otherTrigger" onclick="otherTrigger()">
-        <input type="button" value="jqueryTrigger" onclick="jqueryTrigger()">
-        <input type="text" id="input1">
-    <script type="text/javascript">
-    if (document.attachEvent)
-    {
-        document.getElementById("input1").attachEvent("onkeydown", test);
-    }
-    else
-    {
-        document.getElementById("input1").addEventListener("keydown", test, false);
-    }
-    //$('#input1').keydown(test);
-    
-	function test()
-        {
-            alert('aaa');
-        }
-        
-        function otherTrigger()
-        {
-            var inputElement = document.getElementById("input1");
-		    if (!document.attachEvent)
-		    {
-			    var evObj = document.createEvent("UIEvents");
-			    evObj.initEvent( 'keydown', true, true);
-			    inputElement.dispatchEvent(evObj);
-		    }
-		    else
-		    {
-			    inputElement.fireEvent("onkeydown");
-		    }
-        }
-        function jqueryTrigger()
-        {
-            $('#input1').trigger('keydown');
-        }
-    </script></code></pre>
+      <pre class="language-htm" tabindex="0"><code class="language-htm"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4314/file.htm">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4314/file.htm">Original Format</a>
   </div>
 </h1></div>
         </div>

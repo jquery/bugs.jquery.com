@@ -140,25 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ajax.js
-===================================================================
-<span class="token coord">--- ajax.js	(revision 5615)</span>
-<span class="token coord">+++ ajax.js	(working copy)</span>
-<span class="token coord">@@ -27,7 +27,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Otherwise, build a param string
-</span><span class="token prefix unchanged"> </span><span class="token line">			} else {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				params = jQuery.param( params );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if( params.constructor != String )
-</span><span class="token prefix inserted">+</span><span class="token line">					params = jQuery.param( params );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				type = "POST";
-</span><span class="token prefix unchanged"> </span><span class="token line">			}</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1516/load-string.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1516/load-string.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

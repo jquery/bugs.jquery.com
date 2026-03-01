@@ -140,26 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js">jQuery<span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">mouseover</span><span class="token operator">:</span> <span class="token string">'mouseenter'</span><span class="token punctuation">,</span> <span class="token literal-property property">mouseout</span><span class="token operator">:</span> <span class="token string">'mouseleave'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">orig<span class="token punctuation">,</span> fix</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
-	<span class="token keyword">var</span> ev <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>event<span class="token punctuation">.</span>special<span class="token punctuation">[</span> fix <span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-		<span class="token function-variable function">setup</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-			<span class="token keyword">return</span> jQuery<span class="token punctuation">.</span>browser<span class="token punctuation">.</span>msie <span class="token operator">?</span> <span class="token boolean">false</span> <span class="token operator">:</span> <span class="token function">jQuery</span><span class="token punctuation">(</span> <span class="token keyword">this</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span> orig<span class="token punctuation">,</span> ev<span class="token punctuation">.</span>handler <span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-		<span class="token function-variable function">teardown</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-			<span class="token keyword">return</span> jQuery<span class="token punctuation">.</span>browser<span class="token punctuation">.</span>msie <span class="token operator">?</span> <span class="token boolean">false</span> <span class="token operator">:</span> <span class="token function">jQuery</span><span class="token punctuation">(</span> <span class="token keyword">this</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unbind</span><span class="token punctuation">(</span> orig<span class="token punctuation">,</span> ev<span class="token punctuation">.</span>handler <span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-		<span class="token function-variable function">handler</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">event</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
-			event<span class="token punctuation">.</span>type <span class="token operator">=</span> fix<span class="token punctuation">;</span> 
-			<span class="token keyword">return</span> <span class="token function">withinElement</span><span class="token punctuation">(</span> event<span class="token punctuation">,</span> <span class="token keyword">this</span> <span class="token punctuation">)</span> <span class="token operator">||</span> jQuery<span class="token punctuation">.</span>event<span class="token punctuation">.</span><span class="token function">handle</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">,</span> arguments <span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span>
-		<span class="token punctuation">}</span><span class="token punctuation">;</span>			   
-	<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3125/enterleave_patch.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3125/enterleave_patch.js">Original Format</a>
   </div>
 </h1></div>
         </div>

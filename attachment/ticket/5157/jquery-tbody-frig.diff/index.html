@@ -142,63 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery-1.3.2.js.orig	2009-07-05 17:02:00.000000000 +0100</span>
-<span class="token coord">+++ jquery-1.3.2.js	2009-09-03 09:43:57.000000000 +0100</span>
-<span class="token coord">@@ -615,6 +615,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	defaultView = document.defaultView || {},
-</span><span class="token prefix unchanged"> </span><span class="token line">	toString = Object.prototype.toString;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">var	tagBlockStyle = {
-</span><span class="token prefix inserted">+</span><span class="token line">		TBODY:	'table-row-group'
-</span><span class="token prefix inserted">+</span><span class="token line">	};
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">jQuery.extend({
-</span><span class="token prefix unchanged"> </span><span class="token line">	noConflict: function( deep ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		window.$ = _$;
-</span></span><span class="token coord">@@ -731,6 +735,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	blockDisplayStyle: function( elem ) {
-</span><span class="token prefix inserted">+</span><span class="token line">		return tagBlockStyle[ elem.tagName ] || "block";
-</span><span class="token prefix inserted">+</span><span class="token line">	},
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	// A method for quickly swapping in/out CSS properties to get correct calculations
-</span><span class="token prefix unchanged"> </span><span class="token line">	swap: function( elem, options, callback ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		var old = {};
-</span></span><span class="token coord">@@ -3801,7 +3809,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">						
-</span><span class="token prefix unchanged"> </span><span class="token line">						display = elem.css("display");
-</span><span class="token prefix unchanged"> </span><span class="token line">						if ( display === "none" )
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">							display = "block";
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">							display = jQuery.blockDisplayStyle( elem );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">						
-</span><span class="token prefix unchanged"> </span><span class="token line">						elem.remove();
-</span><span class="token prefix unchanged"> </span><span class="token line">						
-</span></span><span class="token coord">@@ -4021,7 +4029,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Set display property to block for height/width animations
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( ( this.prop == "height" || this.prop == "width" ) &amp;&amp; this.elem.style )
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			this.elem.style.display = "block";
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			this.elem.style.display = jQuery.blockDisplayStyle( this.elem );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Get the current size
-</span></span><span class="token coord">@@ -4114,7 +4122,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					// Reset the display
-</span><span class="token prefix unchanged"> </span><span class="token line">					this.elem.style.display = this.options.display;
-</span><span class="token prefix unchanged"> </span><span class="token line">					if ( jQuery.css(this.elem, "display") == "none" )
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">						this.elem.style.display = "block";
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">						this.elem.style.display = jQuery.blockDisplayStyle( this.elem );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				// Hide the element if the "hide" operation was done</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/5157/jquery-tbody-frig.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/5157/jquery-tbody-frig.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

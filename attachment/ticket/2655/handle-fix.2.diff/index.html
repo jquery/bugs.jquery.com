@@ -142,105 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event.js
-===================================================================
-<span class="token coord">--- src/event.js	(revision 5202)</span>
-<span class="token coord">+++ src/event.js	(working copy)</span>
-<span class="token coord">@@ -41,17 +41,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// Init the element's event structure
-</span><span class="token prefix unchanged"> </span><span class="token line">		var events = jQuery.data(elem, "events") || jQuery.data(elem, "events", {}),
-</span><span class="token prefix unchanged"> </span><span class="token line">			handle = jQuery.data(elem, "handle") || jQuery.data(elem, "handle", function(){
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				// returned undefined or false
-</span><span class="token prefix deleted">-</span><span class="token line">				var val;
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// Handle the second event of a trigger and when
-</span><span class="token prefix unchanged"> </span><span class="token line">				// an event is called after a page has unloaded
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( typeof jQuery == "undefined" || jQuery.event.triggered )
-</span><span class="token prefix deleted">-</span><span class="token line">					return val;
-</span><span class="token prefix deleted">-</span><span class="token line">		
-</span><span class="token prefix deleted">-</span><span class="token line">				val = jQuery.event.handle.apply(arguments.callee.elem, arguments);
-</span><span class="token prefix deleted">-</span><span class="token line">		
-</span><span class="token prefix deleted">-</span><span class="token line">				return val;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( typeof jQuery != "undefined" &amp;&amp; !jQuery.event.triggered )
-</span><span class="token prefix inserted">+</span><span class="token line">					return jQuery.event.handle.apply(arguments.callee.elem, arguments);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			});
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Add elem as a property of the handle function
-</span><span class="token prefix unchanged"> </span><span class="token line">		// This is to prevent a memory leak with non-native
-</span></span><span class="token coord">@@ -240,36 +233,35 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		var val;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Empty object is for triggered events with no data
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		event = jQuery.event.fix( event || window.event || {} ); 
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		event = arguments[0] = jQuery.event.fix( event || window.event ); 
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Namespaced event handlers
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var parts = event.type.split(".");
-</span><span class="token prefix deleted">-</span><span class="token line">		event.type = parts[0];
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var ns = event.type.split(".");
-</span><span class="token prefix inserted">+</span><span class="token line">		event.type = ns[0];
-</span><span class="token prefix inserted">+</span><span class="token line">		ns = ns[1];//namespace
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var handlers = jQuery.data(this, "events") &amp;&amp; jQuery.data(this, "events")[event.type], args = Array.prototype.slice.call( arguments, 1 );
-</span><span class="token prefix deleted">-</span><span class="token line">		args.unshift( event );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var handlers = jQuery.data(this, "events") &amp;&amp; jQuery.data(this, "events")[event.type];
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		for ( var j in handlers ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			var handler = handlers[j];
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			// Pass in a reference to the handler function itself
-</span><span class="token prefix deleted">-</span><span class="token line">			// So that we can later remove it
-</span><span class="token prefix deleted">-</span><span class="token line">			args[0].handler = handler;
-</span><span class="token prefix deleted">-</span><span class="token line">			args[0].data = handler.data;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Filter the functions by class
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( !parts[1] &amp;&amp; !event.exclusive || handler.type == parts[1] ) {
-</span><span class="token prefix deleted">-</span><span class="token line">				var ret = handler.apply( this, args );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( !ns &amp;&amp; !event.exclusive || handler.type == ns ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( val !== false )
-</span><span class="token prefix deleted">-</span><span class="token line">					val = ret;
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">				if ( ret === false ) {
-</span><span class="token prefix deleted">-</span><span class="token line">					event.preventDefault();
-</span><span class="token prefix deleted">-</span><span class="token line">					event.stopPropagation();
-</span><span class="token prefix deleted">-</span><span class="token line">				}
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				// Pass in a reference to the handler function itself
-</span><span class="token prefix inserted">+</span><span class="token line">				// So that we can later remove it
-</span><span class="token prefix inserted">+</span><span class="token line">				event.handler = handler;
-</span><span class="token prefix inserted">+</span><span class="token line">				event.data = handler.data;
-</span><span class="token prefix inserted">+</span><span class="token line">				
-</span><span class="token prefix inserted">+</span><span class="token line">				val = handler.apply( this, arguments ) !== false &amp;&amp; val;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( val === false ) {//check after the loop
-</span><span class="token prefix inserted">+</span><span class="token line">			event.preventDefault();
-</span><span class="token prefix inserted">+</span><span class="token line">			event.stopPropagation();
-</span><span class="token prefix inserted">+</span><span class="token line">		}
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// Clean up added properties in IE to prevent memory leak
-</span><span class="token prefix unchanged"> </span><span class="token line">		if (jQuery.browser.msie)
-</span><span class="token prefix unchanged"> </span><span class="token line">			event.target = event.preventDefault = event.stopPropagation =
-</span></span><span class="token coord">@@ -279,10 +271,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	fix: function(event) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if( event._fixed_ )//already fixed
-</span><span class="token prefix inserted">+</span><span class="token line">			return event;
-</span><span class="token prefix inserted">+</span><span class="token line">		
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// store a copy of the original event object 
-</span><span class="token prefix unchanged"> </span><span class="token line">		// and clone to set read-only properties
-</span><span class="token prefix unchanged"> </span><span class="token line">		var originalEvent = event;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		event = jQuery.extend({}, originalEvent);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		event = jQuery.extend({ _fixed_:true }, originalEvent);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		// add preventDefault and stopPropagation since 
-</span><span class="token prefix unchanged"> </span><span class="token line">		// they will not work on the clone</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2655/handle-fix.2.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2655/handle-fix.2.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,39 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token keyword">function</span> <span class="token function">loadMapFromUrl</span><span class="token punctuation">(</span><span class="token parameter">url</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'GET'</span><span class="token punctuation">,</span>
-        <span class="token literal-property property">url</span><span class="token operator">:</span> url<span class="token punctuation">,</span>
-        <span class="token literal-property property">beforeSend</span><span class="token operator">:</span> showLoading<span class="token punctuation">,</span>
-        <span class="token literal-property property">success</span><span class="token operator">:</span> showMap<span class="token punctuation">,</span>
-        <span class="token literal-property property">error</span><span class="token operator">:</span> showError 
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">showError</span><span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span>textStatus</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#mapContent'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span><span class="token string">'Maps are temporarily unavailable'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">showMap</span><span class="token punctuation">(</span><span class="token parameter">response<span class="token punctuation">,</span>textStatus<span class="token punctuation">,</span>request</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token comment">// IE6 was grabbing the images twice doing this, causing the ImageProxyServlet to blow up</span>
-    <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#mapContent'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">//document.getElementById('mapContent').innerHTML=response;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">showLoading</span><span class="token punctuation">(</span><span class="token parameter">request</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#mapContent'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span><span class="token string">'Loading Map...'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/6212/ajax-calls.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/6212/ajax-calls.js">Original Format</a>
   </div>
 </h1></div>
         </div>

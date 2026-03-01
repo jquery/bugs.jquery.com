@@ -140,25 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/ajax/ajax.js
-===================================================================
-<span class="token coord">--- jquery/src/ajax/ajax.js	(revision 2919)</span>
-<span class="token coord">+++ jquery/src/ajax/ajax.js	(working copy)</span>
-<span class="token coord">@@ -795,7 +795,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		var xml = type == "xml" || !type &amp;&amp; ct &amp;&amp; ct.indexOf("xml") >= 0;
-</span><span class="token prefix unchanged"> </span><span class="token line">		data = xml ? r.responseXML : r.responseText;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( xml &amp;&amp; data.documentElement.tagName == "parsererror" )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( xml &amp;&amp; r.responseText.match(/\S/) &amp;&amp; data.documentElement.tagName == "parsererror" )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			throw "parsererror";
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// If the type is "script", eval it in global context</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1541/xml_parse_error_skipped_when_request_body_is_blank.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1541/xml_parse_error_skipped_when_request_body_is_blank.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

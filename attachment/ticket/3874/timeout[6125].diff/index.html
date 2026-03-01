@@ -140,33 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ajax.js
-===================================================================
-<span class="token coord">--- ajax.js	(revision 6125)</span>
-<span class="token coord">+++ ajax.js	(working copy)</span>
-<span class="token coord">@@ -394,13 +394,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			if ( s.timeout > 0 )
-</span><span class="token prefix unchanged"> </span><span class="token line">				setTimeout(function(){
-</span><span class="token prefix unchanged"> </span><span class="token line">					// Check to see if the request is still happening
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					if ( xhr ) {
-</span><span class="token prefix deleted">-</span><span class="token line">						if( !requestDone )
-</span><span class="token prefix deleted">-</span><span class="token line">							onreadystatechange( "timeout" );
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					if ( xhr &amp;&amp; !requestDone ){
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">						// Cancel the request
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">						if ( xhr )
-</span><span class="token prefix deleted">-</span><span class="token line">							xhr.abort();
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">						xhr.abort();
-</span><span class="token prefix inserted">+</span><span class="token line">						onreadystatechange( "timeout" );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					}
-</span><span class="token prefix unchanged"> </span><span class="token line">				}, s.timeout);
-</span><span class="token prefix unchanged"> </span><span class="token line">		}</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3874/timeout[6125].diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3874/timeout[6125].diff">Original Format</a>
   </div>
 </h1></div>
         </div>

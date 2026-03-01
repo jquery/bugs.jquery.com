@@ -140,126 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery.tablesorter.js.svn	2007-02-20 04:34:25.000000000 +0000</span>
-<span class="token coord">+++ jquery.tablesorter.js	2007-02-20 04:48:39.000000000 +0000</span>
-<span class="token coord">@@ -1,4 +1,4 @@</span>
-<span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">/*
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">/* vim: sts=4:ts=4:sw=4:noet:fenc=utf-8
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> *
-</span><span class="token prefix unchanged"> </span><span class="token line"> * TableSorter - Client-side table sorting with ease!
-</span><span class="token prefix unchanged"> </span><span class="token line"> *
-</span></span><span class="token coord">@@ -33,8 +33,12 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		bind: true,
-</span><span class="token prefix unchanged"> </span><span class="token line">		addHeaderLink: false,
-</span><span class="token prefix unchanged"> </span><span class="token line">		lockedSortDir: false,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		minToScroll: false,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		dateFormat: 'mm/dd/yyyy' /** us default, uk dd/mm/yyyy */
-</span><span class="token prefix unchanged"> </span><span class="token line">	};
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">	var ieDivID = 0;
-</span><span class="token prefix inserted">+</span><span class="token line">	var enableScrollHasRun = false;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> 
-</span><span class="token prefix unchanged"> </span><span class="token line">	return this.each(function(){
-</span><span class="token prefix unchanged"> </span><span class="token line">	/** add a class name for identifiying the table for companion plugins */
-</span></span><span class="token coord">@@ -58,6 +62,70 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		/** table object holder.*/
-</span><span class="token prefix unchanged"> </span><span class="token line">		var oTable = this;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		function enableScroll() {
-</span><span class="token prefix inserted">+</span><span class="token line">			if ( defaults.minToScroll ) {
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( jQuery.browser.mozilla ) { if (enableScrollHasRun) { return; }; mozScroll(); };
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( jQuery.browser.msie ) { ieScroll() };
-</span><span class="token prefix inserted">+</span><span class="token line">			};
-</span><span class="token prefix inserted">+</span><span class="token line">			enableScrollHasRun = true;
-</span><span class="token prefix inserted">+</span><span class="token line">		};
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">		function mozScroll() {
-</span><span class="token prefix inserted">+</span><span class="token line">			for (i=0; i &lt; oTable.tBodies.length; i++) {
-</span><span class="token prefix inserted">+</span><span class="token line">				finalSetup = false;
-</span><span class="token prefix inserted">+</span><span class="token line">				var rows = oTable.tBodies[i].rows;
-</span><span class="token prefix inserted">+</span><span class="token line">                if (rows.length > defaults.minToScroll) {
-</span><span class="token prefix inserted">+</span><span class="token line">                    finalSetup = true;
-</span><span class="token prefix inserted">+</span><span class="token line">                    var lastChilds = jQuery(oTable.tBodies[i]).find('td:last-child');
-</span><span class="token prefix inserted">+</span><span class="token line">                    jQuery(lastChilds).css('padding-right', '16px');
-</span><span class="token prefix inserted">+</span><span class="token line">                    var rows_height = jQuery(rows).height();
-</span><span class="token prefix inserted">+</span><span class="token line">                    if ( rows_height == 0 ) { rows_height = 32; };
-</span><span class="token prefix inserted">+</span><span class="token line">                    var tbody_height = (rows_height * defaults.minToScroll) + 'px';
-</span><span class="token prefix inserted">+</span><span class="token line">                    jQuery(oTable.tBodies[i]).css({ overflow: 'auto', overflowX: 'hidden', height: tbody_height });
-</span><span class="token prefix inserted">+</span><span class="token line">                };
-</span><span class="token prefix inserted">+</span><span class="token line">                if (finalSetup) { jQuery(oTable).css('border-collapse', 'separate'); };
-</span><span class="token prefix inserted">+</span><span class="token line">            };
-</span><span class="token prefix inserted">+</span><span class="token line">        };
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">		function ieScroll () {
-</span><span class="token prefix inserted">+</span><span class="token line">            var rows = 0;
-</span><span class="token prefix inserted">+</span><span class="token line">            for ( i=0; i &lt; oTable.tBodies.length; i++) {
-</span><span class="token prefix inserted">+</span><span class="token line">                rows += oTable.tBodies[i].rows.length;
-</span><span class="token prefix inserted">+</span><span class="token line">            };
-</span><span class="token prefix inserted">+</span><span class="token line">            var tDivID = 'scrollWrapper-';
-</span><span class="token prefix inserted">+</span><span class="token line">            var scrollTop_ = 0;
-</span><span class="token prefix inserted">+</span><span class="token line">            if (rows > defaults.minToScroll) {
-</span><span class="token prefix inserted">+</span><span class="token line">                var createDiv = true;
-</span><span class="token prefix inserted">+</span><span class="token line">                var div_id = tDivID + ieDivID;
-</span><span class="token prefix inserted">+</span><span class="token line">                if ( jQuery(oTable).parent().is('div') &amp;&amp; jQuery(oTable).parent().attr('id') == tDivID + (ieDivID-1) ) {
-</span><span class="token prefix inserted">+</span><span class="token line">                    createDiv = false;
-</span><span class="token prefix inserted">+</span><span class="token line">                    scrollTop_ = oTable.parentNode.scrollTop
-</span><span class="token prefix inserted">+</span><span class="token line">                };
-</span><span class="token prefix inserted">+</span><span class="token line">                if ( createDiv ) { jQuery(oTable).wrap('&lt;div id="' + div_id + '">&lt;/div>'); };
-</span><span class="token prefix inserted">+</span><span class="token line">                jQuery(oTable).css({
-</span><span class="token prefix inserted">+</span><span class="token line">                    margin: '0px', marginRight: '22px', top: '0px', left: '0px'
-</span><span class="token prefix inserted">+</span><span class="token line">                });
-</span><span class="token prefix inserted">+</span><span class="token line">                jQuery(oTable.tHead).css('position', 'relative');
-</span><span class="token prefix inserted">+</span><span class="token line">                jQuery(oTable.tHead.rows).css({
-</span><span class="token prefix inserted">+</span><span class="token line">                    top: '0px', bottom: '0px', position: 'relative'
-</span><span class="token prefix inserted">+</span><span class="token line">                });
-</span><span class="token prefix inserted">+</span><span class="token line">                var rows_height = jQuery(oTable.tBodies[0].rows).height();
-</span><span class="token prefix inserted">+</span><span class="token line">                if ( rows_height == 0 ) { rows_height = 32; };
-</span><span class="token prefix inserted">+</span><span class="token line">                var div_height = (rows_height * defaults.minToScroll) + 'px';
-</span><span class="token prefix inserted">+</span><span class="token line">                jQuery('#'+div_id).css({
-</span><span class="token prefix inserted">+</span><span class="token line">                    width: '100%', overflow: 'auto', overflowX: 'hidden', height: div_height
-</span><span class="token prefix inserted">+</span><span class="token line">                });
-</span><span class="token prefix inserted">+</span><span class="token line">                oTable.parentNode.scrollTop = scrollTop_;
-</span><span class="token prefix inserted">+</span><span class="token line">                jQuery(oTable.tHead.rows).css('top', scrollTop_ + 'px');
-</span><span class="token prefix inserted">+</span><span class="token line">                if ( createDiv ) { ieDivID++; };
-</span><span class="token prefix inserted">+</span><span class="token line">                var div_width = jQuery('#'+div_id).width();
-</span><span class="token prefix inserted">+</span><span class="token line">                var table_width = (div_width-18)*100/div_width;
-</span><span class="token prefix inserted">+</span><span class="token line">                jQuery(oTable).css('width', table_width+'%');
-</span><span class="token prefix inserted">+</span><span class="token line">            };
-</span><span class="token prefix inserted">+</span><span class="token line">            return;
-</span><span class="token prefix inserted">+</span><span class="token line">        };
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		if(defaults.stripeRowsOnStartUp &amp;&amp; defaults.stripingRowClass) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			jQuery.tableSorter.utils.stripeRows(oTable,defaults);
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span></span><span class="token coord">@@ -132,11 +200,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">						jQuery(".sorter",oCell).click(function(e) {
-</span><span class="token prefix unchanged"> </span><span class="token line">							sortOnColumn( jQuery(this).parent(), ((defaults.lockedSortDir) ? defaults.lockedSortDir : jQuery(this).parent()[0].count++) % 2, jQuery(this).parent()[0].index );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">							enableScroll()
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">							return false;
-</span><span class="token prefix unchanged"> </span><span class="token line">						});
-</span><span class="token prefix unchanged"> </span><span class="token line">					} else {
-</span><span class="token prefix unchanged"> </span><span class="token line">						jQuery(oCell).click(function(e) {
-</span><span class="token prefix unchanged"> </span><span class="token line">							sortOnColumn( jQuery(this), ((defaults.lockedSortDir) ? defaults.lockedSortDir : jQuery(this)[0].count++) % 2, jQuery(this)[0].index );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">							enableScroll()
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">							return false;
-</span><span class="token prefix unchanged"> </span><span class="token line">						});
-</span><span class="token prefix unchanged"> </span><span class="token line">					}
-</span></span><span class="token coord">@@ -254,6 +324,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					jQuery.event.trigger("sortStop",[COLUMN_INDEX]);
-</span><span class="token prefix unchanged"> </span><span class="token line">				}
-</span><span class="token prefix unchanged"> </span><span class="token line">				COLUMN_LAST_INDEX = COLUMN_INDEX;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				enableScroll();
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">	});</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/981/jquery.tablesorter.js.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/981/jquery.tablesorter.js.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

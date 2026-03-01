@@ -142,55 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: C:/Development/jquery/test/unit/event.js
-===================================================================
---- C:/Development/jquery/test/unit/event.js	(revision 6582)
-+++ C:/Development/jquery/test/unit/event.js	(working copy)
-@@ -799,19 +799,30 @@
- });
- 
- test("live with submit", function() {
--	var count = 0;
-+	var count1 = 0, count2 = 0;
- 	
--	jQuery("#testForm").live("submit", function() {
--		count++;
--		return false;
-+	jQuery("#testForm").live("submit", function(ev) {
-+		count1++;
-+		ev.preventDefault()
- 	});
-+	jQuery("body").live("submit", function(ev) {
-+		count2++;
-+		ev.preventDefault()
-+	});
-+	if(jQuery.support.submitBubbles){
-+		jQuery("#testForm input[name=sub1]")[0].click();
-+		equals(count1,1 );
-+		equals(count2,1);
-+	}else{
-+		jQuery("#testForm input[name=sub1]")[0].click();
-+		jQuery("#testForm input[name=T1]").trigger({type: "keypress", keyCode: 13});
-+		equals(count1,2 );
-+		equals(count2,2);
-+	}
- 	
--	jQuery("#testForm input[name=sub1]")[0].click();
--	jQuery("#testForm input[name=T1]").trigger({type: "keypress", keyCode: 13});
- 	
--	equals(2, count);
--	
- 	jQuery("#testForm").die("submit");
-+	jQuery("body").die("submit");
- });
- 
- test("live with focus/blur", function(){</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/5267/eventsTest.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/5267/eventsTest.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

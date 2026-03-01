@@ -140,34 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/fx.js
-===================================================================
-<span class="token coord">--- src/fx.js	(revision 3685)</span>
-<span class="token coord">+++ src/fx.js	(working copy)</span>
-<span class="token coord">@@ -126,7 +126,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">	queue: function(type, fn){
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( jQuery.isFunction(type) ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( jQuery.isFunction(type) || type instanceof Array ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			fn = type;
-</span><span class="token prefix unchanged"> </span><span class="token line">			type = "fx";
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span></span><span class="token coord">@@ -162,6 +162,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	if ( !elem )
-</span><span class="token prefix unchanged"> </span><span class="token line">		return;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	type = type || "fx";
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	var q = jQuery.data( elem, type + "queue" );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	if ( !q || array )</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1822/1822.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1822/1822.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

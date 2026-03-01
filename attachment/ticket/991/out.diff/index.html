@@ -140,45 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax/ajax.js
-===================================================================
-<span class="token coord">--- src/ajax/ajax.js	(revision 1396)</span>
-<span class="token coord">+++ src/ajax/ajax.js	(working copy)</span>
-<span class="token coord">@@ -647,6 +647,12 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// The transfer is complete and the data is available, or the request timed out
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( xml &amp;&amp; (xml.readyState == 4 || isTimeout == "timeout") ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">				requestDone = true;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				
-</span><span class="token prefix inserted">+</span><span class="token line">				if (ival) {
-</span><span class="token prefix inserted">+</span><span class="token line">					clearInterval(ival);
-</span><span class="token prefix inserted">+</span><span class="token line">					ival = null;
-</span><span class="token prefix inserted">+</span><span class="token line">				}
-</span><span class="token prefix inserted">+</span><span class="token line">				
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				var status;
-</span><span class="token prefix unchanged"> </span><span class="token line">				try {
-</span><span class="token prefix unchanged"> </span><span class="token line">					status = jQuery.httpSuccess( xml ) &amp;&amp; isTimeout != "timeout" ?
-</span></span><span class="token coord">@@ -692,11 +698,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					s.complete(xml, status);
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				// Stop memory leaks
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				xml.onreadystatechange = function(){};
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				// xml.onreadystatechange = function(){};
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				xml = null;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				xml2 = null;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">		};
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		xml.onreadystatechange = onreadystatechange;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		//xml.onreadystatechange = onreadystatechange;
-</span><span class="token prefix inserted">+</span><span class="token line">		var ival = setInterval(onreadystatechange, 13);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Timeout checker
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( s.timeout > 0 )</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/991/out.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/991/out.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

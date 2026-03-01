@@ -142,39 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: core.js
-===================================================================
-<span class="token coord">--- core.js	(revision 5604)</span>
-<span class="token coord">+++ core.js	(working copy)</span>
-<span class="token coord">@@ -949,12 +949,16 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Convert html string into DOM nodes
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( typeof elem == "string" ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				// Fix "XHTML"-style tags in all browsers
-</span><span class="token prefix deleted">-</span><span class="token line">				elem = elem.replace(/(&lt;(\w+)[^>]*?)\/>/g, function(all, front, tag){
-</span><span class="token prefix deleted">-</span><span class="token line">					return tag.match(/^(abbr|br|col|img|input|link|meta|param|hr|area|embed)$/i) ?
-</span><span class="token prefix deleted">-</span><span class="token line">						all :
-</span><span class="token prefix deleted">-</span><span class="token line">						front + ">&lt;/" + tag + ">";
-</span><span class="token prefix deleted">-</span><span class="token line">				});
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				
-</span><span class="token prefix inserted">+</span><span class="token line">				elem = elem
-</span><span class="token prefix inserted">+</span><span class="token line">					// Remove comment nodes
-</span><span class="token prefix inserted">+</span><span class="token line">					.replace(/&lt;!--.*?-->/g, "")
-</span><span class="token prefix inserted">+</span><span class="token line">					// Fix "XHTML"-style tags in all browsers
-</span><span class="token prefix inserted">+</span><span class="token line">					.replace(/(&lt;(\w+)[^>]*?)\/>/g, function(all, front, tag){
-</span><span class="token prefix inserted">+</span><span class="token line">						return tag.match(/^(abbr|br|col|img|input|link|meta|param|hr|area|embed)$/i) ?
-</span><span class="token prefix inserted">+</span><span class="token line">							all :
-</span><span class="token prefix inserted">+</span><span class="token line">							front + ">&lt;/" + tag + ">";
-</span><span class="token prefix inserted">+</span><span class="token line">					});
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				// Trim whitespace, otherwise indexOf won't work as expected
-</span><span class="token prefix unchanged"> </span><span class="token line">				var tags = jQuery.trim( elem ).toLowerCase(), div = context.createElement("div");</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2604/clean-comments.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2604/clean-comments.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

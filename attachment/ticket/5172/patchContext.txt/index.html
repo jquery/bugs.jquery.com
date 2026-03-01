@@ -140,29 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">Index: core.js
-===================================================================
---- core.js	(revision 6533)
-+++ core.js	(working copy)
-@@ -90,12 +90,13 @@
- 
- 			// HANDLE: $(expr, $(...))
- 			} else if ( !context || context.jquery ) {
-+				if(context &amp;&amp; context.length == 1) context.context = context[0];
- 				return (context || rootjQuery).find( selector );
- 
- 			// HANDLE: $(expr, context)
- 			// (which is just equivalent to: $(expr, $(context))
- 			} else {
--				return jQuery( context ).find( selector );
-+				return jQuery( selector, jQuery( context ));
- 			}</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/5172/patchContext.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/5172/patchContext.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

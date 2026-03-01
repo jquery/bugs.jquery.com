@@ -140,27 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: core.js
-===================================================================
-<span class="token coord">--- core.js	(revision 5554)</span>
-<span class="token coord">+++ core.js	(working copy)</span>
-<span class="token coord">@@ -349,7 +349,9 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	is: function( selector ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		return !!selector &amp;&amp; jQuery.multiFilter( selector, this ).length > 0;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		return typeof selector == 'string' ? 
-</span><span class="token prefix inserted">+</span><span class="token line">			jQuery.multiFilter( selector, this ).length > 0 :
-</span><span class="token prefix inserted">+</span><span class="token line">			jQuery.inArray( selector, this ) != -1;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	hasClass: function( selector ) {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2773/is.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2773/is.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

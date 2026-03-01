@@ -142,39 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event.js
-===================================================================
-<span class="token coord">--- src/event.js	(revision 3830)</span>
-<span class="token coord">+++ src/event.js	(working copy)</span>
-<span class="token coord">@@ -195,7 +195,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Namespaced event handlers
-</span><span class="token prefix unchanged"> </span><span class="token line">		var parts = event.type.split(".");
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		event.type = parts[0];
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if (parts[1])
-</span><span class="token prefix inserted">+</span><span class="token line">			event.type = parts[0];
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		var handlers = jQuery.data(this, "events") &amp;&amp; jQuery.data(this, "events")[event.type], args = Array.prototype.slice.call( arguments, 1 );
-</span><span class="token prefix unchanged"> </span><span class="token line">		args.unshift( event );
-</span></span><span class="token coord">@@ -233,7 +234,11 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// store a copy of the original event object 
-</span><span class="token prefix unchanged"> </span><span class="token line">		// and clone to set read-only properties
-</span><span class="token prefix unchanged"> </span><span class="token line">		var originalEvent = event;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		event = jQuery.extend({}, originalEvent);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var F = function () {};
-</span><span class="token prefix inserted">+</span><span class="token line">		F.prototype = originalEvent;
-</span><span class="token prefix inserted">+</span><span class="token line">		event = new F();
-</span><span class="token prefix inserted">+</span><span class="token line">		if (!event.type)
-</span><span class="token prefix inserted">+</span><span class="token line">			event = jQuery.extend({}, originalEvent);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		// add preventDefault and stopPropagation since 
-</span><span class="token prefix unchanged"> </span><span class="token line">		// they will not work on the clone</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1871/1871.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1871/1871.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

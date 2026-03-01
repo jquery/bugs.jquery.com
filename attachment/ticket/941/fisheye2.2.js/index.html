@@ -142,130 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token comment">/**
- * Interface Elements for jQuery
- * Fisheye2 menu
- * 
- * http://interface.eyecon.ro
- * 
- * Copyright (c) 2006 Stefan Petre
- * Dual licensed under the MIT (MIT-LICENSE.txt) 
- * and GPL (GPL-LICENSE.txt) licenses.
- *
- */</span>
-
-<span class="token comment">/**
- * Build a Fisheye2 menu from a list of links
- *
- * @name Fisheye2
- * @description Build a Fisheye2 menu from a list of links
- * @param Hash hash A hash of parameters
- * @option String items items selection
- * @option String container container element
- * @option Integer itemWidth the minimum width for each item
- * @option Integer maxWidth the maximum width for each item
- * @option String itemsText selection of element that contains the text for each item
- * @option Integer proximity the distance from element that make item to interact
- * @option String valign vertical alignment
- * @option String halign horizontal alignment
- *
- * @type jQuery
- * @cat Plugins/Interface
- * @author Stefan Petre
- */</span>
-jQuery<span class="token punctuation">.</span>iFisheye2 <span class="token operator">=</span> <span class="token punctuation">{</span>
-	
-	<span class="token function-variable function">build</span> <span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">options</span><span class="token punctuation">)</span>
-	<span class="token punctuation">{</span>
-	
-		<span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span>
-			<span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-			<span class="token punctuation">{</span>
-				<span class="token keyword">var</span> el <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-				el<span class="token punctuation">.</span>fisheyeCfg <span class="token operator">=</span> <span class="token punctuation">{</span>
-					<span class="token literal-property property">container</span><span class="token operator">:</span> <span class="token function">jQuery</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-					<span class="token literal-property property">itemWidth</span><span class="token operator">:</span> options<span class="token punctuation">.</span>itemWidth<span class="token punctuation">,</span>
-					<span class="token literal-property property">itemsText</span><span class="token operator">:</span> options<span class="token punctuation">.</span>itemsText<span class="token punctuation">,</span>
-					<span class="token literal-property property">proximity</span><span class="token operator">:</span> options<span class="token punctuation">.</span>proximity<span class="token punctuation">,</span>
-					<span class="token literal-property property">valign</span><span class="token operator">:</span> options<span class="token punctuation">.</span>valign<span class="token punctuation">,</span>
-					<span class="token literal-property property">halign</span><span class="token operator">:</span> options<span class="token punctuation">.</span>halign<span class="token punctuation">,</span>
-					<span class="token literal-property property">maxWidth</span> <span class="token operator">:</span> options<span class="token punctuation">.</span>maxWidth
-				<span class="token punctuation">}</span><span class="token punctuation">;</span>
-				el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>items <span class="token operator">=</span> <span class="token function">jQuery</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>items<span class="token punctuation">,</span> el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>container<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-				el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span><span class="token string">'width'</span><span class="token punctuation">,</span> el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>itemWidth<span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token comment">//el.fisheyeCfg.items.children().css('width', '100%');</span>
-
-				<span class="token comment">/* Get container position */</span>
-				<span class="token keyword">var</span> pos <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>iUtil<span class="token punctuation">.</span><span class="token function">getPosition</span><span class="token punctuation">(</span>el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token keyword">var</span> pos1 <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>iUtil<span class="token punctuation">.</span><span class="token function">getPosition</span><span class="token punctuation">(</span>
-						el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token keyword">var</span> size <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>iUtil<span class="token punctuation">.</span><span class="token function">getSize</span><span class="token punctuation">(</span>
-						el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				pos<span class="token punctuation">.</span>w <span class="token operator">=</span> pos1<span class="token punctuation">.</span>x<span class="token operator">+</span>size<span class="token punctuation">.</span>w <span class="token operator">-</span> pos<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
-				pos<span class="token punctuation">.</span>h <span class="token operator">=</span> pos1<span class="token punctuation">.</span>y<span class="token operator">+</span>size<span class="token punctuation">.</span>h <span class="token operator">-</span> pos<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
-
-				el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>pos <span class="token operator">=</span> pos<span class="token punctuation">;</span>
-
-
-				el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span><span class="token function">items</span>
-					<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>
-						<span class="token string">'mouseover'</span><span class="token punctuation">,</span>
-						<span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-						<span class="token punctuation">{</span>
-							<span class="token function">jQuery</span><span class="token punctuation">(</span>el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>itemsText<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span>style<span class="token punctuation">.</span>display <span class="token operator">=</span> <span class="token string">'block'</span><span class="token punctuation">;</span>
-						<span class="token punctuation">}</span>
-					<span class="token punctuation">)</span>
-					<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>
-						<span class="token string">'mouseout'</span><span class="token punctuation">,</span>
-						<span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-						<span class="token punctuation">{</span>
-							<span class="token function">jQuery</span><span class="token punctuation">(</span>el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>itemsText<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span>style<span class="token punctuation">.</span>display <span class="token operator">=</span> <span class="token string">'none'</span><span class="token punctuation">;</span>
-						<span class="token punctuation">}</span>
-					<span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token function">jQuery</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>
-					<span class="token string">'mousemove'</span><span class="token punctuation">,</span>
-					<span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span>
-					<span class="token punctuation">{</span>
-						<span class="token keyword">var</span> pointer <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>iUtil<span class="token punctuation">.</span><span class="token function">getPointer</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-						<span class="token keyword">var</span> posy <span class="token operator">=</span> pointer<span class="token punctuation">.</span>y <span class="token operator">-</span> el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>pos<span class="token punctuation">.</span>y <span class="token operator">-</span> pos<span class="token punctuation">.</span>h<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">;</span>
-						posy <span class="token operator">*=</span> posy<span class="token punctuation">;</span>
-						<span class="token keyword">var</span> posx <span class="token operator">=</span> pointer<span class="token punctuation">.</span>x <span class="token operator">-</span> el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>pos<span class="token punctuation">.</span>x <span class="token operator">-</span> el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>itemWidth<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">;</span>
-
-						el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span>
-								<span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">nr</span><span class="token punctuation">)</span>
-								<span class="token punctuation">{</span>
-									distance <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">sqrt</span><span class="token punctuation">(</span>
-										Math<span class="token punctuation">.</span><span class="token function">pow</span><span class="token punctuation">(</span>posx <span class="token operator">-</span> nr<span class="token operator">*</span>el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>itemWidth<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
-										<span class="token operator">+</span> posy
-									<span class="token punctuation">)</span><span class="token punctuation">;</span>
-									distance <span class="token operator">-=</span> el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>itemWidth<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">;</span>
-									
-									distance <span class="token operator">=</span> distance <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token number">0</span> <span class="token operator">:</span> distance<span class="token punctuation">;</span>
-									distance <span class="token operator">=</span> distance <span class="token operator">></span> el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>proximity <span class="token operator">?</span> el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>proximity <span class="token operator">:</span> distance<span class="token punctuation">;</span>
-									distance <span class="token operator">=</span> el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>proximity <span class="token operator">-</span> distance<span class="token punctuation">;</span>
-									
-									extraWidth <span class="token operator">=</span> el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>maxWidth <span class="token operator">*</span> distance<span class="token operator">/</span>el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>proximity<span class="token punctuation">;</span>
-									
-									<span class="token comment">//$(this).children().not('br').css('width', el.fisheyeCfg.itemWidth + extraWidth + 'px');</span>
-
-									<span class="token keyword">this</span><span class="token punctuation">.</span>style<span class="token punctuation">.</span>width <span class="token operator">=</span> el<span class="token punctuation">.</span>fisheyeCfg<span class="token punctuation">.</span>itemWidth <span class="token operator">+</span> extraWidth <span class="token operator">+</span> <span class="token string">'px'</span><span class="token punctuation">;</span>
-						<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-					<span class="token punctuation">}</span>
-				<span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span>
-		<span class="token punctuation">)</span>
-	<span class="token punctuation">}</span>
-	
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-jQuery<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>Fisheye2 <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>iFisheye2<span class="token punctuation">.</span>build<span class="token punctuation">;</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/941/fisheye2.2.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/941/fisheye2.2.js">Original Format</a>
   </div>
 </h1></div>
         </div>

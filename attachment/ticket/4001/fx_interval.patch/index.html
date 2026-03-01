@@ -140,33 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: fx.js
-===================================================================
---- fx.js	(revision 6168)
-+++ fx.js	(working copy)
-@@ -273,7 +273,7 @@
- 
- 		t.elem = this.elem;
- 
--		if ( t() && jQuery.timers.push(t) == 1 ) {
-+		if ( t() && jQuery.timers.push(t) && !timerId) {
- 			timerId = setInterval(function(){
- 				var timers = jQuery.timers;
- 
-@@ -283,6 +283,7 @@
- 
- 				if ( !timers.length ) {
- 					clearInterval( timerId );
-+					timerId = undefined;
- 				}
- 			}, 13);
- 		}</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4001/fx_interval.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4001/fx_interval.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

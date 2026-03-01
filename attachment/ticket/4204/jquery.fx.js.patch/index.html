@@ -140,26 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- a/src/fx.js	2009-02-28 18:47:15.000000000 -0600
-+++ b/src/fx.js	2009-02-28 18:50:18.000000000 -0600
-@@ -95,6 +95,12 @@
- 	},
- 
- 	fadeTo: function(speed,to,callback){
-+		for ( var i = 0, l = this.length; i < l; i++ ){
-+			if ( jQuery(this[i]).is(":hidden") ) {
-+				this[i].style.opacity = 0;
-+				jQuery(this[i]).show();
-+			}
-+		};
- 		return this.animate({opacity: to}, speed, callback);
- 	},</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4204/jquery.fx.js.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4204/jquery.fx.js.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,83 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 6000)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -1117,8 +1117,17 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return elem[ name ];
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	// Trim function by Ariel Flesler
-</span><span class="token prefix inserted">+</span><span class="token line">	// http://flesler.blogspot.com/2008/11/fast-trim-function-for-javascript.html
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	trim: function( text ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		return (text || "").replace( /^\s+|\s+$/g, "" );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if( !text )
-</span><span class="token prefix inserted">+</span><span class="token line">			return "";
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">		var start = -1,
-</span><span class="token prefix inserted">+</span><span class="token line">			end = text.length;
-</span><span class="token prefix inserted">+</span><span class="token line">		while( text.charCodeAt(--end) &lt; 33 );
-</span><span class="token prefix inserted">+</span><span class="token line">		while( text.charCodeAt(++start) &lt; 33 );
-</span><span class="token prefix inserted">+</span><span class="token line">		return text.slice( start, end + 1 );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	makeArray: function( array ) {
-</span></span><span class="token coord">@@ -1126,7 +1135,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		if( array != null ){
-</span><span class="token prefix unchanged"> </span><span class="token line">			var i = array.length;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			// The window, strings (and functions) also have 'length'
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			// The window, strings and functions also have 'length'
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			if( i == null || typeof array === "string" || jQuery.isFunction(array) || array.setInterval )
-</span><span class="token prefix unchanged"> </span><span class="token line">				ret[0] = array;
-</span><span class="token prefix unchanged"> </span><span class="token line">			else
-</span></span>Index: test/unit/core.js
-===================================================================
-<span class="token coord">--- test/unit/core.js	(revision 6000)</span>
-<span class="token coord">+++ test/unit/core.js	(working copy)</span>
-<span class="token coord">@@ -1795,7 +1795,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	equals( c[0].nodeValue, "hi", "Check node,textnode,comment contents is just the one from span" );
-</span><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">test("jQuery.makeArray", function(){
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">test("makeArray()", function(){
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	expect(15);
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	equals( jQuery.makeArray(jQuery('html>*'))[0].nodeName, "HEAD", "Pass makeArray a jQuery object" );
-</span></span><span class="token coord">@@ -1830,3 +1830,24 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	ok( jQuery.makeArray(document.getElementById('form')).length >= 13, "Pass makeArray a form (treat as elements)" );
-</span><span class="token prefix unchanged"> </span><span class="token line">});
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">test("trim()", function(){
-</span><span class="token prefix inserted">+</span><span class="token line">	expect( 10 );
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	var parse = jQuery.trim;
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( parse(""), "", "Empty String" );
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( parse("  "), "", "Empty, with spaces" );
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( parse(" \n\t\r  "), "", "Empty, with new lines, tabs, etc" );
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( parse("abc"), "abc", "No spaces" );
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( parse("abc  "), "abc", "Trailing spaces" );
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( parse("abc \n\t\r  "), "abc", "Trailing new lines, tabs, etc" );
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( parse("  abc"), "abc", "Leading spaces" );
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( parse(" \n\t\r abc"), "abc", "Leading new lines, tabs, etc" );
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( parse("  abc  "), "abc", "Both leading and trailing spaces" );
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( parse(" \n\t\r abc \n\t\r "), "abc", "Both leading and trailing new lines, tabs, etc" );
-</span><span class="token prefix inserted">+</span><span class="token line">});
-</span></span>\ No newline at end of file</code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2279/trim[6001].diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2279/trim[6001].diff">Original Format</a>
   </div>
 </h1></div>
         </div>

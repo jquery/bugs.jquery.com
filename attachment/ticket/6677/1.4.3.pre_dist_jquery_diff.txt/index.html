@@ -142,75 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">*** dist/jquery.js	Tue Jun  1 17:07:59 2010
---- dist/jquery.mod.js	Tue Jun  1 17:03:09 2010
-***************
-*** 4542,4548 ****
-  		}
-  
-  		if ( fragment ) {
-! 			for ( i = 0; ret[i]; i++ ) {
-  				if ( scripts &amp;&amp; jQuery.nodeName( ret[i], "script" ) &amp;&amp; (!ret[i].type || ret[i].type.toLowerCase() === "text/javascript") ) {
-  					scripts.push( ret[i].parentNode ? ret[i].parentNode.removeChild( ret[i] ) : ret[i] );
-  				
---- 4542,4548 ----
-  		}
-  
-  		if ( fragment ) {
-! 			for ( var i = 0; ret[i]; i++ ) {
-  				if ( scripts &amp;&amp; jQuery.nodeName( ret[i], "script" ) &amp;&amp; (!ret[i].type || ret[i].type.toLowerCase() === "text/javascript") ) {
-  					scripts.push( ret[i].parentNode ? ret[i].parentNode.removeChild( ret[i] ) : ret[i] );
-  				
-***************
-*** 4695,4700 ****
---- 4695,4701 ----
-  
-  	css: function( elem, name, force, extra ) {
-  		if ( name === "width" || name === "height" ) {
-+                         var val;
-  			if ( elem.offsetWidth !== 0 ) {
-  				val = getWH( elem, name, extra );
-  
-***************
-*** 4799,4805 ****
-  		callback.call( elem );
-  
-  		// Revert the old values
-! 		for ( name in options ) {
-  			elem.style[ name ] = old[ name ];
-  		}
-  	}
---- 4800,4806 ----
-  		callback.call( elem );
-  
-  		// Revert the old values
-! 		for ( var name in options ) {
-  			elem.style[ name ] = old[ name ];
-  		}
-  	}
-***************
-*** 5324,5330 ****
-  			xhr.send( type === "POST" || type === "PUT" || type === "DELETE" ? s.data : null );
-  
-  		} catch( sendError ) {
-! 			jQuery.ajax.handleError( s, xhr, null, e );
-  
-  			// Fire the complete handlers
-  			jQuery.ajax.handleComplete( s, xhr, status, data );
---- 5325,5331 ----
-  			xhr.send( type === "POST" || type === "PUT" || type === "DELETE" ? s.data : null );
-  
-  		} catch( sendError ) {
-! 			jQuery.ajax.handleError( s, xhr, null, sendError );
-  
-  			// Fire the complete handlers
-  			jQuery.ajax.handleComplete( s, xhr, status, data );</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/6677/1.4.3.pre_dist_jquery_diff.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/6677/1.4.3.pre_dist_jquery_diff.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

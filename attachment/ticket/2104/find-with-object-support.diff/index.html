@@ -142,27 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: D:/Data/SKL-workspace/jquery/src/core.js
-===================================================================
-<span class="token coord">--- D:/Data/SKL-workspace/jquery/src/core.js	(revision 4340)</span>
-<span class="token coord">+++ D:/Data/SKL-workspace/jquery/src/core.js	(working copy)</span>
-<span class="token coord">@@ -281,6 +281,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	find: function( selector ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		// Quickly handle non-string expressions
-</span><span class="token prefix inserted">+</span><span class="token line">		if ( typeof selector != "string" )
-</span><span class="token prefix inserted">+</span><span class="token line">			return jQuery(selector);
-</span><span class="token prefix inserted">+</span><span class="token line">		
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		var elems = jQuery.map(this, function(elem){
-</span><span class="token prefix unchanged"> </span><span class="token line">			return jQuery.find( selector, elem );
-</span><span class="token prefix unchanged"> </span><span class="token line">		});</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2104/find-with-object-support.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2104/find-with-object-support.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

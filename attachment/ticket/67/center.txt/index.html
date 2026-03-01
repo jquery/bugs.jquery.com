@@ -142,71 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">$.fn.center = function(f) {
-	return this.each(function(){
-		if ( !f &amp;&amp; this.nodeName == 'IMG' &amp;&amp;
-				 !this.offsetWidth &amp;&amp; !this.offsetHeight ) {
-			var self = this;
-			setTimeout(function(){
-				$(self).center(true);
-			}, 13);
-		} else {
-			var s = this.style;
-			var p = this.parentNode;
-			var b = document.body;
-			var t = 0;
-
-			if ( f != "vertical" )
-			{
-				if ( $.css(p,"position") == 'static' )
-					p.style.position = 'relative';
-				s.position = 'absolute';
-				if ( ! isNaN(parseInt($.css(p,"width"))) )
-				{
-					t = parseInt(($.css(p,"width") - $.css(this,"width"))/2);
-					if ( t > 0 )
-						s.left = t + "px";
-					else
-						s.left = "0px";
-				}
-				else if ( ! isNaN( b.clientWidth ) )
-				{
-					t = parseInt((b.clientWidth - $.css(this,"width"))/2);
-					if ( t > 0 )
-						s.left = t + "px";
-					else
-						s.left = "0px";
-				}
-			}
-
-			if ( f != "horizontal" )
-			{
-				if ( ! isNaN(parseInt($.css(p,"height"))) )
-				{
-					t = parseInt(($.css(p,"height") - $.css(this,"height"))/2);
-					if ( t > 0 )
-						s.top = t + "px";
-					else
-						s.top = "0px";
-				}
-				else if ( ! isNaN( b.clientHeight ) )
-				{
-					t = parseInt((b.clientHeight - $.css(this,"height"))/2);
-					if ( t > 0 )
-						s.top = t + "px";
-					else
-						s.top = "0px";
-				}
-			}
-		}
-  });
-};</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/67/center.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/67/center.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

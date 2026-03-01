@@ -142,47 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 5772)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -614,8 +614,28 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// See test/unit/core.js for details concerning this function.
-</span><span class="token prefix unchanged"> </span><span class="token line">	isFunction: function( fn ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		return !!fn &amp;&amp; typeof fn != "string" &amp;&amp; !fn.nodeName &amp;&amp;
-</span><span class="token prefix deleted">-</span><span class="token line">			fn.constructor != Array &amp;&amp; /^[\s[]?function/.test( fn + "" );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		return !!fn &amp;&amp; ( !jQuery.browser.msie ? fn instanceof Function : 
-</span><span class="token prefix inserted">+</span><span class="token line">			(function(fn){
-</span><span class="token prefix inserted">+</span><span class="token line">				// IE specific test
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( fn instanceof Function ) 
-</span><span class="token prefix inserted">+</span><span class="token line">					return true;
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( typeof fn === "string" || fn instanceof String
-</span><span class="token prefix inserted">+</span><span class="token line">				 	|| fn.constructor === Array )
-</span><span class="token prefix inserted">+</span><span class="token line">					return false;
-</span><span class="token prefix inserted">+</span><span class="token line">				// Remove toString() and valueOf() overriden methods
-</span><span class="token prefix inserted">+</span><span class="token line">				// and dump the function as string
-</span><span class="token prefix inserted">+</span><span class="token line">				var s = "toString",
-</span><span class="token prefix inserted">+</span><span class="token line">					v = "valueOf",
-</span><span class="token prefix inserted">+</span><span class="token line">					t = typeof fn[s] === "function" &amp;&amp; fn[s],
-</span><span class="token prefix inserted">+</span><span class="token line">					o = typeof fn[v] === "function" &amp;&amp; fn[v],
-</span><span class="token prefix inserted">+</span><span class="token line">					r;
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( t ) delete fn[s];
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( o ) delete fn[v];
-</span><span class="token prefix inserted">+</span><span class="token line">				r = /^[\s[]?function/.test(fn + "");
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( t ) fn[s] = t;
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( o ) fn[v] = o;
-</span><span class="token prefix inserted">+</span><span class="token line">				return r;
-</span><span class="token prefix inserted">+</span><span class="token line">			})(fn) );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// check if an element is in a (or is an) XML document</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2968/2968.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2968/2968.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

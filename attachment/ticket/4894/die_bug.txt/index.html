@@ -140,44 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">-----HTML-------
-&lt;p id="a">&lt;span>This has a over highlight style and event 'click'.&lt;/span>&lt;/p>
-&lt;p>&lt;a id="b" href="#">Click here to erase the click event in the last paragraph's inner span&lt;/a>&lt;/p> 
-
-------JS--------
-// without event delegation -- works fine
-$(function() {
-	$("#b").click(function() {
-		$("#a span").unbind("click");
-		return false;
-	});
-
-	$("#a span").hover(
-		function() {$(this).addClass("high");},
-		function() {$(this).removeClass("high");}
-	).click(function() {
-		$(this).append(" He. ");
-	});
-});
-
-// with event delegation - .die("click") kills all live events
-$(function() {
-	$("#b").live("click", function() {
-		$("#a span").die("click");
-		return false;
-	});
-
-	$("#a span")
-	.live("mouseover", function() {$(this).addClass("high");})
-	.live("mouseout", function() {$(this).removeClass("high");})
-	.live("click", function() {$(this).append(" He. ");});
-});</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4894/die_bug.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4894/die_bug.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

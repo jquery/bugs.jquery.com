@@ -142,25 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery.js
-===================================================================
---- jquery.js	(revision 74316)
-+++ jquery.js	(working copy)
-@@ -6230,7 +6230,7 @@
- 					jQuery.css( elem, type ) :
- 
- 					// Set the width or height on the element (default to pixels if value is unitless)
--					this.css( type, typeof size === "string" ? size : size + "px" );
-+					this.css( type, typeof size === "string" ? size : ( parseInt( size ) || 0 ) + "px" );
- 	};
- 
- });</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/7116/jquery.js.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/7116/jquery.js.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

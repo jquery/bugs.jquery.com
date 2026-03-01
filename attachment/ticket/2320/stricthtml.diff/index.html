@@ -140,83 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ui.dialog.js
-===================================================================
-<span class="token coord">--- ui.dialog.js	(revision 4721)</span>
-<span class="token coord">+++ ui.dialog.js	(working copy)</span>
-<span class="token coord">@@ -59,14 +59,14 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		});
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		if (options.resizable &amp;&amp; $.fn.resizable) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			uiDialog.append("&lt;div class='ui-resizable-n ui-resizable-handle'>&lt;/div>")
-</span><span class="token prefix deleted">-</span><span class="token line">				.append("&lt;div class='ui-resizable-s ui-resizable-handle'>&lt;/div>")
-</span><span class="token prefix deleted">-</span><span class="token line">				.append("&lt;div class='ui-resizable-e ui-resizable-handle'>&lt;/div>")
-</span><span class="token prefix deleted">-</span><span class="token line">				.append("&lt;div class='ui-resizable-w ui-resizable-handle'>&lt;/div>")
-</span><span class="token prefix deleted">-</span><span class="token line">				.append("&lt;div class='ui-resizable-ne ui-resizable-handle'>&lt;/div>")
-</span><span class="token prefix deleted">-</span><span class="token line">				.append("&lt;div class='ui-resizable-se ui-resizable-handle'>&lt;/div>")
-</span><span class="token prefix deleted">-</span><span class="token line">				.append("&lt;div class='ui-resizable-sw ui-resizable-handle'>&lt;/div>")
-</span><span class="token prefix deleted">-</span><span class="token line">				.append("&lt;div class='ui-resizable-nw ui-resizable-handle'>&lt;/div>");
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			uiDialog.append('&lt;div class="ui-resizable-n ui-resizable-handle">&lt;/div>')
-</span><span class="token prefix inserted">+</span><span class="token line">				.append('&lt;div class="ui-resizable-s ui-resizable-handle">&lt;/div>')
-</span><span class="token prefix inserted">+</span><span class="token line">				.append('&lt;div class="ui-resizable-e ui-resizable-handle">&lt;/div>')
-</span><span class="token prefix inserted">+</span><span class="token line">				.append('&lt;div class="ui-resizable-w ui-resizable-handle">&lt;/div>')
-</span><span class="token prefix inserted">+</span><span class="token line">				.append('&lt;div class="ui-resizable-ne ui-resizable-handle">&lt;/div>')
-</span><span class="token prefix inserted">+</span><span class="token line">				.append('&lt;div class="ui-resizable-se ui-resizable-handle">&lt;/div>')
-</span><span class="token prefix inserted">+</span><span class="token line">				.append('&lt;div class="ui-resizable-sw ui-resizable-handle">&lt;/div>')
-</span><span class="token prefix inserted">+</span><span class="token line">				.append('&lt;div class="ui-resizable-nw ui-resizable-handle">&lt;/div>');
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			uiDialog.resizable({ maxWidth: options.maxWidth, maxHeight: options.maxHeight, minWidth: options.minWidth, minHeight: options.minHeight });
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span>Index: ui.draggable.ext.js
-===================================================================
-<span class="token coord">--- ui.draggable.ext.js	(revision 4721)</span>
-<span class="token coord">+++ ui.draggable.ext.js	(working copy)</span>
-<span class="token coord">@@ -60,12 +60,12 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			if(o.iframeFix.constructor == Array) {
-</span><span class="token prefix unchanged"> </span><span class="token line">				for(var i=0;i&lt;o.iframeFix.length;i++) {
-</span><span class="token prefix unchanged"> </span><span class="token line">					var co = $(o.iframeFix[i]).offset({ border: false });
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					$("&lt;div class='DragDropIframeFix' style='background: #fff;'>&lt;/div>").css("width", $(o.iframeFix[i])[0].offsetWidth+"px").css("height", $(o.iframeFix[i])[0].offsetHeight+"px").css("position", "absolute").css("opacity", "0.001").css("z-index", "1000").css("top", co.top+"px").css("left", co.left+"px").appendTo("body");
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					$('&lt;div class="DragDropIframeFix" style="background: #fff;">&lt;/div>').css("width", $(o.iframeFix[i])[0].offsetWidth+"px").css("height", $(o.iframeFix[i])[0].offsetHeight+"px").css("position", "absolute").css("opacity", "0.001").css("z-index", "1000").css("top", co.top+"px").css("left", co.left+"px").appendTo("body");
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				}		
-</span><span class="token prefix unchanged"> </span><span class="token line">			} else {
-</span><span class="token prefix unchanged"> </span><span class="token line">				$("iframe").each(function() {					
-</span><span class="token prefix unchanged"> </span><span class="token line">					var co = $(this).offset({ border: false });
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					$("&lt;div class='DragDropIframeFix' style='background: #fff;'>&lt;/div>").css("width", this.offsetWidth+"px").css("height", this.offsetHeight+"px").css("position", "absolute").css("opacity", "0.001").css("z-index", "1000").css("top", co.top+"px").css("left", co.left+"px").appendTo("body");
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					$('&lt;div class="DragDropIframeFix" style="background: #fff;">&lt;/div>').css("width", this.offsetWidth+"px").css("height", this.offsetHeight+"px").css("position", "absolute").css("opacity", "0.001").css("z-index", "1000").css("top", co.top+"px").css("left", co.left+"px").appendTo("body");
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				});							
-</span><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span>Index: ui.mouse.js
-===================================================================
-<span class="token coord">--- ui.mouse.js	(revision 4721)</span>
-<span class="token coord">+++ ui.mouse.js	(working copy)</span>
-<span class="token coord">@@ -24,7 +24,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		css: function(name) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ($.ui.cssCache[name]) return $.ui.cssCache[name];
-</span><span class="token prefix unchanged"> </span><span class="token line">			
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			var tmp = $("&lt;div class='ui-resizable-gen'>").addClass(name).css(
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			var tmp = $('&lt;div class="ui-resizable-gen">&lt;/div>').addClass(name).css(
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				{position:'absolute', top:'-5000px', left:'-5000px', display:'block'}
-</span><span class="token prefix unchanged"> </span><span class="token line">			).appendTo('body');
-</span><span class="token prefix unchanged"> </span><span class="token line">			
-</span></span>Index: ui.resizable.js
-===================================================================
-<span class="token coord">--- ui.resizable.js	(revision 4721)</span>
-<span class="token coord">+++ ui.resizable.js	(working copy)</span>
-<span class="token coord">@@ -118,7 +118,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">        var d = jQuery.trim(n[i]), t = o.defaultTheme, hname = 'ui-resizable-'+d;
-</span><span class="token prefix unchanged"> </span><span class="token line">        
-</span><span class="token prefix unchanged"> </span><span class="token line">        var rcss = $.extend(t[hname], t['ui-resizable-handle']), 
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">            axis = $(["&lt;div class='",hname," ui-resizable-handle' style='",insertions[d],"'>&lt;/div>"].join("")).css(/sw|se|ne|nw/.test(d) ? { zIndex: ++o.zIndex } : {});
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">            axis = $(['&lt;div class="',hname,' ui-resizable-handle" style="',insertions[d],'">&lt;/div>'].join("")).css(/sw|se|ne|nw/.test(d) ? { zIndex: ++o.zIndex } : {});
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">        
-</span><span class="token prefix unchanged"> </span><span class="token line">        o.handles[d] = '.ui-resizable-'+d;</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2320/stricthtml.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2320/stricthtml.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

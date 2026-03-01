@@ -142,76 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- C:\src\lex\xp\jquery-1.2.6.js	Tue Jul 15 17:14:17 2008</span>
-<span class="token coord">+++ C:\src\lex\xp\jquery.js	Tue Jul 15 17:28:24 2008</span>
-<span class="token coord">@@ -935,7 +935,23 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		return ret;
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	discardElement: function( element ) {
-</span><span class="token prefix inserted">+</span><span class="token line">        var garbageBin = document.getElementById('IELeakGarbageBin');
-</span><span class="token prefix inserted">+</span><span class="token line">        if (!garbageBin) {
-</span><span class="token prefix inserted">+</span><span class="token line">            garbageBin = document.createElement('DIV');
-</span><span class="token prefix inserted">+</span><span class="token line">            garbageBin.id = 'IELeakGarbageBin';
-</span><span class="token prefix inserted">+</span><span class="token line">            garbageBin.style.display = 'none';
-</span><span class="token prefix inserted">+</span><span class="token line">            document.body.appendChild(garbageBin);
-</span><span class="token prefix inserted">+</span><span class="token line">        }
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">        // move the element to the garbage bin
-</span><span class="token prefix inserted">+</span><span class="token line">        garbageBin.appendChild(element);
-</span><span class="token prefix inserted">+</span><span class="token line">        garbageBin.innerHTML = '';
-</span><span class="token prefix inserted">+</span><span class="token line">        if (element.__listener)
-</span><span class="token prefix inserted">+</span><span class="token line">            element.__listener = null;
-</span><span class="token prefix inserted">+</span><span class="token line">    },
-</span><span class="token prefix inserted">+</span><span class="token line">    
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	clean: function( elems, context ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		var ret = [];
-</span><span class="token prefix unchanged"> </span><span class="token line">		context = context || document;
-</span></span><span class="token coord">@@ -993,9 +1009,14 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				div.innerHTML = wrap[1] + elem + wrap[2];
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				// Move to the right depth
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				while ( wrap[0]-- )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				while ( wrap[0]-- ) {
-</span><span class="token prefix inserted">+</span><span class="token line">			        var oldDiv = div;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					div = div.lastChild;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					oldDiv.removeChild(div);
-</span><span class="token prefix inserted">+</span><span class="token line">					jQuery.discardElement(oldDiv);
-</span><span class="token prefix inserted">+</span><span class="token line">					oldDiv = null;
-</span><span class="token prefix inserted">+</span><span class="token line">				}
-</span><span class="token prefix inserted">+</span><span class="token line">				
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// Remove IE's autoinserted &lt;tbody> from table fragments
-</span><span class="token prefix unchanged"> </span><span class="token line">				if ( jQuery.browser.msie ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -1019,6 +1040,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				elem = jQuery.makeArray( div.childNodes );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				
-</span><span class="token prefix inserted">+</span><span class="token line">				while (div.firstChild) {
-</span><span class="token prefix inserted">+</span><span class="token line">				    var child = div.firstChild;
-</span><span class="token prefix inserted">+</span><span class="token line">				    div.removeChild( child );
-</span><span class="token prefix inserted">+</span><span class="token line">			    }
-</span><span class="token prefix inserted">+</span><span class="token line">				
-</span><span class="token prefix inserted">+</span><span class="token line">			    jQuery.discardElement(div);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( elem.length === 0 &amp;&amp; (!jQuery.nodeName( elem, "form" ) &amp;&amp; !jQuery.nodeName( elem, "select" )) )
-</span></span><span class="token coord">@@ -1315,6 +1343,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			});
-</span><span class="token prefix unchanged"> </span><span class="token line">			if (this.parentNode)
-</span><span class="token prefix unchanged"> </span><span class="token line">				this.parentNode.removeChild( this );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			jQuery.discardElement(this);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">	},</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3163/jquery-iefix.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3163/jquery-iefix.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,40 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax.js
-===================================================================
-<span class="token coord">--- src/ajax.js	(revision 5810)</span>
-<span class="token coord">+++ src/ajax.js	(working copy)</span>
-<span class="token coord">@@ -480,14 +480,18 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		if( s &amp;&amp; s.dataFilter )
-</span><span class="token prefix unchanged"> </span><span class="token line">			data = s.dataFilter( data, type );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		// If the type is "script", eval it in global context
-</span><span class="token prefix deleted">-</span><span class="token line">		if ( type == "script" )
-</span><span class="token prefix deleted">-</span><span class="token line">			jQuery.globalEval( data );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		// The filter can actually parse the response
-</span><span class="token prefix inserted">+</span><span class="token line">		if( typeof data == 'string' ){
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		// Get the JavaScript object, if JSON is used.
-</span><span class="token prefix deleted">-</span><span class="token line">		if ( type == "json" )
-</span><span class="token prefix deleted">-</span><span class="token line">			data = eval("(" + data + ")");
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			// If the type is "script", eval it in global context
-</span><span class="token prefix inserted">+</span><span class="token line">			if ( type == "script" )
-</span><span class="token prefix inserted">+</span><span class="token line">				jQuery.globalEval( data );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			// Get the JavaScript object, if JSON is used.
-</span><span class="token prefix inserted">+</span><span class="token line">			if ( type == "json" )
-</span><span class="token prefix inserted">+</span><span class="token line">				data = eval("(" + data + ")");
-</span><span class="token prefix inserted">+</span><span class="token line">		}
-</span><span class="token prefix inserted">+</span><span class="token line">		
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return data;
-</span><span class="token prefix unchanged"> </span><span class="token line">	},</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3231/dataFilter[5810].diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3231/dataFilter[5810].diff">Original Format</a>
   </div>
 </h1></div>
         </div>

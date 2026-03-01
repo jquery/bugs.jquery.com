@@ -140,28 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: ajax.js
-===================================================================
---- ajax.js	(revision 1365)
-+++ ajax.js	(working copy)
-@@ -121,6 +121,11 @@
- 	 * @cat Ajax
- 	 */
- 	evalScripts: function() {
-+		if(jQuery.browser.mozilla) {
-+			// Firefox eval's scripts when they get added to the DOM tree,
-+			// so this isn't necessary here
-+			return this;
-+		}
- 		return this.find("script").each(function(){
- 			if ( this.src )
- 				jQuery.getScript( this.src );</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/975/eval-scripts-firefox.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/975/eval-scripts-firefox.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

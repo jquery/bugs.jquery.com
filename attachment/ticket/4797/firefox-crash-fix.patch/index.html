@@ -142,41 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery/src/fx.js
-===================================================================
---- jquery/src/fx.js	(revision 6410)
-+++ jquery/src/fx.js	(working copy)
-@@ -62,18 +62,18 @@
- 		if ( speed ) {
- 			return this.animate( genFx("hide", 3), speed, callback);
- 		} else {
-+			// Set the display of the elements in a separate loop
-+			// to avoid the constant reflow
- 			for ( var i = 0, l = this.length; i < l; i++ ){
-+				this[i].style.display = "none";
-+			}
-+
-+			for ( var i = 0, l = this.length; i < l; i++ ){
- 				var old = jQuery.data(this[i], "olddisplay");
- 				if ( !old && old !== "none" )
- 					jQuery.data(this[i], "olddisplay", jQuery.css(this[i], "display"));
- 			}
- 
--			// Set the display of the elements in a second loop
--			// to avoid the constant reflow
--			for ( var i = 0, l = this.length; i < l; i++ ){
--				this[i].style.display = "none";
--			}
--
- 			return this;
- 		}
- 	},</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4797/firefox-crash-fix.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4797/firefox-crash-fix.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

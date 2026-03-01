@@ -142,41 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">jQuery.extend = jQuery.fn.extend = function() {
-	...
-	for ( ; i &lt; length; i++ )
-		// Only deal with non-null/undefined values
-		if ( (options = arguments[ i ]) != null )
-			// Extend the base object
-			for ( var name in options ) {
-				var src = target[ name ], copy = options[ name ];
-
-				// Prevent never-ending loop
-				if ( target === copy )
-					continue;
-
-				// Recurse if we're merging object values
-				if ( deep &amp;&amp; copy &amp;&amp; typeof copy === "object" &amp;&amp; !copy.nodeType )
-					target[ name ] = jQuery.extend( deep, 
-						// Never move original objects, clone them
-						(typeof src === "object" ? src : null) || ( copy.length != null ? [ ] : { } ) //***Changed***
-					, copy );
-
-				// Don't bring in undefined values
-				else if ( copy !== undefined )
-					target[ name ] = copy;
-
-			}
-
-	// Return the modified object
-	return target;
-};</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/5704/extendcorrection.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/5704/extendcorrection.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

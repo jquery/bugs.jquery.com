@@ -142,29 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 4194)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -816,6 +816,12 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				"1" :
-</span><span class="token prefix unchanged"> </span><span class="token line">				ret;
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		// Opera sometimes will give the wrong display answer, this fixes it, see #2037
-</span><span class="token prefix inserted">+</span><span class="token line">		if ( jQuery.browser.opera &amp;&amp; name == "display" ) {
-</span><span class="token prefix inserted">+</span><span class="token line">			var save = elem.style.display;
-</span><span class="token prefix inserted">+</span><span class="token line">			elem.style.display = "block";
-</span><span class="token prefix inserted">+</span><span class="token line">			elem.style.display = save;
-</span><span class="token prefix inserted">+</span><span class="token line">		}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Make sure we're using the right name for getting the float value
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( name.match( /float/i ) )</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2037/2037.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2037/2037.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

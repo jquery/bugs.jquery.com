@@ -142,49 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 3845)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -749,7 +749,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			elem.style[ name ] = elem.style[ "old" + name ];
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	css: function( elem, name ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	css: function( elem, name, force ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		if ( name == "height" || name == "width" ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			var old = {}, height, width;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -799,7 +799,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				width;
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		return jQuery.curCSS( elem, name );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		return jQuery.curCSS( elem, name, force );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	curCSS: function( elem, name, force ) {
-</span></span>Index: src/fx.js
-===================================================================
-<span class="token coord">--- src/fx.js	(revision 3845)</span>
-<span class="token coord">+++ src/fx.js	(working copy)</span>
-<span class="token coord">@@ -254,8 +254,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		if ( this.elem[this.prop] != null &amp;&amp; this.elem.style[this.prop] == null )
-</span><span class="token prefix unchanged"> </span><span class="token line">			return this.elem[ this.prop ];
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var r = parseFloat(jQuery.curCSS(this.elem, this.prop, force));
-</span><span class="token prefix deleted">-</span><span class="token line">		return r &amp;&amp; r > -10000 ? r : parseFloat(jQuery.css(this.elem, this.prop)) || 0;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var r = parseFloat(jQuery.css(this.elem, this.prop, force));
-</span><span class="token prefix inserted">+</span><span class="token line">		return r &amp;&amp; r > -10000 ? r : parseFloat(jQuery.curCSS(this.elem, this.prop)) || 0;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Start an animation from one number to another</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1942/1942.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1942/1942.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

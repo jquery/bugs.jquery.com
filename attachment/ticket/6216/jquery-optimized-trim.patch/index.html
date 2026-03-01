@@ -142,36 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- jquery-1.4.2-orig.js	2010-03-04 08:31:25.000000000 +0100
-+++ jquery-1.4.2-optimized-trim.js	2010-03-04 09:25:59.000000000 +0100
-@@ -44,7 +44,7 @@
- 	rnotwhite = /\S/,
- 
- 	// Used for trimming whitespace
--	rtrim = /^(\s|\u00A0)+|(\s|\u00A0)+$/g,
-+    rwhite = /\s|\u00A0/,
- 
- 	// Match a standalone tag
- 	rsingleTag = /^<(\w+)\s*\/?>(?:<\/\1>)?$/,
-@@ -585,7 +585,11 @@
- 	},
- 
- 	trim: function( text ) {
--		return (text || "").replace( rtrim, "" );
-+        var nonwhiteStartIndex = 0,
-+            nonwhiteEndIndex = text.length;
-+        while (rwhite.test(text.charAt(nonwhiteStartIndex++)));
-+        while (rwhite.test(text.charAt(--nonwhiteEndIndex)));
-+        return text.slice(--nonwhiteStartIndex, ++nonwhiteEndIndex);
- 	},
- 
- 	// results is for internal usage only</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/6216/jquery-optimized-trim.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/6216/jquery-optimized-trim.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

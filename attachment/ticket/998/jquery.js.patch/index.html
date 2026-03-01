@@ -142,24 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- jquery.orig.js	2007-02-24 02:56:40.000000000 -0500
-+++ jquery.js	2007-02-24 02:53:02.000000000 -0500
-@@ -1600,6 +1600,10 @@
- 
- 			if ( this.queue[type].length == 1 )
- 				fn.apply(this);
-+
-+		    // Remove the item from the queue once it has been executed.
-+		    else if ( this.queue[type].length > 1 )
-+        	   this.queue[type].pop();
- 		});
- 	}</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/998/jquery.js.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/998/jquery.js.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

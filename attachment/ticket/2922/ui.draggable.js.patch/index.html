@@ -140,28 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- a/ui/ui.draggable.js
-+++ b/ui/ui.draggable.js
-@@ -210,10 +210,11 @@
-                stop: function(e) {
-                
-                        //If we are using droppables, inform the manager about the drop
-+
-                        if ($.ui.ddmanager && !this.options.dropBehaviour)
--                               $.ui.ddmanager.drop(this, e);
-+                               var dropped = $.ui.ddmanager.drop(this, e);
-                                
--                       if(this.options.revert) this.revert();
-+                       if(this.options.revert || (this.options.revertInvalid && !dropped)) this.revert();
-                        else {
-                                this.propagate("stop", e);
-                                this.clear();</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2922/ui.draggable.js.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2922/ui.draggable.js.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

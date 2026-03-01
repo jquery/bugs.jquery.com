@@ -140,89 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax.js
-===================================================================
-<span class="token coord">--- src/ajax.js	(revision 5914)</span>
-<span class="token coord">+++ src/ajax.js	(working copy)</span>
-<span class="token coord">@@ -76,7 +76,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		.map(function(i, elem){
-</span><span class="token prefix unchanged"> </span><span class="token line">			var val = jQuery(this).val();
-</span><span class="token prefix unchanged"> </span><span class="token line">			return val == null ? null :
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				val.constructor == Array ?
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				jQuery.isArray(val) ?
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					jQuery.map( val, function(val, i){
-</span><span class="token prefix unchanged"> </span><span class="token line">						return {name: elem.name, value: val};
-</span><span class="token prefix unchanged"> </span><span class="token line">					}) :
-</span></span><span class="token coord">@@ -504,7 +504,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// If an array was passed in, assume that it is an array
-</span><span class="token prefix unchanged"> </span><span class="token line">		// of form elements
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( a.constructor == Array || a.jquery )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( jQuery.isArray(a) || a.jquery )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// Serialize the form elements
-</span><span class="token prefix unchanged"> </span><span class="token line">			jQuery.each( a, function(){
-</span><span class="token prefix unchanged"> </span><span class="token line">				add( this.name, this.value );
-</span></span><span class="token coord">@@ -515,7 +515,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// Serialize the key/values
-</span><span class="token prefix unchanged"> </span><span class="token line">			for ( var j in a )
-</span><span class="token prefix unchanged"> </span><span class="token line">				// If the value is an array then the key names need to be repeated
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( a[j] &amp;&amp; a[j].constructor == Array )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( jQuery.isArray(a[j]) )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					jQuery.each( a[j], function(){
-</span><span class="token prefix unchanged"> </span><span class="token line">						add( j, this );
-</span><span class="token prefix unchanged"> </span><span class="token line">					});
-</span></span>Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 5916)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -407,7 +407,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			if ( this.nodeType != 1 )
-</span><span class="token prefix unchanged"> </span><span class="token line">				return;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( value.constructor == Array &amp;&amp; /radio|checkbox/.test( this.type ) )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( jQuery.isArray(value) &amp;&amp; /radio|checkbox/.test( this.type ) )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				this.checked = (jQuery.inArray(this.value, value) >= 0 ||
-</span><span class="token prefix unchanged"> </span><span class="token line">					jQuery.inArray(this.name, value) >= 0);
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -621,6 +621,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	isFunction: function( fn ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		return !!fn &amp;&amp; !!fn.hasOwnProperty &amp;&amp; fn instanceof Function;
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	isArray: function( arr ){
-</span><span class="token prefix inserted">+</span><span class="token line">		return !!arr &amp;&amp; arr.constructor == Array;
-</span><span class="token prefix inserted">+</span><span class="token line">	},
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// check if an element is in a (or is an) XML document
-</span><span class="token prefix unchanged"> </span><span class="token line">	isXMLDoc: function( elem ) {
-</span></span>Index: src/fx.js
-===================================================================
-<span class="token coord">--- src/fx.js	(revision 5914)</span>
-<span class="token coord">+++ src/fx.js	(working copy)</span>
-<span class="token coord">@@ -112,7 +112,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	queue: function(type, fn){
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( jQuery.isFunction(type) || ( type &amp;&amp; type.constructor == Array )) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( jQuery.isFunction(type) || jQuery.isArray(type) ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			fn = type;
-</span><span class="token prefix unchanged"> </span><span class="token line">			type = "fx";
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span></span><span class="token coord">@@ -121,7 +121,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			return queue( this[0], type );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		return this.each(function(){
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( fn.constructor == Array )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( jQuery.isArray(fn) )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				queue(this, type, fn);
-</span><span class="token prefix unchanged"> </span><span class="token line">			else {
-</span><span class="token prefix unchanged"> </span><span class="token line">				queue(this, type).push( fn );</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3541/isArray[5915].diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3541/isArray[5915].diff">Original Format</a>
   </div>
 </h1></div>
         </div>

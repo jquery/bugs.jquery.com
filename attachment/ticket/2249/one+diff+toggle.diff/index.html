@@ -142,109 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event.js
-===================================================================
-<span class="token coord">--- src/event.js	(revision 5143)</span>
-<span class="token coord">+++ src/event.js	(working copy)</span>
-<span class="token coord">@@ -26,16 +26,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			var fn = handler; 
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Create unique handler function, wrapped around original handler 
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			handler = function() { 
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			handler = this.proxy( fn, function() { 
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// Pass arguments and context to original handler 
-</span><span class="token prefix unchanged"> </span><span class="token line">				return fn.apply(this, arguments); 
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			};
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			});
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Store data in unique handler 
-</span><span class="token prefix unchanged"> </span><span class="token line">			handler.data = data;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">			// Set the guid of unique handler to the same of original handler, so it can be removed 
-</span><span class="token prefix deleted">-</span><span class="token line">			handler.guid = fn.guid;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Init the element's event structure
-</span></span><span class="token coord">@@ -336,6 +333,12 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return event;
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">	
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	proxy: function( fn, proxy ){
-</span><span class="token prefix inserted">+</span><span class="token line">		// Set the guid of unique handler to the same of original handler, so it can be removed 
-</span><span class="token prefix inserted">+</span><span class="token line">		proxy.guid = fn.guid = fn.guid || this.guid++;
-</span><span class="token prefix inserted">+</span><span class="token line">		return proxy;//so proxy can be declared as an argument
-</span><span class="token prefix inserted">+</span><span class="token line">	},
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	special: {
-</span><span class="token prefix unchanged"> </span><span class="token line">		ready: {
-</span><span class="token prefix unchanged"> </span><span class="token line">			setup: function() {
-</span></span><span class="token coord">@@ -401,11 +404,12 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">	one: function( type, data, fn ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var one = jQuery.event.proxy( fn || data, function(event) {
-</span><span class="token prefix inserted">+</span><span class="token line">			jQuery(this).unbind(event, one);
-</span><span class="token prefix inserted">+</span><span class="token line">			return (fn || data).apply( this, arguments);
-</span><span class="token prefix inserted">+</span><span class="token line">		});
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return this.each(function(){
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			jQuery.event.add( this, type, function(event) {
-</span><span class="token prefix deleted">-</span><span class="token line">				jQuery(this).unbind(event);
-</span><span class="token prefix deleted">-</span><span class="token line">				return (fn || data).apply( this, arguments);
-</span><span class="token prefix deleted">-</span><span class="token line">			}, fn &amp;&amp; data);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			jQuery.event.add( this, type, one, fn &amp;&amp; data);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		});
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -427,20 +431,24 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return undefined;
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	toggle: function() {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	toggle: function( fn ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// Save reference to arguments for access in closure
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var args = arguments;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var args = arguments, i=args.length;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		return this.click(function(event) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		//link all the functions, so any of them can unbind this click handler
-</span><span class="token prefix inserted">+</span><span class="token line">		while( --i )
-</span><span class="token prefix inserted">+</span><span class="token line">			jQuery.event.proxy( fn, args[i] );
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">		return this.click(jQuery.event.proxy( fn, function(event) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// Figure out which function to execute
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			this.lastToggle = 0 == this.lastToggle ? 1 : 0;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			this.lastToggle = (this.lastToggle||0) % args.length
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Make sure that clicks stop
-</span><span class="token prefix unchanged"> </span><span class="token line">			event.preventDefault();
-</span><span class="token prefix unchanged"> </span><span class="token line">			
-</span><span class="token prefix unchanged"> </span><span class="token line">			// and execute the function
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			return args[this.lastToggle].apply( this, arguments ) || false;
-</span><span class="token prefix deleted">-</span><span class="token line">		});
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			return args[this.lastToggle++].apply( this, arguments ) || false;
-</span><span class="token prefix inserted">+</span><span class="token line">		}));
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	hover: function(fnOver, fnOut) {
-</span></span>Index: src/fx.js
-===================================================================
-<span class="token coord">--- src/fx.js	(revision 5143)</span>
-<span class="token coord">+++ src/fx.js	(working copy)</span>
-<span class="token coord">@@ -35,7 +35,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">	toggle: function( fn, fn2 ){
-</span><span class="token prefix unchanged"> </span><span class="token line">		return jQuery.isFunction(fn) &amp;&amp; jQuery.isFunction(fn2) ?
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			this._toggle( fn, fn2 ) :
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			this._toggle.apply( this, arguments ) :
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			fn ?
-</span><span class="token prefix unchanged"> </span><span class="token line">				this.animate({
-</span><span class="token prefix unchanged"> </span><span class="token line">					height: "toggle", width: "toggle", opacity: "toggle"</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2249/one+diff+toggle.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2249/one+diff+toggle.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

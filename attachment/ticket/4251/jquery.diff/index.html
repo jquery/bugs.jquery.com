@@ -142,82 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: support.js
-===================================================================
-<span class="token coord">--- support.js	(revision 6260)</span>
-<span class="token coord">+++ support.js	(working copy)</span>
-<span class="token coord">@@ -75,11 +75,11 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	root.removeChild( script );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	if ( div.attachEvent &amp;&amp; div.fireEvent ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		div.attachEvent("onclick", function(){
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		div.attachEvent("onclick", function click(){
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// Cloning a node shouldn't copy over any
-</span><span class="token prefix unchanged"> </span><span class="token line">			// bound event handlers (IE does this)
-</span><span class="token prefix unchanged"> </span><span class="token line">			jQuery.support.noCloneEvent = false;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			div.detachEvent("onclick", arguments.callee);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			div.detachEvent("onclick", click);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		});
-</span><span class="token prefix unchanged"> </span><span class="token line">		div.cloneNode(true).fireEvent("onclick");
-</span><span class="token prefix unchanged"> </span><span class="token line">	}
-</span></span>Index: selector.js
-===================================================================
-<span class="token coord">--- selector.js	(revision 6260)</span>
-<span class="token coord">+++ selector.js	(working copy)</span>
-<span class="token coord">@@ -659,7 +659,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">var origPOS = Expr.match.POS;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">for ( var type in Expr.match ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	Expr.match[ type ] = RegExp( Expr.match[ type ].source + /(?![^\[]*\])(?![^\(]*\))/.source );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	Expr.match[ type ] = new RegExp( Expr.match[ type ].source + /(?![^\[]*\])(?![^\(]*\))/.source );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">var makeArray = function(array, results) {
-</span></span>Index: event.js
-===================================================================
-<span class="token coord">--- event.js	(revision 6260)</span>
-<span class="token coord">+++ event.js	(working copy)</span>
-<span class="token coord">@@ -116,7 +116,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					// Namespaced event handlers
-</span><span class="token prefix unchanged"> </span><span class="token line">					var namespaces = type.split(".");
-</span><span class="token prefix unchanged"> </span><span class="token line">					type = namespaces.shift();
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					var namespace = RegExp("(^|\\.)" + namespaces.slice().sort().join(".*\\.") + "(\\.|$)");
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					var namespace = new RegExp("(^|\\.)" + namespaces.slice().sort().join(".*\\.") + "(\\.|$)");
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">					if ( events[type] ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">						// remove the given handler for the given type
-</span></span><span class="token coord">@@ -249,7 +249,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// Cache this now, all = true means, any handler
-</span><span class="token prefix unchanged"> </span><span class="token line">		all = !namespaces.length &amp;&amp; !event.exclusive;
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var namespace = RegExp("(^|\\.)" + namespaces.slice().sort().join(".*\\.") + "(\\.|$)");
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var namespace = new RegExp("(^|\\.)" + namespaces.slice().sort().join(".*\\.") + "(\\.|$)");
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		handlers = ( jQuery.data(this, "events") || {} )[event.type];
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -354,7 +354,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			},
-</span><span class="token prefix unchanged"> </span><span class="token line">			teardown:  function( namespaces ){
-</span><span class="token prefix unchanged"> </span><span class="token line">				if ( namespaces.length ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					var remove = 0, name = RegExp("(^|\\.)" + namespaces[0] + "(\\.|$)");
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					var remove = 0, name = new RegExp("(^|\\.)" + namespaces[0] + "(\\.|$)");
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					
-</span><span class="token prefix unchanged"> </span><span class="token line">					jQuery.each( (jQuery.data(this, "events").live || {}), function(){
-</span><span class="token prefix unchanged"> </span><span class="token line">						if ( name.test(this.type) )
-</span></span><span class="token coord">@@ -560,7 +560,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">function liveHandler( event ){
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	var check = RegExp("(^|\\.)" + event.type + "(\\.|$)"),
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	var check = new RegExp("(^|\\.)" + event.type + "(\\.|$)"),
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		stop = true,
-</span><span class="token prefix unchanged"> </span><span class="token line">		elems = [];</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4251/jquery.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4251/jquery.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

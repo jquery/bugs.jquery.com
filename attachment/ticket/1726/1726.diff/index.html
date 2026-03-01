@@ -140,38 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/fx.js
-===================================================================
-<span class="token coord">--- src/fx.js	(revision 3567)</span>
-<span class="token coord">+++ src/fx.js	(working copy)</span>
-<span class="token coord">@@ -293,8 +293,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		this.options.orig[this.prop] = jQuery.attr( this.elem.style, this.prop );
-</span><span class="token prefix unchanged"> </span><span class="token line">		this.options.show = true;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		// Begin the animation
-</span><span class="token prefix deleted">-</span><span class="token line">		this.custom(0, this.cur());
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		// Begin the animation - start from 1 to avoid flashing in IE
-</span><span class="token prefix inserted">+</span><span class="token line">		this.custom(this.prop == "width" || this.prop == "height" ? 1 : 0, this.cur());
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Make sure that we start at a small width/height to avoid any
-</span><span class="token prefix unchanged"> </span><span class="token line">		// flash of content
-</span></span><span class="token coord">@@ -311,8 +311,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		this.options.orig[this.prop] = jQuery.attr( this.elem.style, this.prop );
-</span><span class="token prefix unchanged"> </span><span class="token line">		this.options.hide = true;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		// Begin the animation
-</span><span class="token prefix deleted">-</span><span class="token line">		this.custom(this.cur(), 0);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		// Begin the animation - end at 1 to avoid flashing in IE
-</span><span class="token prefix inserted">+</span><span class="token line">		this.custom(this.cur(), this.prop == "width" || this.prop == "height" ? 1 : 0);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Each step of an animation</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1726/1726.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1726/1726.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

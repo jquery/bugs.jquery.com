@@ -140,35 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/core.js
-===================================================================
-<span class="token coord">--- jquery/src/core.js	(revision 5790)</span>
-<span class="token coord">+++ jquery/src/core.js	(working copy)</span>
-<span class="token coord">@@ -362,6 +362,9 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			if ( this.length ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">				var elem = this[0];
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if( jQuery.nodeName( elem, 'option' ) )
-</span><span class="token prefix inserted">+</span><span class="token line">					return jQuery.browser.msie &amp;&amp; !elem.attributes.value.specified ? elem.text : elem.value;
-</span><span class="token prefix inserted">+</span><span class="token line">				
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// We need to handle select boxes special
-</span><span class="token prefix unchanged"> </span><span class="token line">				if ( jQuery.nodeName( elem, "select" ) ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">					var index = elem.selectedIndex,
-</span></span><span class="token coord">@@ -379,7 +382,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">						if ( option.selected ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">							// Get the specifc value for the option
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">							value = jQuery.browser.msie &amp;&amp; !option.attributes.value.specified ? option.text : option.value;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">							value = jQuery(option).val();
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">							// We don't need an array for one selects
-</span><span class="token prefix unchanged"> </span><span class="token line">							if ( one )</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2652/val[5790].diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2652/val[5790].diff">Original Format</a>
   </div>
 </h1></div>
         </div>

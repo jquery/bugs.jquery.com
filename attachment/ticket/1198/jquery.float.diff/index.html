@@ -142,42 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/jquery/jquery.js
-===================================================================
-<span class="token coord">--- src/jquery/jquery.js	(revision 1908)</span>
-<span class="token coord">+++ src/jquery/jquery.js	(working copy)</span>
-<span class="token coord">@@ -1442,7 +1442,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			return ret == "" ? "1" : ret;
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if (prop == "float" || prop == "cssFloat")
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if (prop.match(/float/i))
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			prop = jQuery.browser.msie ? "styleFloat" : "cssFloat";
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		if (!force &amp;&amp; elem.style[prop])
-</span></span><span class="token coord">@@ -1450,7 +1450,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		else if (document.defaultView &amp;&amp; document.defaultView.getComputedStyle) {
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if (prop == "cssFloat" || prop == "styleFloat")
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if (prop.match(/float/i))
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				prop = "float";
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			prop = prop.replace(/([A-Z])/g,"-$1").toLowerCase();
-</span></span><span class="token coord">@@ -1558,6 +1560,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			"class": "className",
-</span><span class="token prefix unchanged"> </span><span class="token line">			"float": jQuery.browser.msie ? "styleFloat" : "cssFloat",
-</span><span class="token prefix unchanged"> </span><span class="token line">			cssFloat: jQuery.browser.msie ? "styleFloat" : "cssFloat",
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			styleFloat: jQuery.browser.msie ? "styleFloat" : "cssFloat",
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			innerHTML: "innerHTML",
-</span><span class="token prefix unchanged"> </span><span class="token line">			className: "className",
-</span><span class="token prefix unchanged"> </span><span class="token line">			value: "value",</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1198/jquery.float.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1198/jquery.float.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

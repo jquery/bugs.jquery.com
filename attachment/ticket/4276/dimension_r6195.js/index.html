@@ -140,57 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token comment">// Create innerHeight, innerWidth, outerHeight and outerWidth methods</span>
-jQuery<span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span><span class="token punctuation">[</span> <span class="token string">"Height"</span><span class="token punctuation">,</span> <span class="token string">"Width"</span> <span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">i<span class="token punctuation">,</span> name</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-
-	<span class="token keyword">var</span> lower <span class="token operator">=</span> name<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-	<span class="token comment">// innerHeight and innerWidth</span>
-	jQuery<span class="token punctuation">.</span>fn<span class="token punctuation">[</span><span class="token string">"inner"</span> <span class="token operator">+</span> name<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-		<span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">?</span>
-			jQuery<span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> lower<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token string">"padding"</span> <span class="token punctuation">)</span> <span class="token operator">:</span>
-			<span class="token keyword">null</span><span class="token punctuation">;</span>
-	<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-	<span class="token comment">// outerHeight and outerWidth</span>
-	jQuery<span class="token punctuation">.</span>fn<span class="token punctuation">[</span><span class="token string">"outer"</span> <span class="token operator">+</span> name<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">margin</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">?</span>
-			jQuery<span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> lower<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> margin <span class="token operator">?</span> <span class="token string">"margin"</span> <span class="token operator">:</span> <span class="token string">"border"</span> <span class="token punctuation">)</span> <span class="token operator">:</span>
-			<span class="token keyword">null</span><span class="token punctuation">;</span>
-	<span class="token punctuation">}</span><span class="token punctuation">;</span>
-	
-	jQuery<span class="token punctuation">.</span>fn<span class="token punctuation">[</span> lower <span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">size</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token comment">// Get window width or height</span>
-		<span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> window <span class="token operator">?</span>
-			<span class="token comment">// Everyone else use document.documentElement or document.body depending on Quirks vs Standards mode</span>
-			document<span class="token punctuation">.</span>compatMode <span class="token operator">==</span> <span class="token string">"CSS1Compat"</span> <span class="token operator">&amp;&amp;</span> document<span class="token punctuation">.</span>documentElement<span class="token punctuation">[</span> <span class="token string">"client"</span> <span class="token operator">+</span> name <span class="token punctuation">]</span> <span class="token operator">||</span>
-			document<span class="token punctuation">.</span>body<span class="token punctuation">[</span> <span class="token string">"client"</span> <span class="token operator">+</span> name <span class="token punctuation">]</span> <span class="token operator">:</span>
-
-			<span class="token comment">// Get document width or height</span>
-			<span class="token keyword">this</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> document <span class="token operator">?</span>
-				<span class="token comment">// Either scroll[Width/Height] or offset[Width/Height], whichever is greater</span>
-				Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>
-					document<span class="token punctuation">.</span>documentElement<span class="token punctuation">[</span><span class="token string">"client"</span> <span class="token operator">+</span> name<span class="token punctuation">]</span><span class="token punctuation">,</span>
-					document<span class="token punctuation">.</span>body<span class="token punctuation">[</span><span class="token string">"scroll"</span> <span class="token operator">+</span> name<span class="token punctuation">]</span><span class="token punctuation">,</span> document<span class="token punctuation">.</span>documentElement<span class="token punctuation">[</span><span class="token string">"scroll"</span> <span class="token operator">+</span> name<span class="token punctuation">]</span><span class="token punctuation">,</span>
-					document<span class="token punctuation">.</span>body<span class="token punctuation">[</span><span class="token string">"offset"</span> <span class="token operator">+</span> name<span class="token punctuation">]</span><span class="token punctuation">,</span> document<span class="token punctuation">.</span>documentElement<span class="token punctuation">[</span><span class="token string">"offset"</span> <span class="token operator">+</span> name<span class="token punctuation">]</span>
-				<span class="token punctuation">)</span> <span class="token operator">:</span>
-
-				<span class="token comment">// Get or set width or height on the element</span>
-				size <span class="token operator">===</span> <span class="token keyword">undefined</span> <span class="token operator">||</span> <span class="token punctuation">{</span> <span class="token literal-property property">padding</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token literal-property property">border</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token literal-property property">margin</span><span class="token operator">:</span><span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">[</span> size <span class="token punctuation">]</span> <span class="token operator">?</span>
-					<span class="token comment">// Get width or height on the element</span>
-					<span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>length <span class="token operator">?</span> jQuery<span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> lower<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> size <span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">:</span>
-
-					<span class="token comment">// Set the width or height on the element (default to pixels if value is unitless)</span>
-					<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span> lower<span class="token punctuation">,</span> <span class="token keyword">typeof</span> size <span class="token operator">===</span> <span class="token string">"string"</span> <span class="token operator">?</span> size <span class="token operator">:</span> size <span class="token operator">+</span> <span class="token string">"px"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4276/dimension_r6195.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4276/dimension_r6195.js">Original Format</a>
   </div>
 </h1></div>
         </div>

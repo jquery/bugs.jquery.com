@@ -142,26 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- ..\jquery.js Mon Nov 19 16:14:13 2007</span>
-<span class="token coord">+++ jquery.js Thu Nov 29 08:03:39 2007</span>
-<span class="token coord">@@ -1927,7 +1927,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				val = jQuery.data(element, "handle").apply( element, data );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Handle triggering native .onfoo handlers
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( !fn &amp;&amp; element["on"+type] &amp;&amp; element["on"+type].apply( element, data ) === false )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			var onevent = element["on"+type] || jQuery.attr(element, "on"+type);
-</span><span class="token prefix inserted">+</span><span class="token line">			if (typeof onevent == "string")
-</span><span class="token prefix inserted">+</span><span class="token line">				onevent = new Function(onevent);
-</span><span class="token prefix inserted">+</span><span class="token line">			if ( !fn &amp;&amp; onevent &amp;&amp; onevent.apply( element, data ) === false )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				val = false;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Extra functions don't get the custom event object</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1564/1564.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1564/1564.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

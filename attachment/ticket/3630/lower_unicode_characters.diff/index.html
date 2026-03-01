@@ -142,44 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/selector.js
-===================================================================
-<span class="token coord">--- test/unit/selector.js	(revision 5949)</span>
-<span class="token coord">+++ test/unit/selector.js	(working copy)</span>
-<span class="token coord">@@ -41,13 +41,14 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("id", function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	expect(25);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	expect(26);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	t( "ID Selector", "#body", ["body"] );
-</span><span class="token prefix unchanged"> </span><span class="token line">	t( "ID Selector w/ Element", "body#body", ["body"] );
-</span><span class="token prefix unchanged"> </span><span class="token line">	t( "ID Selector w/ Element", "ul#first", [] );
-</span><span class="token prefix unchanged"> </span><span class="token line">	t( "ID selector with existing ID descendant", "#firstp #simon1", ["simon1"] );
-</span><span class="token prefix unchanged"> </span><span class="token line">	t( "ID selector with non-existant descendant", "#firstp #foobar", [] );
-</span><span class="token prefix unchanged"> </span><span class="token line">	t( "ID selector using UTF8", "#台北Táiběi", ["台北Táiběi"] );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  t( "ID selector using lower UTF8 characters", "#aviación", ["aviación"] );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	t( "Multiple ID selectors using UTF8", "#台北Táiběi, #台北", ["台北Táiběi","台北"] );
-</span><span class="token prefix unchanged"> </span><span class="token line">	t( "Descendant ID selector using UTF8", "div #台北", ["台北"] );
-</span><span class="token prefix unchanged"> </span><span class="token line">	t( "Child ID selector using UTF8", "form > #台北", ["台北"] );
-</span></span>Index: src/selector.js
-===================================================================
-<span class="token coord">--- src/selector.js	(revision 5949)</span>
-<span class="token coord">+++ src/selector.js	(working copy)</span>
-<span class="token coord">@@ -1,6 +1,6 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">var chars = jQuery.browser.safari &amp;&amp; parseInt(jQuery.browser.version) &lt; 417 ?
-</span><span class="token prefix unchanged"> </span><span class="token line">		"(?:[\\w*_-]|\\\\.)" :
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		"(?:[\\w\u0128-\uFFFF*_-]|\\\\.)",
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		"(?:[\\w\u00c0-\uFFFF*_-]|\\\\.)",
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	quickChild = new RegExp("^>\\s*(" + chars + "+)"),
-</span><span class="token prefix unchanged"> </span><span class="token line">	quickID = new RegExp("^(" + chars + "+)(#)(" + chars + "+)"),
-</span><span class="token prefix unchanged"> </span><span class="token line">	quickClass = new RegExp("^([#.]?)(" + chars + "*)");</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3630/lower_unicode_characters.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3630/lower_unicode_characters.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

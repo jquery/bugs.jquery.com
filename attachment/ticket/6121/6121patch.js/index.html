@@ -140,41 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token comment">//Patch for http://dev.jquery.com/ticket/6121</span>
-<span class="token comment">//3/24/2100: stephenp</span>
-<span class="token comment">//To apply:</span>
-<span class="token comment">//1. Replace the noData declaration with code below</span>
-<span class="token comment">//2. Change code that references noData to call the function and pass the element.  For example, jQuery.noData[elem.nodeName.toLowerCase()] should become jQuery.noData(elem)</span>
-
-        <span class="token comment">// The following elements throw uncatchable exceptions if you attempt to add expando properties to them.  You can override this to allow data support for something like Silverlight.  Flash support is already included.</span>
-        <span class="token literal-property property">noDataElems</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-            <span class="token string-property property">"embed"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-            <span class="token string-property property">"object"</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">var</span> clsid <span class="token operator">=</span> elem<span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">"classid"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token comment">//handles Flash elements added via object tag.  </span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>clsid <span class="token operator">&amp;&amp;</span> clsid <span class="token operator">===</span> <span class="token string">"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-                <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            <span class="token string-property property">"applet"</span><span class="token operator">:</span> <span class="token boolean">true</span>
-        <span class="token punctuation">}</span><span class="token punctuation">,</span>
-
-        <span class="token comment">// Indicates whether an element is not safe to use with the data() function.</span>
-        <span class="token function-variable function">noData</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">elem</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">var</span> isBanned <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>noDataElems<span class="token punctuation">[</span>elem<span class="token punctuation">.</span>nodeName<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>isBanned<span class="token punctuation">)</span>
-                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>jQuery<span class="token punctuation">.</span><span class="token function">isFunction</span><span class="token punctuation">(</span>isBanned<span class="token punctuation">)</span><span class="token punctuation">)</span>
-                <span class="token keyword">return</span> <span class="token function">isBanned</span><span class="token punctuation">(</span>elem<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span><span class="token punctuation">,</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/6121/6121patch.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/6121/6121patch.js">Original Format</a>
   </div>
 </h1></div>
         </div>

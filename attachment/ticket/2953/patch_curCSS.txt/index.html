@@ -142,25 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">Index: /home/lrbabe/workspace/jQuery/jquery/src/core.js
-===================================================================
---- /home/lrbabe/workspace/jQuery/jquery/src/core.js	(revision 5704)
-+++ /home/lrbabe/workspace/jQuery/jquery/src/core.js	(working copy)
-@@ -859,7 +859,7 @@
- 		if ( !force &amp;&amp; style &amp;&amp; style[ name ] )
- 			ret = style[ name ];
- 
--		else if ( defaultView.getComputedStyle ) {
-+		else if ( defaultView.getComputedStyle &amp;&amp; !(jQuery.browser.opera &amp;&amp; (name == 'width' || name == 'height') &amp;&amp; jQuery.curCSS(elem, 'display') == 'none')) {
- 
- 			// Only "float" is needed here
- 			if ( name.match( /float/i ) )</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2953/patch_curCSS.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2953/patch_curCSS.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

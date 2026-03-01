@@ -142,49 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/selector.js
-===================================================================
-<span class="token coord">--- test/unit/selector.js	(revision 4032)</span>
-<span class="token coord">+++ test/unit/selector.js	(working copy)</span>
-<span class="token coord">@@ -8,7 +8,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		if ( all[i].nodeType == 8 )
-</span><span class="token prefix unchanged"> </span><span class="token line">			good = false;
-</span><span class="token prefix unchanged"> </span><span class="token line">	ok( good, "Select all elements, no comment nodes" );
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	t( "Element Selector", "p", ["firstp","ap","sndp","en","sap","first"] );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	// make sure is case insensitive as well
-</span><span class="token prefix inserted">+</span><span class="token line">	t( "Element Selector", "P", ["firstp","ap","sndp","en","sap","first"] );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	t( "Element Selector", "body", ["body"] );
-</span><span class="token prefix unchanged"> </span><span class="token line">	t( "Element Selector", "html", ["html"] );
-</span><span class="token prefix unchanged"> </span><span class="token line">	t( "Parent Element", "div p", ["firstp","ap","sndp","en","sap","first"] );
-</span></span>Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 4032)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -586,8 +586,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">	// check if an element is in a (or is an) XML document
-</span><span class="token prefix unchanged"> </span><span class="token line">	isXMLDoc: function( elem ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		return elem.documentElement &amp;&amp; !elem.body ||
-</span><span class="token prefix deleted">-</span><span class="token line">			elem.tagName &amp;&amp; elem.ownerDocument &amp;&amp; !elem.ownerDocument.body;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		return elem &amp;&amp; elem.documentElement &amp;&amp; !elem.body ||
-</span><span class="token prefix inserted">+</span><span class="token line">			elem &amp;&amp; elem.tagName &amp;&amp; elem.ownerDocument &amp;&amp; !elem.ownerDocument.body;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Evalulates a script in a global context
-</span></span><span class="token coord">@@ -612,6 +612,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	nodeName: function( elem, name ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if (jQuery.isXMLDoc(elem.ownerDocument))
-</span><span class="token prefix inserted">+</span><span class="token line">			return elem.nodeName == name;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return elem.nodeName &amp;&amp; elem.nodeName.toUpperCase() == name.toUpperCase();
-</span><span class="token prefix unchanged"> </span><span class="token line">	},</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1991/1991.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1991/1991.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

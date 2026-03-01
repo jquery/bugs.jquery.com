@@ -140,55 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ui.dialog.js
-===================================================================
-<span class="token coord">--- ui.dialog.js	(revision 4030)</span>
-<span class="token coord">+++ ui.dialog.js	(working copy)</span>
-<span class="token coord">@@ -63,7 +63,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		var uiDialogContainer = uiDialogContent.parent().addClass('ui-dialog-container').css({position: 'relative'});
-</span><span class="token prefix unchanged"> </span><span class="token line">		var uiDialog = uiDialogContainer.parent()
-</span><span class="token prefix unchanged"> </span><span class="token line">			.addClass('ui-dialog')
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			.css({position: 'absolute', width: options.width, height: options.height, overflow: 'hidden'});
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			.css({position: 'absolute', width: options.width, height: options.height, overflow: 'hidden'})
-</span><span class="token prefix inserted">+</span><span class="token line">			.css("z-index", $('.ui-dialog:visible').size());
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		if (options.resizable) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			uiDialog.append("&lt;div class='ui-resizable-n ui-resizable-handle'>&lt;/div>")
-</span></span><span class="token coord">@@ -106,6 +107,20 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		if (options.draggable) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			uiDialog.draggable({ handle: '.ui-dialog-titlebar' });
-</span><span class="token prefix unchanged"> </span><span class="token line">		}
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">		this.bringToFront = function() {
-</span><span class="token prefix inserted">+</span><span class="token line">			var curZindex = uiDialog.css("z-index");
-</span><span class="token prefix inserted">+</span><span class="token line">			// It'd be really nice if we could sort visible siblings on z-index so they'd maintain relative order.
-</span><span class="token prefix inserted">+</span><span class="token line">			uiDialog.siblings('.ui-dialog:visible').each(function() {
-</span><span class="token prefix inserted">+</span><span class="token line">				var elem = $(this);
-</span><span class="token prefix inserted">+</span><span class="token line">				if (elem.css("z-index") >= curZindex) {
-</span><span class="token prefix inserted">+</span><span class="token line">					elem.css("z-index",curZindex);
-</span><span class="token prefix inserted">+</span><span class="token line">					curZindex++;
-</span><span class="token prefix inserted">+</span><span class="token line">				};
-</span><span class="token prefix inserted">+</span><span class="token line">			});
-</span><span class="token prefix inserted">+</span><span class="token line">			uiDialog.css("z-index", curZindex);
-</span><span class="token prefix inserted">+</span><span class="token line">		};
-</span><span class="token prefix inserted">+</span><span class="token line">		uiDialog.click(function() {self.bringToFront();});
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">		this.open = function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">			uiDialog.appendTo('body');
-</span></span><span class="token coord">@@ -135,6 +150,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			top = top &lt; doc.scrollTop() ? doc.scrollTop() : top;
-</span><span class="token prefix unchanged"> </span><span class="token line">			uiDialog.css({top: top, left: left});
-</span><span class="token prefix unchanged"> </span><span class="token line">			uiDialog.show();
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			self.bringToFront();
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		};
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		this.close = function() {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2007/BringToFront.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2007/BringToFront.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

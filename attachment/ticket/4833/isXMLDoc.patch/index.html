@@ -142,26 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: core.js
-===================================================================
---- core.js	(revision 6510)
-+++ core.js	(working copy)
-@@ -315,8 +315,7 @@
- 	isXMLDoc: function( elem ) {
- 		// documentElement is verified for cases where it doesn't yet exist
- 		// (such as loading iframes in IE - #4833)
--		var documentElement = (elem.ownerDocument || elem).documentElement;
--		return !!documentElement && documentElement.nodeName !== "HTML";
-+		return ((elem.ownerDocument || elem).documentElement || 0).nodeName !== "HTML";
- 	},
- 
- 	// Evalulates a script in a global context</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4833/isXMLDoc.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4833/isXMLDoc.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

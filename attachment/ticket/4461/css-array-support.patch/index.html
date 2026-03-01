@@ -142,37 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: src/css.js
-===================================================================
---- src/css.js	(revision 6300)
-+++ src/css.js	(working copy)
-@@ -24,6 +24,13 @@
- 			options = {};
- 			options[ name ] = value;
- 		}
-+	} else if ( jQuery.isArray( name ) ) {
-+		if( !this.length ) return null;
-+		var node = this[0], o = {};
-+		jQuery.each( name, function(){
-+			o[this] = jQuery.css( node, this );
-+		});
-+		return o;
- 	}
- 
- 	// For each element...
-@@ -202,4 +209,4 @@
- 		for ( var name in options )
- 			elem.style[ name ] = old[ name ];
- 	}
--});
-\ No newline at end of file
-+});</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4461/css-array-support.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4461/css-array-support.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

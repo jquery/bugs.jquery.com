@@ -140,56 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event/event.js
-===================================================================
-<span class="token coord">--- src/event/event.js	(revision 1906)</span>
-<span class="token coord">+++ src/event/event.js	(working copy)</span>
-<span class="token coord">@@ -44,7 +44,17 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		if (!element.$handle)
-</span><span class="token prefix unchanged"> </span><span class="token line">			element.$handle = function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				jQuery.event.handle.apply(element, arguments);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				// returned undefined or false
-</span><span class="token prefix inserted">+</span><span class="token line">				var val;
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">				// Handle the second event of a trigger and when
-</span><span class="token prefix inserted">+</span><span class="token line">				// an event is called after a page has unloaded
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( typeof jQuery == "undefined" || jQuery.event.triggered )
-</span><span class="token prefix inserted">+</span><span class="token line">				  return val;
-</span><span class="token prefix inserted">+</span><span class="token line">				
-</span><span class="token prefix inserted">+</span><span class="token line">				val = jQuery.event.handle.apply(element, arguments);
-</span><span class="token prefix inserted">+</span><span class="token line">				
-</span><span class="token prefix inserted">+</span><span class="token line">				return val;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			};
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Get the current list of functions bound to this event
-</span></span><span class="token coord">@@ -135,7 +145,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			data.unshift( this.fix({ type: type, target: element }) );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Trigger the event
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( (val = this.handle.apply( element, data )) !== false )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( (val = element.$handle.apply( element, data )) !== false )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				this.triggered = true;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( fn &amp;&amp; val !== false &amp;&amp; !jQuery.nodeName(element, 'a') )
-</span></span><span class="token coord">@@ -148,11 +158,6 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	handle: function(event) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		// returned undefined or false
-</span><span class="token prefix unchanged"> </span><span class="token line">		var val;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		
-</span><span class="token prefix deleted">-</span><span class="token line">		// Handle the second event of a trigger and when
-</span><span class="token prefix deleted">-</span><span class="token line">		// an event is called after a page has unloaded
-</span><span class="token prefix deleted">-</span><span class="token line">		if ( typeof jQuery == "undefined" || jQuery.event.triggered )
-</span><span class="token prefix deleted">-</span><span class="token line">		  return val;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Empty object is for triggered events with no data
-</span><span class="token prefix unchanged"> </span><span class="token line">		event = jQuery.event.fix( event || window.event || {} );</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1185/jquery.event.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1185/jquery.event.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

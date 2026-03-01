@@ -142,25 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 5772)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -615,7 +615,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	// See test/unit/core.js for details concerning this function.
-</span><span class="token prefix unchanged"> </span><span class="token line">	isFunction: function( fn ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		return !!fn &amp;&amp; typeof fn != "string" &amp;&amp; !fn.nodeName &amp;&amp;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			fn.constructor != Array &amp;&amp; /^[\s[]?function/.test( fn + "" );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			fn.constructor != Array &amp;&amp; /^[\s[]?function/.test( Object.toString.call(fn) );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// check if an element is in a (or is an) XML document</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3134/toString.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3134/toString.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

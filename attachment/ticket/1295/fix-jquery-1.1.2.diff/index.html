@@ -140,49 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">*** jquery-latest.js	Thu Jun 14 16:26:44 2007</span>
-<span class="token coord">--- jquery.js	Thu Jun 14 18:31:51 2007</span>
-<span class="token coord">***************</span>
-<span class="token coord">*** 1288,1294 ****</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> 		// returned undefined or false
-</span><span class="token prefix unchanged"> </span><span class="token line"> 		var returnValue;
-</span><span class="token prefix unchanged"> </span><span class="token line"> 
-</span></span><span class="token diff bold"><span class="token prefix diff">!</span><span class="token line"> 		var c = this.$events[event.type];
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> 
-</span><span class="token prefix unchanged"> </span><span class="token line"> 		var args = [].slice.call( arguments, 1 );
-</span><span class="token prefix unchanged"> </span><span class="token line"> 		args.unshift( event );
-</span></span><span class="token coord">--- 1288,1295 ----</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> 		// returned undefined or false
-</span><span class="token prefix unchanged"> </span><span class="token line"> 		var returnValue;
-</span><span class="token prefix unchanged"> </span><span class="token line"> 
-</span></span><span class="token diff bold"><span class="token prefix diff">!</span><span class="token line">                 var local_this = event.currentTarget;
-</span><span class="token prefix diff">!</span><span class="token line">                 var c = local_this.$events[event.type];
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> 
-</span><span class="token prefix unchanged"> </span><span class="token line"> 		var args = [].slice.call( arguments, 1 );
-</span><span class="token prefix unchanged"> </span><span class="token line"> 		args.unshift( event );
-</span></span><span class="token coord">***************</span>
-<span class="token coord">*** 1299,1305 ****</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> 			args[0].handler = c[j];
-</span><span class="token prefix unchanged"> </span><span class="token line"> 			args[0].data = c[j].data;
-</span><span class="token prefix unchanged"> </span><span class="token line"> 
-</span></span><span class="token diff bold"><span class="token prefix diff">!</span><span class="token line"> 			if ( c[j].apply( this, args ) === false ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> 				event.preventDefault();
-</span><span class="token prefix unchanged"> </span><span class="token line"> 				event.stopPropagation();
-</span><span class="token prefix unchanged"> </span><span class="token line"> 				returnValue = false;
-</span></span><span class="token coord">--- 1300,1306 ----</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> 			args[0].handler = c[j];
-</span><span class="token prefix unchanged"> </span><span class="token line"> 			args[0].data = c[j].data;
-</span><span class="token prefix unchanged"> </span><span class="token line"> 
-</span></span><span class="token diff bold"><span class="token prefix diff">!</span><span class="token line"> 			if ( c[j].apply( local_this, args ) === false ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> 				event.preventDefault();
-</span><span class="token prefix unchanged"> </span><span class="token line"> 				event.stopPropagation();
-</span><span class="token prefix unchanged"> </span><span class="token line"> 				returnValue = false;</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1295/fix-jquery-1.1.2.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1295/fix-jquery-1.1.2.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

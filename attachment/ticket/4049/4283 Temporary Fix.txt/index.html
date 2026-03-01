@@ -142,42 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">/*
- *  $().attr proxy. http://dev.jquery.com/ticket/4283. We need to handle some things special until this gets taken care of.
- */
-(function($){
-	var attr = $.prototype.attr;
-	$.prototype.attr = function(name, value, type){
-		if(typeof name == 'string' &amp;&amp; name.toLowerCase() == 'checked'){
-			var val;
-			if((typeof value == 'string' &amp;&amp; value.length &amp;&amp; value == 'checked'))
-				val = true;
-			else
-				val = false;
-				
-			return this.each(function(){
-				this.checked = val;
-			});		
-		}
-		return attr.call(this, name, value, type);
-	};
-
-	var removeAttr = $.prototype.removeAttr;
-	$.prototype.removeAttr = function(name){
-		if(name.toLowerCase() == 'checked'){
-			return this.each(function(){
-				this.checked = false;
-			});		
-		}
-		return removeAttr.call(this, name);
-	};
-})(jQuery);</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4049/4283 Temporary Fix.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4049/4283 Temporary Fix.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

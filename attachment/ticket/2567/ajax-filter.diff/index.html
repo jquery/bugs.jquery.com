@@ -140,45 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ajax.js
-===================================================================
-<span class="token coord">--- ajax.js	(revision 5595)</span>
-<span class="token coord">+++ ajax.js	(working copy)</span>
-<span class="token coord">@@ -330,7 +330,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					// Watch for, and catch, XML document parse errors
-</span><span class="token prefix unchanged"> </span><span class="token line">					try {
-</span><span class="token prefix unchanged"> </span><span class="token line">						// process the data (runs the xml through httpData regardless of callback)
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">						data = jQuery.httpData( xml, s.dataType );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">						data = jQuery.httpData( xml, s.dataType, s.dataFilter );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					} catch(e) {
-</span><span class="token prefix unchanged"> </span><span class="token line">						status = "parsererror";
-</span><span class="token prefix unchanged"> </span><span class="token line">					}
-</span></span><span class="token coord">@@ -454,7 +454,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return false;
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	httpData: function( r, type ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	httpData: function( r, type, filter ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		var ct = r.getResponseHeader("content-type"),
-</span><span class="token prefix unchanged"> </span><span class="token line">			xml = type == "xml" || !type &amp;&amp; ct &amp;&amp; ct.indexOf("xml") >= 0,
-</span><span class="token prefix unchanged"> </span><span class="token line">			data = xml ? r.responseXML : r.responseText;
-</span></span><span class="token coord">@@ -462,6 +462,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		if ( xml &amp;&amp; data.documentElement.tagName == "parsererror" )
-</span><span class="token prefix unchanged"> </span><span class="token line">			throw "parsererror";
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		// Allow a pre-filtering function to sanitize the response
-</span><span class="token prefix inserted">+</span><span class="token line">		if( filter )
-</span><span class="token prefix inserted">+</span><span class="token line">			data = filter( data, type );
-</span><span class="token prefix inserted">+</span><span class="token line">		
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// If the type is "script", eval it in global context
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( type == "script" )
-</span><span class="token prefix unchanged"> </span><span class="token line">			jQuery.globalEval( data );</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2567/ajax-filter.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2567/ajax-filter.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

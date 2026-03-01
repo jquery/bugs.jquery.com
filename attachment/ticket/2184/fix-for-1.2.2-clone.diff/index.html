@@ -142,51 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: /webapp/trunk/public_html/js/jquery/jquery.js
-===================================================================
-<span class="token coord">--- /webapp/trunk/public_html/js/jquery/jquery.js (revision 2104)</span>
-<span class="token coord">+++ /webapp/trunk/public_html/js/jquery/jquery.js (revision 2113)</span>
-<span class="token coord">@@ -306,8 +306,30 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				var clone = this.cloneNode(true),
-</span><span class="token prefix unchanged"> </span><span class="token line">					container = document.createElement("div"),
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					container2 = document.createElement("div");
-</span><span class="token prefix deleted">-</span><span class="token line">				container.appendChild(clone);
-</span><span class="token prefix deleted">-</span><span class="token line">				container2.innerHTML = container.innerHTML;
-</span><span class="token prefix deleted">-</span><span class="token line">				return container2.firstChild;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					container2 = document.createElement("div"),
-</span><span class="token prefix inserted">+</span><span class="token line">					n = this.nodeName.toLowerCase();
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( n=="tr"||n=="tbody"||n=="thead"||n=="tfoot"||n=="td" ) {
-</span><span class="token prefix inserted">+</span><span class="token line">					var t = document.createElement("table");
-</span><span class="token prefix inserted">+</span><span class="token line">					if ( n == "td" ) {
-</span><span class="token prefix inserted">+</span><span class="token line">						var tr = document.createElement("tr");
-</span><span class="token prefix inserted">+</span><span class="token line">						tr.appendChild(clone);
-</span><span class="token prefix inserted">+</span><span class="token line">						t.appendChild(tr);
-</span><span class="token prefix inserted">+</span><span class="token line">					} else
-</span><span class="token prefix inserted">+</span><span class="token line">						t.appendChild(clone);
-</span><span class="token prefix inserted">+</span><span class="token line">					container.appendChild(t);
-</span><span class="token prefix inserted">+</span><span class="token line">					container2.innerHTML = container.innerHTML;
-</span><span class="token prefix inserted">+</span><span class="token line">					with ( container2.firstChild ) switch ( n ) {
-</span><span class="token prefix inserted">+</span><span class="token line">						case "tr":
-</span><span class="token prefix inserted">+</span><span class="token line">							return firstChild.firstChild;
-</span><span class="token prefix inserted">+</span><span class="token line">						case "td":
-</span><span class="token prefix inserted">+</span><span class="token line">							return firstChild.firstChild.firstChild;
-</span><span class="token prefix inserted">+</span><span class="token line">						default:
-</span><span class="token prefix inserted">+</span><span class="token line">							return firstChild;
-</span><span class="token prefix inserted">+</span><span class="token line">					}
-</span><span class="token prefix inserted">+</span><span class="token line">				} else {
-</span><span class="token prefix inserted">+</span><span class="token line">					container.appendChild(clone);
-</span><span class="token prefix inserted">+</span><span class="token line">					container2.innerHTML = container.innerHTML;
-</span><span class="token prefix inserted">+</span><span class="token line">					return container2.firstChild;
-</span><span class="token prefix inserted">+</span><span class="token line">				}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			} else
-</span><span class="token prefix unchanged"> </span><span class="token line">				return this.cloneNode(true);</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2184/fix-for-1.2.2-clone.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2184/fix-for-1.2.2-clone.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

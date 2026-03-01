@@ -142,29 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">--- sites/resources/fitzwilliam/js/base/jquery.js	(revision 4808)
-+++ sites/resources/fitzwilliam/js/base/jquery.js	(working copy)
-@@ -4597,9 +4597,11 @@
-             style.zoom = 1;
- 
-             // Set the alpha filter to set the opacity
--            var opacity = parseInt( value, 10 ) + "" === "NaN" ? "" : "alpha(opacity=" + value * 100 + ")";
--            var filter = style.filter || jQuery.curCSS( elem, "filter" ) || "";
--            style.filter = ralpha.test(filter) ? filter.replace(ralpha, opacity) : opacity;
-+            if(parseInt( value, 10 ) + "" !== "NaN") {
-+               var opacity  = "alpha(opacity=" + value * 100 + ")";
-+               var filter   = style.filter || jQuery.curCSS( elem, "filter" ) || "";
-+               style.filter = ralpha.test(filter) ? filter.replace(ralpha, opacity) : opacity;
-+            }
-          }
- 
-          return style.filter &amp;&amp; style.filter.indexOf("opacity=") >= 0 ?</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/6271/jquery-patch.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/6271/jquery-patch.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -140,26 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: selector.js
-===================================================================
-<span class="token coord">--- selector.js	(revision 5845)</span>
-<span class="token coord">+++ selector.js	(working copy)</span>
-<span class="token coord">@@ -393,6 +393,9 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				var fn = jQuery.expr[ m[1] ];
-</span><span class="token prefix unchanged"> </span><span class="token line">				if ( typeof fn == "object" )
-</span><span class="token prefix unchanged"> </span><span class="token line">					fn = fn[ m[2] ];
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					
-</span><span class="token prefix inserted">+</span><span class="token line">				if( !fn )
-</span><span class="token prefix inserted">+</span><span class="token line">					throw m[0] + ' is not a valid filter';
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				if ( typeof fn == "string" )
-</span><span class="token prefix unchanged"> </span><span class="token line">					fn = eval("false||function(a,i){return " + fn + ";}");</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3380/bad-filter-throw[5845].diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3380/bad-filter-throw[5845].diff">Original Format</a>
   </div>
 </h1></div>
         </div>

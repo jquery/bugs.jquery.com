@@ -140,27 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: event.js
-===================================================================
-<span class="token coord">--- event.js	(revision 4816)</span>
-<span class="token coord">+++ event.js	(working copy)</span>
-<span class="token coord">@@ -242,6 +242,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// Empty object is for triggered events with no data
-</span><span class="token prefix unchanged"> </span><span class="token line">		event = jQuery.event.fix( event || window.event || {} ); 
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		// make sure event.type is defined
-</span><span class="token prefix inserted">+</span><span class="token line">		if( !event.type )
-</span><span class="token prefix inserted">+</span><span class="token line">		    event.type = "";
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// Namespaced event handlers
-</span><span class="token prefix unchanged"> </span><span class="token line">		var parts = event.type.split(".");
-</span><span class="token prefix unchanged"> </span><span class="token line">		event.type = parts[0];</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2400/event.js.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2400/event.js.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

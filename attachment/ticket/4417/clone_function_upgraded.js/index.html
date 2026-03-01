@@ -142,93 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token function-variable function">clone</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">events</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token comment">// Do the clone</span>
-		<span class="token keyword">var</span> ret <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-			<span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>jQuery<span class="token punctuation">.</span>support<span class="token punctuation">.</span>noCloneEvent <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>jQuery<span class="token punctuation">.</span><span class="token function">isXMLDoc</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-				
-				<span class="token comment">// IE copies events bound via attachEvent when</span>
-				<span class="token comment">// using cloneNode. Calling detachEvent on the</span>
-				<span class="token comment">// clone will also remove the events from the orignal</span>
-				
-				<span class="token comment">// In order to get around this, we use innerHTML.</span>
-				<span class="token comment">// Unfortunately, this means some modifications to</span>
-				<span class="token comment">// attributes in IE that are actually only stored</span>
-				<span class="token comment">// as properties will not be copied (such as the</span>
-				<span class="token comment">// the name attribute on an input).</span>
-				<span class="token keyword">var</span> html <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>outerHTML<span class="token punctuation">;</span>
-				<span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>html <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-					<span class="token keyword">var</span> div <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>ownerDocument<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">"div"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-					div<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">cloneNode</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-					html <span class="token operator">=</span> div<span class="token punctuation">.</span>innerHTML<span class="token punctuation">;</span>			
-				<span class="token punctuation">}</span>
-				
-				<span class="token comment">/////////////////////////////////////////////////</span>
-				<span class="token comment">/////////////////////////</span>
-				<span class="token keyword">if</span><span class="token punctuation">(</span>jQuery<span class="token punctuation">.</span>browser<span class="token punctuation">.</span>msie<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-					<span class="token comment">//Search all tags in outerHTML method</span>
-					jQuery<span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>outerHTML<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&lt;[^&lt;]*></span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">i<span class="token punctuation">,</span>alltag</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-						<span class="token comment">//Foreach tag find an attribute name id </span>
-						<span class="token keyword">var</span> idtag<span class="token operator">=</span>alltag<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span><span class="token string">"id=[^ >]*"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-						<span class="token keyword">if</span><span class="token punctuation">(</span>idtag<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-							<span class="token comment">//If id exists get the id value</span>
-							idtag<span class="token operator">=</span>idtag<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">"="</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-							
-							<span class="token comment">//Array Attributes who doens't change by javascripts methods like name in IE</span>
-							<span class="token keyword">var</span> attributes<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-							
-							<span class="token comment">//Foreach attribute declared above change to new values</span>
-							jQuery<span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span>attributes<span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">j<span class="token punctuation">,</span>attrs</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-								<span class="token comment">//Find old value of the object</span>
-								<span class="token keyword">var</span> old_value<span class="token operator">=</span>alltag<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span>attrs<span class="token operator">+</span><span class="token string">"=[^ >]*"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-								<span class="token comment">//Find new value of the object modified by any method</span>
-								<span class="token keyword">var</span> new_value<span class="token operator">=</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#"</span><span class="token operator">+</span>idtag<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span>attrs<span class="token punctuation">)</span><span class="token punctuation">;</span>			
-								<span class="token comment">//If diferent values replace with new value					</span>
-								<span class="token keyword">if</span><span class="token punctuation">(</span>old_value<span class="token operator">!=</span>new_value<span class="token punctuation">)</span> html<span class="token operator">=</span>html<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span>old_value<span class="token punctuation">,</span>attrs<span class="token operator">+</span><span class="token string">"="</span><span class="token operator">+</span>new_value<span class="token punctuation">)</span><span class="token punctuation">;</span>
-							<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-						<span class="token punctuation">}</span>						
-					<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>			
-				<span class="token punctuation">}</span>
-				<span class="token comment">///////////////////////////////////////////////</span>
-				<span class="token comment">//////////////////////////////////////////////</span>
-
-				<span class="token keyword">return</span> jQuery<span class="token punctuation">.</span><span class="token function">clean</span><span class="token punctuation">(</span><span class="token punctuation">[</span>html<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex"> jQuery\d+="(?:\d+|null)"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^\s*</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-				
-				
-			<span class="token punctuation">}</span> <span class="token keyword">else</span>
-				<span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">cloneNode</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			
-		<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-		<span class="token comment">// Copy the events from the original to the clone</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span> events <span class="token operator">===</span> <span class="token boolean">true</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			<span class="token keyword">var</span> orig <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">andSelf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-
-			ret<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">andSelf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-				<span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">.</span>nodeName <span class="token operator">!==</span> orig<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>nodeName <span class="token punctuation">)</span>
-					<span class="token keyword">return</span><span class="token punctuation">;</span>
-
-				<span class="token keyword">var</span> events <span class="token operator">=</span> jQuery<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span> orig<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"events"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-				<span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">var</span> type <span class="token keyword">in</span> events <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-					<span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">var</span> handler <span class="token keyword">in</span> events<span class="token punctuation">[</span> type <span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-						jQuery<span class="token punctuation">.</span>event<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">,</span> type<span class="token punctuation">,</span> events<span class="token punctuation">[</span> type <span class="token punctuation">]</span><span class="token punctuation">[</span> handler <span class="token punctuation">]</span><span class="token punctuation">,</span> events<span class="token punctuation">[</span> type <span class="token punctuation">]</span><span class="token punctuation">[</span> handler <span class="token punctuation">]</span><span class="token punctuation">.</span>data <span class="token punctuation">)</span><span class="token punctuation">;</span>
-					<span class="token punctuation">}</span>
-				<span class="token punctuation">}</span>
-
-				i<span class="token operator">++</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token punctuation">}</span>
-		
-		<span class="token comment">// Return the cloned set</span>
-		<span class="token keyword">return</span> ret<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4417/clone_function_upgraded.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4417/clone_function_upgraded.js">Original Format</a>
   </div>
 </h1></div>
         </div>

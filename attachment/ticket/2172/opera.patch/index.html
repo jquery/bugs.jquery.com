@@ -140,24 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: ui.resizable.js
-===================================================================
---- ui.resizable.js	(revision 4460)
-+++ ui.resizable.js	(working copy)
-@@ -165,7 +165,7 @@
- 
- 			var el = this.helper, o = this.options;
- 			var change = function(a,b) {
--				var mod = (e['page'+(/(top|height)/.test(a) ? 'Y' : 'X')] - o.startPosition[(/(top|height)/.test(a) ? 'top' : 'left')]) * (b ? -1 : 1);
-+				var mod = (e['page'+(/(top|height)/.test(a) ? 'Y' : 'X')] - o.startPosition[''+(/(top|height)/.test(a) ? 'top' : 'left')]) * (b ? -1 : 1);
- 				el.css(a, o['current'+(/(height|width)/.test(a) ? 'Size' : 'Position')][a] - mod);
- 			};</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2172/opera.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2172/opera.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

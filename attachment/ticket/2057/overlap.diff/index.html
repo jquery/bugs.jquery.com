@@ -140,25 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- ui.droppable.js	2007-12-07 03:22:24.000000000 -0800</span>
-<span class="token coord">+++ ui.droppable-overlap.js	2007-12-15 00:03:50.000000000 -0800</span>
-<span class="token coord">@@ -165,6 +165,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		var l = oDrop.offset.left, r = l + oDrop.item.element.offsetWidth, 
-</span><span class="token prefix unchanged"> </span><span class="token line">		    t = oDrop.offset.top,  b = t + oDrop.item.element.offsetHeight;
-</span><span class="token prefix unchanged"> </span><span class="token line">		switch (toleranceMode) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			case 'overlap':
-</span><span class="token prefix inserted">+</span><span class="token line">				dao = $(oDrag.helper).offset();
-</span><span class="token prefix inserted">+</span><span class="token line">				dpo = oDrop.offset;
-</span><span class="token prefix inserted">+</span><span class="token line">				return ( dao.top == dpo.top &amp;&amp; dao.left == dpo.left );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			case 'fit':
-</span><span class="token prefix unchanged"> </span><span class="token line">				return (   l &lt; x1 &amp;&amp; x2 &lt; r
-</span><span class="token prefix unchanged"> </span><span class="token line">					&amp;&amp; t &lt; y1 &amp;&amp; y2 &lt; b);</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2057/overlap.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2057/overlap.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

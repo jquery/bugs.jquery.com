@@ -142,26 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">3106,3111c3106,3111
-< jQuery( window ).bind( 'unload', function(){ 
-< 	for ( var id in jQuery.cache )
-< 		// Skip the window
-< 		if ( id != 1 && jQuery.cache[ id ].handle )
-< 			jQuery.event.remove( jQuery.cache[ id ].handle.elem );
-< }); 
----
-> jQuery.fn.SplunkPatchWindowUnload = function(){
->     for ( var id in jQuery.cache )
->         // Skip the window
->         if ( id != 1 && jQuery.cache[ id ].handle )
->             jQuery.event.remove( jQuery.cache[ id ].handle.elem );
-> }; jQuery( window ).bind( 'unload', jQuery.fn.SplunkPatchWindowUnload ); //Workaround for anonymous function assignment for onunload</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/6845/jquery-1.3.2.js.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/6845/jquery-1.3.2.js.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

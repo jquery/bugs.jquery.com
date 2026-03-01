@@ -140,55 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: datepicker/core/ui.datepicker.js
-===================================================================
-<span class="token coord">--- datepicker/core/ui.datepicker.js	(revision 5254)</span>
-<span class="token coord">+++ datepicker/core/ui.datepicker.js	(working copy)</span>
-<span class="token coord">@@ -93,7 +93,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		numberOfMonths: 1, // Number of months to show at a time
-</span><span class="token prefix unchanged"> </span><span class="token line">		stepMonths: 1, // Number of months to step back/forward
-</span><span class="token prefix unchanged"> </span><span class="token line">		rangeSelect: false, // Allows for selecting a date range on one date picker
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		rangeSeparator: ' - ' // Text between two dates in a range
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		rangeSeparator: ' - ', // Text between two dates in a range
-</span><span class="token prefix inserted">+</span><span class="token line">		hlDates: [] // Emphasize/highlight provided dates
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	};
-</span><span class="token prefix unchanged"> </span><span class="token line">	$.extend(this._defaults, this.regional['']);
-</span><span class="token prefix unchanged"> </span><span class="token line">	this._datepickerDiv = $('&lt;div id="datepicker_div">');
-</span></span><span class="token coord">@@ -1106,6 +1107,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	_generateDatepicker: function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">		var today = new Date();
-</span><span class="token prefix unchanged"> </span><span class="token line">		today = new Date(today.getFullYear(), today.getMonth(), today.getDate()); // clear time
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var hlDays = [];
-</span><span class="token prefix inserted">+</span><span class="token line">		var hlDates = this._get('hlDates');
-</span><span class="token prefix inserted">+</span><span class="token line">		for (var i=0; i &lt; hlDates.length; i++) {
-</span><span class="token prefix inserted">+</span><span class="token line">			var d = new Date(hlDates[i]);
-</span><span class="token prefix inserted">+</span><span class="token line">			hlDays[i] = d.getTime();
-</span><span class="token prefix inserted">+</span><span class="token line">		}
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		var showStatus = this._get('showStatus');
-</span><span class="token prefix unchanged"> </span><span class="token line">		var isRTL = this._get('isRTL');
-</span><span class="token prefix unchanged"> </span><span class="token line">		// build the date picker HTML
-</span></span><span class="token coord">@@ -1216,6 +1224,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">							(otherMonth &amp;&amp; !showOtherMonths ? '' : ' ' + daySettings[1] + // highlight custom dates
-</span><span class="token prefix unchanged"> </span><span class="token line">							(printDate.getTime() >= currentDate.getTime() &amp;&amp; printDate.getTime() &lt;= endDate.getTime() ?  // in current range
-</span><span class="token prefix unchanged"> </span><span class="token line">							' datepicker_currentDay' : '') + // highlight selected day
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">							(hlDays.indexOf(printDate.getTime()) > -1 ? ' datepicker_today' : '') + // highlight user supplied dates
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">							(printDate.getTime() == today.getTime() ? ' datepicker_today' : '')) + '"' + // highlight today (if different)
-</span><span class="token prefix unchanged"> </span><span class="token line">							(unselectable ? '' : ' onmouseover="jQuery(this).addClass(\'datepicker_daysCellOver\');' +
-</span><span class="token prefix unchanged"> </span><span class="token line">							(!showStatus || (otherMonth &amp;&amp; !showOtherMonths) ? '' : 'jQuery(\'#datepicker_status_' +
-</span></span><span class="token coord">@@ -1436,4 +1445,4 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">$.datepicker = new Datepicker(); // singleton instance
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">})(jQuery);
-</span></span>\ No newline at end of file
-<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">})(jQuery);</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2699/datepicker_highlight_dates.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2699/datepicker_highlight_dates.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

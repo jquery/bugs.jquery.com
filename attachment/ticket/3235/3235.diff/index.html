@@ -142,37 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/ajax.js
-===================================================================
-<span class="token coord">--- jquery/src/ajax.js	(revision 5830)</span>
-<span class="token coord">+++ jquery/src/ajax.js	(working copy)</span>
-<span class="token coord">@@ -283,11 +283,16 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Open the socket
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Passing null username, generates a login popup on Opera (#2865)
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if( s.username )
-</span><span class="token prefix deleted">-</span><span class="token line">			xhr.open(type, s.url, s.async, s.username, s.password);
-</span><span class="token prefix deleted">-</span><span class="token line">		else
-</span><span class="token prefix deleted">-</span><span class="token line">			xhr.open(type, s.url, s.async);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		try {
-</span><span class="token prefix inserted">+</span><span class="token line">			if( s.username )
-</span><span class="token prefix inserted">+</span><span class="token line">				xhr.open(type, s.url, s.async, s.username, s.password);
-</span><span class="token prefix inserted">+</span><span class="token line">			else
-</span><span class="token prefix inserted">+</span><span class="token line">				xhr.open(type, s.url, s.async);
-</span><span class="token prefix inserted">+</span><span class="token line">		} catch (e) {
-</span><span class="token prefix inserted">+</span><span class="token line">			return jQuery.handleError(s, xhr, "error", e);
-</span><span class="token prefix inserted">+</span><span class="token line">		}
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// Need an extra try/catch for cross domain requests in Firefox 3
-</span><span class="token prefix unchanged"> </span><span class="token line">		try {
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Set the correct header, if data is being sent</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3235/3235.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3235/3235.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

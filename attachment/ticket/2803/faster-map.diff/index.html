@@ -140,43 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: core.js
-===================================================================
-<span class="token coord">--- core.js	(revision 5458)</span>
-<span class="token coord">+++ core.js	(working copy)</span>
-<span class="token coord">@@ -1185,22 +1185,18 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	map: function( elems, callback ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var ret = [];
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var ret = [], value;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Go through the array, translating each of the items to their
-</span><span class="token prefix unchanged"> </span><span class="token line">		// new value (or values).
-</span><span class="token prefix unchanged"> </span><span class="token line">		for ( var i = 0, length = elems.length; i &lt; length; i++ ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			var value = callback( elems[ i ], i );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			value = callback( elems[ i ], i );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( value !== null &amp;&amp; value != undefined ) {
-</span><span class="token prefix deleted">-</span><span class="token line">				if ( value.constructor != Array )
-</span><span class="token prefix deleted">-</span><span class="token line">					value = [ value ];
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">				ret = ret.concat( value );
-</span><span class="token prefix deleted">-</span><span class="token line">			}
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( value != null )
-</span><span class="token prefix inserted">+</span><span class="token line">				ret[ ret.length ] = value;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		return ret;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		return ret.concat.apply( [], ret );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	}
-</span><span class="token prefix unchanged"> </span><span class="token line">});</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2803/faster-map.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2803/faster-map.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

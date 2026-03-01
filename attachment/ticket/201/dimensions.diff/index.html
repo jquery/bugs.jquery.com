@@ -142,42 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">@@ -76,10 +76,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> * @cat Dimensions
-</span><span class="token prefix unchanged"> </span><span class="token line"> */
-</span><span class="token prefix unchanged"> </span><span class="token line">$.fn.innerHeight = function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	return this.get(0) == window || this.get(0) == document ?
-</span><span class="token prefix deleted">-</span><span class="token line">		this.height() :
-</span><span class="token prefix deleted">-</span><span class="token line">		this.get(0).offsetHeight - parseInt(this.css("borderTop")) - parseInt(this.css("borderBottom"));
-</span><span class="token prefix deleted">-</span><span class="token line">};
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	return this.get(0) == window || this.get(0) == document ?
-</span><span class="token prefix inserted">+</span><span class="token line">		this.height() :
-</span><span class="token prefix inserted">+</span><span class="token line">		this.get(0).offsetHeight - parseInt(this.css("borderTop") || 0) - parseInt(this.css("borderBottom") || 0);
-</span><span class="token prefix inserted">+</span><span class="token line">};
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">/**
-</span><span class="token prefix unchanged"> </span><span class="token line"> * Returns the inner width value (without border) for the first matched element.
-</span></span><span class="token coord">@@ -94,10 +94,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> * @cat Dimensions
-</span><span class="token prefix unchanged"> </span><span class="token line"> */
-</span><span class="token prefix unchanged"> </span><span class="token line">$.fn.innerWidth = function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	return this.get(0) == window || this.get(0) == document ?
-</span><span class="token prefix deleted">-</span><span class="token line">		this.width() :
-</span><span class="token prefix deleted">-</span><span class="token line">		this.get(0).offsetWidth - parseInt(this.css("borderLeft")) - parseInt(this.css("borderRight"));
-</span><span class="token prefix deleted">-</span><span class="token line">};
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	return this.get(0) == window || this.get(0) == document ?
-</span><span class="token prefix inserted">+</span><span class="token line">		this.width() :
-</span><span class="token prefix inserted">+</span><span class="token line">		this.get(0).offsetWidth - parseInt(this.css("borderLeft") || 0) - parseInt(this.css("borderRight") || 0);
-</span><span class="token prefix inserted">+</span><span class="token line">};
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">/**
-</span><span class="token prefix unchanged"> </span><span class="token line"> * Returns the outer height value (including border) for the first matched element.</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/201/dimensions.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/201/dimensions.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

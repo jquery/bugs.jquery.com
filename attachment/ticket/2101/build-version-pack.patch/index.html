@@ -142,38 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: build/pack.js
-===================================================================
---- build/pack.js	(revision 4334)
-+++ build/pack.js	(working copy)
-@@ -5,8 +5,10 @@
- 
- // arguments
- var inFile = arguments[0];
--var outFile = arguments[1] || inFile.replace(/\.js$/, "pack.js");
-+var outFile = arguments[1] || inFile.replace(/\.js$/, ".pack.js");
- 
-+print(inFile);
-+
- // options
- var base62 = true;
- var shrink = true;
-Index: build/version.js
-===================================================================
---- build/version.js	(revision 4334)
-+++ build/version.js	(working copy)
-@@ -1,4 +1,4 @@
- load("build/js/writeFile.js");
- 
- var file = arguments[0];
--writeFile(file, readFile(file).replace("@VERSION", readFile("version.txt").replace( /^\s+|\s+$/g, "" )));
-+writeFile(file, readFile(file).replace(RegExp("@VERSION", "g"), readFile("version.txt").replace( /^\s+|\s+$/g, "" )));</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2101/build-version-pack.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2101/build-version-pack.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

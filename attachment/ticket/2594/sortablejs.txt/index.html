@@ -142,35 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">$(document).ready(
-	function ()
-	{
-		$('#song_list').Sortable({
-			accept: 	'song',
-			tolerance: 	'intersect',
-			handle: 	'.drag',
-			floats: 	true,
-			axis: 		'vertically',
-			helperclass: 'sorthelper',
-			onStop: 	function(ser)
-			{
-				// Serialize the order and update
-				var sorted = $.SortSerialize('song_list');
-				var ids	   = sorted.hash
-					.replace(/song_/g, '')
-					.replace(/list\[\]\=/g, '')
-					.split('&amp;').join('~');
-				$.post('/playlists/update_sort/&lt;?= $playlist->id; ?>', {id: &lt;?= $playlist->id; ?>, ids: ids});
-			}
-		});
-	}
-);</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2594/sortablejs.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2594/sortablejs.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

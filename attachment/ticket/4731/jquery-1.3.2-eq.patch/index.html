@@ -142,45 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">1653a1654,1657
-> function fromEnd(value, length) {
-> 	return (value < 0 ? length + value : value);
-> }
-> 
-1663c1667
-< 		POS: /:(nth|eq|gt|lt|first|last|even|odd)(?:\((\d*)\))?(?=[^-]|$)/,
----
-> 		POS: /:(nth|eq|gt|lt|first|last|even|odd)(?:\((-?\d*)\))?(?=[^-]|$)/,
-1925,1926c1929,1930
-< 		lt: function(elem, i, match){
-< 			return i < match[3] - 0;
----
-> 		lt: function(elem, i, match, array){
-> 			return i < fromEnd(match[3] - 0, array.length);
-1928,1929c1932,1933
-< 		gt: function(elem, i, match){
-< 			return i > match[3] - 0;
----
-> 		gt: function(elem, i, match, array){
-> 			return i > fromEnd(match[3] - 0, array.length);
-1931,1932c1935,1936
-< 		nth: function(elem, i, match){
-< 			return match[3] - 0 == i;
----
-> 		nth: function(elem, i, match, array){
-> 			return fromEnd(match[3] - 0, array.length) == i;
-1934,1935c1938,1939
-< 		eq: function(elem, i, match){
-< 			return match[3] - 0 == i;
----
-> 		eq: function(elem, i, match, array){
-> 			return fromEnd(match[3] - 0, array.length) == i;</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4731/jquery-1.3.2-eq.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4731/jquery-1.3.2-eq.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

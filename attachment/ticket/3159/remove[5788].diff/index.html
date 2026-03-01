@@ -142,25 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 5788)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -1309,7 +1309,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	remove: function( selector ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( !selector || jQuery.filter( selector, [ this ] ).r.length ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Prevent memory leaks
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			jQuery( "*", this ).add(this).each(function(){
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			jQuery( "*", this ).add([this]).each(function(){
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				jQuery.event.remove(this);
-</span><span class="token prefix unchanged"> </span><span class="token line">				jQuery.removeData(this);
-</span><span class="token prefix unchanged"> </span><span class="token line">			});</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3159/remove[5788].diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3159/remove[5788].diff">Original Format</a>
   </div>
 </h1></div>
         </div>

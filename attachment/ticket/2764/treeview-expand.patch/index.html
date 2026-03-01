@@ -140,33 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery.treeview.js
-===================================================================
---- jquery.treeview.js	(revision 5363)
-+++ jquery.treeview.js	(working copy)
-@@ -218,9 +218,14 @@
- 			}
- 			
- 			return this;
--		}
--	});
-+		},
- 	
-+    expand: function() {
-+      $(this).parents("li."+CLASSES.expandable).find(">div."+CLASSES.hitarea).click();
-+    }
-+  
-+  });
-+	
- 	// classes used by the plugin
- 	// need to be styled via external stylesheet, see first example
- 	$.treeview = {};</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2764/treeview-expand.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2764/treeview-expand.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

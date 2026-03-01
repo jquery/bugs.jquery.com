@@ -142,39 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: unit/ajax.js
-===================================================================
-<span class="token coord">--- test/unit/ajax.js	(revision 5473)</span>
-<span class="token coord">+++ unit/ajax.js	(working copy)</span>
-<span class="token coord">@@ -811,6 +811,22 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	});
-</span><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">test("data option: evaluate function values (#2806)", function() {
-</span><span class="token prefix inserted">+</span><span class="token line">	stop();
-</span><span class="token prefix inserted">+</span><span class="token line">	$.ajax({
-</span><span class="token prefix inserted">+</span><span class="token line">		url: "data/echoQuery.php",
-</span><span class="token prefix inserted">+</span><span class="token line">		data: {
-</span><span class="token prefix inserted">+</span><span class="token line">			key: function() {
-</span><span class="token prefix inserted">+</span><span class="token line">				return "value";
-</span><span class="token prefix inserted">+</span><span class="token line">			}
-</span><span class="token prefix inserted">+</span><span class="token line">		},
-</span><span class="token prefix inserted">+</span><span class="token line">		success: function(result) {
-</span><span class="token prefix inserted">+</span><span class="token line">			equals( result, "key=value" );
-</span><span class="token prefix inserted">+</span><span class="token line">			start();
-</span><span class="token prefix inserted">+</span><span class="token line">		}
-</span><span class="token prefix inserted">+</span><span class="token line">	})
-</span><span class="token prefix inserted">+</span><span class="token line">});
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">//}</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2806/dynamic-test.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2806/dynamic-test.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

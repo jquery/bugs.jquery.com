@@ -142,92 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/event.js
-===================================================================
-<span class="token coord">--- jquery/src/event.js	(revision 5762)</span>
-<span class="token coord">+++ jquery/src/event.js	(working copy)</span>
-<span class="token coord">@@ -363,58 +363,29 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			setup: function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">				// Make sure the ready event is setup
-</span><span class="token prefix unchanged"> </span><span class="token line">				bindReady();
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				return;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			teardown: function() { return; }
-</span><span class="token prefix deleted">-</span><span class="token line">		},
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">		mouseenter: {
-</span><span class="token prefix deleted">-</span><span class="token line">			setup: function() {
-</span><span class="token prefix deleted">-</span><span class="token line">				if ( jQuery.browser.msie ) return false;
-</span><span class="token prefix deleted">-</span><span class="token line">				jQuery(this).bind("mouseover", jQuery.event.special.mouseenter.handler);
-</span><span class="token prefix deleted">-</span><span class="token line">				return true;
-</span><span class="token prefix deleted">-</span><span class="token line">			},
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">			teardown: function() {
-</span><span class="token prefix deleted">-</span><span class="token line">				if ( jQuery.browser.msie ) return false;
-</span><span class="token prefix deleted">-</span><span class="token line">				jQuery(this).unbind("mouseover", jQuery.event.special.mouseenter.handler);
-</span><span class="token prefix deleted">-</span><span class="token line">				return true;
-</span><span class="token prefix deleted">-</span><span class="token line">			},
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">			handler: function(event) {
-</span><span class="token prefix deleted">-</span><span class="token line">				// If we actually just moused on to a sub-element, ignore it
-</span><span class="token prefix deleted">-</span><span class="token line">				if ( withinElement(event, this) ) return true;
-</span><span class="token prefix deleted">-</span><span class="token line">				// Execute the right handlers by setting the event type to mouseenter
-</span><span class="token prefix deleted">-</span><span class="token line">				event.type = "mouseenter";
-</span><span class="token prefix deleted">-</span><span class="token line">				return jQuery.event.handle.apply(this, arguments);
-</span><span class="token prefix deleted">-</span><span class="token line">			}
-</span><span class="token prefix deleted">-</span><span class="token line">		},
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">		mouseleave: {
-</span><span class="token prefix deleted">-</span><span class="token line">			setup: function() {
-</span><span class="token prefix deleted">-</span><span class="token line">				if ( jQuery.browser.msie ) return false;
-</span><span class="token prefix deleted">-</span><span class="token line">				jQuery(this).bind("mouseout", jQuery.event.special.mouseleave.handler);
-</span><span class="token prefix deleted">-</span><span class="token line">				return true;
-</span><span class="token prefix deleted">-</span><span class="token line">			},
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">			teardown: function() {
-</span><span class="token prefix deleted">-</span><span class="token line">				if ( jQuery.browser.msie ) return false;
-</span><span class="token prefix deleted">-</span><span class="token line">				jQuery(this).unbind("mouseout", jQuery.event.special.mouseleave.handler);
-</span><span class="token prefix deleted">-</span><span class="token line">				return true;
-</span><span class="token prefix deleted">-</span><span class="token line">			},
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">			handler: function(event) {
-</span><span class="token prefix deleted">-</span><span class="token line">				// If we actually just moused on to a sub-element, ignore it
-</span><span class="token prefix deleted">-</span><span class="token line">				if ( withinElement(event, this) ) return true;
-</span><span class="token prefix deleted">-</span><span class="token line">				// Execute the right handlers by setting the event type to mouseleave
-</span><span class="token prefix deleted">-</span><span class="token line">				event.type = "mouseleave";
-</span><span class="token prefix deleted">-</span><span class="token line">				return jQuery.event.handle.apply(this, arguments);
-</span><span class="token prefix deleted">-</span><span class="token line">			}
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			teardown: function() { }
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">	}
-</span><span class="token prefix unchanged"> </span><span class="token line">};
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">jQuery.each({ mouseover: 'mouseenter', mouseout: 'mouseleave' }, function( orig, fix ){
-</span><span class="token prefix inserted">+</span><span class="token line">	var ev = jQuery.event.special[ fix ] = {
-</span><span class="token prefix inserted">+</span><span class="token line">		setup: function(){
-</span><span class="token prefix inserted">+</span><span class="token line">			return jQuery.browser.msie ? false : jQuery( this ).bind( orig, ev.handler );
-</span><span class="token prefix inserted">+</span><span class="token line">		},
-</span><span class="token prefix inserted">+</span><span class="token line">		teardown: function(){
-</span><span class="token prefix inserted">+</span><span class="token line">			return jQuery.browser.msie ? false : jQuery( this ).unbind( orig, ev.handler );
-</span><span class="token prefix inserted">+</span><span class="token line">		},
-</span><span class="token prefix inserted">+</span><span class="token line">		handler: function( event ){
-</span><span class="token prefix inserted">+</span><span class="token line">			event.type = fix; 
-</span><span class="token prefix inserted">+</span><span class="token line">			return withinElement( event, this ) || jQuery.event.handle.apply( this, arguments );
-</span><span class="token prefix inserted">+</span><span class="token line">		}
-</span><span class="token prefix inserted">+</span><span class="token line">	};			   
-</span><span class="token prefix inserted">+</span><span class="token line">});
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">jQuery.fn.extend({
-</span><span class="token prefix unchanged"> </span><span class="token line">	bind: function( type, data, fn ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		return type == "unload" ? this.one(type, data, fn) : this.each(function(){</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3127/hover-mike[5762].diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3127/hover-mike[5762].diff">Original Format</a>
   </div>
 </h1></div>
         </div>

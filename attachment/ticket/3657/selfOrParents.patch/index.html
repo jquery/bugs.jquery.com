@@ -140,40 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: src/core.js
-===================================================================
---- src/core.js	(revision 5953)
-+++ src/core.js	(working copy)
-@@ -1258,6 +1258,7 @@
- jQuery.each({
- 	parent: function(elem){return elem.parentNode;},
- 	parents: function(elem){return jQuery.dir(elem,"parentNode");},
-+	selfOrParents: function(elem){return jQuery.dir(elem,"parentNode",elem);},
- 	next: function(elem){return jQuery.nth(elem,2,"nextSibling");},
- 	prev: function(elem){return jQuery.nth(elem,2,"previousSibling");},
- 	nextAll: function(elem){return jQuery.dir(elem,"nextSibling");},
-Index: src/selector.js
-===================================================================
---- src/selector.js	(revision 5953)
-+++ src/selector.js	(working copy)
-@@ -409,9 +409,9 @@
- 		return { r: r, t: t };
- 	},
- 
--	dir: function( elem, dir ){
-+	dir: function( elem, dir, start ){
- 		var matched = [],
--			cur = elem[dir];
-+			cur = start || elem[dir];
- 		while ( cur && cur != document ) {
- 			if ( cur.nodeType == 1 )
- 				matched.push( cur );</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3657/selfOrParents.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3657/selfOrParents.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

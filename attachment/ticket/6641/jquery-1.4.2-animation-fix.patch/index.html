@@ -142,22 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">@@ -5867,7 +5867,8 @@
-                var timers = jQuery.timers;
-
-                for ( var i = 0; i < timers.length; i++ ) {
--                       if ( !timers[i]() ) {
-+                       var timer = timers[i];
-+                       if ( !timers[i]() && timers[i] === timer ) {
-                                timers.splice(i--, 1);
-                        }
-                }</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/6641/jquery-1.4.2-animation-fix.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/6641/jquery-1.4.2-animation-fix.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -140,25 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 3583)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -846,7 +846,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// one special, otherwise get the value
-</span><span class="token prefix unchanged"> </span><span class="token line">				ret = name == "display" &amp;&amp; swap[ stack.length - 1 ] != null ?
-</span><span class="token prefix unchanged"> </span><span class="token line">					"none" :
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					document.defaultView.getComputedStyle( elem, null ).getPropertyValue( name ) || "";
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					( getComputedStyle &amp;&amp; getComputedStyle.getPropertyValue( name ) ) || "";
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				// Finally, revert the display styles back
-</span><span class="token prefix unchanged"> </span><span class="token line">				for ( var i = 0; i &lt; swap.length; i++ )</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1779/1779.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1779/1779.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

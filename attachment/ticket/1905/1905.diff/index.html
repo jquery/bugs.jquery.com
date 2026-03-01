@@ -142,25 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax.js
-===================================================================
-<span class="token coord">--- src/ajax.js	(revision 3798)</span>
-<span class="token coord">+++ src/ajax.js	(working copy)</span>
-<span class="token coord">@@ -174,7 +174,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Build temporary JSONP function
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( s.dataType == "json" &amp;&amp; (s.data &amp;&amp; jsre.test( s.data ) || s.url.match(jsre)) ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( s.dataType == "json" &amp;&amp; (s.data &amp;&amp; s.data.match(jsre) || s.url.match(jsre)) ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			jsonp = "jsonp" + jsc++;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Replace the =? sequence both in the query string and the data</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1905/1905.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1905/1905.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -140,73 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token comment">/*
-Copyright 2008 University of Toronto
-
-Licensed under the Educational Community License (ECL), Version 2.0 or the New
-BSD license. You may not use this file except in compliance with one these
-Licenses.
-
-You may obtain a copy of the ECL 2.0 License and BSD License at
-https://source.fluidproject.org/svn/LICENSE.txt
-*/</span>
-
-<span class="token keyword">var</span> demo <span class="token operator">=</span> demo <span class="token operator">||</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-demo<span class="token punctuation">.</span><span class="token function-variable function">initDnD</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token function">jQuery</span><span class="token punctuation">(</span><span class="token string">".inner-item"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">draggable</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        <span class="token literal-property property">refreshPositions</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-        <span class="token literal-property property">scroll</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-        <span class="token function-variable function">helper</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token keyword">var</span> avatar <span class="token operator">=</span> <span class="token function">jQuery</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            avatar<span class="token punctuation">.</span><span class="token function">removeAttr</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            avatar<span class="token punctuation">.</span><span class="token function">removeClass</span><span class="token punctuation">(</span><span class="token string">"ui-droppable"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            avatar<span class="token punctuation">.</span><span class="token function">removeClass</span><span class="token punctuation">(</span><span class="token string">"inner-item"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> avatar<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">droppable</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        <span class="token literal-property property">accept</span><span class="token operator">:</span> <span class="token string">".inner-item"</span><span class="token punctuation">,</span>
-        <span class="token literal-property property">greedy</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-        <span class="token literal-property property">tolerance</span><span class="token operator">:</span> <span class="token string">"pointer"</span><span class="token punctuation">,</span>
-        <span class="token function-variable function">drop</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e<span class="token punctuation">,</span> ui</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token function">jQuery</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">after</span><span class="token punctuation">(</span>ui<span class="token punctuation">.</span>draggable<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    
-    <span class="token function">jQuery</span><span class="token punctuation">(</span><span class="token string">".outer-item"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">draggable</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        <span class="token literal-property property">refreshPositions</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-        <span class="token literal-property property">scroll</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-        <span class="token function-variable function">helper</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token keyword">var</span> avatar <span class="token operator">=</span> <span class="token function">jQuery</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            avatar<span class="token punctuation">.</span><span class="token function">removeAttr</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            avatar<span class="token punctuation">.</span><span class="token function">removeClass</span><span class="token punctuation">(</span><span class="token string">"ui-droppable"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            avatar<span class="token punctuation">.</span><span class="token function">removeClass</span><span class="token punctuation">(</span><span class="token string">"outer-item"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> avatar<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">droppable</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        <span class="token literal-property property">accept</span><span class="token operator">:</span> <span class="token string">".outer-item"</span><span class="token punctuation">,</span>
-        <span class="token literal-property property">greedy</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-        <span class="token literal-property property">tolerance</span><span class="token operator">:</span> <span class="token string">"pointer"</span><span class="token punctuation">,</span>
-        <span class="token function-variable function">drop</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e<span class="token punctuation">,</span> ui</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token function">jQuery</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">after</span><span class="token punctuation">(</span>ui<span class="token punctuation">.</span>draggable<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    
-    <span class="token function">jQuery</span><span class="token punctuation">(</span><span class="token string">"#outer-container"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">droppable</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        <span class="token literal-property property">accept</span><span class="token operator">:</span> <span class="token string">".outer-item"</span><span class="token punctuation">,</span>
-        <span class="token literal-property property">greedy</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-        <span class="token literal-property property">tolerance</span><span class="token operator">:</span> <span class="token string">"pointer"</span><span class="token punctuation">,</span>
-        <span class="token function-variable function">drop</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e<span class="token punctuation">,</span> ui</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token function">jQuery</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>ui<span class="token punctuation">.</span>draggable<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2886/nested.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2886/nested.js">Original Format</a>
   </div>
 </h1></div>
         </div>

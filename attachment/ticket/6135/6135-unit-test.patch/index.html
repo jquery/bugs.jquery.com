@@ -142,41 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">diff --git a/test/unit/core.js b/test/unit/core.js
-index d8aba16..d3b6943 100644
---- a/test/unit/core.js
-+++ b/test/unit/core.js
-@@ -12,7 +12,7 @@ test("Basic requirements", function() {
- });
- 
- test("jQuery()", function() {
--	expect(23);
-+	expect(24);
- 
- 	// Basic constructor's behavior
- 
-@@ -59,6 +59,15 @@ test("jQuery()", function() {
- 	equals( div.length, 4, "Correct number of elements generated for div hr code b" );
- 	equals( div.parent().length, 0, "Make sure that the generated HTML has no parent." );
- 
-+	// ticket #6135
-+	try {
-+		var html = "<h1>Test</h1>\n\t<h2>Test</h2>";
-+		jQuery(html).hide();
-+		ok(true, 'Correctly handle text nodes');
-+	} catch(e) {
-+		ok(false, 'Was not able to handle text nodes');
-+	}
-+
- 	equals( jQuery([1,2,3]).get(1), 2, "Test passing an array to the factory" );
- 
- 	equals( jQuery(document.body).get(0), jQuery('body').get(0), "Test passing an html node to the factory" );</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/6135/6135-unit-test.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/6135/6135-unit-test.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

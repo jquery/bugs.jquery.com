@@ -142,28 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/attributes.js
-===================================================================
-<span class="token coord">--- jquery/src/attributes.js	(revision 6414)</span>
-<span class="token coord">+++ jquery/src/attributes.js	(working copy)</span>
-<span class="token coord">@@ -36,7 +36,12 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	hasClass: function( selector ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		return !!selector &amp;&amp; this.is( "." + selector );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		return !!selector &amp;&amp; this.is(
-</span><span class="token prefix inserted">+</span><span class="token line">			"." +							// prepend dot to look for class
-</span><span class="token prefix inserted">+</span><span class="token line">			jQuery.trim(selector)			// trim blanks
-</span><span class="token prefix inserted">+</span><span class="token line">			.replace(/([:.#])/g, '\\$1')	// escape metachars
-</span><span class="token prefix inserted">+</span><span class="token line">			.replace(/\s+/g, '.')			// join space-separated classes with dots
-</span><span class="token prefix inserted">+</span><span class="token line">		);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4817/jquery-hasClass.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4817/jquery-hasClass.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

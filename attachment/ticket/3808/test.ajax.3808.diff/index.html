@@ -142,25 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax.js
-===================================================================
-<span class="token coord">--- src/ajax.js	(revision 6268)</span>
-<span class="token coord">+++ src/ajax.js	(working copy)</span>
-<span class="token coord">@@ -176,6 +176,9 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// checked again later (in the test suite, specifically)
-</span><span class="token prefix unchanged"> </span><span class="token line">		s = jQuery.extend(true, s, jQuery.extend(true, {}, jQuery.ajaxSettings, s));
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">        // strip any existing fragment (#) segment from the request URL
-</span><span class="token prefix inserted">+</span><span class="token line">        s.url = s.url.replace(/#(.*)$/, '');
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		var jsonp, jsre = /=\?(&amp;|$)/g, status, data,
-</span><span class="token prefix unchanged"> </span><span class="token line">			type = s.type.toUpperCase();</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3808/test.ajax.3808.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3808/test.ajax.3808.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

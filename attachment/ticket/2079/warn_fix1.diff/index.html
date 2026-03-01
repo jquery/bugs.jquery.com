@@ -142,41 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery-1.2.2b.js.1	2007-12-17 03:29:58.000000000 +0100</span>
-<span class="token coord">+++ jquery-1.2.2b.js	2007-12-21 20:59:27.000000000 +0100</span>
-<span class="token coord">@@ -653,7 +653,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			jQuery.cache[ id ] = {};
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Prevent overriding the named cache with undefined values
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( data != undefined )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( data != undefined || !jQuery.cache[ id ][ name ] )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			jQuery.cache[ id ][ name ] = data;
-</span><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Return the named cache data, or the ID for the element	
-</span></span><span class="token coord">@@ -992,7 +992,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				elem = jQuery.makeArray( div.childNodes );
-</span><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( elem.length === 0 &amp;&amp; (!jQuery.nodeName( elem, "form" ) &amp;&amp; !jQuery.nodeName( elem, "select" )) )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( (elem.length &amp;&amp; elem.length === 0) &amp;&amp; (!jQuery.nodeName( elem, "form" ) &amp;&amp; !jQuery.nodeName( elem, "select" )) )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				return;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( elem[0] == undefined || jQuery.nodeName( elem, "form" ) || elem.options )
-</span></span><span class="token coord">@@ -1790,7 +1790,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	// Bind an event to an element
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Original by Dean Edwards
-</span><span class="token prefix unchanged"> </span><span class="token line">	add: function(elem, types, handler, data) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( elem.nodeType == 3 || elem.nodeType == 8 )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( elem.nodeType &amp;&amp; (elem.nodeType == 3 || elem.nodeType == 8 ))
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			return;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// For whatever reason, IE has trouble passing the window object</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2079/warn_fix1.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2079/warn_fix1.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

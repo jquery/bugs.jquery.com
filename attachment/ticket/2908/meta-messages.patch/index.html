@@ -142,57 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery.validate.js
-===================================================================
---- jquery.validate.js	(revision 5693)
-+++ jquery.validate.js	(working copy)
-@@ -498,6 +498,21 @@
- 			return true;
- 		},
- 		
-+		// return the custom message for the given element and validation method
-+		// specified in the element's "messages" metadata
-+		customMetaMessage: function(element, method) {
-+			if (!jQuery.metadata) return undefined;
-+			
-+			var metaKey = jQuery.data(element.form, 'validator').settings.meta;
-+			var meta = metaKey ?
-+				jQuery(element).metadata()[metaKey] :
-+				jQuery(element).metadata();
-+			
-+			return meta.messages ?
-+				meta.messages[method] :
-+				undefined;
-+		},
-+		
- 		// return the custom message for the given element name and validation method
- 		customMessage: function( name, method ) {
- 			var m = this.settings.messages[name];
-@@ -518,6 +533,7 @@
- 		defaultMessage: function( element, method) {
- 			return this.findDefined(
- 				this.customMessage( element.name, method ),
-+				this.customMetaMessage( element.name, method ),
- 				// title is never undefined, so handle empty string as undefined
- 				element.title || undefined,
- 				jQuery.validator.messages[method],
-@@ -833,6 +849,11 @@
- 			}
- 		}
- 		
-+		// To support custom messages in metadata ignore rule methods titled "messages"
-+		if (rules.messages) {
-+			delete rules.messages
-+		}
-+		
- 		return rules;
- 	},</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2908/meta-messages.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2908/meta-messages.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

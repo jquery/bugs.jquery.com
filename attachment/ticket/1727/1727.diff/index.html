@@ -142,48 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/selector.js
-===================================================================
-<span class="token coord">--- src/selector.js	(revision 3790)</span>
-<span class="token coord">+++ src/selector.js	(working copy)</span>
-<span class="token coord">@@ -349,11 +349,14 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// We can get a speed boost by handling nth-child here
-</span><span class="token prefix unchanged"> </span><span class="token line">			} else if ( m[1] == ":" &amp;&amp; m[2] == "nth-child" ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">				var merge = {}, tmp = [],
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					test = /(\d*)n\+?(\d*)/.exec(
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					// parse equations like 'even', 'odd', '5', '2n', '3n+2', '4n-1', '-n+6'
-</span><span class="token prefix inserted">+</span><span class="token line">					test = /(-?)(\d*)n((?:\+|-)?\d*)/.exec(
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">						m[3] == "even" &amp;&amp; "2n" || m[3] == "odd" &amp;&amp; "2n+1" ||
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">						!/\D/.test(m[3]) &amp;&amp; "n+" + m[3] || m[3]),
-</span><span class="token prefix deleted">-</span><span class="token line">					first = (test[1] || 1) - 0, last = test[2] - 0;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">						!/\D/.test(m[3]) &amp;&amp; "0n+" + m[3] || m[3]),
-</span><span class="token prefix inserted">+</span><span class="token line">					// calculate the numbers (first)n+(last) including if they are negative
-</span><span class="token prefix inserted">+</span><span class="token line">					first = (test[1] + (test[2] || 1)) - 0, last = test[3] - 0;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				// loop through all the elements left in the jQuery object
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				for ( var i = 0, rl = r.length; i &lt; rl; i++ ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">					var node = r[i], parentNode = node.parentNode, id = jQuery.data(parentNode);
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -369,10 +372,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">					var add = false;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					if ( first == 1 ) {
-</span><span class="token prefix deleted">-</span><span class="token line">						if ( last == 0 || node.nodeIndex == last )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					if ( first == 0 ) {
-</span><span class="token prefix inserted">+</span><span class="token line">						if ( node.nodeIndex == last )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">							add = true;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					} else if ( (node.nodeIndex + last) % first == 0 )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					} else if ( (node.nodeIndex - last) % first == 0 &amp;&amp; (node.nodeIndex - last) / first >= 0 )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">						add = true;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">					if ( add ^ not )</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1727/1727.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1727/1727.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,49 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-	<span class="token keyword">var</span> <span class="token function-variable function">getcontent</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">handler<span class="token punctuation">,</span> section<span class="token punctuation">,</span> id<span class="token punctuation">,</span> sort</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token keyword">var</span> json <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-		
-		<span class="token keyword">var</span> id_arr <span class="token operator">=</span> <span class="token punctuation">(</span>id<span class="token punctuation">.</span>constructor<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">"Array"</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token keyword">var</span> id_str <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
-		<span class="token keyword">if</span><span class="token punctuation">(</span>id_arr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> idi <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> idi <span class="token operator">&lt;</span> id<span class="token punctuation">.</span>length<span class="token punctuation">;</span> idi<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-				id_str <span class="token operator">+=</span> <span class="token string">"&amp;id[]="</span> <span class="token operator">+</span> id<span class="token punctuation">[</span>idi<span class="token punctuation">]</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span>
-		<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-			id_str <span class="token operator">+=</span> <span class="token string">"&amp;id="</span> <span class="token operator">+</span> id<span class="token punctuation">;</span>
-		<span class="token punctuation">}</span>
-		
-		<span class="token keyword">var</span> uri <span class="token operator">=</span> <span class="token string">'json.php?s='</span> <span class="token operator">+</span> section <span class="token operator">+</span> id_str <span class="token operator">+</span> <span class="token string">'&amp;sort='</span> <span class="token operator">+</span> sort<span class="token punctuation">;</span>
-		
-		<span class="token comment">/** Here is the error thrown **/</span>
-		json <span class="token operator">=</span> $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-			<span class="token literal-property property">url</span><span class="token operator">:</span> uri<span class="token punctuation">,</span>
-			<span class="token literal-property property">async</span><span class="token operator">:</span> <span class="token boolean">false</span>
-			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>responseText<span class="token punctuation">;</span>
-		<span class="token function">eval</span><span class="token punctuation">(</span>handler <span class="token operator">+</span> <span class="token string">'('</span> <span class="token operator">+</span> json <span class="token operator">+</span> <span class="token string">');'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
-	window<span class="token punctuation">.</span>getcontent <span class="token operator">=</span> getcontent<span class="token punctuation">;</span>
-	
-	<span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ready</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token keyword">try</span> <span class="token punctuation">{</span>
-			window<span class="token punctuation">.</span><span class="token function">getcontent</span><span class="token punctuation">(</span><span class="token string">'handleFotoBoek'</span><span class="token punctuation">,</span><span class="token string">'fotoboek'</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'id'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">alert</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>message<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
-	<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">function</span> <span class="token function">handleFotoBoek</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">checkdata</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token comment">// Cleaning up the carousel</span>
-		<span class="token comment">/** Never Arrives here **/</span>
-	<span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3291/error.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3291/error.js">Original Format</a>
   </div>
 </h1></div>
         </div>

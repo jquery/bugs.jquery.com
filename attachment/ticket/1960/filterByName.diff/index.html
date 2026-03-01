@@ -142,27 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/selector.js
-===================================================================
-<span class="token coord">--- src/selector.js	(revision 5084)</span>
-<span class="token coord">+++ src/selector.js	(working copy)</span>
-<span class="token coord">@@ -330,6 +330,11 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			else if ( m[1] == "." )
-</span><span class="token prefix unchanged"> </span><span class="token line">				r = jQuery.classFilter(r, m[2], not);
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			else if ( !not &amp;&amp; m[1] == '[' &amp;&amp; m[2] == 'name' &amp;&amp; m[3] == '=' )//special case, filter by exact name
-</span><span class="token prefix inserted">+</span><span class="token line">				r = jQuery.grep( document.getElementsByName(m[5]), function(elem){
-</span><span class="token prefix inserted">+</span><span class="token line">					return jQuery.inArray( elem, r ) != -1;	
-</span><span class="token prefix inserted">+</span><span class="token line">				});
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			else if ( m[1] == "[" ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">				var tmp = [], type = m[3];</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1960/filterByName.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1960/filterByName.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

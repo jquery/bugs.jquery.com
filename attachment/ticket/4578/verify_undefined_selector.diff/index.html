@@ -142,34 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/test/unit/core.js
-===================================================================
-<span class="token coord">--- jquery/test/unit/core.js	(revision 6320)</span>
-<span class="token coord">+++ jquery/test/unit/core.js	(working copy)</span>
-<span class="token coord">@@ -12,7 +12,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("jQuery()", function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	expect(8);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	expect(9);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	var main = jQuery("#main");
-</span><span class="token prefix unchanged"> </span><span class="token line">	isSet( jQuery("div p", main).get(), q("sndp", "en", "sap"), "Basic selector with jQuery object as context" );
-</span></span><span class="token coord">@@ -50,6 +50,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	equals( jQuery([1,2,3]).get(1), 2, "Test passing an array to the factory" );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	equals( jQuery(document.body).get(0), jQuery('body').get(0), "Test passing an html node to the factory" );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( jQuery(undefined).get(0), jQuery('shouldnotexist').get(0), "Test passing undefined node to the factory" );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("selector state", function() {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4578/verify_undefined_selector.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4578/verify_undefined_selector.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,29 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: core.js
-===================================================================
-<span class="token coord">--- core.js	(revision 5470)</span>
-<span class="token coord">+++ core.js	(working copy)</span>
-<span class="token coord">@@ -146,8 +146,11 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Locate the position of the desired element
-</span><span class="token prefix unchanged"> </span><span class="token line">		this.each(function(i){
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( this == elem )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			// use === because on IE, window == document
-</span><span class="token prefix inserted">+</span><span class="token line">			if( elem.jquery ? elem.index(this) != -1 : this === elem ){
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				ret = i;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				return false;
-</span><span class="token prefix inserted">+</span><span class="token line">			}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		return ret;</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2771/index.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2771/index.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

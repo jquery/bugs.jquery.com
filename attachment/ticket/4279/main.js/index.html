@@ -142,84 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ready</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-
-    <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#instructions-description a.action-tab"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#instructions-description"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toggleClass</span><span class="token punctuation">(</span><span class="token string">"active"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    
-    <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"input"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">clearingInput</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#invoice-body td textarea"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">autogrow</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    
-    <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"input[id^=qty-], input[id^=unit-sell-price-], input[id^=tax-]"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token string">"keyup"</span><span class="token punctuation">,</span> recalc<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    
-    <span class="token keyword">function</span> <span class="token function">recalc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"[id^=sub-total-]"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">calc</span><span class="token punctuation">(</span>
-        	<span class="token comment">// the equation to use for the calculation</span>
-        	<span class="token string">"qty * price"</span><span class="token punctuation">,</span>
-        	<span class="token comment">// define the variables used in the equation, these can be a jQuery object</span>
-        	<span class="token punctuation">{</span>
-        		<span class="token literal-property property">qty</span><span class="token operator">:</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"input[id^=qty-]"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        		<span class="token literal-property property">price</span><span class="token operator">:</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"input[id^=unit-sell-price-]"</span><span class="token punctuation">)</span>
-        	<span class="token punctuation">}</span><span class="token punctuation">,</span>
-        	<span class="token comment">// define the formatting callback, the results of the calculation are passed to this function</span>
-        	<span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">s</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        		<span class="token comment">// return the number as a dollar amount</span>
-        		<span class="token keyword">return</span> <span class="token string">"$"</span> <span class="token operator">+</span> s<span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        	<span class="token punctuation">}</span><span class="token punctuation">,</span>
-        	<span class="token comment">// define the finish callback, this runs after the calculation has been complete</span>
-        	<span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">$<span class="token keyword">this</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        		<span class="token comment">// sum the total of the $("[id^=total_item]") selector</span>
-        		<span class="token keyword">var</span> sum <span class="token operator">=</span> $<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        		
-        		<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#invoice-sub-total"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span>
-        			<span class="token comment">// round the results to 2 digits</span>
-        			<span class="token string">"$"</span> <span class="token operator">+</span> sum<span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
-        		<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        	<span class="token punctuation">}</span>
-        <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        
-        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"[id^=item-tax-total-]"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">calc</span><span class="token punctuation">(</span>
-        	<span class="token comment">// the equation to use for the calculation</span>
-        	<span class="token string">"(subTotal * tax) / 100"</span><span class="token punctuation">,</span>
-        	<span class="token comment">// define the variables used in the equation, these can be a jQuery object</span>
-        	<span class="token punctuation">{</span>
-        		<span class="token literal-property property">subTotal</span><span class="token operator">:</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"[id^=sub-total-]"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        		<span class="token literal-property property">tax</span><span class="token operator">:</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"input[id^=tax-]"</span><span class="token punctuation">)</span>
-        	<span class="token punctuation">}</span><span class="token punctuation">,</span>
-        	<span class="token comment">// define the formatting callback, the results of the calculation are passed to this function</span>
-        	<span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">s</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        		<span class="token comment">// return the number as a dollar amount</span>
-        		<span class="token keyword">return</span> <span class="token string">"$"</span> <span class="token operator">+</span> s<span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        	<span class="token punctuation">}</span><span class="token punctuation">,</span>
-        	<span class="token comment">// define the finish callback, this runs after the calculation has been complete</span>
-        	<span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">$<span class="token keyword">this</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        		<span class="token comment">// sum the total of the $("[id^=total_item]") selector</span>
-        		<span class="token keyword">var</span> sum <span class="token operator">=</span> $<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        		
-        		<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#invoice-tax-total"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span>
-        			<span class="token comment">// round the results to 2 digits</span>
-        			<span class="token string">"$"</span> <span class="token operator">+</span> sum<span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
-        		<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        	<span class="token punctuation">}</span>
-        <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        
-        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#invoice-sub-total, #invoice-tax-total"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sum</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-            <span class="token literal-property property">selector</span><span class="token operator">:</span> <span class="token string">"#invoice-total"</span><span class="token punctuation">,</span>
-            <span class="token function-variable function">oncalc</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token punctuation">,</span> settings</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        		<span class="token comment">// you can use this callback to format values</span>
-        		<span class="token function">$</span><span class="token punctuation">(</span>settings<span class="token punctuation">.</span>selector<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span><span class="token string">"$"</span> <span class="token operator">+</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        	<span class="token punctuation">}</span>
-        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4279/main.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4279/main.js">Original Format</a>
   </div>
 </h1></div>
         </div>

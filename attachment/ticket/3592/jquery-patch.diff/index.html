@@ -142,24 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery-1.2.6.js	2008-11-02 22:15:42.000000000 -0500</span>
-<span class="token coord">+++ jquery.patch-1.2.6.js	2008-11-02 22:25:49.000000000 -0500</span>
-<span class="token coord">@@ -508,7 +508,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					this;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				// execute all scripts after the elements have been injected
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( jQuery.nodeName( elem, "script" ) )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( jQuery.nodeName( elem, "script" ) &amp;&amp;
-</span><span class="token prefix inserted">+</span><span class="token line">				    ( !elem.type || elem.type == "text/javascript" || elem.type == "application/javascript"))
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					scripts = scripts.add( elem );
-</span><span class="token prefix unchanged"> </span><span class="token line">				else {
-</span><span class="token prefix unchanged"> </span><span class="token line">					// Remove any inner scripts for later evaluation</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3592/jquery-patch.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3592/jquery-patch.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

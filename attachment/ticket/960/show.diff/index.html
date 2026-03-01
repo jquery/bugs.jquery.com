@@ -142,34 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/fx/fx.js
-===================================================================
-<span class="token coord">--- src/fx/fx.js	(revision 1562)</span>
-<span class="token coord">+++ src/fx/fx.js	(working copy)</span>
-<span class="token coord">@@ -38,11 +38,14 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			hidden.animate({
-</span><span class="token prefix unchanged"> </span><span class="token line">				height: "show", width: "show", opacity: "show"
-</span><span class="token prefix unchanged"> </span><span class="token line">			}, speed, callback) :
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			hidden.each(function(){
-</span><span class="token prefix unchanged"> </span><span class="token line">				this.style.display = this.oldblock ? this.oldblock : "";
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( jQuery.css(this,"display") == "none" )
-</span><span class="token prefix deleted">-</span><span class="token line">					this.style.display = "block";
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( jQuery.css(this,"display") == "none" ) {
-</span><span class="token prefix inserted">+</span><span class="token line">					var elem = jQuery("&lt;"+this.tagName.toLowerCase()+">").appendTo("body");
-</span><span class="token prefix inserted">+</span><span class="token line">					this.style.display = elem.css("display");
-</span><span class="token prefix inserted">+</span><span class="token line">					elem.remove();
-</span><span class="token prefix inserted">+</span><span class="token line">				}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			});
-</span><span class="token prefix unchanged"> </span><span class="token line">		return this;
-</span><span class="token prefix unchanged"> </span><span class="token line">	},</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/960/show.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/960/show.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

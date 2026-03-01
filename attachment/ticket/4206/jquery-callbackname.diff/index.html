@@ -140,73 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">diff --git a/src/ajax.js b/src/ajax.js
-index 0f5f805..e5526ee 100644
-<span class="token coord">--- a/src/ajax.js</span>
-<span class="token coord">+++ b/src/ajax.js</span>
-@@ -195,7 +195,17 @@ jQuery.extend({
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Build temporary JSONP function
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( s.dataType == "json" &amp;&amp; (s.data &amp;&amp; s.data.match(jsre) || s.url.match(jsre)) ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			jsonp = "jsonp" + jsc++;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( typeof s.callbackName === "string" ) {
-</span><span class="token prefix inserted">+</span><span class="token line">				// callbackName is used to request the given content with a constant URL.
-</span><span class="token prefix inserted">+</span><span class="token line">				// This enables both the browser and the server to cache the data.
-</span><span class="token prefix inserted">+</span><span class="token line">				// s.cache = false would negate the effect.
-</span><span class="token prefix inserted">+</span><span class="token line">				s.cache = true;
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">				jsonp = "jsonp" + s.callbackName;
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( window[ jsonp ] )
-</span><span class="token prefix inserted">+</span><span class="token line">					throw "callbackName " + s.callbackName + " not unique";
-</span><span class="token prefix inserted">+</span><span class="token line">			} else
-</span><span class="token prefix inserted">+</span><span class="token line">				jsonp = "jsonp" + jsc++;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Replace the =? sequence both in the query string and the data
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( s.data )
-</span></span>diff --git a/test/unit/ajax.js b/test/unit/ajax.js
-index 0d2f071..81ae0b5 100644
-<span class="token coord">--- a/test/unit/ajax.js</span>
-<span class="token coord">+++ b/test/unit/ajax.js</span>
-@@ -442,10 +442,10 @@ test("jQuery.getScript(String, Function) - no callback", function() {
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("jQuery.ajax() - JSONP, Local", function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	expect(7);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	expect(8);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	var count = 0;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	function plus(){ if ( ++count == 7 ) start(); }
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	function plus(){ if ( ++count == 8 ) start(); }
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	stop();
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span>@@ -504,6 +504,20 @@ test("jQuery.ajax() - JSONP, Local", function() {
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	jQuery.ajax({
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		url: "data/jsonp.php",
-</span><span class="token prefix inserted">+</span><span class="token line">		dataType: "jsonp",
-</span><span class="token prefix inserted">+</span><span class="token line">		callbackName: "Test",
-</span><span class="token prefix inserted">+</span><span class="token line">		success: function(data){
-</span><span class="token prefix inserted">+</span><span class="token line">			ok( data.data, "JSON results returned (GET, specified callbackName)" );
-</span><span class="token prefix inserted">+</span><span class="token line">			plus();
-</span><span class="token prefix inserted">+</span><span class="token line">		},
-</span><span class="token prefix inserted">+</span><span class="token line">		error: function(data){
-</span><span class="token prefix inserted">+</span><span class="token line">			ok( false, "Ajax error JSON (GET, specified callbackName)" );
-</span><span class="token prefix inserted">+</span><span class="token line">			plus();
-</span><span class="token prefix inserted">+</span><span class="token line">		}
-</span><span class="token prefix inserted">+</span><span class="token line">	});
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">	jQuery.ajax({
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		type: "POST",
-</span><span class="token prefix unchanged"> </span><span class="token line">		url: "data/jsonp.php",
-</span><span class="token prefix unchanged"> </span><span class="token line">		dataType: "jsonp",</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4206/jquery-callbackname.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4206/jquery-callbackname.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

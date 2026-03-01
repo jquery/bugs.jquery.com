@@ -142,23 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- includes/javascript/jquery-nightly.js	2009-04-02 11:39:58.000000000 +0200
-+++ includes/javascript/jquery.js	2009-04-02 11:42:32.000000000 +0200
-@@ -3212,7 +3212,7 @@
- 		});
- 
- 		if ( set )
--			style[ name ] = value;
-+			try {style[ name ] = value;} catch(e) {jQuery.log('invalid style: ' + name + '=' + value);}
- 
- 		return style[ name ];
- 	},</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4460/jquery-nightly.2.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4460/jquery-nightly.2.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

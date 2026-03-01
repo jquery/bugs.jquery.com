@@ -140,40 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/selector.js
-===================================================================
-<span class="token coord">--- src/selector.js	(revision 6350)</span>
-<span class="token coord">+++ src/selector.js	(working copy)</span>
-<span class="token coord">@@ -977,11 +977,21 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">jQuery.expr[":"] = jQuery.expr.filters;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">Sizzle.selectors.filters.hidden = function(elem){
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	return elem.offsetWidth === 0 &amp;&amp; elem.offsetHeight === 0;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	var width = elem.offsetWidth, height = elem.offsetHeight;
-</span><span class="token prefix inserted">+</span><span class="token line">	return ( width === 0 &amp;&amp; height === 0 ) ?
-</span><span class="token prefix inserted">+</span><span class="token line">		true :
-</span><span class="token prefix inserted">+</span><span class="token line">		( width !== 0 &amp;&amp; height !== 0 ) ?
-</span><span class="token prefix inserted">+</span><span class="token line">			false :
-</span><span class="token prefix inserted">+</span><span class="token line">			!!( jQuery.curCSS(elem, "display") === "none" );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">};
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">Sizzle.selectors.filters.visible = function(elem){
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	return elem.offsetWidth > 0 || elem.offsetHeight > 0;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	var width = elem.offsetWidth, height = elem.offsetHeight;
-</span><span class="token prefix inserted">+</span><span class="token line">	return ( width === 0 &amp;&amp; height === 0 ) ?
-</span><span class="token prefix inserted">+</span><span class="token line">		false :
-</span><span class="token prefix inserted">+</span><span class="token line">		( width > 0 &amp;&amp; height > 0 ) ?
-</span><span class="token prefix inserted">+</span><span class="token line">			true :
-</span><span class="token prefix inserted">+</span><span class="token line">			!!( jQuery.curCSS(elem, "display") !== "none" );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">};
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">Sizzle.selectors.filters.animated = function(elem){</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4512/4512.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4512/4512.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

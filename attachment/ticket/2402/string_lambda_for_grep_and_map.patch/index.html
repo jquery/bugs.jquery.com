@@ -142,40 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: javascripts/jquery.js
-===================================================================
---- javascripts/jquery.js	(revision 189)
-+++ javascripts/jquery.js	(working copy)
-@@ -1179,6 +1179,11 @@
- 	},
- 
- 	grep: function( elems, callback, inv ) {
-+		// If a string is passed in for the function, make a function
-+		// for it (a handy shortcut)
-+		if ( typeof callback == "string" )
-+			callback = eval("false||function(a,i){return " + callback + "}");
-+
- 		var ret = [];
- 
- 		// Go through the array, only saving the items
-@@ -1191,6 +1196,11 @@
- 	},
- 
- 	map: function( elems, callback ) {
-+		// If a string is passed in for the function, make a function
-+		// for it (a handy shortcut)
-+		if ( typeof callback == "string" )
-+			callback = eval("false||function(a,i){return " + callback + "}");
-+
- 		var ret = [];
- 
- 		// Go through the array, translating each of the items to their</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2402/string_lambda_for_grep_and_map.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2402/string_lambda_for_grep_and_map.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

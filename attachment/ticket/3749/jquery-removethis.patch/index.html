@@ -142,30 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: core.js
-===================================================================
---- core.js	(revision 5998)
-+++ core.js	(working copy)
-@@ -1295,6 +1295,13 @@
- 				this.parentNode.removeChild( this );
- 		}
- 	},
-+	
-+	removeThis: function() {
-+		while ( this.firstChild ) {
-+			this.parentNode.insertBefore( this.firstChild, this );
-+		}
-+		jQuery( this ).remove();
-+	},
- 
- 	empty: function() {
- 		// Remove element nodes and prevent memory leaks</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3749/jquery-removethis.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3749/jquery-removethis.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

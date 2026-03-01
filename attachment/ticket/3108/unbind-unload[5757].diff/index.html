@@ -140,28 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: /trunk/jquery/src/event.js
-===================================================================
-<span class="token coord">--- /trunk/jquery/src/event.js (revision 5757)</span>
-<span class="token coord">+++ /trunk/jquery/src/event.js (revision 5758)</span>
-<span class="token coord">@@ -604,5 +604,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">// And prevent errors on refresh with events like mouseover in other browsers
-</span><span class="token prefix unchanged"> </span><span class="token line">// Window isn't included so as not to unbind existing unload events
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">jQuery(window).bind("unload", function() {
-</span><span class="token prefix deleted">-</span><span class="token line">	jQuery("*").add(document).unbind();
-</span><span class="token prefix deleted">-</span><span class="token line">});
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">jQuery( window ).bind( 'unload', function(){ 
-</span><span class="token prefix inserted">+</span><span class="token line">	for ( var id in jQuery.cache )
-</span><span class="token prefix inserted">+</span><span class="token line">		// Skip the window
-</span><span class="token prefix inserted">+</span><span class="token line">		if ( id != 1 &amp;&amp; jQuery.cache[ id ].handle )
-</span><span class="token prefix inserted">+</span><span class="token line">			jQuery.event.remove( jQuery.cache[ id ].handle.elem );
-</span><span class="token prefix inserted">+</span><span class="token line">});</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3108/unbind-unload[5757].diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3108/unbind-unload[5757].diff">Original Format</a>
   </div>
 </h1></div>
         </div>

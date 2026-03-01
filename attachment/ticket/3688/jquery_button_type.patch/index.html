@@ -140,25 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery/src/core.js
-===================================================================
---- jquery/src/core.js	(revision 5961)
-+++ jquery/src/core.js	(working copy)
-@@ -1069,7 +1069,7 @@
- 			if ( name in elem && notxml && !special ) {
- 				if ( set ){
- 					// We can't allow the type property to be changed (since it causes problems in IE)
--					if ( name == "type" && jQuery.nodeName( elem, "input" ) && elem.parentNode )
-+					if ( name == "type" && (jQuery.nodeName( elem, "input" ) || jQuery.nodeName( elem, "button")) && elem.parentNode )
- 						throw "type property can't be changed";
- 
- 					elem[ name ] = value;</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3688/jquery_button_type.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3688/jquery_button_type.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

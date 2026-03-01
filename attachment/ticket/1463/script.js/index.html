@@ -142,137 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token keyword">function</span> <span class="token function">$cm_createTable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">var</span> markup <span class="token operator">=</span> <span class="token string">'&lt;table border="1">'</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
-    <span class="token keyword">var</span> count <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>count<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        markup <span class="token operator">+=</span> <span class="token string">'&lt;tr>'</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
-        markup <span class="token operator">+=</span> <span class="token string">'&lt;td>&lt;span>'</span> <span class="token operator">+</span> i<span class="token operator">++</span> <span class="token operator">+</span> <span class="token string">'&lt;/span>&lt;/td>'</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
-        markup <span class="token operator">+=</span> <span class="token string">'&lt;td>&lt;span>'</span> <span class="token operator">+</span> i<span class="token operator">++</span> <span class="token operator">+</span> <span class="token string">'&lt;/span>&lt;/td>'</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
-        markup <span class="token operator">+=</span> <span class="token string">'&lt;td>&lt;span>'</span> <span class="token operator">+</span> i<span class="token operator">++</span> <span class="token operator">+</span> <span class="token string">'&lt;/span>&lt;/td>'</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
-        markup <span class="token operator">+=</span> <span class="token string">'&lt;td>&lt;span>'</span> <span class="token operator">+</span> i<span class="token operator">++</span> <span class="token operator">+</span> <span class="token string">'&lt;/span>&lt;/td>'</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
-        markup <span class="token operator">+=</span> <span class="token string">'&lt;td>&lt;span>'</span> <span class="token operator">+</span> i <span class="token operator">+</span> <span class="token string">'&lt;/span>&lt;/td>'</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
-        markup <span class="token operator">+=</span> <span class="token string">'&lt;/tr>'</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    markup <span class="token operator">+=</span> <span class="token string">'&lt;/table>'</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
-    <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#'</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_containerId<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>markup<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">$cm_attachBehavior</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token comment">/// &lt;summary>Fastest method&lt;/summary></span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>_startTime <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">var</span> selector <span class="token operator">=</span> <span class="token string">'#'</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_containerId <span class="token operator">+</span> <span class="token string">' table tr td span'</span><span class="token punctuation">;</span>
-    <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addClass</span><span class="token punctuation">(</span><span class="token string">'ClickBox'</span><span class="token punctuation">)</span>
-        <span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span><span class="token string">'font-family'</span><span class="token punctuation">,</span> <span class="token string">'arial, verdana, san-serif'</span><span class="token punctuation">)</span>
-        <span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
-        <span class="token punctuation">{</span>
-            <span class="token function">alert</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>innerHTML<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>_endTime <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setDuration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">$cm_attachBehavior2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token comment">/// &lt;summary>Medium speed method&lt;/summary></span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>_startTime <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">var</span> selector <span class="token operator">=</span> <span class="token string">'#'</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_containerId <span class="token operator">+</span> <span class="token string">' table tr td span'</span><span class="token punctuation">;</span>    
-    <span class="token keyword">var</span> <span class="token function-variable function">setClassName</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addClass</span><span class="token punctuation">(</span><span class="token string">'ClickBox'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    
-    <span class="token keyword">var</span> <span class="token function-variable function">setFontFamily</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span><span class="token string">'font-family'</span><span class="token punctuation">,</span> <span class="token string">'arial, verdana, san-serif'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    
-    <span class="token keyword">var</span> <span class="token function-variable function">bindClick</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
-            <span class="token punctuation">{</span>
-                <span class="token function">alert</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>innerHTML<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    
-    <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span>setClassName<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span>setFontFamily<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span>bindClick<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>_endTime <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setDuration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">$cm_attachBehavior3</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token comment">/// &lt;summary>Slowest method&lt;/summary></span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>_startTime <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">var</span> selector <span class="token operator">=</span> <span class="token string">'#'</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_containerId <span class="token operator">+</span> <span class="token string">' table tr td span'</span><span class="token punctuation">;</span>
-    <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addClass</span><span class="token punctuation">(</span><span class="token string">'ClickBox'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span><span class="token string">'font-family'</span><span class="token punctuation">,</span> <span class="token string">'arial, verdana, san-serif'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
-        <span class="token punctuation">{</span>
-            <span class="token function">alert</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>innerHTML<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>_endTime <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setDuration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">$cm_reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>startTime <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>endTime <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-    <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'div#'</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_containerId<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">//document.getElementById(this._containerId).innerHTML = '';</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">$cm_setCount</span><span class="token punctuation">(</span><span class="token parameter">count</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>_count <span class="token operator">=</span> count<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">$cm_getCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_count<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">$cm_setDuration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>_duration <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_endTime <span class="token operator">-</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_startTime<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">$cm_getDuration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_duration<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">var</span> <span class="token function-variable function">ContentManager</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">containerId</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>_containerId <span class="token operator">=</span> containerId<span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>_startTime<span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>_endTime<span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>_count <span class="token operator">=</span> <span class="token number">250</span><span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>_duration<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token class-name">ContentManager</span><span class="token punctuation">.</span>prototype <span class="token operator">=</span> 
-<span class="token punctuation">{</span>
-    <span class="token literal-property property">createTable</span> <span class="token operator">:</span> $cm_createTable<span class="token punctuation">,</span>
-    <span class="token literal-property property">attachBehavior</span> <span class="token operator">:</span> $cm_attachBehavior<span class="token punctuation">,</span>
-    <span class="token literal-property property">attachBehavior2</span> <span class="token operator">:</span> $cm_attachBehavior2<span class="token punctuation">,</span>
-    <span class="token literal-property property">attachBehavior3</span> <span class="token operator">:</span> $cm_attachBehavior3<span class="token punctuation">,</span>
-    <span class="token literal-property property">reset</span> <span class="token operator">:</span> $cm_reset<span class="token punctuation">,</span>
-    <span class="token literal-property property">setCount</span> <span class="token operator">:</span> $cm_setCount<span class="token punctuation">,</span>
-    <span class="token literal-property property">getCount</span> <span class="token operator">:</span> $cm_getCount<span class="token punctuation">,</span>
-    <span class="token literal-property property">setDuration</span> <span class="token operator">:</span> $cm_setDuration<span class="token punctuation">,</span>
-    <span class="token literal-property property">getDuration</span> <span class="token operator">:</span> $cm_getDuration
-<span class="token punctuation">}</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1463/script.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1463/script.js">Original Format</a>
   </div>
 </h1></div>
         </div>

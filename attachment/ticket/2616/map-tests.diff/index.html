@@ -142,58 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: unit/core.js
-===================================================================
-<span class="token coord">--- unit/core.js	(revision 5284)</span>
-<span class="token coord">+++ unit/core.js	(working copy)</span>
-<span class="token coord">@@ -1511,7 +1511,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("map()", function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	expect(2);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	expect(6);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	isSet(
-</span><span class="token prefix unchanged"> </span><span class="token line">		$("#ap").map(function(){
-</span></span><span class="token coord">@@ -1528,6 +1528,32 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		q("ap","ap","ap"),
-</span><span class="token prefix unchanged"> </span><span class="token line">		"Single Map"
-</span><span class="token prefix unchanged"> </span><span class="token line">	);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	//for #2616
-</span><span class="token prefix inserted">+</span><span class="token line">	var keys = $.map( {a:1,b:2}, function( v, k ){
-</span><span class="token prefix inserted">+</span><span class="token line">		return k;
-</span><span class="token prefix inserted">+</span><span class="token line">	}, [ ] );
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( keys.join(""), "ab", "Map the keys from a hash to an array" );
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	var values = $.map( {a:1,b:2}, function( v, k ){
-</span><span class="token prefix inserted">+</span><span class="token line">		return v;
-</span><span class="token prefix inserted">+</span><span class="token line">	}, [ ] );
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( values.join(""), "12", "Map the values from a hash to an array" );
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	var scripts = document.getElementsByTagName("script");
-</span><span class="token prefix inserted">+</span><span class="token line">	var mapped = $.map( scripts, function( v, k ){
-</span><span class="token prefix inserted">+</span><span class="token line">		return v;
-</span><span class="token prefix inserted">+</span><span class="token line">	}, {length:0} );
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( mapped.length, scripts.length, "Map an array(-like) to a hash" );
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	var flat = $.map( Array(4), function( v, k ){
-</span><span class="token prefix inserted">+</span><span class="token line">		return k % 2 ? k : [k,k,k];//try mixing array and regular returns
-</span><span class="token prefix inserted">+</span><span class="token line">	});
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( flat.join(""), "00012223", "try the new flatten technique(#2616)" );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("contents()", function() {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2616/map-tests.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2616/map-tests.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

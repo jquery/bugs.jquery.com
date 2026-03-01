@@ -142,44 +142,22 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- ui.datepicker.js	2008-02-22 07:28:04.000000000 +0000
-+++ ui.datepicker.js3	2008-03-27 10:26:47.000000000 +0000
-@@ -1251,12 +1251,12 @@
- 		var prev = '<div class="datepicker_prev">' + (this._canAdjustMonth(-1, drawYear, drawMonth) ? 
- 			'<a onclick="jQuery.datepicker._adjustDate(' + this._id + ', -' + stepMonths + ', \'M\');" '="" +="" (showStatus="" ?="" this._addStatus(this._get('prevStatus')="" ||="" '&#xa0;')="" :="" '')="">' +
--			this._get('prevText') + '</a>' :
-+			(this._get('prevText')||(" &#9668;" +this._get('monthNames')[(drawMonth+11)%12]) ) + '' :
- 			(hideIfNoPrevNext ? '' : '<label>' + this._get('prevText') + '</label>')) + '</div>';
- 		var next = '<div class="datepicker_next">' + (this._canAdjustMonth(+1, drawYear, drawMonth) ?
- 			'<a onclick="jQuery.datepicker._adjustDate(' + this._id + ', +' + stepMonths + ', \'M\');" '="" +="" (showStatus="" ?="" this._addStatus(this._get('nextStatus')="" ||="" '&#xa0;')="" :="" '')="">' +
--			this._get('nextText') + '</a>' :
-+			(this._get('nextText')||(this._get('monthNames')[(drawMonth+numMonths[1])%12]+" &#9658;") )+ '' :
- 			(hideIfNoPrevNext ? '>' : '<label>' + this._get('nextText') + '</label>')) + '</div>';
- 		var html = (prompt ? '<div class="datepicker_prompt">' + prompt + '</div>' : '') +
- 			(closeAtTop && !this._inline ? controls : '') +
-@@ -1264,7 +1264,7 @@
- 			(this._isInRange(today) ? '<div class="datepicker_current">' +
- 			'<a onclick="jQuery.datepicker._gotoToday(' + this._id + ');" '="" +="" (showStatus="" ?="" this._addStatus(this._get('currentStatus')="" ||="" '&#xa0;')="" :="" '')="">' +
--			this._get('currentText') + '</a></div>' : '') + (isRTL ? prev : next) + '</code></pre></div>';
-+			(this._get('currentText')||'') + '</h1></div>' : '') + (isRTL ? prev : next) + '</div>';
- 		var showWeeks = this._get('showWeeks');
- 		for (var row = 0; row < numMonths[0]; row++) {
- 		for (var col = 0; col < numMonths[1]; col++) {
-    </main></div>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+    </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2593/ui.datepicker.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2593/ui.datepicker.patch">Original Format</a>
   </div>
-
-        
-      
+</h1></div>
+        </div>
+      </main>
       <footer>
         Copyright &copy; 2026
         <a href="https://openjsf.org">The OpenJS Foundation</a>
       </footer>
-    
+    </div>
     <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
   </body>
 </html>

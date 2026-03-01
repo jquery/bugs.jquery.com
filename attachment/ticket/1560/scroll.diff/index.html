@@ -142,52 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ifxscrollto.js
-===================================================================
-<span class="token coord">--- ifxscrollto.js	(revision 3054)</span>
-<span class="token coord">+++ ifxscrollto.js	(working copy)</span>
-<span class="token coord">@@ -46,14 +46,32 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			return this.each(
-</span><span class="token prefix unchanged"> </span><span class="token line">				function()
-</span><span class="token prefix unchanged"> </span><span class="token line">				{
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					jQuery('a[@href*="#"]', this).click(
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					jQuery('a[@href^="#"]', this).click(
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">						function(e)
-</span><span class="token prefix unchanged"> </span><span class="token line">						{
-</span><span class="token prefix unchanged"> </span><span class="token line">							parts = this.href.split('#');
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">							jQuery('#' + parts[1]).ScrollTo(speed, axis, easing);
-</span><span class="token prefix deleted">-</span><span class="token line">							return false;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">							if(jQuery('#' + parts[1]).size() > 0) {
-</span><span class="token prefix inserted">+</span><span class="token line">								jQuery('#' + parts[1]).ScrollTo(speed, axis, easing);
-</span><span class="token prefix inserted">+</span><span class="token line">								return false;
-</span><span class="token prefix inserted">+</span><span class="token line">							} else if(jQuery('a[@name='+parts[1]+']').size() > 0) {
-</span><span class="token prefix inserted">+</span><span class="token line">								jQuery('a[@name='+parts[1]+']').ScrollTo(speed, axis, easing)
-</span><span class="token prefix inserted">+</span><span class="token line">								return false;
-</span><span class="token prefix inserted">+</span><span class="token line">							}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">						}
-</span><span class="token prefix unchanged"> </span><span class="token line">					);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					jQuery(document).ready(
-</span><span class="token prefix inserted">+</span><span class="token line">						function()	{
-</span><span class="token prefix inserted">+</span><span class="token line">							var loc = new String(document.location);
-</span><span class="token prefix inserted">+</span><span class="token line">							if (loc.search('#') != -1) {
-</span><span class="token prefix inserted">+</span><span class="token line">								var loc_parts = loc.split('#');
-</span><span class="token prefix inserted">+</span><span class="token line">								if(jQuery('#' + loc_parts[1]).size() > 0) {
-</span><span class="token prefix inserted">+</span><span class="token line">									jQuery('#' + loc_parts[1]).ScrollTo(speed, axis, easing);
-</span><span class="token prefix inserted">+</span><span class="token line">								} else if(jQuery('a[@name='+loc_parts[1]+']').size() > 0) {
-</span><span class="token prefix inserted">+</span><span class="token line">									jQuery('a[@name='+loc_parts[1]+']').ScrollTo(speed, axis, easing)
-</span><span class="token prefix inserted">+</span><span class="token line">								}
-</span><span class="token prefix inserted">+</span><span class="token line">							}
-</span><span class="token prefix inserted">+</span><span class="token line">						}
-</span><span class="token prefix inserted">+</span><span class="token line">					);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				}
-</span><span class="token prefix unchanged"> </span><span class="token line">			)
-</span><span class="token prefix unchanged"> </span><span class="token line">		}</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1560/scroll.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1560/scroll.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

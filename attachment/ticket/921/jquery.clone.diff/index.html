@@ -142,51 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/jquery/jquery.js
-===================================================================
-<span class="token coord">--- src/jquery/jquery.js	(revision 1897)</span>
-<span class="token coord">+++ src/jquery/jquery.js	(working copy)</span>
-<span class="token coord">@@ -852,11 +852,30 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	 * @cat DOM/Manipulation
-</span><span class="token prefix unchanged"> </span><span class="token line">	 */
-</span><span class="token prefix unchanged"> </span><span class="token line">	clone: function(deep) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		return this.pushStack( jQuery.map( this, function(a){
-</span><span class="token prefix deleted">-</span><span class="token line">			a = a.cloneNode( deep != undefined ? deep : true );
-</span><span class="token prefix deleted">-</span><span class="token line">			a.$events = null; // drop $events expando to avoid firing incorrect events
-</span><span class="token prefix deleted">-</span><span class="token line">			return a;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		// Need to remove events on the element and its descendants
-</span><span class="token prefix inserted">+</span><span class="token line">		var $this = this.add(this.find("*"));
-</span><span class="token prefix inserted">+</span><span class="token line">		$this.each(function() {
-</span><span class="token prefix inserted">+</span><span class="token line">			this._$events = {};
-</span><span class="token prefix inserted">+</span><span class="token line">			for (var type in this.$events)
-</span><span class="token prefix inserted">+</span><span class="token line">				this._$events[type] = jQuery.extend({},this.$events[type]);
-</span><span class="token prefix inserted">+</span><span class="token line">		}).unbind();
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">		// Do the clone
-</span><span class="token prefix inserted">+</span><span class="token line">		var r = this.pushStack( jQuery.map( this, function(a){
-</span><span class="token prefix inserted">+</span><span class="token line">			return a.cloneNode( deep != undefined ? deep : true );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}) );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">		// Add the events back to the original and its descendants
-</span><span class="token prefix inserted">+</span><span class="token line">		$this.each(function() {
-</span><span class="token prefix inserted">+</span><span class="token line">			var events = this._$events;
-</span><span class="token prefix inserted">+</span><span class="token line">			for (var type in events)
-</span><span class="token prefix inserted">+</span><span class="token line">				for (var handler in events[type])
-</span><span class="token prefix inserted">+</span><span class="token line">					jQuery.event.add(this, type, events[type][handler], events[type][handler].data);
-</span><span class="token prefix inserted">+</span><span class="token line">			this._$events = null;
-</span><span class="token prefix inserted">+</span><span class="token line">		});
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">		// Return the cloned set
-</span><span class="token prefix inserted">+</span><span class="token line">		return r;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	/**</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/921/jquery.clone.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/921/jquery.clone.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

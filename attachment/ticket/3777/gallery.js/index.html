@@ -140,73 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token comment">// JavaScript Document</span>
-
-<span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
-			<span class="token comment">//Connect to the Ajax File to retrieve thumbnails</span>
-			$<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-				   <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"get"</span><span class="token punctuation">,</span>
-				   <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"image_info.xml"</span><span class="token punctuation">,</span>
-				   <span class="token literal-property property">dataType</span><span class="token operator">:</span> <span class="token string">"xml"</span><span class="token punctuation">,</span>
-				   <span class="token function-variable function">success</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">xml</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-					  
-
-					   <span class="token comment">//Locate every image reference in the XML</span>
-					   
-					   <span class="token function">$</span><span class="token punctuation">(</span>xml<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'image'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-														   
-														  <span class="token keyword">var</span> image_id <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">)</span>
-														  <span class="token keyword">var</span> fileName <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'file'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-														  <span class="token keyword">var</span> title <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'title'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-														  <span class="token keyword">var</span> caption <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'caption'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-														  <span class="token comment">//Use append to put thumbnails in html.</span>
-														  
-														<span class="token keyword">if</span> <span class="token punctuation">(</span>image_id<span class="token operator">==</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-															<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'&lt;img />'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'src'</span><span class="token punctuation">,</span> <span class="token string">'images/lg/'</span> <span class="token operator">+</span> fileName<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">,</span> image_id<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">appendTo</span><span class="token punctuation">(</span><span class="token string">'#photo-display'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-															<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'&lt;h2>&lt;/h2>'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span>title<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">appendTo</span><span class="token punctuation">(</span><span class="token string">'#photo-info'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-															<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'&lt;p>&lt;/p>'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span>caption<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">appendTo</span><span class="token punctuation">(</span><span class="token string">'#photo-info'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-															
-														 <span class="token punctuation">}</span>
-														 
-														  
-														  <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'&lt;img />'</span><span class="token punctuation">)</span>
-														  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'src'</span><span class="token punctuation">,</span> <span class="token string">'images/sm/'</span> <span class="token operator">+</span> fileName<span class="token punctuation">)</span>
-														  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">,</span> image_id<span class="token punctuation">)</span>
-														  <span class="token punctuation">.</span><span class="token function">appendTo</span><span class="token punctuation">(</span><span class="token string">'#thumbnails'</span><span class="token punctuation">)</span>
-														  <span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-																		<span class="token keyword">var</span> thumb_clicked <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">)</span>
-																		<span class="token keyword">var</span> displayed_image <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#photo-display img'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">)</span>
-																		
-																		<span class="token keyword">if</span> <span class="token punctuation">(</span>thumb_clicked<span class="token operator">==</span>displayed_image<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-																				<span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>	
-																		<span class="token punctuation">}</span>
-																		
-																		<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#photo-display img'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'src'</span><span class="token punctuation">,</span> <span class="token string">'images/lg/'</span> <span class="token operator">+</span> fileName<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">,</span> image_id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-																		<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#photo-info h2'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span>title<span class="token punctuation">)</span><span class="token punctuation">;</span>
-																		<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#photo-info p'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span>caption<span class="token punctuation">)</span><span class="token punctuation">;</span>
-																		
-																		   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//close click</span>
-														  
-														   
-														  
-														  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//close each</span>
-					   
-					   									<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"&lt;div class='clear'>&lt;!-- -->&lt;/div"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">appendTo</span><span class="token punctuation">(</span><span class="token string">'#thumbnails'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-																								  
-														
-				   <span class="token punctuation">}</span><span class="token comment">//close function(xml)</span>
-				   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//close $.ajax</span>
-			
-			
-			
-			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//close $</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3777/gallery.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3777/gallery.js">Original Format</a>
   </div>
 </h1></div>
         </div>

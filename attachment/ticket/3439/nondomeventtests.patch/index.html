@@ -142,43 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery/test/unit/event.js
-===================================================================
---- jquery/test/unit/event.js	(revision 5853)
-+++ jquery/test/unit/event.js	(working copy)
-@@ -346,3 +346,26 @@
- 		start();
- 	}).click();
- });
-+
-+test("Non DOM element events", function()
-+{
-+        expect(3);
-+
-+        jQuery({}).bind('nonelementglobal', function(e)
-+        {
-+                ok(true, "Global event on non-DOM annonymos object triggered");
-+        });
-+
-+        var o = {};
-+
-+        jQuery(o).bind('nonelementobj', function(e)
-+        {
-+                ok(true, "Event on non-DOM object triggered");
-+        }).bind('nonelementglobal', function()
-+        {
-+                ok(true, "Global event on non-DOM object triggered");
-+        });
-+
-+        jQuery(o).trigger('nonelementobj');
-+        jQuery.event.trigger('nonelementglobal');
-+});</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3439/nondomeventtests.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3439/nondomeventtests.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

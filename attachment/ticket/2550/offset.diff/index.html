@@ -142,61 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/offset.js
-===================================================================
-<span class="token coord">--- src/offset.js	(revision 5084)</span>
-<span class="token coord">+++ src/offset.js	(working copy)</span>
-<span class="token coord">@@ -2,14 +2,14 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">// Originally By Brandon Aaron, part of the Dimension Plugin
-</span><span class="token prefix unchanged"> </span><span class="token line">// http://jquery.com/plugins/project/dimensions
-</span><span class="token prefix unchanged"> </span><span class="token line">jQuery.fn.offset = function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	var left = 0, top = 0, elem = this[0], results;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	var left = 0, top = 0, elem = this[0], results, b = jQuery.browser;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	if ( elem ) with ( jQuery.browser ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	if ( elem ){
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		var parent       = elem.parentNode, 
-</span><span class="token prefix unchanged"> </span><span class="token line">		    offsetChild  = elem,
-</span><span class="token prefix unchanged"> </span><span class="token line">		    offsetParent = elem.offsetParent, 
-</span><span class="token prefix unchanged"> </span><span class="token line">		    doc          = elem.ownerDocument,
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		    safari2      = safari &amp;&amp; parseInt(version) &lt; 522 &amp;&amp; !/adobeair/i.test(userAgent),
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		    safari2      = b.safari &amp;&amp; parseInt(version) &lt; 522 &amp;&amp; !/adobeair/i.test(userAgent),
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		    fixed        = jQuery.css(elem, "position") == "fixed";
-</span><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Use getBoundingClientRect if available
-</span></span><span class="token coord">@@ -41,7 +41,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			
-</span><span class="token prefix unchanged"> </span><span class="token line">				// Mozilla and Safari > 2 does not include the border on offset parents
-</span><span class="token prefix unchanged"> </span><span class="token line">				// However Mozilla adds the border for table or table cells
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( mozilla &amp;&amp; !/^t(able|d|h)$/i.test(offsetParent.tagName) || safari &amp;&amp; !safari2 )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( b.mozilla &amp;&amp; !/^t(able|d|h)$/i.test(offsetParent.tagName) || b.safari &amp;&amp; !safari2 )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					border( offsetParent );
-</span><span class="token prefix unchanged"> </span><span class="token line">					
-</span><span class="token prefix unchanged"> </span><span class="token line">				// Add the document scroll offsets if position is fixed on any offsetParent
-</span></span><span class="token coord">@@ -62,7 +62,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					add( -parent.scrollLeft, -parent.scrollTop );
-</span><span class="token prefix unchanged"> </span><span class="token line">			
-</span><span class="token prefix unchanged"> </span><span class="token line">				// Mozilla does not add the border for a parent that has overflow != visible
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				if ( mozilla &amp;&amp; jQuery.css(parent, "overflow") != "visible" )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				if ( b.mozilla &amp;&amp; jQuery.css(parent, "overflow") != "visible" )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					border( parent );
-</span><span class="token prefix unchanged"> </span><span class="token line">			
-</span><span class="token prefix unchanged"> </span><span class="token line">				// Get next parent
-</span></span><span class="token coord">@@ -72,7 +72,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// Safari &lt;= 2 doubles body offsets with a fixed position element/offsetParent or absolutely positioned offsetChild
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Mozilla doubles body offsets with a non-absolutely positioned offsetChild
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( (safari2 &amp;&amp; (fixed || jQuery.css(offsetChild, "position") == "absolute")) || 
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				(mozilla &amp;&amp; jQuery.css(offsetChild, "position") != "absolute") )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				(b.mozilla &amp;&amp; jQuery.css(offsetChild, "position") != "absolute") )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					add( -doc.body.offsetLeft, -doc.body.offsetTop );
-</span><span class="token prefix unchanged"> </span><span class="token line">			
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Add the document scroll offsets if position is fixed</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2550/offset.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2550/offset.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

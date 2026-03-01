@@ -142,38 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">*** support.js	2010-04-28 10:50:21.000000000 -0400
---- support2.js	2010-04-28 10:50:52.000000000 -0400
-***************
-*** 96,103 ****
-  	var fragment = document.createDocumentFragment();
-  	fragment.appendChild( div.firstChild );
-  
-! 	// WebKit doesn't clone checked state correctly in fragments
-! 	jQuery.support.checkClone = fragment.cloneNode(true).cloneNode(true).lastChild.checked;
-  
-  	// Figure out if the W3C box model works as expected
-  	// document.body must exist before we can do this
---- 96,108 ----
-  	var fragment = document.createDocumentFragment();
-  	fragment.appendChild( div.firstChild );
-  
-! 	try {
-! 		// WebKit doesn't clone checked state correctly in fragments
-! 		jQuery.support.checkClone = fragment.cloneNode(true).cloneNode(true).lastChild.checked;
-! 	} catch(e) {
-! 		// PS3 fails to clone children in fragments
-! 		jQuery.support.checkClone = false;
-! 	}
-  
-  	// Figure out if the W3C box model works as expected
-  	// document.body must exist before we can do this</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/6499/support.js.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/6499/support.js.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

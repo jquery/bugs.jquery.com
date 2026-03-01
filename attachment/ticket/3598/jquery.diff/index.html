@@ -140,27 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery.js.ORIG	2008-10-21 11:31:48.171875000 +0200</span>
-<span class="token coord">+++ jquery.js	2008-11-13 09:06:33.234375000 +0100</span>
-<span class="token coord">@@ -2880,9 +2880,12 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			xml = type == "xml" || !type &amp;&amp; ct &amp;&amp; ct.indexOf("xml") >= 0,
-</span><span class="token prefix unchanged"> </span><span class="token line">			data = xml ? xhr.responseXML : xhr.responseText;
-</span></span>
-<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( xml &amp;&amp; !data.documentElement &amp;&amp; xhr.responseStream )
-</span><span class="token prefix inserted">+</span><span class="token line">			try { data.load( xhr.responseStream ); } catch(e){}
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		if ( xml &amp;&amp; data.documentElement.tagName == "parsererror" )
-</span><span class="token prefix unchanged"> </span><span class="token line">			throw "parsererror";
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// Allow a pre-filtering function to sanitize the response
-</span><span class="token prefix unchanged"> </span><span class="token line">		if( filter )
-</span><span class="token prefix unchanged"> </span><span class="token line">			data = filter( data, type );</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3598/jquery.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3598/jquery.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

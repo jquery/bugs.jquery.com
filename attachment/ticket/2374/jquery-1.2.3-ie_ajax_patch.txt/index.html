@@ -142,32 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">--- jquery/jquery-1.2.3.js	Wed Feb  6 13:23:17 2008
-+++ jquery/jquery-patched.js	Thu Feb 21 05:56:55 2008
-@@ -2838,9 +2838,16 @@
- 	},
- 
- 	httpData: function( r, type ) {
-+		var isIE = window.ActiveXObject ? true : false;
- 		var ct = r.getResponseHeader("content-type");
- 		var xml = type == "xml" || !type &amp;&amp; ct &amp;&amp; ct.indexOf("xml") >= 0;
--		var data = xml ? r.responseXML : r.responseText;
-+		var data = xml ? (isIE ? r.responseText : r.responseXML) : r.responseText;
-+
-+		if (isIE) {
-+			var xmldom = new ActiveXObject('Microsoft.XMLDOM');
-+			xmldom.loadXML(r.responseText);
-+			data = xmldom;
-+		}
- 
- 		if ( xml &amp;&amp; data.documentElement.tagName == "parsererror" )
- 			throw "parsererror";</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2374/jquery-1.2.3-ie_ajax_patch.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2374/jquery-1.2.3-ie_ajax_patch.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,31 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- ui.dialog.orig.js	2008-02-13 02:12:10.000000000 +0100
-+++ ui.dialog.js	2008-03-03 19:43:30.000000000 +0100
-@@ -118,7 +118,15 @@
- 		
- 		// TODO: determine if this is necessary for modal dialogs
- 		options.bgiframe && $.fn.bgiframe && uiDialog.bgiframe();
--		
-+
-+		this.destroy = function () {
-+			var el = this.element;
-+			$(el).unbind("setData.dialog");
-+			$(el).unbind("getData.dialog");
-+			$(el).removeClass('ui-dialog-content');
-+			$(el).parent().parent().before(el).remove();
-+		};		
-+
- 		this.open = function() {
- 			options.modal && overlay.show(self, options.overlay);
- 			uiDialog.appendTo('body');</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2341/dialog.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2341/dialog.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -140,80 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 5625)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -743,7 +743,24 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		return object;
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	// internal, node is the root
-</span><span class="token prefix inserted">+</span><span class="token line">	eachBound: function ( node, fn ){
-</span><span class="token prefix inserted">+</span><span class="token line">		var nodes = node.getElementsByTagName('*'),
-</span><span class="token prefix inserted">+</span><span class="token line">			index = nodes.length,
-</span><span class="token prefix inserted">+</span><span class="token line">			events;
-</span><span class="token prefix inserted">+</span><span class="token line">		
-</span><span class="token prefix inserted">+</span><span class="token line">		// add the root node itself
-</span><span class="token prefix inserted">+</span><span class="token line">		nodes[ index ] = node;
-</span><span class="token prefix inserted">+</span><span class="token line">		
-</span><span class="token prefix inserted">+</span><span class="token line">		do{
-</span><span class="token prefix inserted">+</span><span class="token line">			node = nodes[ index ];
-</span><span class="token prefix inserted">+</span><span class="token line">			if( node &amp;&amp; node.nodeType == 1 &amp;&amp; node[ expando ] &amp;&amp; ( events = $.data(node, 'events') ) )
-</span><span class="token prefix inserted">+</span><span class="token line">				fn.call( node, events );
-</span><span class="token prefix inserted">+</span><span class="token line">				
-</span><span class="token prefix inserted">+</span><span class="token line">		}while( index-- );
-</span><span class="token prefix inserted">+</span><span class="token line">	},
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	prop: function( elem, value, type, i, name ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Handle executable functions
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( jQuery.isFunction( value ) )
-</span></span><span class="token coord">@@ -1303,7 +1320,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	remove: function( selector ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( !selector || jQuery.filter( selector, [ this ] ).r.length ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Prevent memory leaks
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			jQuery( "*", this ).add(this).each(function(){
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			jQuery.eachBound( this, function(){
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				jQuery.event.remove(this);
-</span><span class="token prefix unchanged"> </span><span class="token line">				jQuery.removeData(this);
-</span><span class="token prefix unchanged"> </span><span class="token line">			});
-</span></span>Index: src/event.js
-===================================================================
-<span class="token coord">--- src/event.js	(revision 5625)</span>
-<span class="token coord">+++ src/event.js	(working copy)</span>
-<span class="token coord">@@ -167,8 +167,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// Handle a global trigger
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( !elem ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			// Only trigger if we've ever bound an event for it
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( this.global[type] )
-</span><span class="token prefix deleted">-</span><span class="token line">				jQuery("*").add([window, document]).trigger(type, data);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( this.global[type] ){
-</span><span class="token prefix inserted">+</span><span class="token line">				jQuery.eachBound( document, function( events ){
-</span><span class="token prefix inserted">+</span><span class="token line">					if( events[type] )
-</span><span class="token prefix inserted">+</span><span class="token line">						jQuery.event.trigger( type, data, this, true );
-</span><span class="token prefix inserted">+</span><span class="token line">				});
-</span><span class="token prefix inserted">+</span><span class="token line">				jQuery.event.trigger( type, data, window, true );
-</span><span class="token prefix inserted">+</span><span class="token line">			}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Handle triggering a single element
-</span><span class="token prefix unchanged"> </span><span class="token line">		} else {
-</span></span><span class="token coord">@@ -597,5 +602,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">// And prevent errors on refresh with events like mouseover in other browsers
-</span><span class="token prefix unchanged"> </span><span class="token line">// Window isn't included so as not to unbind existing unload events
-</span><span class="token prefix unchanged"> </span><span class="token line">jQuery(window).bind("unload", function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	jQuery("*").add(document).unbind();
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	jQuery.eachBound( document, function(){
-</span><span class="token prefix inserted">+</span><span class="token line">		jQuery.event.remove(this);
-</span><span class="token prefix inserted">+</span><span class="token line">	});
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2889/eachBound.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2889/eachBound.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

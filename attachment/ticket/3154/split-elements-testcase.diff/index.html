@@ -140,49 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/core.js
-===================================================================
-<span class="token coord">--- test/unit/core.js	(revision 5788)</span>
-<span class="token coord">+++ test/unit/core.js	(working copy)</span>
-<span class="token coord">@@ -258,7 +258,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("add(String|Element|Array|undefined)", function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	expect(12);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	expect(13);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	isSet( jQuery("#sndp").add("#en").add("#sap").get(), q("sndp", "en", "sap"), "Check elements from document" );
-</span><span class="token prefix unchanged"> </span><span class="token line">	isSet( jQuery("#sndp").add( jQuery("#en")[0] ).add( jQuery("#sap") ).get(), q("sndp", "en", "sap"), "Check elements from document" );
-</span><span class="token prefix unchanged"> </span><span class="token line">	ok( jQuery([]).add(jQuery("#form")[0].elements).length >= 13, "Check elements from array" );
-</span></span><span class="token coord">@@ -266,6 +266,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	// For the time being, we're discontinuing support for jQuery(form.elements) since it's ambiguous in IE
-</span><span class="token prefix unchanged"> </span><span class="token line">	// use jQuery([]).add(form.elements) instead.
-</span><span class="token prefix unchanged"> </span><span class="token line">	//equals( jQuery([]).add(jQuery("#form")[0].elements).length, jQuery(jQuery("#form")[0].elements).length, "Array in constructor must equals array in add()" );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	equals( jQuery([]).add(jQuery("#splitform")[0].elements).length, 2, "should be jQuery object with two elements, but is jQuery object with array with two elements" );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	var x = jQuery([]).add(jQuery("&lt;p id='x1'>xxx&lt;/p>")).add(jQuery("&lt;p id='x2'>xxx&lt;/p>"));
-</span><span class="token prefix unchanged"> </span><span class="token line">	equals( x[0].id, "x1", "Check on-the-fly element1" );
-</span></span>Index: test/index.html
-===================================================================
-<span class="token coord">--- test/index.html	(revision 5788)</span>
-<span class="token coord">+++ test/index.html	(working copy)</span>
-<span class="token coord">@@ -51,6 +51,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		&lt;p id="first">Try them out:&lt;/p>
-</span><span class="token prefix unchanged"> </span><span class="token line">		&lt;ul id="firstUL">&lt;/ul>
-</span><span class="token prefix unchanged"> </span><span class="token line">		&lt;ol id="empty">&lt;/ol>
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		&lt;form id="splitform">
-</span><span class="token prefix inserted">+</span><span class="token line">			&lt;input name="split" id="split1" />
-</span><span class="token prefix inserted">+</span><span class="token line">			&lt;input name="xxx" id="split1" />
-</span><span class="token prefix inserted">+</span><span class="token line">		&lt;/form>
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		&lt;form id="form" action="formaction">
-</span><span class="token prefix unchanged"> </span><span class="token line">			&lt;input type="text" name="action" value="Test" id="text1" maxlength="30"/>
-</span><span class="token prefix unchanged"> </span><span class="token line">			&lt;input type="text" name="text2" value="Test" id="text2" disabled="disabled"/></span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3154/split-elements-testcase.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3154/split-elements-testcase.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

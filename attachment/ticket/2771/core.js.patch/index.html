@@ -142,26 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- core.js.orig	2008-05-02 15:14:06.000000000 +0800
-+++ core.js	2008-05-02 15:14:11.000000000 +0800
-@@ -144,6 +144,11 @@
- 	index: function( elem ) {
- 		var ret = -1;
- 
-+		// if the elem argument is a jQuery object, get the element
-+		if (elem instanceof jQuery) {
-+			elem = elem.get(0);
-+		}
-+
- 		// Locate the position of the desired element
- 		this.each(function(i){
- 			if ( this == elem )</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2771/core.js.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2771/core.js.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

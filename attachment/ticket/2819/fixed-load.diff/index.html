@@ -142,56 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax.js
-===================================================================
-<span class="token coord">--- src/ajax.js	(revision 5495)</span>
-<span class="token coord">+++ src/ajax.js	(working copy)</span>
-<span class="token coord">@@ -1,7 +1,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">jQuery.fn.extend({
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	// Keep a copy of the old load
-</span><span class="token prefix inserted">+</span><span class="token line">	_load: jQuery.fn.load,
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	load: function( url, params, callback ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( jQuery.isFunction( url ) )
-</span><span class="token prefix deleted">-</span><span class="token line">			return this.bind("load", url);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( typeof url != 'string' )
-</span><span class="token prefix inserted">+</span><span class="token line">			return this._load( url );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		var off = url.indexOf(" ");
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( off >= 0 ) {
-</span></span>Index: test/unit/event.js
-===================================================================
-<span class="token coord">--- test/unit/event.js	(revision 5495)</span>
-<span class="token coord">+++ test/unit/event.js	(working copy)</span>
-<span class="token coord">@@ -112,8 +112,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	ok( $("a.test:first").triggerHandler("click") === false, "Handler is bound to appendTo'd elements" );
-</span><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">test("click()", function() {
-</span><span class="token prefix deleted">-</span><span class="token line">	expect(5);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">test("trigger() shortcuts", function() {
-</span><span class="token prefix inserted">+</span><span class="token line">	expect(6);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	$('&lt;li>&lt;a href="#">Change location&lt;/a>&lt;/li>').prependTo('#firstUL').find('a').bind('click', function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">		var close = $('spanx', this); // same with $(this).find('span');
-</span><span class="token prefix unchanged"> </span><span class="token line">		equals( close.length, 0, "Context element does not exist, length must be zero" );
-</span></span><span class="token coord">@@ -138,6 +138,11 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	};
-</span><span class="token prefix unchanged"> </span><span class="token line">	$('#simon1').click();
-</span><span class="token prefix unchanged"> </span><span class="token line">	equals( clickCounter, 1, "Check that click, triggers onclick event handler on an a tag also" );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	//try triggering load with $().load() used to fail
-</span><span class="token prefix inserted">+</span><span class="token line">	$('&lt;img />').load(function(){
-</span><span class="token prefix inserted">+</span><span class="token line">		ok( true, "Trigger the load event, using the shortcut .load(), used to fail.");
-</span><span class="token prefix inserted">+</span><span class="token line">	}).load();
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("unbind(event)", function() {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2819/fixed-load.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2819/fixed-load.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

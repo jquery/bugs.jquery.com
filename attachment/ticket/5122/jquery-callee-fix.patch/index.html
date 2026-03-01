@@ -142,30 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery-1.3.2.js
-===================================================================
---- jquery-1.3.2.js	(revision 83)
-+++ jquery-1.3.2.js	(working copy)
-@@ -3105,9 +3105,11 @@
- // Window isn't included so as not to unbind existing unload events
- jQuery( window ).bind( 'unload', function(){ 
- 	for ( var id in jQuery.cache )
--		// Skip the window
--		if ( id != 1 && jQuery.cache[ id ].handle )
--			jQuery.event.remove( jQuery.cache[ id ].handle.elem );
-+		try {
-+			// Skip the window
-+			if ( id != 1 && jQuery.cache[ id ].handle )
-+				jQuery.event.remove( jQuery.cache[ id ].handle.elem );
-+		} catch(e){}
- }); 
- (function(){</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/5122/jquery-callee-fix.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/5122/jquery-callee-fix.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

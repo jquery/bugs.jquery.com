@@ -140,25 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: src/selector/selector.js
-===================================================================
---- src/selector/selector.js	(revision 2253)
-+++ src/selector/selector.js	(working copy)
-@@ -63,7 +63,7 @@
- 
- 		// Match: :even, :last-chlid, #id, .class
- 		new RegExp("^([:.#]*)(" + 
--			( jQuery.chars = jQuery.browser.safari && jQuery.browser.version < 416.12 ? "(?:[\\w*_-]|\\\\.)" : "(?:[\\w\u0128-\uFFFF*_-]|\\\\.)" ) + "+)")
-+			( jQuery.chars = jQuery.browser.safari && parseInt(jQuery.browser.version) < 417 ? "(?:[\\w*_-]|\\\\.)" : "(?:[\\w\u0128-\uFFFF*_-]|\\\\.)" ) + "+)")
- 	],
- 
- 	multiFilter: function( expr, elems, not ) {</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1331/safari_unicode_regexp_2.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1331/safari_unicode_regexp_2.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

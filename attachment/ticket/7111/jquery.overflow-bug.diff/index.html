@@ -142,38 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery-1.4.2.js	2010-06-30 10:58:48.000000000 +0200</span>
-<span class="token coord">+++ jquery-1.4.2.patched.js	2010-10-03 23:54:49.000000000 +0200</span>
-<span class="token coord">@@ -5576,7 +5576,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					opt.display = jQuery.css(this, "display");
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">					// Make sure that nothing sneaks out
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					opt.overflow = this.style.overflow;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					opt.overflowX = this.style.overflowX;
-</span><span class="token prefix inserted">+</span><span class="token line">					opt.overflowY = this.style.overflowY;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				if ( jQuery.isArray( prop[p] ) ) {
-</span></span><span class="token coord">@@ -5586,8 +5587,11 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				}
-</span><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( opt.overflow != null ) {
-</span><span class="token prefix deleted">-</span><span class="token line">				this.style.overflow = "hidden";
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( opt.overflowX != null ) {
-</span><span class="token prefix inserted">+</span><span class="token line">				this.style.overflowX = "hidden";
-</span><span class="token prefix inserted">+</span><span class="token line">			}
-</span><span class="token prefix inserted">+</span><span class="token line">			if ( opt.overflowY != null ) {
-</span><span class="token prefix inserted">+</span><span class="token line">				this.style.overflowY = "hidden";
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			opt.curAnim = jQuery.extend({}, prop);</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/7111/jquery.overflow-bug.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/7111/jquery.overflow-bug.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

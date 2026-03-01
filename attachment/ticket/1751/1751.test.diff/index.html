@@ -140,41 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/fx.js
-===================================================================
-<span class="token coord">--- test/unit/fx.js	(revision 3541)</span>
-<span class="token coord">+++ test/unit/fx.js	(working copy)</span>
-<span class="token coord">@@ -232,7 +232,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">var check = ['opacity','height','width','display','overflow'];
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">jQuery.fn.saveState = function(){
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	expect(check.length);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	expect(check.length * this.length);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	stop();
-</span><span class="token prefix unchanged"> </span><span class="token line">	return this.each(function(){
-</span><span class="token prefix unchanged"> </span><span class="token line">		var self = this;
-</span></span><span class="token coord">@@ -288,6 +288,15 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	$('#slidetoggleout div').saveState().slideToggle('fast').slideToggle('fast',checkState);
-</span><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">test("Multiple/opposite slideToggle()", function() {
-</span><span class="token prefix inserted">+</span><span class="token line">	var x = $("#ap,#foo");
-</span><span class="token prefix inserted">+</span><span class="token line">	x.filter("#foo").hide();
-</span><span class="token prefix inserted">+</span><span class="token line">	x.saveState().slideToggle('fast').slideToggle('fast', function () {
-</span><span class="token prefix inserted">+</span><span class="token line">				checkState.call(this);
-</span><span class="token prefix inserted">+</span><span class="token line">				x.filter("#foo").show();
-</span><span class="token prefix inserted">+</span><span class="token line">			});
-</span><span class="token prefix inserted">+</span><span class="token line">});
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">function makeTest( text ){
-</span><span class="token prefix unchanged"> </span><span class="token line">	var elem = $("&lt;div>&lt;/div>")
-</span><span class="token prefix unchanged"> </span><span class="token line">		.attr("id", "test" + makeTest.id++)</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1751/1751.test.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1751/1751.test.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

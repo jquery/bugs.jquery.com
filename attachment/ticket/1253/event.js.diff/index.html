@@ -142,44 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event/event.js
-===================================================================
-<span class="token coord">--- src/event/event.js	(revision 2012)</span>
-<span class="token coord">+++ src/event/event.js	(working copy)</span>
-<span class="token coord">@@ -8,6 +8,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	// Bind an event to an element
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Original by Dean Edwards
-</span><span class="token prefix unchanged"> </span><span class="token line">	add: function(element, type, handler, data) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		// support multiple comma seperated types
-</span><span class="token prefix inserted">+</span><span class="token line">		if ( type.indexOf(',') >= 0 ) {
-</span><span class="token prefix inserted">+</span><span class="token line">			jQuery.each(type.split(','), function(i,t) {
-</span><span class="token prefix inserted">+</span><span class="token line">				jQuery.event.add(element, jQuery.trim(t), handler, data);
-</span><span class="token prefix inserted">+</span><span class="token line">			});
-</span><span class="token prefix inserted">+</span><span class="token line">		}
-</span><span class="token prefix inserted">+</span><span class="token line">		
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// For whatever reason, IE has trouble passing the window object
-</span><span class="token prefix unchanged"> </span><span class="token line">		// around, causing it to be cloned in the process
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( jQuery.browser.msie &amp;&amp; element.setInterval != undefined )
-</span></span><span class="token coord">@@ -84,6 +91,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Detach an event or set of events from an element
-</span><span class="token prefix unchanged"> </span><span class="token line">	remove: function(element, type, handler) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		// support multiple comma seperated types
-</span><span class="token prefix inserted">+</span><span class="token line">		if ( type &amp;&amp; type.indexOf(',') >= 0 ) {
-</span><span class="token prefix inserted">+</span><span class="token line">			jQuery.each(type.split(','), function(i,t) {
-</span><span class="token prefix inserted">+</span><span class="token line">				jQuery.event.remove(element, jQuery.trim(t), handler);
-</span><span class="token prefix inserted">+</span><span class="token line">			});
-</span><span class="token prefix inserted">+</span><span class="token line">		}
-</span><span class="token prefix inserted">+</span><span class="token line">		
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		var events = element.$events, ret, index;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( events ) {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1253/event.js.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1253/event.js.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

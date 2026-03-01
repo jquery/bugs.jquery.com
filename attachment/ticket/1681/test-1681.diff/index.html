@@ -140,37 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/core.js
-===================================================================
-<span class="token coord">--- test/unit/core.js	(revision 5830)</span>
-<span class="token coord">+++ test/unit/core.js	(working copy)</span>
-<span class="token coord">@@ -1388,13 +1388,19 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("toggleClass(String)", function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	expect(3);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	expect(6);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	var e = jQuery("#firstp");
-</span><span class="token prefix unchanged"> </span><span class="token line">	ok( !e.is(".test"), "Assert class not present" );
-</span><span class="token prefix unchanged"> </span><span class="token line">	e.toggleClass("test");
-</span><span class="token prefix unchanged"> </span><span class="token line">	ok( e.is(".test"), "Assert class present" );
-</span><span class="token prefix unchanged"> </span><span class="token line">	e.toggleClass("test");
-</span><span class="token prefix unchanged"> </span><span class="token line">	ok( !e.is(".test"), "Assert class not present" );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	e.toggleClass("test", false);
-</span><span class="token prefix inserted">+</span><span class="token line">	ok( !e.is(".test"), "Assert class not present" );
-</span><span class="token prefix inserted">+</span><span class="token line">	e.toggleClass("test", true);
-</span><span class="token prefix inserted">+</span><span class="token line">	ok( e.is(".test"), "Assert class present" );
-</span><span class="token prefix inserted">+</span><span class="token line">	e.toggleClass("test", false);
-</span><span class="token prefix inserted">+</span><span class="token line">	ok( !e.is(".test"), "Assert class not present" );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("removeAttr(String", function() {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1681/test-1681.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1681/test-1681.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

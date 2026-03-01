@@ -140,84 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-html" tabindex="0"><code class="language-html"><span class="token comment">&lt;!--
-&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
---></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/JavaScript<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>jquery-112.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/JavaScript<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>iUtil.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/JavaScript<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-<span class="token keyword">function</span> <span class="token function">qviewport</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-	<span class="token keyword">var</span> l<span class="token punctuation">,</span>t<span class="token punctuation">,</span>iw<span class="token punctuation">,</span>ih<span class="token punctuation">;</span>
-	<span class="token keyword">var</span> dE <span class="token operator">=</span> document<span class="token punctuation">.</span>documentElement<span class="token punctuation">;</span>
-	<span class="token keyword">var</span> dB <span class="token operator">=</span> document<span class="token punctuation">.</span>body<span class="token punctuation">;</span>
-	<span class="token keyword">if</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>pageYOffset<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// all except Explorer</span>
-		l <span class="token operator">=</span> self<span class="token punctuation">.</span>pageXOffset<span class="token punctuation">;</span>
-		t <span class="token operator">=</span> self<span class="token punctuation">.</span>pageYOffset<span class="token punctuation">;</span>
-
-	<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>dE <span class="token operator">&amp;&amp;</span> dE<span class="token punctuation">.</span>scrollTop<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment">// Explorer 6 Strict</span>
-		l <span class="token operator">=</span> dE<span class="token punctuation">.</span>scrollLeft<span class="token punctuation">;</span>
-		t <span class="token operator">=</span> dE<span class="token punctuation">.</span>scrollTop<span class="token punctuation">;</span>
-	<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>dB<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// all other Explorers</span>
-		l <span class="token operator">=</span> dB<span class="token punctuation">.</span>scrollLeft<span class="token punctuation">;</span>
-		t <span class="token operator">=</span> dB<span class="token punctuation">.</span>scrollTop<span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
-
-	<span class="token keyword">if</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>innerHeight<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// all except Explorer</span>
-		iw <span class="token operator">=</span> self<span class="token punctuation">.</span>innerWidth<span class="token punctuation">;</span>
-		ih <span class="token operator">=</span> self<span class="token punctuation">.</span>innerHeight<span class="token punctuation">;</span>
-	<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>dE <span class="token operator">&amp;&amp;</span> dE<span class="token punctuation">.</span>clientHeight<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment">// Explorer 6 Strict Mode</span>
-		iw <span class="token operator">=</span> dE<span class="token punctuation">.</span>clientWidth<span class="token punctuation">;</span>
-		ih <span class="token operator">=</span> dE<span class="token punctuation">.</span>clientHeight<span class="token punctuation">;</span>
-	<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>dB<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// other Explorers</span>
-		iw <span class="token operator">=</span> dB<span class="token punctuation">.</span>clientWidth<span class="token punctuation">;</span>
-		ih <span class="token operator">=</span> dB<span class="token punctuation">.</span>clientHeight<span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
-	<span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token literal-property property">l</span><span class="token operator">:</span>l<span class="token punctuation">,</span> <span class="token literal-property property">t</span><span class="token operator">:</span>t<span class="token punctuation">,</span> <span class="token literal-property property">iw</span><span class="token operator">:</span>iw<span class="token punctuation">,</span> <span class="token literal-property property">ih</span><span class="token operator">:</span>ih<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-
-<span class="token keyword">function</span> <span class="token function">testViewport</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-	
-	<span class="token keyword">var</span> s <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>iUtil<span class="token punctuation">.</span><span class="token function">getScroll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">var</span> qv <span class="token operator">=</span> <span class="token function">qviewport</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token comment">//alert('qv '+qv.t+','+qv.l+' '+qv.iw+' '+qv.ih);</span>
-	<span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span>t <span class="token operator">!=</span> qv<span class="token punctuation">.</span>t <span class="token operator">||</span> s<span class="token punctuation">.</span>iw <span class="token operator">!=</span> qv<span class="token punctuation">.</span>iw<span class="token punctuation">)</span><span class="token punctuation">{</span>
-		<span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'INCORRECT '</span><span class="token operator">+</span><span class="token string">'t:'</span><span class="token operator">+</span>s<span class="token punctuation">.</span>t<span class="token operator">+</span><span class="token string">', l:'</span><span class="token operator">+</span> s<span class="token punctuation">.</span>l<span class="token operator">+</span><span class="token string">', w:'</span><span class="token operator">+</span> s<span class="token punctuation">.</span>w<span class="token operator">+</span><span class="token string">', h:'</span><span class="token operator">+</span> s<span class="token punctuation">.</span>h<span class="token operator">+</span><span class="token string">', iw:'</span><span class="token operator">+</span> s<span class="token punctuation">.</span>iw<span class="token operator">+</span><span class="token string">', ih:'</span><span class="token operator">+</span> s<span class="token punctuation">.</span>ih<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
-something in here.
-
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
-alsdk a;lskd;lask dlkasd;l asld kla dka sldk al;sdkas
-dalskdl asdl asldk al;kdsla;ksd asdla sdl;ka sl;dk asl;kd asd
-asldkal;sd asl;kd als;k dla;skd l;askd aksd al;sd kal;sd k;laskd
-adkasl;dk alsdk akds;lak dl;aks d;lka d;lkas;ld a;sldk a;lsd asd ka;skd ;alskd
-asd
-kas;ldk a;lsdk a;lskd l;ask dl;ask dl;as d;lask d;lask d;lask dlka sd
-alskdlak daks d;lask dl;aksd ;lkas; daks;d a;k
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>javascript:testViewport();<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>viewport<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">width</span><span class="token punctuation">:</span>400px<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
-alsdk a;lskd;lask dlkasd;l asld kla dka sldk al;sdkas
-dalskdl asdl asldk al;kdsla;ksd asdla sdl;ka sl;dk asl;kd asd
-asldkal;sd asl;kd als;k dla;skd l;askd aksd al;sd kal;sd k;laskd
-adkasl;dk alsdk akds;lak dl;aks d;lka d;lkas;ld a;sldk a;lsd asd ka;skd ;alskd
-asd
-kas;ldk a;lsdk a;lskd l;ask dl;ask dl;as d;lask d;lask d;lask dlka sd
-alskdlak daks d;lask dl;aksd ;lkas; daks;d a;k
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span></code></pre>
+      <pre class="language-html" tabindex="0"><code class="language-html"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1121/viewport.html">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1121/viewport.html">Original Format</a>
   </div>
 </h1></div>
         </div>

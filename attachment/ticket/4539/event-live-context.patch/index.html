@@ -140,34 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: event.js
-===================================================================
---- event.js	(revision 6308)
-+++ event.js	(working copy)
-@@ -548,7 +548,7 @@
- 		var proxy = jQuery.event.proxy( fn );
- 		proxy.guid += this.selector + type;
- 
--		jQuery( this.context ).bind( liveConvert(type, this.selector), this.selector, proxy );
-+		jQuery( this.context ).bind( liveConvert(type, this.selector), [this.selector, this.context], proxy );
- 
- 		return this;
- 	},
-@@ -566,7 +566,7 @@
- 
- 	jQuery.each(jQuery.data(this, "events").live || [], function(i, fn){
- 		if ( check.test(fn.type) ) {
--			var elem = jQuery(event.target).closest(fn.data)[0];
-+			var elem = jQuery(event.target).closest(fn.data[0], fn.data[1])[0];
- 			if ( elem )
- 				elems.push({ elem: elem, fn: fn });
- 		}</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4539/event-live-context.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4539/event-live-context.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

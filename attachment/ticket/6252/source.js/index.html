@@ -142,83 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js">Here is the source <span class="token operator">:</span>
-<span class="token operator">&lt;</span>script<span class="token operator">></span>
-			
-				<span class="token keyword">function</span> <span class="token function">shoutBoxMessages</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-				<span class="token punctuation">{</span>
-					 $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-						   <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"GET"</span><span class="token punctuation">,</span>
-						    <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"function/LittleMessages/LittleMessages.php"</span><span class="token punctuation">,</span>
-						    <span class="token function-variable function">success</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-						    
-							<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#shoutBoxCell"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-							<span class="token function">eval</span><span class="token punctuation">(</span> <span class="token string">"var Dataes = "</span> <span class="token operator">+</span> response <span class="token operator">+</span> <span class="token string">"; "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-							shoutBoxLength <span class="token operator">=</span> Dataes<span class="token punctuation">.</span>shoutBoxes<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-							<span class="token keyword">if</span> <span class="token punctuation">(</span> shoutBoxLength <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"A szerverrel megszakadt a kapcsolat! "</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
-													
-							<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span>  i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token punctuation">(</span>shoutBoxLength<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">)</span>  <span class="token punctuation">{</span>
-								userName <span class="token operator">=</span> Dataes<span class="token punctuation">.</span>shoutBoxes<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>nick<span class="token punctuation">;</span>
-								userId <span class="token operator">=</span> Dataes<span class="token punctuation">.</span>shoutBoxes<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>userId<span class="token punctuation">;</span>
-								shoutMessage <span class="token operator">=</span> Dataes<span class="token punctuation">.</span>shoutBoxes<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>shoutMess<span class="token punctuation">;</span>
-								userPicture <span class="token operator">=</span> Dataes<span class="token punctuation">.</span>shoutBoxes<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>userPict<span class="token punctuation">;</span>
-								timeIs <span class="token operator">=</span> Dataes<span class="token punctuation">.</span>shoutBoxes<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>timeIs<span class="token punctuation">;</span>
-								
-								timeIs <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
-								
-								shoutBoxIs <span class="token operator">=</span> <span class="token string">" &lt;div style=\'background-color: #D1D5D6;\'> "</span> <span class="token operator">+</span> 
-								<span class="token string">" &lt;table cellpadding=\'0\' cellspacing=\'0\' width=\'100%\' style=\'background-color: #D1D5D6; margin: 4px; margin-bottom: 0px; background-repeat: no-repeat;\'> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;tbody style=\'background-color: #fafafa; height: 60px;\'> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;tr> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;td align=\'left\' valign=\'top\' width=\'10%\' style=\'padding:2px;\'> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;div style=\'border: 2px solid #758386; background-color:black; width: 80px;\'> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;img src=\'"</span><span class="token operator">+</span>userPicture<span class="token operator">+</span><span class="token string">"\' width=\'80\' height=\'60\' border=\'0\'> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/div> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/td> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;td align=\'left\' valign=\'top\' width=\'90%\' style=\'padding:2px;\'> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;div style=\'border: 2px solid #758386; height: 58px; font-size: 12px;\'> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;span style=\'margin: 5px;\'>"</span><span class="token operator">+</span>shoutMessage<span class="token operator">+</span><span class="token string">"&lt;/span> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/div> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/td> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/tr> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/tbody> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/table> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;table cellpadding=\'0\' cellspacing=\'0\' width=\'100%\' style=\'background-color: #D1D5D6; margin: 4px; margin-top: 0px; background-repeat: no-repeat;\'> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;tbody style=\'background-color: #fafafa;\'> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;tr> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;td align=\'left\' width=\'40%\' style=\'fon-color: white; font-weight: bold;\'> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;div style=\'margin: 2px; background-color: #a2acae; height: 20px; '.$padding.' padding-left: 5px;\'> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;a style=\'color: white; font-weight: bold;\' href=\''.$PHP_SELF.'?menu=profile&amp;id="</span><span class="token operator">+</span>userId<span class="token operator">+</span><span class="token string">"\'>"</span><span class="token operator">+</span>userName<span class="token operator">+</span><span class="token string">"&lt;/a> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/div> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/td> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;td align=\'left\' width=\'20%\' style=\'fon-color: white; font-weight: bold;\'> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;div style=\'margin: 2px; background-color: #d0d5d6; height: 20px; padding-top: 3px; padding-left: 5px;\'> "</span> <span class="token operator">+</span>
-								<span class="token string">" &amp;nbsp; "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/div> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/td> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;td align=\'left\' width=\'40%\' style=\' fon-color: white; font-weight: bold; font-size: 12px;\'> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;div style=\'margin: 2px; background-color: #a2acae; height: 20px; padding-top: 3px; padding-left: 5px;\'> "</span> <span class="token operator">+</span>
-								<span class="token string">" "</span><span class="token operator">+</span>timeIs<span class="token operator">+</span><span class="token string">" "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/div> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/td> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/tr> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/tbody> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/table> "</span> <span class="token operator">+</span>
-								<span class="token string">" &lt;/div> "</span><span class="token punctuation">;</span>
-								<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#shoutBoxCell"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>shoutBoxIs<span class="token punctuation">)</span><span class="token punctuation">;</span>
-							<span class="token punctuation">}</span>
-							<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token punctuation">}</span>
-				
-				self<span class="token punctuation">.</span><span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token string">"shoutBoxMessages()"</span><span class="token punctuation">,</span> <span class="token number">7000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		
-			 <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/6252/source.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/6252/source.js">Original Format</a>
   </div>
 </h1></div>
         </div>

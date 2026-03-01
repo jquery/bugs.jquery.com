@@ -142,51 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/core.js
-===================================================================
-<span class="token coord">--- jquery/src/core.js	(revision 5753)</span>
-<span class="token coord">+++ jquery/src/core.js	(working copy)</span>
-<span class="token coord">@@ -1201,19 +1201,25 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return ret;
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	map: function( elems, callback ) {
-</span><span class="token prefix deleted">-</span><span class="token line">		var ret = [];
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	map: function( source, callback, target ) { 
-</span><span class="token prefix inserted">+</span><span class="token line">		if( !target ) 
-</span><span class="token prefix inserted">+</span><span class="token line">			target = 'length' in source ? [ ] : { }; 
-</span><span class="token prefix inserted">+</span><span class="token line">		
-</span><span class="token prefix inserted">+</span><span class="token line">		if( 'length' in target ){ // Is it an array(-like) ? else a hash 
-</span><span class="token prefix inserted">+</span><span class="token line">			var arr = true; 
-</span><span class="token prefix inserted">+</span><span class="token line">			if( !target.concat )// Fix array-like objects, or they will fail the final concat 
-</span><span class="token prefix inserted">+</span><span class="token line">				target = jQuery.makeArray(target); 
-</span><span class="token prefix inserted">+</span><span class="token line">		} 
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// Go through the items, translating each of the items to their
-</span><span class="token prefix unchanged"> </span><span class="token line">		// new value (or values).
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		for ( var i = 0, length = elems.length; i &lt; length; i++ ) {
-</span><span class="token prefix deleted">-</span><span class="token line">			var value = callback( elems[ i ], i );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		jQuery.each( source , function( key, value ){ 
-</span><span class="token prefix inserted">+</span><span class="token line">			value = callback( value, key ); 
-</span><span class="token prefix inserted">+</span><span class="token line">		
-</span><span class="token prefix inserted">+</span><span class="token line">			if ( value != null ) 
-</span><span class="token prefix inserted">+</span><span class="token line">		 		target[ arr ? target.length : key ] = value; 
-</span><span class="token prefix inserted">+</span><span class="token line">		}); 
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( value != null )
-</span><span class="token prefix deleted">-</span><span class="token line">				ret[ ret.length ] = value;
-</span><span class="token prefix deleted">-</span><span class="token line">		}
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">		return ret.concat.apply( [], ret );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		return arr ? target.concat.apply( [], target ) : target;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	}
-</span><span class="token prefix unchanged"> </span><span class="token line">});</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2616/map[5753].diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2616/map[5753].diff">Original Format</a>
   </div>
 </h1></div>
         </div>

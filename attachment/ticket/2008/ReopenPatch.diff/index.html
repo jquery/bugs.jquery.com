@@ -140,27 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ui.dialog.js
-===================================================================
-<span class="token coord">--- ui.dialog.js	(revision 4030)</span>
-<span class="token coord">+++ ui.dialog.js	(working copy)</span>
-<span class="token coord">@@ -8,8 +8,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	}
-</span><span class="token prefix unchanged"> </span><span class="token line">	$.fn.dialogInit = function(o) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		return this.each(function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if (!$(this).is(".ui-dialog")) {
-</span><span class="token prefix deleted">-</span><span class="token line">				$.ui.dialogInit(this, o);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if (!$(this).is(".ui-dialog-content")) {
-</span><span class="token prefix inserted">+</span><span class="token line">				new $.ui.dialogInit(this, o);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			}			
-</span><span class="token prefix unchanged"> </span><span class="token line">		});
-</span><span class="token prefix unchanged"> </span><span class="token line">	}</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2008/ReopenPatch.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2008/ReopenPatch.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

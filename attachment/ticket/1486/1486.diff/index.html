@@ -142,58 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/event.js
-===================================================================
-<span class="token coord">--- test/unit/event.js	(revision 3484)</span>
-<span class="token coord">+++ test/unit/event.js	(working copy)</span>
-<span class="token coord">@@ -116,7 +116,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("trigger(event, [data], [fn])", function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	expect(40);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	expect(41);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	var handler = function(event, a, b, c) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		equals( event.type, "click", "check passed data" );
-</span></span><span class="token coord">@@ -169,6 +169,16 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	// Trigger only the handlers (no native) and extra fn, with external event obj
-</span><span class="token prefix unchanged"> </span><span class="token line">	// Triggers 9
-</span><span class="token prefix unchanged"> </span><span class="token line">	equals( $("#firstp").triggerHandler("click", [eventObj, 1, "2", "abc"], handler), "test", "Verify handler response" );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	var pass = true;
-</span><span class="token prefix inserted">+</span><span class="token line">	try {
-</span><span class="token prefix inserted">+</span><span class="token line">		$('input:first')
-</span><span class="token prefix inserted">+</span><span class="token line">			.hide()
-</span><span class="token prefix inserted">+</span><span class="token line">			.trigger('focus');
-</span><span class="token prefix inserted">+</span><span class="token line">	} catch(e) {
-</span><span class="token prefix inserted">+</span><span class="token line">		pass = false;
-</span><span class="token prefix inserted">+</span><span class="token line">	}
-</span><span class="token prefix inserted">+</span><span class="token line">	ok( pass, "Trigger focus on hidden element" );
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("toggle(Function, Function)", function() {
-</span></span>Index: src/event.js
-===================================================================
-<span class="token coord">--- src/event.js	(revision 3484)</span>
-<span class="token coord">+++ src/event.js	(working copy)</span>
-<span class="token coord">@@ -177,7 +177,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			// Trigger the native events (except for clicks on links)
-</span><span class="token prefix unchanged"> </span><span class="token line">			if ( fn &amp;&amp; donative !== false &amp;&amp; val !== false &amp;&amp; !(jQuery.nodeName(element, 'a') &amp;&amp; type == "click") ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">				this.triggered = true;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				element[ type ]();
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				try {
-</span><span class="token prefix inserted">+</span><span class="token line">					element[ type ]();
-</span><span class="token prefix inserted">+</span><span class="token line">				// prevent IE from throwing an error for some hidden elements
-</span><span class="token prefix inserted">+</span><span class="token line">				} catch (e) {}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">			this.triggered = false;</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1486/1486.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1486/1486.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,49 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token function-variable function">httpData</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">xhr<span class="token punctuation">,</span> type<span class="token punctuation">,</span> s</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> ct  <span class="token operator">=</span> xhr<span class="token punctuation">.</span><span class="token function">getResponseHeader</span><span class="token punctuation">(</span><span class="token string">"content-type"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-      xml   <span class="token operator">=</span> type <span class="token operator">===</span> <span class="token string">"xml"</span>  <span class="token operator">||</span> <span class="token operator">!</span>type <span class="token operator">&amp;&amp;</span> ct <span class="token operator">&amp;&amp;</span> ct<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">"xml"</span><span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">,</span>
-      <span class="token comment">// Patch for #5709</span>
-      json  <span class="token operator">=</span> type <span class="token operator">===</span> <span class="token string">"json"</span> <span class="token operator">||</span> <span class="token operator">!</span>type <span class="token operator">&amp;&amp;</span> ct <span class="token operator">&amp;&amp;</span> ct<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">"json"</span><span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">,</span>
-      data  <span class="token operator">=</span> xml <span class="token operator">?</span> xhr<span class="token punctuation">.</span>responseXML <span class="token operator">:</span> xhr<span class="token punctuation">.</span>responseText<span class="token punctuation">;</span>
-    
-    <span class="token keyword">if</span> <span class="token punctuation">(</span> xml <span class="token operator">&amp;&amp;</span> data<span class="token punctuation">.</span>documentElement<span class="token punctuation">.</span>nodeName <span class="token operator">===</span> <span class="token string">"parsererror"</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">throw</span> <span class="token string">"parsererror"</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token comment">// Allow a pre-filtering function to sanitize the response</span>
-    <span class="token comment">// s is checked to keep backwards compatibility</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span> s <span class="token operator">&amp;&amp;</span> s<span class="token punctuation">.</span>dataFilter <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      data <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">dataFilter</span><span class="token punctuation">(</span> data<span class="token punctuation">,</span> type <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    
-    <span class="token comment">// The filter can actually parse the response</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token keyword">typeof</span> data <span class="token operator">===</span> <span class="token string">"string"</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
-      <span class="token comment">// If the type is "script", eval it in global context</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span> type <span class="token operator">===</span> <span class="token string">"script"</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        jQuery<span class="token punctuation">.</span><span class="token function">globalEval</span><span class="token punctuation">(</span> data <span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-
-      <span class="token comment">// Get the JavaScript object, if JSON is used.</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span> json <span class="token operator">||</span> type <span class="token operator">===</span> <span class="token string">"json"</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token keyword">typeof</span> <span class="token constant">JSON</span> <span class="token operator">===</span> <span class="token string">"object"</span> <span class="token operator">&amp;&amp;</span> <span class="token constant">JSON</span><span class="token punctuation">.</span>parse <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-          data <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span> data <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-          data <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Function</span><span class="token punctuation">(</span><span class="token string">"return "</span> <span class="token operator">+</span> data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-      <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">return</span> data<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/5709/httpData.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/5709/httpData.js">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,39 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax.js
-===================================================================
-<span class="token coord">--- src/ajax.js	(revision 5743)</span>
-<span class="token coord">+++ src/ajax.js	(working copy)</span>
-<span class="token coord">@@ -97,6 +97,13 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">var jsc = now();
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">jQuery.extend({
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  
-</span><span class="token prefix inserted">+</span><span class="token line">  // Create the request object; Microsoft failed to properly
-</span><span class="token prefix inserted">+</span><span class="token line">	// implement the XMLHttpRequest in IE7, so we use the ActiveXObject when it is available
-</span><span class="token prefix inserted">+</span><span class="token line">  getAjaxTransport : function() {
-</span><span class="token prefix inserted">+</span><span class="token line">    return window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
-</span><span class="token prefix inserted">+</span><span class="token line">  },
-</span><span class="token prefix inserted">+</span><span class="token line">  
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	get: function( url, data, callback, type ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		// shift arguments if data argument was ommited
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( jQuery.isFunction( data ) ) {
-</span></span><span class="token coord">@@ -275,7 +282,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Create the request object; Microsoft failed to properly
-</span><span class="token prefix unchanged"> </span><span class="token line">		// implement the XMLHttpRequest in IE7, so we use the ActiveXObject when it is available
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		var xhr = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var xhr = jQuery.getAjaxTransport();
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Open the socket
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Passing null username, generates a login popup on Opera (#2865)</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3087/ajax_transport.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3087/ajax_transport.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

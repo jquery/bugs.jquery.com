@@ -142,45 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- jquery.treeview.js	2007-09-07 15:02:33.000000000 +0200
-+++ jquery.treeview.patched.js	2007-09-07 15:07:17.000000000 +0200
-@@ -217,7 +217,7 @@
- 			$( (settings.collapsed ? "li" : "li." + CLASSES.closed) + ":not(." + CLASSES.open + ") > ul", this).hide();
- 			
- 			// find all tree items with child lists
--			var branches = $("li[>ul]", this);
-+			var branches = $("li:has(>ul)", this);
- 			
- 			if ( settings.navigation ) {
- 				var current = this.find("a").filter(function() { return this.href == location.href; });
-@@ -226,19 +226,19 @@
- 				}
- 			}
- 			
--			$("li[ul]:not([>a])>span", this).click(function(event) {
-+			$("li:has(ul):not(:has(>a))>span", this).click(function(event) {
- 				if ( this == event.target ) {
- 					toggler.apply($(this).next());
- 				}
- 			}).add( $("a", this) ).hoverClass();
- 			
- 			// handle closed ones first
--			branches.filter("[>ul:hidden]")
-+			branches.filter(":has(>ul:hidden)")
- 					.addClass(CLASSES.expandable)
- 					.swapClass(CLASSES.last, CLASSES.lastExpandable);
- 					
- 			// handle open ones
--			branches.not("[>ul:hidden]")
-+			branches.not(":has(>ul:hidden)")
- 					.addClass(CLASSES.collapsable)
- 					.swapClass(CLASSES.last, CLASSES.lastCollapsable);</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1575/jquery.treeview-1.2-has-selector.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1575/jquery.treeview-1.2-has-selector.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

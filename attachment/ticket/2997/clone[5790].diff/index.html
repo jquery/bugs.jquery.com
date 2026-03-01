@@ -142,41 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: core.js
-===================================================================
-<span class="token coord">--- core.js	(revision 5790)</span>
-<span class="token coord">+++ core.js	(working copy)</span>
-<span class="token coord">@@ -274,7 +274,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	clone: function( events ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Do the clone
-</span><span class="token prefix unchanged"> </span><span class="token line">		var ret = this.map(function(){
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( jQuery.browser.msie &amp;&amp; !jQuery.isXMLDoc(this) ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			return jQuery.browser.msie &amp;&amp; !jQuery.isXMLDoc(this) ?
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// IE copies events bound via attachEvent when
-</span><span class="token prefix unchanged"> </span><span class="token line">				// using cloneNode. Calling detachEvent on the
-</span><span class="token prefix unchanged"> </span><span class="token line">				// clone will also remove the events from the orignal
-</span></span><span class="token coord">@@ -283,12 +283,9 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// attributes in IE that are actually only stored
-</span><span class="token prefix unchanged"> </span><span class="token line">				// as properties will not be copied (such as the
-</span><span class="token prefix unchanged"> </span><span class="token line">				// the name attribute on an input).
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				var clone = this.cloneNode(true),
-</span><span class="token prefix deleted">-</span><span class="token line">					container = document.createElement("div");
-</span><span class="token prefix deleted">-</span><span class="token line">				container.appendChild(clone);
-</span><span class="token prefix deleted">-</span><span class="token line">				return jQuery.clean([container.innerHTML])[0];
-</span><span class="token prefix deleted">-</span><span class="token line">			} else
-</span><span class="token prefix deleted">-</span><span class="token line">				return this.cloneNode(true);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				jQuery.clean([this.outerHTML], this)[0] :
-</span><span class="token prefix inserted">+</span><span class="token line">				// W3C
-</span><span class="token prefix inserted">+</span><span class="token line">				this.cloneNode(true);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Need to set the expando to null on the cloned set if it exists</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2997/clone[5790].diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2997/clone[5790].diff">Original Format</a>
   </div>
 </h1></div>
         </div>

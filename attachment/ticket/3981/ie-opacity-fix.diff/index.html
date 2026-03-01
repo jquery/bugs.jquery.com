@@ -140,29 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery-1.3.1.js
-===================================================================
-<span class="token coord">--- jquery-1.3.1.js	(official version)</span>
-<span class="token coord">+++ jquery-1.3.1-ie-opacity-bugfix.js</span>
-<span class="token coord">@@ -772,8 +772,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// We need to handle opacity special in IE
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( name == "opacity" &amp;&amp; !jQuery.support.opacity ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">			ret = jQuery.attr( style, "opacity" );
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">			return ret == "" ?
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if (ret == '') {
-</span><span class="token prefix inserted">+</span><span class="token line">				ret = jQuery.curCSS(elem, 'filter').match(/opacity=(\d+)/) ? RegExp.$1/100 : '';
-</span><span class="token prefix inserted">+</span><span class="token line">			}
-</span><span class="token prefix inserted">+</span><span class="token line">			return ret === "" ?
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				"1" :
-</span><span class="token prefix unchanged"> </span><span class="token line">				ret;
-</span><span class="token prefix unchanged"> </span><span class="token line">		}</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3981/ie-opacity-fix.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3981/ie-opacity-fix.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -140,30 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/selector.js
-===================================================================
-<span class="token coord">--- src/selector.js	(revision 5795)</span>
-<span class="token coord">+++ src/selector.js	(working copy)</span>
-<span class="token coord">@@ -334,11 +334,9 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				var tmp = [], type = m[3];
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				for ( var i = 0, rl = r.length; i &lt; rl; i++ ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					var a = r[i], z = a[ jQuery.props[m[2]] || m[2] ];
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					var a = r[i], 
-</span><span class="token prefix inserted">+</span><span class="token line">						z = jQuery.attr( a, m[2] ) || '';
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					if ( z == null || /style|href|src|selected/.test(m[2]) )
-</span><span class="token prefix deleted">-</span><span class="token line">						z = jQuery.attr(a,m[2]) || '';
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					if ( (type == "" &amp;&amp; !!z ||
-</span><span class="token prefix unchanged"> </span><span class="token line">						 type == "=" &amp;&amp; z == m[5] ||
-</span><span class="token prefix unchanged"> </span><span class="token line">						 type == "!=" &amp;&amp; z != m[5] ||</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3194/selector[5795].diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3194/selector[5795].diff">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,62 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/fx.js
-===================================================================
-<span class="token coord">--- src/fx.js	(revision 5762)</span>
-<span class="token coord">+++ src/fx.js	(working copy)</span>
-<span class="token coord">@@ -45,26 +45,6 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				});
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	slideDown: function(speed,callback){
-</span><span class="token prefix deleted">-</span><span class="token line">		return this.animate({height: "show"}, speed, callback);
-</span><span class="token prefix deleted">-</span><span class="token line">	},
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">	slideUp: function(speed,callback){
-</span><span class="token prefix deleted">-</span><span class="token line">		return this.animate({height: "hide"}, speed, callback);
-</span><span class="token prefix deleted">-</span><span class="token line">	},
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">	slideToggle: function(speed, callback){
-</span><span class="token prefix deleted">-</span><span class="token line">		return this.animate({height: "toggle"}, speed, callback);
-</span><span class="token prefix deleted">-</span><span class="token line">	},
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">	fadeIn: function(speed, callback){
-</span><span class="token prefix deleted">-</span><span class="token line">		return this.animate({opacity: "show"}, speed, callback);
-</span><span class="token prefix deleted">-</span><span class="token line">	},
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">	fadeOut: function(speed, callback){
-</span><span class="token prefix deleted">-</span><span class="token line">		return this.animate({opacity: "hide"}, speed, callback);
-</span><span class="token prefix deleted">-</span><span class="token line">	},
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	fadeTo: function(speed,to,callback){
-</span><span class="token prefix unchanged"> </span><span class="token line">		return this.animate({opacity: to}, speed, callback);
-</span><span class="token prefix unchanged"> </span><span class="token line">	},
-</span></span><span class="token coord">@@ -178,6 +158,19 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">// Generate shortcuts for custom animations
-</span><span class="token prefix inserted">+</span><span class="token line">jQuery.each({
-</span><span class="token prefix inserted">+</span><span class="token line">	slideDown: { height:"show" },
-</span><span class="token prefix inserted">+</span><span class="token line">	slideUp: { height: "hide" },
-</span><span class="token prefix inserted">+</span><span class="token line">	slideToggle: { height: "toggle" },
-</span><span class="token prefix inserted">+</span><span class="token line">	fadeIn: { opacity: "show" },
-</span><span class="token prefix inserted">+</span><span class="token line">	fadeOut: { opacity: "hide" }
-</span><span class="token prefix inserted">+</span><span class="token line">}, function( name, props ){
-</span><span class="token prefix inserted">+</span><span class="token line">	jQuery.fn[ name ] = function( speed, callback ){
-</span><span class="token prefix inserted">+</span><span class="token line">		return this.animate( props, speed, callback );
-</span><span class="token prefix inserted">+</span><span class="token line">	};
-</span><span class="token prefix inserted">+</span><span class="token line">});
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">var queue = function( elem, type, array ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">	if ( elem ){</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3128/fx[5762].diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3128/fx[5762].diff">Original Format</a>
   </div>
 </h1></div>
         </div>

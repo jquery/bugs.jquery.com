@@ -142,34 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">$</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> nativeFixFunction <span class="token operator">=</span> $<span class="token punctuation">.</span>event<span class="token punctuation">.</span>fix<span class="token punctuation">;</span>
-
-    $<span class="token punctuation">.</span>event<span class="token punctuation">.</span><span class="token function-variable function">fix</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span> event<span class="token punctuation">[</span>$<span class="token punctuation">.</span>expando<span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> event<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        
-        <span class="token keyword">var</span> resultEvent <span class="token operator">=</span> <span class="token function">nativeFixFunction</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>$<span class="token punctuation">.</span>event<span class="token punctuation">,</span> event<span class="token punctuation">)</span><span class="token punctuation">,</span>
-            doc <span class="token operator">=</span> document<span class="token punctuation">.</span>documentElement<span class="token punctuation">,</span>
-            body <span class="token operator">=</span> document<span class="token punctuation">.</span>body<span class="token punctuation">;</span>
-        
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>browser<span class="token punctuation">.</span>mozilla <span class="token operator">&amp;&amp;</span> browser<span class="token punctuation">.</span>version <span class="token operator">&lt;</span> <span class="token number">1.9</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            resultEvent<span class="token punctuation">.</span>clientX <span class="token operator">-=</span> <span class="token operator">-</span>body<span class="token punctuation">.</span>offsetLeft<span class="token punctuation">;</span>
-            resultEvent<span class="token punctuation">.</span>clientY <span class="token operator">-=</span> <span class="token operator">-</span>body<span class="token punctuation">.</span>offsetTop<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>browser<span class="token punctuation">.</span>opera <span class="token operator">&amp;&amp;</span> browser<span class="token punctuation">.</span>version <span class="token operator">&lt;=</span> <span class="token number">9.27</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            resultEvent<span class="token punctuation">.</span>clientX <span class="token operator">-=</span> <span class="token punctuation">(</span>doc<span class="token punctuation">.</span>clientLeft <span class="token operator">||</span> body<span class="token punctuation">.</span>clientLeft <span class="token operator">||</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            resultEvent<span class="token punctuation">.</span>clientY <span class="token operator">-=</span> <span class="token punctuation">(</span>doc<span class="token punctuation">.</span>clientTop <span class="token operator">||</span> body<span class="token punctuation">.</span>clientTop <span class="token operator">||</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> resultEvent<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>jQuery<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4927/jquery.event.fix.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4927/jquery.event.fix.js">Original Format</a>
   </div>
 </h1></div>
         </div>

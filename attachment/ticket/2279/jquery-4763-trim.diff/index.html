@@ -142,29 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: core.js
-===================================================================
-<span class="token coord">--- core.js	(revision 4789)</span>
-<span class="token coord">+++ core.js	(working copy)</span>
-<span class="token coord">@@ -1114,7 +1114,11 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">	trim: function( text ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		return (text || "").replace( /^\s+|\s+$/g, "" );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		var text = (text || "").replace(/^\s\s*/, ''),
-</span><span class="token prefix inserted">+</span><span class="token line">		    ws = /\s/,
-</span><span class="token prefix inserted">+</span><span class="token line">		    i = text.length;
-</span><span class="token prefix inserted">+</span><span class="token line">		while ( ws.test(text.charAt(--i)) );
-</span><span class="token prefix inserted">+</span><span class="token line">		return text.slice(0, i + 1);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	},
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	makeArray: function( array ) {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2279/jquery-4763-trim.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2279/jquery-4763-trim.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

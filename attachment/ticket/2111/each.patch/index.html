@@ -142,36 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: C:/Documents and Settings/Scott/eclipse/workspace/jQuery/core.js
-===================================================================
---- C:/Documents and Settings/Scott/eclipse/workspace/jQuery/core.js	(revision 4351)
-+++ C:/Documents and Settings/Scott/eclipse/workspace/jQuery/core.js	(working copy)
-@@ -710,7 +710,8 @@
- 		if ( args ) {
- 			if ( object.length == undefined )
- 				for ( var name in object )
--					callback.apply( object[ name ], args );
-+					if ( callback.apply( object[ name ], args ) === false )
-+						break;
- 			else
- 				for ( var i = 0, length = object.length; i < length; i++ )
- 					if ( callback.apply( object[ i ], args ) === false )
-@@ -720,7 +721,8 @@
- 		} else {
- 			if ( object.length == undefined )
- 				for ( var name in object )
--					callback.call( object[ name ], name, object[ name ] );
-+					if ( callback.call( object[ name ], name, object[ name ] ) === false )
-+						break;
- 			else
- 				for ( var i = 0, length = object.length, value = object[0]; 
- 					i < length && callback.call( value, i, value ) !== false; value = object[++i] ){}</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2111/each.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2111/each.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

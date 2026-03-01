@@ -140,23 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- jquery-1.2.6.js	2008-07-23 13:25:25.000000000 -0400
-+++ jquery-1.2.6.fix.js	2008-12-31 12:22:15.000000000 -0500
-@@ -1037,7 +1037,7 @@
- 
- 	attr: function( elem, name, value ) {
- 		// don't set attributes on text and comment nodes
--		if (!elem || elem.nodeType == 3 || elem.nodeType == 8)
-+		if (!elem || elem.nodeType == 3 || elem.nodeType == 8 || elem.nodeType == undefined)
- 			return undefined;
- 
- 		var notxml = !jQuery.isXMLDoc( elem ),</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3763/fix-attr.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3763/fix-attr.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

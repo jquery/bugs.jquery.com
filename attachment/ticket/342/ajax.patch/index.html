@@ -142,33 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: ajax.js
-===================================================================
---- ajax.js	(revision 541)
-+++ ajax.js	(working copy)
-@@ -701,6 +701,7 @@
- 			success: fvoid,
- 			error: fvoid,
- 			dataType: null,
-+			contentType: "application/x-www-form-urlencoded",
- 			data: null,
- 			url: null
- 		}, s);
-@@ -736,7 +737,7 @@
- 
- 		// Set the correct header, if data is being sent
- 		if ( s.data )
--			xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-+			xml.setRequestHeader("Content-Type", contentType);
- 
- 		// Set the If-Modified-Since header, if ifModified mode.
- 		if ( s.ifModified )</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/342/ajax.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/342/ajax.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -142,26 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: current/ui.mouse.js
-===================================================================
-<span class="token coord">--- current/ui.mouse.js	(revision 3817)</span>
-<span class="token coord">+++ current/ui.mouse.js	(working copy)</span>
-<span class="token coord">@@ -168,7 +168,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				this.pos[1] -= o.po.top;
-</span><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">			
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			this.slowMode = (o.cursorAt &amp;&amp; (o.cursorAt.top-o.margins.top > 0 || o.cursorAt.bottom-o.margins.bottom > 0) &amp;&amp; (o.cursorAt.left-o.margins.left > 0 || o.cursorAt.right-o.margins.right > 0)) ? true : false; //If cursorAt is within the helper, set slowMode to true
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			// slowMode: manually check the physical bounds of droppables for intersection, rather than using the mouseover and mouseout listeners
-</span><span class="token prefix inserted">+</span><span class="token line">			this.slowMode = (o.cursorAtIgnore || (o.cursorAt &amp;&amp; (o.cursorAt.top-o.margins.top > 0 || o.cursorAt.bottom-o.margins.bottom > 0) &amp;&amp; (o.cursorAt.left-o.margins.left > 0 || o.cursorAt.right-o.margins.right > 0))) ? true : false; //If cursorAt is ignored or within the helper, set slowMode to true
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			
-</span><span class="token prefix unchanged"> </span><span class="token line">			if(!o.nonDestructive) $(this.helper).css('position', 'absolute');
-</span><span class="token prefix unchanged"> </span><span class="token line">			if(o.helper != 'original') $(this.helper).appendTo((o.appendTo == 'parent' ? a.parentNode : o.appendTo)).show();</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1920/slowModePatch.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1920/slowModePatch.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

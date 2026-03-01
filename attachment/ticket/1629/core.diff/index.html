@@ -142,79 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 4089)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -779,49 +779,22 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	css: function( elem, name, force ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( name == "height" || name == "width" ) {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			var old = {}, height, width;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			var props = {}, height, width;
-</span><span class="token prefix inserted">+</span><span class="token line">			
-</span><span class="token prefix inserted">+</span><span class="token line">			props["position"]   = "absolute";
-</span><span class="token prefix inserted">+</span><span class="token line">			props["visibility"] = "hidden";
-</span><span class="token prefix inserted">+</span><span class="token line">			props["display"]    = "block";
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			// Revert the padding and border widths to get the
-</span><span class="token prefix deleted">-</span><span class="token line">			// correct height/width values
-</span><span class="token prefix deleted">-</span><span class="token line">			jQuery.each([ "Top", "Bottom", "Right", "Left" ], function(){
-</span><span class="token prefix deleted">-</span><span class="token line">				old[ "padding" + this ] = 0;
-</span><span class="token prefix deleted">-</span><span class="token line">				old[ "border" + this + "Width" ] = 0;
-</span><span class="token prefix deleted">-</span><span class="token line">			});
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">			// Swap out the padding/border values temporarily
-</span><span class="token prefix deleted">-</span><span class="token line">			jQuery.swap( elem, old, function() {
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">				// If the element is visible, then the calculation is easy
-</span><span class="token prefix deleted">-</span><span class="token line">				if ( jQuery( elem ).is(":visible") ) {
-</span><span class="token prefix deleted">-</span><span class="token line">					height = elem.offsetHeight;
-</span><span class="token prefix deleted">-</span><span class="token line">					width = elem.offsetWidth;
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">				// Otherwise, we need to flip out more values
-</span><span class="token prefix deleted">-</span><span class="token line">				} else {
-</span><span class="token prefix deleted">-</span><span class="token line">					elem = jQuery( elem.cloneNode(true) )
-</span><span class="token prefix deleted">-</span><span class="token line">						.find(":radio").removeAttr("checked").removeAttr("defaultChecked").end()
-</span><span class="token prefix deleted">-</span><span class="token line">						.css({
-</span><span class="token prefix deleted">-</span><span class="token line">							visibility: "hidden",
-</span><span class="token prefix deleted">-</span><span class="token line">							position: "absolute",
-</span><span class="token prefix deleted">-</span><span class="token line">							display: "block",
-</span><span class="token prefix deleted">-</span><span class="token line">							right: "0",
-</span><span class="token prefix deleted">-</span><span class="token line">							left: "0"
-</span><span class="token prefix deleted">-</span><span class="token line">						}).appendTo( elem.parentNode )[0];
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">					var position = jQuery.css( elem.parentNode, "position" ) || "static";
-</span><span class="token prefix deleted">-</span><span class="token line">					if ( position == "static" )
-</span><span class="token prefix deleted">-</span><span class="token line">						elem.parentNode.style.position = "relative";
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( jQuery(elem).is(":visible") ) {
-</span><span class="token prefix inserted">+</span><span class="token line">				height = elem.clientHeight;
-</span><span class="token prefix inserted">+</span><span class="token line">				width  = elem.clientWidth;
-</span><span class="token prefix inserted">+</span><span class="token line">			} else {
-</span><span class="token prefix inserted">+</span><span class="token line">				jQuery.swap( elem, props, function() {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					height = elem.clientHeight;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					width = elem.clientWidth;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					width  = elem.clientWidth;
-</span><span class="token prefix inserted">+</span><span class="token line">				});
-</span><span class="token prefix inserted">+</span><span class="token line">			}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					if ( position == "static" )
-</span><span class="token prefix deleted">-</span><span class="token line">						elem.parentNode.style.position = "static";
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span><span class="token prefix deleted">-</span><span class="token line">					elem.parentNode.removeChild( elem );
-</span><span class="token prefix deleted">-</span><span class="token line">				}
-</span><span class="token prefix deleted">-</span><span class="token line">			});
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			return name == "height" ?
-</span><span class="token prefix unchanged"> </span><span class="token line">				height :
-</span><span class="token prefix unchanged"> </span><span class="token line">				width;</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1629/core.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1629/core.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

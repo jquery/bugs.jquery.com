@@ -142,44 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ready</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
-    <span class="token function">testXml</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- 
- 
-<span class="token keyword">function</span> <span class="token function">testXml</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-	<span class="token keyword">var</span> theXml <span class="token operator">=</span> <span class="token string">"&lt;test>&lt;item id='1'>one&lt;/item>&lt;item id='2'>two&lt;/item>&lt;/test>"</span><span class="token punctuation">;</span>		
-	
-	<span class="token comment">// Uncomment the following line for IE workaround:</span>
-	<span class="token comment">// theXml = parseXml(theXml);</span>
-	
-	<span class="token function">$</span><span class="token punctuation">(</span>theXml<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'item'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
-	<span class="token punctuation">{</span>
-		<span class="token keyword">var</span> theItem <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token keyword">var</span> theId <span class="token operator">=</span> theItem<span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token keyword">var</span> theText <span class="token operator">=</span> theItem<span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>		
-		<span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"Id="</span> <span class="token operator">+</span> theId <span class="token operator">+</span> <span class="token string">" Text="</span> <span class="token operator">+</span> theText<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">parseXml</span><span class="token punctuation">(</span><span class="token parameter">xml</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>	
-	<span class="token keyword">if</span> <span class="token punctuation">(</span>jQuery<span class="token punctuation">.</span>browser<span class="token punctuation">.</span>msie<span class="token punctuation">)</span>
-	<span class="token punctuation">{</span>
-		<span class="token keyword">var</span> xmlDoc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ActiveXObject</span><span class="token punctuation">(</span><span class="token string">"Microsoft.XMLDOM"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-		xmlDoc<span class="token punctuation">.</span><span class="token function">loadXML</span><span class="token punctuation">(</span>xml<span class="token punctuation">)</span><span class="token punctuation">;</span>
-		xml <span class="token operator">=</span> xmlDoc<span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
-	
-	<span class="token keyword">return</span> xml<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3143/foo.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3143/foo.js">Original Format</a>
   </div>
 </h1></div>
         </div>

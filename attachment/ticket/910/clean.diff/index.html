@@ -142,29 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/jquery/jquery.js
-===================================================================
-<span class="token coord">--- jquery/src/jquery/jquery.js	(revision 1410)</span>
-<span class="token coord">+++ jquery/src/jquery/jquery.js	(working copy)</span>
-<span class="token coord">@@ -1469,10 +1469,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				arg = div.childNodes;
-</span><span class="token prefix unchanged"> </span><span class="token line">			}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( arg.length === 0 )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( arg.length === 0 &amp;&amp; !jQuery.nodeName(arg, "form") )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				return;
-</span><span class="token prefix unchanged"> </span><span class="token line">			
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">			if ( arg[0] == undefined )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if ( arg[0] == undefined || jQuery.nodeName(arg, "form") )
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				r.push( arg );
-</span><span class="token prefix unchanged"> </span><span class="token line">			else
-</span><span class="token prefix unchanged"> </span><span class="token line">				r = jQuery.merge( r, arg );</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/910/clean.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/910/clean.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

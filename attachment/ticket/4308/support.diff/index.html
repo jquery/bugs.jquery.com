@@ -142,49 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: support.js
-===================================================================
-<span class="token coord">--- support.js	(revision 6272)</span>
-<span class="token coord">+++ support.js	(working copy)</span>
-<span class="token coord">@@ -8,15 +8,19 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		id = "script" + (new Date).getTime();
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	div.style.display = "none";
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	div.innerHTML = '   &lt;link/>&lt;table>&lt;/table>&lt;a href="/a" style="color:red;float:left;opacity:.5;">a&lt;/a>&lt;select>&lt;option>text&lt;/option>&lt;/select>';
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	div.innerHTML = '   &lt;link/>&lt;table>&lt;/table>&lt;span>&lt;/span>&lt;a href="/a" style="color:red;float:left;opacity:.5;">a&lt;/a>&lt;select>&lt;option>text&lt;/option>&lt;/select>';
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	var all = div.getElementsByTagName("*"),
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		a = div.getElementsByTagName("a")[0];
-</span><span class="token prefix deleted">-</span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		a = div.getElementsByTagName("a")[0],
-</span><span class="token prefix inserted">+</span><span class="token line">		span = div.getElementsByTagName("span")[0];
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	// Can't get basic test support
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	if ( !all || !all.length || !a ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	if ( !all || !all.length || !a || !span ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		return;
-</span><span class="token prefix unchanged"> </span><span class="token line">	}
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	span.setAttrbiute("style", "color: red;");
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	jQuery.support = {
-</span><span class="token prefix unchanged"> </span><span class="token line">		// IE strips leading whitespace when .innerHTML is used
-</span></span><span class="token coord">@@ -32,7 +36,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Get the style information from getAttribute
-</span><span class="token prefix unchanged"> </span><span class="token line">		// (IE uses .cssText insted)
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		style: /red/.test( a.getAttribute("style") ),
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		style: /red/.test( a.getAttribute("style") ) &amp;&amp; /red/.test( span.getAttribute("style") ),
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Make sure that URLs aren't manipulated
-</span><span class="token prefix unchanged"> </span><span class="token line">		// (IE normalizes it by default)</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4308/support.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4308/support.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

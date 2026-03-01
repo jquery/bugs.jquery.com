@@ -142,121 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">$</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-	
-	$<span class="token punctuation">.</span>fn<span class="token punctuation">.</span><span class="token function-variable function">moMessenger</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span> <span class="token parameter">opts</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token keyword">var</span> def <span class="token operator">=</span> <span class="token punctuation">{</span>
-			<span class="token literal-property property">classes</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
-				<span class="token literal-property property">handler</span> <span class="token operator">:</span> <span class="token string">'top'</span><span class="token punctuation">,</span>
-				<span class="token literal-property property">close</span> <span class="token operator">:</span> <span class="token string">'close'</span><span class="token punctuation">,</span>
-				<span class="token literal-property property">msgsCont</span> <span class="token operator">:</span> <span class="token string">'msgs'</span><span class="token punctuation">,</span>
-				<span class="token literal-property property">msg</span> <span class="token operator">:</span> <span class="token string">'msg'</span><span class="token punctuation">,</span>
-				<span class="token literal-property property">author</span> <span class="token operator">:</span> <span class="token string">'author'</span><span class="token punctuation">,</span>
-				<span class="token literal-property property">time</span> <span class="token operator">:</span> <span class="token string">'datetime'</span><span class="token punctuation">,</span>
-				<span class="token literal-property property">cont</span> <span class="token operator">:</span> <span class="token string">'cont'</span><span class="token punctuation">,</span>
-				<span class="token literal-property property">type</span> <span class="token operator">:</span> <span class="token string">'type'</span><span class="token punctuation">,</span>
-				<span class="token literal-property property">send</span> <span class="token operator">:</span> <span class="token string">'send'</span><span class="token punctuation">,</span>
-				<span class="token literal-property property">open</span> <span class="token operator">:</span> <span class="token string">'open'</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-			<span class="token literal-property property">dataType</span> <span class="token operator">:</span> <span class="token string">'json'</span><span class="token punctuation">,</span>
-			<span class="token literal-property property">pos</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
-				<span class="token literal-property property">x</span> <span class="token operator">:</span> <span class="token number">300</span><span class="token punctuation">,</span>
-				<span class="token literal-property property">y</span> <span class="token operator">:</span> <span class="token number">100</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-			<span class="token literal-property property">source</span> <span class="token operator">:</span> <span class="token string">'generate'</span><span class="token punctuation">,</span>
-			<span class="token literal-property property">archive</span> <span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-			<span class="token literal-property property">from</span> <span class="token operator">:</span> <span class="token string">'Arrviasto'</span><span class="token punctuation">,</span>
-			<span class="token literal-property property">to</span> <span class="token operator">:</span> <span class="token string">'mojaosoba.pl'</span><span class="token punctuation">,</span>
-			<span class="token literal-property property">interval</span> <span class="token operator">:</span> <span class="token number">2000</span>
-		<span class="token punctuation">}</span><span class="token punctuation">;</span>
-		
-		<span class="token keyword">var</span> opts <span class="token operator">=</span> $<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span> def<span class="token punctuation">,</span> opts <span class="token punctuation">)</span><span class="token punctuation">;</span>
-		
-		<span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">i</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			$win <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			
-			$win<span class="token punctuation">.</span><span class="token function">Draggable</span><span class="token punctuation">(</span> <span class="token punctuation">{</span> 
-				<span class="token literal-property property">handle</span> <span class="token operator">:</span> <span class="token string">'.'</span><span class="token operator">+</span>opts<span class="token punctuation">.</span>classes<span class="token punctuation">.</span>handler<span class="token punctuation">,</span>
-				<span class="token literal-property property">frameClass</span> <span class="token operator">:</span> <span class="token string">'frame'</span>
-			<span class="token punctuation">}</span> <span class="token punctuation">)</span>
-				<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span> <span class="token string">'.'</span><span class="token operator">+</span>opts<span class="token punctuation">.</span>classes<span class="token punctuation">.</span>send <span class="token punctuation">)</span> <span class="token comment">// Travers</span>
-				<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span> <span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-					<span class="token function">sendMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			
-			<span class="token function">bindShow</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token function">bindHide</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token keyword">var</span> timingInterv <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">checkMsgs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">5000</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-			<span class="token keyword">function</span> <span class="token function">bindShow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-				<span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token operator">+</span>opts<span class="token punctuation">.</span>classes<span class="token punctuation">.</span>open<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">one</span><span class="token punctuation">(</span> <span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-					$win<span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-					<span class="token function">bindShow</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span> <span class="token comment">// End of bindShow</span>
-   
-			<span class="token keyword">function</span> <span class="token function">bindHide</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-				$win<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token operator">+</span>opts<span class="token punctuation">.</span>classes<span class="token punctuation">.</span>close<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">one</span><span class="token punctuation">(</span> <span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-					$win<span class="token punctuation">.</span><span class="token function">hide</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-					<span class="token function">bindHide</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span> <span class="token comment">// End of bindHide</span>
-			
-			<span class="token keyword">function</span> <span class="token function">sendMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-				<span class="token keyword">var</span> msg <span class="token operator">=</span> $win
-					<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token operator">+</span>opts<span class="token punctuation">.</span>classes<span class="token punctuation">.</span>type<span class="token punctuation">)</span>
-					<span class="token punctuation">.</span><span class="token function">children</span><span class="token punctuation">(</span><span class="token string">'textarea'</span><span class="token punctuation">)</span>
-					<span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				
-				<span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"Od: "</span><span class="token operator">+</span>opts<span class="token punctuation">.</span>from<span class="token operator">+</span><span class="token string">"\nDo: "</span><span class="token operator">+</span>opts<span class="token punctuation">.</span>to<span class="token operator">+</span><span class="token string">"\nTreść: "</span><span class="token operator">+</span>msg <span class="token punctuation">)</span><span class="token punctuation">;</span>
-				
-				$<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'../ajax.php'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token literal-property property">func</span> <span class="token operator">:</span> <span class="token string">'sendMsg'</span><span class="token punctuation">,</span> <span class="token literal-property property">msg</span> <span class="token operator">:</span> msg<span class="token punctuation">,</span> <span class="token literal-property property">from</span> <span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token literal-property property">to</span> <span class="token operator">:</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-					<span class="token function">alert</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-					<span class="token function">checkMsgs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span> <span class="token comment">// End of sendMessage</span>
-			
-			<span class="token keyword">function</span> <span class="token function">checkMsgs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			
-				$<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'../ajax.php'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token literal-property property">func</span> <span class="token operator">:</span> <span class="token string">'checkMsgs'</span><span class="token punctuation">,</span> <span class="token literal-property property">from</span> <span class="token operator">:</span> opts<span class="token punctuation">.</span>from<span class="token punctuation">,</span> <span class="token literal-property property">to</span> <span class="token operator">:</span> opts<span class="token punctuation">.</span>to <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">json<span class="token punctuation">,</span> e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">alert</span><span class="token punctuation">(</span>json<span class="token operator">+</span><span class="token string">"\n"</span><span class="token operator">+</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-					<span class="token keyword">if</span> <span class="token punctuation">(</span> json<span class="token punctuation">.</span>msg <span class="token punctuation">)</span>
-					<span class="token punctuation">{</span>
-						<span class="token keyword">var</span> $msg <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'&lt;div>&lt;/div>'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addClass</span><span class="token punctuation">(</span>opts<span class="token punctuation">.</span>classes<span class="token punctuation">.</span>msg<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-						<span class="token keyword">var</span> $a <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'&lt;span>&lt;/span>'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addClass</span><span class="token punctuation">(</span>opts<span class="token punctuation">.</span>classes<span class="token punctuation">.</span>author<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-						<span class="token keyword">var</span> $t <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'&lt;span>&lt;/span>'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addClass</span><span class="token punctuation">(</span>opts<span class="token punctuation">.</span>classes<span class="token punctuation">.</span>time<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-						<span class="token keyword">var</span> $cont <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'&lt;span>&lt;/span>'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addClass</span><span class="token punctuation">(</span>opts<span class="token punctuation">.</span>classes<span class="token punctuation">.</span>cont<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-   
-						$a
-							<span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span> json<span class="token punctuation">.</span>from <span class="token punctuation">)</span><span class="token punctuation">;</span>
-						$t
-							<span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span> json<span class="token punctuation">.</span>date <span class="token punctuation">)</span><span class="token punctuation">;</span>
-						$cont
-							<span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span> json<span class="token punctuation">.</span>text <span class="token punctuation">)</span><span class="token punctuation">;</span>
-   
-						$msg
-							<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>$a<span class="token punctuation">)</span>
-							<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>$t<span class="token punctuation">)</span>
-							<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>$cont<span class="token punctuation">)</span>
-							<span class="token punctuation">.</span><span class="token function">appendTo</span><span class="token punctuation">(</span>$win<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token operator">+</span>opts<span class="token punctuation">.</span>classes<span class="token punctuation">.</span>msgsCont<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-					<span class="token punctuation">}</span>
-				<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">'json'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span> <span class="token comment">// End of checkMsgs</span>
-			
-			<span class="token keyword">function</span> <span class="token function">getArchiveId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-				
-				<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-			<span class="token punctuation">}</span> <span class="token comment">// End of getArchiveId</span>
-			
-		<span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
-	
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>jQuery<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4602/msgr.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4602/msgr.js">Original Format</a>
   </div>
 </h1></div>
         </div>

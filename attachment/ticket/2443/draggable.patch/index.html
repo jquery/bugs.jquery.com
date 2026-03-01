@@ -142,22 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- ui.draggable.orig.js	2008-03-02 13:30:09.000000000 +0100
-+++ ui.draggable.js	2008-03-02 19:08:41.000000000 +0100
-@@ -110,6 +110,7 @@
- 			//Create and append the visible helper
- 			this.helper = typeof o.helper == 'function' ? $(o.helper.apply(this.element[0], [e])) : (o.helper == 'clone' ? this.element.clone().appendTo((o.appendTo == 'parent' ? this.element[0].parentNode : o.appendTo)) : this.element);
- 			if(this.helper[0] != this.element[0]) this.helper.css('position', 'absolute');
-+			if(typeof(this.options.zIndex)!='undefined') this.helper.css('z-index', this.options.zIndex);
- 			if(!this.helper.parents('body').length) this.helper.appendTo((o.appendTo == 'parent' ? this.element[0].parentNode : o.appendTo));
- 
- 			//Find out the next positioned parent</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2443/draggable.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2443/draggable.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

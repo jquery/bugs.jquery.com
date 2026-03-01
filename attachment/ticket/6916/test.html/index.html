@@ -142,59 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-html" tabindex="0"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://code.jquery.com/jquery-1.4.2.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>H1</span><span class="token punctuation">></span></span>Test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>H1</span><span class="token punctuation">></span></span>
-
-
-The script below demonstrates an xml parse error that occurs in IE but
-not FF.  Assuming the xml is parsed correctly, you should see an alert
-with the title of the one book in the xml document.  If the parse
-fails, you will get a parseerror alert.  This file and accompanying
-xml work fine in firefox, whather the files are remote (served by
-http) or local.  They also work fine in IE if the files are remote.
-However, if the files are stored locally, IE will generate a
-parseerror.
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-<span class="token keyword">function</span> <span class="token function">testXML</span><span class="token punctuation">(</span><span class="token parameter">xml</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"Title"</span><span class="token punctuation">,</span>xml<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token function">alert</span><span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">reportError</span><span class="token punctuation">(</span><span class="token parameter">xmlhttp<span class="token punctuation">,</span> status<span class="token punctuation">,</span> error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-<span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"error: "</span> <span class="token operator">+</span> status<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token parameter">url</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-<span class="token keyword">var</span> xmlhttp<span class="token operator">=</span>$<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span>
-<span class="token punctuation">{</span>
-<span class="token literal-property property">url</span><span class="token operator">:</span> url<span class="token punctuation">,</span>
-<span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-<span class="token literal-property property">success</span><span class="token operator">:</span> testXML<span class="token punctuation">,</span>
-<span class="token literal-property property">error</span><span class="token operator">:</span> reportError<span class="token punctuation">,</span>
-<span class="token literal-property property">dataType</span><span class="token operator">:</span> <span class="token string">"xml"</span><span class="token punctuation">}</span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test.xml"</span><span class="token punctuation">)</span>
-</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
+      <pre class="language-html" tabindex="0"><code class="language-html"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/6916/test.html">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/6916/test.html">Original Format</a>
   </div>
 </h1></div>
         </div>

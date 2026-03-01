@@ -142,25 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">--- ..\eLearning\eLearning\Scripts\jquery.validate.old.js	2008-04-06 17:45:06.415668800 +0300
-+++ ..\eLearning\eLearning\Scripts\jquery.validate.js	2008-04-06 17:33:58.105276000 +0300
-@@ -714,6 +714,10 @@
- 		});
- 		jQuery.each(['rangelength', 'range'], function() {
- 			if (rules[this]) {
-+			    if(typeof(rules[this]) === "string")
-+				{
-+					rules[this] = eval(rules[this]);
-+				}
- 				rules[this] = [Number(rules[this][0]), Number(rules[this][1])];
- 			}
- 		});</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2660/jquery.validate.js.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2660/jquery.validate.js.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

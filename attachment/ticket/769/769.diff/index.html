@@ -142,39 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 3790)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -483,8 +483,23 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					if ( elem.nodeType == 1 )
-</span><span class="token prefix unchanged"> </span><span class="token line">						scripts = scripts.add( jQuery( "script", elem ).remove() );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					// IE6 fails to copy the checked state over on appendChild type calls
-</span><span class="token prefix inserted">+</span><span class="token line">					if ( jQuery.browser.msie &amp;&amp; jQuery.browser.version == "6.0" ) {
-</span><span class="token prefix inserted">+</span><span class="token line">						var c = jQuery(elem).find("input").andSelf().filter(":checkbox,:radio");
-</span><span class="token prefix inserted">+</span><span class="token line">						c.each(function () {
-</span><span class="token prefix inserted">+</span><span class="token line">							this.saveChecked = this.checked;
-</span><span class="token prefix inserted">+</span><span class="token line">						});
-</span><span class="token prefix inserted">+</span><span class="token line">					}
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					// Inject the elements into the document
-</span><span class="token prefix unchanged"> </span><span class="token line">					callback.call( obj, elem );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">					// set the checked values in IE6 (from above)
-</span><span class="token prefix inserted">+</span><span class="token line">					if ( c )
-</span><span class="token prefix inserted">+</span><span class="token line">						c.each(function () {
-</span><span class="token prefix inserted">+</span><span class="token line">							if (this.saveChecked)
-</span><span class="token prefix inserted">+</span><span class="token line">								this.checked = true;
-</span><span class="token prefix inserted">+</span><span class="token line">						});
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				}
-</span><span class="token prefix unchanged"> </span><span class="token line">			});</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/769/769.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/769/769.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

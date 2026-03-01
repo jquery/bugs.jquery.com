@@ -142,43 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">// Helper function to support older browsers!
-[].indexOf || (Array.prototype.indexOf = function(v, n){
-	n = (n == null) ? 0 : n;
-	var m = this.length;
-	for (var i=n; i&lt;m; i++)
-		if (this[i] == v)
-			return i;
-	return -1;
-});
-
-
-
-change to this:
-
-
-
-// Helper function to support older browsers! if (![].indexOf) {
-
-    Array.prototype.indexOf = function(v, n){
-
-        n = (n == null) ? 0 : n; var m = this.length; for (var i=n; i&lt;m; i++)
-
-            if (this[i] == v)
-
-                return i;
-
-        return -1;
-
-    });
-
-}</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1368/iutil.js.fix.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1368/iutil.js.fix.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

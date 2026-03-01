@@ -142,133 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-php" tabindex="0"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-	<span class="token variable">$raw_post</span> <span class="token operator">=</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"php://input"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token delimiter important">?></span></span>$("#res").append(<span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-			<span class="token keyword">echo</span> <span class="token function">json_encode</span><span class="token punctuation">(</span>
-					<span class="token string double-quoted-string">"raw_post:"</span> <span class="token operator">.</span> <span class="token variable">$raw_post</span> <span class="token operator">.</span> <span class="token string double-quoted-string">"\n"</span> <span class="token operator">.</span> <span class="token function">print_r</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">,</span><span class="token constant boolean">true</span><span class="token punctuation">)</span>
-				<span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token delimiter important">?></span></span>);<span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-		<span class="token keyword">exit</span><span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
-
-<span class="token delimiter important">?></span></span>
-<span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'fix'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token delimiter important">?></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>js/jquery-latest.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-	<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-		<span class="token delimiter important">?></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>js/jquery-nightly.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-	<span class="token punctuation">}</span>
-<span class="token delimiter important">?></span></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-
-<span class="token keyword">var</span> array_foo <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> postObj <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token literal-property property">list</span> <span class="token operator">:</span> array_foo<span class="token punctuation">,</span>
-  <span class="token literal-property property">testObj</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-             <span class="token literal-property property">nested</span> <span class="token operator">:</span><span class="token punctuation">{</span>
-                       <span class="token literal-property property">nested2</span><span class="token operator">:</span> <span class="token string">"value"</span><span class="token punctuation">,</span>
-                       <span class="token literal-property property">nested3</span><span class="token operator">:</span> <span class="token string">"value"</span>
-                     <span class="token punctuation">}</span>
-           <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-$<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">"mda.php"</span><span class="token punctuation">,</span> postObj<span class="token punctuation">,</span>
-  <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">dta</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token string">"script"</span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mda.phps<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>The source to this file.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>js/jquery-nightly.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>jquery-nightly.js with fix.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>?fix=true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Show this page with the fix applyed.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
-
-Code:
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span>
-var array_foo = [0,1,2,[0,1,2]];
-var postObj = {
-  list : array_foo,
-  testObj: {
-             nested :{
-                       nested2: "value",
-                       nested3: "value"
-                     }
-           }
-};
-
-$.post("mda.php", postObj,
-  function(dta) {
-
-  },
-  "script"
-);
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pre</span><span class="token punctuation">></span></span>
-
-<span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'fix'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token delimiter important">?></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>?fix=true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>Fix it<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-	<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-		<span class="token delimiter important">?></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>?<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>Break it.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-	<span class="token punctuation">}</span>
-<span class="token delimiter important">?></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>Live Test Response<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>res<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span><span class="token value css language-css"><span class="token property">border</span><span class="token punctuation">:</span>2px solid #000<span class="token punctuation">;</span></span><span class="token punctuation">'</span></span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pre</span><span class="token punctuation">></span></span>
-<span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'fix'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-	<span class="token delimiter important">?></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>?fix=true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>(What you're looking at is what it shouldn't look like. Fix it by clicking this link)<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-	<span class="token delimiter important">?></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>?<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>(What you're looking at is what it should look like. Break it by clicking this link)<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token punctuation">}</span>
-<span class="token delimiter important">?></span></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>Solution<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>b</span><span class="token punctuation">></span></span>At line 2871 of the nightly build for 2008-05-15 I changed the param: function.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>b</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span>
-param: function( a , pn, d) {
-	if (!d)
-		d=0;
-
-	var t = typeof(a);
-	// We're at the end of the line so return it.
-	if ((t == 'string' || t == 'number' || t == 'boolean' || t == 'undefined') &amp;&amp; pn)
-		return pn+'='+encodeURIComponent(a);
-
-	var s = [];
-	if ( (a.constructor == Array &amp;&amp; this.name) || a.jquery )
-		// Serialize the form elements
-		jQuery.each( a, function(){
-			s.push( encodeURIComponent(this.name) + "=" + encodeURIComponent( this.value ) );
-		});
-	// Otherwise, assume that it's an object of key/value pairs
-	else
-		for ( var j in a ) {
-			d++;
-			// prevent infinite recursion.  max of 10 levels deep.
-			if (d>10)
-				break;
-			if (!pn)
-				// recurse into siblings. with this as parent.
-				s.push(jQuery.param(a[j], encodeURIComponent(j),d));
-				else
-				// recurse into siblings.
-				s.push(jQuery.param(a[j], pn+"["+encodeURIComponent(j)+"]",d));
-
-		}
-	// Return the resulting serialization
-	return s.join("&amp;").replace(/%20/g, "+");
-}
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pre</span><span class="token punctuation">></span></span></code></pre>
+      <pre class="language-php" tabindex="0"><code class="language-php"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2871/mda.php">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2871/mda.php">Original Format</a>
   </div>
 </h1></div>
         </div>

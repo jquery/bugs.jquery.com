@@ -142,35 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ui.accordion.js
-===================================================================
-<span class="token coord">--- ui.accordion.js	(revision 4906)</span>
-<span class="token coord">+++ ui.accordion.js	(working copy)</span>
-<span class="token coord">@@ -43,7 +43,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	this.options = options = $.extend({}, $.ui.accordion.defaults, options);
-</span><span class="token prefix unchanged"> </span><span class="token line">	this.element = container;
-</span><span class="token prefix unchanged"> </span><span class="token line">	
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	$(container).addClass("ui-accordion");
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	$(container).addClass('ui-accordion-container ui-accordion');
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">	if ( options.navigation ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		var current = $(container).find("a").filter(options.navigationFilter);
-</span></span><span class="token coord">@@ -60,6 +60,9 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	// calculate active if not specified, using the first header
-</span><span class="token prefix unchanged"> </span><span class="token line">	options.headers = $(container).find(options.header);
-</span><span class="token prefix unchanged"> </span><span class="token line">	options.active = findActive(options.headers, options.active);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	
-</span><span class="token prefix inserted">+</span><span class="token line">	// add classNames and spans to headers
-</span><span class="token prefix inserted">+</span><span class="token line">	options.headers.addClass('ui-accordion-link').prepend('&lt;span class="ui-accordion-left">&lt;/span>').append('&lt;span class="ui-accordion-right">&lt;/span>');
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	if ( options.fillSpace ) {
-</span><span class="token prefix unchanged"> </span><span class="token line">		var maxHeight = $(container).parent().height();</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2513/ui.accordion_theme.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2513/ui.accordion_theme.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

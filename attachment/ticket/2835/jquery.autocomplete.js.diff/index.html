@@ -142,56 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery.autocomplete.js</span>
-<span class="token coord">+++ (clipboard)</span>
-<span class="token coord">@@ -317,17 +317,28 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				extraParams[key] = typeof param == "function" ? param() : param;
-</span><span class="token prefix unchanged"> </span><span class="token line">			});
-</span><span class="token prefix unchanged"> </span><span class="token line">			
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">			if (options.cleanUrl){
-</span><span class="token prefix inserted">+</span><span class="token line">				urlParam = options.url + '/' + lastWord(term) + '/' + options.max;
-</span><span class="token prefix inserted">+</span><span class="token line">				for (var key in extraParams){
-</span><span class="token prefix inserted">+</span><span class="token line">					urlParam += '/' + extraParams[key];
-</span><span class="token prefix inserted">+</span><span class="token line">				}
-</span><span class="token prefix inserted">+</span><span class="token line">				dataParam = {};
-</span><span class="token prefix inserted">+</span><span class="token line">			}else{
-</span><span class="token prefix inserted">+</span><span class="token line">				urlParam = options.url;
-</span><span class="token prefix inserted">+</span><span class="token line">				dataParam = $.extend({
-</span><span class="token prefix inserted">+</span><span class="token line">					q: lastWord(term),
-</span><span class="token prefix inserted">+</span><span class="token line">					limit: options.max
-</span><span class="token prefix inserted">+</span><span class="token line">				}, extraParams);
-</span><span class="token prefix inserted">+</span><span class="token line">			}
-</span><span class="token prefix inserted">+</span><span class="token line">			
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			$.ajax({
-</span><span class="token prefix unchanged"> </span><span class="token line">				// try to leverage ajaxQueue plugin to abort previous requests
-</span><span class="token prefix unchanged"> </span><span class="token line">				mode: "abort",
-</span><span class="token prefix unchanged"> </span><span class="token line">				// limit abortion to this input
-</span><span class="token prefix unchanged"> </span><span class="token line">				port: "autocomplete" + input.name,
-</span><span class="token prefix unchanged"> </span><span class="token line">				dataType: options.dataType,
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				url: options.url,
-</span><span class="token prefix deleted">-</span><span class="token line">				data: $.extend({
-</span><span class="token prefix deleted">-</span><span class="token line">					q: lastWord(term),
-</span><span class="token prefix deleted">-</span><span class="token line">					limit: options.max
-</span><span class="token prefix deleted">-</span><span class="token line">				}, extraParams),
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				url: urlParam,
-</span><span class="token prefix inserted">+</span><span class="token line">				data: dataParam,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				success: function(data) {
-</span><span class="token prefix unchanged"> </span><span class="token line">					var parsed = options.parse &amp;&amp; options.parse(data) || parse(data);
-</span><span class="token prefix unchanged"> </span><span class="token line">					cache.add(term, parsed);
-</span></span><span class="token coord">@@ -382,6 +393,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	formatMatch: null,
-</span><span class="token prefix unchanged"> </span><span class="token line">	autoFill: false,
-</span><span class="token prefix unchanged"> </span><span class="token line">	width: 0,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	cleanUrl: false,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	multiple: false,
-</span><span class="token prefix unchanged"> </span><span class="token line">	multipleSeparator: ", ",
-</span><span class="token prefix unchanged"> </span><span class="token line">	highlight: function(value, term) {</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2835/jquery.autocomplete.js.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2835/jquery.autocomplete.js.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

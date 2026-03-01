@@ -142,64 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token literal-property property">Index</span><span class="token operator">:</span> src<span class="token operator">/</span>core<span class="token punctuation">.</span>js
-<span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">===</span><span class="token operator">=</span>
-<span class="token operator">--</span><span class="token operator">-</span> src<span class="token operator">/</span>core<span class="token punctuation">.</span><span class="token function">js</span>	<span class="token punctuation">(</span>revision <span class="token number">6270</span><span class="token punctuation">)</span>
-<span class="token operator">++</span><span class="token operator">+</span> src<span class="token operator">/</span>core<span class="token punctuation">.</span><span class="token function">js</span>	<span class="token punctuation">(</span>working copy<span class="token punctuation">)</span>
-@@ <span class="token operator">-</span><span class="token number">629</span><span class="token punctuation">,</span><span class="token number">6</span> <span class="token operator">+</span><span class="token number">629</span><span class="token punctuation">,</span><span class="token number">8</span> @@
- 
- <span class="token comment">// exclude the following css properties to add px</span>
- <span class="token keyword">var</span>	exclude <span class="token operator">=</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">z-?index|font-?weight|opacity|zoom|line-?height</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">,</span>
-<span class="token operator">+</span>	<span class="token comment">// combined trbl styles which have issues computing all at once</span>
-<span class="token operator">+</span>	combined <span class="token operator">=</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^(margin|padding|border-?(width|style|color))$</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">;</span>
- 	<span class="token comment">// cache defaultView</span>
- 	defaultView <span class="token operator">=</span> document<span class="token punctuation">.</span>defaultView <span class="token operator">||</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
- 	toString <span class="token operator">=</span> <span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>toString<span class="token punctuation">;</span>
-@@ <span class="token operator">-</span><span class="token number">786</span><span class="token punctuation">,</span><span class="token number">7</span> <span class="token operator">+</span><span class="token number">788</span><span class="token punctuation">,</span><span class="token number">7</span> @@
- 	<span class="token punctuation">}</span><span class="token punctuation">,</span>
- 
- 	<span class="token function-variable function">curCSS</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">elem<span class="token punctuation">,</span> name<span class="token punctuation">,</span> force</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-<span class="token operator">-</span>		<span class="token keyword">var</span> ret<span class="token punctuation">,</span> style <span class="token operator">=</span> elem<span class="token punctuation">.</span>style<span class="token punctuation">;</span>
-<span class="token operator">+</span>		<span class="token keyword">var</span> ret<span class="token punctuation">;</span>
- 
- 		<span class="token comment">// We need to handle opacity special in IE</span>
- 		<span class="token keyword">if</span> <span class="token punctuation">(</span> name <span class="token operator">==</span> <span class="token string">"opacity"</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>jQuery<span class="token punctuation">.</span>support<span class="token punctuation">.</span>opacity <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-@@ <span class="token operator">-</span><span class="token number">797</span><span class="token punctuation">,</span><span class="token number">10</span> <span class="token operator">+</span><span class="token number">799</span><span class="token punctuation">,</span><span class="token number">30</span> @@
- 				ret<span class="token punctuation">;</span>
- 		<span class="token punctuation">}</span>
- 
-<span class="token operator">+</span>		<span class="token keyword">if</span> <span class="token punctuation">(</span> name<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span> combined <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-<span class="token operator">+</span>			<span class="token keyword">var</span> prefix <span class="token operator">=</span> name<span class="token punctuation">;</span>
-<span class="token operator">+</span>			<span class="token keyword">var</span> suffix <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
-<span class="token operator">+</span>			<span class="token keyword">if</span> <span class="token punctuation">(</span> name<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^border</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-<span class="token operator">+</span>				<span class="token comment">// Special case, border*Edge not borderEdge*</span>
-<span class="token operator">+</span>				prefix <span class="token operator">=</span> <span class="token string">'border'</span>
-<span class="token operator">+</span>				suffix <span class="token operator">=</span> name<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^border</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span> <span class="token string">''</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">+</span>			<span class="token punctuation">}</span>
-<span class="token operator">+</span>
-<span class="token operator">+</span>			<span class="token keyword">return</span> jQuery<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'Top'</span><span class="token punctuation">,</span> <span class="token string">'Right'</span><span class="token punctuation">,</span> <span class="token string">'Bottom'</span><span class="token punctuation">,</span> <span class="token string">'Left'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">edge</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-<span class="token operator">+</span>				<span class="token keyword">return</span> jQuery<span class="token punctuation">.</span><span class="token function">rawCss</span><span class="token punctuation">(</span> elem<span class="token punctuation">,</span> prefix <span class="token operator">+</span> edge <span class="token operator">+</span> suffix<span class="token punctuation">,</span> force <span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">+</span>			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">+</span>		<span class="token punctuation">}</span>
-<span class="token operator">+</span>
- 		<span class="token comment">// Make sure we're using the right name for getting the float value</span>
- 		<span class="token keyword">if</span> <span class="token punctuation">(</span> name<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">float</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span> <span class="token punctuation">)</span> <span class="token punctuation">)</span>
- 			name <span class="token operator">=</span> styleFloat<span class="token punctuation">;</span>
-<span class="token operator">+</span>		
-<span class="token operator">+</span>		<span class="token keyword">return</span> jQuery<span class="token punctuation">.</span><span class="token function">rawCss</span><span class="token punctuation">(</span> elem<span class="token punctuation">,</span> name<span class="token punctuation">,</span> force <span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">+</span>	<span class="token punctuation">}</span><span class="token punctuation">,</span>
- 
-<span class="token operator">+</span>	<span class="token function-variable function">rawCss</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">elem<span class="token punctuation">,</span> name<span class="token punctuation">,</span> force</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-<span class="token operator">+</span>		<span class="token keyword">var</span> style <span class="token operator">=</span> elem<span class="token punctuation">.</span>style<span class="token punctuation">;</span>
-<span class="token operator">+</span>		
- 		<span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>force <span class="token operator">&amp;&amp;</span> style <span class="token operator">&amp;&amp;</span> style<span class="token punctuation">[</span> name <span class="token punctuation">]</span> <span class="token punctuation">)</span>
- 			ret <span class="token operator">=</span> style<span class="token punctuation">[</span> name <span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/4295/rawCss.js">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/4295/rawCss.js">Original Format</a>
   </div>
 </h1></div>
         </div>

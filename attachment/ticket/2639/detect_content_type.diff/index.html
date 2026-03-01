@@ -142,32 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/ajax.js
-===================================================================
-<span class="token coord">@@ -449,13 +449,14 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		if ( xml &amp;&amp; data.documentElement.tagName == "parsererror" )
-</span><span class="token prefix unchanged"> </span><span class="token line">			throw "parsererror";
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		
-</span><span class="token prefix inserted">+</span><span class="token line">		// If no specific type is given, use Content-Type as a clue
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		// If the type is "script", eval it in global context
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( type == "script" )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( type == "script" || (!type &amp;&amp; (ct == "application/javascript" || ct == "text/javascript" || ct == "text/ecmascript" || ct == "application/ecmascript")))
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			jQuery.globalEval( data );
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Get the JavaScript object, if JSON is used.
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( type == "json" )
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( type == "json" || (!type &amp;&amp; ct == "application/json"))
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			data = eval("(" + data + ")");
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		return data;</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2639/detect_content_type.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2639/detect_content_type.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

@@ -140,54 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: fx.js
-===================================================================
-<span class="token coord">--- fx.js	(revision 5892)</span>
-<span class="token coord">+++ fx.js	(working copy)</span>
-<span class="token coord">@@ -208,9 +208,8 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			easing: fn &amp;&amp; easing || easing &amp;&amp; easing.constructor != Function &amp;&amp; easing
-</span><span class="token prefix unchanged"> </span><span class="token line">		};
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		opt.duration = (opt.duration &amp;&amp; opt.duration.constructor == Number ?
-</span><span class="token prefix deleted">-</span><span class="token line">			opt.duration :
-</span><span class="token prefix deleted">-</span><span class="token line">			jQuery.fx.speeds[opt.duration]) || jQuery.fx.speeds._default;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		opt.duration = typeof opt.duration == 'number' ? opt.duration :
-</span><span class="token prefix inserted">+</span><span class="token line">			jQuery.fx.speeds[opt.duration] || jQuery.fx.speeds._default;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		// Queueing
-</span><span class="token prefix unchanged"> </span><span class="token line">		opt.old = opt.complete;
-</span></span><span class="token coord">@@ -278,7 +277,6 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		this.unit = unit || this.unit || "px";
-</span><span class="token prefix unchanged"> </span><span class="token line">		this.now = this.start;
-</span><span class="token prefix unchanged"> </span><span class="token line">		this.pos = this.state = 0;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		this.update();
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		var self = this;
-</span><span class="token prefix unchanged"> </span><span class="token line">		function t(gotoEnd){
-</span></span><span class="token coord">@@ -289,7 +287,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">		jQuery.timers.push(t);
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( jQuery.timerId == null ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( t() &amp;&amp; jQuery.timerId == null ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			jQuery.timerId = setInterval(function(){
-</span><span class="token prefix unchanged"> </span><span class="token line">				var timers = jQuery.timers;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token coord">@@ -337,7 +335,7 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	step: function(gotoEnd){
-</span><span class="token prefix unchanged"> </span><span class="token line">		var t = now();
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">		if ( gotoEnd || t > this.options.duration + this.startTime ) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		if ( gotoEnd || t >= this.options.duration + this.startTime ) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			this.now = this.end;
-</span><span class="token prefix unchanged"> </span><span class="token line">			this.pos = this.state = 1;
-</span><span class="token prefix unchanged"> </span><span class="token line">			this.update();</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/3495/sync-fx[5892].diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/3495/sync-fx[5892].diff">Original Format</a>
   </div>
 </h1></div>
         </div>

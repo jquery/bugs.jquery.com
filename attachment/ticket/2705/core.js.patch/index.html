@@ -140,31 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch">=== core.js
-==================================================================
---- core.js	(revision 31515)
-+++ core.js	(local)
-@@ -651,7 +651,14 @@
- 				script.appendChild( document.createTextNode( data ) );
- 
- 			head.appendChild( script );
--			head.removeChild( script );
-+            try {
-+                head.removeChild( script );
-+            } catch ( error ) {
-+                setTimeout( function() {
-+                    var head = document.getElementsByTagName("head")[0] || document.documentElement;
-+                    head.removeChild( script );
-+                }, 0);
-+            }
- 		}
- 	},</code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2705/core.js.patch">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2705/core.js.patch">Original Format</a>
   </div>
 </h1></div>
         </div>

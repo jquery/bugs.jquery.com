@@ -140,40 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt">*** C:/Users/Charlie/Desktop/jquery-jquery-efe51cd/src/manipulation-src.js	Sat Jul 10 22:54:53 2010
---- C:/Users/Charlie/Desktop/jquery-jquery-efe51cd/src/manipulation.js	Sat Jul 10 22:55:15 2010
-***************
-*** 6,11 ****
---- 6,12 ----
-  	rtbody = /&lt;tbody/i,
-  	rhtml = /&lt;|&amp;#?\w+;/,
-  	rnocache = /&lt;script|&lt;object|&lt;embed|&lt;option|&lt;style/i,
-+ 	rnoInnerhtml = /&lt;script|&lt;style/i,
-  	rchecked = /checked\s*(?:[^=]|=\s*.checked.)/i,  // checked="checked" or checked (html5)
-  	fcloseTag = function( all, front, tag ) {
-  		return rselfClosing.test( tag ) ?
-***************
-*** 229,235 ****
-  				null;
-  
-  		// See if we can take a shortcut and just use innerHTML
-! 		} else if ( typeof value === "string" &amp;&amp; !rnocache.test( value ) &amp;&amp;
-  			(jQuery.support.leadingWhitespace || !rleadingWhitespace.test( value )) &amp;&amp;
-  			!wrapMap[ (rtagName.exec( value ) || ["", ""])[1].toLowerCase() ] ) {
-  
---- 230,236 ----
-  				null;
-  
-  		// See if we can take a shortcut and just use innerHTML
-! 		} else if ( typeof value === "string" &amp;&amp; !rnoInnerhtml.test( value ) &amp;&amp;
-  			(jQuery.support.leadingWhitespace || !rleadingWhitespace.test( value )) &amp;&amp;
-  			!wrapMap[ (rtagName.exec( value ) || ["", ""])[1].toLowerCase() ] ) {</code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/6782/html_innerhtml_patch.txt">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/6782/html_innerhtml_patch.txt">Original Format</a>
   </div>
 </h1></div>
         </div>

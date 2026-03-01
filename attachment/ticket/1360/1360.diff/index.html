@@ -140,49 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event.js
-===================================================================
-<span class="token coord">--- src/event.js	(revision 4191)</span>
-<span class="token coord">+++ src/event.js	(working copy)</span>
-<span class="token coord">@@ -406,6 +406,32 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				arguments[0].type = "mouseleave";
-</span><span class="token prefix unchanged"> </span><span class="token line">				return jQuery.event.handle.apply(this, arguments);
-</span><span class="token prefix unchanged"> </span><span class="token line">			}
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">		},
-</span><span class="token prefix inserted">+</span><span class="token line">		
-</span><span class="token prefix inserted">+</span><span class="token line">		change: {
-</span><span class="token prefix inserted">+</span><span class="token line">			setup: function() {
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( (jQuery.browser.msie &amp;&amp; (this.type == "radio" || this.type == "checkbox")) ||
-</span><span class="token prefix inserted">+</span><span class="token line">				 		(jQuery.browser.safari &amp;&amp; this.type == "radio") ) {
-</span><span class="token prefix inserted">+</span><span class="token line">					jQuery(this).bind( this.type == "radio" ? "focus" : "click", jQuery.event.special.change.handler);
-</span><span class="token prefix inserted">+</span><span class="token line">					return true;
-</span><span class="token prefix inserted">+</span><span class="token line">				} 
-</span><span class="token prefix inserted">+</span><span class="token line">				return false;
-</span><span class="token prefix inserted">+</span><span class="token line">			},
-</span><span class="token prefix inserted">+</span><span class="token line">			
-</span><span class="token prefix inserted">+</span><span class="token line">			teardown: function() {
-</span><span class="token prefix inserted">+</span><span class="token line">				if ( (jQuery.browser.msie &amp;&amp; (this.type == "radio" || this.type == "checkbox")) ||
-</span><span class="token prefix inserted">+</span><span class="token line">				 		(jQuery.browser.safari &amp;&amp; this.type == "radio") ) {
-</span><span class="token prefix inserted">+</span><span class="token line">					jQuery(this).unbind( this.type == "radio" ? "focus" : "click", jQuery.event.special.change.handler);
-</span><span class="token prefix inserted">+</span><span class="token line">					return true;
-</span><span class="token prefix inserted">+</span><span class="token line">				}
-</span><span class="token prefix inserted">+</span><span class="token line">				return false;
-</span><span class="token prefix inserted">+</span><span class="token line">			},
-</span><span class="token prefix inserted">+</span><span class="token line">			
-</span><span class="token prefix inserted">+</span><span class="token line">			handler: function() {
-</span><span class="token prefix inserted">+</span><span class="token line">				// Execute the correct heandlers by setting the event type to change
-</span><span class="token prefix inserted">+</span><span class="token line">				arguments[0].type = "change";
-</span><span class="token prefix inserted">+</span><span class="token line">				return jQuery.event.handle.apply(this, arguments); 
-</span><span class="token prefix inserted">+</span><span class="token line">			}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">	}
-</span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/1360/1360.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/1360/1360.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

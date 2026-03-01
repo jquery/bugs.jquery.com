@@ -140,38 +140,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">diff --git a/ui.sortable.js b/ui.sortable.js
-index 9288a57..c93fcb7 100644
-<span class="token coord">--- a/ui.sortable.js</span>
-<span class="token coord">+++ b/ui.sortable.js</span>
-<span class="token coord">@@ -76,10 +76,10 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				if(this.disabled || this.options.type == 'static') return false;
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">				//Find out if the clicked node (or one of its parents) is a actual item in this.items
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				var currentItem = null, nodes = $(e.target).parents().andSelf().each(function() {
-</span><span class="token prefix deleted">-</span><span class="token line">					if($.data(this, 'ui-sortable-item')) currentItem = $(this);
-</span><span class="token prefix deleted">-</span><span class="token line">				});
-</span><span class="token prefix deleted">-</span><span class="token line">				if(currentItem &amp;&amp; (!this.options.handle || $(e.target).parents().andSelf().is(this.options.handle))) {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				var currentItem = $(e.target).add($(e.target).parents()).filter(function() {
-</span><span class="token prefix inserted">+</span><span class="token line">					return $.data(this, 'ui-sortable-item');
-</span><span class="token prefix inserted">+</span><span class="token line">				}).slice(0,1);
-</span><span class="token prefix inserted">+</span><span class="token line">				if(currentItem.length &amp;&amp; (!this.options.handle || $(e.target).parents().andSelf().is(this.options.handle))) {
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">					this.currentItem = currentItem;
-</span><span class="token prefix unchanged"> </span><span class="token line">					return true;
-</span><span class="token prefix unchanged"> </span><span class="token line">				} else return false; 
-</span></span><span class="token coord">@@ -447,4 +447,4 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}
-</span><span class="token prefix unchanged"> </span><span class="token line">	});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">})(jQuery);
-</span></span>\ No newline at end of file
-<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">})(jQuery);</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2492/nested_sortable.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2492/nested_sortable.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

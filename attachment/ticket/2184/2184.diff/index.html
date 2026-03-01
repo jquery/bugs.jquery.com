@@ -142,59 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/core.js
-===================================================================
-<span class="token coord">--- test/unit/core.js	(revision 4476)</span>
-<span class="token coord">+++ test/unit/core.js	(working copy)</span>
-<span class="token coord">@@ -955,11 +955,23 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">});
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">test("clone()", function() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	expect(4);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	expect(20);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	ok( 'This is a normal link: Yahoo' == $('#en').text(), 'Assert text for #en' );
-</span><span class="token prefix unchanged"> </span><span class="token line">	var clone = $('#yahoo').clone();
-</span><span class="token prefix unchanged"> </span><span class="token line">	ok( 'Try them out:Yahoo' == $('#first').append(clone).text(), 'Check for clone' );
-</span><span class="token prefix unchanged"> </span><span class="token line">	ok( 'This is a normal link: Yahoo' == $('#en').text(), 'Reassert text for #en' );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line">	var cloneTags = [ 
-</span><span class="token prefix inserted">+</span><span class="token line">		"&lt;table/>", "&lt;tr/>", "&lt;td/>", "&lt;div/>", 
-</span><span class="token prefix inserted">+</span><span class="token line">		"&lt;button/>", "&lt;ul/>", "&lt;ol/>", "&lt;li/>",
-</span><span class="token prefix inserted">+</span><span class="token line">		"&lt;input type='checkbox' />", "&lt;select/>", "&lt;option/>", "&lt;textarea/>",
-</span><span class="token prefix inserted">+</span><span class="token line">		"&lt;tbody/>", "&lt;thead/>", "&lt;tfoot/>", "&lt;iframe/>"
-</span><span class="token prefix inserted">+</span><span class="token line">	];
-</span><span class="token prefix inserted">+</span><span class="token line">	for (var i = 0; i &lt; cloneTags.length; i++) {
-</span><span class="token prefix inserted">+</span><span class="token line">		var j = $(cloneTags[i]);
-</span><span class="token prefix inserted">+</span><span class="token line">		equals( j[0].tagName, j.clone()[0].tagName, 'Clone a &amp;lt;' + cloneTags[i].substring(1));
-</span><span class="token prefix inserted">+</span><span class="token line">	}
-</span><span class="token prefix inserted">+</span><span class="token line">
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	// using contents will get comments regular, text, and comment nodes
-</span><span class="token prefix unchanged"> </span><span class="token line">	var cl = $("#nonnodes").contents().clone();
-</span><span class="token prefix unchanged"> </span><span class="token line">	ok( cl.length >= 2, "Check node,textnode,comment clone works (some browsers delete comments on clone)" );
-</span></span>Index: src/core.js
-===================================================================
-<span class="token coord">--- src/core.js	(revision 4476)</span>
-<span class="token coord">+++ src/core.js	(working copy)</span>
-<span class="token coord">@@ -303,11 +303,9 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				// as properties will not be copied (such as the
-</span><span class="token prefix unchanged"> </span><span class="token line">				// the name attribute on an input).
-</span><span class="token prefix unchanged"> </span><span class="token line">				var clone = this.cloneNode(true),
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">					container = document.createElement("div"),
-</span><span class="token prefix deleted">-</span><span class="token line">					container2 = document.createElement("div");
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">					container = document.createElement("div");
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">				container.appendChild(clone);
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">				container2.innerHTML = container.innerHTML;
-</span><span class="token prefix deleted">-</span><span class="token line">				return container2.firstChild;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">				return jQuery.clean([container.innerHTML])[0];
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">			} else
-</span><span class="token prefix unchanged"> </span><span class="token line">				return this.cloneNode(true);
-</span><span class="token prefix unchanged"> </span><span class="token line">		});</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/2184/2184.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/2184/2184.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

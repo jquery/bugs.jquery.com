@@ -142,41 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">954a955</span>
-<span class="token inserted-arrow inserted"><span class="token prefix inserted">></span><span class="token line"> 		var oel = el;
-</span></span><span class="token coord">957,959c958,975</span>
-<span class="token deleted-arrow deleted"><span class="token prefix deleted">&lt;</span><span class="token line"> 		var isSupported = (eventName in el); 
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 		if ( !isSupported ) { 
-</span><span class="token prefix deleted">&lt;</span><span class="token line"> 			el.setAttribute(eventName, "return;"); 
-</span></span><span class="token coord">---</span>
-<span class="token inserted-arrow inserted"><span class="token prefix inserted">></span><span class="token line"> 		var isSupported = true;
-</span><span class="token prefix inserted">></span><span class="token line"> 		var isSafe = true;
-</span><span class="token prefix inserted">></span><span class="token line"> 		if ( typeof el.wrappedJSObject == 'object' ) {
-</span><span class="token prefix inserted">></span><span class="token line"> 			// Detected Firefox with Greasemonkey (or other protected addon)
-</span><span class="token prefix inserted">></span><span class="token line"> 			if ( typeof el.wrappedJSObject.__lookupGetter__(eventName) !== 'undefined' || 
-</span><span class="token prefix inserted">></span><span class="token line"> 			     typeof el.wrappedJSObject.__lookupSetter__(eventName) !== 'undefined' ) {
-</span><span class="token prefix inserted">></span><span class="token line"> 				// A custom getter was detected. It can be:
-</span><span class="token prefix inserted">></span><span class="token line"> 				// 1) Attemt to inject unsafe code into previleged scope with __define[GS]etter__
-</span><span class="token prefix inserted">></span><span class="token line"> 				// 2) Page script authors knows what they do. So we only SUPPOSE that isSupported = true (most probably)
-</span><span class="token prefix inserted">></span><span class="token line"> 				// It is unsafe to access a property with the custom getter
-</span><span class="token prefix inserted">></span><span class="token line"> 				isSafe = false;
-</span><span class="token prefix inserted">></span><span class="token line"> 			} else {
-</span><span class="token prefix inserted">></span><span class="token line"> 				el = el.wrappedJSObject;
-</span><span class="token prefix inserted">></span><span class="token line"> 			}
-</span><span class="token prefix inserted">></span><span class="token line"> 		}
-</span><span class="token prefix inserted">></span><span class="token line"> 
-</span><span class="token prefix inserted">></span><span class="token line"> 		if ( isSafe &amp;&amp; !(eventName in el) ) {
-</span><span class="token prefix inserted">></span><span class="token line"> 			oel.setAttribute(eventName, "return;");
-</span></span><span class="token coord">962c978</span>
-<span class="token deleted-arrow deleted"><span class="token prefix deleted">&lt;</span><span class="token line"> 		el = null; 
-</span></span><span class="token coord">---</span>
-<span class="token inserted-arrow inserted"><span class="token prefix inserted">></span><span class="token line"> 		oel = el = null;</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/5833/jquery-1.4.2.js.GMfix.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/5833/jquery-1.4.2.js.GMfix.diff">Original Format</a>
   </div>
 </h1></div>
         </div>

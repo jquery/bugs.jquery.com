@@ -142,29 +142,13 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event/event.js
-===================================================================
-<span class="token coord">--- src/event/event.js	(revision 1423)</span>
-<span class="token coord">+++ src/event/event.js	(working copy)</span>
-<span class="token coord">@@ -910,7 +910,12 @@</span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">		}, 10); 
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">	// A fallback to window.onload, that will always work
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">	jQuery.event.add( window, "load", jQuery.ready );
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">	window.oldLoad = window.oldLoad;
-</span><span class="token prefix inserted">+</span><span class="token line">	window.onload = function(event) {
-</span><span class="token prefix inserted">+</span><span class="token line">		jQuery.ready();
-</span><span class="token prefix inserted">+</span><span class="token line">		window.oldLoad(event);
-</span><span class="token prefix inserted">+</span><span class="token line">		window.oldLoad = null;
-</span><span class="token prefix inserted">+</span><span class="token line">	}
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">	
-</span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
     </div>
   
 
   <div class="attachment-download flex-column flex-center">
     <h3>Download in other formats:</h3>
-    <a class="attachment-download-link" download="" href="/raw-attachment/ticket/999/dot_net_fix_Rev1423.diff">Original Format</a>
+    <a class="attachment-download-link" download href="/raw-attachment/ticket/999/dot_net_fix_Rev1423.diff">Original Format</a>
   </div>
 </h1></div>
         </div>
