@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,24 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/support.js
+===================================================================
+<span class="token coord">--- jquery/src/support.js	(revision 6169)</span>
+<span class="token coord">+++ jquery/src/support.js	(working copy)</span>
+<span class="token coord">@@ -88,12 +88,11 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	// document.body must exist before we can do this
+<span class="token prefix unchanged"> </span>	jQuery(function(){
+<span class="token prefix unchanged"> </span>		var div = document.createElement("div");
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		div.style.width = "1px";
+<span class="token prefix deleted">-</span>		div.style.paddingLeft = "1px";
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		div.style.width = div.style.paddingLeft = "1px";
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		document.body.appendChild( div );
+<span class="token prefix unchanged"> </span>		jQuery.boxModel = jQuery.support.boxModel = div.offsetWidth === 2;
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		document.body.removeChild( div );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		document.body.removeChild( div ).style.display = 'none';
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	});
+<span class="token prefix unchanged"> </span>})();</span></code></pre>
     </div>
   
 

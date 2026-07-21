@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,78 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/core.js
+===================================================================
+<span class="token coord">--- test/unit/core.js	(revision 6090)</span>
+<span class="token coord">+++ test/unit/core.js	(working copy)</span>
+<span class="token coord">@@ -1574,7 +1574,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("toggleClass(String)", function() {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	expect(6);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	expect(16);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	var e = jQuery("#firstp");
+<span class="token prefix unchanged"> </span>	ok( !e.is(".test"), "Assert class not present" );
+<span class="token prefix unchanged"> </span>	e.toggleClass("test");
+</span><span class="token coord">@@ -1588,6 +1588,33 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	ok( e.is(".test"), "Assert class present" );
+<span class="token prefix unchanged"> </span>	e.toggleClass("test", false);
+<span class="token prefix unchanged"> </span>	ok( !e.is(".test"), "Assert class not present" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	e.addClass("testA testB");
+<span class="token prefix inserted">+</span>	ok( (e.is(".testA") &amp;&amp; e.is(".testB")), "Assert 2 different classes present" );
+<span class="token prefix inserted">+</span>	e.toggleClass("testB testC");
+<span class="token prefix inserted">+</span>	ok( (e.is(".testA") &amp;&amp; !e.is(".testB") &amp;&amp; e.is(".testC")), "Assert 1 class added, 1 class removed and 1 class keeped" );
+<span class="token prefix inserted">+</span>	e.toggleClass("testA testC");
+<span class="token prefix inserted">+</span>	ok( (!e.is(".testA") &amp;&amp; !e.is(".testB") &amp;&amp; !e.is(".testC")), "Assert no class present" );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	// toggleClass storage
+<span class="token prefix inserted">+</span>	e.toggleClass(true);
+<span class="token prefix inserted">+</span>	ok( e.get(0).className === '', "Assert class is empty (data was empty)" );
+<span class="token prefix inserted">+</span>	e.addClass("testD");
+<span class="token prefix inserted">+</span>	ok( e.is(".testD"), "Assert class present" );
+<span class="token prefix inserted">+</span>	e.toggleClass();
+<span class="token prefix inserted">+</span>	ok( !e.is(".testD"), "Assert class not present" );
+<span class="token prefix inserted">+</span>	ok( e.data('originalClassName') == 'testD', "Assert data was stored" );
+<span class="token prefix inserted">+</span>	e.toggleClass();
+<span class="token prefix inserted">+</span>	ok( e.is(".testD"), "Assert class present (restored from data)" );
+<span class="token prefix inserted">+</span>	e.toggleClass(false);
+<span class="token prefix inserted">+</span>	ok( !e.is(".testD"), "Assert class not present" );
+<span class="token prefix inserted">+</span>	e.toggleClass(true);
+<span class="token prefix inserted">+</span>	ok( e.is(".testD"), "Assert class present (restored from data)" );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	// Cleanup
+<span class="token prefix inserted">+</span>	e.removeClass("testD");
+<span class="token prefix inserted">+</span>	e.removeData('originalClassName')
+<span class="token prefix inserted">+</span>	
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("removeAttr(String", function() {
+</span>Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 6090)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -1202,9 +1202,17 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	toggleClass: function( classNames, state ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if( typeof state !== "boolean" )
+<span class="token prefix deleted">-</span>			state = !jQuery.className.has( this, classNames );
+<span class="token prefix deleted">-</span>		jQuery.className[ state ? "add" : "remove" ]( this, classNames );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if(!classNames || typeof classNames === "boolean") {
+<span class="token prefix inserted">+</span>			if( !(classNames = jQuery.data(this, 'originalClassName')) &amp;&amp; !this.className ) return;
+<span class="token prefix inserted">+</span>			state = this.className ? !(jQuery.data(this, 'originalClassName', classNames = this.className)) : true;
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>		var elem = this;
+<span class="token prefix inserted">+</span>		jQuery.each((classNames || "").split(/\s+/), function(i, className){
+<span class="token prefix inserted">+</span>			var force = ( typeof state !== "boolean" ) ?
+<span class="token prefix inserted">+</span>					!jQuery.className.has( elem, className ) :
+<span class="token prefix inserted">+</span>					state;
+<span class="token prefix inserted">+</span>			jQuery.className[ force ? "add" : "remove" ]( elem, className );
+<span class="token prefix inserted">+</span>		});
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	remove: function( selector ) {</span></code></pre>
     </div>
   
 

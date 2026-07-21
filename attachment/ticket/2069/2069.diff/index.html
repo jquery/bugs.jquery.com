@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,76 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/event.js
+===================================================================
+<span class="token coord">--- test/unit/event.js	(revision 4206)</span>
+<span class="token coord">+++ test/unit/event.js	(working copy)</span>
+<span class="token coord">@@ -1,5 +1,16 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>module("event");
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>test("jQuery(function($) {})", function() {
+<span class="token prefix inserted">+</span>	expect(1);
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	stop();
+<span class="token prefix inserted">+</span>	// ready doesn't provide an event object, instead it provides a reference to the jQuery function, see http://docs.jquery.com/Events/ready#fn
+<span class="token prefix inserted">+</span>	jQuery(function($) {
+<span class="token prefix inserted">+</span>		ok(jQuery == $, "Check the ready function parameter is the jQuery object");
+<span class="token prefix inserted">+</span>		start();
+<span class="token prefix inserted">+</span>	});
+<span class="token prefix inserted">+</span>});
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>test("bind()", function() {
+<span class="token prefix unchanged"> </span>	expect(18);
+<span class="token prefix unchanged"> </span>
+</span>Index: src/event.js
+===================================================================
+<span class="token coord">--- src/event.js	(revision 4206)</span>
+<span class="token coord">+++ src/event.js	(working copy)</span>
+<span class="token coord">@@ -62,6 +62,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				type = parts[0];
+<span class="token prefix unchanged"> </span>				handler.type = parts[1];
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				if ( type == "ready" &amp;&amp; jQuery.isReady ) {
+<span class="token prefix inserted">+</span>					handler.call(elem, jQuery);
+<span class="token prefix inserted">+</span>					return;
+<span class="token prefix inserted">+</span>				}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				// Get the current list of functions bound to this event
+<span class="token prefix unchanged"> </span>				var handlers = events[type];
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -242,7 +246,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Filter the functions by class
+<span class="token prefix unchanged"> </span>			if ( !parts[1] || handler.type == parts[1] ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				var ret = handler.apply( this, args );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				// Special case the "ready" type to remove the event and pass only the jQuery object
+<span class="token prefix inserted">+</span>				var ret = ( event.type == "ready" ) ? 
+<span class="token prefix inserted">+</span>					handler.apply( this, Array.prototype.slice.call(args, 1) ) : 
+<span class="token prefix inserted">+</span>					handler.apply( this, args );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				if ( val !== false )
+<span class="token prefix unchanged"> </span>					val = ret;
+</span><span class="token coord">@@ -351,14 +358,19 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				jQuery.event.add( window, "load", handler );
+<span class="token prefix unchanged"> </span>			},
+<span class="token prefix unchanged"> </span>			
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			teardown: function() {return;},
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			teardown: function() {
+<span class="token prefix inserted">+</span>				var handler = jQuery.event.special.ready.handler;
+<span class="token prefix inserted">+</span>				if ( document.removeEventListener )
+<span class="token prefix inserted">+</span>					document.removeEventListener( "DOMContentLoaded", handler, false );
+<span class="token prefix inserted">+</span>				jQuery.event.remove( window, "load", handler );
+<span class="token prefix inserted">+</span>			},
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			
+<span class="token prefix unchanged"> </span>			handler: function() {
+<span class="token prefix unchanged"> </span>				// Make sure that the DOM is not already loaded
+<span class="token prefix unchanged"> </span>				if ( !jQuery.isReady ) {
+<span class="token prefix unchanged"> </span>					// Remember that the DOM is ready
+<span class="token prefix unchanged"> </span>					jQuery.isReady = true;
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					jQuery(document).triggerHandler("ready");
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					jQuery(document).triggerHandler("ready", [ jQuery ]);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					jQuery(document).unbind("ready");
+<span class="token prefix unchanged"> </span>				}
+<span class="token prefix unchanged"> </span>			}</span></code></pre>
     </div>
   
 

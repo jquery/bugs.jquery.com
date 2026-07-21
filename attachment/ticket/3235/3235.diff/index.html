@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,31 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/ajax.js
+===================================================================
+<span class="token coord">--- jquery/src/ajax.js	(revision 5830)</span>
+<span class="token coord">+++ jquery/src/ajax.js	(working copy)</span>
+<span class="token coord">@@ -283,11 +283,16 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Open the socket
+<span class="token prefix unchanged"> </span>		// Passing null username, generates a login popup on Opera (#2865)
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if( s.username )
+<span class="token prefix deleted">-</span>			xhr.open(type, s.url, s.async, s.username, s.password);
+<span class="token prefix deleted">-</span>		else
+<span class="token prefix deleted">-</span>			xhr.open(type, s.url, s.async);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		try {
+<span class="token prefix inserted">+</span>			if( s.username )
+<span class="token prefix inserted">+</span>				xhr.open(type, s.url, s.async, s.username, s.password);
+<span class="token prefix inserted">+</span>			else
+<span class="token prefix inserted">+</span>				xhr.open(type, s.url, s.async);
+<span class="token prefix inserted">+</span>		} catch (e) {
+<span class="token prefix inserted">+</span>			return jQuery.handleError(s, xhr, "error", e);
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		// Need an extra try/catch for cross domain requests in Firefox 3
+<span class="token prefix unchanged"> </span>		try {
+<span class="token prefix unchanged"> </span>			// Set the correct header, if data is being sent</span></code></pre>
     </div>
   
 

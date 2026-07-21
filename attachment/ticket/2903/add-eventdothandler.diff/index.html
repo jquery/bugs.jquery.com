@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,20 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery.fastTrigger.js
+===================================================================
+<span class="token coord">--- jquery.fastTrigger.js	(revision 5641)</span>
+<span class="token coord">+++ jquery.fastTrigger.js	(working copy)</span>
+<span class="token coord">@@ -57,7 +57,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				for( var i in handlers ){
+<span class="token prefix unchanged"> </span>					handler = handlers[i];
+<span class="token prefix unchanged"> </span>					if(	any || handler.type == ns ){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>						e.data = handler.data;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>						e.data = handler.data;
+<span class="token prefix inserted">+</span>						e.handler = handler;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>						if( args )//call is slightly faster, thus preferred
+<span class="token prefix unchanged"> </span>							handler.apply( this, args );
+<span class="token prefix unchanged"> </span>						else</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,43 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/core.js
+===================================================================
+<span class="token coord">--- test/unit/core.js	(revision 5788)</span>
+<span class="token coord">+++ test/unit/core.js	(working copy)</span>
+<span class="token coord">@@ -258,7 +258,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("add(String|Element|Array|undefined)", function() {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	expect(12);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	expect(13);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	isSet( jQuery("#sndp").add("#en").add("#sap").get(), q("sndp", "en", "sap"), "Check elements from document" );
+<span class="token prefix unchanged"> </span>	isSet( jQuery("#sndp").add( jQuery("#en")[0] ).add( jQuery("#sap") ).get(), q("sndp", "en", "sap"), "Check elements from document" );
+<span class="token prefix unchanged"> </span>	ok( jQuery([]).add(jQuery("#form")[0].elements).length >= 13, "Check elements from array" );
+</span><span class="token coord">@@ -266,6 +266,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	// For the time being, we're discontinuing support for jQuery(form.elements) since it's ambiguous in IE
+<span class="token prefix unchanged"> </span>	// use jQuery([]).add(form.elements) instead.
+<span class="token prefix unchanged"> </span>	//equals( jQuery([]).add(jQuery("#form")[0].elements).length, jQuery(jQuery("#form")[0].elements).length, "Array in constructor must equals array in add()" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	equals( jQuery([]).add(jQuery("#splitform")[0].elements).length, 2, "should be jQuery object with two elements, but is jQuery object with array with two elements" );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	var x = jQuery([]).add(jQuery("&lt;p id='x1'>xxx&lt;/p>")).add(jQuery("&lt;p id='x2'>xxx&lt;/p>"));
+<span class="token prefix unchanged"> </span>	equals( x[0].id, "x1", "Check on-the-fly element1" );
+</span>Index: test/index.html
+===================================================================
+<span class="token coord">--- test/index.html	(revision 5788)</span>
+<span class="token coord">+++ test/index.html	(working copy)</span>
+<span class="token coord">@@ -51,6 +51,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		&lt;p id="first">Try them out:&lt;/p>
+<span class="token prefix unchanged"> </span>		&lt;ul id="firstUL">&lt;/ul>
+<span class="token prefix unchanged"> </span>		&lt;ol id="empty">&lt;/ol>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		&lt;form id="splitform">
+<span class="token prefix inserted">+</span>			&lt;input name="split" id="split1" />
+<span class="token prefix inserted">+</span>			&lt;input name="xxx" id="split1" />
+<span class="token prefix inserted">+</span>		&lt;/form>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		&lt;form id="form" action="formaction">
+<span class="token prefix unchanged"> </span>			&lt;input type="text" name="action" value="Test" id="text1" maxlength="30"/>
+<span class="token prefix unchanged"> </span>			&lt;input type="text" name="text2" value="Test" id="text2" disabled="disabled"/></span></code></pre>
     </div>
   
 

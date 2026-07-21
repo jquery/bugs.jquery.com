@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,77 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 6000)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -1117,8 +1117,17 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		return elem[ name ];
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	// Trim function by Ariel Flesler
+<span class="token prefix inserted">+</span>	// http://flesler.blogspot.com/2008/11/fast-trim-function-for-javascript.html
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	trim: function( text ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		return (text || "").replace( /^\s+|\s+$/g, "" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if( !text )
+<span class="token prefix inserted">+</span>			return "";
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		var start = -1,
+<span class="token prefix inserted">+</span>			end = text.length;
+<span class="token prefix inserted">+</span>		while( text.charCodeAt(--end) &lt; 33 );
+<span class="token prefix inserted">+</span>		while( text.charCodeAt(++start) &lt; 33 );
+<span class="token prefix inserted">+</span>		return text.slice( start, end + 1 );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	makeArray: function( array ) {
+</span><span class="token coord">@@ -1126,7 +1135,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		if( array != null ){
+<span class="token prefix unchanged"> </span>			var i = array.length;
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			// The window, strings (and functions) also have 'length'
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			// The window, strings and functions also have 'length'
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			if( i == null || typeof array === "string" || jQuery.isFunction(array) || array.setInterval )
+<span class="token prefix unchanged"> </span>				ret[0] = array;
+<span class="token prefix unchanged"> </span>			else
+</span>Index: test/unit/core.js
+===================================================================
+<span class="token coord">--- test/unit/core.js	(revision 6000)</span>
+<span class="token coord">+++ test/unit/core.js	(working copy)</span>
+<span class="token coord">@@ -1795,7 +1795,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	equals( c[0].nodeValue, "hi", "Check node,textnode,comment contents is just the one from span" );
+<span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>test("jQuery.makeArray", function(){
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>test("makeArray()", function(){
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	expect(15);
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	equals( jQuery.makeArray(jQuery('html>*'))[0].nodeName, "HEAD", "Pass makeArray a jQuery object" );
+</span><span class="token coord">@@ -1830,3 +1830,24 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	ok( jQuery.makeArray(document.getElementById('form')).length >= 13, "Pass makeArray a form (treat as elements)" );
+<span class="token prefix unchanged"> </span>});
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>test("trim()", function(){
+<span class="token prefix inserted">+</span>	expect( 10 );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	var parse = jQuery.trim;
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	equals( parse(""), "", "Empty String" );
+<span class="token prefix inserted">+</span>	equals( parse("  "), "", "Empty, with spaces" );
+<span class="token prefix inserted">+</span>	equals( parse(" \n\t\r  "), "", "Empty, with new lines, tabs, etc" );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	equals( parse("abc"), "abc", "No spaces" );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	equals( parse("abc  "), "abc", "Trailing spaces" );
+<span class="token prefix inserted">+</span>	equals( parse("abc \n\t\r  "), "abc", "Trailing new lines, tabs, etc" );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	equals( parse("  abc"), "abc", "Leading spaces" );
+<span class="token prefix inserted">+</span>	equals( parse(" \n\t\r abc"), "abc", "Leading new lines, tabs, etc" );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	equals( parse("  abc  "), "abc", "Both leading and trailing spaces" );
+<span class="token prefix inserted">+</span>	equals( parse(" \n\t\r abc \n\t\r "), "abc", "Both leading and trailing new lines, tabs, etc" );
+<span class="token prefix inserted">+</span>});
+</span>\ No newline at end of file</code></pre>
     </div>
   
 

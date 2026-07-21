@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,37 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery-1.4.2.js	2010-02-14 03:35:05.000000000 +0000</span>
+<span class="token coord">+++ jquery-1.4.2-gm.js	2010-05-26 22:20:50.000000000 +0100</span>
+<span class="token coord">@@ -950,18 +950,21 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Technique from Juriy Zaytsev
+<span class="token prefix unchanged"> </span>	// http://thinkweb2.com/projects/prototype/detecting-event-support-without-browser-sniffing/
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	// Test doesn't work in Greasemonkey due to security sandbox
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	var eventSupported = function( eventName ) { 
+<span class="token prefix unchanged"> </span>		var el = document.createElement("div"); 
+<span class="token prefix unchanged"> </span>		eventName = "on" + eventName; 
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var isSupported = (eventName in el); 
+<span class="token prefix deleted">-</span>		if ( !isSupported ) { 
+<span class="token prefix deleted">-</span>			el.setAttribute(eventName, "return;"); 
+<span class="token prefix deleted">-</span>			isSupported = typeof el[eventName] === "function"; 
+<span class="token prefix deleted">-</span>		} 
+<span class="token prefix deleted">-</span>		el = null; 
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>    try{
+<span class="token prefix inserted">+</span>  		var isSupported = (eventName in el); 
+<span class="token prefix inserted">+</span>  		if ( !isSupported ) { 
+<span class="token prefix inserted">+</span>  			el.setAttribute(eventName, "return;"); 
+<span class="token prefix inserted">+</span>  			isSupported = typeof el[eventName] === "function"; 
+<span class="token prefix inserted">+</span>  		} 
+<span class="token prefix inserted">+</span>  		el = null; 
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		return isSupported; 
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>  		return isSupported; 
+<span class="token prefix inserted">+</span>	  } catch(Exception) {}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	};
+<span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	jQuery.support.submitBubbles = eventSupported("submit");</span></code></pre>
     </div>
   
 

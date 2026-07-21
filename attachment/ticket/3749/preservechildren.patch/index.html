@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,25 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: core.js
+===================================================================
+--- core.js	(revision 5998)
++++ core.js	(working copy)
+@@ -1284,8 +1284,13 @@
+ 		jQuery.className[ jQuery.className.has( this, classNames ) ? "remove" : "add" ]( this, classNames );
+ 	},
+ 
+-	remove: function( selector ) {
++	remove: function( selector, preserveChildren ) {
+ 		if ( !selector || jQuery.filter( selector, [ this ] ).length ) {
++			if ( this.parentNode && preserveChildren ) {
++				while ( this.firstChild ) {
++					this.parentNode.insertBefore( this.firstChild, this );
++				}
++			}
+ 			// Prevent memory leaks
+ 			jQuery( "*", this ).add([this]).each(function(){
+ 				jQuery.event.remove(this);</code></pre>
     </div>
   
 

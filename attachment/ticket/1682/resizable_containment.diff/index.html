@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,100 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- trunk/ui/ui.resizable.js	2007-09-19 12:12:52.000000000 -0500</span>
+<span class="token coord">+++ jquery.ui-1.0/ui.resizable.js	2007-09-20 11:09:25.000000000 -0500</span>
+<span class="token coord">@@ -46,6 +46,31 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			var helper = "original";	
+<span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>		
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if(options.containment){
+<span class="token prefix inserted">+</span>  		if(options.containment.left != undefined || options.containment.constructor == Array) return;
+<span class="token prefix inserted">+</span>  		if(options.containment == 'parent') options.containment = this.element.parentNode;
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>  		if(options.containment == 'document') {
+<span class="token prefix inserted">+</span>  			options.containment = [
+<span class="token prefix inserted">+</span>  				0,
+<span class="token prefix inserted">+</span>  				0,
+<span class="token prefix inserted">+</span>  				$(document).width(),
+<span class="token prefix inserted">+</span>  				($(document).height() || document.body.parentNode.scrollHeight)
+<span class="token prefix inserted">+</span>  			];
+<span class="token prefix inserted">+</span>  		} else { //I'm a node, so compute top/left/right/bottom
+<span class="token prefix inserted">+</span>  			var ce = $(options.containment)[0];
+<span class="token prefix inserted">+</span>  			var co = $(options.containment).offset({ border: false });
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>  			options.containment = [
+<span class="token prefix inserted">+</span>  				co.left,
+<span class="token prefix inserted">+</span>  				co.top,
+<span class="token prefix inserted">+</span>  				co.left+(ce.offsetWidth || ce.scrollWidth),
+<span class="token prefix inserted">+</span>  				co.top+(ce.offsetHeight || ce.scrollHeight)
+<span class="token prefix inserted">+</span>  			];
+<span class="token prefix inserted">+</span>  		}
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>		
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		//Destructive mode wraps the original element
+<span class="token prefix unchanged"> </span>		if(el.nodeName.match(/textarea|input|select|button|img/i)) options.destructive = true;
+<span class="token prefix unchanged"> </span>		if(options.destructive) {
+</span><span class="token coord">@@ -241,6 +266,11 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>						if(o.axis == 'n') nw = p[0];
+<span class="token prefix unchanged"> </span>						var mod = (this.pos[1] - co.top); nh = nh - (mod*2);
+<span class="token prefix unchanged"> </span>						mod = nh &lt;= o.minHeight ? p[1] - o.minHeight : (nh >= o.maxHeight ? 0-(o.maxHeight-p[1]) : mod);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>						if (o.containment &amp;&amp; co.top + mod &lt; o.containment[1] - o.po.top)
+<span class="token prefix inserted">+</span>						{
+<span class="token prefix inserted">+</span>						  mod = (o.containment[1] - o.po.top) - co.top;
+<span class="token prefix inserted">+</span>						  nh = nh + this.pos[1] - (o.containment[1] - o.po.top);
+<span class="token prefix inserted">+</span>					  }
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>						$(this.helper).css('top', co.top + mod);
+<span class="token prefix unchanged"> </span>						break;
+<span class="token prefix unchanged"> </span>						
+</span><span class="token coord">@@ -253,6 +283,11 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>						if(o.axis == 'w') nh = p[1];
+<span class="token prefix unchanged"> </span>						var mod = (this.pos[0] - co.left); nw = nw - (mod*2);
+<span class="token prefix unchanged"> </span>						mod = nw &lt;= o.minWidth ? p[0] - o.minWidth : (nw >= o.maxWidth ? 0-(o.maxWidth-p[0]) : mod);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>						if (o.containment &amp;&amp; co.left + mod &lt; o.containment[0] - o.po.left)
+<span class="token prefix inserted">+</span>						{
+<span class="token prefix inserted">+</span>						  mod = (o.containment[0] - o.po.left) - co.left;
+<span class="token prefix inserted">+</span>						  nw = nw + this.pos[0] - (o.containment[0] - o.po.left);
+<span class="token prefix inserted">+</span>					  }
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>						$(this.helper).css('left', co.left + mod);
+<span class="token prefix unchanged"> </span>						break;
+<span class="token prefix unchanged"> </span>						
+</span><span class="token coord">@@ -267,6 +302,17 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>						var mody = (this.pos[1] - co.top); nh = nh - (mody*2);
+<span class="token prefix unchanged"> </span>						mody = nh &lt;= o.minHeight ? p[1] - o.minHeight : (nh >= o.maxHeight ? 0-(o.maxHeight-p[1]) : mody);
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>						if (o.containment &amp;&amp; co.top + mody &lt; o.containment[1] - o.po.top)
+<span class="token prefix inserted">+</span>						{
+<span class="token prefix inserted">+</span>						  mody = (o.containment[1] - o.po.top) - co.top;
+<span class="token prefix inserted">+</span>						  nh = nh + this.pos[1] - (o.containment[1] - o.po.top);
+<span class="token prefix inserted">+</span>					  }
+<span class="token prefix inserted">+</span>						if (o.containment &amp;&amp; co.left + modx &lt; o.containment[0] - o.po.left)
+<span class="token prefix inserted">+</span>						{
+<span class="token prefix inserted">+</span>						  modx = (o.containment[0] - o.po.left) - co.left;
+<span class="token prefix inserted">+</span>						  nw = nw + this.pos[0] - (o.containment[0] - o.po.left);
+<span class="token prefix inserted">+</span>					  }
+<span class="token prefix inserted">+</span>						
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>						$(this.helper).css({
+<span class="token prefix unchanged"> </span>							left: co.left + modx,
+<span class="token prefix unchanged"> </span>							top: co.top + mody
+</span><span class="token coord">@@ -289,6 +335,17 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			var modifier = $(that.element).triggerHandler("resize", [e, that.prepareCallbackObj(this)], o.resize);
+<span class="token prefix unchanged"> </span>			if(!modifier) modifier = {};
+<span class="token prefix unchanged"> </span>			
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var left_handle_pos = co.left &lt; this.pos[0] ? co.left : this.pos[0];
+<span class="token prefix inserted">+</span>			var top_handle_pos = co.top &lt; this.pos[1] ? co.top : this.pos[1];
+<span class="token prefix inserted">+</span>			if (o.containment &amp;&amp; left_handle_pos + nw > o.containment[2] - o.po.left)
+<span class="token prefix inserted">+</span>			{
+<span class="token prefix inserted">+</span>			  nw = (o.containment[2] - o.po.left) - left_handle_pos;
+<span class="token prefix inserted">+</span>			}
+<span class="token prefix inserted">+</span>			if (o.containment &amp;&amp; top_handle_pos + nh > o.containment[3] - o.po.top)
+<span class="token prefix inserted">+</span>			{
+<span class="token prefix inserted">+</span>			  nh = (o.containment[3] - o.po.top) - top_handle_pos;
+<span class="token prefix inserted">+</span>			}
+<span class="token prefix inserted">+</span>			
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			for(var i in this.options.modifyThese) {
+<span class="token prefix unchanged"> </span>				var c = this.options.modifyThese[i];
+<span class="token prefix unchanged"> </span>				c[0].css({</span></code></pre>
     </div>
   
 

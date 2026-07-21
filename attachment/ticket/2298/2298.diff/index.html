@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,77 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event.js
+===================================================================
+<span class="token coord">--- src/event.js	(revision 4664)</span>
+<span class="token coord">+++ src/event.js	(working copy)</span>
+<span class="token coord">@@ -175,10 +175,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Handle a global trigger
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( !elem ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( typeof elem != "object" ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			// Only trigger if we've ever bound an event for it
+<span class="token prefix unchanged"> </span>			if ( this.global[type] )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				jQuery("*").add([window, document]).trigger(type, data);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				jQuery(typeof elem == "string" ? elem : "*").add([window, document]).trigger(type, data);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Handle triggering a single element
+<span class="token prefix unchanged"> </span>		} else {
+</span>Index: src/ajax.js
+===================================================================
+<span class="token coord">--- src/ajax.js	(revision 4664)</span>
+<span class="token coord">+++ src/ajax.js	(working copy)</span>
+<span class="token coord">@@ -228,7 +228,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Watch for a new set of requests
+<span class="token prefix unchanged"> </span>		if ( s.global &amp;&amp; ! jQuery.active++ )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			jQuery.event.trigger( "ajaxStart" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			jQuery.event.trigger( "ajaxStart", null, s.global );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// If we're requesting a remote document
+<span class="token prefix unchanged"> </span>		// and trying to load JSON or Script with a GET
+</span><span class="token coord">@@ -295,7 +295,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			s.beforeSend(xml);
+<span class="token prefix unchanged"> </span>			
+<span class="token prefix unchanged"> </span>		if ( s.global )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			jQuery.event.trigger("ajaxSend", [xml, s]);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			jQuery.event.trigger("ajaxSend", [xml, s], s.global);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Wait for a response to come back
+<span class="token prefix unchanged"> </span>		var onreadystatechange = function(isTimeout){
+</span><span class="token coord">@@ -386,7 +386,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Fire the global callback
+<span class="token prefix unchanged"> </span>			if ( s.global )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				jQuery.event.trigger( "ajaxSuccess", [xml, s] );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				jQuery.event.trigger( "ajaxSuccess", [xml, s], s.global );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		function complete(){
+</span><span class="token coord">@@ -396,11 +396,11 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// The request was completed
+<span class="token prefix unchanged"> </span>			if ( s.global )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				jQuery.event.trigger( "ajaxComplete", [xml, s] );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				jQuery.event.trigger( "ajaxComplete", [xml, s], s.global );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Handle the global AJAX counter
+<span class="token prefix unchanged"> </span>			if ( s.global &amp;&amp; ! --jQuery.active )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				jQuery.event.trigger( "ajaxStop" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				jQuery.event.trigger( "ajaxStop", null, s.global );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>		
+<span class="token prefix unchanged"> </span>		// return XMLHttpRequest to allow aborting the request etc.
+</span><span class="token coord">@@ -413,7 +413,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Fire the global callback
+<span class="token prefix unchanged"> </span>		if ( s.global )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			jQuery.event.trigger( "ajaxError", [xml, s, e] );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			jQuery.event.trigger( "ajaxError", [xml, s, e], s.global );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Counter for holding the number of active queries</span></code></pre>
     </div>
   
 

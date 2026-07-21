@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,69 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 4213)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -352,9 +352,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			else
+<span class="token prefix unchanged"> </span>				selector = jQuery.multiFilter( selector, this );
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var isArrayLike = selector.length &amp;&amp; selector[selector.length - 1] !== undefined &amp;&amp; !selector.nodeType;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		return this.filter(function() {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			return isArrayLike ? jQuery.inArray( this, selector ) &lt; 0 : this != selector;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			return jQuery.inArray( this, selector ) &lt; 0;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		});
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -764,9 +763,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// A method for quickly swapping in/out CSS properties to get correct calculations
+<span class="token prefix unchanged"> </span>	swap: function( elem, options, callback ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var old = {};
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		// Remember the old values, and insert the new ones
+<span class="token prefix unchanged"> </span>		for ( var name in options ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			elem.style[ "old" + name ] = elem.style[ name ];
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			old[ name ] = elem.style[ name ];
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			elem.style[ name ] = options[ name ];
+<span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -774,24 +774,29 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Revert the old values
+<span class="token prefix unchanged"> </span>		for ( var name in options )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			elem.style[ name ] = elem.style[ "old" + name ];
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			elem.style[ name ] = old[ name ];
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	css: function( elem, name, force ) {
+<span class="token prefix unchanged"> </span>		if ( name == "width" || name == "height" ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var width, height, props = { position: "absolute", visibility: "hidden", display:"block" };
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var val, props = { position: "absolute", visibility: "hidden", display:"block" }, which = name == "width" ? [ "Left", "Right" ] : [ "Top", "Bottom" ];
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		
+<span class="token prefix unchanged"> </span>			function getWH() {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				width = elem.clientWidth;
+<span class="token prefix deleted">-</span>				height = elem.clientHeight;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				val = name == "width" ? elem.offsetWidth : elem.offsetHeight;
+<span class="token prefix inserted">+</span>				var padding = 0, border = 0;
+<span class="token prefix inserted">+</span>				jQuery.each( which, function() {
+<span class="token prefix inserted">+</span>					padding += parseFloat(jQuery.curCSS( elem, "padding" + this, true)) || 0;
+<span class="token prefix inserted">+</span>					border += parseFloat(jQuery.curCSS( elem, "border" + this + "Width", true)) || 0;
+<span class="token prefix inserted">+</span>				});
+<span class="token prefix inserted">+</span>				val -= Math.round(padding + border);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			}
+<span class="token prefix unchanged"> </span>		
+<span class="token prefix unchanged"> </span>			if ( jQuery(elem).is(":visible") )
+<span class="token prefix unchanged"> </span>				getWH();
+<span class="token prefix unchanged"> </span>			else
+<span class="token prefix unchanged"> </span>				jQuery.swap( elem, props, getWH );
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>			return name == "width" ? width : height;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			
+<span class="token prefix inserted">+</span>			return val;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>		
+<span class="token prefix unchanged"> </span>		return jQuery.curCSS( elem, name, force );</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,24 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: core.js
+===================================================================
+--- core.js	(revision 5998)
++++ core.js	(working copy)
+@@ -1295,6 +1295,13 @@
+ 				this.parentNode.removeChild( this );
+ 		}
+ 	},
++	
++	removeThis: function() {
++		while ( this.firstChild ) {
++			this.parentNode.insertBefore( this.firstChild, this );
++		}
++		jQuery( this ).remove();
++	},
+ 
+ 	empty: function() {
+ 		// Remove element nodes and prevent memory leaks</code></pre>
     </div>
   
 

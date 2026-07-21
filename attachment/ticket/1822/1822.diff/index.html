@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,28 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/fx.js
+===================================================================
+<span class="token coord">--- src/fx.js	(revision 3685)</span>
+<span class="token coord">+++ src/fx.js	(working copy)</span>
+<span class="token coord">@@ -126,7 +126,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	queue: function(type, fn){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( jQuery.isFunction(type) ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( jQuery.isFunction(type) || type instanceof Array ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			fn = type;
+<span class="token prefix unchanged"> </span>			type = "fx";
+<span class="token prefix unchanged"> </span>		}
+</span><span class="token coord">@@ -162,6 +162,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	if ( !elem )
+<span class="token prefix unchanged"> </span>		return;
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	type = type || "fx";
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	var q = jQuery.data( elem, type + "queue" );
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	if ( !q || array )</span></code></pre>
     </div>
   
 

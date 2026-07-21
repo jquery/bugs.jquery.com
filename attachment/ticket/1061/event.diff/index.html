@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,7 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event/event.js===================================================================<span class="token coord">--- File src/event/event.js (revision 1560)</span><span class="token coord">+++ File src/event/event.js (working copy)</span><span class="token coord">@@ -530,6, +530,9 @@</span><span class="token unchanged"><span class="token prefix unchanged"> </span>             // Remove event lisenter to avoid memory leak <span class="token prefix unchanged"> </span>             if ( jQuery.browser.mozilla || jQuery.browser.opera ) <span class="token prefix unchanged"> </span>                 document.removeEventListener( "DOMContentLoaded", jQuery.ready, false ); </span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>              <span class="token prefix inserted">+</span>             // Remove script element used by IE hack <span class="token prefix inserted">+</span>             jQuery(window).load(function(){ jQuery("#__ie_init").remove(); }); </span><span class="token unchanged"><span class="token prefix unchanged"> </span>         } <span class="token prefix unchanged"> </span>     } <span class="token prefix unchanged"> </span> }); </span><span class="token coord">@@ -907,7, +910,6 @@</span><span class="token unchanged"><span class="token prefix unchanged"> </span>         if ( script )  <span class="token prefix unchanged"> </span>             script.onreadystatechange = function() { <span class="token prefix unchanged"> </span>                 if ( this.readyState != "complete" ) return; </span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>                 this.parentNode.removeChild( this ); </span><span class="token unchanged"><span class="token prefix unchanged"> </span>                 jQuery.ready(); <span class="token prefix unchanged"> </span>             };</span></code></pre>
     </div>
   
 

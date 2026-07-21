@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,31 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ui/ui.slider.js
+===================================================================
+<span class="token coord">--- ui/ui.slider.js	(revision 4915)</span>
+<span class="token coord">+++ ui/ui.slider.js	(working copy)</span>
+<span class="token coord">@@ -163,7 +163,12 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		},
+<span class="token prefix unchanged"> </span>		value: function(handle) {
+<span class="token prefix unchanged"> </span>			if(this.handle.length == 1) this.currentHandle = this.handle;
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			return ((parseInt($(handle != undefined ? this.handle[handle] || handle : this.currentHandle).css(this.properties[0]),10) / (this.size - this.handleSize())) * this.options.realMaxValue) + this.options.minValue;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var value = ((parseInt($(handle != undefined ? this.handle[handle] || handle : this.currentHandle).css(this.properties[0]),10) / (this.size - this.handleSize())) * this.options.realMaxValue) + this.options.minValue;
+<span class="token prefix inserted">+</span>                        var o = this.options;
+<span class="token prefix inserted">+</span>                        if (o.stepping) {
+<span class="token prefix inserted">+</span>                            value = Math.round(value / o.stepping) * o.stepping;
+<span class="token prefix inserted">+</span>                        }
+<span class="token prefix inserted">+</span>                        return value
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		},
+<span class="token prefix unchanged"> </span>		convertValue: function(value) {
+<span class="token prefix unchanged"> </span>			return this.options.minValue + (value / (this.size - this.handleSize())) * this.options.realMaxValue;
+</span><span class="token coord">@@ -271,4 +276,4 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>	});
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>})(jQuery);
+</span>\ No newline at end of file
+<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>})(jQuery);</span></code></pre>
     </div>
   
 

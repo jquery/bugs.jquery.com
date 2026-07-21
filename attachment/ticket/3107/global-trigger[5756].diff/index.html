@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,22 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/event.js
+===================================================================
+<span class="token coord">--- jquery/src/event.js	(revision 5754)</span>
+<span class="token coord">+++ jquery/src/event.js	(working copy)</span>
+<span class="token coord">@@ -168,7 +168,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		if ( !elem ) {
+<span class="token prefix unchanged"> </span>			// Only trigger if we've ever bound an event for it
+<span class="token prefix unchanged"> </span>			if ( this.global[type] )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				jQuery("*").add([window, document]).trigger(type, data);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				jQuery.each( jQuery.cache, function(){
+<span class="token prefix inserted">+</span>					if ( this.events &amp;&amp; this.events[type] )
+<span class="token prefix inserted">+</span>						jQuery.event.trigger( type, data, this.handle.elem );
+<span class="token prefix inserted">+</span>				});
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Handle triggering a single element
+<span class="token prefix unchanged"> </span>		} else {</span></code></pre>
     </div>
   
 

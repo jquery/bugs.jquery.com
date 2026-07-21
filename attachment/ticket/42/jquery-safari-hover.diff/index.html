@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,20 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery-1.0a.js	2006-07-01 07:15:52.000000000 -0700</span>
+<span class="token coord">+++ jquery-1.0a-fixed.js	2006-07-08 18:23:16.000000000 -0700</span>
+<span class="token coord">@@ -878,7 +878,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	// A private function for haandling mouse 'hovering'
+<span class="token prefix unchanged"> </span>	function handleHover(e) {
+<span class="token prefix unchanged"> </span>		// Check if mouse(over|out) are still within the same parent element
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var p = e.fromElement || e.toElement || e.relatedTarget;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if (e.type == "mouseover")
+<span class="token prefix inserted">+</span>		    var p = e.fromElement || e.relatedTarget;
+<span class="token prefix inserted">+</span>		else
+<span class="token prefix inserted">+</span>		    var p = e.toElement || e.relatedTarget;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		while ( p &amp;&amp; p != this ) p = p.parentNode;
+<span class="token prefix unchanged"> </span>		
+<span class="token prefix unchanged"> </span>		// If we actually just moused on to a sub-element, ignore it</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,30 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 6053)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -1083,6 +1083,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	grep: function( elems, callback, inv ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if( filter &amp;&amp; !inv )
+<span class="token prefix inserted">+</span>			return filter.call( elems, callback );
+<span class="token prefix inserted">+</span>		
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		var ret = [];
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Go through the array, only saving the items
+</span><span class="token coord">@@ -1114,7 +1117,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>// It's included for backwards compatibility and plugins,
+<span class="token prefix unchanged"> </span>// although they should work to migrate away.
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>var userAgent = navigator.userAgent.toLowerCase();
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>var userAgent = navigator.userAgent.toLowerCase(),
+<span class="token prefix inserted">+</span>	filter = Array.prototype.filter;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>// Figure out what browser is being used
+<span class="token prefix unchanged"> </span>jQuery.browser = {</span></code></pre>
     </div>
   
 

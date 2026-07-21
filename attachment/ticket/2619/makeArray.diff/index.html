@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,30 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 5143)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -1120,12 +1120,13 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	makeArray: function( array ) {
+<span class="token prefix unchanged"> </span>		var ret = [];
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		// Need to use typeof to fight Safari childNodes crashes
+<span class="token prefix deleted">-</span>		if ( array.constructor != Array )
+<span class="token prefix deleted">-</span>			for ( var i = 0, length = array.length; i &lt; length; i++ )
+<span class="token prefix deleted">-</span>				ret.push( array[ i ] );
+<span class="token prefix deleted">-</span>		else
+<span class="token prefix deleted">-</span>			ret = array.slice( 0 );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if( array != undefined )
+<span class="token prefix inserted">+</span>			//strings and functions also have 'length'
+<span class="token prefix inserted">+</span>			if( array.length != undefined &amp;&amp; !array.split &amp;&amp; !array.call )
+<span class="token prefix inserted">+</span>				for( var i = array.length; i; )
+<span class="token prefix inserted">+</span>					ret[--i] = array[i];
+<span class="token prefix inserted">+</span>			else
+<span class="token prefix inserted">+</span>				ret[0] = array;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		return ret;
+<span class="token prefix unchanged"> </span>	},</span></code></pre>
     </div>
   
 

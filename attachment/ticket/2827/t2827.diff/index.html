@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,26 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- core.js	2009-06-17 15:39:15.000000000 -0700</span>
+<span class="token coord">+++ core.js	2009-06-17 15:38:14.000000000 -0700</span>
+<span class="token coord">@@ -659,7 +659,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		var name, i = 0, length = object.length;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		if ( args ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( length === undefined ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( length === undefined || object.constructor == Function ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				for ( name in object )
+<span class="token prefix unchanged"> </span>					if ( callback.apply( object[ name ], args ) === false )
+<span class="token prefix unchanged"> </span>						break;
+</span><span class="token coord">@@ -670,7 +670,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// A special, fast, case for the most common use of each
+<span class="token prefix unchanged"> </span>		} else {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( length === undefined ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( length === undefined || object.constructor == Function ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				for ( name in object )
+<span class="token prefix unchanged"> </span>					if ( callback.call( object[ name ], name, object[ name ] ) === false )
+<span class="token prefix unchanged"> </span>						break;</span></code></pre>
     </div>
   
 

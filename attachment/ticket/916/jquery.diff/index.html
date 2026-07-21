@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,151 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery-latest.js	Mon Jan 22 13:42:55 2007</span>
+<span class="token coord">+++ jquery.js	Sat Feb  3 03:06:52 2007</span>
+<span class="token coord">@@ -7,7 +7,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span> * Dual licensed under the MIT (MIT-LICENSE.txt)
+<span class="token prefix unchanged"> </span> * and GPL (GPL-LICENSE.txt) licenses.
+<span class="token prefix unchanged"> </span> *
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span> * $Date: 2007-01-22 00:27:54 -0500 (Mon, 22 Jan 2007) $
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span> * $Date: 2007/02/02 19:06:52 $
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span> * $Rev: 1153 $
+<span class="token prefix unchanged"> </span> */
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -1857,14 +1857,17 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			data: params,
+<span class="token prefix unchanged"> </span>			ifModified: ifModified,
+<span class="token prefix unchanged"> </span>			complete: function(res, status){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				if ( status == "success" || !ifModified &amp;&amp; status == "notmodified" )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				if ( status.split(" ")[0] != "error" || !ifModified &amp;&amp; status == "notmodified" ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					// Inject the HTML into all the matched elements
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					self.attr("innerHTML", res.responseText)
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					self.attr("innerHTML", res.responseText);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					  // Execute all the scripts inside of the newly-injected HTML
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					  .evalScripts()
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					//if(jQuery.browser.msie)
+<span class="token prefix inserted">+</span>					    jQuery.evalInlineScripts(res.responseText);
+<span class="token prefix inserted">+</span>				        //else
+<span class="token prefix inserted">+</span>					//    self.evalScripts();
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					  // Execute callback
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					  .each( callback, [res.responseText, status, res] );
+<span class="token prefix deleted">-</span>				else
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					self.each( callback, [res.responseText, status, res] );
+<span class="token prefix inserted">+</span>				} else
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					callback.apply( self, [res.responseText, status, res] );
+<span class="token prefix unchanged"> </span>			}
+<span class="token prefix unchanged"> </span>		});
+</span><span class="token coord">@@ -2016,10 +2019,15 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				requestDone = true;
+<span class="token prefix unchanged"> </span>				var status;
+<span class="token prefix unchanged"> </span>				try {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					status = jQuery.httpSuccess( xml ) &amp;&amp; isTimeout != "timeout" ?
+<span class="token prefix deleted">-</span>						s.ifModified &amp;&amp; jQuery.httpNotModified( xml, s.url ) ? "notmodified" : "success" : "error";
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				        status = jQuery.httpSuccess( xml );
+<span class="token prefix inserted">+</span>				        if(status.split(" ")[0] != "error" &amp;&amp;
+<span class="token prefix inserted">+</span>					   isTimeout != "timeout" &amp;&amp;
+<span class="token prefix inserted">+</span>					   s.ifModified &amp;&amp;
+<span class="token prefix inserted">+</span>					   jQuery.httpNotModified( xml, s.url )) {
+<span class="token prefix inserted">+</span>					    status = "redirect 304";
+<span class="token prefix inserted">+</span>					}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					// Make sure that the request was successful or notmodified
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					if ( status != "error" ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					if ( status.split(" ")[0] != "error" ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>						// Cache Last-Modified header, if ifModified mode.
+<span class="token prefix unchanged"> </span>						var modRes;
+<span class="token prefix unchanged"> </span>						try {
+</span><span class="token coord">@@ -2042,7 +2050,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>					} else
+<span class="token prefix unchanged"> </span>						jQuery.handleError(s, xml, status);
+<span class="token prefix unchanged"> </span>				} catch(e) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					status = "error";
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					status = "error exception";
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					jQuery.handleError(s, xml, status, e);
+<span class="token prefix unchanged"> </span>				}
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -2102,7 +2110,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Fire the global callback
+<span class="token prefix unchanged"> </span>		if ( s.global )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			jQuery.event.trigger( "ajaxError", [xml, s, e] );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			jQuery.event.trigger( "ajaxError", [xml, s, e, status] );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Counter for holding the number of active queries
+</span><span class="token coord">@@ -2110,12 +2118,30 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Determines if an XMLHttpRequest was successful or not
+<span class="token prefix unchanged"> </span>	httpSuccess: function( r ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	    var status;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		try {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			return !r.status &amp;&amp; location.protocol == "file:" ||
+<span class="token prefix deleted">-</span>				( r.status >= 200 &amp;&amp; r.status &lt; 300 ) || r.status == 304 ||
+<span class="token prefix deleted">-</span>				jQuery.browser.safari &amp;&amp; r.status == undefined;
+<span class="token prefix deleted">-</span>		} catch(e){}
+<span class="token prefix deleted">-</span>		return false;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		    var status_code = r.status;
+<span class="token prefix inserted">+</span>		    status = "error unknow";
+<span class="token prefix inserted">+</span>		    if(!r.status &amp;&amp; location.protocol == "file:" ||
+<span class="token prefix inserted">+</span>		       jQuery.browser.safari &amp;&amp; r.status == undefined) {
+<span class="token prefix inserted">+</span>			status = "success"
+<span class="token prefix inserted">+</span>		    } else if(status_code >= 600) {
+<span class="token prefix inserted">+</span>			if(status_code == 12029 || status_code == 12152) {
+<span class="token prefix inserted">+</span>			    status = "error connection";
+<span class="token prefix inserted">+</span>			} else if(status_code == 1223) {
+<span class="token prefix inserted">+</span>			    status = "success 204";
+<span class="token prefix inserted">+</span>			}
+<span class="token prefix inserted">+</span>		    } else if(status_code >= 200 &amp;&amp; status_code &lt; 300) {
+<span class="token prefix inserted">+</span>			status = "success " + status_code;
+<span class="token prefix inserted">+</span>		    } else if(status_code >= 300 &amp;&amp; status_code &lt; 400) {
+<span class="token prefix inserted">+</span>			status = "redirect " + status_code;
+<span class="token prefix inserted">+</span>		    } else if(status_code >= 400 &amp;&amp; status_code &lt; 600) {
+<span class="token prefix inserted">+</span>			status = "error " + status_code;
+<span class="token prefix inserted">+</span>		    }
+<span class="token prefix inserted">+</span>		} catch(e){
+<span class="token prefix inserted">+</span>		    status = "error connection";
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>		return status;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Determines if an XMLHttpRequest returns NotModified
+</span><span class="token coord">@@ -2195,7 +2221,35 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			window.setTimeout( data, 0 );
+<span class="token prefix unchanged"> </span>		else
+<span class="token prefix unchanged"> </span>			eval.call( window, data );
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	}
+<span class="token prefix deleted">-</span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	},
+<span class="token prefix inserted">+</span>    
+<span class="token prefix inserted">+</span>        evalInlineScripts: function(data) {
+<span class="token prefix inserted">+</span>	    var frags = [];
+<span class="token prefix inserted">+</span>	    
+<span class="token prefix inserted">+</span>	    while((sts = data.search(/&lt;[ ]*script(>|[^>]*>)/ig)) >= 0) {
+<span class="token prefix inserted">+</span>		data = data.substring(sts);
+<span class="token prefix inserted">+</span>		var sub = data.substring(0, data.search(">"));
+<span class="token prefix inserted">+</span>		var url, i;
+<span class="token prefix inserted">+</span>		
+<span class="token prefix inserted">+</span>		if(sub.search(/src=/i) >= 0) {
+<span class="token prefix inserted">+</span>		    url = sub.replace(/.*[\n\t\r ]src=("[^"]+"|'[^']+').*/i, "$1"); // ");
+<span class="token prefix inserted">+</span>		    src = src.substring(1, src.length - 1);
+<span class="token prefix inserted">+</span>                    url = data.substring(7);
+<span class="token prefix inserted">+</span>		    jQuery.getScript(url);
+<span class="token prefix inserted">+</span>	        } else {
+<span class="token prefix inserted">+</span>		    var i;
+<span class="token prefix inserted">+</span>		    if(data.search(/&lt;[ ]*script(>|[^>]*>)[\n\t\r ]*&lt;!--/i) != 0) {
+<span class="token prefix inserted">+</span>			data = data.substring(data.search(">") + 1);
+<span class="token prefix inserted">+</span>			i = data.search(/&lt;\/[ ]*script[ ]*>/i);
+<span class="token prefix inserted">+</span>		    } else {
+<span class="token prefix inserted">+</span>			data = data.substring(data.search("&lt;!--") + 4);
+<span class="token prefix inserted">+</span>			i = data.search("-->");
+<span class="token prefix inserted">+</span>		    }
+<span class="token prefix inserted">+</span>		    jQuery.globalEval(data.substring(0, i));
+<span class="token prefix inserted">+</span>		    data = data.substring(i);
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>	    }
+<span class="token prefix inserted">+</span>        }
+<span class="token prefix inserted">+</span>    
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>}</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,22 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: ui.droppable.js
+===================================================================
+--- ui.droppable.js	(revision 4501)
++++ ui.droppable.js	(working copy)
+@@ -18,9 +18,9 @@
+ 		
+ 		//Prepare the passed options
+ 		this.options = $.extend({}, options);
+-		var o = this.options; var accept = o.accept;
++		var o = this.options; var accept = o.accept; var self = this;
+ 		$.extend(o, {
+-			accept: o.accept && o.accept.constructor == Function ? o.accept : function(d) {
++			accept: o.accept && o.accept.constructor == Function ? function() { return accept.apply(self, arguments); } : function(d) {
+ 				return $(d).is(accept);	
+ 			},
+ 			tolerance: o.tolerance || 'intersect'</code></pre>
     </div>
   
 

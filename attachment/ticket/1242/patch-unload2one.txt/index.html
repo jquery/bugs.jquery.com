@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt">Index: src/event/event.js
+===================================================================
+--- src/event/event.js	(revision 1957)
++++ src/event/event.js	(working copy)
+@@ -298,7 +298,7 @@
+ 	 * @cat Events
+ 	 */
+ 	bind: function( type, data, fn ) {
+-		return this.each(function(){
++		return type == "unload" ? this.one(type, data, fn) : this.each(function(){
+ 			jQuery.event.add( this, type, fn || data, fn &amp;&amp; data );
+ 		});
+ 	},</code></pre>
     </div>
   
 

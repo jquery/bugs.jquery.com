@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,22 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery.js
+===================================================================
+RCS file: /home/cvs/repository/mclass/javaserver/web/site/js/Attic/jquery.js,v
+retrieving revision 1.1.2.1
+diff -u -r1.1.2.1 jquery.js
+--- jquery.js	5 Oct 2007 15:57:50 -0000	1.1.2.1
++++ jquery.js	11 Oct 2007 21:50:53 -0000
+@@ -637,7 +637,7 @@
+ 
+ 	css: function(e,p) {
+ 		if ( p == "height" || p == "width" ) {
+-			var old = {}, oHeight, oWidth, d = ["Top","Bottom","Right","Left"];
++			var old = {}, oHeight, oWidth, d = ( p == "height" ? ["Top","Bottom"] : ["Right","Left"] );
+ 
+ 			jQuery.each( d, function(){
+ 				old["padding" + this] = 0;</code></pre>
     </div>
   
 

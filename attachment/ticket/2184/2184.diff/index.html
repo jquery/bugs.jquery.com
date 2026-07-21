@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,53 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/core.js
+===================================================================
+<span class="token coord">--- test/unit/core.js	(revision 4476)</span>
+<span class="token coord">+++ test/unit/core.js	(working copy)</span>
+<span class="token coord">@@ -955,11 +955,23 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("clone()", function() {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	expect(4);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	expect(20);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	ok( 'This is a normal link: Yahoo' == $('#en').text(), 'Assert text for #en' );
+<span class="token prefix unchanged"> </span>	var clone = $('#yahoo').clone();
+<span class="token prefix unchanged"> </span>	ok( 'Try them out:Yahoo' == $('#first').append(clone).text(), 'Check for clone' );
+<span class="token prefix unchanged"> </span>	ok( 'This is a normal link: Yahoo' == $('#en').text(), 'Reassert text for #en' );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	var cloneTags = [ 
+<span class="token prefix inserted">+</span>		"&lt;table/>", "&lt;tr/>", "&lt;td/>", "&lt;div/>", 
+<span class="token prefix inserted">+</span>		"&lt;button/>", "&lt;ul/>", "&lt;ol/>", "&lt;li/>",
+<span class="token prefix inserted">+</span>		"&lt;input type='checkbox' />", "&lt;select/>", "&lt;option/>", "&lt;textarea/>",
+<span class="token prefix inserted">+</span>		"&lt;tbody/>", "&lt;thead/>", "&lt;tfoot/>", "&lt;iframe/>"
+<span class="token prefix inserted">+</span>	];
+<span class="token prefix inserted">+</span>	for (var i = 0; i &lt; cloneTags.length; i++) {
+<span class="token prefix inserted">+</span>		var j = $(cloneTags[i]);
+<span class="token prefix inserted">+</span>		equals( j[0].tagName, j.clone()[0].tagName, 'Clone a &amp;lt;' + cloneTags[i].substring(1));
+<span class="token prefix inserted">+</span>	}
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	// using contents will get comments regular, text, and comment nodes
+<span class="token prefix unchanged"> </span>	var cl = $("#nonnodes").contents().clone();
+<span class="token prefix unchanged"> </span>	ok( cl.length >= 2, "Check node,textnode,comment clone works (some browsers delete comments on clone)" );
+</span>Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 4476)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -303,11 +303,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				// as properties will not be copied (such as the
+<span class="token prefix unchanged"> </span>				// the name attribute on an input).
+<span class="token prefix unchanged"> </span>				var clone = this.cloneNode(true),
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					container = document.createElement("div"),
+<span class="token prefix deleted">-</span>					container2 = document.createElement("div");
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					container = document.createElement("div");
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				container.appendChild(clone);
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				container2.innerHTML = container.innerHTML;
+<span class="token prefix deleted">-</span>				return container2.firstChild;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				return jQuery.clean([container.innerHTML])[0];
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			} else
+<span class="token prefix unchanged"> </span>				return this.cloneNode(true);
+<span class="token prefix unchanged"> </span>		});</span></code></pre>
     </div>
   
 

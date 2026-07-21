@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,52 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: unit/core.js
+===================================================================
+<span class="token coord">--- unit/core.js	(revision 5284)</span>
+<span class="token coord">+++ unit/core.js	(working copy)</span>
+<span class="token coord">@@ -1511,7 +1511,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("map()", function() {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	expect(2);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	expect(6);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	isSet(
+<span class="token prefix unchanged"> </span>		$("#ap").map(function(){
+</span><span class="token coord">@@ -1528,6 +1528,32 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		q("ap","ap","ap"),
+<span class="token prefix unchanged"> </span>		"Single Map"
+<span class="token prefix unchanged"> </span>	);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	//for #2616
+<span class="token prefix inserted">+</span>	var keys = $.map( {a:1,b:2}, function( v, k ){
+<span class="token prefix inserted">+</span>		return k;
+<span class="token prefix inserted">+</span>	}, [ ] );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	equals( keys.join(""), "ab", "Map the keys from a hash to an array" );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	var values = $.map( {a:1,b:2}, function( v, k ){
+<span class="token prefix inserted">+</span>		return v;
+<span class="token prefix inserted">+</span>	}, [ ] );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	equals( values.join(""), "12", "Map the values from a hash to an array" );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	var scripts = document.getElementsByTagName("script");
+<span class="token prefix inserted">+</span>	var mapped = $.map( scripts, function( v, k ){
+<span class="token prefix inserted">+</span>		return v;
+<span class="token prefix inserted">+</span>	}, {length:0} );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	equals( mapped.length, scripts.length, "Map an array(-like) to a hash" );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	var flat = $.map( Array(4), function( v, k ){
+<span class="token prefix inserted">+</span>		return k % 2 ? k : [k,k,k];//try mixing array and regular returns
+<span class="token prefix inserted">+</span>	});
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	equals( flat.join(""), "00012223", "try the new flatten technique(#2616)" );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("contents()", function() {</span></code></pre>
     </div>
   
 

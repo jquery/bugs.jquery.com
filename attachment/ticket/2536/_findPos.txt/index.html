@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,38 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt">_findPos: function(obj) {
+var temp = obj;
+while (obj &amp;&amp; (obj.type == 'hidden' || obj.nodeType != 1)) {
+obj = obj.nextSibling;
+}
+var curleft = curtop = 0;
+var origcurleft = 0;
+if (obj &amp;&amp; obj.offsetParent) {
+curleft = obj.offsetLeft;
+curtop = obj.offsetTop;
+while (obj = obj.offsetParent) {
+origcurleft = curleft;
+curleft += obj.offsetLeft;
+if (curleft &lt; 0) {
+curleft = origcurleft;
+}
+curtop += obj.offsetTop;
+}
+}
+var parentNodes = $(temp).parents().get();
+var parentCounter = 0;
+
+while (parentNodes[parentCounter].tagName.toLowerCase() !="body")
+{
+curleft -= parentNodes[parentCounter].scrollLeft;
+curtop -= parentNodes[parentCounter].scrollTop;
+parentCounter++;
+}
+
+if (curleft&lt;0){curleft = origcurleft;}
+return [curleft,curtop];
+},</code></pre>
     </div>
   
 

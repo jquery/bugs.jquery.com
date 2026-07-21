@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,94 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/offset.js
+===================================================================
+<span class="token coord">--- src/offset.js	(revision 5084)</span>
+<span class="token coord">+++ src/offset.js	(working copy)</span>
+<span class="token coord">@@ -10,7 +10,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		    offsetParent = elem.offsetParent, 
+<span class="token prefix unchanged"> </span>		    doc          = elem.ownerDocument,
+<span class="token prefix unchanged"> </span>		    safari2      = safari &amp;&amp; parseInt(version) &lt; 522 &amp;&amp; !/adobeair/i.test(userAgent),
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		    fixed        = jQuery.css(elem, "position") == "fixed";
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		    fixed        = jQuery.curCSS(elem, "position") == "fixed";
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>		// Use getBoundingClientRect if available
+<span class="token prefix unchanged"> </span>		if ( elem.getBoundingClientRect ) {
+</span><span class="token coord">@@ -45,7 +45,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>					border( offsetParent );
+<span class="token prefix unchanged"> </span>					
+<span class="token prefix unchanged"> </span>				// Add the document scroll offsets if position is fixed on any offsetParent
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				if ( !fixed &amp;&amp; jQuery.css(offsetParent, "position") == "fixed" )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				if ( !fixed &amp;&amp; jQuery.curCSS(offsetParent, "position") == "fixed" )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					fixed = true;
+<span class="token prefix unchanged"> </span>			
+<span class="token prefix unchanged"> </span>				// Set offsetChild to previous offsetParent unless it is the body element
+</span><span class="token coord">@@ -57,12 +57,12 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			// Get parent scroll offsets
+<span class="token prefix unchanged"> </span>			while ( parent &amp;&amp; parent.tagName &amp;&amp; !/^body|html$/i.test(parent.tagName) ) {
+<span class="token prefix unchanged"> </span>				// Remove parent scroll UNLESS that parent is inline or a table to work around Opera inline/table scrollLeft/Top bug
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				if ( !/^inline|table.*$/i.test(jQuery.css(parent, "display")) )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				if ( !/^inline|table.*$/i.test(jQuery.curCSS(parent, "display")) )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					// Subtract parent scroll offsets
+<span class="token prefix unchanged"> </span>					add( -parent.scrollLeft, -parent.scrollTop );
+<span class="token prefix unchanged"> </span>			
+<span class="token prefix unchanged"> </span>				// Mozilla does not add the border for a parent that has overflow != visible
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				if ( mozilla &amp;&amp; jQuery.css(parent, "overflow") != "visible" )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				if ( mozilla &amp;&amp; jQuery.curCSS(parent, "overflow") != "visible" )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					border( parent );
+<span class="token prefix unchanged"> </span>			
+<span class="token prefix unchanged"> </span>				// Get next parent
+</span><span class="token coord">@@ -71,8 +71,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		
+<span class="token prefix unchanged"> </span>			// Safari &lt;= 2 doubles body offsets with a fixed position element/offsetParent or absolutely positioned offsetChild
+<span class="token prefix unchanged"> </span>			// Mozilla doubles body offsets with a non-absolutely positioned offsetChild
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( (safari2 &amp;&amp; (fixed || jQuery.css(offsetChild, "position") == "absolute")) || 
+<span class="token prefix deleted">-</span>				(mozilla &amp;&amp; jQuery.css(offsetChild, "position") != "absolute") )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( (safari2 &amp;&amp; (fixed || jQuery.curCSS(offsetChild, "position") == "absolute")) || 
+<span class="token prefix inserted">+</span>				(mozilla &amp;&amp; jQuery.curCSS(offsetChild, "position") != "absolute") )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					add( -doc.body.offsetLeft, -doc.body.offsetTop );
+<span class="token prefix unchanged"> </span>			
+<span class="token prefix unchanged"> </span>			// Add the document scroll offsets if position is fixed
+</span>Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 5084)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -611,6 +611,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>// exclude the following css properties to add px
+<span class="token prefix unchanged"> </span>var exclude = /z-?index|font-?weight|opacity|zoom|line-?height/i;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>//cache this
+<span class="token prefix inserted">+</span>var CS = document.defaultView &amp;&amp; document.defaultView.getComputedStyle;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>jQuery.extend({
+<span class="token prefix unchanged"> </span>	noConflict: function( deep ) {
+</span><span class="token coord">@@ -838,7 +840,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			if ( !jQuery.browser.safari )
+<span class="token prefix unchanged"> </span>				return false;
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var ret = document.defaultView.getComputedStyle( elem, null );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var ret = CS( elem, null );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			return !ret || ret.getPropertyValue("color") == "";
+<span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -864,7 +866,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		if ( !force &amp;&amp; elem.style &amp;&amp; elem.style[ name ] )
+<span class="token prefix unchanged"> </span>			ret = elem.style[ name ];
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		else if ( document.defaultView &amp;&amp; document.defaultView.getComputedStyle ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		else if ( CS ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Only "float" is needed here
+<span class="token prefix unchanged"> </span>			if ( name.match( /float/i ) )
+</span><span class="token coord">@@ -872,7 +874,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			name = name.replace( /([A-Z])/g, "-$1" ).toLowerCase();
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var getComputedStyle = document.defaultView.getComputedStyle( elem, null );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var getComputedStyle = CS( elem, null );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			if ( getComputedStyle &amp;&amp; !color( elem ) )
+<span class="token prefix unchanged"> </span>				ret = getComputedStyle.getPropertyValue( name );</span></code></pre>
     </div>
   
 

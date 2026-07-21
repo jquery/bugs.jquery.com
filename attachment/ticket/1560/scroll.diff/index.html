@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,46 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ifxscrollto.js
+===================================================================
+<span class="token coord">--- ifxscrollto.js	(revision 3054)</span>
+<span class="token coord">+++ ifxscrollto.js	(working copy)</span>
+<span class="token coord">@@ -46,14 +46,32 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			return this.each(
+<span class="token prefix unchanged"> </span>				function()
+<span class="token prefix unchanged"> </span>				{
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					jQuery('a[@href*="#"]', this).click(
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					jQuery('a[@href^="#"]', this).click(
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>						function(e)
+<span class="token prefix unchanged"> </span>						{
+<span class="token prefix unchanged"> </span>							parts = this.href.split('#');
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>							jQuery('#' + parts[1]).ScrollTo(speed, axis, easing);
+<span class="token prefix deleted">-</span>							return false;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>							if(jQuery('#' + parts[1]).size() > 0) {
+<span class="token prefix inserted">+</span>								jQuery('#' + parts[1]).ScrollTo(speed, axis, easing);
+<span class="token prefix inserted">+</span>								return false;
+<span class="token prefix inserted">+</span>							} else if(jQuery('a[@name='+parts[1]+']').size() > 0) {
+<span class="token prefix inserted">+</span>								jQuery('a[@name='+parts[1]+']').ScrollTo(speed, axis, easing)
+<span class="token prefix inserted">+</span>								return false;
+<span class="token prefix inserted">+</span>							}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>						}
+<span class="token prefix unchanged"> </span>					);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					jQuery(document).ready(
+<span class="token prefix inserted">+</span>						function()	{
+<span class="token prefix inserted">+</span>							var loc = new String(document.location);
+<span class="token prefix inserted">+</span>							if (loc.search('#') != -1) {
+<span class="token prefix inserted">+</span>								var loc_parts = loc.split('#');
+<span class="token prefix inserted">+</span>								if(jQuery('#' + loc_parts[1]).size() > 0) {
+<span class="token prefix inserted">+</span>									jQuery('#' + loc_parts[1]).ScrollTo(speed, axis, easing);
+<span class="token prefix inserted">+</span>								} else if(jQuery('a[@name='+loc_parts[1]+']').size() > 0) {
+<span class="token prefix inserted">+</span>									jQuery('a[@name='+loc_parts[1]+']').ScrollTo(speed, axis, easing)
+<span class="token prefix inserted">+</span>								}
+<span class="token prefix inserted">+</span>							}
+<span class="token prefix inserted">+</span>						}
+<span class="token prefix inserted">+</span>					);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				}
+<span class="token prefix unchanged"> </span>			)
+<span class="token prefix unchanged"> </span>		}</span></code></pre>
     </div>
   
 

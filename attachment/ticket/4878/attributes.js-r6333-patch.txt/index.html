@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt">101c101,103
+&lt; 				var values = jQuery.makeArray(value);
+---
+> 				var values = jQuery.makeArray(value),
+> 					one = this.type == "select-one",
+> 					canSelect = true;
+104c106
+&lt; 					this.selected = (jQuery.inArray( this.value, values ) >= 0 ||
+---
+> 					this.selected = canSelect &amp;&amp; (jQuery.inArray( this.value, values ) >= 0 ||
+105a108,109
+> 					if (this.selected &amp;&amp; one)
+> 						canSelect = false;</code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/ajax.js
+===================================================================
+<span class="token coord">--- jquery/src/ajax.js	(revision 6274)</span>
+<span class="token coord">+++ jquery/src/ajax.js	(working copy)</span>
+<span class="token coord">@@ -250,7 +250,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		if ( s.dataType == "script" &amp;&amp; type == "GET" &amp;&amp; parts
+<span class="token prefix unchanged"> </span>			&amp;&amp; ( parts[1] &amp;&amp; parts[1] != location.protocol || parts[2] != location.host )){
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var head = document.getElementsByTagName("head")[0];
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var head = document.getElementsByTagName("head")[0] || document.documentElement,
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			var script = document.createElement("script");
+<span class="token prefix unchanged"> </span>			script.src = s.url;
+<span class="token prefix unchanged"> </span>			if (s.scriptCharset)</span></code></pre>
     </div>
   
 

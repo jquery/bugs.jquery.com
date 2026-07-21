@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,76 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event.js
+===================================================================
+<span class="token coord">--- src/event.js	(revision 4241)</span>
+<span class="token coord">+++ src/event.js	(working copy)</span>
+<span class="token coord">@@ -489,27 +489,58 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	if ( readyBound ) return;
+<span class="token prefix unchanged"> </span>	readyBound = true;
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	// Mozilla, Opera and webkit nightlies currently support this event
+<span class="token prefix deleted">-</span>	if ( document.addEventListener )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	// Mozilla, Opera (see further below for it) and webkit nightlies currently support this event
+<span class="token prefix inserted">+</span>	if ( document.addEventListener &amp;&amp; !jQuery.browser.opera)
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		// Use the handy event callback
+<span class="token prefix unchanged"> </span>		document.addEventListener( "DOMContentLoaded", jQuery.ready, false );
+<span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	// If Safari or IE is used
+<span class="token prefix unchanged"> </span>	// Continually check to see if the document is ready
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	if (jQuery.browser.msie || jQuery.browser.safari ) (function(){
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	if ( jQuery.browser.msie ) (function(){
+<span class="token prefix inserted">+</span>		if (jQuery.isReady) return;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		try {
+<span class="token prefix unchanged"> </span>			// If IE is used, use the trick by Diego Perini
+<span class="token prefix unchanged"> </span>			// http://javascript.nwbox.com/IEContentLoaded/
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( jQuery.browser.msie || document.readyState != "loaded" &amp;&amp; document.readyState != "complete" )
+<span class="token prefix deleted">-</span>				document.documentElement.doScroll("left");
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			document.documentElement.doScroll("left");
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		} catch( error ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			return setTimeout( arguments.callee, 0 );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			setTimeout( arguments.callee, 0 );
+<span class="token prefix inserted">+</span>			return;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		// and execute any waiting functions
+<span class="token prefix unchanged"> </span>		jQuery.ready();
+<span class="token prefix unchanged"> </span>	})();
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	if ( jQuery.browser.opera )
+<span class="token prefix inserted">+</span>		document.addEventListener( "DOMContentLoaded", function () {
+<span class="token prefix inserted">+</span>			if (jQuery.isReady) return;
+<span class="token prefix inserted">+</span>			for (var i = 0; i &lt; document.styleSheets.length; i++)
+<span class="token prefix inserted">+</span>				if (document.styleSheets[i].disabled) {
+<span class="token prefix inserted">+</span>					setTimeout( arguments.callee, 0 );
+<span class="token prefix inserted">+</span>					return;
+<span class="token prefix inserted">+</span>				}
+<span class="token prefix inserted">+</span>			// and execute any waiting functions
+<span class="token prefix inserted">+</span>			jQuery.ready();
+<span class="token prefix inserted">+</span>		}, false);
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	if ( jQuery.browser.safari ) {
+<span class="token prefix inserted">+</span>		var numStyles;
+<span class="token prefix inserted">+</span>		(function(){
+<span class="token prefix inserted">+</span>			if (jQuery.isReady) return;
+<span class="token prefix inserted">+</span>			if ( document.readyState != "loaded" &amp;&amp; document.readyState != "complete" ) {
+<span class="token prefix inserted">+</span>				setTimeout( arguments.callee, 0 );
+<span class="token prefix inserted">+</span>				return;
+<span class="token prefix inserted">+</span>			}
+<span class="token prefix inserted">+</span>			if ( numStyles === undefined )
+<span class="token prefix inserted">+</span>				numStyles = jQuery("style, link[rel=stylesheet]").length;
+<span class="token prefix inserted">+</span>			if ( document.styleSheets.length != numStyles ) {
+<span class="token prefix inserted">+</span>				setTimeout( arguments.callee, 0 );
+<span class="token prefix inserted">+</span>				return;
+<span class="token prefix inserted">+</span>			}
+<span class="token prefix inserted">+</span>			// and execute any waiting functions
+<span class="token prefix inserted">+</span>			jQuery.ready();
+<span class="token prefix inserted">+</span>		})();
+<span class="token prefix inserted">+</span>	}
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	// A fallback to window.onload, that will always work
+<span class="token prefix unchanged"> </span>	jQuery.event.add( window, "load", jQuery.ready );
+<span class="token prefix unchanged"> </span>}</span></code></pre>
     </div>
   
 

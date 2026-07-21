@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery/src/css.js
+===================================================================
+--- jquery/src/css.js	(Revision 6533)
++++ jquery/src/css.js	(Working copy)
+@@ -201,7 +201,7 @@
+ 
+ 				// Put in the new values to get a computed value out
+ 				elem.runtimeStyle.left = elem.currentStyle.left;
+-				style.left = ret || 0;
++				style.left = (camelCase == "fontSize") ? "1em" : (ret || 0);
+ 				ret = style.pixelLeft + "px";
+ 
+ 				// Revert the changed values</code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,33 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 3790)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -483,8 +483,23 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>					if ( elem.nodeType == 1 )
+<span class="token prefix unchanged"> </span>						scripts = scripts.add( jQuery( "script", elem ).remove() );
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					// IE6 fails to copy the checked state over on appendChild type calls
+<span class="token prefix inserted">+</span>					if ( jQuery.browser.msie &amp;&amp; jQuery.browser.version == "6.0" ) {
+<span class="token prefix inserted">+</span>						var c = jQuery(elem).find("input").andSelf().filter(":checkbox,:radio");
+<span class="token prefix inserted">+</span>						c.each(function () {
+<span class="token prefix inserted">+</span>							this.saveChecked = this.checked;
+<span class="token prefix inserted">+</span>						});
+<span class="token prefix inserted">+</span>					}
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					// Inject the elements into the document
+<span class="token prefix unchanged"> </span>					callback.call( obj, elem );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>					// set the checked values in IE6 (from above)
+<span class="token prefix inserted">+</span>					if ( c )
+<span class="token prefix inserted">+</span>						c.each(function () {
+<span class="token prefix inserted">+</span>							if (this.saveChecked)
+<span class="token prefix inserted">+</span>								this.checked = true;
+<span class="token prefix inserted">+</span>						});
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				}
+<span class="token prefix unchanged"> </span>			});</span></code></pre>
     </div>
   
 

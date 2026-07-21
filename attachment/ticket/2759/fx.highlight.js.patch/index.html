@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: fx.highlight.js
+===================================================================
+--- fx.highlight.js	(revision 5345)
++++ fx.highlight.js	(working copy)
+@@ -23,6 +23,8 @@
+       el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
+         if(mode == "hide") el.hide();
+         $.ec.restore(el, props);
++		if (mode == "show" && jQuery.browser.msie)
++               this.style.removeAttribute('filter');
+         if(o.callback) o.callback.apply(this, arguments);
+         el.dequeue();
+       }});</code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,23 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 4628)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -852,9 +852,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>		// Opera sometimes will give the wrong display answer, this fixes it, see #2037
+<span class="token prefix unchanged"> </span>		if ( jQuery.browser.opera &amp;&amp; name == "display" ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var save = elem.style.display;
+<span class="token prefix deleted">-</span>			elem.style.display = "block";
+<span class="token prefix deleted">-</span>			elem.style.display = save;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var tmp = elem.style.outline;
+<span class="token prefix inserted">+</span>			elem.style.outline = '0 solid black';
+<span class="token prefix inserted">+</span>			elem.style.outline = tmp;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>		
+<span class="token prefix unchanged"> </span>		// Make sure we're using the right name for getting the float value</span></code></pre>
     </div>
   
 

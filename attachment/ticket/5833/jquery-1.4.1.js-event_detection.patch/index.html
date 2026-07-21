@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,18 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">*** jquery-1.4.1.js	Fri Feb  5 10:43:33 2010
+--- jquery-141-patched.js	Fri Feb  5 09:17:59 2010
+***************
+*** 930,935 ****
+--- 930,936 ----
+  	// http://thinkweb2.com/projects/prototype/detecting-event-support-without-browser-sniffing/
+  	var eventSupported = function( eventName ) { 
+  		var el = document.createElement("div"); 
++                 el = el.wrappedJSObject || el;
+  		eventName = "on" + eventName; 
+  
+  		var isSupported = (eventName in el);</code></pre>
     </div>
   
 

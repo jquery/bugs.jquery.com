@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,36 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: src/event.js
+===================================================================
+--- src/event.js	(revision 6078)
++++ src/event.js	(working copy)
+@@ -560,15 +560,23 @@
+ 
+ function liveHandler( event ){
+ 	var check = RegExp("(^|\\.)" + event.type + "(\\.|$)"),
+-		stop = true;
++		stop = true,
++		queue = [];
+ 
+ 	jQuery.each(jQuery.data(this, "events").live || [], function(i, fn){
+ 		if ( !event.isImmediatePropagationStopped() && check.test(fn.type) ) {
+ 			var elem = jQuery(event.target).closest(fn.data)[0];
+-			if ( elem && fn.call(elem, event, fn.data) === false )
+-				stop = false;
++			// make a queue to fire events later to avoid bug #3820
++			if ( elem )	queue.push({
++				elem:elem,
++				fn: fn
++			});
+ 		}
+ 	});
++	jQuery.each(queue, function() {
++		if(this['fn'].call(this['elem'], event, this['fn'].data) === false )
++			stop = false;
++	});
+ 	return stop;
+ }</code></pre>
     </div>
   
 

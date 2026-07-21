@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,44 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/test/unit/core.js
+===================================================================
+<span class="token coord">--- jquery/test/unit/core.js	(revision 5830)</span>
+<span class="token coord">+++ jquery/test/unit/core.js	(working copy)</span>
+<span class="token coord">@@ -217,6 +217,16 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	ok( !jQuery("&lt;option>test&lt;/option>")[0].selected, "Make sure that options are auto-selected #2050" );
+<span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>test("jQuery(selector, 'html')", function() {
+<span class="token prefix inserted">+</span>	expect(2);
+<span class="token prefix inserted">+</span>	var teststring = '';
+<span class="token prefix inserted">+</span>	for (var i = 0; i &lt; 10000; i++) { teststring += '22222222'; }
+<span class="token prefix inserted">+</span>	var htmlcode = '&lt;div>&lt;div id="one">one&lt;/div>&lt;div id="two">' + teststring + '&lt;/div>&lt;/div>';
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	equals(jQuery('#one', htmlcode).length, 1, "Verify that a selector matching against an HTML blob matches the correct number of times, #3178");
+<span class="token prefix inserted">+</span>	equals(jQuery('#one', htmlcode).html(), 'one', "Verify that a selector matching against an HTML blob reads correctly, #3178");
+<span class="token prefix inserted">+</span>});
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>test("jQuery('html', context)", function() {
+<span class="token prefix unchanged"> </span>	expect(1);
+<span class="token prefix unchanged"> </span>
+</span>Index: jquery/src/core.js
+===================================================================
+<span class="token coord">--- jquery/src/core.js	(revision 5830)</span>
+<span class="token coord">+++ jquery/src/core.js	(working copy)</span>
+<span class="token coord">@@ -42,8 +42,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>		// Handle HTML strings
+<span class="token prefix unchanged"> </span>		if ( typeof selector == "string" ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			// Are we dealing with HTML string or an ID?
+<span class="token prefix deleted">-</span>			var match = quickExpr.exec( selector );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			// Are we dealing with an HTML string or an ID?
+<span class="token prefix inserted">+</span>			// If selector.length is > 49996, Safari chokes (#3178).
+<span class="token prefix inserted">+</span>			// Assume that anything near that length is HTML.
+<span class="token prefix inserted">+</span>			var match = selector.length > 40000 ? { 1: selector } : quickExpr.exec( selector );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Verify a match, and that no context was specified for #id
+<span class="token prefix unchanged"> </span>			if ( match &amp;&amp; (match[1] || !context) ) {</span></code></pre>
     </div>
   
 

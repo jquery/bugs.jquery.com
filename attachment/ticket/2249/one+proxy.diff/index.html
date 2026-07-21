@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,62 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: core.js
+===================================================================
+<span class="token coord">--- core.js	(revision 5143)</span>
+<span class="token coord">+++ core.js	(working copy)</span>
+<span class="token coord">@@ -661,6 +661,12 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	cache: {},
+<span class="token prefix unchanged"> </span>	
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	proxy: function( fn, proxy ){
+<span class="token prefix inserted">+</span>		// Set the guid of unique handler to the same of original handler, so it can be removed 
+<span class="token prefix inserted">+</span>		proxy.guid = fn.guid = fn.guid || jQuery.event.guid++;
+<span class="token prefix inserted">+</span>		return proxy;//so proxy can be declared as an argument
+<span class="token prefix inserted">+</span>	},
+<span class="token prefix inserted">+</span>	
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	data: function( elem, name, data ) {
+<span class="token prefix unchanged"> </span>		elem = elem == window ?
+<span class="token prefix unchanged"> </span>			windowData :
+</span>Index: event.js
+===================================================================
+<span class="token coord">--- event.js	(revision 5143)</span>
+<span class="token coord">+++ event.js	(working copy)</span>
+<span class="token coord">@@ -26,16 +26,13 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			var fn = handler; 
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Create unique handler function, wrapped around original handler 
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			handler = function() { 
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			handler = jQuery.proxy( fn, function() { 
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				// Pass arguments and context to original handler 
+<span class="token prefix unchanged"> </span>				return fn.apply(this, arguments); 
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			};
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			});
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Store data in unique handler 
+<span class="token prefix unchanged"> </span>			handler.data = data;
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>			// Set the guid of unique handler to the same of original handler, so it can be removed 
+<span class="token prefix deleted">-</span>			handler.guid = fn.guid;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Init the element's event structure
+</span><span class="token coord">@@ -401,11 +398,12 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	one: function( type, data, fn ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var one = jQuery.proxy( fn || data, function(event) {
+<span class="token prefix inserted">+</span>			jQuery(this).unbind(event, one);
+<span class="token prefix inserted">+</span>			return (fn || data).apply( this, arguments);
+<span class="token prefix inserted">+</span>		});
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		return this.each(function(){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			jQuery.event.add( this, type, function(event) {
+<span class="token prefix deleted">-</span>				jQuery(this).unbind(event);
+<span class="token prefix deleted">-</span>				return (fn || data).apply( this, arguments);
+<span class="token prefix deleted">-</span>			}, fn &amp;&amp; data);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			jQuery.event.add( this, type, one, fn &amp;&amp; data);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		});
+<span class="token prefix unchanged"> </span>	},</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,23 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event/event.js
+===================================================================
+<span class="token coord">--- src/event/event.js	(revision 1423)</span>
+<span class="token coord">+++ src/event/event.js	(working copy)</span>
+<span class="token coord">@@ -910,7 +910,12 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		}, 10); 
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// A fallback to window.onload, that will always work
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	jQuery.event.add( window, "load", jQuery.ready );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	window.oldLoad = window.oldLoad;
+<span class="token prefix inserted">+</span>	window.onload = function(event) {
+<span class="token prefix inserted">+</span>		jQuery.ready();
+<span class="token prefix inserted">+</span>		window.oldLoad(event);
+<span class="token prefix inserted">+</span>		window.oldLoad = null;
+<span class="token prefix inserted">+</span>	}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>};</span></code></pre>
     </div>
   
 

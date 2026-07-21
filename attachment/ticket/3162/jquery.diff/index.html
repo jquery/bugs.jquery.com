@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,35 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">*** jquery-1.2.6.js	2008-07-15 10:39:38.000000000 -0700</span>
+<span class="token coord">--- jquery-1.2.6.js.debugging	2008-07-15 12:11:43.000000000 -0700</span>
+<span class="token coord">***************</span>
+<span class="token coord">*** 302,308 ****</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span> 
+<span class="token prefix unchanged"> </span> 		// Copy the events from the original to the clone
+<span class="token prefix unchanged"> </span> 		if ( events === true )
+</span><span class="token diff bold"><span class="token prefix diff">!</span> 			this.find("*").andSelf().each(function(i){
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span> 				if (this.nodeType == 3)
+<span class="token prefix unchanged"> </span> 					return;
+<span class="token prefix unchanged"> </span> 				var events = jQuery.data( this, "events" );
+</span><span class="token coord">--- 302,308 ----</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span> 
+<span class="token prefix unchanged"> </span> 		// Copy the events from the original to the clone
+<span class="token prefix unchanged"> </span> 		if ( events === true )
+</span><span class="token diff bold"><span class="token prefix diff">!</span> 			ret.find("*").andSelf().each(function(i){
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span> 				if (this.nodeType == 3)
+<span class="token prefix unchanged"> </span> 					return;
+<span class="token prefix unchanged"> </span> 				var events = jQuery.data( this, "events" );
+</span><span class="token coord">***************</span>
+<span class="token coord">*** 312,317 ****</span>
+<span class="token coord">--- 312,318 ----</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span> 						jQuery.event.add( clone[ i ], type, events[ type ][ handler ], events[ type ][ handler ].data );
+<span class="token prefix unchanged"> </span> 			});
+<span class="token prefix unchanged"> </span>       
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span> 
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span> 		// Return the cloned set
+<span class="token prefix unchanged"> </span> 		return ret;
+<span class="token prefix unchanged"> </span> 	},</span></code></pre>
     </div>
   
 

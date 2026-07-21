@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,76 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/core.js
+===================================================================
+<span class="token coord">--- test/unit/core.js	(revision 3483)</span>
+<span class="token coord">+++ test/unit/core.js	(working copy)</span>
+<span class="token coord">@@ -926,7 +926,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("addClass(String)", function() {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	expect(1);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	expect(2);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	var div = $("div");
+<span class="token prefix unchanged"> </span>	div.addClass("test");
+<span class="token prefix unchanged"> </span>	var pass = true;
+</span><span class="token coord">@@ -934,10 +934,11 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	 if ( div.get(i).className.indexOf("test") == -1 ) pass = false;
+<span class="token prefix unchanged"> </span>	}
+<span class="token prefix unchanged"> </span>	ok( pass, "Add Class" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	ok( !$('&lt;span>test&lt;/span>\n&lt;span>test&lt;/span>').addClass('test').eq(1).hasClass('test'), 'Test addClass with text nodes' );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("removeClass(String) - simple", function() {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	expect(3);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	expect(4);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	var div = $("div").addClass("test").removeClass("test"),
+<span class="token prefix unchanged"> </span>		pass = true;
+<span class="token prefix unchanged"> </span>	for ( var i = 0; i &lt; div.size(); i++ ) {
+</span><span class="token coord">@@ -957,7 +958,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	reset();
+<span class="token prefix unchanged"> </span>	var div = $("div:eq(0)").addClass("test").removeClass("");
+<span class="token prefix unchanged"> </span>	ok( div.is('.test'), "Empty string passed to removeClass" );
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	ok( !$('&lt;span>test&lt;/span>\n&lt;span>test&lt;/span>').addClass('test').removeClass('test').eq(1).hasClass('test'), 'Test removeClass with text nodes' );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("toggleClass(String)", function() {
+</span>Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 3483)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -687,23 +687,24 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		// internal only, use addClass("class")
+<span class="token prefix unchanged"> </span>		add: function( elem, classNames ) {
+<span class="token prefix unchanged"> </span>			jQuery.each((classNames || "").split(/\s+/), function(i, className){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				if ( !jQuery.className.has( elem.className, className ) )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				if ( elem &amp;&amp; elem.nodeType == 1 &amp;&amp; !jQuery.className.has( elem.className, className ) )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					elem.className += (elem.className ? " " : "") + className;
+<span class="token prefix unchanged"> </span>			});
+<span class="token prefix unchanged"> </span>		},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// internal only, use removeClass("class")
+<span class="token prefix unchanged"> </span>		remove: function( elem, classNames ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			elem.className = classNames != undefined ?
+<span class="token prefix deleted">-</span>				jQuery.grep(elem.className.split(/\s+/), function(className){
+<span class="token prefix deleted">-</span>					return !jQuery.className.has( classNames, className );	
+<span class="token prefix deleted">-</span>				}).join(" ") :
+<span class="token prefix deleted">-</span>				"";
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( elem &amp;&amp; elem.nodeType == 1 )
+<span class="token prefix inserted">+</span>				elem.className = classNames != undefined ?
+<span class="token prefix inserted">+</span>					jQuery.grep(elem.className.split(/\s+/), function(className){
+<span class="token prefix inserted">+</span>						return !jQuery.className.has( classNames, className );	
+<span class="token prefix inserted">+</span>					}).join(" ") :
+<span class="token prefix inserted">+</span>					"";
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// internal only, use is(".class")
+<span class="token prefix unchanged"> </span>		has: function( elem, className ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			return jQuery.inArray( className, (elem.className || elem).toString().split(/\s+/) ) > -1;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			return elem &amp;&amp; jQuery.inArray( className, (elem.className || elem).toString().split(/\s+/) ) > -1;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>	},</span></code></pre>
     </div>
   
 

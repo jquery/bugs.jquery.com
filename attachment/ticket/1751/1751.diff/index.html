@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,24 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/fx.js
+===================================================================
+<span class="token coord">--- src/fx.js	(revision 3501)</span>
+<span class="token coord">+++ src/fx.js	(working copy)</span>
+<span class="token coord">@@ -66,10 +66,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	animate: function( prop, speed, easing, callback ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var opt = jQuery.speed(speed, easing, callback);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var optall = jQuery.speed(speed, easing, callback);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		return this[ opt.queue === false ? "each" : "queue" ](function(){
+<span class="token prefix deleted">-</span>			opt = jQuery.extend({}, opt);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		return this[ optall.queue === false ? "each" : "queue" ](function(){
+<span class="token prefix inserted">+</span>			var opt = jQuery.extend({}, optall);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			var hidden = jQuery(this).is(":hidden"), self = this;
+<span class="token prefix unchanged"> </span>			
+<span class="token prefix unchanged"> </span>			for ( var p in prop ) {</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,39 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery/src/jquery/jquery.js
+===================================================================
+--- jquery/src/jquery/jquery.js	(revision 1854)
++++ jquery/src/jquery/jquery.js	(working copy)
+@@ -1759,6 +1759,29 @@
+ 		}
+ 
+ 		return result;
++	},
++	
++	/**
++	 * Compares two or more arrays, and returns an array with the values 
++	 * from the first array, only if the value is not present in the 
++	 * second array
++	 * 
++	 * @example $.diff( ['a','b','c'], ['b','d','e'] )
++	 * @result ['a','b']
++	 * @desc Compares two or more arrays, and returns an array with the values 
++	 * from the first array
++	 *
++	 * @name $.merge
++	 * @type Array
++	 * @param Array first The array to be filtered.
++	 * @param Array second The second array contains the items that need 
++	 * to be removed from the first array.
++	 * @cat JavaScript
++	 */
++	diff: function(a, b){
++	    return jQuery.grep(a, function(n,i){
++			return b.indexOf(n) < 0; 
++		});
+ 	}
+ });</code></pre>
     </div>
   
 

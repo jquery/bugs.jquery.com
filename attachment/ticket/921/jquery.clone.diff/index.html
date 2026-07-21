@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,45 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/jquery/jquery.js
+===================================================================
+<span class="token coord">--- src/jquery/jquery.js	(revision 1897)</span>
+<span class="token coord">+++ src/jquery/jquery.js	(working copy)</span>
+<span class="token coord">@@ -852,11 +852,30 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	 * @cat DOM/Manipulation
+<span class="token prefix unchanged"> </span>	 */
+<span class="token prefix unchanged"> </span>	clone: function(deep) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		return this.pushStack( jQuery.map( this, function(a){
+<span class="token prefix deleted">-</span>			a = a.cloneNode( deep != undefined ? deep : true );
+<span class="token prefix deleted">-</span>			a.$events = null; // drop $events expando to avoid firing incorrect events
+<span class="token prefix deleted">-</span>			return a;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		// Need to remove events on the element and its descendants
+<span class="token prefix inserted">+</span>		var $this = this.add(this.find("*"));
+<span class="token prefix inserted">+</span>		$this.each(function() {
+<span class="token prefix inserted">+</span>			this._$events = {};
+<span class="token prefix inserted">+</span>			for (var type in this.$events)
+<span class="token prefix inserted">+</span>				this._$events[type] = jQuery.extend({},this.$events[type]);
+<span class="token prefix inserted">+</span>		}).unbind();
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		// Do the clone
+<span class="token prefix inserted">+</span>		var r = this.pushStack( jQuery.map( this, function(a){
+<span class="token prefix inserted">+</span>			return a.cloneNode( deep != undefined ? deep : true );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		}) );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		// Add the events back to the original and its descendants
+<span class="token prefix inserted">+</span>		$this.each(function() {
+<span class="token prefix inserted">+</span>			var events = this._$events;
+<span class="token prefix inserted">+</span>			for (var type in events)
+<span class="token prefix inserted">+</span>				for (var handler in events[type])
+<span class="token prefix inserted">+</span>					jQuery.event.add(this, type, events[type][handler], events[type][handler].data);
+<span class="token prefix inserted">+</span>			this._$events = null;
+<span class="token prefix inserted">+</span>		});
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		// Return the cloned set
+<span class="token prefix inserted">+</span>		return r;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	/**</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,21 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: event.js
+===================================================================
+<span class="token coord">--- event.js	(revision 4750)</span>
+<span class="token coord">+++ event.js	(working copy)</span>
+<span class="token coord">@@ -321,8 +321,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>			
+<span class="token prefix unchanged"> </span>		// Add which for key events
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( !event.which &amp;&amp; ((event.charCode || event.charCode === 0) ? event.charCode : event.keyCode) )
+<span class="token prefix deleted">-</span>			event.which = event.charCode || event.keyCode;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( typeof event.which == "undefined" &amp;&amp; (typeof event.charCode != "undefined" || typeof event.keyCode != "undefined") )
+<span class="token prefix inserted">+</span>			event.which = typeof event.charCode != "undefined" ? event.charCode : event.keyCode;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		
+<span class="token prefix unchanged"> </span>		// Add metaKey to non-Mac browsers (use ctrl for PC's and Meta for Macs)
+<span class="token prefix unchanged"> </span>		if ( !event.metaKey &amp;&amp; event.ctrlKey )</span></code></pre>
     </div>
   
 

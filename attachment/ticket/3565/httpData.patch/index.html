@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,27 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">DIFF against 1.2.6 from svn:
+Index: src/ajax.js
+===================================================================
+--- src/ajax.js (revision 5918)
++++ src/ajax.js (working copy)
+@@ -478,9 +478,12 @@
+ 
+                // Get the JavaScript object, if JSON is used.
+                if ( type == "json" )
+-                       data = eval("(" + data + ")");
+-
+-               return data;
++                       // Check to make sure the JSON returned evaluates correctly
++                       try {
++                               data = eval("(" + data + ")");
++                               return data;
++                       } catch(e) {}
++                       return false;
+        },
+ 
+        // Serialize an array of form elements or a set of</code></pre>
     </div>
   
 

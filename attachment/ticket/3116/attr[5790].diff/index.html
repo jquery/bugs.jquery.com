@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: core.js
+===================================================================
+<span class="token coord">--- core.js	(revision 5790)</span>
+<span class="token coord">+++ core.js	(working copy)</span>
+<span class="token coord">@@ -1039,7 +1039,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		if (!elem || elem.nodeType == 3 || elem.nodeType == 8)
+<span class="token prefix unchanged"> </span>			return undefined;
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var notxml = !jQuery.isXMLDoc( elem ),
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var notxml = !jQuery.isXMLDoc( elem ) &amp;&amp; !jQuery.nodeName( elem, 'svg' ),
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			// Whether we are setting (or getting)
+<span class="token prefix unchanged"> </span>			set = value !== undefined,
+<span class="token prefix unchanged"> </span>			msie = jQuery.browser.msie;</span></code></pre>
     </div>
   
 

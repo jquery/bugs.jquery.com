@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,56 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/fx.js
+===================================================================
+<span class="token coord">--- src/fx.js	(revision 5762)</span>
+<span class="token coord">+++ src/fx.js	(working copy)</span>
+<span class="token coord">@@ -45,26 +45,6 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				});
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	slideDown: function(speed,callback){
+<span class="token prefix deleted">-</span>		return this.animate({height: "show"}, speed, callback);
+<span class="token prefix deleted">-</span>	},
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>	slideUp: function(speed,callback){
+<span class="token prefix deleted">-</span>		return this.animate({height: "hide"}, speed, callback);
+<span class="token prefix deleted">-</span>	},
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>	slideToggle: function(speed, callback){
+<span class="token prefix deleted">-</span>		return this.animate({height: "toggle"}, speed, callback);
+<span class="token prefix deleted">-</span>	},
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>	fadeIn: function(speed, callback){
+<span class="token prefix deleted">-</span>		return this.animate({opacity: "show"}, speed, callback);
+<span class="token prefix deleted">-</span>	},
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>	fadeOut: function(speed, callback){
+<span class="token prefix deleted">-</span>		return this.animate({opacity: "hide"}, speed, callback);
+<span class="token prefix deleted">-</span>	},
+<span class="token prefix deleted">-</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	fadeTo: function(speed,to,callback){
+<span class="token prefix unchanged"> </span>		return this.animate({opacity: to}, speed, callback);
+<span class="token prefix unchanged"> </span>	},
+</span><span class="token coord">@@ -178,6 +158,19 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>// Generate shortcuts for custom animations
+<span class="token prefix inserted">+</span>jQuery.each({
+<span class="token prefix inserted">+</span>	slideDown: { height:"show" },
+<span class="token prefix inserted">+</span>	slideUp: { height: "hide" },
+<span class="token prefix inserted">+</span>	slideToggle: { height: "toggle" },
+<span class="token prefix inserted">+</span>	fadeIn: { opacity: "show" },
+<span class="token prefix inserted">+</span>	fadeOut: { opacity: "hide" }
+<span class="token prefix inserted">+</span>}, function( name, props ){
+<span class="token prefix inserted">+</span>	jQuery.fn[ name ] = function( speed, callback ){
+<span class="token prefix inserted">+</span>		return this.animate( props, speed, callback );
+<span class="token prefix inserted">+</span>	};
+<span class="token prefix inserted">+</span>});
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>var queue = function( elem, type, array ) {
+<span class="token prefix unchanged"> </span>	if ( elem ){</span></code></pre>
     </div>
   
 

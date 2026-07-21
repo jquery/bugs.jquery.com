@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery/src/core.js
+===================================================================
+--- jquery/src/core.js	(revision 6263)
++++ jquery/src/core.js	(working copy)
+@@ -498,7 +498,7 @@
+ 	},
+ 
+ 	eq: function( i ) {
+-		return this.slice( i, +i + 1 );
++		return this.pushStack( this[i], 'eq', i );
+ 	},
+ 
+ 	slice: function() {</code></pre>
     </div>
   
 

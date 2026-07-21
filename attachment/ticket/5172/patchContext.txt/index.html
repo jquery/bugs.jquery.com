@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,23 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt">Index: core.js
+===================================================================
+--- core.js	(revision 6533)
++++ core.js	(working copy)
+@@ -90,12 +90,13 @@
+ 
+ 			// HANDLE: $(expr, $(...))
+ 			} else if ( !context || context.jquery ) {
++				if(context &amp;&amp; context.length == 1) context.context = context[0];
+ 				return (context || rootjQuery).find( selector );
+ 
+ 			// HANDLE: $(expr, context)
+ 			// (which is just equivalent to: $(expr, $(context))
+ 			} else {
+-				return jQuery( context ).find( selector );
++				return jQuery( selector, jQuery( context ));
+ 			}</code></pre>
     </div>
   
 

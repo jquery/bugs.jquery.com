@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,73 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery.fastTrigger.js
+===================================================================
+<span class="token coord">--- jquery.fastTrigger.js	(revision 5641)</span>
+<span class="token coord">+++ jquery.fastTrigger.js	(working copy)</span>
+<span class="token coord">@@ -10,33 +10,38 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span> * @version 1.0.0
+<span class="token prefix unchanged"> </span> */
+<span class="token prefix unchanged"> </span>;(function( $ ){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	
+<span class="token prefix deleted">-</span>	//this is a fake event object, will stay with us all along, don't break it
+<span class="token prefix deleted">-</span>	var event = {
+<span class="token prefix deleted">-</span>		//no need for real data, what data would you expect from a programmatic trigger
+<span class="token prefix deleted">-</span>		pageX:0,
+<span class="token prefix deleted">-</span>		pageY:0,
+<span class="token prefix deleted">-</span>		which:0,
+<span class="token prefix deleted">-</span>		button:0,
+<span class="token prefix deleted">-</span>		metaKey:false,
+<span class="token prefix deleted">-</span>		ctrlKey:false,
+<span class="token prefix deleted">-</span>		charCode:' ',
+<span class="token prefix deleted">-</span>		keyCode:0,
+<span class="token prefix deleted">-</span>		//no need for real functions
+<span class="token prefix deleted">-</span>		preventDefault:function(){},
+<span class="token prefix deleted">-</span>		stopPropagation:function(){}
+<span class="token prefix deleted">-</span>	};
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	function makeEvent() {
+<span class="token prefix inserted">+</span>		//this is a fake event object, will stay with us all along, don't break it
+<span class="token prefix inserted">+</span>		var event = {
+<span class="token prefix inserted">+</span>			//no need for real data, what data would you expect from a programatic trigger
+<span class="token prefix inserted">+</span>			pageX:0,
+<span class="token prefix inserted">+</span>			pageY:0,
+<span class="token prefix inserted">+</span>			which:0,
+<span class="token prefix inserted">+</span>			button:0,
+<span class="token prefix inserted">+</span>			metaKey:false,
+<span class="token prefix inserted">+</span>			ctrlKey:false,
+<span class="token prefix inserted">+</span>			charCode:' ',
+<span class="token prefix inserted">+</span>			keyCode:0,
+<span class="token prefix inserted">+</span>			//no need for real functions
+<span class="token prefix inserted">+</span>			preventDefault:function(){},
+<span class="token prefix inserted">+</span>			stopPropagation:function(){}
+<span class="token prefix inserted">+</span>		};
+<span class="token prefix inserted">+</span>		
+<span class="token prefix inserted">+</span>		return event;
+<span class="token prefix inserted">+</span>	}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	$.fn.fastTrigger = function( type, args ){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var e = event,
+<span class="token prefix deleted">-</span>			ns, any = true;//any is the same as "not-exclusive"
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var e, ns, any = true;//any is the same as "not-exclusive"
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if( !args || !args.length )//what if args is a string ? args CAN'T be a string (docs.jquery.com).
+<span class="token prefix deleted">-</span>			args = null;//args must be an array, or nothing
+<span class="token prefix deleted">-</span>		else if( args[0].preventDefault )
+<span class="token prefix deleted">-</span>			e = args[0];		
+<span class="token prefix deleted">-</span>		else
+<span class="token prefix deleted">-</span>			args.unshift( e );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if( !args || !args.length ) {//what if args is a string ? args CAN'T be a string (docs.jquery.com).
+<span class="token prefix inserted">+</span>			args = null;//args must be an array, or nothing
+<span class="token prefix inserted">+</span>			e = makeEvent();
+<span class="token prefix inserted">+</span>		} else if( args[0].preventDefault ) {
+<span class="token prefix inserted">+</span>			e = args[0];
+<span class="token prefix inserted">+</span>		} else {
+<span class="token prefix inserted">+</span>			e = makeEvent();
+<span class="token prefix inserted">+</span>			args.unshift( e );
+<span class="token prefix inserted">+</span>		}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		
+<span class="token prefix unchanged"> </span>		if( type.indexOf('!') != -1 ){
+<span class="token prefix unchanged"> </span>			any = false;//exclusive</span></code></pre>
     </div>
   
 

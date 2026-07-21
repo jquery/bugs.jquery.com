@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,34 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery-1.2.6.js
+===================================================================
+--- jquery-1.2.6.js	(revision 11843)
++++ jquery-1.2.6.js	(working copy)
+@@ -658,6 +658,14 @@
+ 
+ 	cache: {},
+ 
++	queryData: function(elem, name) {
++		elem = elem == window ?
++				windowData :
++				elem;
++		
++		return (jQuery.cache[elem[expando]] || {})[name];
++	},
++	
+ 	data: function( elem, name, data ) {
+ 		elem = elem == window ?
+ 			windowData :
+@@ -1913,7 +1921,7 @@
+ 		if ( elem.nodeType == 3 || elem.nodeType == 8 )
+ 			return;
+ 
+-		var events = jQuery.data(elem, "events"), ret, index;
++		var events = jQuery.queryData(elem, "events"), ret, index;
+ 
+ 		if ( events ) {
+ 			// Unbind all events for the element</code></pre>
     </div>
   
 

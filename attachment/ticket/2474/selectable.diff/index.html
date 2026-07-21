@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,38 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- ui.selectable.js.old	2008-03-07 20:35:01.000000000 +0100</span>
+<span class="token coord">+++ ui.selectable.js	2008-03-07 20:03:31.000000000 +0100</span>
+<span class="token coord">@@ -5,6 +5,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	$.fn.extend({
+<span class="token prefix unchanged"> </span>		selectable: function(options) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var args = Array.prototype.slice.call(arguments, 1);
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			return this.each(function() {
+<span class="token prefix unchanged"> </span>				if (typeof options == "string") {
+<span class="token prefix unchanged"> </span>					var select = $.data(this, "ui-selectable");
+</span><span class="token coord">@@ -20,8 +22,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		var instance = this;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		this.element = $(element);
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		$.data(this.element, "ui-selectable", this);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		$.data(element, "ui-selectable", this);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		this.element.addClass("ui-selectable");
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		this.options = $.extend({
+</span><span class="token coord">@@ -91,8 +92,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			this.element
+<span class="token prefix unchanged"> </span>				.removeClass("ui-selectable ui-selectable-disabled")
+<span class="token prefix unchanged"> </span>				.removeData("ui-selectable")
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				.unbind(".selectable");
+<span class="token prefix deleted">-</span>			this.removeMouseInteraction();
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				.unbind(".selectable")
+<span class="token prefix inserted">+</span>				.removeMouseInteraction();
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		},
+<span class="token prefix unchanged"> </span>		enable: function() {
+<span class="token prefix unchanged"> </span>			this.element.removeClass("ui-selectable-disabled");</span></code></pre>
     </div>
   
 

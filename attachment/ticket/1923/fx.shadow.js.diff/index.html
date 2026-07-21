@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,151 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: fx/current/fx.shadow.js
+===================================================================
+<span class="token coord">--- fx/current/fx.shadow.js	(revision 3814)</span>
+<span class="token coord">+++ fx/current/fx.shadow.js	(working copy)</span>
+<span class="token coord">@@ -3,80 +3,92 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	//Make nodes selectable by expression
+<span class="token prefix unchanged"> </span>	$.extend($.expr[':'], { shadowed: "(' '+a.className+' ').indexOf(' fx-shadowed ')" });
+<span class="token prefix unchanged"> </span>	
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	$.fn.shadowEnable = function() { if($(this[0]).next().is(".fx-shadow")) $(this[0]).next().show(); }
+<span class="token prefix deleted">-</span>	$.fn.shadowDisable = function() { if($(this[0]).next().is(".fx-shadow")) $(this[0]).next().hide(); }
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	$.fn.shadowEnable  = function() { $(this[0]).next(".fx-shadow").show(); }
+<span class="token prefix inserted">+</span>	$.fn.shadowDisable = function() { $(this[0]).next(".fx-shadow").hide(); }
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	$.fn.shadow = function(options) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		options = $.extend({
+<span class="token prefix inserted">+</span>			offset:  1,
+<span class="token prefix inserted">+</span>			opacity: 0.2,
+<span class="token prefix inserted">+</span>			color:   "#000",
+<span class="token prefix inserted">+</span>			monitor: false
+<span class="token prefix inserted">+</span>		}, options || {});
+<span class="token prefix inserted">+</span>		options.offset -= 1;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		options = options || {};
+<span class="token prefix deleted">-</span>		options.offset = options.offset ? options.offset : 0;
+<span class="token prefix deleted">-</span>		options.opacity = options.opacity ? options.opacity : 0.2;
+<span class="token prefix deleted">-</span>		options.color = options.color || "#000";
+<span class="token prefix deleted">-</span>		
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		return this.each(function() {
+<span class="token prefix unchanged"> </span>			
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var cur = $(this);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			// Remove an existing shadow if it exists
+<span class="token prefix inserted">+</span>			$(this[0]).next(".fx-shadow").remove();
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var $element = $(this),
+<span class="token prefix inserted">+</span>			
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			//Create a shadow element
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var shadow = $("&lt;div class='fx-shadow' style='position: relative;'>&lt;/div>"); cur.after(shadow);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			$shadow = $("&lt;div class='fx-shadow' style='position: relative;'>&lt;/div>").insertAfter($element);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			
+<span class="token prefix unchanged"> </span>			//Figure the base height and width
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var baseWidth = cur.outerWidth();
+<span class="token prefix deleted">-</span>			var baseHeight = cur.outerHeight();
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			baseWidth  = $element.outerWidth(),
+<span class="token prefix inserted">+</span>			baseHeight = $element.outerHeight(),
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			
+<span class="token prefix unchanged"> </span>			//get the offset
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var position = cur.position();
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			position = $element.position(),
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			//get z-index
+<span class="token prefix inserted">+</span>			zIndex = parseInt($element.css("zIndex")) || 0;
+<span class="token prefix inserted">+</span>			
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			//Append smooth corners
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			$('&lt;div class="fx-shadow-color fx-shadow-layer-1">&lt;/div>').css({ position: 'absolute', opacity: options.opacity-0.05, left: 5+options.offset, top: 5+options.offset, width: baseWidth+1, height: baseHeight+1 }).appendTo(shadow);
+<span class="token prefix deleted">-</span>			$('&lt;div class="fx-shadow-color fx-shadow-layer-2">&lt;/div>').css({ position: 'absolute', opacity: options.opacity-0.1, left: 7+options.offset, top: 7+options.offset, width: baseWidth, height: baseHeight-3 }).appendTo(shadow);
+<span class="token prefix deleted">-</span>			$('&lt;div class="fx-shadow-color fx-shadow-layer-3">&lt;/div>').css({ position: 'absolute', opacity: options.opacity-0.1, left: 7+options.offset, top: 7+options.offset, width: baseWidth-3, height: baseHeight }).appendTo(shadow);
+<span class="token prefix deleted">-</span>			$('&lt;div class="fx-shadow-color fx-shadow-layer-4">&lt;/div>').css({ position: 'absolute', opacity: options.opacity, left: 6+options.offset, top: 6+options.offset, width: baseWidth-1, height: baseHeight-1 }).appendTo(shadow);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			$('&lt;div class="fx-shadow-color fx-shadow-layer-1">&lt;/div>').css({ position: 'absolute', opacity: options.opacity - 0.05,  left: options.offset,     top: options.offset,     width: baseWidth + 1, height: baseHeight + 1 }).appendTo($shadow);
+<span class="token prefix inserted">+</span>			$('&lt;div class="fx-shadow-color fx-shadow-layer-2">&lt;/div>').css({ position: 'absolute', opacity: options.opacity - 0.10,  left: options.offset + 2, top: options.offset + 2, width: baseWidth,     height: baseHeight - 3 }).appendTo($shadow);
+<span class="token prefix inserted">+</span>			$('&lt;div class="fx-shadow-color fx-shadow-layer-3">&lt;/div>').css({ position: 'absolute', opacity: options.opacity - 0.10,  left: options.offset + 2, top: options.offset + 2, width: baseWidth - 3, height: baseHeight     }).appendTo($shadow);
+<span class="token prefix inserted">+</span>			$('&lt;div class="fx-shadow-color fx-shadow-layer-4">&lt;/div>').css({ position: 'absolute', opacity: options.opacity,         left: options.offset + 1, top: options.offset + 1, width: baseWidth - 1, height: baseHeight - 1 }).appendTo($shadow);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			
+<span class="token prefix unchanged"> </span>			//Add color
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			$("div.fx-shadow-color", shadow).css("background-color", options.color);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			$("div.fx-shadow-color", $shadow).css("background-color", options.color);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			//Determine the stack order (attention: the zIndex will get one higher!)
+<span class="token prefix deleted">-</span>			if(!cur.css("zIndex") || cur.css("zIndex") == "auto") {
+<span class="token prefix deleted">-</span>				var stack = 0;
+<span class="token prefix deleted">-</span>				cur.css("position", (cur.css("position") == "static" ? "relative" : cur.css("position"))).css("z-index", "1");
+<span class="token prefix deleted">-</span>			} else {
+<span class="token prefix deleted">-</span>				var stack = parseInt(cur.css("zIndex"));
+<span class="token prefix deleted">-</span>				cur.css("zIndex", stack+1);
+<span class="token prefix deleted">-</span>			}
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			//Set zIndex +1 and make sure position is at least relative
+<span class="token prefix inserted">+</span>			//Attention: the zIndex will get one higher!
+<span class="token prefix inserted">+</span>			$element
+<span class="token prefix inserted">+</span>				.css({
+<span class="token prefix inserted">+</span>					zIndex: zIndex + 1,
+<span class="token prefix inserted">+</span>					position: ($element.css("position") == "static" ? "relative" : "")
+<span class="token prefix inserted">+</span>				});
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			
+<span class="token prefix unchanged"> </span>			//Copy the original z-index and position to the clone
+<span class="token prefix unchanged"> </span>			//alert(shadow); If you insert this alert, opera will time correctly!!
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			shadow.css({
+<span class="token prefix deleted">-</span>				position: "absolute",
+<span class="token prefix deleted">-</span>				zIndex: stack,
+<span class="token prefix deleted">-</span>				left: position.left,
+<span class="token prefix deleted">-</span>				top: position.top,
+<span class="token prefix deleted">-</span>				width: baseWidth,
+<span class="token prefix deleted">-</span>				height: baseHeight,
+<span class="token prefix deleted">-</span>				marginLeft: cur.css("marginLeft"),
+<span class="token prefix deleted">-</span>				marginRight: cur.css("marginRight"),
+<span class="token prefix deleted">-</span>				marginBottom: cur.css("marginBottom"),
+<span class="token prefix deleted">-</span>				marginTop: cur.css("marginTop")
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			$shadow.css({
+<span class="token prefix inserted">+</span>				position:     "absolute",
+<span class="token prefix inserted">+</span>				zIndex:       zIndex,
+<span class="token prefix inserted">+</span>				left:         position.left+"px",
+<span class="token prefix inserted">+</span>				top:          position.top+"px",
+<span class="token prefix inserted">+</span>				width:        baseWidth,
+<span class="token prefix inserted">+</span>				height:       baseHeight,
+<span class="token prefix inserted">+</span>				marginLeft:   $element.css("marginLeft"),
+<span class="token prefix inserted">+</span>				marginRight:  $element.css("marginRight"),
+<span class="token prefix inserted">+</span>				marginBottom: $element.css("marginBottom"),
+<span class="token prefix inserted">+</span>				marginTop:    $element.css("marginTop")
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			});
+<span class="token prefix unchanged"> </span>			
+<span class="token prefix unchanged"> </span>			
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			function rearrangeShadow(el,sh) {
+<span class="token prefix deleted">-</span>				var $el = $(el);
+<span class="token prefix deleted">-</span>				$(sh).css($el.position());
+<span class="token prefix deleted">-</span>				$(sh).children().css({ height: $el.outerHeight()+"px", width: $el.outerWidth()+"px" });
+<span class="token prefix deleted">-</span>			}
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( options.monitor ) {
+<span class="token prefix inserted">+</span>				function rearrangeShadow() {
+<span class="token prefix inserted">+</span>					var $element = $(this), $shadow = $element.next();
+<span class="token prefix inserted">+</span>					// $shadow.css( $element.position() );
+<span class="token prefix inserted">+</span>					$shadow.css({
+<span class="token prefix inserted">+</span>						top:  parseInt($element.css("top"))  +"px",
+<span class="token prefix inserted">+</span>						left: parseInt($element.css("left")) +"px"
+<span class="token prefix inserted">+</span>					})
+<span class="token prefix inserted">+</span>					$(">*", $shadow).css({ height: this.offsetHeight+"px", width: this.offsetWidth+"px" });
+<span class="token prefix inserted">+</span>				}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if($.browser.msie) {
+<span class="token prefix deleted">-</span>				//Add dynamic css expressions
+<span class="token prefix deleted">-</span>				shadow[0].style.setExpression("left","parseInt(jQuery(this.previousSibling).css('left'))+'px' || jQuery(this.previousSibling).position().left");
+<span class="token prefix deleted">-</span>				shadow[0].style.setExpression("top","parseInt(jQuery(this.previousSibling).css('top'))+'px' || jQuery(this.previousSibling).position().top");
+<span class="token prefix deleted">-</span>			} else {
+<span class="token prefix deleted">-</span>				//Bind events for good browsers
+<span class="token prefix deleted">-</span>				this.addEventListener("DOMAttrModified",function() { rearrangeShadow(this,shadow); },false);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				//Attempt to use DOMAttrModified event
+<span class="token prefix inserted">+</span>				$element.bind("DOMAttrModified", rearrangeShadow);
+<span class="token prefix inserted">+</span>			
+<span class="token prefix inserted">+</span>				// Use expressions if they exist (IE)
+<span class="token prefix inserted">+</span>				if( $shadow[0].style.setExpression ) {
+<span class="token prefix inserted">+</span>					$shadow[0].style.setExpression("left", "parseInt(jQuery(this.previousSibling).css('left')) + 'px'");
+<span class="token prefix inserted">+</span>					$shadow[0].style.setExpression("top" , "parseInt(jQuery(this.previousSibling).css('top') ) + 'px'");
+<span class="token prefix inserted">+</span>				}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			}
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		});
+<span class="token prefix unchanged"> </span>	};</span></code></pre>
     </div>
   
 

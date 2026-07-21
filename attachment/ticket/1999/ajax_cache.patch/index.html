@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,47 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: ajax.js
+===================================================================
+--- ajax.js	(revision 4000)
++++ ajax.js	(working copy)
+@@ -197,8 +197,34 @@
+ 		if ( s.dataType == "script" && s.cache == null )
+ 			s.cache = false;
+ 
+-		if ( s.cache === false && s.type.toLowerCase() == "get" )
+-			s.url += (s.url.match(/\?/) ? "&" : "?") + "_=" + (new Date()).getTime();
++		if ( s.cache === false && s.type.toLowerCase() == "get" ) {
++			var now = (new Date()).getTime();
++			if (s.url.match(/\?/)) {
++				// Query string exists, check for cache key
++				if (s.url.match(/_=/)) {
++					// Cache key exists, replace the value
++					var parts = s.url.split("?");
++					var params = parts[1].split("&");
++					var newParams = [];
++					
++					s.url = parts[0] + "?"; // Building the new url
++					$(params).each(function (i) {
++						if (this.match(/_=/)) {
++						   newParams[i] = "_=" + now; // Insert new value
++						} else {
++							newParams[i] = this; // Reuse existing value
++						}
++					});
++					s.url += newParams.join("&");
++				} else {
++					// cache key does not exist, add it
++					s.url += "&_=" + now;
++				}
++			} else {
++				// query string does not exist, add cache key
++				s.url += "?_=" + now;
++			}
++		}
+ 
+ 		// If data is available, append data to url for get requests
+ 		if ( s.data && s.type.toLowerCase() == "get" ) {</code></pre>
     </div>
   
 

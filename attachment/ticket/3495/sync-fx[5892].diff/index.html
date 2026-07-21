@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,48 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: fx.js
+===================================================================
+<span class="token coord">--- fx.js	(revision 5892)</span>
+<span class="token coord">+++ fx.js	(working copy)</span>
+<span class="token coord">@@ -208,9 +208,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			easing: fn &amp;&amp; easing || easing &amp;&amp; easing.constructor != Function &amp;&amp; easing
+<span class="token prefix unchanged"> </span>		};
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		opt.duration = (opt.duration &amp;&amp; opt.duration.constructor == Number ?
+<span class="token prefix deleted">-</span>			opt.duration :
+<span class="token prefix deleted">-</span>			jQuery.fx.speeds[opt.duration]) || jQuery.fx.speeds._default;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		opt.duration = typeof opt.duration == 'number' ? opt.duration :
+<span class="token prefix inserted">+</span>			jQuery.fx.speeds[opt.duration] || jQuery.fx.speeds._default;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Queueing
+<span class="token prefix unchanged"> </span>		opt.old = opt.complete;
+</span><span class="token coord">@@ -278,7 +277,6 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		this.unit = unit || this.unit || "px";
+<span class="token prefix unchanged"> </span>		this.now = this.start;
+<span class="token prefix unchanged"> </span>		this.pos = this.state = 0;
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		this.update();
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		var self = this;
+<span class="token prefix unchanged"> </span>		function t(gotoEnd){
+</span><span class="token coord">@@ -289,7 +287,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		jQuery.timers.push(t);
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( jQuery.timerId == null ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( t() &amp;&amp; jQuery.timerId == null ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			jQuery.timerId = setInterval(function(){
+<span class="token prefix unchanged"> </span>				var timers = jQuery.timers;
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -337,7 +335,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	step: function(gotoEnd){
+<span class="token prefix unchanged"> </span>		var t = now();
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( gotoEnd || t > this.options.duration + this.startTime ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( gotoEnd || t >= this.options.duration + this.startTime ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			this.now = this.end;
+<span class="token prefix unchanged"> </span>			this.pos = this.state = 1;
+<span class="token prefix unchanged"> </span>			this.update();</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,21 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/selector.js
+===================================================================
+<span class="token coord">--- src/selector.js	(revision 5084)</span>
+<span class="token coord">+++ src/selector.js	(working copy)</span>
+<span class="token coord">@@ -330,6 +330,11 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			else if ( m[1] == "." )
+<span class="token prefix unchanged"> </span>				r = jQuery.classFilter(r, m[2], not);
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			else if ( !not &amp;&amp; m[1] == '[' &amp;&amp; m[2] == 'name' &amp;&amp; m[3] == '=' )//special case, filter by exact name
+<span class="token prefix inserted">+</span>				r = jQuery.grep( document.getElementsByName(m[5]), function(elem){
+<span class="token prefix inserted">+</span>					return jQuery.inArray( elem, r ) != -1;	
+<span class="token prefix inserted">+</span>				});
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			else if ( m[1] == "[" ) {
+<span class="token prefix unchanged"> </span>				var tmp = [], type = m[3];</span></code></pre>
     </div>
   
 

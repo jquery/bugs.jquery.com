@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,43 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/selector.js
+===================================================================
+<span class="token coord">--- test/unit/selector.js	(revision 4032)</span>
+<span class="token coord">+++ test/unit/selector.js	(working copy)</span>
+<span class="token coord">@@ -8,7 +8,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		if ( all[i].nodeType == 8 )
+<span class="token prefix unchanged"> </span>			good = false;
+<span class="token prefix unchanged"> </span>	ok( good, "Select all elements, no comment nodes" );
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	t( "Element Selector", "p", ["firstp","ap","sndp","en","sap","first"] );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	// make sure is case insensitive as well
+<span class="token prefix inserted">+</span>	t( "Element Selector", "P", ["firstp","ap","sndp","en","sap","first"] );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	t( "Element Selector", "body", ["body"] );
+<span class="token prefix unchanged"> </span>	t( "Element Selector", "html", ["html"] );
+<span class="token prefix unchanged"> </span>	t( "Parent Element", "div p", ["firstp","ap","sndp","en","sap","first"] );
+</span>Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 4032)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -586,8 +586,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	// check if an element is in a (or is an) XML document
+<span class="token prefix unchanged"> </span>	isXMLDoc: function( elem ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		return elem.documentElement &amp;&amp; !elem.body ||
+<span class="token prefix deleted">-</span>			elem.tagName &amp;&amp; elem.ownerDocument &amp;&amp; !elem.ownerDocument.body;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		return elem &amp;&amp; elem.documentElement &amp;&amp; !elem.body ||
+<span class="token prefix inserted">+</span>			elem &amp;&amp; elem.tagName &amp;&amp; elem.ownerDocument &amp;&amp; !elem.ownerDocument.body;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Evalulates a script in a global context
+</span><span class="token coord">@@ -612,6 +612,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	nodeName: function( elem, name ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if (jQuery.isXMLDoc(elem.ownerDocument))
+<span class="token prefix inserted">+</span>			return elem.nodeName == name;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		return elem.nodeName &amp;&amp; elem.nodeName.toUpperCase() == name.toUpperCase();
+<span class="token prefix unchanged"> </span>	},</span></code></pre>
     </div>
   
 

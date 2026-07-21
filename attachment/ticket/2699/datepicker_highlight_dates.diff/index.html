@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,49 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: datepicker/core/ui.datepicker.js
+===================================================================
+<span class="token coord">--- datepicker/core/ui.datepicker.js	(revision 5254)</span>
+<span class="token coord">+++ datepicker/core/ui.datepicker.js	(working copy)</span>
+<span class="token coord">@@ -93,7 +93,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		numberOfMonths: 1, // Number of months to show at a time
+<span class="token prefix unchanged"> </span>		stepMonths: 1, // Number of months to step back/forward
+<span class="token prefix unchanged"> </span>		rangeSelect: false, // Allows for selecting a date range on one date picker
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		rangeSeparator: ' - ' // Text between two dates in a range
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		rangeSeparator: ' - ', // Text between two dates in a range
+<span class="token prefix inserted">+</span>		hlDates: [] // Emphasize/highlight provided dates
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	};
+<span class="token prefix unchanged"> </span>	$.extend(this._defaults, this.regional['']);
+<span class="token prefix unchanged"> </span>	this._datepickerDiv = $('&lt;div id="datepicker_div">');
+</span><span class="token coord">@@ -1106,6 +1107,13 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	_generateDatepicker: function() {
+<span class="token prefix unchanged"> </span>		var today = new Date();
+<span class="token prefix unchanged"> </span>		today = new Date(today.getFullYear(), today.getMonth(), today.getDate()); // clear time
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var hlDays = [];
+<span class="token prefix inserted">+</span>		var hlDates = this._get('hlDates');
+<span class="token prefix inserted">+</span>		for (var i=0; i &lt; hlDates.length; i++) {
+<span class="token prefix inserted">+</span>			var d = new Date(hlDates[i]);
+<span class="token prefix inserted">+</span>			hlDays[i] = d.getTime();
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		var showStatus = this._get('showStatus');
+<span class="token prefix unchanged"> </span>		var isRTL = this._get('isRTL');
+<span class="token prefix unchanged"> </span>		// build the date picker HTML
+</span><span class="token coord">@@ -1216,6 +1224,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>							(otherMonth &amp;&amp; !showOtherMonths ? '' : ' ' + daySettings[1] + // highlight custom dates
+<span class="token prefix unchanged"> </span>							(printDate.getTime() >= currentDate.getTime() &amp;&amp; printDate.getTime() &lt;= endDate.getTime() ?  // in current range
+<span class="token prefix unchanged"> </span>							' datepicker_currentDay' : '') + // highlight selected day
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>							(hlDays.indexOf(printDate.getTime()) > -1 ? ' datepicker_today' : '') + // highlight user supplied dates
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>							(printDate.getTime() == today.getTime() ? ' datepicker_today' : '')) + '"' + // highlight today (if different)
+<span class="token prefix unchanged"> </span>							(unselectable ? '' : ' onmouseover="jQuery(this).addClass(\'datepicker_daysCellOver\');' +
+<span class="token prefix unchanged"> </span>							(!showStatus || (otherMonth &amp;&amp; !showOtherMonths) ? '' : 'jQuery(\'#datepicker_status_' +
+</span><span class="token coord">@@ -1436,4 +1445,4 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>$.datepicker = new Datepicker(); // singleton instance
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>})(jQuery);
+</span>\ No newline at end of file
+<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>})(jQuery);</span></code></pre>
     </div>
   
 

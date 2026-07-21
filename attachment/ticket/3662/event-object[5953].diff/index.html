@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,350 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event.js
+===================================================================
+<span class="token coord">--- src/event.js	(revision 5953)</span>
+<span class="token coord">+++ src/event.js	(working copy)</span>
+<span class="token coord">@@ -155,69 +155,59 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	trigger: function(type, data, elem, donative, extra) {
+<span class="token prefix deleted">-</span>		// Clone the incoming data, if any
+<span class="token prefix deleted">-</span>		data = jQuery.makeArray(data);
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		if ( type.indexOf("!") >= 0 ) {
+<span class="token prefix deleted">-</span>			type = type.slice(0, -1);
+<span class="token prefix deleted">-</span>			var exclusive = true;
+<span class="token prefix deleted">-</span>		}
+<span class="token prefix deleted">-</span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	trigger: function( e, args, elem, donative, extra) {
+<span class="token prefix inserted">+</span>		// Event object or event type
+<span class="token prefix inserted">+</span>		var type = e.type || e;
+<span class="token prefix inserted">+</span>		
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		// Handle a global trigger
+<span class="token prefix unchanged"> </span>		if ( !elem ) {
+<span class="token prefix unchanged"> </span>			// Only trigger if we've ever bound an event for it
+<span class="token prefix unchanged"> </span>			if ( this.global[type] )
+<span class="token prefix unchanged"> </span>				jQuery.each( jQuery.cache, function(){
+<span class="token prefix unchanged"> </span>					if ( this.events &amp;&amp; this.events[type] )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>						jQuery.event.trigger( type, data, this.handle.elem );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>						jQuery.event.trigger( type, args, this.handle.elem );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Handle triggering a single element
+<span class="token prefix unchanged"> </span>		} else {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			// don't do events on text and comment nodes
+<span class="token prefix unchanged"> </span>			if ( elem.nodeType == 3 || elem.nodeType == 8 )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				return undefined;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				return;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var val, ret, fn = jQuery.isFunction( elem[ type ] || null ),
+<span class="token prefix deleted">-</span>				// Check to see if we need to provide a fake event, or not
+<span class="token prefix deleted">-</span>				event = !data[0] || !data[0].preventDefault;
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>			// Pass along a fake event
+<span class="token prefix deleted">-</span>			if ( event ) {
+<span class="token prefix deleted">-</span>				data.unshift({
+<span class="token prefix deleted">-</span>					type: type,
+<span class="token prefix deleted">-</span>					target: elem,
+<span class="token prefix deleted">-</span>					preventDefault: function(){},
+<span class="token prefix deleted">-</span>					stopPropagation: function(){},
+<span class="token prefix deleted">-</span>					stopImmediatePropagation:stopImmediatePropagation,
+<span class="token prefix deleted">-</span>					timeStamp: now()
+<span class="token prefix deleted">-</span>				});
+<span class="token prefix deleted">-</span>				data[0][expando] = true; // no need to fix fake event
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			// Clone the incoming args, if any
+<span class="token prefix inserted">+</span>			args = jQuery.makeArray(args);
+<span class="token prefix inserted">+</span>			
+<span class="token prefix inserted">+</span>			if ( type.indexOf("!") >= 0 ) {
+<span class="token prefix inserted">+</span>				type = type.slice(0, -1);
+<span class="token prefix inserted">+</span>				var exclusive = true;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			}
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			
+<span class="token prefix inserted">+</span>			if( !e.type )
+<span class="token prefix inserted">+</span>				e = new jQuery.Event(type);
+<span class="token prefix inserted">+</span>			e.target = elem;
+<span class="token prefix inserted">+</span>			e.exclusive = exclusive;
+<span class="token prefix inserted">+</span>			
+<span class="token prefix inserted">+</span>			args.unshift( e );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			// Enforce the right trigger type
+<span class="token prefix deleted">-</span>			data[0].type = type;
+<span class="token prefix deleted">-</span>			if ( exclusive )
+<span class="token prefix deleted">-</span>				data[0].exclusive = true;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var val, ret, fn = jQuery.isFunction( elem[ type ] );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Trigger the event, it is assumed that "handle" is a function
+<span class="token prefix unchanged"> </span>			var handle = jQuery.data(elem, "handle");
+<span class="token prefix unchanged"> </span>			if ( handle )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				val = handle.apply( elem, data );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				val = handle.apply( elem, args );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Handle triggering native .onfoo handlers (and on links since we don't call .click() for links)
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( (!fn || (jQuery.nodeName(elem, 'a') &amp;&amp; type == "click")) &amp;&amp; elem["on"+type] &amp;&amp; elem["on"+type].apply( elem, data ) === false )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( (!fn || (jQuery.nodeName(elem, 'a') &amp;&amp; type == "click")) &amp;&amp; elem["on"+type] &amp;&amp; elem["on"+type].apply( elem, args ) === false )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				val = false;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Extra functions don't get the custom event object
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( event )
+<span class="token prefix deleted">-</span>				data.shift();
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			args.shift();
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Handle triggering of extra function
+<span class="token prefix unchanged"> </span>			if ( extra &amp;&amp; jQuery.isFunction( extra ) ) {
+<span class="token prefix unchanged"> </span>				// call the extra function and tack the current return value on the end for possible inspection
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				ret = extra.apply( elem, val == null ? data : data.concat( val ) );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				ret = extra.apply( elem, val == null ? args : args.concat( val ) );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				// if anything is returned, give it precedence and have it overwrite the previous value
+<span class="token prefix unchanged"> </span>				if ( ret !== undefined )
+<span class="token prefix unchanged"> </span>					val = ret;
+</span><span class="token coord">@@ -239,31 +229,29 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	handle: function(event) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		// returned undefined or false
+<span class="token prefix deleted">-</span>		var val, ret, namespace, all, handlers;
+<span class="token prefix deleted">-</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		event = arguments[0] = jQuery.event.fix( event || window.event );
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var val, 
+<span class="token prefix inserted">+</span>			ns = event.type.split("."),
+<span class="token prefix inserted">+</span>			// Cache this now, all = true means, any handler
+<span class="token prefix inserted">+</span>			all = !ns[1] &amp;&amp; !event.exclusive, 
+<span class="token prefix inserted">+</span>			handlers = ( jQuery.data(this, "events") || {} )[ns[0]];
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		// Namespaced event handlers
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		namespace = event.type.split(".");
+<span class="token prefix deleted">-</span>		event.type = namespace[0];
+<span class="token prefix deleted">-</span>		namespace = namespace[1];
+<span class="token prefix deleted">-</span>		// Cache this now, all = true means, any handler
+<span class="token prefix deleted">-</span>		all = !namespace &amp;&amp; !event.exclusive;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		event.type = ns[0];
+<span class="token prefix inserted">+</span>		ns = ns[1];
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		handlers = ( jQuery.data(this, "events") || {} )[event.type];
+<span class="token prefix deleted">-</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		for ( var j in handlers ) {
+<span class="token prefix unchanged"> </span>			var handler = handlers[j];
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Filter the functions by class
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( all || handler.type == namespace ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( all || handler.type == ns ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				// Pass in a reference to the handler function itself
+<span class="token prefix unchanged"> </span>				// So that we can later remove it
+<span class="token prefix unchanged"> </span>				event.handler = handler;
+<span class="token prefix unchanged"> </span>				event.data = handler.data;
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				ret = handler.apply( this, arguments );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				var ret = handler.apply( this, arguments );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				if ( val !== false )
+<span class="token prefix unchanged"> </span>					val = ret;
+</span><span class="token coord">@@ -282,7 +270,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		return val;
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	props: "altKey attrChange attrName bubbles button cancelable charCode clientX clientY ctrlKey currentTarget data detail eventPhase fromElement handler keyCode metaKey newValue originalTarget pageX pageY prevValue relatedNode relatedTarget screenX screenY shiftKey srcElement target timeStamp toElement type view wheelDelta which".split(" "),
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	props: "altKey attrChange attrName bubbles button cancelable charCode clientX clientY ctrlKey currentTarget data detail eventPhase fromElement handler keyCode metaKey newValue originalTarget pageX pageY prevValue relatedNode relatedTarget screenX screenY shiftKey srcElement target toElement type view wheelDelta which".split(" "),
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	fix: function(event) {
+<span class="token prefix unchanged"> </span>		if ( event[expando] )
+</span><span class="token coord">@@ -291,38 +279,13 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		// store a copy of the original event object
+<span class="token prefix unchanged"> </span>		// and "clone" to set read-only properties
+<span class="token prefix unchanged"> </span>		var originalEvent = event;
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		event = { originalEvent: originalEvent };
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		event = new jQuery.Event( originalEvent );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		for ( var i = this.props.length, prop; i; ){
+<span class="token prefix unchanged"> </span>			prop = this.props[ --i ];
+<span class="token prefix unchanged"> </span>			event[ prop ] = originalEvent[ prop ];
+<span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		// Mark it as fixed
+<span class="token prefix deleted">-</span>		event[expando] = true;
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		// add preventDefault and stopPropagation since
+<span class="token prefix deleted">-</span>		// they will not work on the clone
+<span class="token prefix deleted">-</span>		event.preventDefault = function() {
+<span class="token prefix deleted">-</span>			// if preventDefault exists run it on the original event
+<span class="token prefix deleted">-</span>			if (originalEvent.preventDefault)
+<span class="token prefix deleted">-</span>				originalEvent.preventDefault();
+<span class="token prefix deleted">-</span>			// otherwise set the returnValue property of the original event to false (IE)
+<span class="token prefix deleted">-</span>			originalEvent.returnValue = false;
+<span class="token prefix deleted">-</span>		};
+<span class="token prefix deleted">-</span>		event.stopPropagation = function() {
+<span class="token prefix deleted">-</span>			// if stopPropagation exists run it on the original event
+<span class="token prefix deleted">-</span>			if (originalEvent.stopPropagation)
+<span class="token prefix deleted">-</span>				originalEvent.stopPropagation();
+<span class="token prefix deleted">-</span>			// otherwise set the cancelBubble property of the original event to true (IE)
+<span class="token prefix deleted">-</span>			originalEvent.cancelBubble = true;
+<span class="token prefix deleted">-</span>		};
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		event.stopImmediatePropagation = stopImmediatePropagation;
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		// Fix timeStamp
+<span class="token prefix deleted">-</span>		event.timeStamp = event.timeStamp || now();
+<span class="token prefix deleted">-</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		// Fix target property, if necessary
+<span class="token prefix unchanged"> </span>		if ( !event.target )
+<span class="token prefix unchanged"> </span>			event.target = event.srcElement || document; // Fixes #1925 where srcElement might not be defined either
+</span><span class="token coord">@@ -374,11 +337,49 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	}
+<span class="token prefix unchanged"> </span>};
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>function stopImmediatePropagation(){
+<span class="token prefix deleted">-</span>	this._sip = 1;
+<span class="token prefix deleted">-</span>	this.stopPropagation();
+<span class="token prefix deleted">-</span>}
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>jQuery.Event = function( src ){
+<span class="token prefix inserted">+</span>	// Event object
+<span class="token prefix inserted">+</span>	if( src &amp;&amp; src.type ){
+<span class="token prefix inserted">+</span>		this.originalEvent = src;
+<span class="token prefix inserted">+</span>		this.type = src.type;
+<span class="token prefix inserted">+</span>		
+<span class="token prefix inserted">+</span>		// Fix timeStamp
+<span class="token prefix inserted">+</span>		this.timeStamp = src.timeStamp || now();
+<span class="token prefix inserted">+</span>	// Event type
+<span class="token prefix inserted">+</span>	}else
+<span class="token prefix inserted">+</span>		this.type = src;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	// Mark it as fixed
+<span class="token prefix inserted">+</span>	this[expando] = true;
+<span class="token prefix inserted">+</span>};
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>jQuery.Event.prototype = {
+<span class="token prefix inserted">+</span>	// add preventDefault and stopPropagation since
+<span class="token prefix inserted">+</span>	// they will not work on the clone
+<span class="token prefix inserted">+</span>	preventDefault: function() {
+<span class="token prefix inserted">+</span>		if( !this.originalEvent )
+<span class="token prefix inserted">+</span>			return;
+<span class="token prefix inserted">+</span>		// if preventDefault exists run it on the original event
+<span class="token prefix inserted">+</span>		if (this.originalEvent.preventDefault)
+<span class="token prefix inserted">+</span>			this.originalEvent.preventDefault();
+<span class="token prefix inserted">+</span>		// otherwise set the returnValue property of the original event to false (IE)
+<span class="token prefix inserted">+</span>		this.originalEvent.returnValue = false;
+<span class="token prefix inserted">+</span>	},
+<span class="token prefix inserted">+</span>	stopPropagation: function() {
+<span class="token prefix inserted">+</span>		if( !this.originalEvent )
+<span class="token prefix inserted">+</span>			return;
+<span class="token prefix inserted">+</span>		// if stopPropagation exists run it on the original event
+<span class="token prefix inserted">+</span>		if (this.originalEvent.stopPropagation)
+<span class="token prefix inserted">+</span>			this.originalEvent.stopPropagation();
+<span class="token prefix inserted">+</span>		// otherwise set the cancelBubble property of the original event to true (IE)
+<span class="token prefix inserted">+</span>		this.originalEvent.cancelBubble = true;
+<span class="token prefix inserted">+</span>	},
+<span class="token prefix inserted">+</span>	stopImmediatePropagation:function(){
+<span class="token prefix inserted">+</span>		this._sip = 1;
+<span class="token prefix inserted">+</span>		this.stopPropagation();
+<span class="token prefix inserted">+</span>	}
+<span class="token prefix inserted">+</span>};
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>if ( !jQuery.browser.msie ){	
+<span class="token prefix unchanged"> </span>	// Checks if an event happened on an element within another element
+<span class="token prefix unchanged"> </span>	// Used in jQuery.event.special.mouseenter and mouseleave handlers
+</span>Index: test/unit/event.js
+===================================================================
+<span class="token coord">--- test/unit/event.js	(revision 5953)</span>
+<span class="token coord">+++ test/unit/event.js	(working copy)</span>
+<span class="token coord">@@ -182,7 +182,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("trigger(event, [data], [fn])", function() {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	expect(67);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	expect(62);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	var handler = function(event, a, b, c) {
+<span class="token prefix unchanged"> </span>		equals( event.type, "click", "check passed data" );
+</span><span class="token coord">@@ -213,48 +213,46 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		equals( c, "abc", "check passed data" );
+<span class="token prefix unchanged"> </span>		equals( v, "test", "check current value" );
+<span class="token prefix unchanged"> </span>	};
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	var $elem = jQuery("#firstp");
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Simulate a "native" click
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	jQuery("#firstp")[0].click = function(){
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	$elem[0].click = function(){
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		ok( true, "Native call was triggered" );
+<span class="token prefix unchanged"> </span>	};
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Triggers handlrs and native
+<span class="token prefix unchanged"> </span>	// Trigger 5
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	jQuery("#firstp").bind("click", handler).trigger("click", [1, "2", "abc"]);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	$elem.bind("click", handler).trigger("click", [1, "2", "abc"]);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Triggers handlers, native, and extra fn
+<span class="token prefix unchanged"> </span>	// Triggers 9
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	jQuery("#firstp").trigger("click", [1, "2", "abc"], handler4);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	$elem.trigger("click", [1, "2", "abc"], handler4);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Simulate a "native" click
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	jQuery("#firstp")[0].click = function(){
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	$elem[0].click = function(){
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		ok( false, "Native call was triggered" );
+<span class="token prefix unchanged"> </span>	};
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	// Triggers handlers, native, and extra fn
+<span class="token prefix deleted">-</span>	// Triggers 7
+<span class="token prefix deleted">-</span>	jQuery("#firstp").trigger("click", [1, "2", "abc"], handler2);
+<span class="token prefix deleted">-</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	// Trigger only the handlers (no native)
+<span class="token prefix unchanged"> </span>	// Triggers 5
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	equals( jQuery("#firstp").triggerHandler("click", [1, "2", "abc"]), "test", "Verify handler response" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	equals( $elem.triggerHandler("click", [1, "2", "abc"]), "test", "Verify handler response" );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Trigger only the handlers (no native) and extra fn
+<span class="token prefix unchanged"> </span>	// Triggers 8
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	equals( jQuery("#firstp").triggerHandler("click", [1, "2", "abc"], handler2), false, "Verify handler response" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	equals( $elem.triggerHandler("click", [1, "2", "abc"], handler2), false, "Verify handler response" );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Build fake click event to pass in
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	var eventObj = jQuery.event.fix({ type: "foo", target: document.body });
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	var eventObj = new jQuery.Event("click");
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Trigger only the handlers (no native), with external event obj
+<span class="token prefix unchanged"> </span>	// Triggers 5
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	equals( jQuery("#firstp").triggerHandler("click", [eventObj, 1, "2", "abc"]), "test", "Verify handler response" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	equals( $elem.triggerHandler(eventObj, [1, "2", "abc"]), "test", "Verify handler response" );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Trigger only the handlers (no native) and extra fn, with external event obj
+<span class="token prefix unchanged"> </span>	// Triggers 9
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	eventObj = jQuery.event.fix({ type: "foo", target: document.body });
+<span class="token prefix deleted">-</span>	equals( jQuery("#firstp").triggerHandler("click", [eventObj, 1, "2", "abc"], handler), "test", "Verify handler response" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	eventObj = new jQuery.Event("click");
+<span class="token prefix inserted">+</span>	equals( $elem.triggerHandler(eventObj, [1, "2", "abc"], handler2), false, "Verify handler response" );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	var pass = true;
+<span class="token prefix unchanged"> </span>	try {
+</span><span class="token coord">@@ -268,11 +266,23 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// have the extra handler override the return
+<span class="token prefix unchanged"> </span>	// Triggers 9
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	equals( jQuery("#firstp").triggerHandler("click", [1, "2", "abc"], handler3), "newVal", "Verify triggerHandler return is overwritten by extra function" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	equals( $elem.triggerHandler("click", [1, "2", "abc"], handler3), "newVal", "Verify triggerHandler return is overwritten by extra function" );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// have the extra handler leave the return value alone
+<span class="token prefix unchanged"> </span>	// Triggers 9
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	equals( jQuery("#firstp").triggerHandler("click", [1, "2", "abc"], handler4), "test", "Verify triggerHandler return is not overwritten by extra function" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	equals( $elem.triggerHandler("click", [1, "2", "abc"], handler4), "test", "Verify triggerHandler return is not overwritten by extra function" );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	eventObj = new jQuery.Event('foo');
+<span class="token prefix inserted">+</span>	eventObj.secret = 'boo!';
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	$elem.unbind('click').bind('foo',function(e){
+<span class="token prefix inserted">+</span>		equals( e.type, 'foo', 'Verify event type when passed passing an event object' );
+<span class="token prefix inserted">+</span>		equals( e.target.id, 'firstp', 'Verify event.target when passed passing an event object' );
+<span class="token prefix inserted">+</span>		equals( e.secret, 'boo!', 'Verify event object\'s custom attribute when passed passing an event object' );
+<span class="token prefix inserted">+</span>	});
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	$elem.triggerHandler( eventObj );
+<span class="token prefix inserted">+</span>	$elem.unbind('foo');
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("toggle(Function, Function, ...)", function() {</span></code></pre>
     </div>
   
 

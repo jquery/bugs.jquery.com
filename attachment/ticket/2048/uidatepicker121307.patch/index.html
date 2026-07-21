@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,23 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: ui.datepicker.js
+===================================================================
+--- ui.datepicker.js	(revision 4141)
++++ ui.datepicker.js	(working copy)
+@@ -1224,10 +1224,10 @@
+ 						(unselectable || (otherMonth && !showOtherMonths) ? '' :
+ 						' onmouseover="' + (unselectable ? '' : 'jQuery(this).addClass(\'datepicker_daysCellOver\');') +
+ 						(!showStatus || (otherMonth && !showOtherMonths) ? '' : 'jQuery(\'#datepicker_status_' +
+-						this._id + '\').html(\'' + dateStatus(printDate, this) +'\');"') +
++						this._id + '\').html(\'' + dateStatus(printDate, this) +'\');') + '"' +
+ 						' onmouseout="' + (unselectable ? '' : 'jQuery(this).removeClass(\'datepicker_daysCellOver\');') +
+ 						(!showStatus || (otherMonth && !showOtherMonths) ? '' : 'jQuery(\'#datepicker_status_' +
+-						this._id + '\').html(\'&#xa0;\');"')) +
++						this._id + '\').html(\'&#xa0;\');') +'"') +
+ 						(unselectable ? '' : ' onclick="jQuery.datepicker._selectDay(' + this._id + ',' +
+ 						drawMonth + ',' + drawYear + ', this);"') + '>' + // actions
+ 						(otherMonth ? (showOtherMonths ? printDate.getDate() : '&#xa0;') : // display for other months</code></pre>
     </div>
   
 

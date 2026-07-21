@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,27 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: core.js
+===================================================================
+--- core.js	(revision 5091)
++++ core.js	(working copy)
+@@ -32,6 +32,8 @@
+ // Is it a simple selector
+ var isSimple = /^.[^:#\[\.]*$/;
+ 
++var expando = "jQuery" + (new Date()).getTime(), uuid = 0, windowData = {};
++
+ jQuery.fn = jQuery.prototype = {
+ 	init: function( selector, context ) {
+ 		// Make sure that a selection was provided
+@@ -607,8 +609,6 @@
+ 	return target;
+ };
+ 
+-var expando = "jQuery" + (new Date()).getTime(), uuid = 0, windowData = {};
+-
+ // exclude the following css properties to add px
+ var exclude = /z-?index|font-?weight|opacity|zoom|line-?height/i;</code></pre>
     </div>
   
 

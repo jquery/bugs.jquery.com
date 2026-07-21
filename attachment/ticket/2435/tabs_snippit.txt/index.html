@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,27 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt">//Call to Load Tabs
+$(document).ready(function(){
+		$("#tabNav > ul").tabs({ajaxOptions: {cache: false}});
+		});
+
+//Call to swap to the first tab
+function navTest()
+{
+	$("#tabNav > ul").tabs('select', 0);
+}
+
+
+
+//Tabs Code
+&lt;div id="tabNav" class="flora">
+	&lt;ul>
+		&lt;li>&lt;a href="ajax/ajaxAgentOfficePanels.cfm?page=currentOffices">&lt;span>Current Offices&lt;/span>&lt;/a>&lt;/li>
+		&lt;li>&lt;a href="ajax/ajaxAgentOfficePanels.cfm?page=addOffices">&lt;span>Add Office&lt;/span>&lt;/a>&lt;/li>
+		&lt;li>&lt;a href="ajax/ajaxAgentOfficePanels.cfm?page=disconnectOffices">&lt;span>Disconnect Office&lt;/span>&lt;/a>&lt;/li>
+	&lt;/ul>
+&lt;/div></code></pre>
     </div>
   
 

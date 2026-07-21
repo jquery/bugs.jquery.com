@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,37 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/selector/selector.js
+===================================================================
+<span class="token coord">--- src/selector/selector.js	(revision 1603)</span>
+<span class="token coord">+++ src/selector/selector.js	(working copy)</span>
+<span class="token coord">@@ -77,7 +77,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Match: :even, :last-chlid, #id, .class
+<span class="token prefix unchanged"> </span>		new RegExp("^([:.#]*)(" + 
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			( jQuery.chars = "(?:[\\w\u0128-\uFFFF*-]|\\\\.)" ) + "+)")
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			( jQuery.chars = "(?:[\\w\u0128-\uFFFF*_-]|\\\\.)" ) + "+)")
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	],
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	token: [
+</span><span class="token coord">@@ -149,7 +149,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// An attempt at speeding up child selectors that
+<span class="token prefix unchanged"> </span>			// point to a specific element tag
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var re = /^[\/>]\s*([\w*-]+)/;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var re = new RegExp("^[/>]\\s*(" + jQuery.chars + "+)");
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			var m = re.exec(t);
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			if ( m ) {
+</span><span class="token coord">@@ -204,7 +204,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				} else {
+<span class="token prefix unchanged"> </span>					// Optomize for the case nodeName#idName
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					var re2 = new RegExp("^(\\w+)(#)(" + jQuery.chars + "+)");
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					var re2 = new RegExp("^(" + jQuery.chars + "+)(#)(" + jQuery.chars + "+)");
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					var m = re2.exec(t);
+<span class="token prefix unchanged"> </span>					
+<span class="token prefix unchanged"> </span>					// Re-organize the results, so that they're consistent</span></code></pre>
     </div>
   
 

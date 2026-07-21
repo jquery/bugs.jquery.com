@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,48 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 3751)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -319,15 +319,15 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	not: function( selector ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		return this.pushStack(
+<span class="token prefix deleted">-</span>			selector.constructor == String &amp;&amp;
+<span class="token prefix deleted">-</span>			jQuery.multiFilter( selector, this, true ) ||
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>			jQuery.grep(this, function(elem) {
+<span class="token prefix deleted">-</span>				return selector.constructor == Array || selector.jquery ?
+<span class="token prefix deleted">-</span>					jQuery.inArray( elem, selector ) &lt; 0 :
+<span class="token prefix deleted">-</span>					elem != selector;
+<span class="token prefix deleted">-</span>			}) );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if (selector.constructor == String) 
+<span class="token prefix inserted">+</span>			return this.not(jQuery(selector));
+<span class="token prefix inserted">+</span>		else
+<span class="token prefix inserted">+</span>			return this.pushStack(
+<span class="token prefix inserted">+</span>				jQuery.grep(this, function(elem) {
+<span class="token prefix inserted">+</span>					return selector.constructor == Array || selector.jquery ?
+<span class="token prefix inserted">+</span>						jQuery.inArray( elem, selector ) &lt; 0 :
+<span class="token prefix inserted">+</span>						elem != selector;
+<span class="token prefix inserted">+</span>				}) );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	add: function( selector ) {
+</span>Index: src/selector.js
+===================================================================
+<span class="token coord">--- src/selector.js	(revision 3751)</span>
+<span class="token coord">+++ src/selector.js	(working copy)</span>
+<span class="token coord">@@ -320,7 +320,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			// :not() is a special case that can be optimized by
+<span class="token prefix unchanged"> </span>			// keeping it out of the expression list
+<span class="token prefix unchanged"> </span>			if ( m[1] == ":" &amp;&amp; m[2] == "not" )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				r = jQuery.filter(m[3], r, true).r;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				r = jQuery(r).not(m[3]).get();
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// We can get a big speed boost by filtering by class here
+<span class="token prefix unchanged"> </span>			else if ( m[1] == "." )</span></code></pre>
     </div>
   
 

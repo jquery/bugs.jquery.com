@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,24 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/selector.js
+===================================================================
+<span class="token coord">--- jquery/src/selector.js	(revision 5829)</span>
+<span class="token coord">+++ jquery/src/selector.js	(working copy)</span>
+<span class="token coord">@@ -21,7 +21,13 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			odd: function(a,i){return i%2;},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Child Checks
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			"first-child": function(a){return a.parentNode.getElementsByTagName("*")[0]==a;},
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			"first-child": function(a){
+<span class="token prefix inserted">+</span>				var children = a.parentNode.getElementsByTagName("*");
+<span class="token prefix inserted">+</span>				for ( var i = 0 ; i &lt; children.length; i++ ) {
+<span class="token prefix inserted">+</span>					if ( children[i].nodeType != 8 ) return children[i] == a;
+<span class="token prefix inserted">+</span>				}
+<span class="token prefix inserted">+</span>				return children[0] == a;
+<span class="token prefix inserted">+</span>			},
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			"last-child": function(a){return jQuery.nth(a.parentNode.lastChild,1,"previousSibling")==a;},
+<span class="token prefix unchanged"> </span>			"only-child": function(a){return !jQuery.nth(a.parentNode.lastChild,2,"previousSibling");},</span></code></pre>
     </div>
   
 

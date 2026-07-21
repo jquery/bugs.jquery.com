@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,17 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">465c465,466
+< 				var rule = { method: method, parameters: rules[method] };
+---
+> 				var parameters = jQuery.isFunction(rules[method]) ? rules[method](element) : rules[method];
+> 				var rule = { method: method, parameters: parameters };
+801,805d801
+< 		});
+< 		
+< 		// evaluate parameters
+< 		jQuery.each(rules, function(rule, parameter) {
+< 			rules[rule] = jQuery.isFunction(parameter) ? parameter(element) : parameter;</code></pre>
     </div>
   
 

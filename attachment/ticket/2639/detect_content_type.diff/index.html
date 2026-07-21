@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,26 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/ajax.js
+===================================================================
+<span class="token coord">@@ -449,13 +449,14 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		if ( xml &amp;&amp; data.documentElement.tagName == "parsererror" )
+<span class="token prefix unchanged"> </span>			throw "parsererror";
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		
+<span class="token prefix inserted">+</span>		// If no specific type is given, use Content-Type as a clue
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		// If the type is "script", eval it in global context
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( type == "script" )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( type == "script" || (!type &amp;&amp; (ct == "application/javascript" || ct == "text/javascript" || ct == "text/ecmascript" || ct == "application/ecmascript")))
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			jQuery.globalEval( data );
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Get the JavaScript object, if JSON is used.
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( type == "json" )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( type == "json" || (!type &amp;&amp; ct == "application/json"))
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			data = eval("(" + data + ")");
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		return data;</span></code></pre>
     </div>
   
 

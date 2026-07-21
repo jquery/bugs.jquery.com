@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,38 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event/event.js
+===================================================================
+<span class="token coord">--- src/event/event.js	(revision 2012)</span>
+<span class="token coord">+++ src/event/event.js	(working copy)</span>
+<span class="token coord">@@ -8,6 +8,13 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	// Bind an event to an element
+<span class="token prefix unchanged"> </span>	// Original by Dean Edwards
+<span class="token prefix unchanged"> </span>	add: function(element, type, handler, data) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		// support multiple comma seperated types
+<span class="token prefix inserted">+</span>		if ( type.indexOf(',') >= 0 ) {
+<span class="token prefix inserted">+</span>			jQuery.each(type.split(','), function(i,t) {
+<span class="token prefix inserted">+</span>				jQuery.event.add(element, jQuery.trim(t), handler, data);
+<span class="token prefix inserted">+</span>			});
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>		
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		// For whatever reason, IE has trouble passing the window object
+<span class="token prefix unchanged"> </span>		// around, causing it to be cloned in the process
+<span class="token prefix unchanged"> </span>		if ( jQuery.browser.msie &amp;&amp; element.setInterval != undefined )
+</span><span class="token coord">@@ -84,6 +91,13 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Detach an event or set of events from an element
+<span class="token prefix unchanged"> </span>	remove: function(element, type, handler) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		// support multiple comma seperated types
+<span class="token prefix inserted">+</span>		if ( type &amp;&amp; type.indexOf(',') >= 0 ) {
+<span class="token prefix inserted">+</span>			jQuery.each(type.split(','), function(i,t) {
+<span class="token prefix inserted">+</span>				jQuery.event.remove(element, jQuery.trim(t), handler);
+<span class="token prefix inserted">+</span>			});
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>		
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		var events = element.$events, ret, index;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		if ( events ) {</span></code></pre>
     </div>
   
 

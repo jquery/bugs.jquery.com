@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,18 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery.ui/ui.dialog.js
+===================================================================
+--- jquery.ui/ui.dialog.js 
++++ jquery.ui/ui.dialog.js 
+
+@@ -178,5 +178,5 @@
+ 		
+ 		position: function(pos) {
+-			var wnd = $(window), doc = $(document), minTop = top = doc.scrollTop(), left = doc.scrollLeft();
++			var wnd = $(window), doc = document.body, minTop = top = doc.scrollTop, left = doc.scrollLeft;
+ 			if ($.inArray(pos, ['center','top','right','bottom','left']) >= 0) {
+ 				pos = [pos == 'right' || pos == 'left' ? pos : 'center', pos == 'top' || pos == 'bottom' ? pos : 'middle'];</code></pre>
     </div>
   
 

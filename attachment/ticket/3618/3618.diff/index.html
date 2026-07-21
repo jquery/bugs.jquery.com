@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,306 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 5946)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -41,7 +41,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			return this;
+<span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>		// Handle HTML strings
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( typeof selector == "string" ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( typeof selector === "string" ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			// Are we dealing with HTML string or an ID?
+<span class="token prefix unchanged"> </span>			var match = quickExpr.exec( selector );
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -150,7 +150,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		var options = name;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Look for the case where we're accessing a style value
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( name.constructor == String )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( typeof name === "string" )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			if ( value === undefined )
+<span class="token prefix unchanged"> </span>				return this[0] &amp;&amp; jQuery[ type || "attr" ]( this[0], name );
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -180,7 +180,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	text: function( text ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( typeof text != "object" &amp;&amp; text != null )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( typeof text !== "object" &amp;&amp; text != null )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			return this.empty().append( (this[0] &amp;&amp; this[0].ownerDocument || document).createTextNode( text ) );
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		var ret = "";
+</span><span class="token coord">@@ -323,7 +323,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	not: function( selector ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( selector.constructor == String )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( typeof selector === "string" )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			// test special case where just one selector is passed in
+<span class="token prefix unchanged"> </span>			if ( isSimple.test( selector ) )
+<span class="token prefix unchanged"> </span>				return this.pushStack( jQuery.multiFilter( selector, this, true ) );
+</span><span class="token coord">@@ -339,7 +339,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	add: function( selector ) {
+<span class="token prefix unchanged"> </span>		return this.pushStack( jQuery.unique( jQuery.merge(
+<span class="token prefix unchanged"> </span>			this.get(),
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			typeof selector == 'string' ?
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			typeof selector === "string" ?
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				jQuery( selector ) :
+<span class="token prefix unchanged"> </span>				jQuery.makeArray( selector )
+<span class="token prefix unchanged"> </span>		)));
+</span><span class="token coord">@@ -400,7 +400,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			return undefined;
+<span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if( value.constructor == Number )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( typeof value === "number" )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			value += '';
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		return this.each(function(){
+</span><span class="token coord">@@ -550,7 +550,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	var target = arguments[0] || {}, i = 1, length = arguments.length, deep = false, options;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Handle a deep copy situation
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	if ( target.constructor == Boolean ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	if ( typeof target === "boolean" ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		deep = target;
+<span class="token prefix unchanged"> </span>		target = arguments[1] || {};
+<span class="token prefix unchanged"> </span>		// skip the boolean and the target
+</span><span class="token coord">@@ -558,7 +558,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	}
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Handle case when target is a string or something (possible in deep copy)
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	if ( typeof target != "object" &amp;&amp; typeof target != "function" )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	if ( typeof target !== "object" &amp;&amp; !jQuery.isFunction(target) )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		target = {};
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// extend jQuery itself if only one argument is passed
+</span><span class="token coord">@@ -579,7 +579,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>					continue;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				// Recurse if we're merging object values
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				if ( deep &amp;&amp; copy &amp;&amp; typeof copy == "object" &amp;&amp; !copy.nodeType )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				if ( deep &amp;&amp; copy &amp;&amp; typeof copy === "object" &amp;&amp; !copy.nodeType )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					target[ name ] = jQuery.extend( deep, 
+<span class="token prefix unchanged"> </span>						// Never move original objects, clone them
+<span class="token prefix unchanged"> </span>						src || ( copy.length != null ? [ ] : { } )
+</span><span class="token coord">@@ -599,7 +599,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	// exclude the following css properties to add px
+<span class="token prefix unchanged"> </span>	exclude = /z-?index|font-?weight|opacity|zoom|line-?height/i,
+<span class="token prefix unchanged"> </span>	// cache defaultView
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	defaultView = document.defaultView || {};
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	defaultView = document.defaultView || {},
+<span class="token prefix inserted">+</span>	toString = Object.prototype.toString;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>jQuery.extend({
+<span class="token prefix unchanged"> </span>	noConflict: function( deep ) {
+</span><span class="token coord">@@ -611,19 +612,15 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		return jQuery;
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	// See test/unit/core.js for details concerning this function.
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	// See test/unit/core.js for details concerning isFunction.
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	// Since version 1.3, DOM methods and functions like alert
+<span class="token prefix unchanged"> </span>	// aren't supported. They return false on IE (#2968).
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	
+<span class="token prefix deleted">-</span>	// Memory leaks appear in IE6 when applying instanceof 
+<span class="token prefix deleted">-</span>	// to the window, document or any other COM object (#3485)
+<span class="token prefix deleted">-</span>	// http://ajaxian.com/archives/working-aroung-the-instanceof-memory-leak
+<span class="token prefix deleted">-</span>	isFunction: function( fn ) {
+<span class="token prefix deleted">-</span>		return !!fn &amp;&amp; !!fn.hasOwnProperty &amp;&amp; fn instanceof Function;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	isFunction: function( obj ) {
+<span class="token prefix inserted">+</span>		return toString.call(obj) === "[object Function]";
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	
+<span class="token prefix deleted">-</span>	isArray: function( arr ){
+<span class="token prefix deleted">-</span>		return !!arr &amp;&amp; arr.constructor == Array;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	isArray: function( obj ) {
+<span class="token prefix inserted">+</span>		return toString.call(obj) === "[object Array]";
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// check if an element is in a (or is an) XML document
+</span><span class="token coord">@@ -761,7 +758,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			value = value.call( elem, i );
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Handle passing in a number to a CSS property
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		return value &amp;&amp; value.constructor == Number &amp;&amp; type == "curCSS" &amp;&amp; !exclude.test( name ) ?
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		return typeof value === "number" &amp;&amp; type == "curCSS" &amp;&amp; !exclude.test( name ) ?
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			value + "px" :
+<span class="token prefix unchanged"> </span>			value;
+<span class="token prefix unchanged"> </span>	},
+</span><span class="token coord">@@ -946,19 +943,20 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	clean: function( elems, context ) {
+<span class="token prefix unchanged"> </span>		var ret = [];
+<span class="token prefix unchanged"> </span>		context = context || document;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		// !context.createElement fails in IE with an error but returns typeof 'object'
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if (typeof context.createElement == 'undefined')
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( typeof context.createElement === "undefined" )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			context = context.ownerDocument || context[0] &amp;&amp; context[0].ownerDocument || document;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		jQuery.each(elems, function(i, elem){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( typeof elem == 'number' )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( typeof elem === "number" )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				elem += '';
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			if ( !elem )
+<span class="token prefix unchanged"> </span>				return;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Convert html string into DOM nodes
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( typeof elem == "string" ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( typeof elem === "string" ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				// Fix "XHTML"-style tags in all browsers
+<span class="token prefix unchanged"> </span>				elem = elem.replace(/(&lt;(\w+)[^>]*?)\/>/g, function(all, front, tag){
+<span class="token prefix unchanged"> </span>					return tag.match(/^(abbr|br|col|img|input|link|meta|param|hr|area|embed)$/i) ?
+</span><span class="token coord">@@ -1139,7 +1137,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		if( array != null ){
+<span class="token prefix unchanged"> </span>			var i = array.length;
+<span class="token prefix unchanged"> </span>			// The window, strings (and functions) also have 'length'
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if( i == null || typeof array == 'string' || jQuery.isFunction(array) || array.setInterval )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if( i == null || typeof array === "string" || jQuery.isFunction(array) || array.setInterval )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				ret[0] = array;
+<span class="token prefix unchanged"> </span>			else
+<span class="token prefix unchanged"> </span>				while( i )
+</span><span class="token coord">@@ -1369,7 +1367,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>					(this.length ? jQuery.css( this[0], type ) : null) :
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>					// Set the width or height on the element (default to pixels if value is unitless)
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					this.css( type, size.constructor == String ? size : size + "px" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					this.css( type, typeof size === "string" ? size : size + "px" );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	};
+<span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+</span>Index: src/fx.js
+===================================================================
+<span class="token coord">--- src/fx.js	(revision 5946)</span>
+<span class="token coord">+++ src/fx.js	(working copy)</span>
+<span class="token coord">@@ -117,7 +117,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			type = "fx";
+<span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( !type || (typeof type == "string" &amp;&amp; !fn) )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( !type || (typeof type === "string" &amp;&amp; !fn) )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			return queue( this[0], type );
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		return this.each(function(){
+</span><span class="token coord">@@ -201,14 +201,14 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>jQuery.extend({
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	speed: function(speed, easing, fn) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var opt = speed &amp;&amp; speed.constructor == Object ? speed : {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var opt = typeof speed === "object" ? speed : {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			complete: fn || !fn &amp;&amp; easing ||
+<span class="token prefix unchanged"> </span>				jQuery.isFunction( speed ) &amp;&amp; speed,
+<span class="token prefix unchanged"> </span>			duration: speed,
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			easing: fn &amp;&amp; easing || easing &amp;&amp; easing.constructor != Function &amp;&amp; easing
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			easing: fn &amp;&amp; easing || jQuery.isFunction(easing) &amp;&amp; easing
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		};
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		opt.duration = jQuery.fx.off ? 0 : typeof opt.duration == 'number' ? opt.duration :
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		opt.duration = jQuery.fx.off ? 0 : typeof opt.duration === "number" ? opt.duration :
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			jQuery.fx.speeds[opt.duration] || jQuery.fx.speeds._default;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Queueing
+</span>Index: src/selector.js
+===================================================================
+<span class="token coord">--- src/selector.js	(revision 5946)</span>
+<span class="token coord">+++ src/selector.js	(working copy)</span>
+<span class="token coord">@@ -92,7 +92,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	find: function( t, context ) {
+<span class="token prefix unchanged"> </span>		// Quickly handle non-string expressions
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( typeof t != "string" )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( typeof t !== "string" )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			return [ t ];
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// check to make sure context is a DOM element or a document
+</span><span class="token coord">@@ -214,7 +214,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>						// Do a quick check for the existence of the actual ID attribute
+<span class="token prefix unchanged"> </span>						// to avoid selecting by the name attribute in IE
+<span class="token prefix unchanged"> </span>						// also check to insure id is a string to avoid selecting an element with the name of 'id' inside a form
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>						if ( (jQuery.browser.msie||jQuery.browser.opera) &amp;&amp; oid &amp;&amp; typeof oid.id == "string" &amp;&amp; oid.id != m[2] )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>						if ( (jQuery.browser.msie||jQuery.browser.opera) &amp;&amp; oid &amp;&amp; typeof oid.id === "string" &amp;&amp; oid.id != m[2] )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>							oid = jQuery('[@id="'+m[2]+'"]', elem)[0];
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>						// Do a quick check for node name (where applicable) so
+</span><span class="token coord">@@ -391,10 +391,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			// Otherwise, find the expression to execute
+<span class="token prefix unchanged"> </span>			} else {
+<span class="token prefix unchanged"> </span>				var fn = jQuery.expr[ m[1] ];
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				if ( typeof fn == "object" )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				if ( typeof fn === "object" )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					fn = fn[ m[2] ];
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				if ( typeof fn == "string" )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				if ( typeof fn === "string" )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					fn = eval("false||function(a,i){return " + fn + ";}");
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				// Execute it against the current filter
+</span>Index: src/event.js
+===================================================================
+<span class="token coord">--- src/event.js	(revision 5946)</span>
+<span class="token coord">+++ src/event.js	(working copy)</span>
+<span class="token coord">@@ -40,7 +40,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			handle = jQuery.data(elem, "handle") || jQuery.data(elem, "handle", function(){
+<span class="token prefix unchanged"> </span>				// Handle the second event of a trigger and when
+<span class="token prefix unchanged"> </span>				// an event is called after a page has unloaded
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				if ( typeof jQuery != "undefined" &amp;&amp; !jQuery.event.triggered )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				if ( typeof jQuery !== "undefined" &amp;&amp; !jQuery.event.triggered )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					return jQuery.event.handle.apply(arguments.callee.elem, arguments);
+<span class="token prefix unchanged"> </span>			});
+<span class="token prefix unchanged"> </span>		// Add elem as a property of the handle function
+</span><span class="token coord">@@ -99,7 +99,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		if ( events ) {
+<span class="token prefix unchanged"> </span>			// Unbind all events for the element
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( types == undefined || (typeof types == "string" &amp;&amp; types.charAt(0) == ".") )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( types == undefined || (typeof types === "string" &amp;&amp; types.charAt(0) == ".") )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				for ( var type in events )
+<span class="token prefix unchanged"> </span>					this.remove( elem, type + (types || "") );
+<span class="token prefix unchanged"> </span>			else {
+</span>Index: src/ajax.js
+===================================================================
+<span class="token coord">--- src/ajax.js	(revision 5946)</span>
+<span class="token coord">+++ src/ajax.js	(working copy)</span>
+<span class="token coord">@@ -3,7 +3,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	_load: jQuery.fn.load,
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	load: function( url, params, callback ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( typeof url != 'string' )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( typeof url !== "string" )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			return this._load( url );
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		var off = url.indexOf(" ");
+</span><span class="token coord">@@ -24,7 +24,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				params = null;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Otherwise, build a param string
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			} else if( typeof params == 'object' ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			} else if( typeof params === "object" ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				params = jQuery.param( params );
+<span class="token prefix unchanged"> </span>				type = "POST";
+<span class="token prefix unchanged"> </span>			}
+</span><span class="token coord">@@ -178,7 +178,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			type = s.type.toUpperCase();
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// convert data if not already a string
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( s.data &amp;&amp; s.processData &amp;&amp; typeof s.data != "string" )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( s.data &amp;&amp; s.processData &amp;&amp; typeof s.data !== "string" )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			s.data = jQuery.param(s.data);
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Handle JSONP Parameter Callbacks
+</span><span class="token coord">@@ -490,7 +490,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			data = s.dataFilter( data, type );
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// The filter can actually parse the response
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if( typeof data == 'string' ){
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if( typeof data === "string" ){
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// If the type is "script", eval it in global context
+<span class="token prefix unchanged"> </span>			if ( type == "script" )</span></code></pre>
     </div>
   
 

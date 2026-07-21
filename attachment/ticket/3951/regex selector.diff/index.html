@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,35 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\selector.js-revBASE.svn005.tmp.js	ven. janv. 23 13:36:43 2009</span>
+<span class="token coord">+++ C:\Dev\SVN\jQuery\trunk\jquery\src\selector.js	ven. janv. 23 13:29:10 2009</span>
+<span class="token coord">@@ -6,7 +6,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span> */
+<span class="token prefix unchanged"> </span>(function(){
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^[\]]*\]|['"][^'"]+['"]|[^[\]'"]+)+\]|\\.|[^ >+~,(\[]+)+|[>+~])(\s*,\s*)?/g,
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^[\]]*\]|['"][^'"]+['"]|[^[\]'"]+)+\]|\[[^\/]*\/=\/.*\/[ig]{0,2}\]|\\.|[^ >+~,(\[]+)+|[>+~])(\s*,\s*)?/g,
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	done = 0,
+<span class="token prefix unchanged"> </span>	toString = Object.prototype.toString;
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -233,7 +233,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		ID: /#((?:[\w\u00c0-\uFFFF_-]|\\.)+)/,
+<span class="token prefix unchanged"> </span>		CLASS: /\.((?:[\w\u00c0-\uFFFF_-]|\\.)+)/,
+<span class="token prefix unchanged"> </span>		NAME: /\[name=['"]*((?:[\w\u00c0-\uFFFF_-]|\\.)+)['"]*\]/,
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		ATTR: /\[\s*((?:[\w\u00c0-\uFFFF_-]|\\.)+)\s*(?:(\S?=)\s*(['"]*)(.*?)\3|)\s*\]/,
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		ATTR: /\[\s*((?:[\w\u00c0-\uFFFF_-]|\\.)+)\s*(?:(\S?=)\s*(?:(['"]*)([^/].*?)\3|\/(.*)\/([ig]*))|)\s*\]/,
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		TAG: /^((?:[\w\u00c0-\uFFFF\*_-]|\\.)+)/,
+<span class="token prefix unchanged"> </span>		CHILD: /:(only|nth|last|first)-child(?:\((even|odd|[\dn+-]*)\))?/,
+<span class="token prefix unchanged"> </span>		POS: /:(nth|eq|gt|lt|first|last|even|odd)(?:\((\d*)\))?(?=[^-]|$)/,
+</span><span class="token coord">@@ -571,6 +571,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				value === check :
+<span class="token prefix unchanged"> </span>				type === "*=" ?
+<span class="token prefix unchanged"> </span>				value.indexOf(check) >= 0 :
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				type === "/="?
+<span class="token prefix inserted">+</span>				!!value.match(new RegExp(match[5], match[6])):
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				type === "~=" ?
+<span class="token prefix unchanged"> </span>				(" " + value + " ").indexOf(check) >= 0 :
+<span class="token prefix unchanged"> </span>				!match[4] ?</span></code></pre>
     </div>
   
 

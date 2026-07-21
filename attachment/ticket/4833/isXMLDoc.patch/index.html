@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,20 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: core.js
+===================================================================
+--- core.js	(revision 6510)
++++ core.js	(working copy)
+@@ -315,8 +315,7 @@
+ 	isXMLDoc: function( elem ) {
+ 		// documentElement is verified for cases where it doesn't yet exist
+ 		// (such as loading iframes in IE - #4833)
+-		var documentElement = (elem.ownerDocument || elem).documentElement;
+-		return !!documentElement && documentElement.nodeName !== "HTML";
++		return ((elem.ownerDocument || elem).documentElement || 0).nodeName !== "HTML";
+ 	},
+ 
+ 	// Evalulates a script in a global context</code></pre>
     </div>
   
 

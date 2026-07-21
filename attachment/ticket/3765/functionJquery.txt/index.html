@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,29 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt">$("#btnSbmtOrden").click(clickBtnOrden);
+
+      function clickBtnOrden(){
+              $("#customer").hide("slow");
+       alert($("#nota").text()) //-----------------------------------------------this value is empty in ForeFox but show the contect in IE
+              $.post("orderManager.asp", {clienteId:$("#clienteId").val(),
+                                             mode:"add",
+                                             tab : "orden",
+                                             addressId:$("#direccionId").val(),
+                                             fecha:$("#fecha").val(),
+                                             note:$("#nota").text()
+                                             },addingOrders,"html");
+                                             
+              $("#fecha").val("");
+              $("#dspCliente").text("");
+              $("#disDireccion").text("");
+              $("#nota").text("");
+              $("#dspClient").text(""); 
+              $(this).attr("disabled","disabled");
+              $("#clientName").val("").focus();
+              $("#customer").show("slow");
+              return false;
+      }   // click al boton de enviar orden</code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,43 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event.js
+===================================================================
+<span class="token coord">--- src/event.js	(revision 4191)</span>
+<span class="token coord">+++ src/event.js	(working copy)</span>
+<span class="token coord">@@ -406,6 +406,32 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				arguments[0].type = "mouseleave";
+<span class="token prefix unchanged"> </span>				return jQuery.event.handle.apply(this, arguments);
+<span class="token prefix unchanged"> </span>			}
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		},
+<span class="token prefix inserted">+</span>		
+<span class="token prefix inserted">+</span>		change: {
+<span class="token prefix inserted">+</span>			setup: function() {
+<span class="token prefix inserted">+</span>				if ( (jQuery.browser.msie &amp;&amp; (this.type == "radio" || this.type == "checkbox")) ||
+<span class="token prefix inserted">+</span>				 		(jQuery.browser.safari &amp;&amp; this.type == "radio") ) {
+<span class="token prefix inserted">+</span>					jQuery(this).bind( this.type == "radio" ? "focus" : "click", jQuery.event.special.change.handler);
+<span class="token prefix inserted">+</span>					return true;
+<span class="token prefix inserted">+</span>				} 
+<span class="token prefix inserted">+</span>				return false;
+<span class="token prefix inserted">+</span>			},
+<span class="token prefix inserted">+</span>			
+<span class="token prefix inserted">+</span>			teardown: function() {
+<span class="token prefix inserted">+</span>				if ( (jQuery.browser.msie &amp;&amp; (this.type == "radio" || this.type == "checkbox")) ||
+<span class="token prefix inserted">+</span>				 		(jQuery.browser.safari &amp;&amp; this.type == "radio") ) {
+<span class="token prefix inserted">+</span>					jQuery(this).unbind( this.type == "radio" ? "focus" : "click", jQuery.event.special.change.handler);
+<span class="token prefix inserted">+</span>					return true;
+<span class="token prefix inserted">+</span>				}
+<span class="token prefix inserted">+</span>				return false;
+<span class="token prefix inserted">+</span>			},
+<span class="token prefix inserted">+</span>			
+<span class="token prefix inserted">+</span>			handler: function() {
+<span class="token prefix inserted">+</span>				// Execute the correct heandlers by setting the event type to change
+<span class="token prefix inserted">+</span>				arguments[0].type = "change";
+<span class="token prefix inserted">+</span>				return jQuery.event.handle.apply(this, arguments); 
+<span class="token prefix inserted">+</span>			}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>	}
+<span class="token prefix unchanged"> </span>};</span></code></pre>
     </div>
   
 

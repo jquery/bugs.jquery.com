@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,50 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax.js
+===================================================================
+<span class="token coord">--- src/ajax.js	(revision 5495)</span>
+<span class="token coord">+++ src/ajax.js	(working copy)</span>
+<span class="token coord">@@ -1,7 +1,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>jQuery.fn.extend({
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	// Keep a copy of the old load
+<span class="token prefix inserted">+</span>	_load: jQuery.fn.load,
+<span class="token prefix inserted">+</span>	
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	load: function( url, params, callback ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( jQuery.isFunction( url ) )
+<span class="token prefix deleted">-</span>			return this.bind("load", url);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( typeof url != 'string' )
+<span class="token prefix inserted">+</span>			return this._load( url );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		var off = url.indexOf(" ");
+<span class="token prefix unchanged"> </span>		if ( off >= 0 ) {
+</span>Index: test/unit/event.js
+===================================================================
+<span class="token coord">--- test/unit/event.js	(revision 5495)</span>
+<span class="token coord">+++ test/unit/event.js	(working copy)</span>
+<span class="token coord">@@ -112,8 +112,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	ok( $("a.test:first").triggerHandler("click") === false, "Handler is bound to appendTo'd elements" );
+<span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>test("click()", function() {
+<span class="token prefix deleted">-</span>	expect(5);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>test("trigger() shortcuts", function() {
+<span class="token prefix inserted">+</span>	expect(6);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	$('&lt;li>&lt;a href="#">Change location&lt;/a>&lt;/li>').prependTo('#firstUL').find('a').bind('click', function() {
+<span class="token prefix unchanged"> </span>		var close = $('spanx', this); // same with $(this).find('span');
+<span class="token prefix unchanged"> </span>		equals( close.length, 0, "Context element does not exist, length must be zero" );
+</span><span class="token coord">@@ -138,6 +138,11 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	};
+<span class="token prefix unchanged"> </span>	$('#simon1').click();
+<span class="token prefix unchanged"> </span>	equals( clickCounter, 1, "Check that click, triggers onclick event handler on an a tag also" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	//try triggering load with $().load() used to fail
+<span class="token prefix inserted">+</span>	$('&lt;img />').load(function(){
+<span class="token prefix inserted">+</span>		ok( true, "Trigger the load event, using the shortcut .load(), used to fail.");
+<span class="token prefix inserted">+</span>	}).load();
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("unbind(event)", function() {</span></code></pre>
     </div>
   
 

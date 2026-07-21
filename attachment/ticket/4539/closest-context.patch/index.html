@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,25 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: src/traversing.js
+===================================================================
+--- src/traversing.js	(revision 6308)
++++ src/traversing.js	(working copy)
+@@ -36,11 +36,12 @@
+ 
+ 	closest: function( selector ) {
+ 		var pos = jQuery.expr.match.POS.test( selector ) ? jQuery(selector) : null,
+-			closer = 0;
++			closer = 0,
++			stop = this.context.parentNode;
+ 
+ 		return this.map(function(){
+ 			var cur = this;
+-			while ( cur && cur.ownerDocument ) {
++			while ( cur && cur.ownerDocument && cur !== stop ) {
+ 				if ( pos ? pos.index(cur) > -1 : jQuery(cur).is(selector) ) {
+ 					jQuery.data(cur, "closest", closer);
+ 					return cur;</code></pre>
     </div>
   
 

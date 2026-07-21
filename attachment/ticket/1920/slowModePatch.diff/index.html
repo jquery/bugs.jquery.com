@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,20 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: current/ui.mouse.js
+===================================================================
+<span class="token coord">--- current/ui.mouse.js	(revision 3817)</span>
+<span class="token coord">+++ current/ui.mouse.js	(working copy)</span>
+<span class="token coord">@@ -168,7 +168,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				this.pos[1] -= o.po.top;
+<span class="token prefix unchanged"> </span>			}
+<span class="token prefix unchanged"> </span>			
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			this.slowMode = (o.cursorAt &amp;&amp; (o.cursorAt.top-o.margins.top > 0 || o.cursorAt.bottom-o.margins.bottom > 0) &amp;&amp; (o.cursorAt.left-o.margins.left > 0 || o.cursorAt.right-o.margins.right > 0)) ? true : false; //If cursorAt is within the helper, set slowMode to true
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			// slowMode: manually check the physical bounds of droppables for intersection, rather than using the mouseover and mouseout listeners
+<span class="token prefix inserted">+</span>			this.slowMode = (o.cursorAtIgnore || (o.cursorAt &amp;&amp; (o.cursorAt.top-o.margins.top > 0 || o.cursorAt.bottom-o.margins.bottom > 0) &amp;&amp; (o.cursorAt.left-o.margins.left > 0 || o.cursorAt.right-o.margins.right > 0))) ? true : false; //If cursorAt is ignored or within the helper, set slowMode to true
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			
+<span class="token prefix unchanged"> </span>			if(!o.nonDestructive) $(this.helper).css('position', 'absolute');
+<span class="token prefix unchanged"> </span>			if(o.helper != 'original') $(this.helper).appendTo((o.appendTo == 'parent' ? a.parentNode : o.appendTo)).show();</span></code></pre>
     </div>
   
 

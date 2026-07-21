@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,50 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- C:\Documents and Settings\mhelgeson\Desktop\CODE\jquery\src\event.js	Tue Aug 25 13:18:56 2009</span>
+<span class="token coord">+++ C:\Temp\event.js	Tue Aug 25 13:16:43 2009</span>
+<span class="token coord">@@ -247,24 +247,32 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			handle.apply( elem, data );
+<span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var nativeFn, nativeHandler;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var aclick = ( jQuery.nodeName(elem, 'a') &amp;&amp; type === "click" ),
+<span class="token prefix inserted">+</span>		nativeFn, nativeHandler = function(){
+<span class="token prefix inserted">+</span>			try {
+<span class="token prefix inserted">+</span>				if ( elem[ "on" + type ] )
+<span class="token prefix inserted">+</span>					return elem[ "on" + type ].apply( elem, data );
+<span class="token prefix inserted">+</span>				}
+<span class="token prefix inserted">+</span>			// catch some IE issues	
+<span class="token prefix inserted">+</span>			catch( ex ){ }
+<span class="token prefix inserted">+</span>			};
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		try {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			nativeFn = elem[ type ];
+<span class="token prefix deleted">-</span>			nativeHandler = elem[ "on" + type ];
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			nativeFn = !!elem[ type ] ? function(){ 
+<span class="token prefix inserted">+</span>				try {
+<span class="token prefix inserted">+</span>					elem[ type ]();
+<span class="token prefix inserted">+</span>				} catch(e) {}
+<span class="token prefix inserted">+</span>			} : null;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		// prevent IE from throwing an error for some elements with some event types, see #3533
+<span class="token prefix unchanged"> </span>		} catch (e) {}
+<span class="token prefix unchanged"> </span>		// Handle triggering native .onfoo handlers (and on links since we don't call .click() for links)
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( (!nativeFn || (jQuery.nodeName(elem, 'a') &amp;&amp; type === "click")) &amp;&amp; nativeHandler &amp;&amp; nativeHandler.apply( elem, data ) === false ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( (!nativeFn || aclick) &amp;&amp; nativeHandler() === false ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			event.result = false;
+<span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Trigger the native events (except for clicks on links)
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( !bubbling &amp;&amp; nativeFn &amp;&amp; !event.isDefaultPrevented() &amp;&amp; !(jQuery.nodeName(elem, 'a') &amp;&amp; type === "click") ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( !bubbling &amp;&amp; nativeFn &amp;&amp; !event.isDefaultPrevented() &amp;&amp; !aclick ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			this.triggered = true;
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			try {
+<span class="token prefix deleted">-</span>				nativeFn();
+<span class="token prefix deleted">-</span>			// prevent IE from throwing an error for some hidden elements
+<span class="token prefix deleted">-</span>			} catch (e) {}
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			nativeFn();
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		this.triggered = false;</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,77 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/event/event.js
+===================================================================
+<span class="token coord">--- jquery/src/event/event.js	(revision 1408)</span>
+<span class="token coord">+++ jquery/src/event/event.js	(working copy)</span>
+<span class="token coord">@@ -55,18 +55,36 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Detach an event or set of events from an element
+<span class="token prefix unchanged"> </span>	remove: function(element, type, handler) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if (element.$events)
+<span class="token prefix deleted">-</span>			if ( type &amp;&amp; type.type )
+<span class="token prefix deleted">-</span>				delete element.$events[ type.type ][ type.handler.guid ];
+<span class="token prefix deleted">-</span>			else if (type &amp;&amp; element.$events[type])
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if (element.$events) {
+<span class="token prefix inserted">+</span>			var i,j,k;
+<span class="token prefix inserted">+</span>			if ( type &amp;&amp; type.type ) { // type is actually an event object here
+<span class="token prefix inserted">+</span>				handler = type.handler;
+<span class="token prefix inserted">+</span>				type    = type.type;
+<span class="token prefix inserted">+</span>			}
+<span class="token prefix inserted">+</span>			
+<span class="token prefix inserted">+</span>			if (type &amp;&amp; element.$events[type])
+<span class="token prefix inserted">+</span>				// remove the given handler for the given type
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				if ( handler )
+<span class="token prefix unchanged"> </span>					delete element.$events[type][handler.guid];
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					
+<span class="token prefix inserted">+</span>				// remove all handlers for the given type
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				else
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					for ( var i in element.$events[type] )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					for ( i in element.$events[type] )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>						delete element.$events[type][i];
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>						
+<span class="token prefix inserted">+</span>			// remove all handlers		
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			else
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				for ( var j in element.$events )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				for ( j in element.$events )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					this.remove( element, j );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			
+<span class="token prefix inserted">+</span>			// remove event handler if no more handlers exist
+<span class="token prefix inserted">+</span>			for ( k in element.$events[type] )
+<span class="token prefix inserted">+</span>				if (k) {
+<span class="token prefix inserted">+</span>					k = true;
+<span class="token prefix inserted">+</span>					break;
+<span class="token prefix inserted">+</span>				}
+<span class="token prefix inserted">+</span>			if (!k) element["on" + type] = null;
+<span class="token prefix inserted">+</span>		}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	trigger: function(type, data, element) {
+</span>Index: jquery/src/event/eventTest.js
+===================================================================
+<span class="token coord">--- jquery/src/event/eventTest.js	(revision 1408)</span>
+<span class="token coord">+++ jquery/src/event/eventTest.js	(working copy)</span>
+<span class="token coord">@@ -15,7 +15,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("unbind(event)", function() {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	expect(3);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	expect(4);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	var el = $("#firstp");
+<span class="token prefix unchanged"> </span>	el.click(function() {
+<span class="token prefix unchanged"> </span>		ok( true, "Fake normal bind" );
+</span><span class="token coord">@@ -25,6 +25,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		ok( true, "Fake onebind" );
+<span class="token prefix unchanged"> </span>	});
+<span class="token prefix unchanged"> </span>	el.click().click();
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	el.click(function() { return; });
+<span class="token prefix inserted">+</span>	el.unbind('click');
+<span class="token prefix inserted">+</span>	ok( !el[0].onclick, "Handler is removed" ); // Bug #964
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("trigger(event, [data]", function() {</span></code></pre>
     </div>
   
 

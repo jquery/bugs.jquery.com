@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,58 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt">@@ -3394,6 +3394,8 @@
+ 	// Last-Modified header cache for next request
+ 	lastModified: {},
+ 
++	getScriptTimer: {},
++
+ 	ajax: function( s ) {
+ 		// Extend the settings, but re-extend 's' so that it can be
+ 		// checked again later (in the test suite, specifically)
+@@ -3483,19 +3485,30 @@
+ 			if ( !jsonp ) {
+ 				var done = false;
+ 
+-				// Attach handlers for all browsers
+-				script.onload = script.onreadystatechange = function(){
+-					if ( !done &amp;&amp; (!this.readyState ||
+-							this.readyState == "loaded" || this.readyState == "complete") ) {
+-						done = true;
+-						success();
+-						complete();
++				if(($.browser.safari &amp;&amp; !navigator.userAgent.match(/Version\/3/)) || $.browser.opera) {
++					$.getScriptTimer[s.url] = setInterval(function() {
++						if(!done &amp;&amp; /loaded|complete/.test(document.readyState)) {
++							clearInterval($.getScriptTimer[s.url]);
++							done = true;
++							success();
++							complete();
++						}
++					}, 10);
++				} else {
++					// Attach handlers for all browsers
++					script.onload = script.onreadystatechange = function(){
++						if ( !done &amp;&amp; (!this.readyState ||
++								this.readyState == "loaded" || this.readyState == "complete") ) {
++							done = true;
++							success();
++							complete();
+ 
+-						// Handle memory leak in IE
+-						script.onload = script.onreadystatechange = null;
+-						head.removeChild( script );
+-					}
+-				};
++							// Handle memory leak in IE
++							script.onload = script.onreadystatechange = null;
++							head.removeChild( script );
++						}
++					};
++				}
+ 			}
+ 
+ 			head.appendChild(script);</code></pre>
     </div>
   
 

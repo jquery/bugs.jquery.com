@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,140 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/ajax.js
+===================================================================
+<span class="token coord">--- test/unit/ajax.js	(revision 6386)</span>
+<span class="token coord">+++ test/unit/ajax.js	(working copy)</span>
+<span class="token coord">@@ -874,6 +874,58 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	})
+<span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>test("jQuery.ajax - If-Modified-Since support", function() {
+<span class="token prefix inserted">+</span>	expect( 3 );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	jQuery.ajaxSetup({ ifModified: true });
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	stop();
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	var url = "data/if_modified_since.php?ts=" + new Date();
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	jQuery.ajax({
+<span class="token prefix inserted">+</span>		url: url,
+<span class="token prefix inserted">+</span>		success: function(data, status) { 
+<span class="token prefix inserted">+</span>			equals(status, "success");
+<span class="token prefix inserted">+</span>			
+<span class="token prefix inserted">+</span>			jQuery.ajax({
+<span class="token prefix inserted">+</span>				url: url,
+<span class="token prefix inserted">+</span>				success: function(data, status) { 
+<span class="token prefix inserted">+</span>					equals(status, "notmodified");
+<span class="token prefix inserted">+</span>					ok(data == null, "response body should be empty")
+<span class="token prefix inserted">+</span>					start();
+<span class="token prefix inserted">+</span>				}
+<span class="token prefix inserted">+</span>			});
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>	});
+<span class="token prefix inserted">+</span>});
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>test("jQuery.ajax - Etag support", function() {
+<span class="token prefix inserted">+</span>	expect( 3 );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	jQuery.ajaxSetup({ ifModified: true });
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	stop();
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	var url = "data/etag.php?ts=" + new Date();
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	jQuery.ajax({
+<span class="token prefix inserted">+</span>		url: url,
+<span class="token prefix inserted">+</span>		success: function(data, status) { 
+<span class="token prefix inserted">+</span>			equals(status, "success");
+<span class="token prefix inserted">+</span>			
+<span class="token prefix inserted">+</span>			jQuery.ajax({
+<span class="token prefix inserted">+</span>				url: url,
+<span class="token prefix inserted">+</span>				success: function(data, status) { 
+<span class="token prefix inserted">+</span>					equals(status, "notmodified");
+<span class="token prefix inserted">+</span>					ok(data == null, "response body should be empty")
+<span class="token prefix inserted">+</span>					start();
+<span class="token prefix inserted">+</span>				}
+<span class="token prefix inserted">+</span>			});
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>	});
+<span class="token prefix inserted">+</span>});
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>}
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>//}
+</span>Index: src/ajax.js
+===================================================================
+<span class="token coord">--- src/ajax.js	(revision 6386)</span>
+<span class="token coord">+++ src/ajax.js	(working copy)</span>
+<span class="token coord">@@ -170,6 +170,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Last-Modified header cache for next request
+<span class="token prefix unchanged"> </span>	lastModified: {},
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	etag: {},
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	ajax: function( s ) {
+<span class="token prefix unchanged"> </span>		// Extend the settings, but re-extend 's' so that it can be
+</span><span class="token coord">@@ -298,10 +299,13 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			if ( s.data )
+<span class="token prefix unchanged"> </span>				xhr.setRequestHeader("Content-Type", s.contentType);
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			// Set the If-Modified-Since header, if ifModified mode.
+<span class="token prefix deleted">-</span>			if ( s.ifModified )
+<span class="token prefix deleted">-</span>				xhr.setRequestHeader("If-Modified-Since",
+<span class="token prefix deleted">-</span>					jQuery.lastModified[s.url] || "Thu, 01 Jan 1970 00:00:00 GMT" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				// Set the If-Modified-Since and/or If-None-Match header, if in ifModified mode.
+<span class="token prefix inserted">+</span>				if ( s.ifModified ) {
+<span class="token prefix inserted">+</span>					if (jQuery.lastModified[s.url])
+<span class="token prefix inserted">+</span>						xhr.setRequestHeader("If-Modified-Since", jQuery.lastModified[s.url]);
+<span class="token prefix inserted">+</span>					if (jQuery.etag[s.url])
+<span class="token prefix inserted">+</span>						xhr.setRequestHeader("If-None-Match", jQuery.etag[s.url]);
+<span class="token prefix inserted">+</span>				}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Set header so the called script knows that it's an XMLHttpRequest
+<span class="token prefix unchanged"> </span>			xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+</span><span class="token coord">@@ -363,16 +367,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				}
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				// Make sure that the request was successful or notmodified
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				if ( status == "success" ) {
+<span class="token prefix deleted">-</span>					// Cache Last-Modified header, if ifModified mode.
+<span class="token prefix deleted">-</span>					var modRes;
+<span class="token prefix deleted">-</span>					try {
+<span class="token prefix deleted">-</span>						modRes = xhr.getResponseHeader("Last-Modified");
+<span class="token prefix deleted">-</span>					} catch(e) {} // swallow exception thrown by FF if header is not available
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>					if ( s.ifModified &amp;&amp; modRes )
+<span class="token prefix deleted">-</span>						jQuery.lastModified[s.url] = modRes;
+<span class="token prefix deleted">-</span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				if ( status == "success" || status == "notmodified" ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					// JSONP handles its own success callback
+<span class="token prefix unchanged"> </span>					if ( !jsonp )
+<span class="token prefix unchanged"> </span>						success();
+</span><span class="token coord">@@ -467,13 +462,16 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Determines if an XMLHttpRequest returns NotModified
+<span class="token prefix unchanged"> </span>	httpNotModified: function( xhr, url ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		try {
+<span class="token prefix deleted">-</span>			var xhrRes = xhr.getResponseHeader("Last-Modified");
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var last_modified = xhr.getResponseHeader("Last-Modified");
+<span class="token prefix inserted">+</span>		var etag = xhr.getResponseHeader("Etag");
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			// Firefox always returns 200. check Last-Modified date
+<span class="token prefix deleted">-</span>			return xhr.status == 304 || xhrRes == jQuery.lastModified[url];
+<span class="token prefix deleted">-</span>		} catch(e){}
+<span class="token prefix deleted">-</span>		return false;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if (last_modified) 
+<span class="token prefix inserted">+</span>			jQuery.lastModified[url] = last_modified;
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		if (etag) 
+<span class="token prefix inserted">+</span>			jQuery.etag[url] = etag;
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		return xhr.status == 304;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	httpData: function( xhr, type, s ) {</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,27 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/core.js
+===================================================================
+<span class="token coord">--- test/unit/core.js	(revision 5872)</span>
+<span class="token coord">+++ test/unit/core.js	(working copy)</span>
+<span class="token coord">@@ -1364,7 +1364,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	var div = jQuery("div").addClass("test").removeClass("test"),
+<span class="token prefix unchanged"> </span>		pass = true;
+<span class="token prefix unchanged"> </span>	for ( var i = 0; i &lt; div.size(); i++ ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( div.get(i).className.indexOf("test") != -1 ) pass = false;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( div.get(i).className.search(/(^|\s)test(\s|$)/) != -1 ) pass = false;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	}
+<span class="token prefix unchanged"> </span>	ok( pass, "Remove Class" );
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -1373,7 +1373,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	div.removeClass("test").removeClass("bar").removeClass("foo");
+<span class="token prefix unchanged"> </span>	var pass = true;
+<span class="token prefix unchanged"> </span>	for ( var i = 0; i &lt; div.size(); i++ ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	 if ( div.get(i).className.match(/test|bar|foo/) ) pass = false;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	 if ( div.get(i).className.search(/(^|\s)(test|bar|foo)(\s|$)/) != -1 ) pass = false;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	}
+<span class="token prefix unchanged"> </span>	ok( pass, "Remove multiple classes" );</span></code></pre>
     </div>
   
 

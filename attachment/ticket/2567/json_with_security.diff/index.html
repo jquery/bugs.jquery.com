@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,113 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">diff --git a/jquery/src/ajax.js b/jquery/src/ajax.js
+index 3e72488..947b6be 100644
+<span class="token coord">--- a/jquery/src/ajax.js</span>
+<span class="token coord">+++ b/jquery/src/ajax.js</span>
+@@ -143,6 +143,7 @@ jQuery.extend({
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		timeout: 0,
+<span class="token prefix unchanged"> </span>		contentType: "application/x-www-form-urlencoded",
+<span class="token prefix unchanged"> </span>		processData: true,
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		filter: /^\/\*-secure-([\s\S]*)\*\/\s*$/,
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		async: true,
+<span class="token prefix unchanged"> </span>		data: null,
+<span class="token prefix unchanged"> </span>		username: null,
+</span>@@ -318,7 +319,7 @@ jQuery.extend({
+<span class="token unchanged"><span class="token prefix unchanged"> </span>					// Watch for, and catch, XML document parse errors
+<span class="token prefix unchanged"> </span>					try {
+<span class="token prefix unchanged"> </span>						// process the data (runs the xml through httpData regardless of callback)
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>						data = jQuery.httpData( xml, s.dataType );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>						data = jQuery.httpData( xml, s.dataType, s.filter );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					} catch(e) {
+<span class="token prefix unchanged"> </span>						status = "parsererror";
+<span class="token prefix unchanged"> </span>					}
+</span>@@ -442,7 +443,7 @@ jQuery.extend({
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		return false;
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	httpData: function( r, type ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	httpData: function( r, type, filter ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		var ct = r.getResponseHeader("content-type");
+<span class="token prefix unchanged"> </span>		var xml = type == "xml" || !type &amp;&amp; ct &amp;&amp; ct.indexOf("xml") >= 0;
+<span class="token prefix unchanged"> </span>		var data = xml ? r.responseXML : r.responseText;
+</span>@@ -450,14 +451,18 @@ jQuery.extend({
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		if ( xml &amp;&amp; data.documentElement.tagName == "parsererror" )
+<span class="token prefix unchanged"> </span>			throw "parsererror";
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		// remove security measure if one is used
+<span class="token prefix inserted">+</span>		if ( filter )
+<span class="token prefix inserted">+</span>			data = data.replace(filter, "$1");
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		// If the type is "script", eval it in global context
+<span class="token prefix unchanged"> </span>		if ( type == "script" )
+<span class="token prefix unchanged"> </span>			jQuery.globalEval( data );
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Get the JavaScript object, if JSON is used.
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( type == "json" )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( type == "json" ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			data = eval("(" + data + ")");
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		return data;
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+</span>diff --git a/jquery/test/data/js_with_security.js b/jquery/test/data/js_with_security.js
+new file mode 100644
+index 0000000..1999ee5
+<span class="token coord">--- /dev/null</span>
+<span class="token coord">+++ b/jquery/test/data/js_with_security.js</span>
+<span class="token coord">@@ -0,0 +1 @@</span>
+<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>/*-secure- window.js_with_security_ran = true; */
+</span>diff --git a/jquery/test/data/json_with_security.js b/jquery/test/data/json_with_security.js
+new file mode 100644
+index 0000000..ff7e378
+<span class="token coord">--- /dev/null</span>
+<span class="token coord">+++ b/jquery/test/data/json_with_security.js</span>
+<span class="token coord">@@ -0,0 +1 @@</span>
+<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>/*-secure- { "data": {"lang": "en", "length": 25} } */
+</span>diff --git a/jquery/test/unit/ajax.js b/jquery/test/unit/ajax.js
+index 15c4ed7..14ae2b3 100644
+<span class="token coord">--- a/jquery/test/unit/ajax.js</span>
+<span class="token coord">+++ b/jquery/test/unit/ajax.js</span>
+@@ -662,6 +662,17 @@ test("$.getJSON(String, Function) - JSON object with absolute url to local conte
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	});
+<span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>test("$.getJSON(String, Function) - filter out security token", function() {
+<span class="token prefix inserted">+</span>	expect(2);
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	stop();
+<span class="token prefix inserted">+</span>	$.getJSON(url("data/json_with_security.js"), function(json) {
+<span class="token prefix inserted">+</span>		ok( json.data.lang == 'en', 'Check JSON: lang' );
+<span class="token prefix inserted">+</span>		ok( json.data.length == 25, 'Check JSON: length' );
+<span class="token prefix inserted">+</span>		start();
+<span class="token prefix inserted">+</span>	});
+<span class="token prefix inserted">+</span>})
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>test("$.post(String, Hash, Function) - simple with xml", function() {
+<span class="token prefix unchanged"> </span>	expect(4);
+<span class="token prefix unchanged"> </span>	stop();
+</span>@@ -764,6 +775,19 @@ test("$.ajax - simple post", function() {
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	});
+<span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>test("$.ajax - get with security filter", function() {
+<span class="token prefix inserted">+</span>	expect(1);
+<span class="token prefix inserted">+</span>	stop();
+<span class="token prefix inserted">+</span>	$.ajax({
+<span class="token prefix inserted">+</span>		type: "GET",
+<span class="token prefix inserted">+</span>		url: url("data/js_with_security.js"),
+<span class="token prefix inserted">+</span>		success: function(){
+<span class="token prefix inserted">+</span>			ok( window.js_with_security_ran, 'Check for GET' );
+<span class="token prefix inserted">+</span>			start();
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>	});
+<span class="token prefix inserted">+</span>});
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>test("ajaxSetup()", function() {
+<span class="token prefix unchanged"> </span>	expect(1);
+<span class="token prefix unchanged"> </span>	stop();</span></code></pre>
     </div>
   
 

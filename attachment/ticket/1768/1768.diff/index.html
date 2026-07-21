@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,92 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax.js
+===================================================================
+<span class="token coord">--- src/ajax.js	(revision 4156)</span>
+<span class="token coord">+++ src/ajax.js	(working copy)</span>
+<span class="token coord">@@ -184,14 +184,18 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			// that a JSONP style response is executed properly
+<span class="token prefix unchanged"> </span>			s.dataType = "script";
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			function jsonpEnd() {
+<span class="token prefix inserted">+</span>				// Garbage collect
+<span class="token prefix inserted">+</span>				window[ jsonp ] = undefined;
+<span class="token prefix inserted">+</span>				try{ delete window[ jsonp ]; } catch(e){}
+<span class="token prefix inserted">+</span>			}
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			// Handle JSONP-style loading
+<span class="token prefix unchanged"> </span>			window[ jsonp ] = function(tmp){
+<span class="token prefix unchanged"> </span>				data = tmp;
+<span class="token prefix unchanged"> </span>				success();
+<span class="token prefix unchanged"> </span>				complete();
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				// Garbage collect
+<span class="token prefix deleted">-</span>				window[ jsonp ] = undefined;
+<span class="token prefix deleted">-</span>				try{ delete window[ jsonp ]; } catch(e){}
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				jsonpEnd();
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			};
+<span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -221,26 +225,45 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		// If we're requesting a remote document
+<span class="token prefix unchanged"> </span>		// and trying to load JSON or Script with a GET
+<span class="token prefix unchanged"> </span>		if ( (!s.url.indexOf("http") || !s.url.indexOf("//")) &amp;&amp; ( s.dataType == "script" || s.dataType =="json" ) &amp;&amp; s.type.toLowerCase() == "get" ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var head = document.getElementsByTagName("head")[0];
+<span class="token prefix deleted">-</span>			var script = document.createElement("script");
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var head = document.getElementsByTagName("head")[0],
+<span class="token prefix inserted">+</span>				script = document.createElement("script"),
+<span class="token prefix inserted">+</span>				done = false;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			script.src = s.url;
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			// Handle Script loading
+<span class="token prefix deleted">-</span>			if ( !jsonp ) {
+<span class="token prefix deleted">-</span>				var done = false;
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>				// Attach handlers for all browsers
+<span class="token prefix deleted">-</span>				script.onload = script.onreadystatechange = function(){
+<span class="token prefix deleted">-</span>					if ( !done &amp;&amp; (!this.readyState || 
+<span class="token prefix deleted">-</span>							this.readyState == "loaded" || this.readyState == "complete") ) {
+<span class="token prefix deleted">-</span>						done = true;
+<span class="token prefix deleted">-</span>						success();
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			function scriptTagEnd(how) {
+<span class="token prefix inserted">+</span>				if (!done) {
+<span class="token prefix inserted">+</span>					done = true;
+<span class="token prefix inserted">+</span>					status = how;
+<span class="token prefix inserted">+</span>					// don't do success/complete calls on jsonp success
+<span class="token prefix inserted">+</span>					if (!jsonp || status != "success") {
+<span class="token prefix inserted">+</span>						if (status == "success")
+<span class="token prefix inserted">+</span>							success();
+<span class="token prefix inserted">+</span>						else {
+<span class="token prefix inserted">+</span>							jQuery.handleError(s, null, status);
+<span class="token prefix inserted">+</span>							if (jsonp)
+<span class="token prefix inserted">+</span>								jsonpEnd();
+<span class="token prefix inserted">+</span>						}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>						complete();
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>						head.removeChild( script );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					}
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				};
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>					head.removeChild( script );
+<span class="token prefix inserted">+</span>				}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			}
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			// Attach handlers for all browsers
+<span class="token prefix inserted">+</span>			script.onload = script.onreadystatechange = function(){
+<span class="token prefix inserted">+</span>				if ( !done &amp;&amp; (!this.readyState || 
+<span class="token prefix inserted">+</span>						this.readyState == "loaded" || this.readyState == "complete") )
+<span class="token prefix inserted">+</span>					// opera sets the .text value so we can test that, the other browsers don't so have assume success
+<span class="token prefix inserted">+</span>					scriptTagEnd(this.text || !jQuery.browser.opera ? "success" : "error");
+<span class="token prefix inserted">+</span>			};
+<span class="token prefix inserted">+</span>			script.onerror = function(){
+<span class="token prefix inserted">+</span>				scriptTagEnd("error");
+<span class="token prefix inserted">+</span>			};
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>			if (s.timeout)
+<span class="token prefix inserted">+</span>				setTimeout(function(){ scriptTagEnd("timeout"); }, s.timeout);
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			head.appendChild(script);
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// We handle everything using the script element injection</span></code></pre>
     </div>
   
 

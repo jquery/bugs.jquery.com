@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,32 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery-1.4.2.js	2010-06-30 10:58:48.000000000 +0200</span>
+<span class="token coord">+++ jquery-1.4.2.patched.js	2010-10-03 23:54:49.000000000 +0200</span>
+<span class="token coord">@@ -5576,7 +5576,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>					opt.display = jQuery.css(this, "display");
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>					// Make sure that nothing sneaks out
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					opt.overflow = this.style.overflow;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					opt.overflowX = this.style.overflowX;
+<span class="token prefix inserted">+</span>					opt.overflowY = this.style.overflowY;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				}
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				if ( jQuery.isArray( prop[p] ) ) {
+</span><span class="token coord">@@ -5586,8 +5587,11 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				}
+<span class="token prefix unchanged"> </span>			}
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( opt.overflow != null ) {
+<span class="token prefix deleted">-</span>				this.style.overflow = "hidden";
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( opt.overflowX != null ) {
+<span class="token prefix inserted">+</span>				this.style.overflowX = "hidden";
+<span class="token prefix inserted">+</span>			}
+<span class="token prefix inserted">+</span>			if ( opt.overflowY != null ) {
+<span class="token prefix inserted">+</span>				this.style.overflowY = "hidden";
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			}
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			opt.curAnim = jQuery.extend({}, prop);</span></code></pre>
     </div>
   
 

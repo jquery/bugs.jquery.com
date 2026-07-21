@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,329 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 5084)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -729,24 +729,25 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// args is for internal usage only
+<span class="token prefix unchanged"> </span>	each: function( object, callback, args ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var i = 0, name, length = object.length;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		if ( args ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( object.length == undefined ) {
+<span class="token prefix deleted">-</span>				for ( var name in object )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( length == undefined ) {
+<span class="token prefix inserted">+</span>				for ( name in object )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					if ( callback.apply( object[ name ], args ) === false )
+<span class="token prefix unchanged"> </span>						break;
+<span class="token prefix unchanged"> </span>			} else
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				for ( var i = 0, length = object.length; i &lt; length; i++ )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				for ( ; i &lt; length; i++ )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					if ( callback.apply( object[ i ], args ) === false )
+<span class="token prefix unchanged"> </span>						break;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// A special, fast, case for the most common use of each
+<span class="token prefix unchanged"> </span>		} else {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( object.length == undefined ) {
+<span class="token prefix deleted">-</span>				for ( var name in object )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( length == undefined ) {
+<span class="token prefix inserted">+</span>				for ( name in object )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					if ( callback.call( object[ name ], name, object[ name ] ) === false )
+<span class="token prefix unchanged"> </span>						break;
+<span class="token prefix unchanged"> </span>			} else
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				for ( var i = 0, length = object.length, value = object[0]; 
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				for ( var value = object[0]; 
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					i &lt; length &amp;&amp; callback.call( value, i, value ) !== false; value = object[++i] ){}
+<span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -791,9 +792,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// A method for quickly swapping in/out CSS properties to get correct calculations
+<span class="token prefix unchanged"> </span>	swap: function( elem, options, callback ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var old = {};
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var old = {}, name;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		// Remember the old values, and insert the new ones
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		for ( var name in options ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		for ( name in options ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			old[ name ] = elem.style[ name ];
+<span class="token prefix unchanged"> </span>			elem.style[ name ] = options[ name ];
+<span class="token prefix unchanged"> </span>		}
+</span><span class="token coord">@@ -801,7 +802,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		callback.call( elem );
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Revert the old values
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		for ( var name in options )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		for ( name in options )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			elem.style[ name ] = old[ name ];
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -831,7 +832,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	curCSS: function( elem, name, force ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var ret;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var ret, estyle = elem.style;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// A helper method for determining if an element's values are broken
+<span class="token prefix unchanged"> </span>		function color( elem ) {
+</span><span class="token coord">@@ -844,7 +845,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// We need to handle opacity special in IE
+<span class="token prefix unchanged"> </span>		if ( name == "opacity" &amp;&amp; jQuery.browser.msie ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			ret = jQuery.attr( elem.style, "opacity" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			ret = jQuery.attr( estyle, "opacity" );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			return ret == "" ?
+<span class="token prefix unchanged"> </span>				"1" :
+</span><span class="token coord">@@ -852,17 +853,17 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>		// Opera sometimes will give the wrong display answer, this fixes it, see #2037
+<span class="token prefix unchanged"> </span>		if ( jQuery.browser.opera &amp;&amp; name == "display" ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var save = elem.style.outline;
+<span class="token prefix deleted">-</span>			elem.style.outline = "0 solid black";
+<span class="token prefix deleted">-</span>			elem.style.outline = save;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var save = estyle.outline;
+<span class="token prefix inserted">+</span>			estyle.outline = "0 solid black";
+<span class="token prefix inserted">+</span>			estyle.outline = save;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>		
+<span class="token prefix unchanged"> </span>		// Make sure we're using the right name for getting the float value
+<span class="token prefix unchanged"> </span>		if ( name.match( /float/i ) )
+<span class="token prefix unchanged"> </span>			name = styleFloat;
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( !force &amp;&amp; elem.style &amp;&amp; elem.style[ name ] )
+<span class="token prefix deleted">-</span>			ret = elem.style[ name ];
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( !force &amp;&amp; estyle &amp;&amp; estyle[ name ] )
+<span class="token prefix inserted">+</span>			ret = style[ name ];
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		else if ( document.defaultView &amp;&amp; document.defaultView.getComputedStyle ) {
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -880,7 +881,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			// If the element isn't reporting its values properly in Safari
+<span class="token prefix unchanged"> </span>			// then some display: none elements are involved
+<span class="token prefix unchanged"> </span>			else {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				var swap = [], stack = [];
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				var swap = [], stack = [], i = 0;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				// Locate all of the parent display: none elements
+<span class="token prefix unchanged"> </span>				for ( var a = elem; a &amp;&amp; color(a); a = a.parentNode )
+</span><span class="token coord">@@ -888,7 +889,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				// Go through and make them visible, but in reverse
+<span class="token prefix unchanged"> </span>				// (It would be better if we knew the exact display type that they had)
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				for ( var i = 0; i &lt; stack.length; i++ )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				for ( ; i &lt; stack.length; i++ )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					if ( color( stack[ i ] ) ) {
+<span class="token prefix unchanged"> </span>						swap[ i ] = stack[ i ].style.display;
+<span class="token prefix unchanged"> </span>						stack[ i ].style.display = "block";
+</span><span class="token coord">@@ -901,7 +902,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>					( getComputedStyle &amp;&amp; getComputedStyle.getPropertyValue( name ) ) || "";
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				// Finally, revert the display styles back
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				for ( var i = 0; i &lt; swap.length; i++ )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				for ( ; i &lt; swap.length; i++ )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					if ( swap[ i ] != null )
+<span class="token prefix unchanged"> </span>						stack[ i ].style.display = swap[ i ];
+<span class="token prefix unchanged"> </span>			}
+</span><span class="token coord">@@ -924,15 +925,15 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			// but a number that has a weird ending, we need to convert it to pixels
+<span class="token prefix unchanged"> </span>			if ( !/^\d+(px)?$/i.test( ret ) &amp;&amp; /^\d/.test( ret ) ) {
+<span class="token prefix unchanged"> </span>				// Remember the original values
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				var style = elem.style.left, runtimeStyle = elem.runtimeStyle.left;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				var style = estyle.left, runtimeStyle = elem.runtimeStyle.left;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				// Put in the new values to get a computed value out
+<span class="token prefix unchanged"> </span>				elem.runtimeStyle.left = elem.currentStyle.left;
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				elem.style.left = ret || 0;
+<span class="token prefix deleted">-</span>				ret = elem.style.pixelLeft + "px";
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				estyle.left = ret || 0;
+<span class="token prefix inserted">+</span>				ret = estyle.pixelLeft + "px";
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				// Revert the changed values
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				elem.style.left = style;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				estyle.left = style;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				elem.runtimeStyle.left = runtimeStyle;
+<span class="token prefix unchanged"> </span>			}
+<span class="token prefix unchanged"> </span>		}
+</span><span class="token coord">@@ -1144,13 +1145,14 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Also, we need to make sure that the correct elements are being returned
+<span class="token prefix unchanged"> </span>		// (IE returns comment nodes in a '*' query)
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var i = 0;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		if ( jQuery.browser.msie ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			for ( var i = 0; second[ i ]; i++ )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			for (; second[ i ]; i++ )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				if ( second[ i ].nodeType != 8 )
+<span class="token prefix unchanged"> </span>					first.push( second[ i ] );
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		} else
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			for ( var i = 0; second[ i ]; i++ )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			for (; second[ i ]; i++ )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				first.push( second[ i ] );
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		return first;
+</span>Index: src/fx.js
+===================================================================
+<span class="token coord">--- src/fx.js	(revision 5084)</span>
+<span class="token coord">+++ src/fx.js	(working copy)</span>
+<span class="token coord">@@ -76,8 +76,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			if ( this.nodeType != 1)
+<span class="token prefix unchanged"> </span>				return false;
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var opt = jQuery.extend({}, optall);
+<span class="token prefix deleted">-</span>			var hidden = jQuery(this).is(":hidden"), self = this;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var opt = jQuery.extend({}, optall),
+<span class="token prefix inserted">+</span>				hidden = jQuery(this).is(":hidden"), self = this;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			
+<span class="token prefix unchanged"> </span>			for ( var p in prop ) {
+<span class="token prefix unchanged"> </span>				if ( prop[p] == "hide" &amp;&amp; hidden || prop[p] == "show" &amp;&amp; !hidden )
+</span>Index: src/selector.js
+===================================================================
+<span class="token coord">--- src/selector.js	(revision 5084)</span>
+<span class="token coord">+++ src/selector.js	(working copy)</span>
+<span class="token coord">@@ -114,12 +114,12 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			t = jQuery.trim(t);
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var foundToken = false;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var foundToken = false,
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// An attempt at speeding up child selectors that
+<span class="token prefix unchanged"> </span>			// point to a specific element tag
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var re = quickChild;
+<span class="token prefix deleted">-</span>			var m = re.exec(t);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				re = quickChild,
+<span class="token prefix inserted">+</span>				m = re.exec(t);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			if ( m ) {
+<span class="token prefix unchanged"> </span>				nodeName = m[1].toUpperCase();
+</span><span class="token coord">@@ -188,8 +188,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				} else {
+<span class="token prefix unchanged"> </span>					// Optimize for the case nodeName#idName
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					var re2 = quickID;
+<span class="token prefix deleted">-</span>					var m = re2.exec(t);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					re2 = quickID;
+<span class="token prefix inserted">+</span>					m = re2.exec(t);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					
+<span class="token prefix unchanged"> </span>					// Re-organize the results, so that they're consistent
+<span class="token prefix unchanged"> </span>					if ( m ) {
+</span><span class="token coord">@@ -222,7 +222,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>						ret = r = oid &amp;&amp; (!m[3] || jQuery.nodeName(oid, m[3])) ? [oid] : [];
+<span class="token prefix unchanged"> </span>					} else {
+<span class="token prefix unchanged"> </span>						// We need to find all descendant elements
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>						for ( var i = 0; ret[i]; i++ ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>						for ( i = 0; ret[i]; i++ ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>							// Grab the tag name being searched for
+<span class="token prefix unchanged"> </span>							var tag = m[1] == "#" &amp;&amp; m[3] ? m[3] : m[1] != "" || m[0] == "" ? "*" : m[2];
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -242,7 +242,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>							var tmp = [];
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>							// Try to find the element with the ID
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>							for ( var i = 0; r[i]; i++ )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>							for ( i = 0; r[i]; i++ )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>								if ( r[i].getAttribute("id") == m[2] ) {
+<span class="token prefix unchanged"> </span>									tmp = [ r[i] ];
+<span class="token prefix unchanged"> </span>									break;
+</span><span class="token coord">@@ -301,9 +301,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		while ( t &amp;&amp; t != last ) {
+<span class="token prefix unchanged"> </span>			last = t;
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var p = jQuery.parse, m;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var p = jQuery.parse, m, i = 0, tmp = [];
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			for ( var i = 0; p[i]; i++ ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			for ( ; p[i]; i++ ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				m = p[i].exec( t );
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				if ( m ) {
+</span><span class="token coord">@@ -331,9 +331,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				r = jQuery.classFilter(r, m[2], not);
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			else if ( m[1] == "[" ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				var tmp = [], type = m[3];
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				var type = m[3], i = 0, rl = r.length;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				for ( var i = 0, rl = r.length; i &lt; rl; i++ ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				for ( ; i &lt; rl; i++ ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					var a = r[i], z = a[ jQuery.props[m[2]] || m[2] ];
+<span class="token prefix unchanged"> </span>					
+<span class="token prefix unchanged"> </span>					if ( z == null || /href|src|selected/.test(m[2]) )
+</span><span class="token coord">@@ -352,16 +352,17 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// We can get a speed boost by handling nth-child here
+<span class="token prefix unchanged"> </span>			} else if ( m[1] == ":" &amp;&amp; m[2] == "nth-child" ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				var merge = {}, tmp = [],
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				var merge = {},
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					// parse equations like 'even', 'odd', '5', '2n', '3n+2', '4n-1', '-n+6'
+<span class="token prefix unchanged"> </span>					test = /(-?)(\d*)n((?:\+|-)?\d*)/.exec(
+<span class="token prefix unchanged"> </span>						m[3] == "even" &amp;&amp; "2n" || m[3] == "odd" &amp;&amp; "2n+1" ||
+<span class="token prefix unchanged"> </span>						!/\D/.test(m[3]) &amp;&amp; "0n+" + m[3] || m[3]),
+<span class="token prefix unchanged"> </span>					// calculate the numbers (first)n+(last) including if they are negative
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					first = (test[1] + (test[2] || 1)) - 0, last = test[3] - 0;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					first = (test[1] + (test[2] || 1)) - 0;
+<span class="token prefix inserted">+</span>				last = test[3] - 0;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span> 
+<span class="token prefix unchanged"> </span>				// loop through all the elements left in the jQuery object
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				for ( var i = 0, rl = r.length; i &lt; rl; i++ ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				for ( i = 0, rl = r.length; i &lt; rl; i++ ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					var node = r[i], parentNode = node.parentNode, id = jQuery.data(parentNode);
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>					if ( !merge[id] ) {
+</span><span class="token coord">@@ -410,8 +411,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	dir: function( elem, dir ){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var matched = [];
+<span class="token prefix deleted">-</span>		var cur = elem[dir];
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var matched = [],
+<span class="token prefix inserted">+</span>			cur = elem[dir];
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		while ( cur &amp;&amp; cur != document ) {
+<span class="token prefix unchanged"> </span>			if ( cur.nodeType == 1 )
+<span class="token prefix unchanged"> </span>				matched.push( cur );
+</span>Index: src/event.js
+===================================================================
+<span class="token coord">--- src/event.js	(revision 5084)</span>
+<span class="token coord">+++ src/event.js	(working copy)</span>
+<span class="token coord">@@ -105,7 +105,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		if ( elem.nodeType == 3 || elem.nodeType == 8 )
+<span class="token prefix unchanged"> </span>			return;
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var events = jQuery.data(elem, "events"), ret, index;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var events = jQuery.data(elem, "events"), ret;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		if ( events ) {
+<span class="token prefix unchanged"> </span>			// Unbind all events for the element
+</span>Index: src/ajax.js
+===================================================================
+<span class="token coord">--- src/ajax.js	(revision 5084)</span>
+<span class="token coord">+++ src/ajax.js	(working copy)</span>
+<span class="token coord">@@ -233,8 +233,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		// If we're requesting a remote document
+<span class="token prefix unchanged"> </span>		// and trying to load JSON or Script with a GET
+<span class="token prefix unchanged"> </span>		if ( (!s.url.indexOf("http") || !s.url.indexOf("//")) &amp;&amp; s.dataType == "script" &amp;&amp; s.type.toLowerCase() == "get" ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			var head = document.getElementsByTagName("head")[0];
+<span class="token prefix deleted">-</span>			var script = document.createElement("script");
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var head = document.getElementsByTagName("head")[0],
+<span class="token prefix inserted">+</span>				script = document.createElement("script");
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			script.src = s.url;
+<span class="token prefix unchanged"> </span>			if (s.scriptCharset)
+<span class="token prefix unchanged"> </span>				script.charset = s.scriptCharset;
+</span><span class="token coord">@@ -443,9 +443,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	httpData: function( r, type ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var ct = r.getResponseHeader("content-type");
+<span class="token prefix deleted">-</span>		var xml = type == "xml" || !type &amp;&amp; ct &amp;&amp; ct.indexOf("xml") >= 0;
+<span class="token prefix deleted">-</span>		var data = xml ? r.responseXML : r.responseText;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var ct = r.getResponseHeader("content-type"),
+<span class="token prefix inserted">+</span>			xml = type == "xml" || !type &amp;&amp; ct &amp;&amp; ct.indexOf("xml") >= 0,
+<span class="token prefix inserted">+</span>			data = xml ? r.responseXML : r.responseText;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		if ( xml &amp;&amp; data.documentElement.tagName == "parsererror" )
+<span class="token prefix unchanged"> </span>			throw "parsererror";</span></code></pre>
     </div>
   
 

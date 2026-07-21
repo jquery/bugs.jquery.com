@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,22 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: /trunk/jquery/src/event.js
+===================================================================
+<span class="token coord">--- /trunk/jquery/src/event.js (revision 5757)</span>
+<span class="token coord">+++ /trunk/jquery/src/event.js (revision 5758)</span>
+<span class="token coord">@@ -604,5 +604,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>// And prevent errors on refresh with events like mouseover in other browsers
+<span class="token prefix unchanged"> </span>// Window isn't included so as not to unbind existing unload events
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>jQuery(window).bind("unload", function() {
+<span class="token prefix deleted">-</span>	jQuery("*").add(document).unbind();
+<span class="token prefix deleted">-</span>});
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>jQuery( window ).bind( 'unload', function(){ 
+<span class="token prefix inserted">+</span>	for ( var id in jQuery.cache )
+<span class="token prefix inserted">+</span>		// Skip the window
+<span class="token prefix inserted">+</span>		if ( id != 1 &amp;&amp; jQuery.cache[ id ].handle )
+<span class="token prefix inserted">+</span>			jQuery.event.remove( jQuery.cache[ id ].handle.elem );
+<span class="token prefix inserted">+</span>});</span></code></pre>
     </div>
   
 

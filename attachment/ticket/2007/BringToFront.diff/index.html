@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,49 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ui.dialog.js
+===================================================================
+<span class="token coord">--- ui.dialog.js	(revision 4030)</span>
+<span class="token coord">+++ ui.dialog.js	(working copy)</span>
+<span class="token coord">@@ -63,7 +63,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		var uiDialogContainer = uiDialogContent.parent().addClass('ui-dialog-container').css({position: 'relative'});
+<span class="token prefix unchanged"> </span>		var uiDialog = uiDialogContainer.parent()
+<span class="token prefix unchanged"> </span>			.addClass('ui-dialog')
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			.css({position: 'absolute', width: options.width, height: options.height, overflow: 'hidden'});
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			.css({position: 'absolute', width: options.width, height: options.height, overflow: 'hidden'})
+<span class="token prefix inserted">+</span>			.css("z-index", $('.ui-dialog:visible').size());
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		
+<span class="token prefix unchanged"> </span>		if (options.resizable) {
+<span class="token prefix unchanged"> </span>			uiDialog.append("&lt;div class='ui-resizable-n ui-resizable-handle'>&lt;/div>")
+</span><span class="token coord">@@ -106,6 +107,20 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		if (options.draggable) {
+<span class="token prefix unchanged"> </span>			uiDialog.draggable({ handle: '.ui-dialog-titlebar' });
+<span class="token prefix unchanged"> </span>		}
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		this.bringToFront = function() {
+<span class="token prefix inserted">+</span>			var curZindex = uiDialog.css("z-index");
+<span class="token prefix inserted">+</span>			// It'd be really nice if we could sort visible siblings on z-index so they'd maintain relative order.
+<span class="token prefix inserted">+</span>			uiDialog.siblings('.ui-dialog:visible').each(function() {
+<span class="token prefix inserted">+</span>				var elem = $(this);
+<span class="token prefix inserted">+</span>				if (elem.css("z-index") >= curZindex) {
+<span class="token prefix inserted">+</span>					elem.css("z-index",curZindex);
+<span class="token prefix inserted">+</span>					curZindex++;
+<span class="token prefix inserted">+</span>				};
+<span class="token prefix inserted">+</span>			});
+<span class="token prefix inserted">+</span>			uiDialog.css("z-index", curZindex);
+<span class="token prefix inserted">+</span>		};
+<span class="token prefix inserted">+</span>		uiDialog.click(function() {self.bringToFront();});
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>		this.open = function() {
+<span class="token prefix unchanged"> </span>			uiDialog.appendTo('body');
+</span><span class="token coord">@@ -135,6 +150,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			top = top &lt; doc.scrollTop() ? doc.scrollTop() : top;
+<span class="token prefix unchanged"> </span>			uiDialog.css({top: top, left: left});
+<span class="token prefix unchanged"> </span>			uiDialog.show();
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			self.bringToFront();
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		};
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		this.close = function() {</span></code></pre>
     </div>
   
 

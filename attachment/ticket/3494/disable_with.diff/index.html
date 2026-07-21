@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,24 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery.form.js
+===================================================================
+<span class="token coord">--- jquery.form.js	(revision 5889)</span>
+<span class="token coord">+++ jquery.form.js	(working copy)</span>
+<span class="token coord">@@ -105,6 +105,14 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>        options.data = q; // data is the query string for 'post'
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>    var $form = this, callbacks = [];
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>    if (options.disableWith) {
+<span class="token prefix inserted">+</span>      var submitButton = this.find('input[@type=submit]');
+<span class="token prefix inserted">+</span>      var submitButtonOldValue = submitButton.attr('value');
+<span class="token prefix inserted">+</span>      options.complete = function() {
+<span class="token prefix inserted">+</span>        submitButton.attr('value',submitButtonOldValue).attr('disabled',false);
+<span class="token prefix inserted">+</span>      }
+<span class="token prefix inserted">+</span>      submitButton.attr('value',options.disableWith).attr('disabled',true).blur();
+<span class="token prefix inserted">+</span>    }
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>    if (options.resetForm) callbacks.push(function() { $form.resetForm(); });
+<span class="token prefix unchanged"> </span>    if (options.clearForm) callbacks.push(function() { $form.clearForm(); });</span></code></pre>
     </div>
   
 

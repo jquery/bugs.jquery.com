@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,33 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: unit/ajax.js
+===================================================================
+<span class="token coord">--- test/unit/ajax.js	(revision 5473)</span>
+<span class="token coord">+++ unit/ajax.js	(working copy)</span>
+<span class="token coord">@@ -811,6 +811,22 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	});
+<span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>test("data option: evaluate function values (#2806)", function() {
+<span class="token prefix inserted">+</span>	stop();
+<span class="token prefix inserted">+</span>	$.ajax({
+<span class="token prefix inserted">+</span>		url: "data/echoQuery.php",
+<span class="token prefix inserted">+</span>		data: {
+<span class="token prefix inserted">+</span>			key: function() {
+<span class="token prefix inserted">+</span>				return "value";
+<span class="token prefix inserted">+</span>			}
+<span class="token prefix inserted">+</span>		},
+<span class="token prefix inserted">+</span>		success: function(result) {
+<span class="token prefix inserted">+</span>			equals( result, "key=value" );
+<span class="token prefix inserted">+</span>			start();
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>	})
+<span class="token prefix inserted">+</span>});
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>}
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>//}</span></code></pre>
     </div>
   
 

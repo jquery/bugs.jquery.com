@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,29 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ui.accordion.js
+===================================================================
+<span class="token coord">--- ui.accordion.js	(revision 4906)</span>
+<span class="token coord">+++ ui.accordion.js	(working copy)</span>
+<span class="token coord">@@ -43,7 +43,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	this.options = options = $.extend({}, $.ui.accordion.defaults, options);
+<span class="token prefix unchanged"> </span>	this.element = container;
+<span class="token prefix unchanged"> </span>	
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	$(container).addClass("ui-accordion");
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	$(container).addClass('ui-accordion-container ui-accordion');
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	if ( options.navigation ) {
+<span class="token prefix unchanged"> </span>		var current = $(container).find("a").filter(options.navigationFilter);
+</span><span class="token coord">@@ -60,6 +60,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	// calculate active if not specified, using the first header
+<span class="token prefix unchanged"> </span>	options.headers = $(container).find(options.header);
+<span class="token prefix unchanged"> </span>	options.active = findActive(options.headers, options.active);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	// add classNames and spans to headers
+<span class="token prefix inserted">+</span>	options.headers.addClass('ui-accordion-link').prepend('&lt;span class="ui-accordion-left">&lt;/span>').append('&lt;span class="ui-accordion-right">&lt;/span>');
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	if ( options.fillSpace ) {
+<span class="token prefix unchanged"> </span>		var maxHeight = $(container).parent().height();</span></code></pre>
     </div>
   
 

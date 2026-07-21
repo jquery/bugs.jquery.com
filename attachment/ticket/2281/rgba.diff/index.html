@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,78 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery.color.js
+===================================================================
+<span class="token coord">--- jquery.color.js	(revision 4747)</span>
+<span class="token coord">+++ jquery.color.js	(working copy)</span>
+<span class="token coord">@@ -12,13 +12,19 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>            if ( fx.state == 0 ) {
+<span class="token prefix unchanged"> </span>                fx.start = getColor( fx.elem, attr );
+<span class="token prefix unchanged"> </span>                fx.end = getRGB( fx.end );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>                if ( fx.start[3] || fx.end[3] ) { // if one is rgba, make sure both are
+<span class="token prefix inserted">+</span>                    fx.start[3] = fx.start[3] || 1;
+<span class="token prefix inserted">+</span>                    fx.end[3] = fx.end[3] || 1;
+<span class="token prefix inserted">+</span>                }
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>            }
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>            fx.elem.style[attr] = "rgb(" + [
+<span class="token prefix deleted">-</span>                Math.max(Math.min( parseInt((fx.pos * (fx.end[0] - fx.start[0])) + fx.start[0]), 255), 0),
+<span class="token prefix deleted">-</span>                Math.max(Math.min( parseInt((fx.pos * (fx.end[1] - fx.start[1])) + fx.start[1]), 255), 0),
+<span class="token prefix deleted">-</span>                Math.max(Math.min( parseInt((fx.pos * (fx.end[2] - fx.start[2])) + fx.start[2]), 255), 0)
+<span class="token prefix deleted">-</span>            ].join(",") + ")";
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>            fx.elem.style[attr] = ( fx.end[3] ? 'rgba(' : 'rgb(' ) +
+<span class="token prefix inserted">+</span>                Math.max(Math.min( parseInt((fx.pos * (fx.end[0] - fx.start[0])) + fx.start[0]), 255), 0) + ',' +
+<span class="token prefix inserted">+</span>                Math.max(Math.min( parseInt((fx.pos * (fx.end[1] - fx.start[1])) + fx.start[1]), 255), 0) + ',' +
+<span class="token prefix inserted">+</span>                Math.max(Math.min( parseInt((fx.pos * (fx.end[2] - fx.start[2])) + fx.start[2]), 255), 0) +
+<span class="token prefix inserted">+</span>                ( fx.end[3] ? ',' +
+<span class="token prefix inserted">+</span>                Math.max(Math.min( parseFloat((fx.pos * (fx.end[3] - fx.start[3])) + fx.start[3]), 1), 0) : '') +
+<span class="token prefix inserted">+</span>		')';
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>        }
+<span class="token prefix unchanged"> </span>    });
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -50,22 +56,27 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>        if (result = /#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(color))
+<span class="token prefix unchanged"> </span>            return [parseInt(result[1]+result[1],16), parseInt(result[2]+result[2],16), parseInt(result[3]+result[3],16)];
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>        // Look for rgba(0, 0, 0, 0) == transparent in Safari 3
+<span class="token prefix deleted">-</span>        if (result = /rgba\(0, 0, 0, 0\)/.exec(color))
+<span class="token prefix deleted">-</span>            return colors['transparent']
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>        // Look for rgba(num,num,num,alpha)
+<span class="token prefix inserted">+</span>        if (result = /rgba\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([01]*(?:\.[0-9]+)?)\s*\)/.exec(color))
+<span class="token prefix inserted">+</span>            return [parseInt(result[1]), parseInt(result[2]), parseInt(result[3]), parseFloat(result[4])];
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>        // Look for rgba(num%,num%,num%,alpha)
+<span class="token prefix inserted">+</span>        if (result = /rgba\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([01]*(?:\.[0-9]+)?)\s*\)/.exec(color))
+<span class="token prefix inserted">+</span>            return [parseFloat(result[1])*2.55, parseFloat(result[2])*2.55, parseFloat(result[3])*2.55, parseFloat(result[4])];
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>        // Otherwise, we're most likely dealing with a named color
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>        return colors[jQuery.trim(color).toLowerCase()];
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>        return colors[jQuery.trim(color).toLowerCase()] || [255,255,255];
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>    }
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>    function getColor(elem, attr) {
+<span class="token prefix unchanged"> </span>        var color;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>        var rgba = /rgba\(\s*0,\s*0,\s*0,\s*0\s*\)/; // transparent
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>        do {
+<span class="token prefix unchanged"> </span>            color = jQuery.curCSS(elem, attr);
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>            // Keep going until we find an element that has color, or we hit the body
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>            if ( color != '' &amp;&amp; color != 'transparent' || jQuery.nodeName(elem, "body") )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>            if ( color != '' &amp;&amp; color != 'transparent' &amp;&amp; !color.match(rgba) || jQuery.nodeName(elem, "body") )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>                break;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>            attr = "backgroundColor";
+</span><span class="token coord">@@ -121,8 +132,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>        red:[255,0,0],
+<span class="token prefix unchanged"> </span>        silver:[192,192,192],
+<span class="token prefix unchanged"> </span>        white:[255,255,255],
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>        yellow:[255,255,0],
+<span class="token prefix deleted">-</span>        transparent: [255,255,255]
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>        yellow:[255,255,0]
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>    };
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>})(jQuery);</span></code></pre>
     </div>
   
 

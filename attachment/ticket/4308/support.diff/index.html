@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,43 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: support.js
+===================================================================
+<span class="token coord">--- support.js	(revision 6272)</span>
+<span class="token coord">+++ support.js	(working copy)</span>
+<span class="token coord">@@ -8,15 +8,19 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		id = "script" + (new Date).getTime();
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	div.style.display = "none";
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	div.innerHTML = '   &lt;link/>&lt;table>&lt;/table>&lt;a href="/a" style="color:red;float:left;opacity:.5;">a&lt;/a>&lt;select>&lt;option>text&lt;/option>&lt;/select>';
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	div.innerHTML = '   &lt;link/>&lt;table>&lt;/table>&lt;span>&lt;/span>&lt;a href="/a" style="color:red;float:left;opacity:.5;">a&lt;/a>&lt;select>&lt;option>text&lt;/option>&lt;/select>';
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	var all = div.getElementsByTagName("*"),
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		a = div.getElementsByTagName("a")[0];
+<span class="token prefix deleted">-</span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		a = div.getElementsByTagName("a")[0],
+<span class="token prefix inserted">+</span>		span = div.getElementsByTagName("span")[0];
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	// Can't get basic test support
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	if ( !all || !all.length || !a ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	if ( !all || !all.length || !a || !span ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		return;
+<span class="token prefix unchanged"> </span>	}
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	span.setAttrbiute("style", "color: red;");
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	jQuery.support = {
+<span class="token prefix unchanged"> </span>		// IE strips leading whitespace when .innerHTML is used
+</span><span class="token coord">@@ -32,7 +36,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		
+<span class="token prefix unchanged"> </span>		// Get the style information from getAttribute
+<span class="token prefix unchanged"> </span>		// (IE uses .cssText insted)
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		style: /red/.test( a.getAttribute("style") ),
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		style: /red/.test( a.getAttribute("style") ) &amp;&amp; /red/.test( span.getAttribute("style") ),
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		
+<span class="token prefix unchanged"> </span>		// Make sure that URLs aren't manipulated
+<span class="token prefix unchanged"> </span>		// (IE normalizes it by default)</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,46 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: /Users/dschoon/dev/Projects/jQuery/trunk/jquery/src/core.js
+===================================================================
+<span class="token coord">--- /Users/dschoon/dev/Projects/jQuery/trunk/jquery/src/core.js	(revision 5510)</span>
+<span class="token coord">+++ /Users/dschoon/dev/Projects/jQuery/trunk/jquery/src/core.js	(working copy)</span>
+<span class="token coord">@@ -716,24 +716,26 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		var name, i = 0, length = object.length;
+<span class="token prefix unchanged"> </span>		
+<span class="token prefix unchanged"> </span>		if ( args ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( length == undefined ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( object instanceof Array ) 
+<span class="token prefix inserted">+</span>				for ( ; i &lt; length; )
+<span class="token prefix inserted">+</span>					if ( callback.apply( object[ i++ ], args ) === false )
+<span class="token prefix inserted">+</span>						break;
+<span class="token prefix inserted">+</span>			else {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				for ( name in object )
+<span class="token prefix unchanged"> </span>					if ( callback.apply( object[ name ], args ) === false )
+<span class="token prefix unchanged"> </span>						break;
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			} else
+<span class="token prefix deleted">-</span>				for ( ; i &lt; length; )
+<span class="token prefix deleted">-</span>					if ( callback.apply( object[ i++ ], args ) === false )
+<span class="token prefix deleted">-</span>						break;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// A special, fast, case for the most common use of each
+<span class="token prefix unchanged"> </span>		} else {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( length == undefined ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( object instanceof Array )
+<span class="token prefix inserted">+</span>				for ( var value = object[0]; 
+<span class="token prefix inserted">+</span>					i &lt; length &amp;&amp; callback.call( value, i, value ) !== false; value = object[++i] ){}
+<span class="token prefix inserted">+</span>			else {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				for ( name in object )
+<span class="token prefix unchanged"> </span>					if ( callback.call( object[ name ], name, object[ name ] ) === false )
+<span class="token prefix unchanged"> </span>						break;
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			} else
+<span class="token prefix deleted">-</span>				for ( var value = object[0]; 
+<span class="token prefix deleted">-</span>					i &lt; length &amp;&amp; callback.call( value, i, value ) !== false; value = object[++i] ){}
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		return object;</span></code></pre>
     </div>
   
 

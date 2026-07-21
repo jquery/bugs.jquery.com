@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,63 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event.js
+===================================================================
+<span class="token coord">--- src/event.js	(revision 6262)</span>
+<span class="token coord">+++ src/event.js	(working copy)</span>
+<span class="token coord">@@ -34,11 +34,11 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Init the element's event structure
+<span class="token prefix unchanged"> </span>		var events = jQuery.data(elem, "events") || jQuery.data(elem, "events", {}),
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			handle = jQuery.data(elem, "handle") || jQuery.data(elem, "handle", function(){
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			handle = jQuery.data(elem, "handle") || jQuery.data(elem, "handle", function anon(){
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				// Handle the second event of a trigger and when
+<span class="token prefix unchanged"> </span>				// an event is called after a page has unloaded
+<span class="token prefix unchanged"> </span>				return typeof jQuery !== "undefined" &amp;&amp; !jQuery.event.triggered ?
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					jQuery.event.handle.apply(arguments.callee.elem, arguments) :
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					jQuery.event.handle.apply(anon.elem, arguments) :
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					undefined;
+<span class="token prefix unchanged"> </span>			});
+<span class="token prefix unchanged"> </span>		// Add elem as a property of the handle function
+</span><span class="token coord">@@ -625,8 +625,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	// Mozilla, Opera and webkit nightlies currently support this event
+<span class="token prefix unchanged"> </span>	if ( document.addEventListener ) {
+<span class="token prefix unchanged"> </span>		// Use the handy event callback
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		document.addEventListener( "DOMContentLoaded", function(){
+<span class="token prefix deleted">-</span>			document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		document.addEventListener( "DOMContentLoaded", function anon(){
+<span class="token prefix inserted">+</span>			document.removeEventListener( "DOMContentLoaded", anon, false );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			jQuery.ready();
+<span class="token prefix unchanged"> </span>		}, false );
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -634,16 +634,16 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	} else if ( document.attachEvent ) {
+<span class="token prefix unchanged"> </span>		// ensure firing before onload,
+<span class="token prefix unchanged"> </span>		// maybe late but safe also for iframes
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		document.attachEvent("onreadystatechange", function(){
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		document.attachEvent("onreadystatechange", function anon(){
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			if ( document.readyState === "complete" ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				document.detachEvent( "onreadystatechange", arguments.callee );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				document.detachEvent( "onreadystatechange", anon );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				jQuery.ready();
+<span class="token prefix unchanged"> </span>			}
+<span class="token prefix unchanged"> </span>		});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// If IE and not an iframe
+<span class="token prefix unchanged"> </span>		// continually check to see if the document is ready
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( document.documentElement.doScroll &amp;&amp; window == window.top ) (function(){
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( document.documentElement.doScroll &amp;&amp; window == window.top ) (function anon(){
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			if ( jQuery.isReady ) return;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			try {
+</span><span class="token coord">@@ -651,7 +651,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				// http://javascript.nwbox.com/IEContentLoaded/
+<span class="token prefix unchanged"> </span>				document.documentElement.doScroll("left");
+<span class="token prefix unchanged"> </span>			} catch( error ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				setTimeout( arguments.callee, 0 );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				setTimeout( anon, 0 );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				return;
+<span class="token prefix unchanged"> </span>			}</span></code></pre>
     </div>
   
 

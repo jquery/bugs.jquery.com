@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,14 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token keyword">var</span> win <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"iframe#cible"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> contDoc <span class="token operator">=</span> win<span class="token punctuation">.</span>contentDocument<span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>contDoc<span class="token operator">==</span><span class="token keyword">undefined</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	contDoc <span class="token operator">=</span> win<span class="token punctuation">.</span>contentWindow<span class="token punctuation">.</span>document<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> doc <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span>contDoc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> styleStr <span class="token operator">=</span> <span class="token string">"&lt;style type=\"text/css\">.clazz{border: none;}&lt;/style>"</span><span class="token punctuation">;</span>
+<span class="token function">$</span><span class="token punctuation">(</span>styleStr<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">appendTo</span><span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'head'</span><span class="token punctuation">,</span>doc<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
     </div>
   
 

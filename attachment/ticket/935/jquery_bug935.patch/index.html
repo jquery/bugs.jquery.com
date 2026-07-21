@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,43 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: event.js
+===================================================================
+--- event.js	(revision 1722)
++++ event.js	(working copy)
+@@ -13,14 +13,28 @@
+ 		if ( jQuery.browser.msie && element.setInterval != undefined )
+ 			element = window;
+ 
+-		// if data is passed, bind to handler
+-		if( data ) 
+-			handler.data = data;
+-
+ 		// Make sure that the function being executed has a unique ID
+ 		if ( !handler.guid )
+ 			handler.guid = this.guid++;
+ 
++		// if data is passed, bind to handler
++		if( data != undefined ) {
++			// Create temporary function pointer to original handler
++			var fn = handler;
++
++			// Create unique handler function, wrapped around original handler
++			handler = function() {
++				// Pass arguments and context to original handler
++				return fn.apply(this, arguments);
++			};
++
++			// Store data in unique handler
++			handler.data = data;
++			
++			// Set the guid of unique handler to the same of original handler, so it can be removed
++			handler.guid = fn.guid;
++		}
++
+ 		// Init the element's event structure
+ 		if (!element.$events)
+ 			element.$events = {};</code></pre>
     </div>
   
 

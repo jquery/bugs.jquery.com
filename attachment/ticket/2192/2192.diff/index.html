@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,102 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/test/unit/selector.js
+===================================================================
+<span class="token coord">--- jquery/test/unit/selector.js	(revision 5836)</span>
+<span class="token coord">+++ jquery/test/unit/selector.js	(working copy)</span>
+<span class="token coord">@@ -126,7 +126,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	t( "Nth Child", "p:nth-child(1)", ["firstp","sndp"] );
+<span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	t( "Last Child", "p:last-child", ["sap"] );
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	t( "Last Child", "a:last-child", ["simon1","anchor1","mark","yahoo","anchor2","simon"] );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	t( "Last Child", "a:last-child", ["simon1","anchor1","mark","yahoo","anchor2","simon","hreflangus", "hreflangcockney", "hreflanguk", "reltest1", "reltest2", "reltest3"] );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	t( "Nth-child", "#main form#form > *:nth-child(2)", ["text2"] );
+<span class="token prefix unchanged"> </span>	t( "Nth-child", "#main form#form > :nth-child(2)", ["text2"] );
+</span><span class="token coord">@@ -152,7 +152,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("attributes", function() {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	expect(20);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	expect(24);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	t( "Attribute Exists", "a[title]", ["google"] );
+<span class="token prefix unchanged"> </span>	t( "Attribute Exists", "*[title]", ["google"] );
+<span class="token prefix unchanged"> </span>	t( "Attribute Exists", "[title]", ["google"] );
+</span><span class="token coord">@@ -169,6 +169,11 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	t( "Attribute Begins With", "a[href ^= 'http://www']", ["google","yahoo"] );
+<span class="token prefix unchanged"> </span>	t( "Attribute Ends With", "a[href $= 'org/']", ["mark"] );
+<span class="token prefix unchanged"> </span>	t( "Attribute Contains", "a[href *= 'google']", ["google","groups"] );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	t( "Attribute Has Exactly (~=)", "a[rel ~= 'appendix'][rel ~= 'help']", ["reltest2"] );
+<span class="token prefix inserted">+</span>	t( "Attribute Has Exactly (~=)", "a[rel ~= 'section']", ["reltest3"] );
+<span class="token prefix inserted">+</span>	t( "Attribute Begins With (|=)", "a[hreflang |= 'en']", ["mark", "hreflangus", "hreflangcockney", "hreflanguk"] );
+<span class="token prefix inserted">+</span>	t( "Attribute Begins With (|=)", "a[hreflang |= 'en-us']", ["hreflangus"] );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	t("Select options via [selected]", "#select1 option[selected]", ["option1a"] );
+<span class="token prefix unchanged"> </span>	t("Select options via [selected]", "#select2 option[selected]", ["option2d"] );
+</span><span class="token coord">@@ -185,7 +190,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	expect(35);
+<span class="token prefix unchanged"> </span>	t( "First Child", "p:first-child", ["firstp","sndp"] );
+<span class="token prefix unchanged"> </span>	t( "Last Child", "p:last-child", ["sap"] );
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	t( "Only Child", "a:only-child", ["simon1","anchor1","yahoo","anchor2"] );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	t( "Only Child", "a:only-child", ["simon1","anchor1","yahoo","anchor2", "hreflangus", "hreflangcockney", "hreflanguk", "reltest1", "reltest2", "reltest3"] );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	t( "Empty", "ul:empty", ["firstUL"] );
+<span class="token prefix unchanged"> </span>	t( "Enabled UI Element", "#form input:enabled", ["text1","radio1","radio2","check1","check2","hidden1","hidden2","name"] );
+<span class="token prefix unchanged"> </span>	t( "Disabled UI Element", "#form input:disabled", ["text2"] );
+</span><span class="token coord">@@ -193,7 +198,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	t( "Selected Option Element", "#form option:selected", ["option1a","option2d","option3b","option3c"] );
+<span class="token prefix unchanged"> </span>	t( "Text Contains", "a:contains('Google')", ["google","groups"] );
+<span class="token prefix unchanged"> </span>	t( "Text Contains", "a:contains('Google Groups')", ["groups"] );
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	t( "Element Preceded By", "p ~ div", ["foo","fx-queue","fx-tests", "moretests"] );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	t( "Element Preceded By", "p ~ div", ["foo","fx-queue","fx-tests", "moretests", "newselectors"] );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	t( "Not", "a.blog:not(.link)", ["mark"] );
+<span class="token prefix unchanged"> </span>	t( "Not - multiple", "#form option:not(:contains('Nothing'),#option1b,:selected)", ["option1c", "option1d", "option2b", "option2c", "option3d", "option3e"] );
+<span class="token prefix unchanged"> </span>	t( "Not - complex", "#form option:not([id^='opt']:gt(0):nth-child(-n+3))", [ "option1a", "option1d", "option2d", "option3d", "option3e"] );
+</span>Index: jquery/test/index.html
+===================================================================
+<span class="token coord">--- jquery/test/index.html	(revision 5836)</span>
+<span class="token coord">+++ jquery/test/index.html	(working copy)</span>
+<span class="token coord">@@ -187,6 +187,16 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				&lt;div>&lt;div class="hidden">hidden&lt;/div>&lt;/div>
+<span class="token prefix unchanged"> </span>			&lt;/div>
+<span class="token prefix unchanged"> </span>		&lt;/div>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		&lt;div id="newselectors">
+<span class="token prefix inserted">+</span>			&lt;ul>
+<span class="token prefix inserted">+</span>				&lt;li>&lt;a href="http://example.com/" hreflang="en-us" id="hreflangus">example.com&lt;/a>&lt;/li>
+<span class="token prefix inserted">+</span>				&lt;li>&lt;a href="http://example.com/" hreflang="en-cockney" id="hreflangcockney">example.com&lt;/a>&lt;/li>
+<span class="token prefix inserted">+</span>				&lt;li>&lt;a href="http://example.com/" hreflang="en-uk" id="hreflanguk">example.com&lt;/a>&lt;/li>
+<span class="token prefix inserted">+</span>				&lt;li>&lt;a href="http://example.com/" rel="start next prev contents" id="reltest1">example.com&lt;/a>&lt;/li>
+<span class="token prefix inserted">+</span>				&lt;li>&lt;a href="http://example.com/" rel="appendix help" id="reltest2">example.com&lt;/a>&lt;/li>
+<span class="token prefix inserted">+</span>				&lt;li>&lt;a href="http://example.com/" rel="section" id="reltest3">example.com&lt;/a>&lt;/li>
+<span class="token prefix inserted">+</span>			&lt;/ul>
+<span class="token prefix inserted">+</span>		&lt;/div>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	&lt;/div>
+<span class="token prefix unchanged"> </span>	&lt;/dl>
+<span class="token prefix unchanged"> </span>	
+</span>Index: jquery/src/selector.js
+===================================================================
+<span class="token coord">--- jquery/src/selector.js	(revision 5836)</span>
+<span class="token coord">+++ jquery/src/selector.js	(working copy)</span>
+<span class="token coord">@@ -68,7 +68,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	// The regular expressions that power the parsing engine
+<span class="token prefix unchanged"> </span>	parse: [
+<span class="token prefix unchanged"> </span>		// Match: [@value='test'], [@foo]
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		/^(\[) *@?([\w:-]+) *([!*$^~=]*) *('?"?)(.*?)\4 *\]/,
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		/^(\[) *@?([\w:-]+) *([!*$^~|=]*) *('?"?)(.*?)\4 *\]/,
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Match: :contains('foo')
+<span class="token prefix unchanged"> </span>		/^(:)([\w-]+)\("?'?(.*?(\(.*?\))?[^(]*?)"?'?\)/,
+</span><span class="token coord">@@ -344,7 +344,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>						 type == "!=" &amp;&amp; z != m[5] ||
+<span class="token prefix unchanged"> </span>						 type == "^=" &amp;&amp; z &amp;&amp; !z.indexOf(m[5]) ||
+<span class="token prefix unchanged"> </span>						 type == "$=" &amp;&amp; z.substr(z.length - m[5].length) == m[5] ||
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>						 (type == "*=" || type == "~=") &amp;&amp; z.indexOf(m[5]) >= 0) ^ not )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>						 type == "*=" &amp;&amp; z.indexOf(m[5]) >= 0 ||
+<span class="token prefix inserted">+</span>						 type == "~=" &amp;&amp; (' '+z+' ').indexOf(' '+m[5]+' ') >= 0 ||
+<span class="token prefix inserted">+</span>						 type == "|=" &amp;&amp; z.indexOf(m[5]) == 0 &amp;&amp; (z.length == m[5].length || z.charAt(m[5].length) == '-')) ^ not )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>							tmp.push( a );
+<span class="token prefix unchanged"> </span>				}</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,374 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: Makefile
+===================================================================
+<span class="token coord">--- Makefile	(revision 5917)</span>
+<span class="token coord">+++ Makefile	(working copy)</span>
+<span class="token coord">@@ -9,6 +9,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>PLUG_DIR = ../plugins
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>BASE_FILES = ${SRC_DIR}/core.js\
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	${SRC_DIR}/data.js\
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	${SRC_DIR}/selector.js\
+<span class="token prefix unchanged"> </span>	${SRC_DIR}/event.js\
+<span class="token prefix unchanged"> </span>	${SRC_DIR}/ajax.js\
+</span>Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 5917)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -457,31 +457,6 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		return this.add( this.prevObject );
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	data: function( key, value ){
+<span class="token prefix deleted">-</span>		var parts = key.split(".");
+<span class="token prefix deleted">-</span>		parts[1] = parts[1] ? "." + parts[1] : "";
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		if ( value === undefined ) {
+<span class="token prefix deleted">-</span>			var data = this.triggerHandler("getData" + parts[1] + "!", [parts[0]]);
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>			if ( data === undefined &amp;&amp; this.length )
+<span class="token prefix deleted">-</span>				data = jQuery.data( this[0], key );
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>			return data === undefined &amp;&amp; parts[1] ?
+<span class="token prefix deleted">-</span>				this.data( parts[0] ) :
+<span class="token prefix deleted">-</span>				data;
+<span class="token prefix deleted">-</span>		} else
+<span class="token prefix deleted">-</span>			return this.trigger("setData" + parts[1] + "!", [parts[0], value]).each(function(){
+<span class="token prefix deleted">-</span>				jQuery.data( this, key, value );
+<span class="token prefix deleted">-</span>			});
+<span class="token prefix deleted">-</span>	},
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>	removeData: function( key ){
+<span class="token prefix deleted">-</span>		return this.each(function(){
+<span class="token prefix deleted">-</span>			jQuery.removeData( this, key );
+<span class="token prefix deleted">-</span>		});
+<span class="token prefix deleted">-</span>	},
+<span class="token prefix deleted">-</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	domManip: function( args, table, reverse, callback ) {
+<span class="token prefix unchanged"> </span>		var clone = this.length > 1, elems;
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -595,9 +570,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	return target;
+<span class="token prefix unchanged"> </span>};
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>var expando = "jQuery" + now(), uuid = 0, windowData = {},
+<span class="token prefix deleted">-</span>	// exclude the following css properties to add px
+<span class="token prefix deleted">-</span>	exclude = /z-?index|font-?weight|opacity|zoom|line-?height/i,
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>// exclude the following css properties to add px
+<span class="token prefix inserted">+</span>var exclude = /z-?index|font-?weight|opacity|zoom|line-?height/i,
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	// cache defaultView
+<span class="token prefix unchanged"> </span>	defaultView = document.defaultView || {};
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -659,74 +633,6 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		return elem.nodeName &amp;&amp; elem.nodeName.toUpperCase() == name.toUpperCase();
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	cache: {},
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>	data: function( elem, name, data ) {
+<span class="token prefix deleted">-</span>		elem = elem == window ?
+<span class="token prefix deleted">-</span>			windowData :
+<span class="token prefix deleted">-</span>			elem;
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		var id = elem[ expando ];
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		// Compute a unique ID for the element
+<span class="token prefix deleted">-</span>		if ( !id )
+<span class="token prefix deleted">-</span>			id = elem[ expando ] = ++uuid;
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		// Only generate the data cache if we're
+<span class="token prefix deleted">-</span>		// trying to access or manipulate it
+<span class="token prefix deleted">-</span>		if ( name &amp;&amp; !jQuery.cache[ id ] )
+<span class="token prefix deleted">-</span>			jQuery.cache[ id ] = {};
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		// Prevent overriding the named cache with undefined values
+<span class="token prefix deleted">-</span>		if ( data !== undefined )
+<span class="token prefix deleted">-</span>			jQuery.cache[ id ][ name ] = data;
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		// Return the named cache data, or the ID for the element
+<span class="token prefix deleted">-</span>		return name ?
+<span class="token prefix deleted">-</span>			jQuery.cache[ id ][ name ] :
+<span class="token prefix deleted">-</span>			id;
+<span class="token prefix deleted">-</span>	},
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>	removeData: function( elem, name ) {
+<span class="token prefix deleted">-</span>		elem = elem == window ?
+<span class="token prefix deleted">-</span>			windowData :
+<span class="token prefix deleted">-</span>			elem;
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		var id = elem[ expando ];
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		// If we want to remove a specific section of the element's data
+<span class="token prefix deleted">-</span>		if ( name ) {
+<span class="token prefix deleted">-</span>			if ( jQuery.cache[ id ] ) {
+<span class="token prefix deleted">-</span>				// Remove the section of cache data
+<span class="token prefix deleted">-</span>				delete jQuery.cache[ id ][ name ];
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>				// If we've removed all the data, remove the element's cache
+<span class="token prefix deleted">-</span>				name = "";
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>				for ( name in jQuery.cache[ id ] )
+<span class="token prefix deleted">-</span>					break;
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>				if ( !name )
+<span class="token prefix deleted">-</span>					jQuery.removeData( elem );
+<span class="token prefix deleted">-</span>			}
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		// Otherwise, we want to remove all of the element's data
+<span class="token prefix deleted">-</span>		} else {
+<span class="token prefix deleted">-</span>			// Clean up the element expando
+<span class="token prefix deleted">-</span>			try {
+<span class="token prefix deleted">-</span>				delete elem[ expando ];
+<span class="token prefix deleted">-</span>			} catch(e){
+<span class="token prefix deleted">-</span>				// IE has trouble directly removing the expando
+<span class="token prefix deleted">-</span>				// but it's ok with using removeAttribute
+<span class="token prefix deleted">-</span>				if ( elem.removeAttribute )
+<span class="token prefix deleted">-</span>					elem.removeAttribute( expando );
+<span class="token prefix deleted">-</span>			}
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>			// Completely remove the data cache
+<span class="token prefix deleted">-</span>			delete jQuery.cache[ id ];
+<span class="token prefix deleted">-</span>		}
+<span class="token prefix deleted">-</span>	},
+<span class="token prefix deleted">-</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	// args is for internal usage only
+<span class="token prefix unchanged"> </span>	each: function( object, callback, args ) {
+<span class="token prefix unchanged"> </span>		var name, i = 0, length = object.length;
+</span>Index: src/data.js
+===================================================================
+<span class="token coord">--- src/data.js	(revision 0)</span>
+<span class="token coord">+++ src/data.js	(revision 0)</span>
+<span class="token coord">@@ -0,0 +1,136 @@</span>
+<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>var expando = "jQuery" + now(), uuid = 0, windowData = {};
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>jQuery.extend({
+<span class="token prefix inserted">+</span>	cache: {},
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	data: function( elem, name, data ) {
+<span class="token prefix inserted">+</span>		elem = elem == window ?
+<span class="token prefix inserted">+</span>			windowData :
+<span class="token prefix inserted">+</span>			elem;
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		var id = elem[ expando ];
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		// Compute a unique ID for the element
+<span class="token prefix inserted">+</span>		if ( !id )
+<span class="token prefix inserted">+</span>			id = elem[ expando ] = ++uuid;
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		// Only generate the data cache if we're
+<span class="token prefix inserted">+</span>		// trying to access or manipulate it
+<span class="token prefix inserted">+</span>		if ( name &amp;&amp; !jQuery.cache[ id ] )
+<span class="token prefix inserted">+</span>			jQuery.cache[ id ] = {};
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		// Prevent overriding the named cache with undefined values
+<span class="token prefix inserted">+</span>		if ( data !== undefined )
+<span class="token prefix inserted">+</span>			jQuery.cache[ id ][ name ] = data;
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		// Return the named cache data, or the ID for the element
+<span class="token prefix inserted">+</span>		return name ?
+<span class="token prefix inserted">+</span>			jQuery.cache[ id ][ name ] :
+<span class="token prefix inserted">+</span>			id;
+<span class="token prefix inserted">+</span>	},
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	removeData: function( elem, name ) {
+<span class="token prefix inserted">+</span>		elem = elem == window ?
+<span class="token prefix inserted">+</span>			windowData :
+<span class="token prefix inserted">+</span>			elem;
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		var id = elem[ expando ];
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		// If we want to remove a specific section of the element's data
+<span class="token prefix inserted">+</span>		if ( name ) {
+<span class="token prefix inserted">+</span>			if ( jQuery.cache[ id ] ) {
+<span class="token prefix inserted">+</span>				// Remove the section of cache data
+<span class="token prefix inserted">+</span>				delete jQuery.cache[ id ][ name ];
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>				// If we've removed all the data, remove the element's cache
+<span class="token prefix inserted">+</span>				name = "";
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>				for ( name in jQuery.cache[ id ] )
+<span class="token prefix inserted">+</span>					break;
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>				if ( !name )
+<span class="token prefix inserted">+</span>					jQuery.removeData( elem );
+<span class="token prefix inserted">+</span>			}
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		// Otherwise, we want to remove all of the element's data
+<span class="token prefix inserted">+</span>		} else {
+<span class="token prefix inserted">+</span>			// Clean up the element expando
+<span class="token prefix inserted">+</span>			try {
+<span class="token prefix inserted">+</span>				delete elem[ expando ];
+<span class="token prefix inserted">+</span>			} catch(e){
+<span class="token prefix inserted">+</span>				// IE has trouble directly removing the expando
+<span class="token prefix inserted">+</span>				// but it's ok with using removeAttribute
+<span class="token prefix inserted">+</span>				if ( elem.removeAttribute )
+<span class="token prefix inserted">+</span>					elem.removeAttribute( expando );
+<span class="token prefix inserted">+</span>			}
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>			// Completely remove the data cache
+<span class="token prefix inserted">+</span>			delete jQuery.cache[ id ];
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>	},
+<span class="token prefix inserted">+</span>	queue: function( elem, type, data ) {
+<span class="token prefix inserted">+</span>		if ( elem ){
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>			type = (type || "fx") + "queue";
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>			var q = jQuery.data( elem, type );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>			if ( !q || jQuery.isArray(data) )
+<span class="token prefix inserted">+</span>				q = jQuery.data( elem, type, jQuery.makeArray(data) );
+<span class="token prefix inserted">+</span>			else if( data )
+<span class="token prefix inserted">+</span>				q.push( data );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>		return q;
+<span class="token prefix inserted">+</span>	},
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	dequeue: function( elem, type ){
+<span class="token prefix inserted">+</span>		return jQuery.queue( elem, type ).shift();
+<span class="token prefix inserted">+</span>	}
+<span class="token prefix inserted">+</span>});
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>jQuery.fn.extend({
+<span class="token prefix inserted">+</span>	data: function( key, value ){
+<span class="token prefix inserted">+</span>		var parts = key.split(".");
+<span class="token prefix inserted">+</span>		parts[1] = parts[1] ? "." + parts[1] : "";
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		if ( value === undefined ) {
+<span class="token prefix inserted">+</span>			var data = this.triggerHandler("getData" + parts[1] + "!", [parts[0]]);
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>			if ( data === undefined &amp;&amp; this.length )
+<span class="token prefix inserted">+</span>				data = jQuery.data( this[0], key );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>			return data === undefined &amp;&amp; parts[1] ?
+<span class="token prefix inserted">+</span>				this.data( parts[0] ) :
+<span class="token prefix inserted">+</span>				data;
+<span class="token prefix inserted">+</span>		} else
+<span class="token prefix inserted">+</span>			return this.trigger("setData" + parts[1] + "!", [parts[0], value]).each(function(){
+<span class="token prefix inserted">+</span>				jQuery.data( this, key, value );
+<span class="token prefix inserted">+</span>			});
+<span class="token prefix inserted">+</span>	},
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	removeData: function( key ){
+<span class="token prefix inserted">+</span>		return this.each(function(){
+<span class="token prefix inserted">+</span>			jQuery.removeData( this, key );
+<span class="token prefix inserted">+</span>		});
+<span class="token prefix inserted">+</span>	},
+<span class="token prefix inserted">+</span>	queue: function(type, data){
+<span class="token prefix inserted">+</span>		if ( typeof type != "string" ) {
+<span class="token prefix inserted">+</span>			data = type;
+<span class="token prefix inserted">+</span>			type = "fx";
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		if ( data === undefined )
+<span class="token prefix inserted">+</span>			return jQuery.queue( this[0], type );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>		return this.each(function(){
+<span class="token prefix inserted">+</span>			var queue = jQuery.queue( this, type, data );
+<span class="token prefix inserted">+</span>			
+<span class="token prefix inserted">+</span>			 if( type == "fx" &amp;&amp; queue.length == 1 )
+<span class="token prefix inserted">+</span>				queue[0].call(this);
+<span class="token prefix inserted">+</span>		});
+<span class="token prefix inserted">+</span>	},
+<span class="token prefix inserted">+</span>	dequeue: function(type){
+<span class="token prefix inserted">+</span>		return jQuery.dequeue( this[0], type );
+<span class="token prefix inserted">+</span>	}
+<span class="token prefix inserted">+</span>});
+</span>Index: src/fx.js
+===================================================================
+<span class="token coord">--- src/fx.js	(revision 5917)</span>
+<span class="token coord">+++ src/fx.js	(working copy)</span>
+<span class="token coord">@@ -111,27 +111,17 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		});
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	queue: function(type, fn){
+<span class="token prefix deleted">-</span>		if ( jQuery.isFunction(type) || jQuery.isArray(type) ) {
+<span class="token prefix deleted">-</span>			fn = type;
+<span class="token prefix deleted">-</span>			type = "fx";
+<span class="token prefix deleted">-</span>		}
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		if ( !type || (typeof type == "string" &amp;&amp; !fn) )
+<span class="token prefix deleted">-</span>			return queue( this[0], type );
+<span class="token prefix deleted">-</span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	nextAnim:function(){
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		return this.each(function(){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( jQuery.isArray(fn) )
+<span class="token prefix deleted">-</span>				queue(this, type, fn);
+<span class="token prefix deleted">-</span>			else {
+<span class="token prefix deleted">-</span>				queue(this, type).push( fn );
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>				if ( queue(this, type).length == 1 )
+<span class="token prefix deleted">-</span>					fn.call(this);
+<span class="token prefix deleted">-</span>			}
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var queue = jQuery.queue( this );
+<span class="token prefix inserted">+</span>			
+<span class="token prefix inserted">+</span>			queue.shift()
+<span class="token prefix inserted">+</span>			
+<span class="token prefix inserted">+</span>			if( queue.length )
+<span class="token prefix inserted">+</span>				queue[0].call( this );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		});
+<span class="token prefix unchanged"> </span>	},
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	stop: function(clearQueue, gotoEnd){
+<span class="token prefix unchanged"> </span>		var timers = jQuery.timers;
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -151,7 +141,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// start the next in the queue if the last step wasn't forced
+<span class="token prefix unchanged"> </span>		if (!gotoEnd)
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			this.dequeue();
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			this.nextAnim();
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		return this;
+<span class="token prefix unchanged"> </span>	}
+</span><span class="token coord">@@ -171,33 +161,6 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	};
+<span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>var queue = function( elem, type, array ) {
+<span class="token prefix deleted">-</span>	if ( elem ){
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		type = type || "fx";
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		var q = jQuery.data( elem, type + "queue" );
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		if ( !q || array )
+<span class="token prefix deleted">-</span>			q = jQuery.data( elem, type + "queue", jQuery.makeArray(array) );
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>	}
+<span class="token prefix deleted">-</span>	return q;
+<span class="token prefix deleted">-</span>};
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>jQuery.fn.dequeue = function(type){
+<span class="token prefix deleted">-</span>	type = type || "fx";
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>	return this.each(function(){
+<span class="token prefix deleted">-</span>		var q = queue(this, type);
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		q.shift();
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		if ( q.length )
+<span class="token prefix deleted">-</span>			q[0].call( this );
+<span class="token prefix deleted">-</span>	});
+<span class="token prefix deleted">-</span>};
+<span class="token prefix deleted">-</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>jQuery.extend({
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	speed: function(speed, easing, fn) {
+</span><span class="token coord">@@ -215,7 +178,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		opt.old = opt.complete;
+<span class="token prefix unchanged"> </span>		opt.complete = function(){
+<span class="token prefix unchanged"> </span>			if ( opt.queue !== false )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				jQuery(this).dequeue();
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				jQuery(this).nextAnim();
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			if ( jQuery.isFunction( opt.old ) )
+<span class="token prefix unchanged"> </span>				opt.old.call( this );
+<span class="token prefix unchanged"> </span>		};</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,29 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/outro.js
+===================================================================
+<span class="token coord">--- src/outro.js	(revision 6414)</span>
+<span class="token coord">+++ src/outro.js	(working copy)</span>
+<span class="token coord">@@ -1 +1,4 @@</span>
+<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>// Expose jQuery to the global object
+<span class="token prefix inserted">+</span>window.jQuery = window.$ = jQuery;
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>})(window);
+</span>Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 6414)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -28,9 +28,6 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	// Save a reference to the core toString method
+<span class="token prefix unchanged"> </span>	toString = Object.prototype.toString;
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>// Expose jQuery to the global object
+<span class="token prefix deleted">-</span>window.jQuery = window.$ = jQuery;
+<span class="token prefix deleted">-</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>jQuery.fn = jQuery.prototype = {
+<span class="token prefix unchanged"> </span>	init: function( selector, context ) {
+<span class="token prefix unchanged"> </span>		var match, elem, ret;</span></code></pre>
     </div>
   
 

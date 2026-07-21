@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,38 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt">-----HTML-------
+&lt;p id="a">&lt;span>This has a over highlight style and event 'click'.&lt;/span>&lt;/p>
+&lt;p>&lt;a id="b" href="#">Click here to erase the click event in the last paragraph's inner span&lt;/a>&lt;/p> 
+
+------JS--------
+// without event delegation -- works fine
+$(function() {
+	$("#b").click(function() {
+		$("#a span").unbind("click");
+		return false;
+	});
+
+	$("#a span").hover(
+		function() {$(this).addClass("high");},
+		function() {$(this).removeClass("high");}
+	).click(function() {
+		$(this).append(" He. ");
+	});
+});
+
+// with event delegation - .die("click") kills all live events
+$(function() {
+	$("#b").live("click", function() {
+		$("#a span").die("click");
+		return false;
+	});
+
+	$("#a span")
+	.live("mouseover", function() {$(this).addClass("high");})
+	.live("mouseout", function() {$(this).removeClass("high");})
+	.live("click", function() {$(this).append(" He. ");});
+});</code></pre>
     </div>
   
 

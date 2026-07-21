@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,20 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">3106,3111c3106,3111
+< jQuery( window ).bind( 'unload', function(){ 
+< 	for ( var id in jQuery.cache )
+< 		// Skip the window
+< 		if ( id != 1 && jQuery.cache[ id ].handle )
+< 			jQuery.event.remove( jQuery.cache[ id ].handle.elem );
+< }); 
+---
+> jQuery.fn.SplunkPatchWindowUnload = function(){
+>     for ( var id in jQuery.cache )
+>         // Skip the window
+>         if ( id != 1 && jQuery.cache[ id ].handle )
+>             jQuery.event.remove( jQuery.cache[ id ].handle.elem );
+> }; jQuery( window ).bind( 'unload', jQuery.fn.SplunkPatchWindowUnload ); //Workaround for anonymous function assignment for onunload</code></pre>
     </div>
   
 

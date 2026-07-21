@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,49 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: ui/tests/sortable.html
+===================================================================
+<span class="token coord">--- ui/tests/sortable.html	(revision 4909)</span>
+<span class="token coord">+++ ui/tests/sortable.html	(working copy)</span>
+<span class="token coord">@@ -70,6 +70,18 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span> position: relative;
+<span class="token prefix unchanged"> </span>}
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>#with_overflow {
+<span class="token prefix inserted">+</span>	width: 100px;
+<span class="token prefix inserted">+</span>	height: 100px;
+<span class="token prefix inserted">+</span>	overflow-y: scroll;
+<span class="token prefix inserted">+</span>}
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>#with_overflow DIV.item {
+<span class="token prefix inserted">+</span>	height: 10px;
+<span class="token prefix inserted">+</span>	border: 1px solid #999;
+<span class="token prefix inserted">+</span>	margin: 5px; padding: 10px;
+<span class="token prefix inserted">+</span>}
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>.hover {
+<span class="token prefix unchanged"> </span>	background: #eee;	
+<span class="token prefix unchanged"> </span>}
+</span><span class="token coord">@@ -116,6 +128,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	&lt;br style='clear: both;' />
+<span class="token prefix unchanged"> </span>	&lt;br />
+<span class="token prefix unchanged"> </span>	
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	&lt;div id="with_overflow">&lt;/div>
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	&lt;ul id='myul'>
+<span class="token prefix unchanged"> </span>	    &lt;li>Item 1&lt;/li>
+<span class="token prefix unchanged"> </span>	    &lt;li>Item 2&lt;/li>
+</span><span class="token coord">@@ -171,6 +185,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		animated: true
+<span class="token prefix unchanged"> </span>	});
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	var wo = $('#with_overflow')
+<span class="token prefix inserted">+</span>	for(var i=0; i&lt;100; i++) { wo.append( '&lt;div class="item">Item ' + i + '&lt;/div>' ); }
+<span class="token prefix inserted">+</span>	wo.sortable({ items: 'div.item' });
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>&lt;/script>
+<span class="token prefix unchanged"> </span>&lt;/body></span></code></pre>
     </div>
   
 

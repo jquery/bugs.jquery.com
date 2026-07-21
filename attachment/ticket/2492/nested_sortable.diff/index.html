@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,32 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">diff --git a/ui.sortable.js b/ui.sortable.js
+index 9288a57..c93fcb7 100644
+<span class="token coord">--- a/ui.sortable.js</span>
+<span class="token coord">+++ b/ui.sortable.js</span>
+<span class="token coord">@@ -76,10 +76,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				if(this.disabled || this.options.type == 'static') return false;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				//Find out if the clicked node (or one of its parents) is a actual item in this.items
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				var currentItem = null, nodes = $(e.target).parents().andSelf().each(function() {
+<span class="token prefix deleted">-</span>					if($.data(this, 'ui-sortable-item')) currentItem = $(this);
+<span class="token prefix deleted">-</span>				});
+<span class="token prefix deleted">-</span>				if(currentItem &amp;&amp; (!this.options.handle || $(e.target).parents().andSelf().is(this.options.handle))) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				var currentItem = $(e.target).add($(e.target).parents()).filter(function() {
+<span class="token prefix inserted">+</span>					return $.data(this, 'ui-sortable-item');
+<span class="token prefix inserted">+</span>				}).slice(0,1);
+<span class="token prefix inserted">+</span>				if(currentItem.length &amp;&amp; (!this.options.handle || $(e.target).parents().andSelf().is(this.options.handle))) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					this.currentItem = currentItem;
+<span class="token prefix unchanged"> </span>					return true;
+<span class="token prefix unchanged"> </span>				} else return false; 
+</span><span class="token coord">@@ -447,4 +447,4 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>	});
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>})(jQuery);
+</span>\ No newline at end of file
+<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>})(jQuery);</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,29 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/core.js
+===================================================================
+<span class="token coord">--- jquery/src/core.js	(revision 5790)</span>
+<span class="token coord">+++ jquery/src/core.js	(working copy)</span>
+<span class="token coord">@@ -362,6 +362,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			if ( this.length ) {
+<span class="token prefix unchanged"> </span>				var elem = this[0];
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				if( jQuery.nodeName( elem, 'option' ) )
+<span class="token prefix inserted">+</span>					return jQuery.browser.msie &amp;&amp; !elem.attributes.value.specified ? elem.text : elem.value;
+<span class="token prefix inserted">+</span>				
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				// We need to handle select boxes special
+<span class="token prefix unchanged"> </span>				if ( jQuery.nodeName( elem, "select" ) ) {
+<span class="token prefix unchanged"> </span>					var index = elem.selectedIndex,
+</span><span class="token coord">@@ -379,7 +382,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>						if ( option.selected ) {
+<span class="token prefix unchanged"> </span>							// Get the specifc value for the option
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>							value = jQuery.browser.msie &amp;&amp; !option.attributes.value.specified ? option.text : option.value;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>							value = jQuery(option).val();
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>							// We don't need an array for one selects
+<span class="token prefix unchanged"> </span>							if ( one )</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,25 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">=== core.js
+==================================================================
+--- core.js	(revision 31515)
++++ core.js	(local)
+@@ -651,7 +651,14 @@
+ 				script.appendChild( document.createTextNode( data ) );
+ 
+ 			head.appendChild( script );
+-			head.removeChild( script );
++            try {
++                head.removeChild( script );
++            } catch ( error ) {
++                setTimeout( function() {
++                    var head = document.getElementsByTagName("head")[0] || document.documentElement;
++                    head.removeChild( script );
++                }, 0);
++            }
+ 		}
+ 	},</code></pre>
     </div>
   
 

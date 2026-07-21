@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,21 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: D:/Data/SKL-workspace/jquery/src/core.js
+===================================================================
+<span class="token coord">--- D:/Data/SKL-workspace/jquery/src/core.js	(revision 4340)</span>
+<span class="token coord">+++ D:/Data/SKL-workspace/jquery/src/core.js	(working copy)</span>
+<span class="token coord">@@ -281,6 +281,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	find: function( selector ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		// Quickly handle non-string expressions
+<span class="token prefix inserted">+</span>		if ( typeof selector != "string" )
+<span class="token prefix inserted">+</span>			return jQuery(selector);
+<span class="token prefix inserted">+</span>		
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		var elems = jQuery.map(this, function(elem){
+<span class="token prefix unchanged"> </span>			return jQuery.find( selector, elem );
+<span class="token prefix unchanged"> </span>		});</span></code></pre>
     </div>
   
 

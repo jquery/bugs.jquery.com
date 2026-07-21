@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,36 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt">/*
+ *  $().attr proxy. http://dev.jquery.com/ticket/4283. We need to handle some things special until this gets taken care of.
+ */
+(function($){
+	var attr = $.prototype.attr;
+	$.prototype.attr = function(name, value, type){
+		if(typeof name == 'string' &amp;&amp; name.toLowerCase() == 'checked'){
+			var val;
+			if((typeof value == 'string' &amp;&amp; value.length &amp;&amp; value == 'checked'))
+				val = true;
+			else
+				val = false;
+				
+			return this.each(function(){
+				this.checked = val;
+			});		
+		}
+		return attr.call(this, name, value, type);
+	};
+
+	var removeAttr = $.prototype.removeAttr;
+	$.prototype.removeAttr = function(name){
+		if(name.toLowerCase() == 'checked'){
+			return this.each(function(){
+				this.checked = false;
+			});		
+		}
+		return removeAttr.call(this, name);
+	};
+})(jQuery);</code></pre>
     </div>
   
 

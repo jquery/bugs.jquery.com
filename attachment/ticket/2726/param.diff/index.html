@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,57 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax.js
+===================================================================
+<span class="token coord">--- src/ajax.js	(revision 5600)</span>
+<span class="token coord">+++ src/ajax.js	(working copy)</span>
+<span class="token coord">@@ -479,25 +479,39 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	param: function( a ) {
+<span class="token prefix unchanged"> </span>		var s = [];
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		function add( key, value ){
+<span class="token prefix inserted">+</span>			s[s.length] = key + "=" + encodeURIComponent( value );
+<span class="token prefix inserted">+</span>		};
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		// If an array was passed in, assume that it is an array
+<span class="token prefix unchanged"> </span>		// of form elements
+<span class="token prefix unchanged"> </span>		if ( a.constructor == Array || a.jquery )
+<span class="token prefix unchanged"> </span>			// Serialize the form elements
+<span class="token prefix unchanged"> </span>			jQuery.each( a, function(){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				s.push( encodeURIComponent(this.name) + "=" + encodeURIComponent( this.value ) );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				add( encodeURIComponent(this.name), this.value );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Otherwise, assume that it's an object of key/value pairs
+<span class="token prefix unchanged"> </span>		else
+<span class="token prefix unchanged"> </span>			// Serialize the key/values
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			for ( var j in a )
+<span class="token prefix deleted">-</span>				// If the value is an array then the key names need to be repeated
+<span class="token prefix deleted">-</span>				if ( a[j] &amp;&amp; a[j].constructor == Array )
+<span class="token prefix deleted">-</span>					jQuery.each( a[j], function(){
+<span class="token prefix deleted">-</span>						s.push( encodeURIComponent(j) + "=" + encodeURIComponent( this ) );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			for ( var j in a ){
+<span class="token prefix inserted">+</span>				var obj = a[j];
+<span class="token prefix inserted">+</span>				
+<span class="token prefix inserted">+</span>				// Encode it, but don't encode the squared brackets afterwards
+<span class="token prefix inserted">+</span>				j = encodeURIComponent(j);
+<span class="token prefix inserted">+</span>				
+<span class="token prefix inserted">+</span>				// If the value is an array or a map, generate name[key]=value
+<span class="token prefix inserted">+</span>				if ( obj &amp;&amp; typeof obj == 'object' )
+<span class="token prefix inserted">+</span>					jQuery.each( obj, function( key, v ){
+<span class="token prefix inserted">+</span>						var name = j;
+<span class="token prefix inserted">+</span>						// Don't break name[]=v1&amp;name[]=v2 ...
+<span class="token prefix inserted">+</span>						if( j.indexOf('[]') == -1 )
+<span class="token prefix inserted">+</span>							name += '['+k+']';
+<span class="token prefix inserted">+</span>						add( name , v );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					});
+<span class="token prefix unchanged"> </span>				else
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					s.push( encodeURIComponent(j) + "=" + encodeURIComponent( jQuery.isFunction(a[j]) ? a[j]() : a[j] ) );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					add( j, jQuery.isFunction(obj) ? obj() : obj );
+<span class="token prefix inserted">+</span>			}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Return the resulting serialization
+<span class="token prefix unchanged"> </span>		return s.join("&amp;").replace(/%20/g, "+");</span></code></pre>
     </div>
   
 

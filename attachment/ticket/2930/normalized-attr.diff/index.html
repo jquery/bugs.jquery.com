@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,76 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 5679)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -1057,7 +1057,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				elem.parentNode.selectedIndex;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// If applicable, access the attribute via the DOM 0 way
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( notxml &amp;&amp; !special &amp;&amp; name in elem ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( name in elem &amp;&amp; notxml &amp;&amp; !special ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				if ( set ){
+<span class="token prefix unchanged"> </span>					// We can't allow the type property to be changed (since it causes problems in IE)
+<span class="token prefix unchanged"> </span>					if ( name == "type" &amp;&amp; jQuery.nodeName( elem, "input" ) &amp;&amp; elem.parentNode )
+</span><span class="token coord">@@ -1080,10 +1080,13 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				// convert the value to a string (all browsers do this but IE) see #1070
+<span class="token prefix unchanged"> </span>				elem.setAttribute( name, "" + value );
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( msie &amp;&amp; special &amp;&amp; notxml )
+<span class="token prefix deleted">-</span>				return elem.getAttribute( name, 2 );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			var attr = msie &amp;&amp; notxml &amp;&amp; special
+<span class="token prefix inserted">+</span>					// Some attributes require a special call on IE
+<span class="token prefix inserted">+</span>					? elem.getAttribute( name, 2 )
+<span class="token prefix inserted">+</span>					: elem.getAttribute( name );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			return elem.getAttribute( name );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			// Non-existent attributes return null, we normalize to undefined
+<span class="token prefix inserted">+</span>			return attr === null ? undefined : attr;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+</span>Index: test/unit/core.js
+===================================================================
+<span class="token coord">--- test/unit/core.js	(revision 5679)</span>
+<span class="token coord">+++ test/unit/core.js	(working copy)</span>
+<span class="token coord">@@ -320,7 +320,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("attr(String)", function() {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	expect(20);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	expect(26);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	equals( $('#text1').attr('value'), "Test", 'Check for value attribute' );
+<span class="token prefix unchanged"> </span>	equals( $('#text1').attr('value', "Test2").attr('defaultValue'), "Test", 'Check for defaultValue attribute' );
+<span class="token prefix unchanged"> </span>	equals( $('#text1').attr('type'), "text", 'Check for type attribute' );
+</span><span class="token coord">@@ -343,6 +343,26 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	$('&lt;a id="tAnchor5">&lt;/a>').attr('href', '#5').appendTo('#main'); // using innerHTML in IE causes href attribute to be serialized to the full path
+<span class="token prefix unchanged"> </span>	equals( $('#tAnchor5').attr('href'), "#5", 'Check for non-absolute href (an anchor)' );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	// Enabled since [5574]
+<span class="token prefix inserted">+</span>	var body = document.body, $body = $(body);
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	ok( $body.attr('foo') === undefined, 'Make sure that a non existent attribute returns undefined' );
+<span class="token prefix inserted">+</span>	ok( $body.attr('nextSibling') === null, 'Make sure a null expando returns null' );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	body.setAttribute('foo', 'baz');	
+<span class="token prefix inserted">+</span>	equals( $body.attr('foo'), 'baz', 'Make sure the dom attribute is retrieved when no expando is found' );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	body.foo = 'bar';
+<span class="token prefix inserted">+</span>	equals( $body.attr('foo'), 'bar', 'Make sure the expando is preferred over the dom attribute' );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	$body.attr('foo','cool');
+<span class="token prefix inserted">+</span>	equals( $body.attr('foo'), 'cool', 'Make sure that setting works well when both expando and dom attribute are available' );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	body.foo = undefined;
+<span class="token prefix inserted">+</span>	ok( $body.attr('foo') === undefined, 'Make sure the expando is preferred over the dom attribute, even if undefined' );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	body.removeAttribute('foo'); // Cleanup
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>if ( !isLocal ) {</span></code></pre>
     </div>
   
 

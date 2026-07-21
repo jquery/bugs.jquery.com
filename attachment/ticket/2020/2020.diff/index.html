@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,38 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax.js
+===================================================================
+<span class="token coord">--- src/ajax.js	(revision 4175)</span>
+<span class="token coord">+++ src/ajax.js	(working copy)</span>
+<span class="token coord">@@ -151,7 +151,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	lastModified: {},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	ajax: function( s ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var jsonp, jsre = /=(\?|%3F)/g, status, data;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var jsonp, jsre = /=(\?|%3F)(&amp;|$)/g, status, data;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Extend the settings, but re-extend 's' so that it can be
+<span class="token prefix unchanged"> </span>		// checked again later (in the test suite, specifically)
+</span><span class="token coord">@@ -177,8 +177,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Replace the =? sequence both in the query string and the data
+<span class="token prefix unchanged"> </span>			if ( s.data )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				s.data = (s.data + "").replace(jsre, "=" + jsonp);
+<span class="token prefix deleted">-</span>			s.url = s.url.replace(jsre, "=" + jsonp);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				s.data = (s.data + "").replace(jsre, "=" + jsonp + "$2");
+<span class="token prefix inserted">+</span>			s.url = s.url.replace(jsre, "=" + jsonp + "$2");
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// We need to make sure
+<span class="token prefix unchanged"> </span>			// that a JSONP style response is executed properly
+</span><span class="token coord">@@ -192,6 +192,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				// Garbage collect
+<span class="token prefix unchanged"> </span>				window[ jsonp ] = undefined;
+<span class="token prefix unchanged"> </span>				try{ delete window[ jsonp ]; } catch(e){}
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				if (head)
+<span class="token prefix inserted">+</span>					head.removeChild( script );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			};
+<span class="token prefix unchanged"> </span>		}</span></code></pre>
     </div>
   
 

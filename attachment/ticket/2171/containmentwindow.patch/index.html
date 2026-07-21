@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,26 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: ui.draggable.ext.js
+===================================================================
+--- ui.draggable.ext.js	(revision 4457)
++++ ui.draggable.ext.js	(working copy)
+@@ -90,6 +90,15 @@
+ 					$(document).width(),
+ 					($(document).height() || document.body.parentNode.scrollHeight)
+ 				];
++			} else if(o._containment == 'window' || o._containment == window) {
++				var leftAdjust = Math.max(document.documentElement.scrollLeft, document.body.scrollLeft);
++				var topAdjust = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
++				o.containment = [
++					leftAdjust,
++					topAdjust,
++					$(window).width() + leftAdjust,
++					$(window).height() + topAdjust
++				];
+ 			} else { //I'm a node, so compute top/left/right/bottom
+ 
+ 				var ce = $(o._containment)[0];</code></pre>
     </div>
   
 

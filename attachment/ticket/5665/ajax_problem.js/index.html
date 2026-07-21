@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,27 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token keyword">var</span> soapMessage <span class="token operator">=</span> <span class="token string">'&lt;S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"> \
+    				&lt;S:Header/> \
+    					&lt;S:Body> \
+        				&lt;ns2:sayHello xmlns:ns2="http://main/"/> \
+    					&lt;/S:Body> \
+				 	&lt;/S:Envelope>'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> wsURL <span class="token operator">=</span> <span class="token string">"http://localhost:8080/TestJavascript/HelloWorldService"</span><span class="token punctuation">;</span>
+
+$<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token literal-property property">url</span><span class="token operator">:</span> wsURL<span class="token punctuation">,</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"POST"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">dataType</span><span class="token operator">:</span> <span class="token string">"xml"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">data</span><span class="token operator">:</span> soapMessage<span class="token punctuation">,</span>
+		<span class="token literal-property property">contentType</span><span class="token operator">:</span> <span class="token string">"text/xml; charset=\"utf-8\""</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">complete</span><span class="token operator">:</span> onComplete<span class="token punctuation">,</span>       
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">onComplete</span><span class="token punctuation">(</span><span class="token parameter">xData<span class="token punctuation">,</span> status</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token function">alert</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
     </div>
   
 

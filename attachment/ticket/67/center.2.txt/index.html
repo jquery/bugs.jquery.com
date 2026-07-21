@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,65 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt">$.fn.center = function(f) {
+	return this.each(function(){
+		if ( !f &amp;&amp; this.nodeName == 'IMG' &amp;&amp;
+				 !this.offsetWidth &amp;&amp; !this.offsetHeight ) {
+			var self = this;
+			setTimeout(function(){
+				$(self).center(true);
+			}, 13);
+		} else {
+			var s = this.style;
+			var p = this.parentNode;
+			var b = document.body;
+			var t = 0;
+
+			if ( f != "vertical" )
+			{
+				if ( $.css(p,"position") == 'static' )
+					p.style.position = 'relative';
+				s.position = 'absolute';
+				if ( ! isNaN(parseInt($.css(p,"width"))) )
+				{
+					t = parseInt(($.css(p,"width") - $.css(this,"width"))/2);
+					if ( t > 0 )
+						s.left = t + "px";
+					else
+						s.left = "0px";
+				}
+				else if ( ! isNaN( b.clientWidth ) )
+				{
+					t = parseInt((b.clientWidth - $.css(this,"width"))/2);
+					if ( t > 0 )
+						s.left = t + "px";
+					else
+						s.left = "0px";
+				}
+			}
+
+			if ( f != "horizontal" )
+			{
+				if ( ! isNaN(parseInt($.css(p,"height"))) )
+				{
+					t = parseInt(($.css(p,"height") - $.css(this,"height"))/2);
+					if ( t > 0 )
+						s.top = t + "px";
+					else
+						s.top = "0px";
+				}
+				else if ( ! isNaN( b.clientHeight ) )
+				{
+					t = parseInt((b.clientHeight - $.css(this,"height"))/2);
+					if ( t > 0 )
+						s.top = t + "px";
+					else
+						s.top = "0px";
+				}
+			}
+		}
+  });
+};</code></pre>
     </div>
   
 

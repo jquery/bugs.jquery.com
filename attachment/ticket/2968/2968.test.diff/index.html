@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,40 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/core.js
+===================================================================
+<span class="token coord">--- test/unit/core.js	(revision 5772)</span>
+<span class="token coord">+++ test/unit/core.js	(working copy)</span>
+<span class="token coord">@@ -107,7 +107,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("isFunction", function() {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	expect(21);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	expect(27);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Make sure that false values return false
+<span class="token prefix unchanged"> </span>	ok( !jQuery.isFunction(), "No Value" );
+</span><span class="token coord">@@ -138,7 +138,20 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	// Make sure normal functions still work
+<span class="token prefix unchanged"> </span>	var fn = function(){};
+<span class="token prefix unchanged"> </span>	ok( jQuery.isFunction(fn), "Normal Function" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	// Edge cases (bug #2968 #3134)
+<span class="token prefix inserted">+</span>	var fnWithToString = function(){};
+<span class="token prefix inserted">+</span>	fnWithToString.toString = function(){ return "Test"; };
+<span class="token prefix inserted">+</span>	fnWithToString.valueOf = function(){ return "Test"; };
+<span class="token prefix inserted">+</span>	ok( jQuery.isFunction(fnWithToString), "Normal Function with toString() and valueOf() overridden" );
+<span class="token prefix inserted">+</span>	ok( !jQuery.isFunction(new String("function")), 'new String("function")' );
+<span class="token prefix inserted">+</span>	ok( !jQuery.isFunction({toString:function(){return "function"}}), 'Object with toString()' );
+<span class="token prefix inserted">+</span>	ok( !jQuery.isFunction({valueOf:function(){return "function"}}), "Object with valueOf()" );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	// Native functions in IE
+<span class="token prefix inserted">+</span>	ok( jQuery.isFunction( window.alert ), "alert()" );
+<span class="token prefix inserted">+</span>	ok( jQuery.isFunction( window.prompt ), "prompt()" );	
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	var obj = document.createElement("object");
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Firefox says this is a function</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax.js
+===================================================================
+<span class="token coord">--- src/ajax.js	(revision 6268)</span>
+<span class="token coord">+++ src/ajax.js	(working copy)</span>
+<span class="token coord">@@ -176,6 +176,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		// checked again later (in the test suite, specifically)
+<span class="token prefix unchanged"> </span>		s = jQuery.extend(true, s, jQuery.extend(true, {}, jQuery.ajaxSettings, s));
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>        // strip any existing fragment (#) segment from the request URL
+<span class="token prefix inserted">+</span>        s.url = s.url.replace(/#(.*)$/, '');
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		var jsonp, jsre = /=\?(&amp;|$)/g, status, data,
+<span class="token prefix unchanged"> </span>			type = s.type.toUpperCase();</span></code></pre>
     </div>
   
 

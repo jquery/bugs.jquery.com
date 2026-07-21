@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/ajax/ajax.js
+===================================================================
+<span class="token coord">--- jquery/src/ajax/ajax.js	(revision 2919)</span>
+<span class="token coord">+++ jquery/src/ajax/ajax.js	(working copy)</span>
+<span class="token coord">@@ -795,7 +795,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		var xml = type == "xml" || !type &amp;&amp; ct &amp;&amp; ct.indexOf("xml") >= 0;
+<span class="token prefix unchanged"> </span>		data = xml ? r.responseXML : r.responseText;
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( xml &amp;&amp; data.documentElement.tagName == "parsererror" )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( xml &amp;&amp; r.responseText.match(/\S/) &amp;&amp; data.documentElement.tagName == "parsererror" )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			throw "parsererror";
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// If the type is "script", eval it in global context</span></code></pre>
     </div>
   
 

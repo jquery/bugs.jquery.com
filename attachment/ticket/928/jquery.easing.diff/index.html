@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,45 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/fx/fx.js
+===================================================================
+<span class="token coord">--- src/fx/fx.js	(revision 1295)</span>
+<span class="token coord">+++ src/fx/fx.js	(working copy)</span>
+<span class="token coord">@@ -301,7 +301,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	 * @example $("p").animate({
+<span class="token prefix unchanged"> </span>	 *   opacity: 'show'
+<span class="token prefix unchanged"> </span>	 * }, "slow", "easein");
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	 * @desc An example of using an 'easing' function to provide a different style of animation. This will only work if you have a plugin that provides this easing function (Only 'linear' is provided by default, with jQuery).
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	 * @desc An example of using an 'easing' function to provide a different style of animation. This will only work if you have a plugin that provides this easing function (Only 'swing' and 'linear' are provided by default, with jQuery).
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	 *
+<span class="token prefix unchanged"> </span>	 * @name animate
+<span class="token prefix unchanged"> </span>	 * @type jQuery
+</span><span class="token coord">@@ -379,7 +379,14 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		return opt;
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>	
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	easing: {},
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	easing: {
+<span class="token prefix inserted">+</span>		linear: function(percentage_elapsed, time_elapsed, value_start, value_difference, time_duration) {
+<span class="token prefix inserted">+</span>			return value_start + value_difference * percentage_elapsed;
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>		swing: function(percentage_elapsed, time_elapsed, value_start, value_difference, time_duration) {
+<span class="token prefix inserted">+</span>			return value_start + value_difference * ((- Math.cos(percentage_elapsed * Math.PI) / 2) + 0.5);
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>	},
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	queue: {},
+<span class="token prefix unchanged"> </span>	
+</span><span class="token coord">@@ -558,8 +565,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				// If the easing function exists, then use it 
+<span class="token prefix unchanged"> </span>				z.now = options.easing &amp;&amp; jQuery.easing[options.easing] ?
+<span class="token prefix unchanged"> </span>					jQuery.easing[options.easing](p, n,  firstNum, (lastNum-firstNum), options.duration) :
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					// else use default linear easing
+<span class="token prefix deleted">-</span>					((-Math.cos(p*Math.PI)/2) + 0.5) * (lastNum-firstNum) + firstNum;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					jQuery.easing["swing"](p, n,  firstNum, (lastNum-firstNum), options.duration);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				// Perform the next step of the animation
+<span class="token prefix unchanged"> </span>				z.a();</span></code></pre>
     </div>
   
 

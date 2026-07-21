@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,34 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax.js
+===================================================================
+<span class="token coord">--- src/ajax.js	(revision 5810)</span>
+<span class="token coord">+++ src/ajax.js	(working copy)</span>
+<span class="token coord">@@ -480,14 +480,18 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		if( s &amp;&amp; s.dataFilter )
+<span class="token prefix unchanged"> </span>			data = s.dataFilter( data, type );
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		// If the type is "script", eval it in global context
+<span class="token prefix deleted">-</span>		if ( type == "script" )
+<span class="token prefix deleted">-</span>			jQuery.globalEval( data );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		// The filter can actually parse the response
+<span class="token prefix inserted">+</span>		if( typeof data == 'string' ){
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		// Get the JavaScript object, if JSON is used.
+<span class="token prefix deleted">-</span>		if ( type == "json" )
+<span class="token prefix deleted">-</span>			data = eval("(" + data + ")");
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			// If the type is "script", eval it in global context
+<span class="token prefix inserted">+</span>			if ( type == "script" )
+<span class="token prefix inserted">+</span>				jQuery.globalEval( data );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			// Get the JavaScript object, if JSON is used.
+<span class="token prefix inserted">+</span>			if ( type == "json" )
+<span class="token prefix inserted">+</span>				data = eval("(" + data + ")");
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>		
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		return data;
+<span class="token prefix unchanged"> </span>	},</span></code></pre>
     </div>
   
 

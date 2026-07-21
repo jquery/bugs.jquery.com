@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery.js
+===================================================================
+--- jquery.js	(revision 74316)
++++ jquery.js	(working copy)
+@@ -6230,7 +6230,7 @@
+ 					jQuery.css( elem, type ) :
+ 
+ 					// Set the width or height on the element (default to pixels if value is unitless)
+-					this.css( type, typeof size === "string" ? size : size + "px" );
++					this.css( type, typeof size === "string" ? size : ( parseInt( size ) || 0 ) + "px" );
+ 	};
+ 
+ });</code></pre>
     </div>
   
 

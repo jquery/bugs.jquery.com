@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event.js
+===================================================================
+<span class="token coord">--- src/event.js	(revision 5084)</span>
+<span class="token coord">+++ src/event.js	(working copy)</span>
+<span class="token coord">@@ -403,7 +403,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	one: function( type, data, fn ) {
+<span class="token prefix unchanged"> </span>		return this.each(function(){
+<span class="token prefix unchanged"> </span>			jQuery.event.add( this, type, function(event) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				jQuery(this).unbind(event);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				jQuery(this).unbind(event, arguments.callee);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				return (fn || data).apply( this, arguments);
+<span class="token prefix unchanged"> </span>			}, fn &amp;&amp; data);
+<span class="token prefix unchanged"> </span>		});</span></code></pre>
     </div>
   
 

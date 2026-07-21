@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,31 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/core.js
+===================================================================
+<span class="token coord">--- test/unit/core.js	(revision 5830)</span>
+<span class="token coord">+++ test/unit/core.js	(working copy)</span>
+<span class="token coord">@@ -1388,13 +1388,19 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("toggleClass(String)", function() {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	expect(3);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	expect(6);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	var e = jQuery("#firstp");
+<span class="token prefix unchanged"> </span>	ok( !e.is(".test"), "Assert class not present" );
+<span class="token prefix unchanged"> </span>	e.toggleClass("test");
+<span class="token prefix unchanged"> </span>	ok( e.is(".test"), "Assert class present" );
+<span class="token prefix unchanged"> </span>	e.toggleClass("test");
+<span class="token prefix unchanged"> </span>	ok( !e.is(".test"), "Assert class not present" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	e.toggleClass("test", false);
+<span class="token prefix inserted">+</span>	ok( !e.is(".test"), "Assert class not present" );
+<span class="token prefix inserted">+</span>	e.toggleClass("test", true);
+<span class="token prefix inserted">+</span>	ok( e.is(".test"), "Assert class present" );
+<span class="token prefix inserted">+</span>	e.toggleClass("test", false);
+<span class="token prefix inserted">+</span>	ok( !e.is(".test"), "Assert class not present" );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("removeAttr(String", function() {</span></code></pre>
     </div>
   
 

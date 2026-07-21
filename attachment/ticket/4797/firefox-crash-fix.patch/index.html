@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,35 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: jquery/src/fx.js
+===================================================================
+--- jquery/src/fx.js	(revision 6410)
++++ jquery/src/fx.js	(working copy)
+@@ -62,18 +62,18 @@
+ 		if ( speed ) {
+ 			return this.animate( genFx("hide", 3), speed, callback);
+ 		} else {
++			// Set the display of the elements in a separate loop
++			// to avoid the constant reflow
+ 			for ( var i = 0, l = this.length; i < l; i++ ){
++				this[i].style.display = "none";
++			}
++
++			for ( var i = 0, l = this.length; i < l; i++ ){
+ 				var old = jQuery.data(this[i], "olddisplay");
+ 				if ( !old && old !== "none" )
+ 					jQuery.data(this[i], "olddisplay", jQuery.css(this[i], "display"));
+ 			}
+ 
+-			// Set the display of the elements in a second loop
+-			// to avoid the constant reflow
+-			for ( var i = 0, l = this.length; i < l; i++ ){
+-				this[i].style.display = "none";
+-			}
+-
+ 			return this;
+ 		}
+ 	},</code></pre>
     </div>
   
 

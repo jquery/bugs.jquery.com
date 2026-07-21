@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/ajax.js
+===================================================================
+<span class="token coord">--- src/ajax.js	(revision 3798)</span>
+<span class="token coord">+++ src/ajax.js	(working copy)</span>
+<span class="token coord">@@ -174,7 +174,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Build temporary JSONP function
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( s.dataType == "json" &amp;&amp; (s.data &amp;&amp; jsre.test( s.data ) || s.url.match(jsre)) ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( s.dataType == "json" &amp;&amp; (s.data &amp;&amp; s.data.match(jsre) || s.url.match(jsre)) ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			jsonp = "jsonp" + jsc++;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			// Replace the =? sequence both in the query string and the data</span></code></pre>
     </div>
   
 

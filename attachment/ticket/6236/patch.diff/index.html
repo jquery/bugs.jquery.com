@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,29 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery.js
+===================================================================
+<span class="token coord">--- jquery.js	(revision 15330)</span>
+<span class="token coord">+++ jquery.js	(working copy)</span>
+<span class="token coord">@@ -3959,15 +3959,15 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>var rinlinejQuery = / jQuery\d+="(?:\d+|null)"/g,
+<span class="token prefix unchanged"> </span>	rleadingWhitespace = /^\s+/,
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	rxhtmlTag = /(&lt;([\w:]+)[^>]*?)\/>/g,
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	rxhtmlTag = /(&lt;([\w:]+)([^>]*?))\/>/g,
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	rselfClosing = /^(?:area|br|col|embed|hr|img|input|link|meta|param)$/i,
+<span class="token prefix unchanged"> </span>	rtagName = /&lt;([\w:]+)/,
+<span class="token prefix unchanged"> </span>	rtbody = /&lt;tbody/i,
+<span class="token prefix unchanged"> </span>	rhtml = /&lt;|&amp;#?\w+;/,
+<span class="token prefix unchanged"> </span>	rnocache = /&lt;script|&lt;object|&lt;embed|&lt;option|&lt;style/i,
+<span class="token prefix unchanged"> </span>	rchecked = /checked\s*(?:[^=]|=\s*.checked.)/i,  // checked="checked" or checked (html5)
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	fcloseTag = function( all, front, tag ) {
+<span class="token prefix deleted">-</span>		return rselfClosing.test( tag ) ?
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	fcloseTag = function( all, front, tag, attrs ) {
+<span class="token prefix inserted">+</span>		return rselfClosing.test( tag ) || attrs.match(/[^\s"']$/) ?
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			all :
+<span class="token prefix unchanged"> </span>			front + ">&lt;/" + tag + ">";
+<span class="token prefix unchanged"> </span>	},</span></code></pre>
     </div>
   
 

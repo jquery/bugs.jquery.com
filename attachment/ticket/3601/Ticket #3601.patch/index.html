@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: src/fx.js
+===================================================================
+--- src/fx.js	(revision 5946)
++++ src/fx.js	(working copy)
+@@ -205,7 +205,7 @@
+ 			complete: fn || !fn && easing ||
+ 				jQuery.isFunction( speed ) && speed,
+ 			duration: speed,
+-			easing: fn && easing || easing && easing.constructor != Function && easing
++			easing: fn && easing || easing && easing.constructor.toString() != Function.toString() && easing
+ 		};
+ 
+ 		opt.duration = jQuery.fx.off ? 0 : typeof opt.duration == 'number' ? opt.duration :</code></pre>
     </div>
   
 

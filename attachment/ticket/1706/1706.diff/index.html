@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,40 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 3817)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -53,19 +53,23 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>					var elem = document.getElementById( match[3] );
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>					// Make sure an element was located
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					if ( elem )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					if ( elem ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>						// Handle the case where IE and Opera return items
+<span class="token prefix unchanged"> </span>						// by name instead of ID
+<span class="token prefix unchanged"> </span>						if ( elem.id != match[3] )
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>							return jQuery().find( selector );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>							// Use document.all if it exist and contains more than one element
+<span class="token prefix inserted">+</span>							if ( document.all &amp;&amp; document.all[ match[3] ].length > 1 )
+<span class="token prefix inserted">+</span>								jQuery.each( document.all[ match[3] ], function(index, element) {
+<span class="token prefix inserted">+</span>									if ( match[3] == element.id ) elem = element;
+<span class="token prefix inserted">+</span>								} );
+<span class="token prefix inserted">+</span>							else
+<span class="token prefix inserted">+</span>								return jQuery().find( selector );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>						// Otherwise, we inject the element directly into the jQuery object
+<span class="token prefix deleted">-</span>						else {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>						// Inject the element directly into the jQuery object
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>							this[0] = elem;
+<span class="token prefix unchanged"> </span>							this.length = 1;
+<span class="token prefix unchanged"> </span>							return this;
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>						}
+<span class="token prefix deleted">-</span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					else
+<span class="token prefix unchanged"> </span>						selector = [];
+<span class="token prefix unchanged"> </span>				}</span></code></pre>
     </div>
   
 

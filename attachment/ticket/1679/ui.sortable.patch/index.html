@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,18 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: plugins/ui/current/ui.sortable.js
+===================================================================
+--- plugins/ui/current/ui.sortable.js	(Revision 3610)
++++ plugins/ui/current/ui.sortable.js	(Arbeitskopie)
+@@ -86,6 +86,7 @@
+ 		currentTarget: null,
+ 		lastTarget: null,
+ 		prepareCallbackObj: function(self, that) {
++		  	if (!self.pos) self.pos = [0, 0];
+ 			return {
+ 				helper: self.helper,
+ 				position: { left: self.pos[0], top: self.pos[1] },</code></pre>
     </div>
   
 

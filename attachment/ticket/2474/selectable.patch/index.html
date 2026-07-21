@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,44 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: ui.selectable.js
+===================================================================
+--- ui.selectable.js	(revision 4976)
++++ ui.selectable.js	(working copy)
+@@ -5,10 +5,12 @@
+ 
+ 	$.fn.extend({
+ 		selectable: function(options) {
++			var args = Array.prototype.slice.call(arguments, 1); 
++			
+ 			return this.each(function() {
+ 				if (typeof options == "string") {
+ 					var select = $.data(this, "selectable");
+-					select[options].apply(select, args);
++					if (select) select[options].apply(select, args);
+ 
+ 				} else if(!$.data(this, "selectable"))
+ 					new $.ui.selectable(this, options);
+@@ -21,7 +23,7 @@
+ 		
+ 		this.element = $(element);
+ 		
+-		$.data(this.element, "selectable", this);
++		$.data(element, "selectable", this); 
+ 		this.element.addClass("ui-selectable");
+ 		
+ 		this.options = $.extend({
+@@ -91,8 +93,8 @@
+ 			this.element
+ 				.removeClass("ui-selectable ui-selectable-disabled")
+ 				.removeData("selectable")
+-				.unbind(".selectable");
+-			this.removeMouseInteraction();
++				.unbind(".selectable")
++				.removeMouseInteraction();
+ 		},
+ 		enable: function() {
+ 			this.element.removeClass("ui-selectable-disabled");</code></pre>
     </div>
   
 

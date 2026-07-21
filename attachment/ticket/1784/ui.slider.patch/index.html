@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,17 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">--- ui.slider.js        (revision 3598)
++++ ui.slider.js        (working copy)
+@@ -240,7 +240,7 @@
+                                m = ((this.curValue)/o.realValue) * p;
+                        }
+                        
+-                       if(that.interactions) {
++                        if(that.interactions && this.options.dontOverLap) {
+                                nonvalidRange = that.nonvalidRange(this);
+                                if(nonvalidRange) {
+                                        this.curValue = nonvalidRange;</code></pre>
     </div>
   
 

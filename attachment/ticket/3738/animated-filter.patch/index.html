@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,20 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: selector.js
+===================================================================
+--- selector.js	(revision 5994)
++++ selector.js	(working copy)
+@@ -807,6 +807,9 @@
+ 		jQuery.css(elem, "display") !== "none" &&
+ 		jQuery.css(elem, "visibility") !== "hidden";
+ };
++Sizzle.selectors.filters.animated = function(elem){
++  return jQuery.grep(jQuery.timers,function(fn){return elem==fn.elem;}).length;
++};
+ 
+ jQuery.multiFilter = function( expr, elems, not ) {
+ 	if ( not ) {</code></pre>
     </div>
   
 

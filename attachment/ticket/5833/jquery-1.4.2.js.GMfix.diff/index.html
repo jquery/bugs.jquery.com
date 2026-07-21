@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,35 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">954a955</span>
+<span class="token inserted-arrow inserted"><span class="token prefix inserted">></span> 		var oel = el;
+</span><span class="token coord">957,959c958,975</span>
+<span class="token deleted-arrow deleted"><span class="token prefix deleted"><</span> 		var isSupported = (eventName in el); 
+<span class="token prefix deleted"><</span> 		if ( !isSupported ) { 
+<span class="token prefix deleted"><</span> 			el.setAttribute(eventName, "return;"); 
+</span><span class="token coord">---</span>
+<span class="token inserted-arrow inserted"><span class="token prefix inserted">></span> 		var isSupported = true;
+<span class="token prefix inserted">></span> 		var isSafe = true;
+<span class="token prefix inserted">></span> 		if ( typeof el.wrappedJSObject == 'object' ) {
+<span class="token prefix inserted">></span> 			// Detected Firefox with Greasemonkey (or other protected addon)
+<span class="token prefix inserted">></span> 			if ( typeof el.wrappedJSObject.__lookupGetter__(eventName) !== 'undefined' || 
+<span class="token prefix inserted">></span> 			     typeof el.wrappedJSObject.__lookupSetter__(eventName) !== 'undefined' ) {
+<span class="token prefix inserted">></span> 				// A custom getter was detected. It can be:
+<span class="token prefix inserted">></span> 				// 1) Attemt to inject unsafe code into previleged scope with __define[GS]etter__
+<span class="token prefix inserted">></span> 				// 2) Page script authors knows what they do. So we only SUPPOSE that isSupported = true (most probably)
+<span class="token prefix inserted">></span> 				// It is unsafe to access a property with the custom getter
+<span class="token prefix inserted">></span> 				isSafe = false;
+<span class="token prefix inserted">></span> 			} else {
+<span class="token prefix inserted">></span> 				el = el.wrappedJSObject;
+<span class="token prefix inserted">></span> 			}
+<span class="token prefix inserted">></span> 		}
+<span class="token prefix inserted">></span> 
+<span class="token prefix inserted">></span> 		if ( isSafe &amp;&amp; !(eventName in el) ) {
+<span class="token prefix inserted">></span> 			oel.setAttribute(eventName, "return;");
+</span><span class="token coord">962c978</span>
+<span class="token deleted-arrow deleted"><span class="token prefix deleted"><</span> 		el = null; 
+</span><span class="token coord">---</span>
+<span class="token inserted-arrow inserted"><span class="token prefix inserted">></span> 		oel = el = null;</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,110 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/event.js
+===================================================================
+<span class="token coord">--- test/unit/event.js	(revision 6162)</span>
+<span class="token coord">+++ test/unit/event.js	(working copy)</span>
+<span class="token coord">@@ -474,7 +474,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test(".live()/.die()", function() {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	expect(42);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	expect(46);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	var submit = 0, div = 0, livea = 0, liveb = 0;
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -611,6 +611,29 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	// Cleanup
+<span class="token prefix unchanged"> </span>	jQuery("#nothiddendivchild").die("click");
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	// Verify that .live() ocurs and cancel buble in the same order as
+<span class="token prefix inserted">+</span>	// we would expect .bind() and .click() without delegation
+<span class="token prefix inserted">+</span>	var lived = 0, livee = 0;
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	// bind one pair in one order
+<span class="token prefix inserted">+</span>	jQuery('span#liveSpan1 a').live('click', function(){ lived++; return false; });
+<span class="token prefix inserted">+</span>	jQuery('span#liveSpan1').live('click', function(){	livee++; });
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	jQuery('span#liveSpan1 a').click();
+<span class="token prefix inserted">+</span>	equals( lived, 1, "Verify that only one first handler occurred." );
+<span class="token prefix inserted">+</span>	equals( livee, 0, "Verify that second handler don't." );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	// and one pair in inverse
+<span class="token prefix inserted">+</span>	jQuery('#liveHandlerOrder span#liveSpan2').live('click', function(){	livee++; });
+<span class="token prefix inserted">+</span>	jQuery('#liveHandlerOrder span#liveSpan2 a').live('click', function(){ lived++; return false; });
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	jQuery('span#liveSpan2 a').click();
+<span class="token prefix inserted">+</span>	equals( lived, 2, "Verify that only one first handler occurred." );
+<span class="token prefix inserted">+</span>	equals( livee, 0, "Verify that second handler don't." );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	// Cleanup
+<span class="token prefix inserted">+</span>	jQuery("span#liveSpan1 a, span#liveSpan1, span#liveSpan2 a, span#liveSpan2").die("click");
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>/*
+</span>Index: test/index.html
+===================================================================
+<span class="token coord">--- test/index.html	(revision 6162)</span>
+<span class="token coord">+++ test/index.html	(working copy)</span>
+<span class="token coord">@@ -213,6 +213,11 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			&lt;span>...&lt;/span>&lt;a id="linkWithNoHrefWithTabIndex" tabindex="1">Eat some funyuns&lt;/a>&lt;span>...&lt;/span>
+<span class="token prefix unchanged"> </span>			&lt;span>...&lt;/span>&lt;a id="linkWithNoHrefWithNegativeTabIndex" tabindex="-1">Eat some funyuns&lt;/a>&lt;span>...&lt;/span>
+<span class="token prefix unchanged"> </span>		&lt;/div>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		
+<span class="token prefix inserted">+</span>		&lt;div id="liveHandlerOrder">
+<span class="token prefix inserted">+</span>			&lt;span id="liveSpan1">&lt;a href="#">&lt;/a>&lt;/span>
+<span class="token prefix inserted">+</span>			&lt;span id="liveSpan2">&lt;a href="#">&lt;/a>&lt;/span>
+<span class="token prefix inserted">+</span>		&lt;/div>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	&lt;/div>
+<span class="token prefix unchanged"> </span>	&lt;/dl>
+<span class="token prefix unchanged"> </span>	
+</span>Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 6162)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -342,14 +342,17 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	closest: function( selector ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var pos = jQuery.expr.match.POS.test( selector ) ? jQuery(selector) : null;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var closer = 0, pos = jQuery.expr.match.POS.test( selector ) ? jQuery(selector) : null;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		return this.map(function(){
+<span class="token prefix unchanged"> </span>			var cur = this;
+<span class="token prefix unchanged"> </span>			while ( cur &amp;&amp; cur.ownerDocument ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				if ( pos ? pos.index(cur) > -1 : jQuery(cur).is(selector) )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				if ( pos ? pos.index(cur) > -1 : jQuery(cur).is(selector) ) {
+<span class="token prefix inserted">+</span>					jQuery(cur).data('howClose',closer);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					return cur;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				cur = cur.parentNode;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				closer++;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			}
+<span class="token prefix unchanged"> </span>		});
+<span class="token prefix unchanged"> </span>	},
+</span>Index: src/event.js
+===================================================================
+<span class="token coord">--- src/event.js	(revision 6162)</span>
+<span class="token coord">+++ src/event.js	(working copy)</span>
+<span class="token coord">@@ -571,9 +571,14 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>	});
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	elems.sort(function(a,b) {
+<span class="token prefix inserted">+</span>		return jQuery(a.elem).data('howClose') - jQuery(b.elem).data('howClose');
+<span class="token prefix inserted">+</span>	});
+<span class="token prefix inserted">+</span>	
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	jQuery.each(elems, function(){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( this.fn.call(this.elem, event, this.fn.data) === false )
+<span class="token prefix deleted">-</span>			stop = false;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( this.fn.call(this.elem, event, this.fn.data) === false ) {
+<span class="token prefix inserted">+</span>			return stop = false;;
+<span class="token prefix inserted">+</span>		}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	return stop;</span></code></pre>
     </div>
   
 

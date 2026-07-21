@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,45 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: data/testrunner.js
+===================================================================
+<span class="token coord">--- data/testrunner.js	(revision 5282)</span>
+<span class="token coord">+++ data/testrunner.js	(working copy)</span>
+<span class="token coord">@@ -13,6 +13,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	asyncTimeout: 2 // seconds for async timeout
+<span class="token prefix unchanged"> </span>};
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>_config.restrictions = 	location.search.length &lt; 2 ? [ ] : //restrict modules/tests by get parameters
+<span class="token prefix inserted">+</span>		$.map( location.search.slice(1).split('&amp;'), decodeURIComponent );
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>var isLocal = !!(window.location.protocol == 'file:');
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>$(function() {
+</span><span class="token coord">@@ -72,9 +75,22 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>function test(name, callback, nowait) {
+<span class="token prefix unchanged"> </span>	if(_config.currentModule)
+<span class="token prefix unchanged"> </span>		name = _config.currentModule + " module: " + name;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	var i = _config.restrictions.length, pass = !i;
+<span class="token prefix inserted">+</span>	while( i-- ){
+<span class="token prefix inserted">+</span>		var r = _config.restrictions[i],
+<span class="token prefix inserted">+</span>			not = r.charAt(0) == '!';
+<span class="token prefix inserted">+</span>			
+<span class="token prefix inserted">+</span>		if( not ) 
+<span class="token prefix inserted">+</span>			r = r.slice(1);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	var filter = location.search.slice(1);
+<span class="token prefix deleted">-</span>	if ( filter &amp;&amp; encodeURIComponent(name).indexOf(filter) == -1 )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if( name.indexOf(r) != -1 ){
+<span class="token prefix inserted">+</span>			pass = !not;
+<span class="token prefix inserted">+</span>			break;
+<span class="token prefix inserted">+</span>		}else if( not )
+<span class="token prefix inserted">+</span>			pass = true;
+<span class="token prefix inserted">+</span>	}
+<span class="token prefix inserted">+</span>	if( !pass ) 
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		return;
+<span class="token prefix unchanged"> </span>		
+<span class="token prefix unchanged"> </span>	synchronize(function() {</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,33 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 5084)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -692,12 +692,13 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			windowData :
+<span class="token prefix unchanged"> </span>			elem;
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var id = elem[ expando ];
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var id = elem[ expando ], ret;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// If we want to remove a specific section of the element's data
+<span class="token prefix unchanged"> </span>		if ( name ) {
+<span class="token prefix unchanged"> </span>			if ( jQuery.cache[ id ] ) {
+<span class="token prefix unchanged"> </span>				// Remove the section of cache data
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				ret = jQuery.cache[ id ][ name ];
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				delete jQuery.cache[ id ][ name ];
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				// If we've removed all the data, remove the element's cache
+</span><span class="token coord">@@ -725,6 +726,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			// Completely remove the data cache
+<span class="token prefix unchanged"> </span>			delete jQuery.cache[ id ];
+<span class="token prefix unchanged"> </span>		}
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		return ret;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// args is for internal usage only</span></code></pre>
     </div>
   
 

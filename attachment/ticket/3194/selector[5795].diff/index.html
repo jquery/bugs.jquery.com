@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,24 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/selector.js
+===================================================================
+<span class="token coord">--- src/selector.js	(revision 5795)</span>
+<span class="token coord">+++ src/selector.js	(working copy)</span>
+<span class="token coord">@@ -334,11 +334,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				var tmp = [], type = m[3];
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>				for ( var i = 0, rl = r.length; i &lt; rl; i++ ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					var a = r[i], z = a[ jQuery.props[m[2]] || m[2] ];
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					var a = r[i], 
+<span class="token prefix inserted">+</span>						z = jQuery.attr( a, m[2] ) || '';
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					if ( z == null || /style|href|src|selected/.test(m[2]) )
+<span class="token prefix deleted">-</span>						z = jQuery.attr(a,m[2]) || '';
+<span class="token prefix deleted">-</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					if ( (type == "" &amp;&amp; !!z ||
+<span class="token prefix unchanged"> </span>						 type == "=" &amp;&amp; z == m[5] ||
+<span class="token prefix unchanged"> </span>						 type == "!=" &amp;&amp; z != m[5] ||</span></code></pre>
     </div>
   
 

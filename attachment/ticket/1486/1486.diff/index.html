@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,52 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/event.js
+===================================================================
+<span class="token coord">--- test/unit/event.js	(revision 3484)</span>
+<span class="token coord">+++ test/unit/event.js	(working copy)</span>
+<span class="token coord">@@ -116,7 +116,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("trigger(event, [data], [fn])", function() {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	expect(40);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	expect(41);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	var handler = function(event, a, b, c) {
+<span class="token prefix unchanged"> </span>		equals( event.type, "click", "check passed data" );
+</span><span class="token coord">@@ -169,6 +169,16 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	// Trigger only the handlers (no native) and extra fn, with external event obj
+<span class="token prefix unchanged"> </span>	// Triggers 9
+<span class="token prefix unchanged"> </span>	equals( $("#firstp").triggerHandler("click", [eventObj, 1, "2", "abc"], handler), "test", "Verify handler response" );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	var pass = true;
+<span class="token prefix inserted">+</span>	try {
+<span class="token prefix inserted">+</span>		$('input:first')
+<span class="token prefix inserted">+</span>			.hide()
+<span class="token prefix inserted">+</span>			.trigger('focus');
+<span class="token prefix inserted">+</span>	} catch(e) {
+<span class="token prefix inserted">+</span>		pass = false;
+<span class="token prefix inserted">+</span>	}
+<span class="token prefix inserted">+</span>	ok( pass, "Trigger focus on hidden element" );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("toggle(Function, Function)", function() {
+</span>Index: src/event.js
+===================================================================
+<span class="token coord">--- src/event.js	(revision 3484)</span>
+<span class="token coord">+++ src/event.js	(working copy)</span>
+<span class="token coord">@@ -177,7 +177,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			// Trigger the native events (except for clicks on links)
+<span class="token prefix unchanged"> </span>			if ( fn &amp;&amp; donative !== false &amp;&amp; val !== false &amp;&amp; !(jQuery.nodeName(element, 'a') &amp;&amp; type == "click") ) {
+<span class="token prefix unchanged"> </span>				this.triggered = true;
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				element[ type ]();
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				try {
+<span class="token prefix inserted">+</span>					element[ type ]();
+<span class="token prefix inserted">+</span>				// prevent IE from throwing an error for some hidden elements
+<span class="token prefix inserted">+</span>				} catch (e) {}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			}
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			this.triggered = false;</span></code></pre>
     </div>
   
 

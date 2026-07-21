@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,408 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/core.js
+===================================================================
+<span class="token coord">--- test/unit/core.js	(revision 4059)</span>
+<span class="token coord">+++ test/unit/core.js	(working copy)</span>
+<span class="token coord">@@ -141,11 +141,11 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		ok( jQuery.isFunction(fn), "Recursive Function Call" );
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>    	fn({ some: "data" });
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		fn({ some: "data" });
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	};
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	callme(function(){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>    	callme(function(){});
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		callme(function(){});
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	});
+<span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -168,6 +168,76 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	reset();
+<span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>test("$() returning text and comment nodes", function() {
+<span class="token prefix inserted">+</span>	expect(23);
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	// the next set of tests is to see how jquery handles non node nodes (like text and comment nodes)
+<span class="token prefix inserted">+</span>	var j = $("&lt;span>hi&lt;/span> there &lt;!-- mon ami -->");
+<span class="token prefix inserted">+</span>	ok( j.length >= 2, "Check node,textnode,comment creation (some browsers delete comments)" );
+<span class="token prefix inserted">+</span>	// using contents will get comments even in IE
+<span class="token prefix inserted">+</span>	j = $("#nonnodes").contents();
+<span class="token prefix inserted">+</span>	j.addClass("asdf");
+<span class="token prefix inserted">+</span>	ok( j.hasClass("asdf"), "Check node,textnode,comment for addClass" );
+<span class="token prefix inserted">+</span>	j.removeClass("asdf");
+<span class="token prefix inserted">+</span>	ok( !j.hasClass("asdf"), "Check node,textnode,comment for removeClass" );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	j.attr("name", "attrvalue");
+<span class="token prefix inserted">+</span>	equals( j.attr("name"), "attrvalue", "Check node,textnode,comment for attr" );
+<span class="token prefix inserted">+</span>	j.removeAttr("name")
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	equals( j.find("div").length, 0, "Check node,textnode,comment to find zero divs" );
+<span class="token prefix inserted">+</span>	equals( j.filter("span").length, 1, "Check node,textnode,comment to filter the one span" );
+<span class="token prefix inserted">+</span>	equals( j.filter("[name]").length, 0, "Check node,textnode,comment to filter the one span" );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	j.html("&lt;b>bold&lt;/b>");
+<span class="token prefix inserted">+</span>	equals( j.html().toLowerCase(), "&lt;b>bold&lt;/b>", "Check node,textnode,comment with html()" );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	j.text("hi!");
+<span class="token prefix inserted">+</span>	equals( $(j[0]).text(), "hi!", "Check node,textnode,comment with text()" );
+<span class="token prefix inserted">+</span>	equals( j[1].nodeValue, " there ", "Check node,textnode,comment with text()" );
+<span class="token prefix inserted">+</span>	equals( j[2].nodeType, 8, "Check node,textnode,comment with text()" );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	j.val("asdf");
+<span class="token prefix inserted">+</span>	equals( j.val(), "asdf", "Check node,textnode,comment with val()" );
+<span class="token prefix inserted">+</span>	j.removeAttr("value");
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	var c = j.contents();
+<span class="token prefix inserted">+</span>	equals( c[0].nodeValue, j.text(), "Check node,textnode,comment contents is just the one from span" );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	var cl = j.clone();
+<span class="token prefix inserted">+</span>	ok( cl.length >= 2, "Check node,textnode,comment clone works (some browsers delete comments on clone)" );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	var d = $("&lt;div/>").appendTo("#nonnodes").append(cl);
+<span class="token prefix inserted">+</span>	var dc = d.contents();
+<span class="token prefix inserted">+</span>	ok( dc.length >= 2, "Check node,textnode,comment append works" );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	dc.empty();
+<span class="token prefix inserted">+</span>	equals( $(dc[0]).html(), "", "Check node,textnode,comment empty works" );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	dc.remove();
+<span class="token prefix inserted">+</span>	equals( d.contents().length, 0, "Check node,textnode,comment remove works" );
+<span class="token prefix inserted">+</span>	d.remove();
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	j.css("padding-left", "1px");
+<span class="token prefix inserted">+</span>	equals( j.css("padding-left"), "1px", "Check node,textnode,comment css works" );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	j.bind("tester", function () {
+<span class="token prefix inserted">+</span>		equals(this.nodeType, 1, "Check node,textnode,comment bind just does real nodes" );
+<span class="token prefix inserted">+</span>	});
+<span class="token prefix inserted">+</span>	j.trigger("tester");
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	j.wrap("&lt;i>&lt;/i>");
+<span class="token prefix inserted">+</span>	equals( c[0].nodeValue, j.text(), "Check node,textnode,comment wraps doesn't hurt text" );
+<span class="token prefix inserted">+</span>	equals( $("#nonnodes > i").length, 3, "Check node,textnode,comment wraps ok" );
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	stop();
+<span class="token prefix inserted">+</span>	j.animate({paddingLeft:"5px"}, 100, function () {
+<span class="token prefix inserted">+</span>		equals(this.nodeType, 1, "Check node,textnode,comment animate just does real nodes" );
+<span class="token prefix inserted">+</span>		equals($(this).css("paddingLeft"), "5px", "Check node,textnode,comment animate just does real nodes" );
+<span class="token prefix inserted">+</span>		start();
+<span class="token prefix inserted">+</span>	});
+<span class="token prefix inserted">+</span>});
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>test("$('html', context)", function() {
+<span class="token prefix unchanged"> </span>	expect(1);
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -232,7 +302,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	div.each(function(){this.foo = 'zoo';});
+<span class="token prefix unchanged"> </span>	var pass = true;
+<span class="token prefix unchanged"> </span>	for ( var i = 0; i &lt; div.size(); i++ ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	  if ( div.get(i).foo != "zoo" ) pass = false;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( div.get(i).foo != "zoo" ) pass = false;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	}
+<span class="token prefix unchanged"> </span>	ok( pass, "Execute a function, Relative" );
+<span class="token prefix unchanged"> </span>});
+</span><span class="token coord">@@ -277,15 +347,15 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>if ( !isLocal ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>    test("attr(String) in XML Files", function() {
+<span class="token prefix deleted">-</span>        expect(2);
+<span class="token prefix deleted">-</span>        stop();
+<span class="token prefix deleted">-</span>        $.get("data/dashboard.xml", function(xml) {
+<span class="token prefix deleted">-</span>            ok( $("locations", xml).attr("class") == "foo", "Check class attribute in XML document" );
+<span class="token prefix deleted">-</span>            ok( $("location", xml).attr("for") == "bar", "Check for attribute in XML document" );
+<span class="token prefix deleted">-</span>            start();
+<span class="token prefix deleted">-</span>        });
+<span class="token prefix deleted">-</span>    });
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	test("attr(String) in XML Files", function() {
+<span class="token prefix inserted">+</span>		expect(2);
+<span class="token prefix inserted">+</span>		stop();
+<span class="token prefix inserted">+</span>		$.get("data/dashboard.xml", function(xml) {
+<span class="token prefix inserted">+</span>			ok( $("locations", xml).attr("class") == "foo", "Check class attribute in XML document" );
+<span class="token prefix inserted">+</span>			ok( $("location", xml).attr("for") == "bar", "Check for attribute in XML document" );
+<span class="token prefix inserted">+</span>			start();
+<span class="token prefix inserted">+</span>		});
+<span class="token prefix inserted">+</span>	});
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>}
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("attr(String, Function)", function() {
+</span><span class="token coord">@@ -298,7 +368,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	expect(1);
+<span class="token prefix unchanged"> </span>	var pass = true;
+<span class="token prefix unchanged"> </span>	$("div").attr({foo: 'baz', zoo: 'ping'}).each(function(){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	  if ( this.getAttribute('foo') != "baz" &amp;&amp; this.getAttribute('zoo') != "ping" ) pass = false;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( this.getAttribute('foo') != "baz" &amp;&amp; this.getAttribute('zoo') != "ping" ) pass = false;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	});
+<span class="token prefix unchanged"> </span>	ok( pass, "Set Multiple Attributes" );
+<span class="token prefix unchanged"> </span>});
+</span><span class="token coord">@@ -309,7 +379,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	div.attr("foo", "bar");
+<span class="token prefix unchanged"> </span>	var pass = true;
+<span class="token prefix unchanged"> </span>	for ( var i = 0; i &lt; div.size(); i++ ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	  if ( div.get(i).getAttribute('foo') != "bar" ) pass = false;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( div.get(i).getAttribute('foo') != "bar" ) pass = false;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	}
+<span class="token prefix unchanged"> </span>	ok( pass, "Set Attribute" );
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -362,19 +432,19 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>if ( !isLocal ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>    test("attr(String, Object) - Loaded via XML document", function() {
+<span class="token prefix deleted">-</span>        expect(2);
+<span class="token prefix deleted">-</span>        stop();
+<span class="token prefix deleted">-</span>        $.get('data/dashboard.xml', function(xml) { 
+<span class="token prefix deleted">-</span>              var titles = [];
+<span class="token prefix deleted">-</span>              $('tab', xml).each(function() {
+<span class="token prefix deleted">-</span>                    titles.push($(this).attr('title'));
+<span class="token prefix deleted">-</span>              });
+<span class="token prefix deleted">-</span>              equals( titles[0], 'Location', 'attr() in XML context: Check first title' );
+<span class="token prefix deleted">-</span>              equals( titles[1], 'Users', 'attr() in XML context: Check second title' );
+<span class="token prefix deleted">-</span>              start();
+<span class="token prefix deleted">-</span>        });
+<span class="token prefix deleted">-</span>    });
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	test("attr(String, Object) - Loaded via XML document", function() {
+<span class="token prefix inserted">+</span>		expect(2);
+<span class="token prefix inserted">+</span>		stop();
+<span class="token prefix inserted">+</span>		$.get('data/dashboard.xml', function(xml) { 
+<span class="token prefix inserted">+</span>			var titles = [];
+<span class="token prefix inserted">+</span>			$('tab', xml).each(function() {
+<span class="token prefix inserted">+</span>				titles.push($(this).attr('title'));
+<span class="token prefix inserted">+</span>			});
+<span class="token prefix inserted">+</span>			equals( titles[0], 'Location', 'attr() in XML context: Check first title' );
+<span class="token prefix inserted">+</span>			equals( titles[1], 'Users', 'attr() in XML context: Check second title' );
+<span class="token prefix inserted">+</span>			start();
+<span class="token prefix inserted">+</span>		});
+<span class="token prefix inserted">+</span>	});
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>}
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>test("css(String|Hash)", function() {
+</span><span class="token coord">@@ -561,7 +631,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	reset();
+<span class="token prefix unchanged"> </span>	$("#sap").append(document.getElementById('form'));
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	ok( $("#sap>form").size() == 1, "Check for appending a form" );  // Bug #910
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	ok( $("#sap>form").size() == 1, "Check for appending a form" ); // Bug #910
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	reset();
+<span class="token prefix unchanged"> </span>	var pass = true;
+</span><span class="token coord">@@ -873,7 +943,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	expect(17);
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	var settings = { xnumber1: 5, xnumber2: 7, xstring1: "peter", xstring2: "pan" },
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		options =     { xnumber2: 1, xstring2: "x", xxx: "newstring" },
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		options = { xnumber2: 1, xstring2: "x", xxx: "newstring" },
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		optionsCopy = { xnumber2: 1, xstring2: "x", xxx: "newstring" },
+<span class="token prefix unchanged"> </span>		merged = { xnumber1: 5, xnumber2: 1, xstring1: "peter", xstring2: "x", xxx: "newstring" },
+<span class="token prefix unchanged"> </span>		deep1 = { foo: { bar: true } },
+</span><span class="token coord">@@ -919,9 +989,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	var defaults = { xnumber1: 5, xnumber2: 7, xstring1: "peter", xstring2: "pan" },
+<span class="token prefix unchanged"> </span>		defaultsCopy = { xnumber1: 5, xnumber2: 7, xstring1: "peter", xstring2: "pan" },
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		options1 =     { xnumber2: 1, xstring2: "x" },
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		options1 = { xnumber2: 1, xstring2: "x" },
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		options1Copy = { xnumber2: 1, xstring2: "x" },
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		options2 =     { xstring2: "xx", xxx: "newstringx" },
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		options2 = { xstring2: "xx", xxx: "newstringx" },
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		options2Copy = { xstring2: "xx", xxx: "newstringx" },
+<span class="token prefix unchanged"> </span>		merged2 = { xnumber1: 5, xnumber2: 1, xstring1: "peter", xstring2: "xx", xxx: "newstringx" };
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -1055,7 +1125,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	expect(1);
+<span class="token prefix unchanged"> </span>	var pass = true, div = $("div");
+<span class="token prefix unchanged"> </span>	div.show().each(function(){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	  if ( this.style.display == "none" ) pass = false;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( this.style.display == "none" ) pass = false;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	});
+<span class="token prefix unchanged"> </span>	ok( pass, "Show" );
+<span class="token prefix unchanged"> </span>});
+</span>Index: test/index.html
+===================================================================
+<span class="token coord">--- test/index.html	(revision 4059)</span>
+<span class="token coord">+++ test/index.html	(working copy)</span>
+<span class="token coord">@@ -171,6 +171,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>					&lt;input type="checkbox" name="checkedtestcheckboxes" />
+<span class="token prefix unchanged"> </span>				&lt;/div>
+<span class="token prefix unchanged"> </span>			&lt;/form>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			&lt;div id="nonnodes">&lt;span>hi&lt;/span> there &lt;!-- mon ami -->&lt;/div>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		&lt;/div>
+<span class="token prefix unchanged"> </span>	&lt;/div>
+<span class="token prefix unchanged"> </span>	&lt;/dl>
+</span>Index: src/core.js
+===================================================================
+<span class="token coord">--- src/core.js	(revision 4059)</span>
+<span class="token coord">+++ src/core.js	(working copy)</span>
+<span class="token coord">@@ -251,13 +251,15 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	append: function() {
+<span class="token prefix unchanged"> </span>		return this.domManip(arguments, true, false, function(elem){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			this.appendChild( elem );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if (this.nodeType == 1)
+<span class="token prefix inserted">+</span>				this.appendChild( elem );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		});
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	prepend: function() {
+<span class="token prefix unchanged"> </span>		return this.domManip(arguments, true, true, function(elem){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			this.insertBefore( elem, this.firstChild );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if (this.nodeType == 1)
+<span class="token prefix inserted">+</span>				this.insertBefore( elem, this.firstChild );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		});
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>	
+</span><span class="token coord">@@ -402,6 +404,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		} else
+<span class="token prefix unchanged"> </span>			return this.each(function(){
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				if ( this.nodeType != 1 )
+<span class="token prefix inserted">+</span>					return;
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				if ( value.constructor == Array &amp;&amp; /radio|checkbox/.test( this.type ) )
+<span class="token prefix unchanged"> </span>					this.checked = (jQuery.inArray(this.value, value) >= 0 ||
+<span class="token prefix unchanged"> </span>						jQuery.inArray(this.name, value) >= 0);
+</span><span class="token coord">@@ -722,18 +727,19 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		// internal only, use addClass("class")
+<span class="token prefix unchanged"> </span>		add: function( elem, classNames ) {
+<span class="token prefix unchanged"> </span>			jQuery.each((classNames || "").split(/\s+/), function(i, className){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				if ( !jQuery.className.has( elem.className, className ) )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				if ( elem.nodeType == 1 &amp;&amp; !jQuery.className.has( elem.className, className ) )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					elem.className += (elem.className ? " " : "") + className;
+<span class="token prefix unchanged"> </span>			});
+<span class="token prefix unchanged"> </span>		},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// internal only, use removeClass("class")
+<span class="token prefix unchanged"> </span>		remove: function( elem, classNames ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			elem.className = classNames != undefined ?
+<span class="token prefix deleted">-</span>				jQuery.grep(elem.className.split(/\s+/), function(className){
+<span class="token prefix deleted">-</span>					return !jQuery.className.has( classNames, className );	
+<span class="token prefix deleted">-</span>				}).join(" ") :
+<span class="token prefix deleted">-</span>				"";
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if (elem.nodeType == 1)
+<span class="token prefix inserted">+</span>				elem.className = classNames != undefined ?
+<span class="token prefix inserted">+</span>					jQuery.grep(elem.className.split(/\s+/), function(className){
+<span class="token prefix inserted">+</span>						return !jQuery.className.has( classNames, className );	
+<span class="token prefix inserted">+</span>					}).join(" ") :
+<span class="token prefix inserted">+</span>					"";
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// internal only, use is(".class")
+</span><span class="token coord">@@ -1014,6 +1020,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	attr: function( elem, name, value ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if (!elem || elem.nodeType == 3 || elem.nodeType == 8)
+<span class="token prefix inserted">+</span>			return undefined;
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		var fix = jQuery.isXMLDoc( elem ) ?
+<span class="token prefix unchanged"> </span>			{} :
+<span class="token prefix unchanged"> </span>			jQuery.props;
+</span><span class="token coord">@@ -1267,7 +1276,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>jQuery.each({
+<span class="token prefix unchanged"> </span>	removeAttr: function( name ) {
+<span class="token prefix unchanged"> </span>		jQuery.attr( this, name, "" );
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		this.removeAttribute( name );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if (this.nodeType == 1) 
+<span class="token prefix inserted">+</span>			this.removeAttribute( name );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	addClass: function( classNames ) {
+</span>Index: src/fx.js
+===================================================================
+<span class="token coord">--- src/fx.js	(revision 4059)</span>
+<span class="token coord">+++ src/fx.js	(working copy)</span>
+<span class="token coord">@@ -69,6 +69,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		var optall = jQuery.speed(speed, easing, callback);
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		return this[ optall.queue === false ? "each" : "queue" ](function(){
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( this.nodeType != 1)
+<span class="token prefix inserted">+</span>				return false;
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			var opt = jQuery.extend({}, optall);
+<span class="token prefix unchanged"> </span>			var hidden = jQuery(this).is(":hidden"), self = this;
+<span class="token prefix unchanged"> </span>			
+</span><span class="token coord">@@ -135,6 +138,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			return queue( this[0], type );
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		return this.each(function(){
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( this.nodeType != 1)
+<span class="token prefix inserted">+</span>				return;
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			if ( fn.constructor == Array )
+<span class="token prefix unchanged"> </span>				queue(this, type, fn);
+<span class="token prefix unchanged"> </span>			else {
+</span>Index: src/selector.js
+===================================================================
+<span class="token coord">--- src/selector.js	(revision 4059)</span>
+<span class="token coord">+++ src/selector.js	(working copy)</span>
+<span class="token coord">@@ -96,9 +96,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		if ( typeof t != "string" )
+<span class="token prefix unchanged"> </span>			return [ t ];
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		// Make sure that the context is a DOM Element
+<span class="token prefix deleted">-</span>		if ( context &amp;&amp; !context.nodeType )
+<span class="token prefix deleted">-</span>			context = null;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		// check to make sure context is a DOM element or a document
+<span class="token prefix inserted">+</span>		if ( context &amp;&amp; context.nodeType != 1 &amp;&amp; context.nodeType != 9)
+<span class="token prefix inserted">+</span>			return [ ];
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Set the correct context (if none is provided)
+<span class="token prefix unchanged"> </span>		context = context || document;
+</span>Index: src/event.js
+===================================================================
+<span class="token coord">--- src/event.js	(revision 4059)</span>
+<span class="token coord">+++ src/event.js	(working copy)</span>
+<span class="token coord">@@ -8,6 +8,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	// Bind an event to an element
+<span class="token prefix unchanged"> </span>	// Original by Dean Edwards
+<span class="token prefix unchanged"> </span>	add: function(element, type, handler, data) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( element.nodeType == 3 || element.nodeType == 8 )
+<span class="token prefix inserted">+</span>			return;
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		// For whatever reason, IE has trouble passing the window object
+<span class="token prefix unchanged"> </span>		// around, causing it to be cloned in the process
+<span class="token prefix unchanged"> </span>		if ( jQuery.browser.msie &amp;&amp; element.setInterval != undefined )
+</span><span class="token coord">@@ -83,6 +86,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Detach an event or set of events from an element
+<span class="token prefix unchanged"> </span>	remove: function(element, type, handler) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( element.nodeType == 3 || element.nodeType == 8 )
+<span class="token prefix inserted">+</span>			return;
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		var events = jQuery.data(element, "events"), ret, index;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Namespaced event handlers
+</span><span class="token coord">@@ -147,6 +153,9 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// Handle triggering a single element
+<span class="token prefix unchanged"> </span>		} else {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( element.nodeType == 3 || element.nodeType == 8 )
+<span class="token prefix inserted">+</span>				return;
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			var val, ret, fn = jQuery.isFunction( element[ type ] || null ),
+<span class="token prefix unchanged"> </span>				// Check to see if we need to provide a fake event, or not
+<span class="token prefix unchanged"> </span>				event = !data[0] || !data[0].preventDefault;
+</span><span class="token coord">@@ -273,7 +282,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		if ( event.pageX == null &amp;&amp; event.clientX != null ) {
+<span class="token prefix unchanged"> </span>			var doc = document.documentElement, body = document.body;
+<span class="token prefix unchanged"> </span>			event.pageX = event.clientX + (doc &amp;&amp; doc.scrollLeft || body &amp;&amp; body.scrollLeft || 0) - (doc.clientLeft || 0);
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			event.pageY = event.clientY + (doc &amp;&amp; doc.scrollTop  || body &amp;&amp; body.scrollTop  || 0) - (doc.clientLeft || 0);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			event.pageY = event.clientY + (doc &amp;&amp; doc.scrollTop || body &amp;&amp; body.scrollTop || 0) - (doc.clientLeft || 0);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>			
+<span class="token prefix unchanged"> </span>		// Add which for key events
+</span><span class="token coord">@@ -437,7 +446,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	
+<span class="token prefix unchanged"> </span>	// If Safari or IE is used
+<span class="token prefix unchanged"> </span>	// Continually check to see if the document is ready
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	if  (jQuery.browser.msie || jQuery.browser.safari ) (function(){
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	if (jQuery.browser.msie || jQuery.browser.safari ) (function(){
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		try {
+<span class="token prefix unchanged"> </span>			// If IE is used, use the trick by Diego Perini
+<span class="token prefix unchanged"> </span>			// http://javascript.nwbox.com/IEContentLoaded/</span></code></pre>
     </div>
   
 

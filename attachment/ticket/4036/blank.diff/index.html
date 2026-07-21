@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,30 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery-1.3.1.js	2009-02-01 02:54:55.000000000 -0500</span>
+<span class="token coord">+++ jquery-1.3.1-a.js	2009-02-01 02:57:30.000000000 -0500</span>
+<span class="token coord">@@ -636,9 +636,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	// Evalulates a script in a global context
+<span class="token prefix unchanged"> </span>	globalEval: function( data ) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		data = jQuery.trim( data );
+<span class="token prefix deleted">-</span>
+<span class="token prefix deleted">-</span>		if ( data ) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( !jQuery.blank( data ) ) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			// Inspired by code by Andrea Giammarchi
+<span class="token prefix unchanged"> </span>			// http://webreflection.blogspot.com/2007/08/global-scope-evaluation-and-dom.html
+<span class="token prefix unchanged"> </span>			var head = document.getElementsByTagName("head")[0] || document.documentElement,
+</span><span class="token coord">@@ -1050,6 +1048,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		return elem[ name ];
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	blank: function( text ) {
+<span class="token prefix inserted">+</span>		return !text ||  /^\s*$/.test(text);
+<span class="token prefix inserted">+</span>	},
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	trim: function( text ) {
+<span class="token prefix unchanged"> </span>		return (text || "").replace( /^\s+|\s+$/g, "" );
+<span class="token prefix unchanged"> </span>	},</span></code></pre>
     </div>
   
 

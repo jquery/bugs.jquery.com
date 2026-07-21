@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- ui.droppable.js	2007-12-07 03:22:24.000000000 -0800</span>
+<span class="token coord">+++ ui.droppable-overlap.js	2007-12-15 00:03:50.000000000 -0800</span>
+<span class="token coord">@@ -165,6 +165,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		var l = oDrop.offset.left, r = l + oDrop.item.element.offsetWidth, 
+<span class="token prefix unchanged"> </span>		    t = oDrop.offset.top,  b = t + oDrop.item.element.offsetHeight;
+<span class="token prefix unchanged"> </span>		switch (toleranceMode) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			case 'overlap':
+<span class="token prefix inserted">+</span>				dao = $(oDrag.helper).offset();
+<span class="token prefix inserted">+</span>				dpo = oDrop.offset;
+<span class="token prefix inserted">+</span>				return ( dao.top == dpo.top &amp;&amp; dao.left == dpo.left );
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			case 'fit':
+<span class="token prefix unchanged"> </span>				return (   l &lt; x1 &amp;&amp; x2 &lt; r
+<span class="token prefix unchanged"> </span>					&amp;&amp; t &lt; y1 &amp;&amp; y2 &lt; b);</span></code></pre>
     </div>
   
 

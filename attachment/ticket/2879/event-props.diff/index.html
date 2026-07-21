@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,28 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: event.js
+===================================================================
+<span class="token coord">--- event.js	(revision 5615)</span>
+<span class="token coord">+++ event.js	(working copy)</span>
+<span class="token coord">@@ -274,15 +274,16 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		return val;
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	props: "altKey attrChange attrName bubbles button cancelable charCode clientX clientY ctrlKey currentTarget data detail eventPhase fromElement handler keyCode metaKey newValue originalTarget pageX pageY prevValue relatedNode relatedTarget screenX screenY shiftKey srcElement target timeStamp toElement type view wheelDelta which".split(" "),
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	fix: function(event) {
+<span class="token prefix unchanged"> </span>		if ( event[expando] == true )
+<span class="token prefix unchanged"> </span>			return event;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// store a copy of the original event object
+<span class="token prefix unchanged"> </span>		// and "clone" to set read-only properties
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var originalEvent = event;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		var originalEvent = event, props = this.props;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		event = { originalEvent: originalEvent };
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		var props = "altKey attrChange attrName bubbles button cancelable charCode clientX clientY ctrlKey currentTarget data detail eventPhase fromElement handler keyCode metaKey newValue originalTarget pageX pageY prevValue relatedNode relatedTarget screenX screenY shiftKey srcElement target timeStamp toElement type view wheelDelta which".split(" ");
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		for ( var i=props.length; i; i-- )
+<span class="token prefix unchanged"> </span>			event[ props[i] ] = originalEvent[ props[i] ];</span></code></pre>
     </div>
   
 

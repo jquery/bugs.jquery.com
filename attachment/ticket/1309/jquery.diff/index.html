@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,40 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- /Users/keith/Sites/sonomagrapevine.org/misc/jquery-1.1.2-uncompressed.js	2007-06-20 10:00:16.000000000 -0700</span>
+<span class="token coord">+++ /Users/keith/Sites/sonomagrapevine.org/misc/jquery.js	2007-06-20 10:00:20.000000000 -0700</span>
+<span class="token coord">@@ -330,10 +330,11 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	className: {
+<span class="token prefix unchanged"> </span>		// internal only, use addClass("class")
+<span class="token prefix unchanged"> </span>		add: function( elem, c ){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			jQuery.each( c.split(/\s+/), function(i, cur){
+<span class="token prefix deleted">-</span>				if ( !jQuery.className.has( elem.className, cur ) )
+<span class="token prefix deleted">-</span>					elem.className += ( elem.className ? " " : "" ) + cur;
+<span class="token prefix deleted">-</span>			});
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		    if ( c.split )
+<span class="token prefix inserted">+</span>    			jQuery.each( c.split(/\s+/), function(i, cur){
+<span class="token prefix inserted">+</span>    				if ( !jQuery.className.has( elem.className, cur ) )
+<span class="token prefix inserted">+</span>    					elem.className += ( elem.className ? " " : "" ) + cur;
+<span class="token prefix inserted">+</span>    			});
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		},
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// internal only, use removeClass("class")
+</span><span class="token coord">@@ -348,8 +349,13 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>		has: function( t, c ) {
+<span class="token prefix unchanged"> </span>			t = t.className || t;
+<span class="token prefix unchanged"> </span>			// escape regex characters
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			c = c.replace(/([\.\\\+\*\?\[\^\]\$\(\)\{\}\=\!\&lt;\>\|\:])/g, "\\$1");
+<span class="token prefix deleted">-</span>			return t &amp;&amp; new RegExp("(^|\\s)" + c + "(\\s|$)").test( t );
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( c.replace ) {
+<span class="token prefix inserted">+</span>			    c = c.replace(/([\.\\\+\*\?\[\^\]\$\(\)\{\}\=\!\&lt;\>\|\:])/g, "\\$1");
+<span class="token prefix inserted">+</span>			    return t &amp;&amp; new RegExp("(^|\\s)" + c + "(\\s|$)").test( t );
+<span class="token prefix inserted">+</span>		    }
+<span class="token prefix inserted">+</span>		    else {
+<span class="token prefix inserted">+</span>		        return false;
+<span class="token prefix inserted">+</span>		    }
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>	},
+<span class="token prefix unchanged"> </span>	swap: function(e,o,f) {</span></code></pre>
     </div>
   
 

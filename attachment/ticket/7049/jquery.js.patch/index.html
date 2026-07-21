@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">--- jquery-nightly.js.orig	2010-09-18 13:00:21.009602454 +0400
++++ jquery-nightly.js	2010-09-18 13:02:11.887574789 +0400
+@@ -360,9 +360,9 @@
+ 
+ jQuery.extend({
+ 	noConflict: function( deep ) {
+-		window.$ = _$;
++		if ( window.$ === jQuery ) window.$ = _$;
+ 
+-		if ( deep ) {
++		if ( deep && window.jQuery === jQuery ) {
+ 			window.jQuery = _jQuery;
+ 		}</code></pre>
     </div>
   
 

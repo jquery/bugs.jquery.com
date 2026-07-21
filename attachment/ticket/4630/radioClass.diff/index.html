@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,51 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/attributes.js
+===================================================================
+<span class="token coord">--- test/unit/attributes.js	(revision 6340)</span>
+<span class="token coord">+++ test/unit/attributes.js	(working copy)</span>
+<span class="token coord">@@ -354,3 +354,22 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	ok( c.has(x, "hi"), "Check has1" );
+<span class="token prefix unchanged"> </span>	ok( c.has(x, "bar"), "Check has2" );
+<span class="token prefix unchanged"> </span>});
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>test("radioClass(String)", function() {
+<span class="token prefix inserted">+</span>	expect(8);
+<span class="token prefix inserted">+</span>	var lis = jQuery('#listWithTabIndex li'),
+<span class="token prefix inserted">+</span>		li = lis.eq(0).radioClass("test");
+<span class="token prefix inserted">+</span>	ok( li.is(".test"), "Check that first li has class" );
+<span class="token prefix inserted">+</span>	ok( !lis.not(":eq(0)").is(".test"), "Check that siblings do not have class" );
+<span class="token prefix inserted">+</span>	li = lis.eq(1).radioClass("test");
+<span class="token prefix inserted">+</span>	ok( li.is(".test"), "Check that first li has class" );
+<span class="token prefix inserted">+</span>	ok( !lis.not(":eq(1)").is(".test"), "Check that siblings do not have class" );
+<span class="token prefix inserted">+</span>	
+<span class="token prefix inserted">+</span>	var els = jQuery('#listWithTabIndex li, #foo p'),
+<span class="token prefix inserted">+</span>		first = els.filter(":first-child").radioClass("test"),
+<span class="token prefix inserted">+</span>		last = els.filter(":last-child");
+<span class="token prefix inserted">+</span>	ok( first.is(".test"), "Check that first-child has class" );
+<span class="token prefix inserted">+</span>	ok( !els.not(":first-child").is(".test"), "Check that siblings do not have class" );
+<span class="token prefix inserted">+</span>	ok( last.radioClass("test").is(".test"), "Check that last child has class" );
+<span class="token prefix inserted">+</span>	ok( !els.not(":last-child").is(".test"), "Check that siblings do not have class" );
+<span class="token prefix inserted">+</span>});
+</span>Index: src/attributes.js
+===================================================================
+<span class="token coord">--- src/attributes.js	(revision 6340)</span>
+<span class="token coord">+++ src/attributes.js	(working copy)</span>
+<span class="token coord">@@ -148,6 +148,13 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			// toggle whole className
+<span class="token prefix unchanged"> </span>			this.className = this.className || classNames === false ? "" : jQuery.data( this, "__className__" ) || "";
+<span class="token prefix unchanged"> </span>		}
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	},
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>	radioClass: function( classNames ) {
+<span class="token prefix inserted">+</span>		jQuery.className.add( this, classNames );
+<span class="token prefix inserted">+</span>		jQuery.each( jQuery.sibling( this.parentNode.firstChild, this ), function() {
+<span class="token prefix inserted">+</span>			jQuery.className.remove( this, classNames );
+<span class="token prefix inserted">+</span>		});
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	}
+<span class="token prefix unchanged"> </span>}, function(name, fn){
+<span class="token prefix unchanged"> </span>	jQuery.fn[ name ] = function(){</span></code></pre>
     </div>
   
 

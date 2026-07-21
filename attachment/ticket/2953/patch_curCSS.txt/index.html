@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt">Index: /home/lrbabe/workspace/jQuery/jquery/src/core.js
+===================================================================
+--- /home/lrbabe/workspace/jQuery/jquery/src/core.js	(revision 5704)
++++ /home/lrbabe/workspace/jQuery/jquery/src/core.js	(working copy)
+@@ -859,7 +859,7 @@
+ 		if ( !force &amp;&amp; style &amp;&amp; style[ name ] )
+ 			ret = style[ name ];
+ 
+-		else if ( defaultView.getComputedStyle ) {
++		else if ( defaultView.getComputedStyle &amp;&amp; !(jQuery.browser.opera &amp;&amp; (name == 'width' || name == 'height') &amp;&amp; jQuery.curCSS(elem, 'display') == 'none')) {
+ 
+ 			// Only "float" is needed here
+ 			if ( name.match( /float/i ) )</code></pre>
     </div>
   
 

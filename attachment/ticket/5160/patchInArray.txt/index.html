@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,23 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt">Index: core.js
+===================================================================
+--- core.js	(revision 6533)
++++ core.js	(working copy)
+@@ -409,12 +409,12 @@
+ 	},
+ 
+ 	inArray: function( elem, array ) {
++		if(array.indexOf) return array.indexOf(elem);
+ 		for ( var i = 0, length = array.length; i &lt; length; i++ ) {
+ 			if ( array[ i ] === elem ) {
+ 				return i;
+ 			}
+ 		}
+-
+ 		return -1;
+ 	},</code></pre>
     </div>
   
 

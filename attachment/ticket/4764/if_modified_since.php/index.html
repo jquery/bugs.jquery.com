@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,21 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-php" tabindex="0"><code class="language-php"></code></pre>
+      <pre class="language-php" tabindex="0"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token variable">$ts</span> <span class="token operator">=</span> <span class="token variable">$_REQUEST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'ts'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token variable">$ifModifiedSince</span> <span class="token operator">=</span> <span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'HTTP_IF_MODIFIED_SINCE'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">stripslashes</span><span class="token punctuation">(</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'HTTP_IF_MODIFIED_SINCE'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token class-name return-type">false</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$ifModifiedSince</span> <span class="token operator">==</span> <span class="token variable">$ts</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">header</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'HTTP/1.0 304 Not Modified'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">die</span><span class="token punctuation">;</span> <span class="token comment">// stop processing</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">header</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"Last-Modified: "</span> <span class="token operator">.</span> <span class="token variable">$ts</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string double-quoted-string">"OK: "</span> <span class="token operator">.</span> <span class="token variable">$ts</span><span class="token punctuation">;</span>
+
+<span class="token delimiter important">?></span></span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,50 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff"><span class="token coord">--- jquery.autocomplete.js</span>
+<span class="token coord">+++ (clipboard)</span>
+<span class="token coord">@@ -317,17 +317,28 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>				extraParams[key] = typeof param == "function" ? param() : param;
+<span class="token prefix unchanged"> </span>			});
+<span class="token prefix unchanged"> </span>			
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if (options.cleanUrl){
+<span class="token prefix inserted">+</span>				urlParam = options.url + '/' + lastWord(term) + '/' + options.max;
+<span class="token prefix inserted">+</span>				for (var key in extraParams){
+<span class="token prefix inserted">+</span>					urlParam += '/' + extraParams[key];
+<span class="token prefix inserted">+</span>				}
+<span class="token prefix inserted">+</span>				dataParam = {};
+<span class="token prefix inserted">+</span>			}else{
+<span class="token prefix inserted">+</span>				urlParam = options.url;
+<span class="token prefix inserted">+</span>				dataParam = $.extend({
+<span class="token prefix inserted">+</span>					q: lastWord(term),
+<span class="token prefix inserted">+</span>					limit: options.max
+<span class="token prefix inserted">+</span>				}, extraParams);
+<span class="token prefix inserted">+</span>			}
+<span class="token prefix inserted">+</span>			
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			$.ajax({
+<span class="token prefix unchanged"> </span>				// try to leverage ajaxQueue plugin to abort previous requests
+<span class="token prefix unchanged"> </span>				mode: "abort",
+<span class="token prefix unchanged"> </span>				// limit abortion to this input
+<span class="token prefix unchanged"> </span>				port: "autocomplete" + input.name,
+<span class="token prefix unchanged"> </span>				dataType: options.dataType,
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				url: options.url,
+<span class="token prefix deleted">-</span>				data: $.extend({
+<span class="token prefix deleted">-</span>					q: lastWord(term),
+<span class="token prefix deleted">-</span>					limit: options.max
+<span class="token prefix deleted">-</span>				}, extraParams),
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				url: urlParam,
+<span class="token prefix inserted">+</span>				data: dataParam,
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				success: function(data) {
+<span class="token prefix unchanged"> </span>					var parsed = options.parse &amp;&amp; options.parse(data) || parse(data);
+<span class="token prefix unchanged"> </span>					cache.add(term, parsed);
+</span><span class="token coord">@@ -382,6 +393,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	formatMatch: null,
+<span class="token prefix unchanged"> </span>	autoFill: false,
+<span class="token prefix unchanged"> </span>	width: 0,
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	cleanUrl: false,
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	multiple: false,
+<span class="token prefix unchanged"> </span>	multipleSeparator: ", ",
+<span class="token prefix unchanged"> </span>	highlight: function(value, term) {</span></code></pre>
     </div>
   
 

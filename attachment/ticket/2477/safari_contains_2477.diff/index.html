@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,71 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">diff --git a/ui.sortable.js b/ui.sortable.js
+index c93fcb7..91c48a8 100644
+<span class="token coord">--- a/ui.sortable.js</span>
+<span class="token coord">+++ b/ui.sortable.js</span>
+<span class="token coord">@@ -1,10 +1,16 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>(function($) {
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	if (window.Node &amp;&amp; Node.prototype &amp;&amp; !Node.prototype.contains) {
+<span class="token prefix deleted">-</span>		Node.prototype.contains = function (arg) {
+<span class="token prefix deleted">-</span>			return !!(this.compareDocumentPosition(arg) &amp; 16);
+<span class="token prefix deleted">-</span>		};
+<span class="token prefix deleted">-</span>	}
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	function contains(a, b) {
+<span class="token prefix inserted">+</span>		var safari2 = $.browser.safari &amp;&amp; $.browser.version &lt; 522;
+<span class="token prefix inserted">+</span>		if (a.contains &amp;&amp; !safari2) {
+<span class="token prefix inserted">+</span>			return a.contains(b);
+<span class="token prefix inserted">+</span>		}
+<span class="token prefix inserted">+</span>		if (a.compareDocumentPosition)
+<span class="token prefix inserted">+</span>			return !!(a.compareDocumentPosition(b) &amp; 16);
+<span class="token prefix inserted">+</span>		while (b = b.parentNode)
+<span class="token prefix inserted">+</span>			  if (b == a) return true;
+<span class="token prefix inserted">+</span>		return false;
+<span class="token prefix inserted">+</span>	};
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	$.fn.extend({
+<span class="token prefix unchanged"> </span>		sortable: function(options) {
+</span><span class="token coord">@@ -331,10 +337,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			this.propagate("stop", e); //Call plugins and trigger callbacks
+<span class="token prefix unchanged"> </span>			if(this.positionDOM != this.currentItem.prev()[0]) this.propagate("update", e);
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if(!this.element[0].contains(this.currentItem[0])) { //Node was moved out of the current element
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if(!contains(this.element[0], this.currentItem[0])) { //Node was moved out of the current element
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				this.propagate("remove", e);
+<span class="token prefix unchanged"> </span>				for (var i = this.containers.length - 1; i >= 0; i--){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					if(this.containers[i].element[0].contains(this.currentItem[0])) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					if(contains(this.containers[i].element[0], this.currentItem[0])) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>						this.containers[i].propagate("update", e, this);
+<span class="token prefix unchanged"> </span>						this.containers[i].propagate("receive", e, this);
+<span class="token prefix unchanged"> </span>					}
+</span><span class="token coord">@@ -376,8 +382,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>						this.intersectsWith(this.items[i]) //items must intersect
+<span class="token prefix unchanged"> </span>					&amp;&amp; 	this.items[i].item[0] != this.currentItem[0] //cannot intersect with itself
+<span class="token prefix unchanged"> </span>					&amp;&amp;	this.items[i].item[this.direction == 'down' ? 'prev' : 'next']()[0] != this.currentItem[0] //no useless actions that have been done before
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					&amp;&amp;	!this.currentItem[0].contains(this.items[i].item[0]) //no action if the item moved is the parent of the item checked
+<span class="token prefix deleted">-</span>					&amp;&amp; (this.options.type == 'semi-dynamic' ? !this.element[0].contains(this.items[i].item[0]) : true)
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					&amp;&amp;	!contains(this.currentItem[0], this.items[i].item[0]) //no action if the item moved is the parent of the item checked
+<span class="token prefix inserted">+</span>					&amp;&amp; (this.options.type == 'semi-dynamic' ? !contains(this.element[0], this.items[i].item[0]) : true)
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				) {
+<span class="token prefix unchanged"> </span>					
+<span class="token prefix unchanged"> </span>					this.rearrange(e, this.items[i]);
+</span><span class="token coord">@@ -393,12 +399,12 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>					if(!this.containers[i].containerCache.over) {
+<span class="token prefix unchanged"> </span>						
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>						if(!this.containers[i].element[0].contains(this.currentItem[0])) {
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>						if(!contains(this.containers[i].element[0], this.currentItem[0])) {
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>							
+<span class="token prefix unchanged"> </span>							//When entering a new container, we will find the item with the least distance and append our item near it
+<span class="token prefix unchanged"> </span>							var dist = 10000; var itemWithLeastDistance = null; var base = this.positionAbs[this.containers[i].floating ? 'left' : 'top'];
+<span class="token prefix unchanged"> </span>							for (var j = this.items.length - 1; j >= 0; j--) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>								if(!this.containers[i].element[0].contains(this.items[j].item[0])) continue;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>								if(!contains(this.containers[i].element[0], this.items[j].item[0])) continue;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>								var cur = this.items[j][this.containers[i].floating ? 'left' : 'top'];
+<span class="token prefix unchanged"> </span>								if(Math.abs(cur - base) &lt; dist) {
+<span class="token prefix unchanged"> </span>									dist = Math.abs(cur - base); itemWithLeastDistance = this.items[j];</span></code></pre>
     </div>
   
 

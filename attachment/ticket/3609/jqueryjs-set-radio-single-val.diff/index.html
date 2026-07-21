@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,27 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: jquery/src/core.js
+===================================================================
+<span class="token coord">--- jquery/src/core.js	(revision 5945)</span>
+<span class="token coord">+++ jquery/src/core.js	(working copy)</span>
+<span class="token coord">@@ -407,9 +407,13 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			if ( this.nodeType != 1 )
+<span class="token prefix unchanged"> </span>				return;
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>			if ( jQuery.isArray(value) &amp;&amp; /radio|checkbox/.test( this.type ) )
+<span class="token prefix deleted">-</span>				this.checked = (jQuery.inArray(this.value, value) >= 0 ||
+<span class="token prefix deleted">-</span>					jQuery.inArray(this.name, value) >= 0);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>			if ( /radio|checkbox/.test( this.type ) ) {
+<span class="token prefix inserted">+</span>				if ( jQuery.isArray(value) )
+<span class="token prefix inserted">+</span>					this.checked = (jQuery.inArray(this.value, value) >= 0 ||
+<span class="token prefix inserted">+</span>						jQuery.inArray(this.name, value) >= 0);
+<span class="token prefix inserted">+</span>				else
+<span class="token prefix inserted">+</span>					this.checked = (this.value == value || this.name == value);
+<span class="token prefix inserted">+</span>			}
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>			else if ( jQuery.nodeName( this, "select" ) ) {
+<span class="token prefix unchanged"> </span>				var values = jQuery.makeArray(value);</span></code></pre>
     </div>
   
 

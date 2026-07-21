@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-txt" tabindex="0"><code class="language-txt"></code></pre>
+      <pre class="language-txt" tabindex="0"><code class="language-txt">Index: /home/lrbabe/workspace/jQuery/jquery/src/core.js
+===================================================================
+--- /home/lrbabe/workspace/jQuery/jquery/src/core.js	(revision 5654)
++++ /home/lrbabe/workspace/jQuery/jquery/src/core.js	(working copy)
+@@ -1098,7 +1098,7 @@
+ 
+ 				// Set the alpha filter to set the opacity
+ 				elem.filter = (elem.filter || "").replace( /alpha\([^)]*\)/, "" ) +
+-					(parseInt( value ) + '' == "NaN" ? "" : "alpha(opacity=" + value * 100 + ")");
++					(isNaN(parseInt(value))? "" : "alpha(opacity=" + value * 100 + ")");
+ 			}
+ 
+ 			return elem.filter &amp;&amp; elem.filter.indexOf("opacity=") >= 0 ?</code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,23 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: fx.magnifier.js
+===================================================================
+--- fx.magnifier.js	(revision 4508)
++++ fx.magnifier.js	(working copy)
+@@ -34,10 +34,11 @@
+ 		o.magnification = o.magnification || 2;
+ 		o.baseline = o.baseline || 0;
+ 		o.verticalLine =  o.verticalLine != undefined ? o.verticalLine : -0.5;
++		o.elements = o.elements || '> *';
+ 		
+ 		this.pp = $(el).offset({ border: false });
+ 		
+-		$('> *', el).each(function() {
++		$(o.elements, el).each(function() {
+ 			var co = $(this).offset({ border: false });
+ 			if(self.options.overlap) var cp = $(this).position();
+ 			self.items.push([this, co, [$(this).width(),$(this).height()], (cp || null)]);</code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,48 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-htm" tabindex="0"><code class="language-htm"></code></pre>
+      <pre class="language-htm" tabindex="0"><code class="language-htm"><html>
+	<head>
+		<title>jQuery Live Bug</title>
+	</head>
+	<body>
+		<div id="live">
+			<select id="select_live_1">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+			<select id="select_live_2">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+		</div>
+		<div id="static">
+			<select id="select_static_1" onchange="staticFn();">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+		</div>
+		<script language="javascript" type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+		<script language="javascript" type="text/javascript">
+			function staticFn() {
+				alert("static change");
+			}
+            
+            function liveFn() {
+				alert("live change");
+			}
+
+			$(document).ready(function() {
+				$("#live select").live("change", liveFn);
+
+				/*$("#static select").change(staticFn);*/
+			});
+		</script>
+	</body>
+</html></code></pre>
     </div>
   
 

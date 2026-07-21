@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,42 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/selector.js
+===================================================================
+<span class="token coord">--- src/selector.js	(revision 3790)</span>
+<span class="token coord">+++ src/selector.js	(working copy)</span>
+<span class="token coord">@@ -349,11 +349,14 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			// We can get a speed boost by handling nth-child here
+<span class="token prefix unchanged"> </span>			} else if ( m[1] == ":" &amp;&amp; m[2] == "nth-child" ) {
+<span class="token prefix unchanged"> </span>				var merge = {}, tmp = [],
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					test = /(\d*)n\+?(\d*)/.exec(
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					// parse equations like 'even', 'odd', '5', '2n', '3n+2', '4n-1', '-n+6'
+<span class="token prefix inserted">+</span>					test = /(-?)(\d*)n((?:\+|-)?\d*)/.exec(
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>						m[3] == "even" &amp;&amp; "2n" || m[3] == "odd" &amp;&amp; "2n+1" ||
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>						!/\D/.test(m[3]) &amp;&amp; "n+" + m[3] || m[3]),
+<span class="token prefix deleted">-</span>					first = (test[1] || 1) - 0, last = test[2] - 0;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>						!/\D/.test(m[3]) &amp;&amp; "0n+" + m[3] || m[3]),
+<span class="token prefix inserted">+</span>					// calculate the numbers (first)n+(last) including if they are negative
+<span class="token prefix inserted">+</span>					first = (test[1] + (test[2] || 1)) - 0, last = test[3] - 0;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				// loop through all the elements left in the jQuery object
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>				for ( var i = 0, rl = r.length; i &lt; rl; i++ ) {
+<span class="token prefix unchanged"> </span>					var node = r[i], parentNode = node.parentNode, id = jQuery.data(parentNode);
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -369,10 +372,10 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>					var add = false;
+<span class="token prefix unchanged"> </span>
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					if ( first == 1 ) {
+<span class="token prefix deleted">-</span>						if ( last == 0 || node.nodeIndex == last )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					if ( first == 0 ) {
+<span class="token prefix inserted">+</span>						if ( node.nodeIndex == last )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>							add = true;
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>					} else if ( (node.nodeIndex + last) % first == 0 )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					} else if ( (node.nodeIndex - last) % first == 0 &amp;&amp; (node.nodeIndex - last) / first >= 0 )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>						add = true;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>					if ( add ^ not )</span></code></pre>
     </div>
   
 

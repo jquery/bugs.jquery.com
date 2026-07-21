@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,30 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: src/selector.js
+===================================================================
+--- src/selector.js	(revision 6617)
++++ src/selector.js	(working copy)
+@@ -133,7 +133,11 @@
+ 
+ Sizzle.uniqueSort = function(results){
+ 	if ( sortOrder ) {
+-		hasDuplicate = false;
++		/* Here we check if the JavaScript engine is using some sort of
++		 * optimization where it does not always call our comparision
++		 * function. If that is the case, discard the hasDuplicate value. */
++		hasDuplicate = true;
++		['', ''].sort(function(a,b) { hasDuplicate = false; return 0; });
+ 		results.sort(sortOrder);
+ 
+ 		if ( hasDuplicate ) {
+@@ -144,7 +148,6 @@
+ 			}
+ 		}
+ 	}
+-
+ 	return results;
+ };</code></pre>
     </div>
   
 

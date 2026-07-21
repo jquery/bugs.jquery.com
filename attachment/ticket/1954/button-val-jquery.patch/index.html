@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,20 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">Index: core.js
+===================================================================
+--- core.js	(revision 5949)
++++ core.js	(working copy)
+@@ -391,6 +391,9 @@
+ 
+ 					return values;				
+ 				}
++				
++				if ( jQuery.browser.msie && jQuery.nodeName( elem, 'button' ) )
++					return elem.getAttributeNode('value').value;
+ 
+ 				// Everything else, we just grab the value
+ 				return (elem.value || "").replace(/\r/g, "");</code></pre>
     </div>
   
 

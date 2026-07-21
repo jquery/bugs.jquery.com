@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,35 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: test/unit/fx.js
+===================================================================
+<span class="token coord">--- test/unit/fx.js	(revision 3541)</span>
+<span class="token coord">+++ test/unit/fx.js	(working copy)</span>
+<span class="token coord">@@ -232,7 +232,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>var check = ['opacity','height','width','display','overflow'];
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>jQuery.fn.saveState = function(){
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>	expect(check.length);
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>	expect(check.length * this.length);
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>	stop();
+<span class="token prefix unchanged"> </span>	return this.each(function(){
+<span class="token prefix unchanged"> </span>		var self = this;
+</span><span class="token coord">@@ -288,6 +288,15 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	$('#slidetoggleout div').saveState().slideToggle('fast').slideToggle('fast',checkState);
+<span class="token prefix unchanged"> </span>});
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>test("Multiple/opposite slideToggle()", function() {
+<span class="token prefix inserted">+</span>	var x = $("#ap,#foo");
+<span class="token prefix inserted">+</span>	x.filter("#foo").hide();
+<span class="token prefix inserted">+</span>	x.saveState().slideToggle('fast').slideToggle('fast', function () {
+<span class="token prefix inserted">+</span>				checkState.call(this);
+<span class="token prefix inserted">+</span>				x.filter("#foo").show();
+<span class="token prefix inserted">+</span>			});
+<span class="token prefix inserted">+</span>});
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>function makeTest( text ){
+<span class="token prefix unchanged"> </span>	var elem = $("&lt;div>&lt;/div>")
+<span class="token prefix unchanged"> </span>		.attr("id", "test" + makeTest.id++)</span></code></pre>
     </div>
   
 

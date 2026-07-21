@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,19 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">diff --git a/src/core.js b/src/core.js
+index de82d77..a99efd2 100644
+<span class="token coord">--- a/src/core.js</span>
+<span class="token coord">+++ b/src/core.js</span>
+@@ -957,7 +957,7 @@ jQuery.extend({
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			// Convert html string into DOM nodes
+<span class="token prefix unchanged"> </span>			if ( typeof elem == "string" ) {
+<span class="token prefix unchanged"> </span>				// Fix "XHTML"-style tags in all browsers
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>				elem = elem.replace(/(&lt;(\w+)[^>]*?)\/>/g, function(all, front, tag){
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>				elem = elem.replace(new RegExp("/(&lt;(\w+)[^>]*?)\/>", "g"), function(all, front, tag){
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					return tag.match(/^(abbr|br|col|img|input|link|meta|param|hr|area|embed)$/i) ?
+<span class="token prefix unchanged"> </span>						all :
+<span class="token prefix unchanged"> </span>						front + ">&lt;/" + tag + ">";</span></code></pre>
     </div>
   
 

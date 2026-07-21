@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,62 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-diff" tabindex="0"><code class="language-diff"></code></pre>
+      <pre class="language-diff" tabindex="0"><code class="language-diff">Index: src/event.js
+===================================================================
+<span class="token coord">--- src/event.js	(revision 5843)</span>
+<span class="token coord">+++ src/event.js	(working copy)</span>
+<span class="token coord">@@ -190,6 +190,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>					target: elem,
+<span class="token prefix unchanged"> </span>					preventDefault: function(){},
+<span class="token prefix unchanged"> </span>					stopPropagation: function(){},
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>					stopImmediatePropagation:stopImmediatePropagation,
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>					timeStamp: now()
+<span class="token prefix unchanged"> </span>				});
+<span class="token prefix unchanged"> </span>				data[0][expando] = true; // no need to fix fake event
+</span><span class="token coord">@@ -271,6 +272,13 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>					event.preventDefault();
+<span class="token prefix unchanged"> </span>					event.stopPropagation();
+<span class="token prefix unchanged"> </span>				}
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>				if( event[expando] == -1 ){
+<span class="token prefix inserted">+</span>					event[expando] = true;
+<span class="token prefix inserted">+</span>					break;
+<span class="token prefix inserted">+</span>				}
+<span class="token prefix inserted">+</span>
+<span class="token prefix inserted">+</span>				
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			}
+<span class="token prefix unchanged"> </span>		}
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -280,7 +288,7 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	props: "altKey attrChange attrName bubbles button cancelable charCode clientX clientY ctrlKey currentTarget data detail eventPhase fromElement handler keyCode metaKey newValue originalTarget pageX pageY prevValue relatedNode relatedTarget screenX screenY shiftKey srcElement target timeStamp toElement type view wheelDelta which".split(" "),
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>	fix: function(event) {
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>		if ( event[expando] == true )
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		if ( event[expando] )
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>			return event;
+<span class="token prefix unchanged"> </span>
+<span class="token prefix unchanged"> </span>		// store a copy of the original event object
+</span><span class="token coord">@@ -313,6 +321,8 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>			originalEvent.cancelBubble = true;
+<span class="token prefix unchanged"> </span>		};
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>		event.stopImmediatePropagation = stopImmediatePropagation;
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>		// Fix timeStamp
+<span class="token prefix unchanged"> </span>		event.timeStamp = event.timeStamp || now();
+<span class="token prefix unchanged"> </span>
+</span><span class="token coord">@@ -367,6 +377,11 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>	}
+<span class="token prefix unchanged"> </span>};
+<span class="token prefix unchanged"> </span>
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>function stopImmediatePropagation(){
+<span class="token prefix inserted">+</span>	this[expando] = -1;
+<span class="token prefix inserted">+</span>	this.stopPropagation();
+<span class="token prefix inserted">+</span>}
+<span class="token prefix inserted">+</span>
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>if ( !jQuery.browser.msie ){	
+<span class="token prefix unchanged"> </span>	// Checks if an event happened on an element within another element
+<span class="token prefix unchanged"> </span>	// Used in jQuery.event.special.mouseenter and mouseleave handlers</span></code></pre>
     </div>
   
 

@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,20 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">diff --git a/src/support.js b/src/support.js
+index 332839d..1aa5318 100644
+--- a/src/support.js
++++ b/src/support.js
+@@ -46,6 +46,9 @@
+ 		// (IE uses styleFloat instead of cssFloat)
+ 		cssFloat: !!a.style.cssFloat,
+ 
++		// Check to see if we have a native JSON parser
++		json: typeof JSON === "object" && JSON.parse,
++
+ 		// Will be defined later
+ 		scriptEval: false,
+ 		noCloneEvent: true,</code></pre>
     </div>
   
 

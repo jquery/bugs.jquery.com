@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -140,7 +140,20 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-patch" tabindex="0"><code class="language-patch"></code></pre>
+      <pre class="language-patch" tabindex="0"><code class="language-patch">=== modified file 'src/event.js'
+--- src/event.js	2007-10-15 17:55:54 +0000
++++ src/event.js	2007-11-14 06:01:31 +0000
+@@ -253,8 +253,8 @@
+ 		};
+ 		
+ 		// Fix target property, if necessary
+-		if ( !event.target && event.srcElement )
+-			event.target = event.srcElement;
++		if ( !event.target )
++			event.target = event.srcElement ? event.srcElement : document;
+ 				
+ 		// check if target is a textnode (safari)
+ 		if (jQuery.browser.safari && event.target.nodeType == 3)</code></pre>
     </div>
   
 

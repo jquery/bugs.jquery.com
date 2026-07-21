@@ -17,7 +17,7 @@
     
     
     
-    <link rel="stylesheet" href="/bundle/PPcE5K0pdi.css">
+    <link rel="stylesheet" href="/bundle/EpzdZ-4Wq-.css">
   </head>
   <body>
     <div class="banner flex-center">
@@ -142,7 +142,27 @@
   
     <div class="attachment-preview">
       
-      <pre class="language-js" tabindex="0"><code class="language-js"></code></pre>
+      <pre class="language-js" tabindex="0"><code class="language-js"><span class="token function">jQuery</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ready</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> html <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+  html <span class="token operator">+=</span> <span class="token string">'&lt;form class="the-form">'</span><span class="token punctuation">;</span>
+  html <span class="token operator">+=</span>   <span class="token string">'silly text'</span><span class="token punctuation">;</span>
+  html <span class="token operator">+=</span>   <span class="token string">'&lt;img class="silly-img" src="potato.jpg"/>'</span><span class="token punctuation">;</span>
+  html <span class="token operator">+=</span> <span class="token string">'&lt;/form>'</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// create an unattached dom wrapped inside a jquery</span>
+  
+  <span class="token keyword">var</span> dom <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span>html<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> form <span class="token operator">=</span> dom<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'.the-form'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// As I read the documentation the output from the use of ':first' and 'first-child' selectors,</span>
+  <span class="token comment">// should be identical in the case of a trivial (single-element) selection set</span>
+  
+  <span class="token keyword">var</span> firstElem <span class="token operator">=</span> form<span class="token punctuation">.</span><span class="token function">children</span><span class="token punctuation">(</span><span class="token string">':first'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ok, returns silly-img</span>
+  <span class="token keyword">var</span> firstNode <span class="token operator">=</span> form<span class="token punctuation">.</span><span class="token function">contents</span><span class="token punctuation">(</span><span class="token string">':first'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ok, returns 'silly text'</span>
+
+  firstElem <span class="token operator">=</span> form<span class="token punctuation">.</span><span class="token function">children</span><span class="token punctuation">(</span><span class="token string">':first-child'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ok, returns silly-img</span>
+  firstNode <span class="token operator">=</span> form<span class="token punctuation">.</span><span class="token function">contents</span><span class="token punctuation">(</span><span class="token string">':first-child'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// fail, returns silly-img.  should return 'silly text'</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
     </div>
   
 
